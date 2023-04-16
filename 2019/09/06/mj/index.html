@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Manjaro Linux 的正确打开方式 | 人生天地间，忽如远行客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言Manjaro 是一个基于 Arch Linux 专业制作的桌面操作系统   我选择的是KDE桌面版本，安装参考：Windows下安装Linux双系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Manjaro Linux 的正确打开方式">
+<meta property="og:url" content="http://example.com/2019/09/06/mj/index.html">
+<meta property="og:site_name" content="人生天地间，忽如远行客">
+<meta property="og:description" content="前言Manjaro 是一个基于 Arch Linux 专业制作的桌面操作系统   我选择的是KDE桌面版本，安装参考：Windows下安装Linux双系统">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/007X8olVly1g77dfgt5qwj30j00bgjta.jpg">
+<meta property="article:published_time" content="2019-09-06T12:49:55.000Z">
+<meta property="article:modified_time" content="2023-04-16T02:49:39.497Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Manjaro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tva1.sinaimg.cn/large/007X8olVly1g77dfgt5qwj30j00bgjta.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="人生天地间，忽如远行客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">人生天地间，忽如远行客</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mj" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/06/mj/" class="article-date">
+  <time datetime="2019-09-06T12:49:55.000Z" itemprop="datePublished">2019-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Manjaro Linux 的正确打开方式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a target="_blank" rel="noopener" href="https://manjaro.org/">Manjaro</a> 是一个基于 Arch Linux 专业制作的桌面操作系统  </p>
+<p>我选择的是KDE桌面版本，安装参考：<a target="_blank" rel="noopener" href="http://www.allalright.site/post/installinux">Windows下安装Linux双系统</a></p>
+<span id="more"></span>
+
+<h1 id="配置国内镜像源"><a href="#配置国内镜像源" class="headerlink" title="配置国内镜像源"></a>配置国内镜像源</h1><p><a target="_blank" rel="noopener" href="http://www.allalright.site/post/pacman">上手Manjaro Linux包管理工具 pacman</a></p>
+<h1 id="修改按键"><a href="#修改按键" class="headerlink" title="修改按键"></a>修改按键</h1><p><strong>交换 Esc 和 Caps Lock 的按键位置</strong></p>
+<p>方法一:</p>
+<ol>
+<li><p><code>sudo pacman -S xorg</code></p>
+</li>
+<li><p>在 ~/ 下 创建 <code>.xmodmaprc</code> 文件,加入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">remove Lock = Caps_Lock</span><br><span class="line">add Lock = Escape</span><br><span class="line">keysym Caps_Lock = Escape</span><br><span class="line">keysym Escape = Caps_Lock</span><br></pre></td></tr></table></figure></li>
+<li><p>执行 <code>xmodmap .xmodmaprc</code> 即生效  (重启后失效)</p>
+</li>
+</ol>
+<p>方法二:</p>
+<ol>
+<li><p>编辑 <code>/etc/X11/xorg.conf.d/00-keyboard.conf</code></p>
+</li>
+<li><p>增加 <code>Option &quot;XkbOptions&quot; &quot;caps:swapescape&quot;</code> :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Read and parsed by systemd-localed. It&#x27;s probably wise not to edit this file</span><br><span class="line"># manually too freely.</span><br><span class="line">Section &quot;InputClass&quot;</span><br><span class="line">        Identifier &quot;system-keyboard&quot;</span><br><span class="line">        MatchIsKeyboard &quot;on&quot;</span><br><span class="line">    Option &quot;XkbOptions&quot; &quot;caps:swapescape&quot;</span><br><span class="line">        Option &quot;XkbLayout&quot; &quot;cn&quot;</span><br><span class="line">        Option &quot;XkbModel&quot; &quot;pc105&quot;</span><br><span class="line">EndSection</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/lepeCoder/p/swap_ESC_and_Caps.html">https://www.cnblogs.com/lepeCoder/p/swap_ESC_and_Caps.html</a></p>
+</blockquote>
+<h1 id="修改主目录为英文"><a href="#修改主目录为英文" class="headerlink" title="修改主目录为英文"></a>修改主目录为英文</h1><p>选择中文语言后，家目录下的文件夹名是中文，不方便终端下的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S xdg-user-dirs-gtk</span><br><span class="line">export LANG=en_US</span><br><span class="line">xdg-user-dirs-gtk-update</span><br><span class="line"># 会弹出窗口提示语言更改，更新名称即可</span><br><span class="line">export LANG=zh_CN.UTF-8</span><br><span class="line"># 以显示中文</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h1><p>安装输入法工具</p>
+<p><code>sudo pacman -S fcitx fcitx-im fcitx-configtool</code></p>
+<blockquote>
+<p>如果安装后一直提示输入法异常则选择 <code>sudo pacman -S fcitx-qt4 fcitx-configtool</code></p>
+</blockquote>
+<p>安装搜狗输入法</p>
+<p><code>sudo pacman -S fcitx-sogoupinyin</code></p>
+<p>皮肤下载：<a target="_blank" rel="noopener" href="https://pinyin.sogou.com/skins/">https://pinyin.sogou.com/skins/</a></p>
+<p>修改全局变量</p>
+<p><code>sudo vi ~/.xprofile</code></p>
+<p>输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export GTK_IM_MODULE=fcitx</span><br><span class="line">export QT_IM_MODUE=fcitx</span><br><span class="line">erport XMODIFERS=”@im=fcitx</span><br></pre></td></tr></table></figure>
+<p>重启后即可使用中文输入法</p>
+<h1 id="安装常用软件"><a href="#安装常用软件" class="headerlink" title="安装常用软件"></a>安装常用软件</h1><p>dock栏</p>
+<p><code>sudo pacman -S latte-dock</code></p>
+<p>安装配置后设置开机自启</p>
+<p>TIM</p>
+<p><code>sudo pacman -S deepin.com.qq.office</code></p>
+<p><strong>安装后如果打不开：</strong></p>
+<ol>
+<li>安装gnome-settings-daemon</li>
+</ol>
+<p>  <code>sudo pacman -S gnome-settings-daemon</code></p>
+<ol start="2">
+<li>设置开启自启动</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">系统设置-&gt;开机或关机-&gt;自动启动-&gt;添加脚本-&gt;输入/usr/lib/gsd-xsettings，重启后即可打开</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>WPS<br><code>sudo pacman -S wps-office </code></p>
+<p>安装wps必要字体</p>
+<p><code>sudo pacman -S ttf-wps-fonts</code></p>
+<p><strong>安装windows字体：</strong></p>
+<p>由于版权问题，linux版WPS 没有自带字体，而许多字体是平时要使用的</p>
+<ol>
+<li><p>到windows字体目录(双系统)下，复制字体文件到wps-fonts</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp *.ttf /usr/share/fonts/wps-fonts/</span><br><span class="line">sudo cp *.TTF /usr/share/fonts/wps-fonts/</span><br><span class="line">sudo cp simsun.ttc /usr/share/fonts/wps-fonts/</span><br></pre></td></tr></table></figure></li>
+<li><p>添加可执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/fonts/</span><br><span class="line">sudo chmod 755 wps-fonts/</span><br><span class="line">cd /usr/share/fonts/wps-fonts/</span><br><span class="line">sudo chmod 644 *</span><br></pre></td></tr></table></figure></li>
+<li><p>生成字体缓存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfontscale</span><br><span class="line">sudo mkfontdir</span><br><span class="line">fc-cache </span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这下wps里就有了平时那些常用的字体</p>
+<hr>
+<p>网易云音乐</p>
+<p><code>sudo pacman -S netease-cloud-music</code></p>
+<p>搜索栏无法输入中文解决办法：</p>
+<ol>
+<li><p><code>yay -S qcef</code></p>
+</li>
+<li><p><code>sudo vim /opt/netease/netease-cloud-music/netease-cloud-music.bash</code> 修改为：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">HERE=&quot;$(dirname &quot;$(readlink -f &quot;$&#123;0&#125;&quot;)&quot;)&quot;</span><br><span class="line">#export LD_LIBRARY_PATH=&quot;$&#123;HERE&#125;&quot;/libs</span><br><span class="line">#export QT_PLUGIN_PATH=&quot;$&#123;HERE&#125;&quot;/plugins </span><br><span class="line">#export QT_QPA_PLATFORM_PLUGIN_PATH=&quot;$&#123;HERE&#125;&quot;/plugins/platforms</span><br><span class="line">export XDG_CURRENT_DESKTOP=DDE </span><br><span class="line">exec &quot;$&#123;HERE&#125;&quot;/netease-cloud-music $@</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>VirtualBox 虚拟机</p>
+<ol>
+<li><code>sudo uname -r</code> 查看内核版本</li>
+<li><code>sudo pacman -S virtualbox</code> 安装对应内核的版本</li>
+<li><code>sudo pacman -Ss virtualbox-ext-oracle</code> 安装扩展包</li>
+</ol>
+<p><img src="http://tva1.sinaimg.cn/large/007X8olVly1g77dfgt5qwj30j00bgjta.jpg"></p>
+<hr>
+<p>谷歌浏览器</p>
+<p><code>sudo pacman -S google-chrome</code></p>
+<p>Vim</p>
+<p><code>sudo pacman -S vim</code></p>
+<p>Neovim</p>
+<p><code>sudo pacman -S neovim</code></p>
+<p>Ranger</p>
+<p><code>sudo pacman -S ranger</code></p>
+<p>微信</p>
+<p><code>sudo pacman -S electronic-wechat</code></p>
+<p>Markdown编辑器</p>
+<p><code>sudo pacman -S typora</code></p>
+<p>VS Code</p>
+<p><code>sudo pacman -S code </code></p>
+<p>百度网盘</p>
+<p><code>sudo pacman -S baidunetdisk-bin</code></p>
+<p>截图工具</p>
+<p><code>sudo pacman -S deepin-screenshot</code></p>
+<p><code>sudo pacman -S flameshot</code></p>
+<p>yay</p>
+<p>pacman不直接支持AUR，yay是一个AUR助手</p>
+<p><code>sudo pacman -S yay</code></p>
+<h1 id="美化终端"><a href="#美化终端" class="headerlink" title="美化终端"></a>美化终端</h1><p>安装Monaco字体 </p>
+<p><code>curl -kL https://raw.github.com/cstrap/monaco-font/master/install-font-archlinux.sh | bash</code></p>
+<p>fish</p>
+<p><code>sudo pacman -S fish</code></p>
+<p>安装oh-my-fish</p>
+<p><code>curl -L https://get.oh-my.fish | fish</code></p>
+<p>更换shell为fish</p>
+<p><code>chsh -s /usr/bin/fish</code></p>
+<p>更改配色样式</p>
+<p><code>fish_config</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/09/06/mj/" data-id="clgitedc00005z083dia00xb5" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>Recommended Posts</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/10/ranger/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          终端文件管理器 ranger 入门
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">Content</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-number">2.</span> <span class="toc-text">配置国内镜像源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%8C%89%E9%94%AE"><span class="toc-number">3.</span> <span class="toc-text">修改按键</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E7%9B%AE%E5%BD%95%E4%B8%BA%E8%8B%B1%E6%96%87"><span class="toc-number">4.</span> <span class="toc-text">修改主目录为英文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">安装中文输入法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">安装常用软件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%8E%E5%8C%96%E7%BB%88%E7%AB%AF"><span class="toc-number">7.</span> <span class="toc-text">美化终端</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 hcjjj&nbsp;|&nbsp;
+      Theme by <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+    </div>
+     <div id="footer-right">
+      Contact&nbsp;|&nbsp;hcjjj@foxmail.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "e2fb4051c49842688ce669e634bc983f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+    
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>
