@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>部署 Hexo 博客到云服务器 | HCJ&#39;s Blog</title>
+  <meta name="author" content="hcjjj">
+  
+  <meta name="description" content="参考：Hexo 博客部署到腾讯云教程
+作者：行走少年郎">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="部署 Hexo 博客到云服务器"/>
+  <meta property="og:site_name" content="HCJ&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">HCJ&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 部署 Hexo 博客到云服务器</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p><strong>参考</strong>：<a target="_blank" rel="noopener" href="https://bujige.net/blog/hexoBlog-deployed-server.html">Hexo 博客部署到腾讯云教程</a></p>
+<p><strong>作者</strong>：行走少年郎</p>
+<span id="more"></span>
+
+<hr>
+<p><strong>总体思路</strong>：</p>
+<ol>
+<li>通过 git 将本地hexo生成的博客静态资源上传至服务器</li>
+<li>修改 nginx 配置，让访问指向博客静态资源所在的目录</li>
+</ol>
+<hr>
+<h1 id="云服务器配置"><a href="#云服务器配置" class="headerlink" title="云服务器配置"></a>云服务器配置</h1><h2 id="安装必要程序"><a href="#安装必要程序" class="headerlink" title="安装必要程序"></a>安装必要程序</h2><p>我服务器安装的Linux发行版为 CentOS</p>
+<p><code>yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel </code> 安装依赖库</p>
+<p><code>yum install gcc perl-ExtUtils-MakeMaker package</code> 安装编译工具</p>
+<p><code>yum install git nginx</code> 安装 git 和 nginx</p>
+<blockquote>
+<p><strong>Nginx</strong>：一款轻量级、高性能的Web服务器程序</p>
+</blockquote>
+<p><code>service nginx start</code> 启动 Nginx</p>
+<p>在浏览器中打开服务器ip地址 测试 Nginx 是否成功启动： <img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gakcfiijg8j30tz0e3wia.jpg"></p>
+<p>或者：<code>wget http://127.0.0.1</code> 进行测试</p>
+<h2 id="创建-git-仓库"><a href="#创建-git-仓库" class="headerlink" title="创建 git 仓库"></a>创建 git 仓库</h2><p>创建并修改目录的所有权和用户权限：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/git/</span><br><span class="line">chown -R $USER:$USER /home/git/</span><br><span class="line">chmod -R 755 /home/git/</span><br></pre></td></tr></table></figure>
+
+<p>创建一个裸的 git 仓库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/git/</span><br><span class="line">git init --bare hexoBlog.git</span><br></pre></td></tr></table></figure>
+
+<p>创建一个新的 git 钩子，用于自动部署：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /home/git/hexoBlog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+
+<p>编辑添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">git --work-tree=/home/hexoBlog --git-dir=/home/git/hexoBlog.git checkout -f</span><br></pre></td></tr></table></figure>
+
+<p>修改文件权限，使得其可执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /home/git/hexoBlog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-Nginx-托管文件目录"><a href="#配置-Nginx-托管文件目录" class="headerlink" title="配置 Nginx 托管文件目录"></a>配置 Nginx 托管文件目录</h2><p>创建 <code>/home/hexoBlog</code> 目录，用于存放博客静态资源:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/hexoBlog/</span><br><span class="line">chown -R $USER:$USER /home/hexoBlog/</span><br><span class="line">chmod -R 755 /home/hexoBlog/</span><br></pre></td></tr></table></figure>
+
+<p><code>nginx -t</code> 查看 Nginx 配置文件位置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@aliyun ~]<span class="comment"># nginx -t</span></span><br><span class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf <span class="built_in">test</span> is successful</span><br></pre></td></tr></table></figure>
+
+<p><code>vim /etc/nginx/nginx.conf</code>  编辑配置文件：</p>
+<p> <img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbtpda0drbj30k303l75x.jpg"></p>
+<p>将其中的 root 值改为 <code>/home/hexoBlog</code> （刚才创建的托管仓库目录）</p>
+<p>检查配置文件是否准确 <code>./sbin/nginx -t</code></p>
+<p><code>service nginx restart</code> 重启 Nginx 服务</p>
+<p><strong>访问服务器上面的静态文件</strong></p>
+<p> <img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbtpaq5a47j30jj01yq2z.jpg"></p>
+<p>把文件上传到服务器后配置文件地址，即可通过 [IP地址]/guitar/2019.12.17.mp4 访问该文件</p>
+<blockquote>
+<p>这里的root指的是上面配置的 /home/hexoBlog </p>
+</blockquote>
+<p><strong>配置404页面</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfs1vgersxj30t10gxwmy.jpg">  </p>
+<h1 id="本地主机配置"><a href="#本地主机配置" class="headerlink" title="本地主机配置"></a>本地主机配置</h1><p>编辑 hexo站点配置文件 <code>_config.yml</code></p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gake52skz8j30lz04haao.jpg"></p>
+<blockquote>
+<p>repo: root@[服务器IP地址]:/home/git/hexoBlog</p>
+</blockquote>
+<p>进入你的 hexo 博客目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>部署成功，打开服务器公网 IP 即可访问博客了</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2020/01/10/vim/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/11/28/linux/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-01-04 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Hexo/">Hexo<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Hexo/">Hexo<span>2</span></a></li> <li><a href="/tags/Nginx/">Nginx<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2023 hcjjj
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

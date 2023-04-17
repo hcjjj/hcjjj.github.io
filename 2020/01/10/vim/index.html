@@ -1,0 +1,500 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Vim/Neovim 的使用和配置 | HCJ&#39;s Blog</title>
+  <meta name="author" content="hcjjj">
+  
+  <meta name="description" content="Vim 是文本/代码编辑器之中最为优秀经典的上古神器之一，也是早年 Vi 编辑器的加强版，强大、高效、免费开源且跨平台。  
+Neovim 可以说是Vim的改进版，而且与Vim的编辑模型和Vimscript语言完全兼容。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Vim/Neovim 的使用和配置"/>
+  <meta property="og:site_name" content="HCJ&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">HCJ&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Vim/Neovim 的使用和配置</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p><a target="_blank" rel="noopener" href="https://www.vim.org/">Vim</a> 是文本/代码编辑器之中最为优秀经典的上古神器之一，也是早年 Vi 编辑器的加强版，强大、高效、免费开源且跨平台。  </p>
+<p><a target="_blank" rel="noopener" href="https://neovim.io/">Neovim</a> 可以说是Vim的改进版，而且与Vim的编辑模型和Vimscript语言完全兼容。</p>
+<span id="more"></span>
+
+<h1 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h1><p>Vim 在终端中启动命令为 <code>vim</code>，Neovim 为 <code>nvim</code>， 共分为三种模式：</p>
+<ul>
+<li>命令模式（Command mode）</li>
+<li>写入模式（Insert mode）</li>
+<li>底线命令模式（Last line mode）</li>
+</ul>
+<h2 id="初次使用"><a href="#初次使用" class="headerlink" title="初次使用"></a>初次使用</h2><p>进入vim后初始为命令模式，<code>k</code> <code> j</code> <code> h</code> <code>l</code> 为上下左右移动光标</p>
+<p>按 <code>i</code> 进入<strong>写入模式</strong>，<code>ESC</code> 回到 <strong>命令模式</strong></p>
+<p>在命令模式下，按 <code>:</code> 进入<strong>底线命令模式</strong></p>
+<p>底线命令模式下输入<code>:w</code> 后回车为写入文件；<code>:q</code> 为退出nvim；<code>:wq</code> 为保存文件并退出</p>
+<blockquote>
+<p>ctrl+[ 或 ctrl+c 为 ESC 默认快捷键，可自己设置为更方便的映射</p>
+</blockquote>
+<h2 id="指令详解"><a href="#指令详解" class="headerlink" title="指令详解"></a>指令详解</h2><p>主要是掌握 <strong>操作逻辑</strong> ,都是以 <strong>先指令后动作</strong> 这个模式</p>
+<p><strong>移动</strong></p>
+<p><code>w</code>：跳到下一个单词的开头</p>
+<p><code>e</code>：跳到下一个单词的结尾</p>
+<p><code>b</code>：跳到上一个单词的开头</p>
+<blockquote>
+<p>由blank字符分隔的单词，使用 <code>W</code> 和 <code>E</code></p>
+</blockquote>
+<p><code>%</code>：匹配括号移动（需要把光标先移到括号上）</p>
+<p><code>*</code>：匹配光标当前所在的单词（下一个）</p>
+<p><code>#</code>：匹配光标当前所在的单词（上一个）</p>
+<p><strong>插入</strong></p>
+<p><code>i</code>：insert 在光标前插入</p>
+<p><code>I</code>：在行最前面插入，快捷键为 <code>Shift+i</code></p>
+<p><code>a</code>：append 在光标后开始编辑</p>
+<p><code>A</code>：在行最后面开始编辑</p>
+<p><code>o</code>：在当前行下一行开始编辑</p>
+<p><code>O</code>：在当前行上一行开始编辑</p>
+<p><strong>删除</strong></p>
+<p><code>s</code>：删除当前字    符并进入插入模式</p>
+<p><code>u</code>：撤回上一步操作</p>
+<p><code>Ctrl + R</code> ：重做</p>
+<p><code>U</code>： 撤销对整行的操作</p>
+<p><code>x</code>：删除光标下的字符</p>
+<p><code>D</code>：删除当前字符至行尾</p>
+<p><code>dl</code>：删除光标右边的字符 ( 同 <code>x</code> )</p>
+<p><code>dh</code>：删除光标左边的字符</p>
+<p><code>d3l</code> ：删除光标右边的三个字符</p>
+<p><code>dd</code>：删除该行(等于剪贴，<code>p</code> 粘贴）</p>
+<p><code>dj</code>：删除该行和下一行</p>
+<p><code>dG</code> ： 删除当前行至文档尾部</p>
+<p><code>dt&quot;</code> ：删除 “ 前的所有内容</p>
+<p><code>cc</code> ：与<code>d</code> 操作同理，删除并进入写入模式</p>
+<p><strong>复制</strong></p>
+<p><code>y、d、x</code> 都会把文本复制到剪切板（默认不与系统剪切板共享）</p>
+<p><code>&quot;+y</code> 复制文本共享至系统剪切板</p>
+<p><code>y</code>：与 <code>d</code> 操作同理</p>
+<p><strong>更改</strong></p>
+<p><code>r </code>：替换光标所在位置的字符</p>
+<p><code>R</code>：连续替换字符</p>
+<p><code>c3l</code>：替换右边三个字符</p>
+<p><code>cw</code>：更改下一个词</p>
+<p><code>cb</code>：更改上一个词</p>
+<p><code>cc</code>：替换整行</p>
+<p><code>ci&quot;</code>：修改双引号内的字符</p>
+<blockquote>
+<p>change in “</p>
+</blockquote>
+<p><code>f&quot;</code> ：光标跳到当前行下一个 “ </p>
+<p><code>3fa</code>：光标跳到当前行第三个出现的a</p>
+<p><code>F</code> ：反向查找</p>
+<p><code>t&quot;</code>：光标跳到当前行下一个 “ 的前一个字符</p>
+<p><code>T</code>：反向</p>
+<p><code>cfx</code>：修改x字符前的内容(包括x)</p>
+<p><strong>搜索</strong></p>
+<p><code>/</code>：输入后回车</p>
+<p><code>n</code>：下一条搜索结果</p>
+<p><code>N</code>：上一条搜索结果</p>
+<p><code>zz</code>：跳到光标位置</p>
+<p><strong>分屏</strong></p>
+<p><code>:split</code> 上下分屏</p>
+<p><code>:vsplit </code>  左右分屏</p>
+<p><code>:set vsplitright</code> 光标右边</p>
+<p><code>:e [文件路径]</code> 打开新文件</p>
+<p><code>Ctrl+w 后按 hjkl</code> 光标在分屏中移动</p>
+<p><strong>跳转</strong></p>
+<p><code>gg</code>：跳到首行</p>
+<p><code>G</code>：跳到尾行</p>
+<p>N<code>G</code> ：到第 N 行</p>
+<blockquote>
+<p>8G 跳到第8行</p>
+</blockquote>
+<p><strong>选中</strong></p>
+<p><code>v</code> ：字符选中</p>
+<p><code>V</code> ：行选中</p>
+<p><code>Ctrl+v</code> ：块选中</p>
+<p><code>vi&quot;</code>：选中 “ 中的字符</p>
+<p><strong>替换</strong></p>
+<p><code>:s/from/to/</code> 将当前行中的第一个 from 替换成 to</p>
+<p><code>:s/from/to/g </code> 将当前行中的所有 from 都替换成 to</p>
+<p><code>:%s/from/to/g</code> 对所有行的内容进行替换 </p>
+<p><strong>配色</strong></p>
+<p><code>:color </code> (color后一个空格 按Tab选择,通过插件安装更好看的配色)</p>
+<hr>
+<p><img src="https://image-static.segmentfault.com/420/263/420263226-5d72440864e3c"></p>
+<p><img src="https://image-static.segmentfault.com/401/388/401388363-5d72441bdddd8"></p>
+<hr>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>通过修改vim的配置文件和安装插件，能让它更加强大高效</p>
+<p>vim 的配置文件目录在：<code>~/.vimrc</code></p>
+<p>neovim 的配置文件目录在：<code>~/.config/nvim/init.vim</code> </p>
+<p>没有的话需自己创建，</p>
+<p><code>nvim ~/.config/nvim/init.vim</code> </p>
+<p>创建软链接，方便修改</p>
+<p><code> ln -s ~/.config/nvim/init.vim .nvim</code></p>
+<blockquote>
+<p>在配置文件中  <code>&quot;</code> 为注释  </p>
+</blockquote>
+<p>::: collapse 把macOS终端默认的文本编辑器由vim替换为neovim</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">❯ <span class="built_in">where</span> vim</span><br><span class="line">/usr/bin/vim</span><br><span class="line">❯ <span class="built_in">where</span> nvim</span><br><span class="line">/usr/local/bin/nvim</span><br><span class="line">❯ sudo <span class="built_in">mv</span> /usr/bin/vim /usr/bin/vim-original</span><br><span class="line">❯ sudo <span class="built_in">ln</span> /usr/local/bin/nvim /usr/bin/vim</span><br></pre></td></tr></table></figure>
+
+<p>:::  </p>
+<p>我的配置文件：<a target="_blank" rel="noopener" href="https://gitee.com/hcjjj/config/blob/master/.config/nvim/init.vim">https://gitee.com/hcjjj/config/blob/master/.config/nvim/init.vim</a></p>
+<h2 id="修改按键"><a href="#修改按键" class="headerlink" title="修改按键"></a>修改按键</h2><p>在命令模式下起作用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"> _   ___     _____ __  __</span><br><span class="line">| \ | \ \   / /_ _|  \/  |</span><br><span class="line">|  \| |\ \ / / | || |\/| |</span><br><span class="line">| |\  | \ V /  | || |  | |</span><br><span class="line">|_| \_|  \_/  |___|_|  |_|</span><br><span class="line">--------------------------</span><br><span class="line">imap &lt;Up&gt; &lt;Nop&gt;</span><br><span class="line">nmap &lt;Up&gt; &lt;Nop&gt;</span><br><span class="line">imap &lt;Down&gt; &lt;Nop&gt;</span><br><span class="line">nmap &lt;Down&gt; &lt;Nop&gt;</span><br><span class="line">imap &lt;Left&gt; &lt;Nop&gt;</span><br><span class="line">nmap &lt;Left&gt; &lt;Nop&gt;</span><br><span class="line">imap &lt;Right&gt; &lt;Nop&gt;</span><br><span class="line">nmap &lt;Right&gt; &lt;Nop&gt;</span><br><span class="line">&quot; 让方向键失效</span><br><span class="line">imap kj &lt;esc&gt;</span><br><span class="line">&quot; 按 kj 等同于按 Esc</span><br><span class="line">noremap a b </span><br><span class="line">&quot; 在普通模式下，让按a键等于按b键盘，仅为示例</span><br><span class="line">noremap K 5k</span><br><span class="line">noremap J 5j</span><br><span class="line">&quot; 实现快速换行</span><br><span class="line">map S :w&lt;CR&gt;</span><br><span class="line">&quot; 让按 S 等同于执行 :w 即保存</span><br><span class="line">map ? :nohlsearch&lt;CR&gt;</span><br><span class="line">&quot; 按 ? 取消高亮搜索结果</span><br><span class="line">map s &lt;nop&gt; </span><br><span class="line">&quot; 让按 s 无效果</span><br><span class="line">map Q :q&lt;CR&gt; </span><br><span class="line">&quot; 按 Q 退出nvim</span><br><span class="line">nmap &lt;CR&gt; o&lt;Esc&gt;</span><br><span class="line">&quot; 按回车等于换行</span><br><span class="line">vnoremap Y &quot;+y</span><br><span class="line">&quot; 可视模式下按Y等于&quot;+y，复制到系统剪切板</span><br><span class="line">map sl :set splitright&lt;CR&gt;:vsplit&lt;CR&gt;</span><br><span class="line">&quot; 按 sl 向右分屏，后面同理</span><br><span class="line">map sh :set nosplitright&lt;CR&gt;:vsplit&lt;CR&gt;    </span><br><span class="line">map sk :set nosplitbelow&lt;CR&gt;:split&lt;CR&gt; </span><br><span class="line">map sj :set splitbelow&lt;CR&gt;:split&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">let mapleader=&quot; &quot;</span><br><span class="line">map &lt;LEADER&gt;l &lt;C-w&gt;l</span><br><span class="line">map &lt;LEADER&gt;k &lt;C-w&gt;k</span><br><span class="line">map &lt;LEADER&gt;h &lt;C-w&gt;h</span><br><span class="line">map &lt;LEADER&gt;j &lt;C-w&gt;j</span><br><span class="line">&quot; 修改 空格+hjkl 为光标在分屏中移动</span><br><span class="line">map &lt;up&gt; :res +5&lt;CR&gt;</span><br><span class="line">map &lt;down&gt; :res -5&lt;CR&gt;</span><br><span class="line">map &lt;left&gt; :vertical resize-5&lt;CR&gt;</span><br><span class="line">map &lt;right&gt; :vertical resize+5&lt;CR&gt;</span><br><span class="line">&quot; 通过上下左右箭头修改分屏大小</span><br><span class="line">map sv &lt;C-w&gt;t&lt;C-w&gt;H</span><br><span class="line">map sh &lt;C-w&gt;t&lt;C-w&gt;K</span><br><span class="line">&quot; sv 改为左右分屏</span><br><span class="line">map &lt;LEADER&gt;tt :tabe&lt;CR&gt;</span><br><span class="line">map &lt;LEADER&gt;th :-tabnext&lt;CR&gt;</span><br><span class="line">map &lt;LEADER&gt;tl :+tabnext&lt;CR&gt;</span><br><span class="line">&quot; tt 新建标签页 th移动在左边的标签页 tl右</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改设置"><a href="#修改设置" class="headerlink" title="修改设置"></a>修改设置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">set clipboard+=unnamedplus</span><br><span class="line">&quot; 让vim与系统共享同一个剪切板</span><br><span class="line">set number</span><br><span class="line">&quot; 显示行号</span><br><span class="line">set wildmenu</span><br><span class="line">&quot; 底线命令模式下，按Tab显示补全</span><br><span class="line">set relativenumber</span><br><span class="line">&quot; 显示相对行号</span><br><span class="line">set norelativenumber</span><br><span class="line">&quot; 取消显示相对行号</span><br><span class="line">set cursorline</span><br><span class="line">&quot; 突显当前行</span><br><span class="line">set scrolloff=5</span><br><span class="line">&quot; 光标与窗口的距离为5行</span><br><span class="line">set wrap</span><br><span class="line">&quot; 设置字符不超出窗口</span><br><span class="line">set ignorecase</span><br><span class="line">&quot; 搜索忽略大小写</span><br><span class="line">set smartcase</span><br><span class="line">&quot; 智能搜索匹配</span><br><span class="line">set tabstop=4</span><br><span class="line">set shiftwidth=4</span><br><span class="line">&quot; 调整Tab和每一级缩进的长度</span><br><span class="line">let &amp;t_SI = &quot;\&lt;Esc&gt;]50;CursorShape=1\x7&quot;</span><br><span class="line">let &amp;t_EI = &quot;\&lt;Esc&gt;]50;CursorShape=0\x7&quot;</span><br><span class="line">&quot; 插入状态的光标改为竖线,nvim默认开启</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p><strong>vim-plug</strong></p>
+<p>Vim 的一款插件管理器  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/junegunn/vim-plug">https://github.com/junegunn/vim-plug</a>  </p>
+<p> <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcm9807sgug30go0cib29.gif"></p>
+<p><strong>安装</strong></p>
+<p>Vim</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fLo ~/.vim/autoload/plug.vim --create-dirs \</span><br><span class="line">    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span><br></pre></td></tr></table></figure>
+
+<p>Neovim</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \</span><br><span class="line">    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用</strong></p>
+<p>以下命令均在命令模式下使用</p>
+<ul>
+<li>安装插件 <code>:PlugInstall</code></li>
+<li>更新插件 <code>:PlugUpdate</code></li>
+<li>删除插件 PlugClean(先在 <code>init.vim</code> 中，注释掉该插件，然后打开 Nvim 使用 <code>:PlugClean</code>命令清除该插件)</li>
+<li>查看插件状态：<code>:PlugStatus</code></li>
+<li>升级 vim-plug：<code>:PlugUpgrade</code></li>
+</ul>
+<p>如果想暂时禁用某个插件，但不删除它：</p>
+<p>在 inti.vim 中注释掉该插件 或者 <code>Plug &#39;插件名&#39;, &#123; &#39;on&#39;: [] &#125;</code></p>
+<hr>
+<p><strong>vim-airline</strong></p>
+<p>状态栏插件</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vim-airline/vim-airline">https://github.com/vim-airline/vim-airline</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vim-airline/vim-airline-themes">https://github.com/vim-airline/vim-airline-themes</a>  </p>
+<p> <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcm9bgbimdg30ht020wl5.gif"></p>
+<p>在配置文件中添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line">Plug &#x27;vim-airline/vim-airline&#x27; </span><br><span class="line">Plug &#x27;vim-airline/vim-airline/vim-airline-themes&#x27;</span><br><span class="line">call plug#end()</span><br></pre></td></tr></table></figure>
+
+<p>保存后输入命令 <code>PlugInstall</code>（按Tab键可以补全），显示 <strong>Finishing … Done!</strong>  就安装好了   </p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcm9q72zxzj30t10gcwit.jpg"></p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcm9oqzw7sj30t10gcafj.jpg"></p>
+<p><strong>vim-snazzy</strong></p>
+<p>配色主题</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/connorholyday/vim-snazzy">https://github.com/connorholyday/vim-snazzy</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/w0ng/vim-hybrid">https://github.com/w0ng/vim-hybrid</a>  </p>
+<p><img src="https://s2.ax1x.com/2019/09/15/ncKGY6.png"></p>
+<p><strong>vim-devicons</strong></p>
+<p>显示图标</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ryanoasis/vim-devicons">https://github.com/ryanoasis/vim-devicons</a>  </p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdt58p7u3ej30zo0rsqa0.jpg"></p>
+<p><strong>nerdtree</strong></p>
+<p>文件树  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/scrooloose/nerdtree">https://github.com/scrooloose/nerdtree</a></p>
+<p><img src="https://s2.ax1x.com/2019/09/14/n6Vc8J.png">  </p>
+<p><strong>vim-nerdtree-syntax-highlight</strong>  </p>
+<p>nerdtree 文件名高亮</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tiagofumo/vim-nerdtree-syntax-highlight">https://github.com/tiagofumo/vim-nerdtree-syntax-highlight</a>  </p>
+<p><strong>vim-floaterm</strong></p>
+<p>悬浮窗口使用终端</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/voldikss/vim-floaterm">https://github.com/voldikss/vim-floaterm</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/107749687">https://zhuanlan.zhihu.com/p/107749687</a></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggep8x1fmxg30k00aftcy.gif"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggep8f0tklg30k00afdjt.gif"></p>
+<p><strong>coc.nvim</strong>  </p>
+<p>一款针对 neovim 所开发的智能感知插件</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/neoclide/coc.nvim">https://github.com/neoclide/coc.nvim</a>  </p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggeorvk6xeg315s0lsk1y.gif"></p>
+<p>::: collapse 示例安装java代码补全</p>
+<p>安装插件：<code>Plug &#39;neoclide/coc.nvim&#39;, &#123;&#39;branch&#39;: &#39;release&#39;&#125;</code><br>执行：<code>CocInstall coc-java</code><br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggbe8n3qjtj30ce02gjrj.jpg">  </p>
+<p>安装成功：<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggbe9cw0obj30d506rmxo.jpg">  </p>
+<p>打开java文件会自动下载jdtls：<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggbe9mm29sj30gj03bweo.jpg"> </p>
+<p>默认下载地址是 eclipse.org ：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghj91mo6k0j30t10gxq6r.jpg"></p>
+<p>下载太慢的话可以从 <a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/eclipse/jdtls/snapshots/">中科大镜像站</a> 下载，解压文件至 <code>~/.config/coc/extensions/coc-java-data/server</code></p>
+<p>:::  </p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39302327">Coc.nvim 系列（一）： 为了更好的补全体验</a></p>
+<p><strong>tagbar</strong></p>
+<p>生成标签</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/majutsushi/tagbar">https://github.com/majutsushi/tagbar</a>  </p>
+<p> <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcm9g0vt9aj30hi0bs759.jpg"></p>
+<p>如果在加载该插件时，报错: Tagbar: Exuberant ctags not found!</p>
+<p>安装 ctags 即可解决问题 </p>
+<p>Manjaro Linux：<code>sudo pacman -S ctags</code></p>
+<p>macOS：<code>brew install ctags</code></p>
+<p><strong>Markdown Preview for Neovim</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/iamcco/markdown-preview.nvim">https://github.com/iamcco/markdown-preview.nvim</a>  </p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcm9h6yqhtg30rs0jme82.gif"></p>
+<p><strong>goyo</strong></p>
+<p>优雅的文本编辑体验</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/junegunn/goyo.vim">https://github.com/junegunn/goyo.vim</a>  </p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcm9hsam9aj31c00u0437.jpg"></p>
+<p><strong>vim-startify</strong></p>
+<p>快捷启动页  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mhinz/vim-startify">https://github.com/mhinz/vim-startify</a></p>
+<p><img src="https://s2.ax1x.com/2019/09/14/n6wXyn.png"></p>
+<p><strong>indentLine</strong></p>
+<p>缩进”刻度尺”  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Yggdroot/indentLine">https://github.com/Yggdroot/indentLine</a></p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbe9dunsnpj30m80go40f.jpg"></p>
+<p><strong>nerdcommenter</strong></p>
+<p>代码注释</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/scrooloose/nerdcommenter">https://github.com/scrooloose/nerdcommenter</a>  </p>
+<p> <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggeovtezu2g30hr0cbag4.gif"></p>
+<p><strong>undotree</strong></p>
+<p>编辑历史记录</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mbbill/undotree">https://github.com/mbbill/undotree</a>  </p>
+<p><strong>auto-pairs</strong></p>
+<p>自动补全一对括号</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jiangmiao/auto-pairs">https://github.com/jiangmiao/auto-pairs</a>  </p>
+<p><strong>YouCompleteMe</strong></p>
+<p>强大的代码补全</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ycm-core/YouCompleteMe">https://github.com/ycm-core/YouCompleteMe</a>  </p>
+<p>安装：</p>
+<p><code>cd ~/.vim/plugged/YouCompleteMe</code></p>
+<p><code>sudo python3 install.py</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">参考教程：</span><br><span class="line">https://www.bilibili.com/video/av55498503</span><br><span class="line">https://www.imooc.com/learn/1129</span><br><span class="line">(2019.09 第一次接触 Vim)</span><br></pre></td></tr></table></figure>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2020/03/07/homebrew/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2020/01/04/hexo2/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2020-01-10 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Linux/">Linux<span>8</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Linux/">Linux<span>7</span></a></li> <li><a href="/tags/Neovim/">Neovim<span>1</span></a></li> <li><a href="/tags/Vim/">Vim<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2023 hcjjj
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

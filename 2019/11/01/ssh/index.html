@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>SSH 连接云服务器 | HCJ&#39;s Blog</title>
+  <meta name="author" content="hcjjj">
+  
+  <meta name="description" content="SSH 为 Secure Shell 的缩写,最初是UNIX系统上的一个程序，专为 远程登录会话 和其他网络服务提供安全性的协议。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="SSH 连接云服务器"/>
+  <meta property="og:site_name" content="HCJ&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">HCJ&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> SSH 连接云服务器</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>SSH 为 Secure Shell 的缩写,最初是UNIX系统上的一个程序，专为 <strong>远程登录会话</strong> 和其他网络服务提供安全性的协议。</p>
+<span id="more"></span>
+<p>简单来说就是可以通过 ssh 以命令行的方式远程控制自己的电脑或者远程服务器</p>
+<h1 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h1><p><code>ssh user@remote (-v -p port) </code></p>
+<p>如：ssh <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x31;&#x32;&#46;&#x37;&#x34;&#x2e;&#120;&#120;&#46;&#120;&#120;">&#x72;&#x6f;&#x6f;&#x74;&#x40;&#x31;&#x31;&#x32;&#46;&#x37;&#x34;&#x2e;&#120;&#120;&#46;&#120;&#120;</a></p>
+<p><code>user</code> 是在远程机器上的用户名  </p>
+<p><code>remote</code> 是云服务器的地址，可以是IP或域名  </p>
+<p><code>port</code> 是SSH Server监听的端口，默认值为22  </p>
+<p><code>-v</code> 打印出详细的连接信息</p>
+<p><code>-p</code> 指定连接SSH Server的端口</p>
+<p><code>ssh user@remote [指令]</code> 连接远程服务器并执行指令，发回 stdout 到本机后结束连接  </p>
+<h1 id="免密登入"><a href="#免密登入" class="headerlink" title="免密登入"></a>免密登入</h1><p>公私钥非对称加密方式登入：</p>
+<p>1、配置公钥  </p>
+<p>在自己计算机的终端中执行 <code>ssh-keygen</code> 即可生成SSH钥匙 (一路回车即可) </p>
+<p>生成的文件在 <code>~/.ssh</code>  </p>
+<p>2、上传公钥到服务器  </p>
+<p>执行 <code>ssh-copy-id user@remote</code>  </p>
+<p>如：ssh-copy-id <a href="mailto:&#x72;&#x6f;&#111;&#x74;&#64;&#49;&#x31;&#x32;&#46;&#x37;&#x34;&#46;&#120;&#120;&#x2e;&#120;&#x78;">&#x72;&#x6f;&#111;&#x74;&#64;&#49;&#x31;&#x32;&#46;&#x37;&#x34;&#46;&#120;&#120;&#x2e;&#120;&#x78;</a>  </p>
+<p>让远程服务器记住我们自己的计算机，文件保存在服务器的 <code>~/.ssh/authorized_keys</code></p>
+<p>这样子既方便又安全</p>
+<h1 id="上传下载文件"><a href="#上传下载文件" class="headerlink" title="上传下载文件"></a>上传下载文件</h1><p> <strong>s</strong>ecure <strong>c</strong>o<strong>p</strong>y  </p>
+<p>1、上传本地文件到服务器</p>
+<p><code>scp /path/filename（本地文件） username@remote:/remote_dir（远程目录或文件）</code></p>
+<p>2、上传本地目录到服务器</p>
+<p><code>scp -r /local_dir/（本地目录） username@remote:/remote_dir/（远程目录）</code></p>
+<p>3、下载服务器上的文件</p>
+<p><code>scp username@remote:/path/filename（远程文件）/local_dir（本地目录或文件）</code></p>
+<p>4、下载服务器上的目录</p>
+<p><code>scp -r username@remote:/remote_dir/（远程目录） /local_dir/（本地目录）</code></p>
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p><strong>本地</strong>：</p>
+<p>编辑 <code>~/.ssh/config</code>，添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">    ServerAliveInterval 60</span><br><span class="line">    <span class="comment"># 每60秒发送一个no-op包，防止空闲时被服务器断开</span></span><br><span class="line">    <span class="comment"># 保持ssh连接不断开</span></span><br><span class="line">    </span><br><span class="line">Host yun</span><br><span class="line">    Hostname 112.74.xx.xx</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    </span><br><span class="line">Host xxx</span><br><span class="line">   ......</span><br></pre></td></tr></table></figure>
+
+<p><code>yun</code> 服务器别名</p>
+<p><code>Hostname</code> 服务器地址</p>
+<p>保存后即可使用 <code>ssh yun</code> 来登入对应的服务器  </p>
+<p><strong>服务端</strong>：</p>
+<p>文件在 <code>/etc/ssh/ssh_config</code></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gismmaes29j30t10gcdhd.jpg"></p>
+<p>SSH 的默认保留端口为22，可以修改为其他合理的端口</p>
+<p>修改后需要重启服务器或ssh服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">❯ curl 112.74.38.53:22 <span class="comment"># 可以查看端口是否可连接</span></span><br><span class="line">SSH-2.0-OpenSSH_7.4</span><br><span class="line">curl: (56) Recv failure: Connection reset by peer</span><br><span class="line"></span><br><span class="line">❯ curl 112.74.38.53:80 <span class="comment"># http</span></span><br><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Hidden track&lt;/title&gt;</span><br><span class="line">  ......</span><br></pre></td></tr></table></figure>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2019/11/10/ranger/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/09/06/mj/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-11-01 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Linux/">Linux<span>8</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Linux/">Linux<span>7</span></a></li> <li><a href="/tags/SSH/">SSH<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2023 hcjjj
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

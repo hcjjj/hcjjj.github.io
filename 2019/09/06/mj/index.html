@@ -1,0 +1,421 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Manjaro Linux 的正确打开方式 | HCJ&#39;s Blog</title>
+  <meta name="author" content="hcjjj">
+  
+  <meta name="description" content="前言Manjaro 是一个基于 Arch Linux 专业制作的桌面操作系统">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Manjaro Linux 的正确打开方式"/>
+  <meta property="og:site_name" content="HCJ&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">HCJ&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Manjaro Linux 的正确打开方式</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a target="_blank" rel="noopener" href="https://manjaro.org/">Manjaro</a> 是一个基于 Arch Linux 专业制作的桌面操作系统  </p>
+<span id="more"></span>
+
+<h1 id="配置国内镜像源"><a href="#配置国内镜像源" class="headerlink" title="配置国内镜像源"></a>配置国内镜像源</h1><p><a target="_blank" rel="noopener" href="http://www.allalright.site/post/pacman">上手Manjaro Linux包管理工具 pacman</a></p>
+<h1 id="修改按键"><a href="#修改按键" class="headerlink" title="修改按键"></a>修改按键</h1><p><strong>交换 Esc 和 Caps Lock 的按键位置</strong></p>
+<p>方法一:</p>
+<ol>
+<li><p><code>sudo pacman -S xorg</code></p>
+</li>
+<li><p>在 ~/ 下 创建 <code>.xmodmaprc</code> 文件,加入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">remove Lock = Caps_Lock</span><br><span class="line">add Lock = Escape</span><br><span class="line">keysym Caps_Lock = Escape</span><br><span class="line">keysym Escape = Caps_Lock</span><br></pre></td></tr></table></figure></li>
+<li><p>执行 <code>xmodmap .xmodmaprc</code> 即生效  (重启后失效)</p>
+</li>
+</ol>
+<p>方法二:</p>
+<ol>
+<li><p>编辑 <code>/etc/X11/xorg.conf.d/00-keyboard.conf</code></p>
+</li>
+<li><p>增加 <code>Option &quot;XkbOptions&quot; &quot;caps:swapescape&quot;</code> :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Read and parsed by systemd-localed. It&#x27;s probably wise not to edit this file</span><br><span class="line"># manually too freely.</span><br><span class="line">Section &quot;InputClass&quot;</span><br><span class="line">        Identifier &quot;system-keyboard&quot;</span><br><span class="line">        MatchIsKeyboard &quot;on&quot;</span><br><span class="line">    Option &quot;XkbOptions&quot; &quot;caps:swapescape&quot;</span><br><span class="line">        Option &quot;XkbLayout&quot; &quot;cn&quot;</span><br><span class="line">        Option &quot;XkbModel&quot; &quot;pc105&quot;</span><br><span class="line">EndSection</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/lepeCoder/p/swap_ESC_and_Caps.html">https://www.cnblogs.com/lepeCoder/p/swap_ESC_and_Caps.html</a></p>
+</blockquote>
+<h1 id="修改主目录为英文"><a href="#修改主目录为英文" class="headerlink" title="修改主目录为英文"></a>修改主目录为英文</h1><p>选择中文语言后，家目录下的文件夹名是中文，不方便终端下的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S xdg-user-dirs-gtk</span><br><span class="line">export LANG=en_US</span><br><span class="line">xdg-user-dirs-gtk-update</span><br><span class="line"># 会弹出窗口提示语言更改，更新名称即可</span><br><span class="line">export LANG=zh_CN.UTF-8</span><br><span class="line"># 以显示中文</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h1><p>安装输入法工具</p>
+<p><code>sudo pacman -S fcitx fcitx-im fcitx-configtool</code></p>
+<blockquote>
+<p>如果安装后一直提示输入法异常则选择 <code>sudo pacman -S fcitx-qt4 fcitx-configtool</code></p>
+</blockquote>
+<p>安装搜狗输入法</p>
+<p><code>sudo pacman -S fcitx-sogoupinyin</code></p>
+<p>皮肤下载：<a target="_blank" rel="noopener" href="https://pinyin.sogou.com/skins/">https://pinyin.sogou.com/skins/</a></p>
+<p>修改全局变量</p>
+<p><code>sudo vi ~/.xprofile</code></p>
+<p>输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export GTK_IM_MODULE=fcitx</span><br><span class="line">export QT_IM_MODUE=fcitx</span><br><span class="line">erport XMODIFERS=”@im=fcitx</span><br></pre></td></tr></table></figure>
+<p>重启后即可使用中文输入法</p>
+<h1 id="安装常用软件"><a href="#安装常用软件" class="headerlink" title="安装常用软件"></a>安装常用软件</h1><p>dock栏</p>
+<p><code>sudo pacman -S latte-dock</code></p>
+<p>安装配置后设置开机自启</p>
+<p>TIM</p>
+<p><code>sudo pacman -S deepin.com.qq.office</code></p>
+<p><strong>安装后如果打不开：</strong></p>
+<ol>
+<li>安装gnome-settings-daemon</li>
+</ol>
+<p>  <code>sudo pacman -S gnome-settings-daemon</code></p>
+<ol start="2">
+<li>设置开启自启动</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">系统设置-&gt;开机或关机-&gt;自动启动-&gt;添加脚本-&gt;输入/usr/lib/gsd-xsettings，重启后即可打开</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>WPS<br><code>sudo pacman -S wps-office </code></p>
+<p>安装wps必要字体</p>
+<p><code>sudo pacman -S ttf-wps-fonts</code></p>
+<p><strong>安装windows字体：</strong></p>
+<p>由于版权问题，linux版WPS 没有自带字体，而许多字体是平时要使用的</p>
+<ol>
+<li><p>到windows字体目录(双系统)下，复制字体文件到wps-fonts</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp *.ttf /usr/share/fonts/wps-fonts/</span><br><span class="line">sudo cp *.TTF /usr/share/fonts/wps-fonts/</span><br><span class="line">sudo cp simsun.ttc /usr/share/fonts/wps-fonts/</span><br></pre></td></tr></table></figure></li>
+<li><p>添加可执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/fonts/</span><br><span class="line">sudo chmod 755 wps-fonts/</span><br><span class="line">cd /usr/share/fonts/wps-fonts/</span><br><span class="line">sudo chmod 644 *</span><br></pre></td></tr></table></figure></li>
+<li><p>生成字体缓存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfontscale</span><br><span class="line">sudo mkfontdir</span><br><span class="line">fc-cache </span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这下wps里就有了平时那些常用的字体</p>
+<hr>
+<p>网易云音乐</p>
+<p><code>sudo pacman -S netease-cloud-music</code></p>
+<p>搜索栏无法输入中文解决办法：</p>
+<ol>
+<li><p><code>yay -S qcef</code></p>
+</li>
+<li><p><code>sudo vim /opt/netease/netease-cloud-music/netease-cloud-music.bash</code> 修改为：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">HERE=&quot;$(dirname &quot;$(readlink -f &quot;$&#123;0&#125;&quot;)&quot;)&quot;</span><br><span class="line">#export LD_LIBRARY_PATH=&quot;$&#123;HERE&#125;&quot;/libs</span><br><span class="line">#export QT_PLUGIN_PATH=&quot;$&#123;HERE&#125;&quot;/plugins </span><br><span class="line">#export QT_QPA_PLATFORM_PLUGIN_PATH=&quot;$&#123;HERE&#125;&quot;/plugins/platforms</span><br><span class="line">export XDG_CURRENT_DESKTOP=DDE </span><br><span class="line">exec &quot;$&#123;HERE&#125;&quot;/netease-cloud-music $@</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>VirtualBox 虚拟机</p>
+<ol>
+<li><code>sudo uname -r</code> 查看内核版本</li>
+<li><code>sudo pacman -S virtualbox</code> 安装对应内核的版本</li>
+<li><code>sudo pacman -Ss virtualbox-ext-oracle</code> 安装扩展包</li>
+</ol>
+<p><img src="http://tva1.sinaimg.cn/large/007X8olVly1g77dfgt5qwj30j00bgjta.jpg"></p>
+<hr>
+<p>谷歌浏览器</p>
+<p><code>sudo pacman -S google-chrome</code></p>
+<p>Vim</p>
+<p><code>sudo pacman -S vim</code></p>
+<p>Neovim</p>
+<p><code>sudo pacman -S neovim</code></p>
+<p>Ranger</p>
+<p><code>sudo pacman -S ranger</code></p>
+<p>微信</p>
+<p><code>sudo pacman -S electronic-wechat</code></p>
+<p>Markdown编辑器</p>
+<p><code>sudo pacman -S typora</code></p>
+<p>VS Code</p>
+<p><code>sudo pacman -S code </code></p>
+<p>百度网盘</p>
+<p><code>sudo pacman -S baidunetdisk-bin</code></p>
+<p>截图工具</p>
+<p><code>sudo pacman -S deepin-screenshot</code></p>
+<p><code>sudo pacman -S flameshot</code></p>
+<p>yay</p>
+<p>pacman不直接支持AUR，yay是一个AUR助手</p>
+<p><code>sudo pacman -S yay</code></p>
+<h1 id="美化终端"><a href="#美化终端" class="headerlink" title="美化终端"></a>美化终端</h1><p>安装Monaco字体 </p>
+<p><code>curl -kL https://raw.github.com/cstrap/monaco-font/master/install-font-archlinux.sh | bash</code></p>
+<p>fish</p>
+<p><code>sudo pacman -S fish</code></p>
+<p>安装oh-my-fish</p>
+<p><code>curl -L https://get.oh-my.fish | fish</code></p>
+<p>更换shell为fish</p>
+<p><code>chsh -s /usr/bin/fish</code></p>
+<p>更改配色样式</p>
+<p><code>fish_config</code></p>
+<h1 id="Pacman"><a href="#Pacman" class="headerlink" title="Pacman"></a>Pacman</h1><p>Pacman是Manjaro系统中的软件包管理器，Manjaro也提供了可视化操作的 pacman-manager</p>
+<h2 id="配置国内镜像源-1"><a href="#配置国内镜像源-1" class="headerlink" title="配置国内镜像源"></a>配置国内镜像源</h2><p>Manjaro本身包含了很多国内的源，测试并自动选择国内源<br><code>sudo pacman-mirrors -c China</code></p>
+<p><strong>添加archlinuxcn源：</strong></p>
+<p><code>sudo vi /etc/pacman.d/archlinuxcn</code><br>在archlinuxcn中写入国内的镜像源地址：</p>
+<pre><code>Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+</code></pre>
+<p><code>sudo vi /etc/pacman.conf</code><br>在末尾添加：</p>
+<pre><code>[archlinuxcn]
+SigLevel = Never
+Include = /etc/pacman.d/archlinuxcn
+</code></pre>
+<p>保存后更新软件源</p>
+<p><code>sudo pacman -Syy</code></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p><code>sudo pacman -Sy</code><br>更新软件库，获取最新软件情报<br>如果刚刚更新过就不再更新</p>
+<p><code>sudo pacman -Syy</code><br>强制更新软件库，无论刚刚是否更新过</p>
+<p><code>sudo pacman -Su</code><br>更新软件包</p>
+<p><code>sudo pacman -Syyu</code><br>更新软件库并更新软件包</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>sudo pacman -S [软件包名]</code><br>安装软件包</p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p><code>sudo pacman -Ss [要查询的软件包名]</code><br>查询软件仓库中的软件</p>
+<p><code>sudo pacman -Q</code><br>查询本地所有已安装的软件包</p>
+<p><code>sudo pacman -Q | wc -l</code><br>查看本地已安装的软件包数量</p>
+<p><code>sudo pacman -Qe | wc -l</code><br>查看本地自己安装的软件包数量（不包括系统自带的软件包）</p>
+<p><code>sudo pacman -Qqe</code><br>查询本地自己安装的软件包（不显示版本号）</p>
+<p><code>sudo pacman -Qs [要查询的软件包名]</code><br>查询本地软件包</p>
+<p><code>sudo pacman -Qdt</code><br>查询系统中不再被需要的依赖</p>
+<p><code>sudo pacman -Qdtq</code><br>查询系统中不再被需要的依赖（不显示版本号）</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p><code>sudo pacman -Sc</code><br>删除本地安装的软件包缓存</p>
+<p><code>sudo pacman -R [要删除的软件包名]</code><br>删除软件包</p>
+<p><code>sudo pacman -Rs [要删除的软件包名]</code><br>删除软件包及其依赖</p>
+<p><code>sudo pacman -Rn [要删除的软件包名]</code><br>删除软件包及其配置文件</p>
+<p><code>sudo pacman -Ru [要删除的软件包名]</code></p>
+<p>删除软件包与不再被需要的依赖</p>
+<p><code>sudo pacman -R (sudo pacman -Qdtq)</code><br>删除系统中不再被需要的依赖</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2019/11/01/ssh/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2019/07/28/markdown/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2019-09-06 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Linux/">Linux<span>8</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Linux/">Linux<span>7</span></a></li> <li><a href="/tags/Manjaro/">Manjaro<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2023 hcjjj
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>
