@@ -6,17 +6,16 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>Manjaro Linux 的正确打开方式 | 人生天地间，忽如远行客</title>
+  <title>Manjaro Linux 的正确打开方式 | HCJ&#39;s Blog</title>
   <meta name="author" content="hcjjj">
   
-  <meta name="description" content="前言Manjaro 是一个基于 Arch Linux 专业制作的桌面操作系统  
-我选择的是KDE桌面版本，安装参考：Windows下安装Linux双系统">
+  <meta name="description" content="前言Manjaro 是一个基于 Arch Linux 专业制作的桌面操作系统">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <meta property="og:title" content="Manjaro Linux 的正确打开方式"/>
-  <meta property="og:site_name" content="人生天地间，忽如远行客"/>
+  <meta property="og:site_name" content="HCJ&#39;s Blog"/>
 
   
     <meta property="og:image" content=""/>
@@ -72,7 +71,7 @@ var _hmt = _hmt || [];
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <a class="navbar-brand" href="/">人生天地间，忽如远行客</a>
+	  <a class="navbar-brand" href="/">HCJ&#39;s Blog</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
@@ -137,7 +136,6 @@ var _hmt = _hmt || [];
 	  		
 
 	  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a target="_blank" rel="noopener" href="https://manjaro.org/">Manjaro</a> 是一个基于 Arch Linux 专业制作的桌面操作系统  </p>
-<p>我选择的是KDE桌面版本，安装参考：<a target="_blank" rel="noopener" href="http://www.allalright.site/post/installinux">Windows下安装Linux双系统</a></p>
 <span id="more"></span>
 
 <h1 id="配置国内镜像源"><a href="#配置国内镜像源" class="headerlink" title="配置国内镜像源"></a>配置国内镜像源</h1><p><a target="_blank" rel="noopener" href="http://www.allalright.site/post/pacman">上手Manjaro Linux包管理工具 pacman</a></p>
@@ -260,6 +258,40 @@ var _hmt = _hmt || [];
 <p><code>chsh -s /usr/bin/fish</code></p>
 <p>更改配色样式</p>
 <p><code>fish_config</code></p>
+<h1 id="Pacman"><a href="#Pacman" class="headerlink" title="Pacman"></a>Pacman</h1><p>Pacman是Manjaro系统中的软件包管理器，Manjaro也提供了可视化操作的 pacman-manager</p>
+<h2 id="配置国内镜像源-1"><a href="#配置国内镜像源-1" class="headerlink" title="配置国内镜像源"></a>配置国内镜像源</h2><p>Manjaro本身包含了很多国内的源，测试并自动选择国内源<br><code>sudo pacman-mirrors -c China</code></p>
+<p><strong>添加archlinuxcn源：</strong></p>
+<p><code>sudo vi /etc/pacman.d/archlinuxcn</code><br>在archlinuxcn中写入国内的镜像源地址：</p>
+<pre><code>Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+</code></pre>
+<p><code>sudo vi /etc/pacman.conf</code><br>在末尾添加：</p>
+<pre><code>[archlinuxcn]
+SigLevel = Never
+Include = /etc/pacman.d/archlinuxcn
+</code></pre>
+<p>保存后更新软件源</p>
+<p><code>sudo pacman -Syy</code></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p><code>sudo pacman -Sy</code><br>更新软件库，获取最新软件情报<br>如果刚刚更新过就不再更新</p>
+<p><code>sudo pacman -Syy</code><br>强制更新软件库，无论刚刚是否更新过</p>
+<p><code>sudo pacman -Su</code><br>更新软件包</p>
+<p><code>sudo pacman -Syyu</code><br>更新软件库并更新软件包</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>sudo pacman -S [软件包名]</code><br>安装软件包</p>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p><code>sudo pacman -Ss [要查询的软件包名]</code><br>查询软件仓库中的软件</p>
+<p><code>sudo pacman -Q</code><br>查询本地所有已安装的软件包</p>
+<p><code>sudo pacman -Q | wc -l</code><br>查看本地已安装的软件包数量</p>
+<p><code>sudo pacman -Qe | wc -l</code><br>查看本地自己安装的软件包数量（不包括系统自带的软件包）</p>
+<p><code>sudo pacman -Qqe</code><br>查询本地自己安装的软件包（不显示版本号）</p>
+<p><code>sudo pacman -Qs [要查询的软件包名]</code><br>查询本地软件包</p>
+<p><code>sudo pacman -Qdt</code><br>查询系统中不再被需要的依赖</p>
+<p><code>sudo pacman -Qdtq</code><br>查询系统中不再被需要的依赖（不显示版本号）</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p><code>sudo pacman -Sc</code><br>删除本地安装的软件包缓存</p>
+<p><code>sudo pacman -R [要删除的软件包名]</code><br>删除软件包</p>
+<p><code>sudo pacman -Rs [要删除的软件包名]</code><br>删除软件包及其依赖</p>
+<p><code>sudo pacman -Rn [要删除的软件包名]</code><br>删除软件包及其配置文件</p>
+<p><code>sudo pacman -Ru [要删除的软件包名]</code></p>
+<p>删除软件包与不再被需要的依赖</p>
+<p><code>sudo pacman -R (sudo pacman -Qdtq)</code><br>删除系统中不再被需要的依赖</p>
 	  
 	</div>
 
@@ -269,13 +301,14 @@ var _hmt = _hmt || [];
 
     
     
-    <a href="/2019/11/10/ranger/" type="button" class="btn btn-default"><i
+    <a href="/2019/11/01/ssh/" type="button" class="btn btn-default"><i
                 class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a type="button" class="btn btn-default disabled">Next<i class="fa fa-arrow-circle-o-right"></i></a>
+    <a href="/2019/08/03/installinux/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
     
 
     
@@ -314,7 +347,7 @@ var _hmt = _hmt || [];
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/categories/Linux/">Linux<span>5</span></a></li>
+    <li><a href="/categories/Linux/">Linux<span>9</span></a></li>
   </li>
 
     </ul>
@@ -327,7 +360,7 @@ var _hmt = _hmt || [];
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/Linux/">Linux<span>4</span></a></li> <li><a href="/tags/Manjaro/">Manjaro<span>1</span></a></li>
+  <li><a href="/tags/Linux/">Linux<span>8</span></a></li> <li><a href="/tags/Manjaro/">Manjaro<span>2</span></a></li>
     </ul>
 	</div>
 		
