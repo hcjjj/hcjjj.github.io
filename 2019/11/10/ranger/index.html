@@ -110,7 +110,8 @@
 	<div class="mypage">		
 	  		
 
-	  <p>Ranger 是一个以GPL许可证发放源码，默认使用VI风格键盘绑定、curses图形库（一个在Linux/Unix下广泛应用的图形函数库），基于字符终端的文件管理器。快捷键丰富，可以大大减少使用鼠标的次数，提高效率。<span id="more"></span><br>官网：<a target="_blank" rel="noopener" href="https://ranger.github.io/">https://ranger.github.io</a></p>
+	  <p> <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180945968.jpg"></p>
+<p>Ranger 是一个以GPL许可证发放源码，默认使用VI风格键盘绑定、curses图形库（一个在Linux/Unix下广泛应用的图形函数库），基于字符终端的文件管理器。快捷键丰富，可以大大减少使用鼠标的次数，提高效率。<span id="more"></span><br>官网：<a target="_blank" rel="noopener" href="https://ranger.github.io/">https://ranger.github.io</a></p>
 <h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><p>主要是学会快捷键的操作<strong>逻辑</strong></p>
 <p><code>j</code> 上 <code>k</code> 下（切换当前文件夹文件）</p>
 <p><code>[</code> 上 <code>]</code> 下（切换上一层文件夹）</p>
@@ -164,13 +165,13 @@
 <p>将 <code>$EDITOR</code> 修改成 <code>nvim</code>, 如下:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Define the &quot;editor&quot; for text files as first action</span><br><span class="line">mime ^text,  label editor = nvim -- &quot;$@&quot;</span><br><span class="line">mime ^text,  label pager  = &quot;$PAGER&quot; -- &quot;$@&quot;</span><br><span class="line">!mime ^text, label editor, ext xml|json|csv|tex|py|pl|rb|js|sh|php = nvim -- &quot;$@&quot;</span><br><span class="line">!mime ^text, label pager,  ext xml|json|csv|tex|py|pl|rb|js|sh|php = &quot;$PAGER&quot; -- &quot;$@&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><p><a target="_blank" rel="noopener" href="https://github.com/alexanderjeurissen/ranger_devicons"><strong>Ranger Devicons plugin</strong></a> (显示文件图标)<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1geff54qi0fj30t10gxjzv.jpg"></p>
+<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><p><a target="_blank" rel="noopener" href="https://github.com/alexanderjeurissen/ranger_devicons"><strong>Ranger Devicons plugin</strong></a> (显示文件图标)<br><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180944860.jpg"></p>
 <p>使用前需要安装 <a target="_blank" rel="noopener" href="https://github.com/ryanoasis/nerd-fonts">nerd-fonts </a>字体并在终端设置，否则图标无法显示，macOS 下为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew tap homebrew/cask-fonts</span><br><span class="line">brew cask install font-hack-nerd-font</span><br><span class="line">下载太慢的话可以尝试用手机网络开热点。。。可达400+ KiB/s</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap homebrew/cask-fonts</span><br><span class="line">brew cask install font-hack-nerd-font</span><br></pre></td></tr></table></figure>
 
 <p>安装玩字体后，在 iTerm2 中设置字体：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gb0uhweettj30pu0fugo2.jpg"><br> <a target="_blank" rel="noopener" href="https://github.com/ranger/ranger/wiki/Image-Previews"><strong>Image Previews</strong></a>  (图片预览)</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1g9p977z2o0j30m20blzmf.jpg"></p>
+<p><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180944282.jpg"> <a target="_blank" rel="noopener" href="https://github.com/ranger/ranger/wiki/Image-Previews"><strong>Image Previews</strong></a>  (图片预览)</p>
+<p><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180944760.jpg"></p>
 <p>需先安装 w3m 浏览器 ：<code>brew install w3m</code><br>打开配置文件<code> ~/.config/ranger/rc.conf</code> ，搜索修改：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set preview_images true</span><br><span class="line">set preview_images_method iterm2</span><br></pre></td></tr></table></figure>	  
 	</div>

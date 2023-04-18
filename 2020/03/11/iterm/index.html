@@ -114,7 +114,8 @@
 <span id="more"></span>
 
 <p>操作系统分为两个部分，一部分叫<strong>内核</strong>，另一部分叫<strong>用户交互界面</strong><br>在UNIX/LINUX系统中，用户登录系统后会有一个Shell进程，它是一个用 C 语言编写的程序，既是一种命令语言，又是一种程序设计语言，它是管理系统的<strong>命令解析器</strong>，终端是敲命令的工具，是连接内核与交互界面的桥梁  </p>
-<h1 id="美化终端"><a href="#美化终端" class="headerlink" title="美化终端"></a>美化终端</h1><p>以 macOS 为例，安装 <a target="_blank" rel="noopener" href="https://www.iterm2.com/">iTerm2</a> </p>
+<h1 id="美化终端"><a href="#美化终端" class="headerlink" title="美化终端"></a>美化终端</h1><p> <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180937897.jpg"></p>
+<p>以 macOS 为例，安装 <a target="_blank" rel="noopener" href="https://www.iterm2.com/">iTerm2</a> </p>
 <p>更换 <a target="_blank" rel="noopener" href="https://gitee.com/jasonwood/iTerm2-Color-Schemes">主题</a> ：</p>
 <p><code>Preferences -&gt; Profiles -&gt; ColorPresets -&gt; Import</code> </p>
 <p>导入 <code>iTerm2-Color-Schemes/schemes/xxx.itermcolors</code></p>
@@ -124,14 +125,13 @@
 <p>查看已安装的shell：<code>cat /etc/shells</code>  </p>
 <p>更换shell：<code>chsh -s [shell路径]</code></p>
 <h2 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h2><p>MacOS 默认的shell为 bash，但自带了 zsh</p>
-<p> <img src="https://ohmyz.sh/img/OMZLogo_BnW.png"></p>
 <ol>
 <li><p>安装 <a target="_blank" rel="noopener" href="https://ohmyz.sh/">oh-my-zsh</a> (切换到zsh后进行安装)</p>
  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Shell successfully changed to &#x27;/bin/zsh&#x27;.</span><br><span class="line">         __                                     __</span><br><span class="line">  ____  / /_     ____ ___  __  __   ____  _____/ /_</span><br><span class="line"> / __ \/ __ \   / __ `__ \/ / / /  /_  / / ___/ __ \</span><br><span class="line">/ /_/ / / / /  / / / / / / /_/ /    / /_(__  ) / / /</span><br><span class="line">\____/_/ /_/  /_/ /_/ /_/\__, /    /___/____/_/ /_/</span><br><span class="line">                        /____/                       ....is now installed!</span><br><span class="line">Please look over the ~/.zshrc file to select plugins, themes, and options.</span><br></pre></td></tr></table></figure></li>
 <li><p>更换<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki/themes">主题</a></p>
 <p> 下载 <a target="_blank" rel="noopener" href="https://github.com/romkatv/powerlevel10k#oh-my-zsh">powerlevel10k</a>（需要安装 Hack Nerd Font 字体和配置）</p>
 <p> 编辑 <code>~/.zshrc</code> ，修改 <code>ZSH_THEME=&quot;powerlevel10k/powerlevel10k&quot;</code>  </p>
-<p> <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdvfj922kbj30t10gch5s.jpg">  </p>
+<p>  <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180936607.jpg"></p>
 </li>
 <li><p>安装插件</p>
 <p> <a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-syntax-highlighting"><strong>zsh-syntax-highlighting</strong> </a>语法高亮</p>
@@ -149,11 +149,11 @@
 <li><code>cp incr-0.2.zsh ~/.oh-my-zsh/plugins/</code></li>
 <li>添加 <code>source ~/.oh-my-zsh/plugins/incr*.zsh</code> 到 <code>~/.zshrc</code> 中</li>
 </ol>
-<p>  <img src="https://mimosa-pudica.net/img/zsh.gif">  </p>
+<p>  <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180937023.png"></p>
 <h2 id="fish"><a href="#fish" class="headerlink" title="fish"></a>fish</h2></li>
 </ol>
 <p>fish 开箱即用，不需要怎么配置</p>
-<p> <img src="https://tva1.sinaimg.cn/large/006tNbRwgy1ga41ngb81rj307n07n748.jpg"></p>
+<p> <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180936558.jpg"></p>
 <p><a target="_blank" rel="noopener" href="http://fishshell.com/">http://fishshell.com</a></p>
 <p><code>brew install fish</code></p>
 <blockquote>
@@ -168,7 +168,7 @@
 <p><code>fish_config</code> 网页可视化配置  </p>
 <p>fish 的PATH路径为：<code>~/.config/fish/config.fish</code></p>
 <p>格式：<code>set PATH /usr/local/mysql/bin $PATH</code></p>
-<p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc52o5ok76j311y0j7gqe.jpg"></p>
+<p><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180936468.jpg"></p>
 <h1 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h1><table>
 <thead>
 <tr>
