@@ -57,8 +57,11 @@ body {
 .page{
   margin: 1.0em 0em;
   padding-top: 25px;
-  line-height: 1.5em;
+    /* 修改了这里 */
+  line-height: 1.7em;
   font-family: 'Open Sans',"Helvetica Neue", "Helvetica","Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
+  /* 修改了这里 */
+  font-size: 1.1em;
 }
 
 .page p{
