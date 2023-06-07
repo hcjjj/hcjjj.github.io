@@ -10,10 +10,9 @@
 官方 github 仓库
 2020 讲义
 2020 中文讲义
-课程概览与 shell这一讲主要是介绍了一些类Unix shell的简单命令，包括重定向输入输出流和管道符。
-本讲课后的小练习：
+课程概览与 Shell这一讲主要是介绍了一些类Unix shell的简单命令，包括重定向输入输出流和管道符。
 
-">
+Shell 工具和脚">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -78,10 +77,41 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/missing-semester/missing-semester">官方 github 仓库</a></p>
 <p><a target="_blank" rel="noopener" href="https://missing.csail.mit.edu/">2020 讲义</a></p>
 <p><a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/">2020 中文讲义</a></p>
-<h2 id="课程概览与-shell"><a href="#课程概览与-shell" class="headerlink" title="课程概览与 shell"></a>课程概览与 shell</h2><p>这一讲主要是介绍了一些类Unix shell的简单命令，包括重定向输入输出流和管道符。</p>
-<p>本讲课后的小练习：</p>
+<h2 id="课程概览与-Shell"><a href="#课程概览与-Shell" class="headerlink" title="课程概览与 Shell"></a>课程概览与 Shell</h2><p>这一讲主要是介绍了一些类Unix shell的简单命令，包括重定向输入输出流和管道符。</p>
 <p><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202306042054244.png"></p>
-<h2 id="shell-工具和脚本"><a href="#shell-工具和脚本" class="headerlink" title="shell 工具和脚本"></a>shell 工具和脚本</h2><h2 id="编辑器-Vim"><a href="#编辑器-Vim" class="headerlink" title="编辑器(Vim)"></a>编辑器(Vim)</h2><h2 id="数据整理"><a href="#数据整理" class="headerlink" title="数据整理"></a>数据整理</h2><h2 id="命令行环境"><a href="#命令行环境" class="headerlink" title="命令行环境"></a>命令行环境</h2><h2 id="版本控制-Git"><a href="#版本控制-Git" class="headerlink" title="版本控制(Git)"></a>版本控制(Git)</h2><h2 id="调试及性能分析"><a href="#调试及性能分析" class="headerlink" title="调试及性能分析"></a>调试及性能分析</h2><h2 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h2><h2 id="安全和密码学"><a href="#安全和密码学" class="headerlink" title="安全和密码学"></a>安全和密码学</h2><h2 id="大杂烩提问-amp-回答"><a href="#大杂烩提问-amp-回答" class="headerlink" title="大杂烩提问&amp;回答"></a>大杂烩提问&amp;回答</h2>	  
+<h2 id="Shell-工具和脚本"><a href="#Shell-工具和脚本" class="headerlink" title="Shell 工具和脚本"></a>Shell 工具和脚本</h2><p>介绍bash作为脚本语言的一些基础操作和几种常用的shell工具。</p>
+<ul>
+<li>查找文件<ul>
+<li><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/find.1.html"><code>find</code></a> </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/sharkdp/fd"><code>fd</code></a> </li>
+</ul>
+</li>
+<li>查找代码<ul>
+<li><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/grep.1.html"><code>grep</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://beyondgrep.com/"><code>ack</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ggreer/the_silver_searcher"><code>ag</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a></li>
+</ul>
+</li>
+<li>查找shell命令<ul>
+<li><code>history | grep xxx</code></li>
+<li><code>Ctrl + R</code></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#ctrl-r"><code>fzf</code></a> </li>
+<li><a target="_blank" rel="noopener" href="https://fishshell.com/"><code>fish</code></a> shell</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions"><strong>zsh-autosuggestions</strong></a> </li>
+</ul>
+</li>
+<li>目录导航<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/clvv/fasd"><code>fasd</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/wting/autojump"><code>autojump</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://linux.die.net/man/1/tree"><code>tree</code></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Canop/broot"><code>broot</code></a> </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jarun/nnn"><code>nnn</code></a> </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ranger/ranger"><code>ranger</code></a></li>
+</ul>
+</li>
+</ul>
+<h2 id="编辑器-Vim"><a href="#编辑器-Vim" class="headerlink" title="编辑器(Vim)"></a>编辑器(Vim)</h2><h2 id="数据整理"><a href="#数据整理" class="headerlink" title="数据整理"></a>数据整理</h2><h2 id="命令行环境"><a href="#命令行环境" class="headerlink" title="命令行环境"></a>命令行环境</h2><h2 id="版本控制-Git"><a href="#版本控制-Git" class="headerlink" title="版本控制(Git)"></a>版本控制(Git)</h2><h2 id="调试及性能分析"><a href="#调试及性能分析" class="headerlink" title="调试及性能分析"></a>调试及性能分析</h2><h2 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h2><h2 id="安全和密码学"><a href="#安全和密码学" class="headerlink" title="安全和密码学"></a>安全和密码学</h2><h2 id="大杂烩提问-amp-回答"><a href="#大杂烩提问-amp-回答" class="headerlink" title="大杂烩提问&amp;回答"></a>大杂烩提问&amp;回答</h2>	  
 
 	  <div>
   		<center>
