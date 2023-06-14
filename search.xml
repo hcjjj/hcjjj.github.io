@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>程序员生存定律</title>
+      <link href="/2023/06/15/laws/"/>
+      <url>/2023/06/15/laws/</url>
+      
+        <content type="html"><![CDATA[<h1 id="程序员生存定律"><a href="#程序员生存定律" class="headerlink" title="程序员生存定律"></a><a href="https://blog.csdn.net/leezy_2000/article/details/29407747">程序员生存定律</a></h1><blockquote><p>李智勇， 2014-06-08</p></blockquote><span id="more"></span><h2 id="代码之外的人生"><a href="#代码之外的人生" class="headerlink" title="代码之外的人生"></a>代码之外的人生</h2><h2 id="职场生存定律"><a href="#职场生存定律" class="headerlink" title="职场生存定律"></a>职场生存定律</h2><h2 id="软件的世界是怎样的"><a href="#软件的世界是怎样的" class="headerlink" title="软件的世界是怎样的"></a>软件的世界是怎样的</h2><h2 id="程序员的增值之路"><a href="#程序员的增值之路" class="headerlink" title="程序员的增值之路"></a>程序员的增值之路</h2><h2 id="程序员的表达力磨砺"><a href="#程序员的表达力磨砺" class="headerlink" title="程序员的表达力磨砺"></a>程序员的表达力磨砺</h2><h2 id="程序员的稀缺性营造"><a href="#程序员的稀缺性营造" class="headerlink" title="程序员的稀缺性营造"></a>程序员的稀缺性营造</h2><h2 id="程序员的公司选择"><a href="#程序员的公司选择" class="headerlink" title="程序员的公司选择"></a>程序员的公司选择</h2><h2 id="六个程序员的故事"><a href="#六个程序员的故事" class="headerlink" title="六个程序员的故事"></a>六个程序员的故事</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> Books </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Notes </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CMU 15-445/645(FALL 2022)</title>
+      <link href="/2023/06/11/CMU445/"/>
+      <url>/2023/06/11/CMU445/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CMU-15-445-645-FALL-2022"><a href="#CMU-15-445-645-FALL-2022" class="headerlink" title="CMU 15-445/645(FALL 2022)"></a>CMU 15-445/645(FALL 2022)</h1><p>课程网站：<a href="https://15445.courses.cs.cmu.edu/fall2022/">https://15445.courses.cs.cmu.edu/fall2022/</a></p><p><strong>PROJECTS：</strong></p><ul><li><a href="https://15445.courses.cs.cmu.edu/fall2022/project0/">C++ Primer</a></li><li><a href="https://15445.courses.cs.cmu.edu/fall2022/project1/">Buffer Pool Manager</a></li><li><a href="https://15445.courses.cs.cmu.edu/fall2022/project2/">B+Tree Index</a></li><li><a href="https://15445.courses.cs.cmu.edu/fall2022/project3/">Query Execution</a></li><li><a href="https://15445.courses.cs.cmu.edu/fall2022/project4/">Concurrency Control</a></li></ul><p><strong>STEP：</strong></p><ul><li>Linux环境</li><li>安装依赖<ul><li>g++</li><li>cmake</li><li>clang-format</li></ul></li><li>下载Bustub项目</li><li>完成项目要求</li><li>提交作业到Gradescope</li></ul><h2 id="注册课程"><a href="#注册课程" class="headerlink" title="注册课程"></a>注册课程</h2><p><a href="https://www.gradescope.com/">https://www.gradescope.com/</a></p><p>邀请码在课程网站的FAQ里，用于上传代码做线上评测</p><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><ol><li>在本地生成ssh公钥id_rsa.pub</li><li>把本地的id_rsa.pub拷贝到远程服务器上的authorized_keys</li></ol><p><strong>本机：</strong></p><p><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202306141002208.png"></p><p><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202306141019630.png"></p><p><strong>Linux：</strong></p><p>操作系统：Ubuntu 22.04.2 LTS x86_64</p><p>配置SSH远程连接：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成密钥</span></span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line"><span class="comment"># 添加本机的公钥在此</span></span><br><span class="line">vim ~/.ssh/authorized_keys</span><br><span class="line"><span class="comment"># 查看ip地址</span></span><br><span class="line">sudo apt install net-tools</span><br><span class="line">ifconfig</span><br></pre></td></tr></table></figure><p>相关依赖：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install g++ cmake clang-format</span><br></pre></td></tr></table></figure><p>下载Bustub项目：</p><p><a href="https://github.com/cmu-db/bustub">https://github.com/cmu-db/bustub</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/cmu-db/bustub.git </span><br><span class="line"><span class="built_in">cd</span> bustub</span><br><span class="line">git checkout -b branchname v20221128-2022fall</span><br></pre></td></tr></table></figure><p><img src="assets/image-20230614103011033.png" alt="image-20230614103011033"></p><p><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202306141033218.png"></p><h2 id="线上提交"><a href="#线上提交" class="headerlink" title="线上提交"></a>线上提交</h2><p>本地测试：</p><p>代码格式检查：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make format</span><br><span class="line">make check-lint</span><br><span class="line">make check-clang-tidy-p0</span><br></pre></td></tr></table></figure><p>线上提交：</p><h2 id="调试工具"><a href="#调试工具" class="headerlink" title="调试工具"></a>调试工具</h2><p>LLDB </p><p>GDB </p><h2 id="Project-0"><a href="#Project-0" class="headerlink" title="Project 0"></a>Project 0</h2><h2 id="Project-1"><a href="#Project-1" class="headerlink" title="Project 1"></a>Project 1</h2><h2 id="Project-2"><a href="#Project-2" class="headerlink" title="Project 2"></a>Project 2</h2><h2 id="Project-3"><a href="#Project-3" class="headerlink" title="Project 3"></a>Project 3</h2><h2 id="Project-4"><a href="#Project-4" class="headerlink" title="Project 4"></a>Project 4</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> Accumulation </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> database </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C++ 多线程编程</title>
       <link href="/2023/06/06/cpp/"/>
       <url>/2023/06/06/cpp/</url>
@@ -23,31 +73,6 @@
             <tag> Linux </tag>
             
             <tag> C++ </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>CMU 15-445/645(FALL 2022)</title>
-      <link href="/2023/06/06/CMU445/"/>
-      <url>/2023/06/06/CMU445/</url>
-      
-        <content type="html"><![CDATA[<h1 id="CMU-15-445-645-FALL-2022"><a href="#CMU-15-445-645-FALL-2022" class="headerlink" title="CMU 15-445/645(FALL 2022)"></a>CMU 15-445/645(FALL 2022)</h1><p><a href="https://15445.courses.cs.cmu.edu/fall2022/">https://15445.courses.cs.cmu.edu/fall2022/</a></p><h2 id="注册课程"><a href="#注册课程" class="headerlink" title="注册课程"></a>注册课程</h2><p><a href="https://www.gradescope.com/">https://www.gradescope.com/</a></p><p>邀请码在课程网站的FAQ里，用于上传代码做线上评测</p><h2 id="SSH-远程登录"><a href="#SSH-远程登录" class="headerlink" title="SSH 远程登录"></a>SSH 远程登录</h2>]]></content>
-      
-      
-      <categories>
-          
-          <category> Accumulation </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> database </tag>
             
         </tags>
       
@@ -129,31 +154,6 @@
         <tags>
             
             <tag> Soft skills </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>程序员生存定律</title>
-      <link href="/2023/05/08/laws/"/>
-      <url>/2023/05/08/laws/</url>
-      
-        <content type="html"><![CDATA[<h1 id="程序员生存定律"><a href="#程序员生存定律" class="headerlink" title="程序员生存定律"></a><a href="https://blog.csdn.net/leezy_2000/article/details/29407747">程序员生存定律</a></h1><blockquote><p>李智勇， 2014-06-08</p></blockquote><span id="more"></span><h2 id="代码之外的人生"><a href="#代码之外的人生" class="headerlink" title="代码之外的人生"></a>代码之外的人生</h2><h2 id="职场生存定律"><a href="#职场生存定律" class="headerlink" title="职场生存定律"></a>职场生存定律</h2><h2 id="软件的世界是怎样的"><a href="#软件的世界是怎样的" class="headerlink" title="软件的世界是怎样的"></a>软件的世界是怎样的</h2><h2 id="程序员的增值之路"><a href="#程序员的增值之路" class="headerlink" title="程序员的增值之路"></a>程序员的增值之路</h2><h2 id="程序员的表达力磨砺"><a href="#程序员的表达力磨砺" class="headerlink" title="程序员的表达力磨砺"></a>程序员的表达力磨砺</h2><h2 id="程序员的稀缺性营造"><a href="#程序员的稀缺性营造" class="headerlink" title="程序员的稀缺性营造"></a>程序员的稀缺性营造</h2><h2 id="程序员的公司选择"><a href="#程序员的公司选择" class="headerlink" title="程序员的公司选择"></a>程序员的公司选择</h2><h2 id="六个程序员的故事"><a href="#六个程序员的故事" class="headerlink" title="六个程序员的故事"></a>六个程序员的故事</h2>]]></content>
-      
-      
-      <categories>
-          
-          <category> Books </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Notes </tag>
             
         </tags>
       
@@ -484,7 +484,7 @@
       <link href="/2019/11/01/ssh/"/>
       <url>/2019/11/01/ssh/</url>
       
-        <content type="html"><![CDATA[<p>SSH 为 Secure Shell 的缩写,最初是UNIX系统上的一个程序，专为 <strong>远程登录会话</strong> 和其他网络服务提供安全性的协议。</p><span id="more"></span><h1 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h1><p><code>ssh user@remote (-v -p port) </code></p><p>如：ssh <a href="mailto:&#114;&#x6f;&#111;&#116;&#x40;&#49;&#x31;&#50;&#46;&#55;&#x34;&#46;&#x78;&#120;&#46;&#x78;&#120;">&#114;&#x6f;&#111;&#116;&#x40;&#49;&#x31;&#50;&#46;&#55;&#x34;&#46;&#x78;&#120;&#46;&#x78;&#120;</a></p><p><code>user</code> 是在远程机器上的用户名  </p><p><code>remote</code> 是云服务器的地址，可以是IP或域名  </p><p><code>port</code> 是SSH Server监听的端口，默认值为22  </p><p><code>-v</code> 打印出详细的连接信息</p><p><code>-p</code> 指定连接SSH Server的端口</p><p><code>ssh user@remote [指令]</code> 连接远程服务器并执行指令，发回 stdout 到本机后结束连接  </p><h1 id="免密登入"><a href="#免密登入" class="headerlink" title="免密登入"></a>免密登入</h1><p>公私钥非对称加密方式登入：</p><p>1、配置公钥  </p><p>在自己计算机的终端中执行 <code>ssh-keygen</code> 即可生成SSH钥匙 (一路回车即可) </p><p>生成的文件在 <code>~/.ssh</code>  </p><p>2、上传公钥到服务器  </p><p>执行 <code>ssh-copy-id user@remote</code>  </p><p>如：ssh-copy-id <a href="mailto:&#x72;&#x6f;&#x6f;&#x74;&#x40;&#49;&#x31;&#x32;&#x2e;&#x37;&#x34;&#46;&#120;&#120;&#x2e;&#120;&#x78;">&#x72;&#x6f;&#x6f;&#x74;&#x40;&#49;&#x31;&#x32;&#x2e;&#x37;&#x34;&#46;&#120;&#120;&#x2e;&#120;&#x78;</a>  </p><p>让远程服务器记住我们自己的计算机，文件保存在服务器的 <code>~/.ssh/authorized_keys</code></p><p>这样子既方便又安全</p><h1 id="上传下载文件"><a href="#上传下载文件" class="headerlink" title="上传下载文件"></a>上传下载文件</h1><p> <strong>s</strong>ecure <strong>c</strong>o<strong>p</strong>y  </p><p>1、上传本地文件到服务器</p><p><code>scp /path/filename（本地文件） username@remote:/remote_dir（远程目录或文件）</code></p><p>2、上传本地目录到服务器</p><p><code>scp -r /local_dir/（本地目录） username@remote:/remote_dir/（远程目录）</code></p><p>3、下载服务器上的文件</p><p><code>scp username@remote:/path/filename（远程文件）/local_dir（本地目录或文件）</code></p><p>4、下载服务器上的目录</p><p><code>scp -r username@remote:/remote_dir/（远程目录） /local_dir/（本地目录）</code></p><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p><strong>本地</strong>：</p><p>编辑 <code>~/.ssh/config</code>，添加</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">    ServerAliveInterval 60</span><br><span class="line">    <span class="comment"># 每60秒发送一个no-op包，防止空闲时被服务器断开</span></span><br><span class="line">    <span class="comment"># 保持ssh连接不断开</span></span><br><span class="line">    </span><br><span class="line">Host yun</span><br><span class="line">    Hostname 112.74.xx.xx</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    </span><br><span class="line">Host xxx</span><br><span class="line">   ......</span><br></pre></td></tr></table></figure><p><code>yun</code> 服务器别名</p><p><code>Hostname</code> 服务器地址</p><p>保存后即可使用 <code>ssh yun</code> 来登入对应的服务器  </p><p><strong>服务端</strong>：</p><p>文件在 <code>/etc/ssh/ssh_config</code></p><p><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180927183.jpg"></p><p>SSH 的默认保留端口为22，可以修改为其他合理的端口</p><p>修改后需要重启服务器或ssh服务</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">❯ curl 112.74.38.53:22 <span class="comment"># 可以查看端口是否可连接</span></span><br><span class="line">SSH-2.0-OpenSSH_7.4</span><br><span class="line">curl: (56) Recv failure: Connection reset by peer</span><br><span class="line"></span><br><span class="line">❯ curl 112.74.38.53:80 <span class="comment"># http</span></span><br><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Hidden track&lt;/title&gt;</span><br><span class="line">  ......</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<p>SSH 为 Secure Shell 的缩写,最初是UNIX系统上的一个程序，专为 <strong>远程登录会话</strong> 和其他网络服务提供安全性的协议。</p><span id="more"></span><h1 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h1><p><code>ssh user@remote (-v -p port) </code></p><p>如：ssh <a href="mailto:&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x31;&#50;&#46;&#x37;&#x34;&#x2e;&#x78;&#x78;&#x2e;&#x78;&#x78;">&#x72;&#x6f;&#111;&#116;&#64;&#x31;&#x31;&#50;&#46;&#x37;&#x34;&#x2e;&#x78;&#x78;&#x2e;&#x78;&#x78;</a></p><p><code>user</code> 是在远程机器上的用户名  </p><p><code>remote</code> 是云服务器的地址，可以是IP或域名  </p><p><code>port</code> 是SSH Server监听的端口，默认值为22  </p><p><code>-v</code> 打印出详细的连接信息</p><p><code>-p</code> 指定连接SSH Server的端口</p><p><code>ssh user@remote [指令]</code> 连接远程服务器并执行指令，发回 stdout 到本机后结束连接  </p><h1 id="免密登入"><a href="#免密登入" class="headerlink" title="免密登入"></a>免密登入</h1><p>公私钥非对称加密方式登入：</p><p>1、配置公钥  </p><p>在自己计算机的终端中执行 <code>ssh-keygen</code> 即可生成SSH钥匙 (一路回车即可) </p><p>生成的文件在 <code>~/.ssh</code>  </p><p>2、上传公钥到服务器  </p><p>执行 <code>ssh-copy-id user@remote</code>  </p><p>如：ssh-copy-id <a href="mailto:&#114;&#111;&#x6f;&#x74;&#x40;&#x31;&#x31;&#x32;&#46;&#x37;&#52;&#x2e;&#120;&#120;&#x2e;&#x78;&#x78;">&#114;&#111;&#x6f;&#x74;&#x40;&#x31;&#x31;&#x32;&#46;&#x37;&#52;&#x2e;&#120;&#120;&#x2e;&#x78;&#x78;</a>  </p><p>让远程服务器记住我们自己的计算机，文件保存在服务器的 <code>~/.ssh/authorized_keys</code></p><p>这样子既方便又安全</p><h1 id="上传下载文件"><a href="#上传下载文件" class="headerlink" title="上传下载文件"></a>上传下载文件</h1><p> <strong>s</strong>ecure <strong>c</strong>o<strong>p</strong>y  </p><p>1、上传本地文件到服务器</p><p><code>scp /path/filename（本地文件） username@remote:/remote_dir（远程目录或文件）</code></p><p>2、上传本地目录到服务器</p><p><code>scp -r /local_dir/（本地目录） username@remote:/remote_dir/（远程目录）</code></p><p>3、下载服务器上的文件</p><p><code>scp username@remote:/path/filename（远程文件）/local_dir（本地目录或文件）</code></p><p>4、下载服务器上的目录</p><p><code>scp -r username@remote:/remote_dir/（远程目录） /local_dir/（本地目录）</code></p><h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p><strong>本地</strong>：</p><p>编辑 <code>~/.ssh/config</code>，添加</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">    ServerAliveInterval 60</span><br><span class="line">    <span class="comment"># 每60秒发送一个no-op包，防止空闲时被服务器断开</span></span><br><span class="line">    <span class="comment"># 保持ssh连接不断开</span></span><br><span class="line">    </span><br><span class="line">Host yun</span><br><span class="line">    Hostname 112.74.xx.xx</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    </span><br><span class="line">Host xxx</span><br><span class="line">   ......</span><br></pre></td></tr></table></figure><p><code>yun</code> 服务器别名</p><p><code>Hostname</code> 服务器地址</p><p>保存后即可使用 <code>ssh yun</code> 来登入对应的服务器  </p><p><strong>服务端</strong>：</p><p>文件在 <code>/etc/ssh/ssh_config</code></p><p><img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180927183.jpg"></p><p>SSH 的默认保留端口为22，可以修改为其他合理的端口</p><p>修改后需要重启服务器或ssh服务</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">❯ curl 112.74.38.53:22 <span class="comment"># 可以查看端口是否可连接</span></span><br><span class="line">SSH-2.0-OpenSSH_7.4</span><br><span class="line">curl: (56) Recv failure: Connection reset by peer</span><br><span class="line"></span><br><span class="line">❯ curl 112.74.38.53:80 <span class="comment"># http</span></span><br><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;utf-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Hidden track&lt;/title&gt;</span><br><span class="line">  ......</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
