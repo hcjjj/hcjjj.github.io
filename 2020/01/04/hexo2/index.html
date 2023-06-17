@@ -88,7 +88,7 @@
 </blockquote>
 <p><code>service nginx start</code> 启动 Nginx</p>
 <p>在浏览器中打开服务器ip地址 测试 Nginx 是否成功启动：</p>
-<p> <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180932763.jpg"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180932763.jpg"></p>
 <p>或者：<code>wget http://127.0.0.1</code> 进行测试</p>
 <h2 id="创建-git-仓库"><a href="#创建-git-仓库" class="headerlink" title="创建 git 仓库"></a>创建 git 仓库</h2><p>创建并修改目录的所有权和用户权限：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/git/</span><br><span class="line">chown -R $USER:$USER /home/git/</span><br><span class="line">chmod -R 755 /home/git/</span><br></pre></td></tr></table></figure>
@@ -112,20 +112,20 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@aliyun ~]<span class="comment"># nginx -t</span></span><br><span class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf <span class="built_in">test</span> is successful</span><br></pre></td></tr></table></figure>
 
 <p><code>vim /etc/nginx/nginx.conf</code>  编辑配置文件：</p>
-<p> <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180932797.jpg"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180932797.jpg"></p>
 <p>将其中的 root 值改为 <code>/home/hexoBlog</code> （刚才创建的托管仓库目录）</p>
 <p>检查配置文件是否准确 <code>./sbin/nginx -t</code></p>
 <p><code>service nginx restart</code> 重启 Nginx 服务</p>
 <p><strong>访问服务器上面的静态文件</strong></p>
-<p> <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180932831.jpg"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180932831.jpg"></p>
 <p>把文件上传到服务器后配置文件地址，即可通过 [IP地址]/guitar/2019.12.17.mp4 访问该文件</p>
 <blockquote>
 <p>这里的root指的是上面配置的 /home/hexoBlog </p>
 </blockquote>
 <p><strong>配置404页面</strong></p>
-<p> <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180932860.jpg"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180932860.jpg"></p>
 <h1 id="本地主机配置"><a href="#本地主机配置" class="headerlink" title="本地主机配置"></a>本地主机配置</h1><p>编辑 hexo站点配置文件 <code>_config.yml</code></p>
-<p> <img src="https://raw.githubusercontent.com/hcjjj/blog-img/main/202304180931792.jpg"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180931792.jpg"></p>
 <blockquote>
 <p>repo: root@[服务器IP地址]:/home/git/hexoBlog</p>
 </blockquote>
