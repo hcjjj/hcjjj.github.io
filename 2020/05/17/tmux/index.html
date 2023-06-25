@@ -6,7 +6,7 @@
   <title>上手终端复用神器 Tmux | H-sediment&#39;s Blog</title>
   <meta name="author" content="hcjjj">
   
-  <meta name="description" content="Tmux 是一个终端复用工具，它可以让会话(session)与窗口(window)”解绑”，一个窗口还可以分割为多个窗格(pane)，同时运行多个命令行程序。">
+  <meta name="description" content="Tmux 是一个终端复用工具，它可以让会话（session）与窗口（window）“解绑”，一个窗口还可以分割为多个窗格（pane），同时运行多个命令行程序。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -67,14 +67,14 @@
 	
 
 	  <!-- content -->
-	  <p>Tmux 是一个终端复用工具，它可以让会话(session)与窗口(window)”解绑”，一个窗口还可以分割为多个窗格(pane)，同时运行多个命令行程序。</p>
+	  <p>Tmux 是一个终端复用工具，它可以让会话（session）与窗口（window）“解绑”，一个窗口还可以分割为多个窗格（pane），同时运行多个命令行程序。</p>
 <span id="more"></span>
 
-<p><img src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304171123615.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202306251019107.png"></p>
 <p>安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Debian/Ubuntu...</span></span><br><span class="line">$ sudo apt install tmux</span><br><span class="line"><span class="comment"># RedHat/CentOS...</span></span><br><span class="line">$ sudo yum install tmux</span><br><span class="line"><span class="comment"># Arch/Manjrao...</span></span><br><span class="line">$ sudo pacman -S tmux</span><br><span class="line"><span class="comment"># Mac</span></span><br><span class="line">$ brew install tmux</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
-<p>执行 <code>tmux</code>  命令启动服务，（<code>Ctrl+d</code> 或 <code>exit</code> 退出），一个tmux服务可以包含多个会话，一个会话可以包含多个窗口，一个窗口可以包含多个窗格。</p>
+<p>执行 <code>tmux</code>  命令启动服务，（<code>Ctrl+d</code> 或 <code>exit</code> 退出），一个 tmux 服务可以包含多个会话，一个会话可以包含多个窗口，一个窗口可以包含多个窗格。</p>
 <h2 id="Pane-窗格"><a href="#Pane-窗格" class="headerlink" title="Pane 窗格"></a>Pane 窗格</h2><p>默认激活键为<code>Ctrl+B</code> ，激活后按<code>%</code>为竖直分割窗口，以下同理：</p>
 <ul>
 <li><code>%</code>：纵向分隔窗口</li>
@@ -105,7 +105,7 @@
 <ul>
 <li><code>s</code> ：以菜单方式显示和选择会话</li>
 <li><code>$</code>：重命名会话</li>
-<li><code>d</code> ：分离会话，tmux仍在后台运行</li>
+<li><code>d</code> ：分离会话，tmux 仍在后台运行</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新接入某个已存在的会话，使用会话编号</span></span><br><span class="line">$ tmux attach -t 0 </span><br><span class="line"><span class="comment"># 使用会话名称</span></span><br><span class="line">$ tmux attach -t &lt;session-name&gt;</span><br><span class="line"><span class="comment"># 杀死某个会话</span></span><br><span class="line">$ tmux kill-session -t &lt;session-name&gt;</span><br><span class="line"><span class="comment"># 切换到某个会话</span></span><br><span class="line">$ tmux switch -t &lt;session-name&gt;</span><br><span class="line"><span class="comment"># 列出当前所有 Tmux 会话的信息</span></span><br><span class="line">$ tmux info</span><br><span class="line"><span class="comment"># 重新加载当前的 Tmux 配置</span></span><br><span class="line">$ tmux source-file ~/.tmux.conf</span><br></pre></td></tr></table></figure>
 
