@@ -16,8 +16,7 @@ bash作为脚本语言的一些基础操作和几种常用的shell工具
 
 
 查找文件：find 、fd 
-
-查找代码：gre">
+查找代码：grep">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -87,18 +86,14 @@ bash作为脚本语言的一些基础操作和几种常用的shell工具
 <p>bash作为脚本语言的一些基础操作和几种常用的shell工具</p>
 </blockquote>
 <ul>
-<li><p>查找文件：<a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/find.1.html"><code>find</code></a> 、<a target="_blank" rel="noopener" href="https://github.com/sharkdp/fd"><code>fd</code></a> </p>
-</li>
-<li><p>查找代码：<a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/grep.1.html"><code>grep</code></a>、<a target="_blank" rel="noopener" href="https://beyondgrep.com/"><code>ack</code></a>、 <a target="_blank" rel="noopener" href="https://github.com/ggreer/the_silver_searcher"><code>ag</code></a>、<a target="_blank" rel="noopener" href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a></p>
-</li>
-<li><p>查找shell命令：</p>
-<ul>
+<li>查找文件：<a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/find.1.html"><code>find</code></a> 、<a target="_blank" rel="noopener" href="https://github.com/sharkdp/fd"><code>fd</code></a> </li>
+<li>查找代码：<a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/grep.1.html"><code>grep</code></a>、<a target="_blank" rel="noopener" href="https://beyondgrep.com/"><code>ack</code></a>、 <a target="_blank" rel="noopener" href="https://github.com/ggreer/the_silver_searcher"><code>ag</code></a>、<a target="_blank" rel="noopener" href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a></li>
+<li>查找shell命令：<ul>
 <li><code>history | grep xxx</code>、<code>Ctrl + R</code></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#ctrl-r"><code>fzf</code></a> 、<a target="_blank" rel="noopener" href="https://fishshell.com/"><code>fish</code></a>、 <a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions"><strong>zsh-autosuggestions</strong></a> </li>
 </ul>
 </li>
-<li><p>目录导航： <a target="_blank" rel="noopener" href="https://github.com/clvv/fasd"><code>fasd</code></a>、<a target="_blank" rel="noopener" href="https://github.com/wting/autojump"><code>autojump</code></a>、 <a target="_blank" rel="noopener" href="https://linux.die.net/man/1/tree"><code>tree</code></a>、<a target="_blank" rel="noopener" href="https://github.com/Canop/broot"><code>broot</code></a> 、<a target="_blank" rel="noopener" href="https://github.com/jarun/nnn"><code>nnn</code></a> 、<a target="_blank" rel="noopener" href="https://github.com/ranger/ranger"><code>ranger</code></a></p>
-</li>
+<li>目录导航： <a target="_blank" rel="noopener" href="https://github.com/clvv/fasd"><code>fasd</code></a>、<a target="_blank" rel="noopener" href="https://github.com/wting/autojump"><code>autojump</code></a>、 <a target="_blank" rel="noopener" href="https://linux.die.net/man/1/tree"><code>tree</code></a>、<a target="_blank" rel="noopener" href="https://github.com/Canop/broot"><code>broot</code></a> 、<a target="_blank" rel="noopener" href="https://github.com/jarun/nnn"><code>nnn</code></a> 、<a target="_blank" rel="noopener" href="https://github.com/ranger/ranger"><code>ranger</code></a></li>
 </ul>
 <h2 id="编辑器（Vim）"><a href="#编辑器（Vim）" class="headerlink" title="编辑器（Vim）"></a>编辑器（Vim）</h2><blockquote>
 <p><strong>Vim</strong> 是程序员为程序员编写的编辑器</p>
@@ -120,48 +115,35 @@ bash作为脚本语言的一些基础操作和几种常用的shell工具
 </blockquote>
 <p>正则表达式调试器：<a target="_blank" rel="noopener" href="https://regex101.com/">https://regex101.com/</a></p>
 <ul>
-<li><p>流编辑器：<code>sed</code></p>
-</li>
-<li><p>列流编辑器：<code>awk</code></p>
-</li>
-<li><p>排序工具：<code>sort</code></p>
-</li>
-<li><p>统计信息：<code>wc</code></p>
-</li>
-<li><p>统计整理工具：<code>uniq</code></p>
-</li>
-<li><p>查看：<code>cat</code>、<code>head</code>、<code>tail</code></p>
-</li>
-<li><p>合并工具：<code>paste</code></p>
-</li>
-<li><p>计算器：<code>bc</code></p>
-</li>
-<li><p><code>xargs</code>   可以将输入列表转换为参数</p>
-</li>
+<li>流编辑器：<code>sed</code></li>
+<li>列流编辑器：<code>awk</code></li>
+<li>排序工具：<code>sort</code></li>
+<li>统计信息：<code>wc</code></li>
+<li>统计整理工具：<code>uniq</code></li>
+<li>查看：<code>cat</code>、<code>head</code>、<code>tail</code></li>
+<li>合并工具：<code>paste</code></li>
+<li>计算器：<code>bc</code></li>
+<li><code>xargs</code>   可以将输入列表转换为参数</li>
 </ul>
 <h2 id="命令行环境"><a href="#命令行环境" class="headerlink" title="命令行环境"></a>命令行环境</h2><blockquote>
 <p>如何更加“优雅”地使用命令行环境</p>
 </blockquote>
 <ul>
-<li><p>Job Control（任务控制）</p>
-<ul>
+<li>Job Control（任务控制）<ul>
 <li>信号机制</li>
 </ul>
 </li>
-<li><p>Terminal Multiplexers（终端复用器）</p>
-<ul>
+<li>Terminal Multiplexers（终端复用器）<ul>
 <li> <code>tmux</code></li>
 </ul>
 </li>
-<li><p>Dotfiles（配置文件）</p>
-<ul>
+<li>Dotfiles（配置文件）<ul>
 <li><code>alias</code></li>
 <li><code>~/.bashrc</code>、<code>~/.vimrc</code>、<code>~/.config/...</code></li>
 <li>使用<strong>dotfiles仓库</strong>和<strong>符号链接</strong>进行统一管理</li>
 </ul>
 </li>
-<li><p>Remote Machines（远程设备）</p>
-<ul>
+<li>Remote Machines（远程设备）<ul>
 <li><code>ssh</code></li>
 <li><code>ssh-keygen</code></li>
 <li><code>ssh-copy-id</code></li>
@@ -170,10 +152,8 @@ bash作为脚本语言的一些基础操作和几种常用的shell工具
 <li><code>~/.ssh/config</code></li>
 </ul>
 </li>
-<li><p>Shells &amp; Frameworks（Shell和框架）</p>
-</li>
-<li><p>Terminal Emulators（终端模拟器）</p>
-</li>
+<li>Shells &amp; Frameworks（Shell和框架）</li>
+<li>Terminal Emulators（终端模拟器）</li>
 </ul>
 <h2 id="版本控制（Git）"><a href="#版本控制（Git）" class="headerlink" title="版本控制（Git）"></a>版本控制（Git）</h2><blockquote>
 <p><strong>Git</strong> Version Control System</p>
@@ -187,12 +167,9 @@ bash作为脚本语言的一些基础操作和几种常用的shell工具
 </ul>
 <p><strong>Git 本地的三个工作区域：</strong></p>
 <ul>
-<li><p>工作目录 （Working Directory）</p>
-</li>
-<li><p>暂存区 （Stage/Index）</p>
-</li>
-<li><p>资源库 （Repository/Git Directory）</p>
-</li>
+<li>工作目录 （Working Directory）</li>
+<li>暂存区 （Stage/Index）</li>
+<li>资源库 （Repository/Git Directory）</li>
 </ul>
 <p><strong>文件的四种状态：</strong></p>
 <ul>
@@ -201,7 +178,15 @@ bash作为脚本语言的一些基础操作和几种常用的shell工具
 <li>Unmodified: 修改后变为Modified，<code>git rm </code> 移出版本库，变为Untracked</li>
 <li>Modified: 文件已修改，<code>git add</code> 进入staged状态, <code>git checkout</code> 丢弃修改</li>
 </ul>
-<h2 id="调试及性能分析"><a href="#调试及性能分析" class="headerlink" title="调试及性能分析"></a>调试及性能分析</h2><h2 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h2><h2 id="安全和密码学"><a href="#安全和密码学" class="headerlink" title="安全和密码学"></a>安全和密码学</h2><h2 id="大杂烩提问-amp-回答"><a href="#大杂烩提问-amp-回答" class="headerlink" title="大杂烩提问&amp;回答"></a>大杂烩提问&amp;回答</h2>	  
+<h2 id="调试及性能分析"><a href="#调试及性能分析" class="headerlink" title="调试及性能分析"></a>调试及性能分析</h2><ul>
+<li>打印调试</li>
+<li>日志记录</li>
+<li>调试器</li>
+<li>专门工具</li>
+<li>静态分析</li>
+<li>性能分析</li>
+</ul>
+<h2 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h2><h2 id="安全和密码学"><a href="#安全和密码学" class="headerlink" title="安全和密码学"></a>安全和密码学</h2><h2 id="大杂烩提问-amp-回答"><a href="#大杂烩提问-amp-回答" class="headerlink" title="大杂烩提问&amp;回答"></a>大杂烩提问&amp;回答</h2>	  
 
 	  <div>
   		<center>
@@ -214,6 +199,10 @@ bash作为脚本语言的一些基础操作和几种常用的shell工具
 	
 	
 		
+			
+		
+	
+		
 	
 		
 			
@@ -225,10 +214,6 @@ bash作为脚本语言的一些基础操作和几种常用的shell工具
 	
 		
 			
-		
-	
-		
-			
 			
 		
 	
@@ -268,7 +253,7 @@ bash作为脚本语言的一些基础操作和几种常用的shell工具
 	
 	
 	
-		<li class="prev"><a href="/2023/06/06/linux2/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+		<li class="prev"><a href="/2023/06/06/cpp/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
 	
 	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
 	
