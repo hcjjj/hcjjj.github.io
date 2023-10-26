@@ -84,13 +84,13 @@ Concurr">
 <li><a target="_blank" rel="noopener" href="https://15445.courses.cs.cmu.edu/fall2022/project4/">Concurrency Control</a></li>
 </ul>
 <p><strong>STEPS：</strong></p>
-<ul>
+<ol>
 <li>Linux环境</li>
 <li>安装依赖</li>
-<li>克隆Bustub项目</li>
+<li>克隆Bustub 项目</li>
 <li>完成项目要求</li>
-<li>提交作业到 Gradescope</li>
-</ul>
+<li>提交到 Gradescope</li>
+</ol>
 <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p><strong>SSH 免密登录：</strong></p>
 <ol>
 <li>在本地生成 ssh 公钥 id_rsa.pub</li>
@@ -140,7 +140,7 @@ Concurr">
 
 
 <p>LLDB：<a target="_blank" rel="noopener" href="https://lldb.llvm.org/">https://lldb.llvm.org/</a></p>
-<p>LLDB调试的原理：基于操作系统的ptrace系统调用，用于进程跟踪，它可以让A进程监听和控制B进程的内存和寄存器。</p>
+<p>LLDB 调试的原理：基于操作系统的ptrace系统调用，用于进程跟踪，它可以让A进程监听和控制B进程的内存和寄存器。</p>
 <p>GDB：<a target="_blank" rel="noopener" href="https://www.sourceware.org/gdb/">https://www.sourceware.org/gdb/</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install lldb</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ubuntu 22.04 出现问题</span></span><br><span class="line">hcjjj@ubuntu22:~/Desktop » lldb</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">ModuleNotFoundError: No module named &#x27;lldb.embedded_interpreter&#x27;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解决办法</span></span><br><span class="line">sudo apt install python3-lldb-14</span><br><span class="line">sudo ln -s /usr/lib/llvm-14/lib/python3.10/dist-packages/lldb/* /usr/lib/python3/dist-packages/lldb/</span><br></pre></td></tr></table></figure>
 
@@ -149,11 +149,11 @@ Concurr">
 <blockquote>
 <p> Identification: src/include/primer/p0_trie.h</p>
 </blockquote>
-<ul>
+<ol>
 <li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-trie-prefix-tree/">力扣 208. 实现 Trie (前缀树)</a></li>
 <li>Task #1 - Templated Trie</li>
 <li>Task #2 - Concurrent Trie</li>
-</ul>
+</ol>
 <p><strong>实现思路</strong></p>
 <ul>
 <li>TrieNode</li>
@@ -176,10 +176,6 @@ Concurr">
 <p><strong>代码提交</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">zip project0-submission.zip src/include/primer/p0_trie.h</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后将 project0-submission.zip 上传至平台即可</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>知识补充：</strong></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/335994370">一文读懂C++右值引用和std::move</a></li>
-</ol>
 <h2 id="Project-1"><a href="#Project-1" class="headerlink" title="Project #1"></a>Project #1</h2><h2 id="Project-2"><a href="#Project-2" class="headerlink" title="Project #2"></a>Project #2</h2><h2 id="Project-3"><a href="#Project-3" class="headerlink" title="Project #3"></a>Project #3</h2><h2 id="Project-4"><a href="#Project-4" class="headerlink" title="Project #4"></a>Project #4</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>	  
 
 	  <div>
@@ -191,6 +187,8 @@ Concurr">
 	
 	
 	
+	
+		
 	
 		
 			
