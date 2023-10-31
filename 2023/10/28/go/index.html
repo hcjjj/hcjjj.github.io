@@ -229,7 +229,40 @@ Gogogo!国内镜像
 </ul>
 </li>
 </ul>
-<h2 id="面向接口"><a href="#面向接口" class="headerlink" title="面向接口"></a>面向接口</h2><h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><h2 id="错误处理和资源管理"><a href="#错误处理和资源管理" class="headerlink" title="错误处理和资源管理"></a>错误处理和资源管理</h2><h2 id="测试与性能调优"><a href="#测试与性能调优" class="headerlink" title="测试与性能调优"></a>测试与性能调优</h2><h2 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h2><h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><h2 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h2><h2 id="http及其他标准库"><a href="#http及其他标准库" class="headerlink" title="http及其他标准库"></a>http及其他标准库</h2>	  
+<h2 id="面向接口"><a href="#面向接口" class="headerlink" title="面向接口"></a>面向接口</h2><ul>
+<li>接口由<strong>使用者</strong>定义</li>
+<li>接口里面全是函数，不需要加 func</li>
+<li>接口的实现是隐式的，只要实现接口里的方法</li>
+<li>接口变量自带指针</li>
+<li>接口变量同样采用值传递，几乎不需要使用接口的指针</li>
+<li>指针接收者实现只能以指针方式使用，值接收者都可</li>
+<li>查看接口变量<ul>
+<li>表示任何类型：interface{}</li>
+<li>Type Assertion</li>
+<li>Type Switch</li>
+</ul>
+</li>
+<li>常用系统接口<ul>
+<li>Stringer</li>
+<li>Reader</li>
+<li>Writer</li>
+</ul>
+</li>
+</ul>
+<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><ul>
+<li>函数式编程 <em>vs</em> 函数指针<ul>
+<li>函数是一等公民：参数，变量，返回值都可以是函数</li>
+<li>高阶函数（函数的参数是函数）</li>
+<li>函数 → 闭包</li>
+</ul>
+</li>
+<li>“正统”函数式编程<ul>
+<li>不可变性：不能有状态，只有常量和函数</li>
+<li>函数只能有一个参数</li>
+</ul>
+</li>
+</ul>
+<h2 id="错误处理和资源管理"><a href="#错误处理和资源管理" class="headerlink" title="错误处理和资源管理"></a>错误处理和资源管理</h2><h2 id="测试与性能调优"><a href="#测试与性能调优" class="headerlink" title="测试与性能调优"></a>测试与性能调优</h2><h2 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h2><h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><h2 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h2><h2 id="http及其他标准库"><a href="#http及其他标准库" class="headerlink" title="http及其他标准库"></a>http及其他标准库</h2>	  
 
 	  <div>
   		<center>
@@ -301,11 +334,11 @@ Gogogo!国内镜像
 		
 	
 		
-	
+			
+			
+			
 		
-			
-			
-			
+	
 		
 			
 		
@@ -316,7 +349,7 @@ Gogogo!国内镜像
 	
 	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
 	
-		<li class="next"><a href="/1998/07/17/go2/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+		<li class="next"><a href="/1998/07/17/go3/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
 	
 </ul>
 </div>
