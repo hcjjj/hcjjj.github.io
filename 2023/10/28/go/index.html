@@ -196,8 +196,38 @@ Gogogo!国内镜像
 </ul>
 </li>
 </ul>
-<h2 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h2><ul>
-<li></li>
+<h2 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h2><p>依赖管理的三个阶段（三种方式）：GOPATH，GOVENDOR，GOMODULE</p>
+<ul>
+<li>GOPATH<ul>
+<li>默认在 <code>~/go</code> (unix, linux)，<code>%USERPROFILE%\go</code> (windows)</li>
+<li>依赖查找顺序： <code>GOROOT/src</code>  →  <code>GOPATH/src</code></li>
+</ul>
+</li>
+<li>GOVERDOR<ul>
+<li>每个项目有自己的vendor目录，存放第三方库</li>
+<li>大量第三方依赖管理工具：glide, dep, go dep, …</li>
+<li>依赖查找顺序： <code>verdor</code> → <code>GOROOT/src</code> → <code>GOPATH/src</code></li>
+</ul>
+</li>
+<li>GOMODULE（go.mod） <ul>
+<li>由 go 命令统一的管理，用户不必关心目录结构</li>
+<li><code>go get [@v...]</code> add dependencies to current module and install them</li>
+<li> <code>go mod tidy</code>  add missing and remove unused modules</li>
+<li>go.mod, go.sum 文件</li>
+<li>依赖的位置在：<code>GOPATH/pkg/mod</code></li>
+</ul>
+</li>
+<li>旧方式迁移到 go.mod<ul>
+<li><code> go mod init</code>  initialize new module in current directory</li>
+<li><code>go build ./...</code> compile packages and dependencies</li>
+</ul>
+</li>
+<li>目录的整理<ul>
+<li><code>go build ./...</code> 编译多个目录的时候不产生 exe</li>
+<li><code>go install ./...</code> compile and install packages and dependencies</li>
+<li>生成的文件在 <code>GOPATH/bin</code></li>
+</ul>
+</li>
 </ul>
 <h2 id="面向接口"><a href="#面向接口" class="headerlink" title="面向接口"></a>面向接口</h2><h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><h2 id="错误处理和资源管理"><a href="#错误处理和资源管理" class="headerlink" title="错误处理和资源管理"></a>错误处理和资源管理</h2><h2 id="测试与性能调优"><a href="#测试与性能调优" class="headerlink" title="测试与性能调优"></a>测试与性能调优</h2><h2 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h2><h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><h2 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h2><h2 id="http及其他标准库"><a href="#http及其他标准库" class="headerlink" title="http及其他标准库"></a>http及其他标准库</h2>	  
 
@@ -269,13 +299,13 @@ Gogogo!国内镜像
 		
 	
 		
-			
-			
-			
-		
 	
 		
 	
+		
+			
+			
+			
 		
 			
 		
