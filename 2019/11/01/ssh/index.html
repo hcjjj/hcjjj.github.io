@@ -20,14 +20,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>SSH 连接云服务器 - H-sediment's Blog</title>
+  <title>SSH 连接云服务器 - H-sediment</title>
 
   
     <meta name="description" content="SSH 为 Secure Shell 的缩写,最初是UNIX系统上的一个程序，专为 远程登录会话 和其他网络服务提供安全性的协议。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH 连接云服务器">
 <meta property="og:url" content="http://example.com/2019/11/01/ssh/index.html">
-<meta property="og:site_name" content="H-sediment&#39;s Blog">
+<meta property="og:site_name" content="H-sediment">
 <meta property="og:description" content="SSH 为 Secure Shell 的缩写,最初是UNIX系统上的一个程序，专为 远程登录会话 和其他网络服务提供安全性的协议。">
 <meta property="og:locale">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180927183.jpg">
@@ -53,6 +53,8 @@
   
 
   
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
 
   
 
@@ -74,9 +76,9 @@
 
   
 
-<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">H-sediment's Blog</div></a></div>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
 
-<nav class="menu dis-select"></nav>
+<nav class="menu dis-select"><a class="nav-item active" href="/">Blog</a><a class="nav-item" href="/about/">关于</a></nav>
 </header>
 
 
@@ -108,7 +110,7 @@
 <span id="more"></span>
 
 <h2 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h2><p><code>ssh user@remote (-v -p port) </code></p>
-<p>如：ssh <a href="mailto:&#114;&#111;&#x6f;&#116;&#64;&#49;&#49;&#x32;&#46;&#55;&#x34;&#x2e;&#120;&#x78;&#46;&#x78;&#120;">&#114;&#111;&#x6f;&#116;&#64;&#49;&#49;&#x32;&#46;&#55;&#x34;&#x2e;&#120;&#x78;&#46;&#x78;&#120;</a></p>
+<p>如：ssh <a href="mailto:&#x72;&#111;&#111;&#116;&#x40;&#49;&#49;&#x32;&#x2e;&#55;&#x34;&#x2e;&#120;&#x78;&#x2e;&#120;&#x78;">&#x72;&#111;&#111;&#116;&#x40;&#49;&#49;&#x32;&#x2e;&#55;&#x34;&#x2e;&#120;&#x78;&#x2e;&#120;&#x78;</a></p>
 <p><code>user</code> 是在远程机器上的用户名  </p>
 <p><code>remote</code> 是云服务器的地址，可以是IP或域名  </p>
 <p><code>port</code> 是SSH Server监听的端口，默认值为22  </p>
@@ -121,7 +123,7 @@
 <p>生成的文件在 <code>~/.ssh</code>  </p>
 <p>2、上传公钥到服务器  </p>
 <p>执行 <code>ssh-copy-id user@remote</code>  </p>
-<p>如：ssh-copy-id <a href="mailto:&#x72;&#x6f;&#111;&#116;&#x40;&#49;&#x31;&#x32;&#46;&#55;&#52;&#46;&#120;&#x78;&#46;&#x78;&#x78;">&#x72;&#x6f;&#111;&#116;&#x40;&#49;&#x31;&#x32;&#46;&#55;&#52;&#46;&#120;&#x78;&#46;&#x78;&#x78;</a>  </p>
+<p>如：ssh-copy-id <a href="mailto:&#x72;&#111;&#111;&#x74;&#64;&#49;&#x31;&#50;&#x2e;&#x37;&#52;&#46;&#x78;&#120;&#46;&#120;&#120;">&#x72;&#111;&#111;&#x74;&#64;&#49;&#x31;&#50;&#x2e;&#x37;&#52;&#46;&#x78;&#120;&#46;&#120;&#120;</a>  </p>
 <p>让远程服务器记住我们自己的计算机，文件保存在服务器的 <code>~/.ssh/authorized_keys</code></p>
 <p>这样子既方便又安全</p>
 <h2 id="上传下载文件"><a href="#上传下载文件" class="headerlink" title="上传下载文件"></a>上传下载文件</h2><p> <strong>s</strong>ecure <strong>c</strong>o<strong>p</strong>y  </p>
