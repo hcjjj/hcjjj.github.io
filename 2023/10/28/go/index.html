@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/11.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231028202611.png">
 <meta property="article:published_time" content="2023-10-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-15T11:46:25.787Z">
+<meta property="article:modified_time" content="2023-11-16T12:21:33.066Z">
 <meta property="article:author" content="hcjjj">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/11.png">
@@ -305,15 +305,15 @@
 <li>函数式编程 <em>vs</em> 函数指针
 <ul>
 <li>函数是一等公民：参数，变量，返回值都可以是函数</li>
-<li>高阶函数（函数的参数可以是函数）</li>
+<li>高阶函数（函数的参数是函数）</li>
 <li>函数 → 闭包</li>
 </ul></li>
 <li>闭包
 <ul>
-<li>函数体有局部变量、自由变量</li>
-<li>为函数实现接口</li>
-<li>更为自然，不需要修饰如何访问自由变量</li>
-<li>没有Lambda表达式，但是有匿名函数</li>
+<li>函数体：局部变量 + 自由变量（函数所处环境的变量）</li>
+<li>“函数类型”也可以作为接收者，实现接口</li>
+<li>go 的闭包不需要修饰如何访问自由变量</li>
+<li>go 没有Lambda表达式，但是有匿名函数</li>
 </ul></li>
 </ul>
 <h2 id="资源管理与错误处理">资源管理与错误处理</h2>
