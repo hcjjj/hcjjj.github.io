@@ -8,7 +8,7 @@
       <link href="/2023/11/18/readme/"/>
       <url>/2023/11/18/readme/</url>
       
-        <content type="html"><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231117172048.png" style="zoom:50%" /></p><blockquote><p>作者： [美] 克里斯·里科米尼（Chris Riccomini）/ [美] 德米特里·里亚博伊（Dmitriy Ryaboy）</p><p>出版年: 2023-7-10</p></blockquote><p>译者序：“翻译完本书的最后一章时，正好是我踏入软件行业的12年整，此时的我却觉得自己的职业生涯好像才刚刚开始。”</p><span id="more"></span><h1 id="程序员的-readme">程序员的 <code>README</code></h1><h2 id="第1章-前面的旅程">第1章 前面的旅程</h2><ul><li><p><strong>目的地 ☸️</strong></p><ul><li>技术知识</li><li>执行力</li><li>沟通能力</li><li>领导力</li></ul></li><li><p><strong>地图 🗺</strong></p><ul><li><p>新手营</p></li><li><p>试炼之河</p></li><li><p>贡献者之角</p></li><li><p>运维之海</p></li><li><p>胜任之湾</p></li></ul></li></ul><h2 id="第2章-步入自觉阶段">第2章 步入自觉阶段</h2><ul><li><p><strong>学习如何学习</strong></p><ul><li>切记善用个人的时间——虽然说持续进步非常重要，但是把所有清醒的时间都花在工作上是不健康的。</li><li>在工作的前几个月里，你要学习一切如何运作。</li><li>错误是不可避免的。如果你失败了，也不要被击垮：写下经验教训，然后继续前行。</li><li>调试器是你运行实例代码时最好的朋友。</li><li>在复杂的情况下，特别是在多线程的应用程序中，输出调试信息可能会产生误导。</li><li>不要试图一下子把所有东西都读完。请从团队文档和设计文档入手。</li><li>不要像阅读小说一样从前到后地通读代码：请利用你的IDE来浏览代码。</li><li>出版物大多很可靠，只是有些过时。在线资源则正好相反，不那么可靠，但很能跟上潮流。</li><li>跟随一名高级工程师是学习新技能的好方法。</li><li>从长远来看，获得明确的信息将保护你免受挫折。（be careful</li></ul></li><li><p><strong>提出问题</strong></p><ul><li>有效地提出问题将帮助你快速地学习，而不会烦扰其他人。</li><li>动手调查</li><li>设置一个时间限制</li><li>写下全过程</li><li>别打扰别人</li><li>多用“非打扰式”交流</li><li>批量处理</li></ul></li><li><p><strong>克服成长的障碍</strong></p><ul><li>冒充者综合征 —— “有意识的无能力”</li><li>邓宁-克鲁格效应—— “无意识的无能力”</li></ul></li><li><p><strong>行为准则</strong></p><table><thead><tr class="header"><th style="text-align: center;">需要做的</th><th style="text-align: center;">不应该做的</th></tr></thead><tbody><tr class="odd"><td style="text-align: center;">多尝试和实验代码</td><td style="text-align: center;">只是大量炮制劣质代码</td></tr><tr class="even"><td style="text-align: center;">多阅读设计文档和他人的代码</td><td style="text-align: center;">害怕承担风险和失败</td></tr><tr class="odd"><td style="text-align: center;">参加一些聚会、在线社区、兴趣小组和导师计划</td><td style="text-align: center;">过于频繁地参加研讨会</td></tr><tr class="even"><td style="text-align: center;">多读论文和博客</td><td style="text-align: center;">害怕提出问题</td></tr><tr class="odd"><td style="text-align: center;">多采用“非打扰式”交流</td><td style="text-align: center;"></td></tr><tr class="even"><td style="text-align: center;">旁听面试以及参与On-Call轮换</td><td style="text-align: center;"></td></tr></tbody></table></li></ul><h2 id="第3章-玩转代码">第3章 玩转代码</h2><h2 id="第4章-编写可维护的代码">第4章 编写可维护的代码</h2><h2 id="第5章-依赖管理">第5章 依赖管理</h2><h2 id="第6章-测试">第6章 测试</h2><h2 id="第7章-代码评审">第7章 代码评审</h2><h2 id="第8章-软件交付">第8章 软件交付</h2><h2 id="第9章-on-call">第9章 On-Call</h2><h2 id="第10章-技术设计流程">第10章 技术设计流程</h2><h2 id="第11章-构建可演进的架构">第11章 构建可演进的架构</h2><h2 id="第12章-敏捷计划">第12章 敏捷计划</h2><h2 id="第13章-与管理者合作">第13章 与管理者合作</h2><h2 id="第14章-职业生涯规划">第14章 职业生涯规划</h2>]]></content>
+        <content type="html"><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231117172048.png" style="zoom:50%" /></p><blockquote><p>作者： [美] 克里斯·里科米尼（Chris Riccomini）/ [美] 德米特里·里亚博伊（Dmitriy Ryaboy）</p><p>出版年: 2023-7-10</p></blockquote><p>译者序：“翻译完本书的最后一章时，正好是我踏入软件行业的12年整，此时的我却觉得自己的职业生涯好像才刚刚开始。”</p><span id="more"></span><h1 id="程序员的-readme">程序员的 <code>README</code></h1><h2 id="第1章-前面的旅程">第1章 前面的旅程</h2><ul><li><p><strong>目的地 ☸️</strong></p><ul><li>技术知识</li><li>执行力</li><li>沟通能力</li><li>领导力</li></ul></li><li><p><strong>地图 🗺</strong></p><ul><li><p>新手营</p></li><li><p>试炼之河</p></li><li><p>贡献者之角</p></li><li><p>运维之海</p></li><li><p>胜任之湾</p></li></ul></li></ul><h2 id="第2章-步入自觉阶段">第2章 步入自觉阶段</h2><ul><li><p><strong>学习如何学习</strong></p><ul><li>虽然说持续进步非常重要，但是把所有清醒的时间都花在工作上是不健康的。</li><li>在工作的前几个月里，你要学习一切如何运作。</li><li>错误是不可避免的。如果你失败了，也不要被击垮：写下经验教训，然后继续前行。</li><li>调试器是你运行实例代码时最好的朋友。</li><li>在复杂的情况下，特别是在多线程的应用程序中，输出调试信息可能会产生误导。</li><li>不要试图一下子把所有东西都读完。请从团队文档和设计文档入手。</li><li>不要像阅读小说一样从前到后地通读代码：请利用你的IDE来浏览代码。</li><li>出版物大多很可靠，只是有些过时。在线资源则正好相反，不那么可靠，但很能跟上潮流。</li><li>跟随一名高级工程师是学习新技能的好方法。</li><li>从长远来看，获得明确的信息将保护你免受挫折。（be careful</li></ul></li><li><p><strong>提出问题</strong></p><ul><li>有效地提出问题将帮助你快速地学习，而不会烦扰其他人。</li><li>动手调查</li><li>设置一个时间限制</li><li>写下全过程</li><li>别打扰别人</li><li>多用“非打扰式”交流</li><li>批量处理</li></ul></li><li><p><strong>克服成长的障碍</strong></p><ul><li>冒充者综合征 —— “有意识的无能力”</li><li>邓宁-克鲁格效应—— “无意识的无能力”</li></ul></li><li><p><strong>行为准则</strong></p><table><thead><tr class="header"><th style="text-align: center;">需要做的</th><th style="text-align: center;">不应该做的</th></tr></thead><tbody><tr class="odd"><td style="text-align: center;">多尝试和实验代码</td><td style="text-align: center;">只是大量炮制劣质代码</td></tr><tr class="even"><td style="text-align: center;">多阅读设计文档和他人的代码</td><td style="text-align: center;">害怕承担风险和失败</td></tr><tr class="odd"><td style="text-align: center;">参加一些聚会、在线社区、兴趣小组和导师计划</td><td style="text-align: center;">过于频繁地参加研讨会</td></tr><tr class="even"><td style="text-align: center;">多读论文和博客</td><td style="text-align: center;">害怕提出问题</td></tr><tr class="odd"><td style="text-align: center;">多采用“非打扰式”交流</td><td style="text-align: center;"></td></tr><tr class="even"><td style="text-align: center;">旁听面试以及参与On-Call轮换</td><td style="text-align: center;"></td></tr></tbody></table></li></ul><h2 id="第3章-玩转代码">第3章 玩转代码</h2><h2 id="第4章-编写可维护的代码">第4章 编写可维护的代码</h2><h2 id="第5章-依赖管理">第5章 依赖管理</h2><h2 id="第6章-测试">第6章 测试</h2><h2 id="第7章-代码评审">第7章 代码评审</h2><h2 id="第8章-软件交付">第8章 软件交付</h2><h2 id="第9章-on-call">第9章 On-Call</h2><h2 id="第10章-技术设计流程">第10章 技术设计流程</h2><h2 id="第11章-构建可演进的架构">第11章 构建可演进的架构</h2><h2 id="第12章-敏捷计划">第12章 敏捷计划</h2><h2 id="第13章-与管理者合作">第13章 与管理者合作</h2><h2 id="第14章-职业生涯规划">第14章 职业生涯规划</h2>]]></content>
       
       
       <categories>
@@ -415,11 +415,11 @@
       
         <tags>
             
+            <tag> macOS </tag>
+            
             <tag> iTerm </tag>
             
             <tag> terminal </tag>
-            
-            <tag> macOS </tag>
             
         </tags>
       
@@ -765,7 +765,7 @@
       <link href="/1998/07/17/go3/"/>
       <url>/1998/07/17/go3/</url>
       
-        <content type="html"><![CDATA[<h2 id="还未开启">还未开启</h2><h2 id="参考">参考</h2><p>https://github.com/HDT3213/godis</p>]]></content>
+        <content type="html"><![CDATA[<h2 id="参考">参考</h2><p>https://github.com/HDT3213/godis</p>]]></content>
       
       
       <categories>
