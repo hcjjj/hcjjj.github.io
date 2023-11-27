@@ -91,7 +91,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">【进阶】Go 底层原理与源码分析</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text"> 参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86-go"><span class="toc-text"> 重新认识  Go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text"> 数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%88%87%E7%89%87"><span class="toc-text"> 字符串、切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map"><span class="toc-text"> map</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goroutine-%E5%8D%8F%E7%A8%8B"><span class="toc-text"> Goroutine 协程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81"><span class="toc-text"> 锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#channel-%E7%AE%A1%E9%81%93"><span class="toc-text"> Channel 管道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-text"> TCP网络编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text"> 内存模型与垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7"><span class="toc-text"> 其他高级特性</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">【进阶】Go 底层原理与源码分析</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86-go"><span class="toc-text">重新认识 Go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E7%89%87"><span class="toc-text">字符串、切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map"><span class="toc-text">map</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goroutine-%E5%8D%8F%E7%A8%8B"><span class="toc-text">Goroutine 协程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81"><span class="toc-text">锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#channel-%E7%AE%A1%E9%81%93"><span class="toc-text">Channel 管道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tcp%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-text">TCP网络编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">内存模型与垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7"><span class="toc-text">其他高级特性</span></a></li></ol></div></div></widget>
 
 
 
@@ -111,15 +111,15 @@
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>【进阶】Go 底层原理与源码分析</span></h1>
- <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/222.png" style="zoom:33%;" />
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/222.png" style="zoom:33%;" /></p>
 <p>深入学习 Go 底层原理</p>
 <span id="more"></span>
-<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
+<h2 id="参考资料">参考资料</h2>
 <ul>
 <li><strong><a target="_blank" rel="noopener" href="https://draveness.me/golang">Go 语言设计与实现</a></strong></li>
 <li><strong><a target="_blank" rel="noopener" href="https://www.topgoer.cn/">地鼠文档</a></strong></li>
 </ul>
-<h2 id="重新认识-go"><a class="markdownIt-Anchor" href="#重新认识-go"></a> 重新认识  Go</h2>
+<h2 id="重新认识-go">重新认识 Go</h2>
 <ul>
 <li><strong>C/C++</strong>
 <ul>
@@ -127,156 +127,146 @@
 <li>直接编译为机器码，不需要执行环境</li>
 <li>一次编码只能适用一种平台（不同平台源代码不一样）</li>
 <li>需要自己处理垃圾回收（GC）问题</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Java</strong>
 <ul>
 <li>编译为中间码（字节码）</li>
 <li>需要特定执行环境（JVM）</li>
 <li>一次编译多处执行</li>
 <li>有虚拟化损失</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>JavaScript</strong>
 <ul>
 <li>不需要编译，直接解释执行</li>
 <li>需要执行环境（浏览器）</li>
 <li>有虚拟化损失</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Go</strong>
 <ul>
 <li>直接编译为二进制，没有虚拟化损失</li>
 <li>自带运行环境，无需处理 GC 问题</li>
 <li>一次编码可以适用多种平台（不同平台源代码一样）</li>
 <li>超强的并发支持能力与并发易用性</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 9%" />
+<col style="width: 41%" />
+<col style="width: 10%" />
+<col style="width: 5%" />
+<col style="width: 12%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">一次编码</th>
-<th style="text-align:center">一次编译</th>
-<th style="text-align:center">不需要运行环境</th>
-<th style="text-align:center">没有虚拟化损失</th>
-<th style="text-align:center">不需要自行处理GC</th>
-<th style="text-align:center">面向对象</th>
-<th style="text-align:center">非常易用的并发能力</th>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">一次编码</th>
+<th style="text-align: center;">一次编译</th>
+<th style="text-align: center;">不需要运行环境</th>
+<th style="text-align: center;">没有虚拟化损失</th>
+<th style="text-align: center;">不需要自行处理GC</th>
+<th style="text-align: center;">面向对象</th>
+<th style="text-align: center;">非常易用的并发能力</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center"><strong>C</strong></td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">❌</td>
+<tr class="odd">
+<td style="text-align: center;"><strong>C</strong></td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
 </tr>
-<tr>
-<td style="text-align:center"><strong>C++</strong></td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">xxxxxxxxxx #include <iostream>#include <thread>#include <mutex>#include <chrono>#include <atomic>​using namespace std;​void my_thread();int count = 0;mutex my_mutex;atomic<int> count2(0);​int main() {    thread t1(my_thread);    thread t2(my_thread);    auto start = chrono::high_resolution_clock::now();    t1.join();    t2.join();    auto stop = chrono::high_resolution_clock::now();    auto durations = chrono::duration&lt;double, ratio&lt;1, 1&gt;&gt;(stop - start).count();    cout &lt;&lt; &quot;durations = &quot; &lt;&lt; durations &lt;&lt; endl;    // cout &lt;&lt; &quot;count = &quot; &lt;&lt; count &lt;&lt; endl;    cout &lt;&lt; &quot;count = &quot; &lt;&lt; count2 &lt;&lt; endl;        return 0;}​void my_thread() {    for (int j = 0; j &lt; 5; ++j) {        for (int i = 0; i &lt; 10000000; ++i) {            // 加锁解锁 消耗资源            // my_mutex.lock();            // ++count;            // my_mutex.unlock();            <ins>count2;        }    }}c</ins></td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">❌</td>
+<tr class="even">
+<td style="text-align: center;"><strong>C++</strong></td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">xxxxxxxxxx #include <iostream>#include <thread>#include <mutex>#include <chrono>#include <atomic>​using namespace std;​void my_thread();int count = 0;mutex my_mutex;atomic<int> count2(0);​int main() {    thread t1(my_thread);    thread t2(my_thread);    auto start = chrono::high_resolution_clock::now();    t1.join();    t2.join();    auto stop = chrono::high_resolution_clock::now();    auto durations = chrono::duration&lt;double, ratio&lt;1, 1&gt;&gt;(stop - start).count();    cout &lt;&lt; "durations = " &lt;&lt; durations &lt;&lt; endl;    // cout &lt;&lt; "count = " &lt;&lt; count &lt;&lt; endl;    cout &lt;&lt; "count = " &lt;&lt; count2 &lt;&lt; endl;        return 0;}​void my_thread() {    for (int j = 0; j &lt; 5; ++j) {        for (int i = 0; i &lt; 10000000; ++i) {            // 加锁解锁 消耗资源            // my_mutex.lock();            // ++count;            // my_mutex.unlock();            ++count2;       }   }}c++</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">❌</td>
 </tr>
-<tr>
-<td style="text-align:center"><strong>Java</strong></td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">❌</td>
+<tr class="odd">
+<td style="text-align: center;"><strong>Java</strong></td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">❌</td>
 </tr>
-<tr>
-<td style="text-align:center"><strong>JavaScript</strong></td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">⭕</td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">❌</td>
+<tr class="even">
+<td style="text-align: center;"><strong>JavaScript</strong></td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">⭕</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">❌</td>
 </tr>
-<tr>
-<td style="text-align:center"><strong>Go</strong></td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">❌</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">✔️</td>
-<td style="text-align:center">✔️</td>
+<tr class="odd">
+<td style="text-align: center;"><strong>Go</strong></td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">❌</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
 </tr>
 </tbody>
 </table>
 <ul>
-<li>
-<p><strong>什么是 Runtime</strong></p>
+<li><p><strong>什么是 Runtime</strong></p>
 <ul>
 <li>Runtime 就是程序的运行环境</li>
 <li>Java：JVM</li>
 <li>JavaScript：浏览器内核</li>
-</ul>
-</li>
-<li>
-<p><strong>Go 的 Runtime</strong></p>
+</ul></li>
+<li><p><strong>Go 的 Runtime</strong></p>
 <ul>
 <li>Go 没有虚拟机的概念</li>
 <li>Runtime 作为程序的一部分打包进二进制产物</li>
 <li>Runtime 随用户程序一起运行</li>
 <li>Runtime 与用户程序没有明显界限，直接通过函数调用</li>
-</ul>
-</li>
-<li>
-<p><strong>Go Runtime 的能力</strong></p>
-</li>
-<li>
-<p><strong>内存管理</strong>能力</p>
-</li>
-<li>
-<p><strong>垃圾回收</strong>能力</p>
-</li>
-<li>
-<p>超强的并发能力（<strong>协程调度</strong>）</p>
-</li>
-<li>
-<p>Runtime 有一定的屏蔽系统调用能力（跨平台）</p>
-</li>
-<li>
-<p>一些 go 的关键字其实是 Runtime 下的函数</p>
-</li>
+</ul></li>
+<li><p><strong>Go Runtime 的能力</strong></p></li>
+<li><p><strong>内存管理</strong>能力</p></li>
+<li><p><strong>垃圾回收</strong>能力</p></li>
+<li><p>超强的并发能力（<strong>协程调度</strong>）</p></li>
+<li><p>Runtime 有一定的屏蔽系统调用能力（跨平台）</p></li>
+<li><p>一些 go 的关键字其实是 Runtime 下的函数</p></li>
 </ul>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>关键字</th>
 <th>函数</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>go</td>
 <td>newproc</td>
 </tr>
-<tr>
+<tr class="even">
 <td>new</td>
 <td>newobject</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>make</td>
-<td>makeslice, makechain, makemap …</td>
+<td>makeslice, makechain, makemap ...</td>
 </tr>
-<tr>
+<tr class="even">
 <td>&lt;-</td>
 <td>chansend1, chanrecv1</td>
 </tr>
@@ -289,27 +279,22 @@
 <li>词法分析 → 句法分析 → 语义分析 → 中间码生成（平台无关） → 代码优化 → 机器码生成→ 链接 → 可执行文件</li>
 <li>查看代码带中间码的过程（平台无关）
 <ul>
-<li><code>$env:GOSSAFUNC=&quot;main&quot;</code> 或 <code>export GOSSAFUNC=main</code></li>
+<li><code>$env:GOSSAFUNC="main"</code> 或 <code>export GOSSAFUNC=main</code></li>
 <li><code>go build</code></li>
-</ul>
-</li>
+</ul></li>
 <li>查看生成的 Plan9 汇编代码（平台相关）
 <ul>
 <li><code>go build -gcflags -S main.go</code></li>
-</ul>
-</li>
+</ul></li>
 <li>链接：将各个包（.a 文件）进行链接，包括 runtime，生成可执行文件</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Go 程序是如何运行的？</strong>
 <ul>
 <li>Go 程序的入口
 <ul>
 <li>不是 main 方法，是 runtime/rt0_xxx.s 汇编文件中的方法</li>
-</ul>
-</li>
-<li>
-<ol>
+</ul></li>
+<li><ol type="1">
 <li>读取命令行参数</li>
 <li>初始化 g0 执行栈</li>
 <li>运行时检测</li>
@@ -317,13 +302,11 @@
 <li>调度器初始化 runtime.schedinit</li>
 <li>创建主协程</li>
 <li>主协程执行主函数 runtime.main</li>
-</ol>
-</li>
+</ol></li>
 <li>Go启动时经历了检查、各种初始化、初始化协程调度的过程</li>
 <li>main.main（） 也是在协程中运行</li>
 <li>Go程序的启动过程像不像一个虚拟机，或者框架?</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Go 是面向对象语言吗？Yes and No</strong>
 <ul>
 <li>Go 允许 OO 的编程风格</li>
@@ -332,8 +315,7 @@
 <li>组合中的匿名字段，通过语法糖达成了类似继承的效果</li>
 <li>struct 的每个实例并不是“对象”，而是此类型的“值”</li>
 <li>struct 并不显式实现接口，而是隐式实现</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Go Modules</strong>
 <ul>
 <li>本质上，一个 Go 包就是一个项目的源码</li>
@@ -341,71 +323,43 @@
 <li>Go 包的版本就是 git 项目的 Tag</li>
 <li>gomod 就是解决“需要哪个 git 项目的什么版本”</li>
 <li>无法连接远程仓库时，使用重定向或者mod vender方案</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="数据结构"><a class="markdownIt-Anchor" href="#数据结构"></a> 数据结构</h2>
-<h3 id="字符串-切片"><a class="markdownIt-Anchor" href="#字符串-切片"></a> 字符串、切片</h3>
+<h2 id="数据结构">数据结构</h2>
+<h3 id="字符串切片">字符串、切片</h3>
 <ul>
-<li>
-<p><strong>基本类型的字节数</strong></p>
+<li><p><strong>基本类型的字节数</strong></p>
 <ul>
 <li>int 大小跟随系统字长</li>
 <li>指针的大小也是系统字长</li>
-</ul>
-</li>
-<li>
-<p><strong>空结构体</strong></p>
+</ul></li>
+<li><p><strong>空结构体</strong></p>
 <ul>
 <li>空结构体的地址均相同（不被包含在其他结构体中时）</li>
 <li>空结构体主要是为了节约内存
 <ul>
 <li>map 不要值的时候，实现 hashset</li>
 <li>channel 不需要携带信息的时候，纯信号</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>字符串</strong></p>
+</ul></li>
+</ul></li>
+<li><p><strong>字符串</strong></p>
 <ul>
-<li>
-<pre class="highlight"><code class="go"><span class="comment">// src/runtime/string.go</span>
-<span class="keyword">type</span> stringStruct <span class="keyword">struct</span> &#123;
-	str unsafe.Pointer
-	<span class="built_in">len</span> <span class="type">int</span>
-&#125;
-
-<span class="comment">// src/reflect/value.go</span>
-<span class="keyword">type</span> StringHeader <span class="keyword">struct</span> &#123;
-	Data <span class="type">uintptr</span>
-	Len  <span class="type">int</span>
-&#125;
-&lt;!--code￼<span class="number">0</span>--&gt;
-
-</code></pre>
-</li>
-<li>
-<p>切片是对数组的引用</p>
-</li>
-<li>
-<p>切片的创建</p>
+<li><p>```go // src/runtime/string.go type stringStruct struct { str unsafe.Pointer len int }</p>
+<p>// src/reflect/value.go type StringHeader struct { Data uintptr Len int } <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">  * 字符串本质是个结构体</span><br><span class="line"></span><br><span class="line">  * Data 指针指向底层 Byte 数组</span><br><span class="line">  </span><br><span class="line">  * Len 表示 Byte 数组的长度而不是字符个数（Unicode 编码</span><br><span class="line">  </span><br><span class="line">  * Unicode</span><br><span class="line">  </span><br><span class="line">    * 是一种统一的字符集</span><br><span class="line">    * 囊括了159种文字的144679个字符</span><br><span class="line">    * 14万个字符至少需要3个字节表示</span><br><span class="line">    * 英文字母均排在前128个</span><br><span class="line">  </span><br><span class="line">  * UTF-8</span><br><span class="line">  </span><br><span class="line">    * Unicode 的一种变长格式</span><br><span class="line">    * 128个 US-ASCII 字符只需一个字节编码</span><br><span class="line">    * 西方常用字符需要两个字节</span><br><span class="line">    * 其他字符需要3个字节，极少需要4个字节</span><br><span class="line">    </span><br><span class="line">  * 字符串的访问</span><br><span class="line">  </span><br><span class="line">    * 对字符串使用 len 方法得到的是字节数不是字符数</span><br><span class="line">    * 对字符串直接使用下标访问，得到的是字节</span><br><span class="line">    * 字符串被 range 遍历时，被解码成 rune 类型的字符</span><br><span class="line">    * UTF-8 编码解码算法位于 runtime/utf8.go</span><br><span class="line">  </span><br><span class="line">  * 字符串的切分</span><br><span class="line">  </span><br><span class="line">    * 1. 转为rune数组</span><br><span class="line">      2. 切片</span><br><span class="line">      3. 转为 string</span><br><span class="line">    * `s = string([]rune(s)[:3])`</span><br><span class="line">  </span><br><span class="line">* **切片**</span><br><span class="line"></span><br><span class="line">  * ```go</span><br><span class="line">    // runtime/slice.go</span><br><span class="line">    type slice struct &#123;</span><br><span class="line">    	array unsafe.Pointer</span><br><span class="line">    	len   int</span><br><span class="line">    	cap   int</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>切片是对数组的引用</p></li>
+<li><p>切片的创建</p>
 <ul>
 <li>根据数组创建：arr[0:3] or slice[0:3]</li>
 <li>字面量，<strong>编译时</strong>插入创建数组的代码：slice := []int{1, 2, 3}</li>
 <li>make，<strong>运行时</strong>创建数组：slice := make([]int, 10)</li>
-</ul>
-</li>
-<li>
-<p>切片的访问</p>
+</ul></li>
+<li><p>切片的访问</p>
 <ul>
 <li>下标直接访问元素</li>
 <li>range 遍历元素</li>
 <li>len(slice) 查看切片长度</li>
-</ul>
-</li>
-<li>
-<p>切片的追加</p>
+</ul></li>
+<li><p>切片的追加</p>
 <ul>
 <li>不扩容时，只调整 len（编译器负责）</li>
 <li>扩容时，编译时转为调用 runtime.growslice() （开一个新数组）</li>
@@ -413,132 +367,81 @@
 <li>如果当前切片的长度小于 1024，将容量翻倍</li>
 <li>如果当前切片的长度大于1024，每次增加 25%</li>
 <li><strong>切片扩容时，并发不安全</strong>，注意切片并发要加锁</li>
+</ul></li>
+</ul></li>
+<li><p><strong>总结</strong></p></li>
+<li><p>字符串与切片都是对底层数组的引用</p></li>
+<li><p>字符串有 UTF-8 变长编码的特点</p></li>
+<li><p>切片的容量和长度不同</p></li>
+<li><p>切片追加时可能需要重建底层数组</p></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>总结</strong></p>
-</li>
-<li>
-<p>字符串与切片都是对底层数组的引用</p>
-</li>
-<li>
-<p>字符串有 UTF-8 变长编码的特点</p>
-</li>
-<li>
-<p>切片的容量和长度不同</p>
-</li>
-<li>
-<p>切片追加时可能需要重建底层数组</p>
-</li>
-</ul>
-<h3 id="map"><a class="markdownIt-Anchor" href="#map"></a> map</h3>
+<h3 id="map">map</h3>
 <ul>
-<li>
-<p><strong>HashMap 的基本方案</strong></p>
+<li><p><strong>HashMap 的基本方案</strong></p>
 <ul>
 <li>开放寻址法（碰撞横向移动）</li>
 <li>拉链法（碰撞纵向移动）</li>
-</ul>
-</li>
-<li>
-<p><strong>Go 的 map</strong></p>
+</ul></li>
+<li><p><strong>Go 的 map</strong></p>
 <ul>
-<li>
-<pre class="highlight"><code class="go"><span class="comment">// runtime/map.go</span>
-<span class="comment">// A header for a Go map.</span>
-<span class="keyword">type</span> hmap <span class="keyword">struct</span> &#123;
-	<span class="comment">// Note: the format of the hmap is also encoded in cmd/compile/internal/reflectdata/reflect.go.</span>
-	<span class="comment">// Make sure this stays in sync with the compiler&#x27;s definition.</span>
-	count     <span class="type">int</span> <span class="comment">// # live cells == size of map.  Must be first (used by len() builtin)</span>
-	flags     <span class="type">uint8</span>
-	B         <span class="type">uint8</span>  <span class="comment">// log_2 of # of buckets (can hold up to loadFactor * 2^B items)</span>
-	noverflow <span class="type">uint16</span> <span class="comment">// approximate number of overflow buckets; see incrnoverflow for details</span>
-	hash0     <span class="type">uint32</span> <span class="comment">// hash seed</span>
+<li><p>```go // runtime/map.go // A header for a Go map. type hmap struct { // Note: the format of the hmap is also encoded in cmd/compile/internal/reflectdata/reflect.go. // Make sure this stays in sync with the compiler's definition. count int // # live cells == size of map. Must be first (used by len() builtin) flags uint8 B uint8 // log_2 of # of buckets (can hold up to loadFactor * 2^B items) noverflow uint16 // approximate number of overflow buckets; see incrnoverflow for details hash0 uint32 // hash seed</p>
+<pre><code>buckets    unsafe.Pointer // array of 2^B Buckets. may be nil if count==0.
+oldbuckets unsafe.Pointer // previous bucket array of half the size, non-nil only when growing
+nevacuate  uintptr        // progress counter for evacuation (buckets less than this have been evacuated)
 
-	buckets    unsafe.Pointer <span class="comment">// array of 2^B Buckets. may be nil if count==0.</span>
-	oldbuckets unsafe.Pointer <span class="comment">// previous bucket array of half the size, non-nil only when growing</span>
-	nevacuate  <span class="type">uintptr</span>        <span class="comment">// progress counter for evacuation (buckets less than this have been evacuated)</span>
-
-	extra *mapextra <span class="comment">// optional fields</span>
-&#125;
-&lt;!--code￼<span class="number">1</span>--&gt;
-
-</code></pre>
-</li>
-<li>
-<p>runtime.mapassign() 可能会触发扩容的情况：</p>
+extra *mapextra // optional fields</code></pre>
+<p>} <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  * map 的初始化</span><br><span class="line"></span><br><span class="line">    * m := make(map[string]int, 10)</span><br><span class="line">    * 字面量方式，实际是先 make 再赋值</span><br><span class="line"></span><br><span class="line">  * Go 语言使用拉链实现了 hashmap</span><br><span class="line"></span><br><span class="line">  * 每一个桶中存储键哈希的前8位</span><br><span class="line"></span><br><span class="line">  * 桶超出8个数据，就会存储到溢出桶中</span><br><span class="line"></span><br><span class="line">* **map 为什么需要扩容？**</span><br><span class="line"></span><br><span class="line">  * 哈希碰撞，溢出桶太多时会导致严重的性能下降</span><br><span class="line"></span><br><span class="line">  * ```go</span><br><span class="line">    	// If we hit the max load factor or we have too many overflow buckets,</span><br><span class="line">    	// and we&#x27;re not already in the middle of growing, start growing.</span><br><span class="line">    	if !h.growing() &amp;&amp; (overLoadFactor(h.count+1, h.B) || tooManyOverflowBuckets(h.noverflow, h.B)) &#123;</span><br><span class="line">    		hashGrow(t, h)</span><br><span class="line">    		goto again // Growing the table invalidates everything, so try again</span><br><span class="line">    	&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>runtime.mapassign() 可能会触发扩容的情况：</p>
 <ul>
 <li>装载因子超过6.5（平均每个槽6.5个key）</li>
 <li>使用了太多溢出桶（溢出桶超过了普通桶）</li>
-</ul>
-</li>
-<li>
-<p>mao 扩容的类型</p>
+</ul></li>
+<li><p>mao 扩容的类型</p>
 <ul>
 <li>等量扩容：数据不多但是溢出桶太多了（就是整理）</li>
 <li>翻倍扩容：数据太多了</li>
-</ul>
-</li>
-<li>
-<p>map 扩容</p>
-</li>
-<li>
-<p>步骤 1</p>
+</ul></li>
+<li><p>map 扩容</p></li>
+<li><p>步骤 1</p>
 <ul>
-<li>
-<ol>
+<li><ol type="1">
 <li>创建一组新桶</li>
 <li>oldbuckets 指向原有的桶数组</li>
 <li>buckets 指向新的桶数组</li>
 <li>map标记为扩容状态</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p>步骤 2</p>
+</ol></li>
+</ul></li>
+<li><p>步骤 2</p>
 <ul>
-<li>
-<ol>
+<li><ol type="1">
 <li>将所有的数据从旧桶驱逐到新桶</li>
 <li>采用渐进式驱逐</li>
 <li>每次操作一个旧桶时，将旧桶数据驱逐到新桶</li>
 <li>读取时不进行驱逐，只判断读取新桶还是旧桶</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>
-<p>步骤 3</p>
+</ol></li>
+</ul></li>
+<li><p>步骤 3</p>
 <ul>
 <li>所有的旧桶驱逐完成后，oldbuckets 回收</li>
-</ul>
-</li>
-<li>
-<p>总结</p>
+</ul></li>
+<li><p>总结</p>
 <ul>
 <li>装载系数或者溢出桶的增加，会触发 map 扩容</li>
 <li>“扩容”可能并不是增加桶数，而是整理</li>
 <li>map 扩容采用渐进式，桶被操作时才会重新分配</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>怎么解决 map 的并发问题？</strong></p>
+</ul></li>
+</ul></li>
+<li><p><strong>怎么解决 map 的并发问题？</strong></p>
 <ul>
 <li></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="goroutine-协程"><a class="markdownIt-Anchor" href="#goroutine-协程"></a> Goroutine 协程</h2>
-<h2 id="锁"><a class="markdownIt-Anchor" href="#锁"></a> 锁</h2>
-<h2 id="channel-管道"><a class="markdownIt-Anchor" href="#channel-管道"></a> Channel 管道</h2>
-<h2 id="tcp网络编程"><a class="markdownIt-Anchor" href="#tcp网络编程"></a> TCP网络编程</h2>
-<h2 id="内存模型与垃圾回收"><a class="markdownIt-Anchor" href="#内存模型与垃圾回收"></a> 内存模型与垃圾回收</h2>
-<h2 id="其他高级特性"><a class="markdownIt-Anchor" href="#其他高级特性"></a> 其他高级特性</h2>
+<h2 id="goroutine-协程">Goroutine 协程</h2>
+<h2 id="锁">锁</h2>
+<h2 id="channel-管道">Channel 管道</h2>
+<h2 id="tcp网络编程">TCP网络编程</h2>
+<h2 id="内存模型与垃圾回收">内存模型与垃圾回收</h2>
+<h2 id="其他高级特性">其他高级特性</h2>
 
 
 <!-- 
@@ -557,8 +460,7 @@
 
 
       <!-- 
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br />
-本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <span class="citation" data-cites="anonymity">[@anonymity]</span>(/) 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer> -->
 
       <div class='float-panel mobile-only blur' style='display:none'>
