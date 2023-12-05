@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231117172048.png">
 <meta property="article:published_time" content="2023-11-18T01:10:55.000Z">
-<meta property="article:modified_time" content="2023-12-02T12:53:54.342Z">
+<meta property="article:modified_time" content="2023-12-05T02:11:12.221Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="programmer">
 <meta name="twitter:card" content="summary">
@@ -121,20 +121,20 @@
 <h1 id="程序员的-readme">程序员的 <code>README</code></h1>
 <h2 id="第1章-前面的旅程">第1章 前面的旅程</h2>
 <ul>
-<li><p><strong>目的地 ☸️</strong></p>
+<li><strong>目的地 ☸️</strong>
 <ul>
 <li>技术知识</li>
 <li>执行力</li>
 <li>沟通能力</li>
 <li>领导力</li>
 </ul></li>
-<li><p><strong>地图 🗺</strong></p>
+<li><strong>地图 🗺</strong>
 <ul>
-<li><p>新手营</p></li>
-<li><p>试炼之河</p></li>
-<li><p>贡献者之角</p></li>
-<li><p>运维之海</p></li>
-<li><p>胜任之湾</p></li>
+<li>新手营</li>
+<li>试炼之河</li>
+<li>贡献者之角</li>
+<li>运维之海</li>
+<li>胜任之湾</li>
 </ul></li>
 </ul>
 <h2 id="第2章-步入自觉阶段">第2章 步入自觉阶段</h2>
@@ -253,7 +253,37 @@
 <li>不要只分叉而不向上游提交修改</li>
 <li>克制重构的冲动</li>
 </ul></li>
-<li><p><strong>行为准则</strong> | 需要做的 | 不应该做的 | | :----------------------------: | :----------------------------------: | | 进行渐进式的重构 | 过度使用“技术债”这个词 | | 从新特性的提交中剥离重构的部分 | 为了适应测试而将变量或方法变成公共的 | | 保持以小规模的方式修改伐码 | 成为编程语言上的“势利眼” | | 将过手的代码整理得比之前更干净 | 忽视你公司的标准和工具集 | | 使用保守的技术选型 | 只分叉而不向上游提交修改 |</p></li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">需要做的</th>
+<th style="text-align: center;">不应该做的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">进行渐进式的重构</td>
+<td style="text-align: center;">过度使用“技术债”这个词</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">从新特性的提交中剥离重构的部分</td>
+<td style="text-align: center;">为了适应测试而将变量或方法变成公共的</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">保持以小规模的方式修改伐码</td>
+<td style="text-align: center;">成为编程语言上的“势利眼”</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">将过手的代码整理得比之前更干净</td>
+<td style="text-align: center;">忽视你公司的标准和工具集</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">使用保守的技术选型</td>
+<td style="text-align: center;">只分叉而不向上游提交修改</td>
+</tr>
+</tbody>
+</table></li>
 </ul>
 <h2 id="第4章-编写可维护的代码">第4章 编写可维护的代码</h2>
 <ul>
@@ -410,7 +440,7 @@
 </ul>
 <h2 id="第6章-测试">第6章 测试</h2>
 <ul>
-<li><strong>测试的多种用途</strong>
+<li><p><strong>测试的多种用途</strong></p>
 <ul>
 <li>检查代码是否正常工作</li>
 <li>保护代码不会被将来那些无意中的修改所影响</li>
@@ -418,7 +448,7 @@
 <li>强迫开发者试用他们自己的 API</li>
 <li>记录组件之间如何交互</li>
 </ul></li>
-<li><strong>测试类型</strong>
+<li><p><strong>测试类型</strong></p>
 <ul>
 <li>单元测试</li>
 <li>集成测试</li>
@@ -426,7 +456,7 @@
 <li>性能测试</li>
 <li>验收测试</li>
 </ul></li>
-<li><strong>测试工具</strong>
+<li><p><strong>测试工具</strong></p>
 <ul>
 <li>模拟库</li>
 <li>测试框架</li>
@@ -437,7 +467,7 @@
 <li>避免过度测试</li>
 </ul></li>
 </ul></li>
-<li>测试中的确定性
+<li><p><strong>测试中的确定性</strong></p>
 <ul>
 <li>几种可以避免出现非确定性测试的手段
 <ul>
@@ -452,13 +482,130 @@
 <li>测试不应该依赖于特定的执行顺序</li>
 </ul></li>
 </ul></li>
-<li>行为准则 | 需要做的 | 不应该做的 | | :----------------------------------------: | :------------------------------------: | | 使用测试去重现bug | 忽视添加新测试工具时的成本 | | 使用模拟工具去帮助编写单元测试 | 依赖干他人为你编写测试用例 | | 使用代码质量工具去检查覆盖率、格式和复杂度 | 仅仅为了提高覆盖率而编写测试 | | 在测试中使用常教种子的随机救生成器 | 仅仅将代码覆盖率作为代码质量的衡量标准 | | 在测试后关闭网络套接字和文件句柄 | 在测试中使用可以避免的休眠和超时 | | 在测试中生成唯-的文件路径和数据库位置 | 在单元测试中调用远程系统 | | 在测试执行的间隙清理掉遗留的测试状态 | 依赖于测试执行顺序 |</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">需要做的</th>
+<th style="text-align: center;">不应该做的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">使用测试去重现bug</td>
+<td style="text-align: center;">忽视添加新测试工具时的成本</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">使用模拟工具去帮助编写单元测试</td>
+<td style="text-align: center;">依赖干他人为你编写测试用例</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">使用代码质量工具去检查覆盖率、格式和复杂度</td>
+<td style="text-align: center;">仅仅为了提高覆盖率而编写测试</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">在测试中使用常教种子的随机救生成器</td>
+<td style="text-align: center;">仅仅将代码覆盖率作为代码质量的衡量标准</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">在测试后关闭网络套接字和文件句柄</td>
+<td style="text-align: center;">在测试中使用可以避免的休眠和超时</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">在测试中生成唯-的文件路径和数据库位置</td>
+<td style="text-align: center;">在单元测试中调用远程系统</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">在测试执行的间隙清理掉遗留的测试状态</td>
+<td style="text-align: center;">依赖于测试执行顺序</td>
+</tr>
+</tbody>
+</table></li>
 </ul>
 <h2 id="第7章-代码评审">第7章 代码评审</h2>
 <ul>
-<li></li>
+<li><p><strong>为什么需要评审代码</strong></p>
+<ul>
+<li>代码评审是一种教学和学习工具</li>
+<li>为了安全性与合规性，需要代码评审</li>
+<li>对代码库的共同理解有助于团队更有凝聚力地扩展代码</li>
+</ul></li>
+<li><p><strong>当你的代码被评审时</strong></p>
+<ul>
+<li>代码修改由准备、提交、评审、最后批准和合并这几个环节组成</li>
+<li>用评审草案降低风险</li>
+<li>提交评审请勿触发测试</li>
+<li>预排大体量的代码修改</li>
+<li>评审意见是针对代码的，而不是针对个人的</li>
+<li>保持同理心，但不要容忍粗鲁</li>
+<li>不要羞于要求别人评审你的代码</li>
+</ul></li>
+<li><p><strong>评审别人的代码时</strong></p>
+<ul>
+<li>分流评审请求（轻重缓急）</li>
+<li>给评审预留时间</li>
+<li>理解修改的意图</li>
+<li>提供全面的反馈
+<ul>
+<li>代码修改的正确性、可实施性、可维护性、可读性和安全性</li>
+</ul></li>
+<li>要承认优点</li>
+<li>区分问题、建议和挑剔
+<ul>
+<li>在反馈前加上字样</li>
+<li>“可选” （optional）</li>
+<li>“接受或不接受” （take it or leave it）</li>
+<li>“非必须” （nonblocking）</li>
+</ul></li>
+<li>不要只做橡皮图章</li>
+<li>不要只局限于使用网页版的评审工具</li>
+<li>不要忘记评审测试代码</li>
+<li>推动决断（不要拖）</li>
+</ul></li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">需要做的</th>
+<th style="text-align: center;">不应该做的</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">在提交评审请求之前保证通过了测试和代码检测工具的检查</td>
+<td style="text-align: center;">仅仅为了触发持续集成（CI）系统而提交评审请求</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">为代码评审预留出专门的时间，像对待其他工作--样对待评审工作</td>
+<td style="text-align: center;">只做橡皮图章</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">当评审意见很粗鲁、没有建设性或者有不当言论的时候，请明确指出来</td>
+<td style="text-align: center;">和代码“坠入爱河”或者把评审的反馈意见当作私人恩怨</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">通过适当提供相应修改的背景信息来帮助评审者</td>
+<td style="text-align: center;">在不了解整项政动的大背景的情况下就直接纠缠代码细节</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">在进行代码评审时，超越肤浅的对代码风格的指摘</td>
+<td style="text-align: center;">过度地挑剔</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">用尽一切工具去理解棘手的代码改动，不要只依赖评审工具自身的界面</td>
+<td style="text-align: center;">让“完美”成为“优秀”的敌人</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">将测试代码纳入评审范围</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table></li>
 </ul>
 <h2 id="第8章-软件交付">第8章 软件交付</h2>
+<ul>
+<li></li>
+</ul>
 <h2 id="第9章-on-call">第9章 On-Call</h2>
 <h2 id="第10章-技术设计流程">第10章 技术设计流程</h2>
 <h2 id="第11章-构建可演进的架构">第11章 构建可演进的架构</h2>
