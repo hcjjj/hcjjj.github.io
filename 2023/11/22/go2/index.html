@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/222.png">
 <meta property="article:published_time" content="2023-11-21T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-10T01:36:52.135Z">
+<meta property="article:modified_time" content="2023-12-11T04:12:44.512Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -1259,15 +1259,180 @@
 </ul></li>
 <li>heapArena
 <ul>
-<li>Go 每次申请的虚拟内存单元为 64MB</li>
+<li>Go 每次申请的虚拟内存单元为 <strong>64MB</strong></li>
 <li>最多有 4,194,304 个虚拟内存单元（<span class="math inline">\(2^{20}\)</span>，256 TB）</li>
 <li>内存单元也叫 heapArena</li>
 <li>所有的 heapArena 组成了 mheap（Go 堆内存）</li>
 </ul></li>
-<li></li>
+<li>heapArena 使用方案
+<ul>
+<li>线性分配或者链表分配容易出现空间碎片</li>
+<li>分级分配 - 内存管理单元 mspan
+<ul>
+<li>runtime/sizeclasses.go, mheap.go</li>
+<li>根据隔离适应策略，使用内存时的最小单位为 mspan</li>
+<li>每个 mspan 为 N 个相同大小的“格子”</li>
+<li>Go 中一共有 67 种 mspan</li>
+</ul></li>
+</ul></li>
+<li>中心索引 mcentral
+<ul>
+<li><p>runtime/mcentral.go</p></li>
+<li><p>136 个 mcentral 结构体</p></li>
+<li><p>其中 68 个组需要 GC 扫描的 mspan</p></li>
+<li><p>68 个组不需要 GC 扫描的 mspan</p></li>
+</ul></li>
+<li>mcentral 的性能问题
+<ul>
+<li>mcentral 实际是中心索引，使用互斥锁保护</li>
+<li>在高并发场景下，锁冲突问题严重</li>
+<li>参考协程 GMP 模型，增加线程本地缓存</li>
+<li>线程缓存 mcache（大大减少了 mcentral 高并发加锁的情况）
+<ul>
+<li>每个 P 有一个mcache</li>
+<li>一个mcache，拥有136个mspan，其中</li>
+<li>68 个需要GC扫描的 mspan</li>
+<li>68 个不需要GC扫描的 mspan</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>Go 分配堆内存方案</strong>
+<ul>
+<li>对象分级
+<ul>
+<li>Tiny 微对象 (0，16B) 无指针</li>
+<li>SmalI 小对象 [16B, 32KB]</li>
+<li>Large 大对象 (32KB, +∞)</li>
+</ul></li>
+<li>微对象分配
+<ul>
+<li>从 mcache 拿到 2 级 mspan</li>
+<li>将多个微对象合并成一个 16Byte 存入</li>
+</ul></li>
+<li>mcache 的替换
+<ul>
+<li>mcache 中，每个级别的 mspan 只有一个</li>
+<li>当 mpan 满了之后，会从 mcentral 中换一个新的</li>
+</ul></li>
+<li>mcentral 的扩容
+<ul>
+<li>mcentral 中，只有有限数量的 mspan</li>
+<li>当 mspan 缺少时，会从 heapArena 开辟新的 mspan</li>
+</ul></li>
+<li>大对象分配
+<ul>
+<li>直接从 heapArena 开辟 0 级的 mspan</li>
+<li>0 级的 mspan 为大对象定制</li>
+</ul></li>
+</ul></li>
+<li><strong>垃圾回收（Garbage CoIIecting）思路</strong>
+<ul>
+<li>”标记 — 清除“ ，会有碎片</li>
+<li>“标记 — 整理” ，整理开销大</li>
+<li>“标记 — 复制” ，空间消耗大</li>
+<li>Go 因为堆内存结构的独特优势，选择最简单的 “标记 — 清除”</li>
+<li><strong>找到有引用的对象</strong>，剩下的就是没有引用的，标记有用的</li>
+<li>GC 的起点
+<ul>
+<li>被栈上的指针引用</li>
+<li>被全局变量指针引用</li>
+<li>被寄存器中的指针引用</li>
+<li>上述变量被称为 RootSet() （GCRoot）</li>
+<li>Root 节点进行广度优先搜索 BFS</li>
+<li><strong>可达性分析标记法</strong></li>
+</ul></li>
+<li>串行 GC 步骤（Go 老版本）
+<ul>
+<li><em>Stop The WorId</em>，暂停所有其他协程</li>
+<li>通过可达性分析，找到无用的堆内存</li>
+<li>释放堆内存</li>
+<li>恢复所有其他协程</li>
+<li>STW 对性能影响很大</li>
+</ul></li>
+<li><strong>并发垃圾回收</strong>
+<ul>
+<li>三色标记法 BFS
+<ul>
+<li>黑色：有用，已经分析扫描</li>
+<li>灰色：有用，还未分析扫描</li>
+<li>白色：不可达，暂时无用（需要清除的对象）</li>
+</ul></li>
+<li>并发标记问题（删除）
+<ul>
+<li>Yuasa 删除屏障
+<ul>
+<li>并发标记时，对指针释放的白色对象置灰</li>
+<li>删除屏障可以杜绝在 GC 标记中被释放的指针，被清理</li>
+</ul></li>
+</ul></li>
+<li>并发标记问题（插入）
+<ul>
+<li>Dijkstra 插入屏障
+<ul>
+<li>并发标记时，对插入的白色对象置灰</li>
+<li>插入屏障可以杜绝在 GC 标记中被插入的指针，被清理</li>
+</ul></li>
+</ul></li>
+<li>混合屏障 （Go 的 GC）
+<ul>
+<li>被删除的堆对象标记为灰色</li>
+<li>被添加的堆对象标记为灰色</li>
+<li>并发垃圾回收的关键在于标记安全</li>
+<li>混合屏障机制兼顾了安全与效率</li>
+</ul></li>
+</ul></li>
+<li>GC 触发的时机
+<ul>
+<li>系统定时触发
+<ul>
+<li>sysmon 定时检查</li>
+<li>如果 2 分钟内没有过 GC，触发</li>
+<li>谨慎调整</li>
+</ul></li>
+<li>用户显式触发
+<ul>
+<li>用户调用 runtime.GC 方法</li>
+<li>并不推荐调用</li>
+</ul></li>
+<li>申请内存时触发
+<ul>
+<li>给对象申请堆空间时，可能导致 GC</li>
+</ul></li>
+<li><strong>GC 优化原则 — 尽量少在堆上产生垃圾</strong>
+<ul>
+<li>内存池化
+<ul>
+<li>缓存性质的对象</li>
+<li>频繁创建和删除</li>
+<li>使用内存池，不GC</li>
+</ul></li>
+<li>减少逃逸
+<ul>
+<li>逃逸会使原本在栈上的对象进入堆中</li>
+<li>fmt包慎用，多用 log 的组件</li>
+<li>方法返回了指针而不是拷贝，可能会发生逃逸</li>
+</ul></li>
+<li>使用空结构体
+<ul>
+<li>空结构体指向一个固定地址</li>
+<li>不占用堆空间</li>
+<li>比如 channel 传递空结构体</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>GC 分析工具
+<ul>
+<li>go tool pprof</li>
+<li>go tool trace</li>
+<li>go build -gcflags="-m"</li>
+<li>设置环境变量 GODEBUG = "gctrace = 1" ，go run main.go</li>
+</ul></li>
 </ul></li>
 </ul>
 <h2 id="其他高级特性">其他高级特性</h2>
+<ul>
+<li></li>
+</ul>
 
 
 <!-- 
