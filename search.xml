@@ -8,7 +8,7 @@
       <link href="/2023/12/24/redis/"/>
       <url>/2023/12/24/redis/</url>
       
-        <content type="html"><![CDATA[<p>The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</p><span id="more"></span><h2 id="参考资料">参考资料</h2><ul><li><strong><a href="https://github.com/redis/redis">Redis 仓库</a></strong></li><li><strong><a href="https://redis.io/">Redis 官网</a></strong></li><li><strong><a href="https://space.bilibili.com/102438649">GeekHour</a></strong></li></ul><h2 id="section"></h2>]]></content>
+        <content type="html"><![CDATA[<p>The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</p><span id="more"></span><h2 id="参考资料">参考资料</h2><ul><li><strong><a href="https://github.com/redis/redis">Redis 仓库</a></strong></li><li><strong><a href="https://redis.io/">Redis 官网</a></strong></li><li><strong><a href="https://space.bilibili.com/102438649">GeekHour</a></strong></li></ul><h2 id="redis-简介">Redis 简介</h2><ul><li>基本数据类型<ul><li>字符串 String</li><li>列表 List</li><li>集合 Set</li><li>有序集合 SortedSet</li><li>哈希 Hash</li></ul></li><li>高级数据类型<ul><li>消息队列 stream</li><li>地理空间 Geospatial</li><li>HyperLogLog</li><li>位图 Bitmap</li><li>位域 Bitfield</li></ul></li><li>使用方式<ul><li>CLI (Command Line Interface)</li><li>API (Application Programming Interface)</li><li>GUl (Graphical User Interface)</li></ul></li><li>Redis 优势<ul><li>性能极高</li><li>数据类型丰富，单键值对最大支持512M大小的数据</li><li>简单易用，支持所有主流编程语言</li><li>支持数据持久化、主从复制、哨兵模式等高可用特性</li></ul></li></ul><h2 id="安装配置">安装配置</h2><ul><li>macOS / Linux 通过包管理器</li><li>windows<ul><li>WSL</li><li>Docker</li><li>.exe</li></ul></li><li>命令<ul><li>redis-server</li><li>redis-server.exe</li><li>redis-cli</li></ul></li><li>GUI<ul><li><a href="https://redis.com/redis-enterprise/redis-insight/">RedisInsight</a></li><li><a href="https://github.com/qishibo/AnotherRedisDesktopManager">Another Redis Desktop Manager</a></li></ul></li></ul>]]></content>
       
       
       
@@ -515,9 +515,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> Git </tag>
+            
+            <tag> Hexo </tag>
             
         </tags>
       
@@ -594,11 +594,11 @@
       
         <tags>
             
+            <tag> macOS </tag>
+            
             <tag> iTerm </tag>
             
             <tag> terminal </tag>
-            
-            <tag> macOS </tag>
             
         </tags>
       
