@@ -31,7 +31,7 @@
 <meta property="og:description" content="The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-26T13:43:54.322Z">
+<meta property="article:modified_time" content="2023-12-30T14:43:21.935Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -89,7 +89,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Redis 入门</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-%E7%AE%80%E4%BB%8B"><span class="toc-text">Redis 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="toc-text">安装配置</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Redis 入门</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text"> 参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-%E7%AE%80%E4%BB%8B"><span class="toc-text"> Redis 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="toc-text"> 安装配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="toc-text"> 操作命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-text"> 事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text"> 持久化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text"> 主从复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="toc-text"> 哨兵模式</span></a></li></ol></div></div></widget>
 
 
 
@@ -111,64 +111,284 @@
 <h1 class="article-title"><span>Redis 入门</span></h1>
 <p>The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</p>
 <span id="more"></span>
-<h2 id="参考资料">参考资料</h2>
+<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
 <ul>
 <li><strong><a target="_blank" rel="noopener" href="https://github.com/redis/redis">Redis 仓库</a></strong></li>
 <li><strong><a target="_blank" rel="noopener" href="https://redis.io/">Redis 官网</a></strong></li>
 <li><strong><a target="_blank" rel="noopener" href="https://space.bilibili.com/102438649">GeekHour</a></strong></li>
 </ul>
-<h2 id="redis-简介">Redis 简介</h2>
+<h2 id="redis-简介"><a class="markdownIt-Anchor" href="#redis-简介"></a> Redis 简介</h2>
 <ul>
-<li>基本数据类型
+<li>
+<p>基本数据类型</p>
 <ul>
 <li>字符串 String</li>
 <li>列表 List</li>
 <li>集合 Set</li>
 <li>有序集合 SortedSet</li>
 <li>哈希 Hash</li>
-</ul></li>
-<li>高级数据类型
+</ul>
+</li>
+<li>
+<p>高级数据类型</p>
 <ul>
 <li>消息队列 stream</li>
 <li>地理空间 Geospatial</li>
 <li>HyperLogLog</li>
 <li>位图 Bitmap</li>
 <li>位域 Bitfield</li>
-</ul></li>
-<li>使用方式
+</ul>
+</li>
+<li>
+<p>使用方式</p>
 <ul>
 <li>CLI (Command Line Interface)</li>
 <li>API (Application Programming Interface)</li>
 <li>GUl (Graphical User Interface)</li>
-</ul></li>
-<li>Redis 优势
+</ul>
+</li>
+<li>
+<p>Redis 优势</p>
 <ul>
 <li>性能极高</li>
 <li>数据类型丰富，单键值对最大支持512M大小的数据</li>
 <li>简单易用，支持所有主流编程语言</li>
 <li>支持数据持久化、主从复制、哨兵模式等高可用特性</li>
-</ul></li>
 </ul>
-<h2 id="安装配置">安装配置</h2>
+</li>
+</ul>
+<h2 id="安装配置"><a class="markdownIt-Anchor" href="#安装配置"></a> 安装配置</h2>
 <ul>
-<li>macOS / Linux 通过包管理器</li>
-<li>windows
+<li>
+<p>macOS / Linux 通过包管理器</p>
+</li>
+<li>
+<p>windows</p>
 <ul>
 <li>WSL</li>
 <li>Docker</li>
 <li>.exe</li>
-</ul></li>
-<li>命令
+</ul>
+</li>
+<li>
+<p>命令</p>
 <ul>
 <li>redis-server</li>
 <li>redis-server.exe</li>
-<li>redis-cli</li>
-</ul></li>
-<li>GUI
+<li>redis-cli [–raw]</li>
+<li>telnet 127.0.0.1 6379</li>
+<li>quit/exit</li>
+</ul>
+</li>
+<li>
+<p>GUI</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://redis.com/redis-enterprise/redis-insight/">RedisInsight</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/qishibo/AnotherRedisDesktopManager">Another Redis Desktop Manager</a></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+<h2 id="操作命令"><a class="markdownIt-Anchor" href="#操作命令"></a> 操作命令</h2>
+<ul>
+<li>
+<p><strong>String</strong></p>
+<ul>
+<li>SET</li>
+<li>GET</li>
+<li>DEL</li>
+<li>EXISTS</li>
+<li>KEYS</li>
+<li>FLUSHALL</li>
+<li>TTL</li>
+<li>EXPIRE</li>
+<li>SETEX</li>
+<li>SETNX</li>
+</ul>
+</li>
+<li>
+<p><strong>List</strong>（有序、可重）</p>
+<ul>
+<li>LPUSH/RPUSH</li>
+<li>LRANGE</li>
+<li>LPOP/RPOP</li>
+<li>LLEN</li>
+<li>LTRIM</li>
+</ul>
+</li>
+<li>
+<p><strong>Set</strong>（无序、不可重）</p>
+<ul>
+<li>SADD</li>
+<li>SMEMBERS</li>
+<li>SISMEMBER</li>
+<li>SREM</li>
+<li>SINTER/SUNION</li>
+</ul>
+</li>
+<li>
+<p><strong>SortedSet</strong>（按分数小到大排序、成员不可重、分数可重）</p>
+<ul>
+<li>ZADD</li>
+<li>ZRANGE</li>
+<li>ZSCORE</li>
+<li>ZRANK</li>
+<li>ZREVRANK</li>
+<li>ZREM</li>
+</ul>
+</li>
+<li>
+<p><strong>Hash</strong>（键值对）</p>
+<ul>
+<li>
+<p>HSET</p>
+</li>
+<li>
+<p>HGET</p>
+</li>
+<li>
+<p>HGETALL</p>
+</li>
+<li>
+<p>HDEL</p>
+</li>
+<li>
+<p>HEXISTS</p>
+</li>
+<li>
+<p>HKEYS</p>
+</li>
+<li>
+<p>HLEN</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>发布订阅模式</strong></p>
+<ul>
+<li>
+<p>SUBSCRIBE</p>
+</li>
+<li>
+<p>PUBLISH</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>消息队列 Stream</strong></p>
+<ul>
+<li>XADD</li>
+<li>XLEN</li>
+<li>XRANGE</li>
+<li>XDEL</li>
+<li>XTRIM</li>
+<li>SREAD</li>
+<li>XGROUP</li>
+<li>XINFO GROUPS</li>
+<li>XREADGROUP GROUP</li>
+</ul>
+</li>
+<li>
+<p><strong>地理空间 Geospatial</strong></p>
+<ul>
+<li>针对地理位置的数据结构</li>
+<li>GEOADD</li>
+<li>GEOPOS</li>
+<li>GEODIST</li>
+<li>GEOSEARCH</li>
+</ul>
+</li>
+<li>
+<p><strong>HyperLogLog</strong></p>
+<ul>
+<li>用于统计基数，牺牲精度换效率</li>
+<li>PFADD</li>
+<li>PFCOUNT</li>
+<li>PFMERGE</li>
+</ul>
+</li>
+<li>
+<p><strong>位图 Bitmap</strong></p>
+<ul>
+<li>用字符串存储整数</li>
+<li>SETBIT</li>
+<li>GETBIT</li>
+<li>SET</li>
+<li>BITCOUNT</li>
+<li>BITPOS</li>
+</ul>
+</li>
+<li>
+<p><strong>位域 Bitfield</strong></p>
+<ul>
+<li>将多个小的整数储存到一个较大的位图中，节约内存</li>
+<li>BITFIELD</li>
+<li>GET</li>
+</ul>
+</li>
+</ul>
+<h2 id="事务"><a class="markdownIt-Anchor" href="#事务"></a> 事务</h2>
+<ul>
+<li>在一次请求中执行多个命令</li>
+<li>并不能保证所有命令都执行成功，结果取决于命令</li>
+<li>但不会因为某个命令执行失败而导致其他命令不被执行</li>
+<li>事务执行命令序列中不会被新的请求插入</li>
+<li>MULTI</li>
+<li>EXEC/DISCARD</li>
+<li>与数据库的事务差别有些大</li>
+</ul>
+<h2 id="持久化"><a class="markdownIt-Anchor" href="#持久化"></a> 持久化</h2>
+<ul>
+<li>
+<p>RDB (Redis Database)</p>
+<ul>
+<li>dump.rdb 快照文件</li>
+<li>快照的时候是阻塞状态</li>
+<li>有一个子进程负责快照</li>
+</ul>
+</li>
+<li>
+<p>AOF（Append Only File）</p>
+<ul>
+<li>追加文件</li>
+<li>同时写入内存和文件中</li>
+</ul>
+</li>
+</ul>
+<h2 id="主从复制"><a class="markdownIt-Anchor" href="#主从复制"></a> 主从复制</h2>
+<ul>
+<li>
+<p>主节点负责写操作，异步发生数据到从节点</p>
+</li>
+<li>
+<p>从节点负责读操作</p>
+</li>
+<li>
+<p>通过命令或者配置文件</p>
+<ul>
+<li>IP地址、端口号</li>
+<li>进程文件</li>
+</ul>
+</li>
+<li>
+<p>redis-server redis-xxx.conf</p>
+</li>
+<li>
+<p>redis-cli -p xxx</p>
+<ul>
+<li>info replication</li>
+</ul>
+</li>
+</ul>
+<h2 id="哨兵模式"><a class="markdownIt-Anchor" href="#哨兵模式"></a> 哨兵模式</h2>
+<ul>
+<li>监控 Redis 集群各个节点的状态，自动的故障转移</li>
+<li>监控 - 通知 - 转移
+<ul>
+<li>主节点挂了，从节点顶上</li>
+</ul>
+</li>
+<li>redis-sentinel sentinel.conf</li>
+<li>哨兵节点本身也可以是多个保证高可用</li>
 </ul>
 
 
@@ -188,7 +408,8 @@
 
 
       <!-- 
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <span class="citation" data-cites="anonymity">[@anonymity]</span>(/) 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br />
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer> -->
 
       <div class='float-panel mobile-only blur' style='display:none'>
