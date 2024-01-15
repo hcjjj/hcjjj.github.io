@@ -23,12 +23,12 @@
   <title>Visual Studio Code 使用记录 - H-sediment</title>
 
   
-    <meta name="description" content="Windows 下配置 C&#x2F;C++ 环境    下载并解压 MinGW Win + R 打开运行，输入 sysdm.cpl，配置 Path 系统变量 安装 clangd 或 C&#x2F;C++ Extension Pack  插件 修改根目录的 .vscode 文件夹中的 tasks.json、launch.json 文件     快捷键修改 VSCode 的 Terminal 中 Ctrl + F">
+    <meta name="description" content="Windows 下配置 C&#x2F;C++ 环境   下载并解压 MinGW Win + R 打开运行，输入 sysdm.cpl，配置 Path 系统变量 安装 clangd 或 C&#x2F;C++ Extension Pack 插件 修改根目录的 .vscode 文件夹中的 tasks.json、launch.json 文件   快捷键修改 VSCode 的 Terminal 中 Ctr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Visual Studio Code 使用记录">
 <meta property="og:url" content="http://example.com/2023/06/20/vscode/index.html">
 <meta property="og:site_name" content="H-sediment">
-<meta property="og:description" content="Windows 下配置 C&#x2F;C++ 环境    下载并解压 MinGW Win + R 打开运行，输入 sysdm.cpl，配置 Path 系统变量 安装 clangd 或 C&#x2F;C++ Extension Pack  插件 修改根目录的 .vscode 文件夹中的 tasks.json、launch.json 文件     快捷键修改 VSCode 的 Terminal 中 Ctrl + F">
+<meta property="og:description" content="Windows 下配置 C&#x2F;C++ 环境   下载并解压 MinGW Win + R 打开运行，输入 sysdm.cpl，配置 Path 系统变量 安装 clangd 或 C&#x2F;C++ Extension Pack 插件 修改根目录的 .vscode 文件夹中的 tasks.json、launch.json 文件   快捷键修改 VSCode 的 Terminal 中 Ctr">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202306210901627.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202306210920094.png">
@@ -93,7 +93,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Visual Studio Code 使用记录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#windows-%E4%B8%8B%E9%85%8D%E7%BD%AE-cc-%E7%8E%AF%E5%A2%83"><span class="toc-text"> Windows 下配置 C&#x2F;C++ 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE%E4%BF%AE%E6%94%B9"><span class="toc-text"> 快捷键修改</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Visual Studio Code 使用记录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#windows-%E4%B8%8B%E9%85%8D%E7%BD%AE-cc-%E7%8E%AF%E5%A2%83"><span class="toc-text">Windows 下配置 C&#x2F;C++ 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE%E4%BF%AE%E6%94%B9"><span class="toc-text">快捷键修改</span></a></li></ol></div></div></widget>
 
 
 
@@ -114,19 +114,19 @@
 <article class='md-text content post'>
 <h1 class="article-title"><span>Visual Studio Code 使用记录</span></h1>
 <span id="more"></span>
-<h2 id="windows-下配置-cc-环境"><a class="markdownIt-Anchor" href="#windows-下配置-cc-环境"></a> Windows 下配置 C/C++ 环境</h2>
- <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202306210901627.png" style="zoom:50%;" />
-<ol>
+<h2 id="windows-下配置-cc-环境">Windows 下配置 C/C++ 环境</h2>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202306210901627.png" style="zoom:50%;" /></p>
+<ol type="1">
 <li>下载并解压 <a target="_blank" rel="noopener" href="https://www.mingw-w64.org/downloads/">MinGW</a></li>
 <li><code>Win + R</code> 打开运行，输入 <code>sysdm.cpl</code>，配置 <code>Path</code> 系统变量</li>
-<li>安装 <code>clangd</code> 或 <code>C/C++ Extension Pack</code>  插件</li>
+<li>安装 <code>clangd</code> 或 <code>C/C++ Extension Pack</code> 插件</li>
 <li>修改根目录的 <code>.vscode</code> 文件夹中的 <code>tasks.json</code>、<code>launch.json</code> 文件</li>
 </ol>
- <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202306210920094.png" style="zoom:50%;" />
-<h2 id="快捷键修改"><a class="markdownIt-Anchor" href="#快捷键修改"></a> 快捷键修改</h2>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202306210920094.png" style="zoom:50%;" /></p>
+<h2 id="快捷键修改">快捷键修改</h2>
 <p>VSCode 的 Terminal 中 <code>Ctrl + F</code> 默认为查找，将其修改为 <code>Ctrl + Alt + F</code>，方便在终端中使用 <code>Ctrl + F</code> 进行命令的快速补全</p>
 <p>步骤：在 VSCode 中 <code>Ctrl + Shift + P</code> 或者 <code>F1</code> 输入 <code>keyboard</code> 进入 Preferences: Open Keyboard Shortcuts，搜索 <code>Ctrl + F</code>，找到 Terminal: Focus Find 进行修改</p>
- <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202307021455335.png" style="zoom:50%;" />
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202307021455335.png" style="zoom:50%;" /></p>
 
 
 <!-- 
