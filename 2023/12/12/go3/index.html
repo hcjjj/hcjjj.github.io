@@ -31,7 +31,7 @@
 <meta property="og:description" content="使用 Go 语言重写 Redis 中间件">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-14T12:54:58.018Z">
+<meta property="article:modified_time" content="2024-01-18T04:24:18.845Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Golang">
 <meta property="article:tag" content="Redis">
@@ -90,7 +90,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">【实践】Go 重写 Redis 中间件</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#github-%E5%9C%B0%E5%9D%80"><span class="toc-text">GitHub 地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-tcp-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">实现 TCP 服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-redis-%E5%8D%8F%E8%AE%AE%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="toc-text">实现 Redis 协议解析器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">实现内存数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-redis-%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">实现 Redis 持久化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-redis-%E9%9B%86%E7%BE%A4"><span class="toc-text">实现 Redis 集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="toc-text">问题记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E6%80%BB%E8%A7%88"><span class="toc-text">代码文件总览</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">【实践】Go 重写 Redis 中间件</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#github-%E5%9C%B0%E5%9D%80"><span class="toc-text">GitHub 地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-tcp-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">实现 TCP 服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-redis-%E5%8D%8F%E8%AE%AE%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="toc-text">实现 Redis 协议解析器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%86%85%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">实现内存数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-redis-%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">实现 Redis 持久化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-redis-%E9%9B%86%E7%BE%A4"><span class="toc-text">实现 Redis 集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4"><span class="toc-text">测试命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="toc-text">问题记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E6%80%BB%E8%A7%88"><span class="toc-text">代码文件总览</span></a></li></ol></div></div></widget>
 
 
 
@@ -157,20 +157,32 @@
 </ul>
 <h2 id="实现内存数据库">实现内存数据库</h2>
 <p>KV 内存数据库的核心是并发安全的哈希表 <strong>sync.map</strong></p>
-<p>测试： * <code>*3\r\n$3\r\nSET\r\n$3\r\nkey\r\n$5\r\nvalue\r\n</code> * <code>*2\r\n$3\r\nGET\r\n$3\r\nkey\r\n</code></p>
 <h2 id="实现-redis-持久化">实现 Redis 持久化</h2>
 <p>AOF 持久化是典型的异步任务，主协程 (goroutine) 可以使用 channel 将数据发送到异步协程由异步协程执行持久化操作</p>
 <h2 id="实现-redis-集群">实现 Redis 集群</h2>
+<p>单台服务器的CPU和内存等资源是有限的，利用多台机器建立分布式系统，分工处理来提高系统容量和吞吐量</p>
+<h2 id="测试命令">测试命令</h2>
+<ul>
+<li>set key value <code>*3\r\n$3\r\nSET\r\n$3\r\nkey\r\n$5\r\nvalue\r\n</code></li>
+<li>select 2 <code>*2\r\n$6\r\nselect\r\n$1\r\n1\r\n</code></li>
+<li>get key <code>*2\r\n$3\r\nGET\r\n$3\r\nkey\r\n</code></li>
+</ul>
 <h2 id="问题记录">问题记录</h2>
 <ul>
 <li>问题一
 <ul>
 <li>当客户端主动断开连接的时候服务器报错，<code>panic: sync: negative WaitGroup counter</code></li>
-<li>原因：<code>waitDone.Add(1)</code> 不小心写成 <code>waitDone.Add(0)</code>，导致后续的 <code>waitDone.Done()</code> 出现 panic</li>
+<li><code>waitDone.Add(1)</code> 不小心写成 <code>waitDone.Add(0)</code>，导致后续的 <code>waitDone.Done()</code> 出现 panic</li>
 </ul></li>
 <li>问题二
 <ul>
-<li></li>
+<li><code>imports redis-go/database: import cycle not allowed</code></li>
+<li>aof.go 文件导包错误，需要的是 "redis-go/interface/database"，而不是 "redis-go/database"</li>
+</ul></li>
+<li>问题三
+<ul>
+<li><code>[ERROR][database.go:76] runtime error: index out of range [1] with length 1</code></li>
+<li>execSelect 方法中的 <code>strconv.Atoi(string(args[0]))</code> 写成了 1</li>
 </ul></li>
 </ul>
 <h2 id="代码文件总览">代码文件总览</h2>
@@ -200,18 +212,30 @@
 </ul></li>
 <li>实现内存数据库
 <ul>
-<li>datastruct 定义 Redis 底层数据结构的接口与实现</li>
+<li>datastruct/database.go 数据库核心，定义 Redis 底层数据结构的接口与实现</li>
 <li>datastruct/sync_dict 对底层并发map的包装，方便更换实现</li>
 <li>database/db.go 定义分数据库、底层执行逻辑</li>
 <li>database/command.go 注册命令的方法</li>
-<li>database/keys.go ping.go string.go 实现相关命令</li>
+<li>database/keys.go ping.go string.go ... 实现相关命令</li>
 </ul></li>
 <li>实现 Redis 持久化
 <ul>
 <li>Append Only File</li>
-<li>aof/aof.go</li>
+<li>aof/aof.go 实现指令落盘和加载恢复数据</li>
 </ul></li>
-<li>实现 Redis 集群</li>
+<li>实现 Redis 集群
+<ul>
+<li>一致性哈希（减少传统哈希增加节点时数据哈希存储不一致调整的开销）</li>
+<li>lib/consistenthash 一致性哈希</li>
+<li>cluster/cluster_database.go 集群</li>
+<li>resp/client 客户端</li>
+<li>go-commos-pool 开源连接池工具</li>
+<li>cluster/client_pool.go 连接工厂，给连接池用的</li>
+<li>cluster/com.go 节点之间的通信</li>
+<li>cluster/router.go 指令路由</li>
+<li><code>go build</code> 生成 exe</li>
+<li><code>go mod tidy</code> 整理依赖</li>
+</ul></li>
 </ul>
 
 
