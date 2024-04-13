@@ -37,16 +37,16 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/cluster0.svg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240411200044.png">
 <meta property="article:published_time" content="2023-12-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-12T05:23:29.737Z">
+<meta property="article:modified_time" content="2024-04-13T04:00:50.585Z">
 <meta property="article:author" content="hcjjj">
-<meta property="article:tag" content="Golang">
 <meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/resp.svg">
   
   
   
-  <meta name="keywords" content="Golang,Redis">
+  <meta name="keywords" content="Redis,Golang">
 
   <!-- feed -->
   
@@ -97,7 +97,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Go 重写 Redis 中间件 🔨</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#github-%E5%9C%B0%E5%9D%80"><span class="toc-text">GitHub 地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="toc-text">实现逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resp-%E5%8D%8F%E8%AE%AE"><span class="toc-text">RESP 协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E5%91%BD%E4%BB%A4"><span class="toc-text">支持命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="toc-text">问题记录</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Go 重写 Redis 中间件 🔨</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="toc-text">实现逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resp-%E5%8D%8F%E8%AE%AE"><span class="toc-text">RESP 协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E5%91%BD%E4%BB%A4"><span class="toc-text">支持命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="toc-text">问题记录</span></a></li></ol></div></div></widget>
 
 
 
@@ -119,18 +119,7 @@
 <h1 class="article-title"><span>Go 重写 Redis 中间件 🔨</span></h1>
 <p>使用 Go 语言基于 Redis serialization protocol (RESP) 实现简易的 Redis</p>
 <span id="more"></span>
-<h2 id="github-地址">GitHub 地址</h2>
-<ul>
-<li>参考资料
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/HDT3213/godis"><strong>godis</strong></a></li>
-<li><strong><a target="_blank" rel="noopener" href="https://github.com/dawnzzz/simple-redis/tree/master">simple-redis</a></strong></li>
-</ul></li>
-<li>开源地址
-<ul>
-<li><strong><a target="_blank" rel="noopener" href="https://github.com/hcjjj/redis-go">redis-go</a></strong></li>
-</ul></li>
-</ul>
+<p><strong>开源地址：</strong>https://github.com/hcjjj/redis-go</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#                _ _                       </span></span><br><span class="line"><span class="comment">#               | (_)                      </span></span><br><span class="line"><span class="comment">#   _ __ ___  __| |_ ___ ______ __ _  ___  </span></span><br><span class="line"><span class="comment">#  | &#x27;__/ _ \/ _` | / __|______/ _` |/ _ \ </span></span><br><span class="line"><span class="comment">#  | | |  __/ (_| | \__ \     | (_| | (_) |</span></span><br><span class="line"><span class="comment">#  |_|  \___|\__,_|_|___/      \__, |\___/ </span></span><br><span class="line"><span class="comment">#                               __/ |      </span></span><br><span class="line"><span class="comment">#                              |___/       </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># git配置</span></span><br><span class="line">git config --global user.name <span class="string">&quot;hcjjj&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;hcjjj@foxmail.com&quot;</span></span><br><span class="line"><span class="comment"># 生成密钥SSH key</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;hcjjj@foxmail.com&quot;</span></span><br><span class="line"><span class="comment"># 填入 github 设置的 SSH and GPG keys</span></span><br><span class="line">$ <span class="built_in">cat</span>  C:\Users\hcjjj/.ssh/id_rsa.pub</span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line">$ ssh -T git@github.com</span><br><span class="line"><span class="comment"># Hi hcjjj! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br><span class="line"><span class="comment"># 初始化本地仓库</span></span><br><span class="line">git init</span><br><span class="line"><span class="built_in">touch</span> .gitignore</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;first commit&quot;</span> </span><br><span class="line"><span class="comment"># 推送到 github</span></span><br><span class="line">git remote add origin git@github.com:hcjjj/redis-go.git</span><br><span class="line">git push -u origin master</span><br><span class="line"><span class="comment"># 查看提交记录</span></span><br><span class="line">git reflog show master</span><br></pre></td></tr></table></figure>
 <p><strong>编译运行：</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">redis.conf 设置服务器信息、数据库核心数、aof 持久化相关、集群相关</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置 peer 信息既开启集群模式，每个节点需要分别设置好各自配置文件的 self 和 peers</span></span><br><span class="line">go build &amp;&amp; ./redis-go</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">客户端 telnet 或者 网络调试助手，开启转义符指令解析</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">https://www.cmsoft.cn/assistcenter/help/assistscript/</span></span><br><span class="line">telnet 127.0.0.1 6379</span><br></pre></td></tr></table></figure>
@@ -241,6 +230,11 @@
 <li>Go 的切片有着共享内存的特性</li>
 <li>Go 有类型推断，但是没有自动类型转换</li>
 </ul></li>
+</ul>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/HDT3213/godis"><strong>godis</strong></a></li>
+<li><strong><a target="_blank" rel="noopener" href="https://github.com/dawnzzz/simple-redis/tree/master">simple-redis</a></strong></li>
 </ul>
 
 
