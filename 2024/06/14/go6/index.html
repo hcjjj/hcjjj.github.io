@@ -31,7 +31,7 @@
 <meta property="og:description" content="go app → docker image → k8s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-14T05:45:48.135Z">
+<meta property="article:modified_time" content="2024-06-17T09:03:19.441Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Golang">
 <meta property="article:tag" content="Docker">
@@ -90,7 +90,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">构建 Go 程序为镜像并部署到 k8s 集群</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA-docker-%E9%95%9C%E5%83%8F"><span class="toc-text">构建 Docker 镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">推送到远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0-k8s-%E9%9B%86%E7%BE%A4"><span class="toc-text">部署到 k8s 集群</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">构建 Go 程序为镜像并部署到 k8s 集群</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA-docker-%E9%95%9C%E5%83%8F"><span class="toc-text">构建 Docker 镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">推送到远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0-k8s-%E9%9B%86%E7%BE%A4"><span class="toc-text">部署到 k8s 集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#makefile"><span class="toc-text">Makefile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#goctl"><span class="toc-text">goctl</span></a></li></ol></div></div></widget>
 
 
 
@@ -106,7 +106,7 @@
 
 
 
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Golang/">Golang</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/Golang/Docker/">Docker</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-06-13T16:00:00.000Z">2024-06-14</time></div></div>
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Golang/">Golang</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-06-13T16:00:00.000Z">2024-06-14</time></div></div>
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>构建 Go 程序为镜像并部署到 k8s 集群</span></h1>
@@ -121,13 +121,17 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">构建</span></span><br><span class="line">docker build -t wechatpay:v0.0.1 .</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看镜像信息</span></span><br><span class="line">docker images wechatpay:v0.0.1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除</span></span><br><span class="line">docker rmi -f wechatpay:v0.0.1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以将上述命令都写在 Makefile 里面</span></span><br></pre></td></tr></table></figure>
 <p>启动服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it -p 8888:8888 wechatpay:v0.0.1      </span><br><span class="line">Starting server at 0.0.0.0:8888...</span><br></pre></td></tr></table></figure>
-<p>使用 <code>goctl</code> 生成 Dockerfile</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">goctl docker 命令用于生成 Dockerfile 文件，用于构建 Docker 镜像</span></span><br></pre></td></tr></table></figure>
 <h2 id="推送到远程仓库">推送到远程仓库</h2>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登录腾讯云容器镜像服务 Docker Registry</span></span><br><span class="line">docker login xxx.tencentcloudcr.com --username xxx --password xxx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">向 Registry 中推送镜像</span></span><br><span class="line">docker tag [imageId] xxx.tencentcloudcr.com/xxx/xxx:[tag]</span><br><span class="line">docker push xxx.tencentcloudcr.com/xxx/xxx:[tag]</span><br></pre></td></tr></table></figure>
 <h2 id="部署到-k8s-集群">部署到 k8s 集群</h2>
-<p>使用 <code>goctl</code> 生成 deployment</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">goctl kube 可以快速生成 kubernetes deployment 资源文件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="makefile">Makefile</h2>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基础镜像 alpine 精简的 Linux</span></span><br><span class="line">FROM alpine:latest</span><br><span class="line"><span class="comment"># 安装 ca-certificates</span></span><br><span class="line">RUN apk update &amp;&amp; apk add --no-cache ca-certificates</span><br><span class="line"><span class="comment"># 把编译后的打包进这个镜像，放到工作目录 /app</span></span><br><span class="line">COPY /build/webook /app/webook</span><br><span class="line">COPY ./etc /app/etc</span><br><span class="line">WORKDIR /app</span><br><span class="line">ENTRYPOINT [<span class="string">&quot;/app/webook&quot;</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="goctl"><code>goctl</code></h2>
+<ul>
+<li>goctl docker 命令用于生成 Dockerfile 文件，用于构建 Docker 镜像</li>
+<li>goctl kube 可以快速生成 kubernetes deployment 资源文件</li>
+</ul>
 
 
 <!-- 
