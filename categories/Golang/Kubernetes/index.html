@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.0" theme-name="Stellar" theme-version="1.29.0">
-  
+  <meta name="robots" content="noindex,follow">
   <meta name="generator" content="Hexo 5.4.2">
   <meta http-equiv='x-dns-prefetch-control' content='on' />
   
@@ -17,33 +17,20 @@
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
   <meta name="theme-color" content="#f9fafb">
   
-  <title>终端模拟器入门指南 - H-sediment</title>
+  <title>分类：Kubernetes - H-sediment</title>
 
   
-    <meta name="description" content="Linux 上叫 Terminal，macOS 上叫 iTerm，Android 上有 Termux">
-<meta property="og:type" content="article">
-<meta property="og:title" content="终端模拟器入门指南">
-<meta property="og:url" content="http://example.com/2020/03/11/iterm/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="H-sediment">
+<meta property="og:url" content="http://example.com/categories/Golang/Kubernetes/index.html">
 <meta property="og:site_name" content="H-sediment">
-<meta property="og:description" content="Linux 上叫 Terminal，macOS 上叫 iTerm，Android 上有 Termux">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180937897.jpg">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180936607.jpg">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180937023.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180936558.jpg">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180936468.jpg">
-<meta property="article:published_time" content="2020-03-11T02:10:55.000Z">
-<meta property="article:modified_time" content="2023-06-17T03:34:48.000Z">
 <meta property="article:author" content="hcjjj">
-<meta property="article:tag" content="macOS">
-<meta property="article:tag" content="iTerm">
-<meta property="article:tag" content="terminal">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180937897.jpg">
   
   
   
-  <meta name="keywords" content="macOS,iTerm,terminal">
+  
 
   <!-- feed -->
   
@@ -62,7 +49,7 @@
 </head>
 <body>
 
-<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+<div class="l_body s:aa index tech" id="start" layout="undefined" ><aside class="l_left"><div class="leftbar-container">
 
 
 <header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div></header>
@@ -74,255 +61,28 @@
 <nav class="menu dis-select"></nav>
 </div>
 <div class="widgets">
-
-
 <widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2023/11/13/gocode/"><span class="title">Go 数据结构与算法、SQL 刷题 ⌨️</span></a><a class="item title" href="/2024/05/30/gosdk/"><span class="title">Go SDK：context、unsafe、reflect、errors</span></a><a class="item title" href="/2024/06/29/k8s/"><span class="title">Kubernetes：从基础概念到应用部署</span></a><a class="item title" href="/2024/06/14/go6/"><span class="title">构建应用程序为镜像并部署到 k8s 集群</span></a><a class="item title" href="/2024/04/16/MulVAL/"><span class="title">MulVAL - A Logic based Network Security Analyzer</span></a><a class="item title" href="/2023/12/05/CarVal/"><span class="title">IEEE S&P 2024 - 对车载攻击面的重新审视</span></a><a class="item title" href="/2023/11/18/readme/"><span class="title">程序员的 README</span></a><a class="item title" href="/2023/11/22/go2/"><span class="title">Go 底层原理与源码初探 👾</span></a><a class="item title" href="/2023/12/12/go3/"><span class="title">使用 Golang 实现的简易 Redis 🔨</span></a><a class="item title" href="/2019/11/28/linux/"><span class="title">Linux 入门</span></a></div></widget>
 </div>
 <footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" onclick="switchTheme()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" fill-rule="evenodd" d="M582.4 326.4c-140.8 0-256 115.2-256 256s115.2 256 256 256 256-115.2 256-256-115.2-256-256-256z m0 448c-70.4 0-131.2-36.8-164.8-92.8 12.8 3.2 27.2 4.8 40 4.8 121.6 0 219.2-99.2 219.2-219.2 0-17.6-1.6-35.2-6.4-52.8 60.8 32 102.4 96 102.4 169.6 1.6 104-84.8 190.4-190.4 190.4zM582.4 262.4c17.6 0 32-14.4 32-32v-128c0-17.6-14.4-32-32-32s-32 14.4-32 32v128c0 17.6 14.4 32 32 32zM262.4 582.4c0-17.6-14.4-32-32-32h-128c-17.6 0-32 14.4-32 32s14.4 32 32 32h128c17.6 0 32-14.4 32-32zM310.4 356.8c6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6 12.8-12.8 12.8-32 0-44.8l-91.2-91.2c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l91.2 91.2zM944 220.8c-12.8-12.8-32-12.8-44.8 0l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-33.6 0-44.8zM310.4 808l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-32 0-44.8-11.2-11.2-32-11.2-44.8 0z"></path></svg></a></div></footer>
 </div></aside><div class="l_main" id="main">
 
+<header class="header mobile-only"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div></header>
+
+ 
 
 
 
 
-<div class="article banner top">
-  <div class="content">
-    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
-<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Tools/">Tools</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2020-03-11T02:10:55.000Z">2020-03-11</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2023-06-17T03:34:48.000Z">2023-06-17</time></span></div></div></div>
-    
-    <div class="bottom only-title">
-      
-      <div class="text-area">
-        <h1 class="text title"><span>终端模拟器入门指南</span></h1>
-        
-      </div>
-    </div>
-    
-  </div>
-  </div><article class="md-text content"><p>Linux 上叫 Terminal，macOS 上叫 iTerm，Android 上有 Termux</p>
-<span id="more"></span>
-<p>操作系统分为两个部分，一部分叫<strong>内核</strong>，另一部分叫<strong>用户交互界面</strong> 在UNIX/LINUX系统中，用户登录系统后会有一个Shell进程，它是一个用 C 语言编写的程序，既是一种命令语言，又是一种程序设计语言，它是管理系统的<strong>命令解析器</strong>，终端是敲命令的工具，是连接内核与交互界面的桥梁</p>
-<h1 id="美化终端">美化终端</h1>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180937897.jpg" /></p>
-<p>以 macOS 为例，安装 <a target="_blank" rel="noopener" href="https://www.iterm2.com/">iTerm2</a></p>
-<p>更换 <a target="_blank" rel="noopener" href="https://gitee.com/jasonwood/iTerm2-Color-Schemes">主题</a> ：</p>
-<p><code>Preferences -&gt; Profiles -&gt; ColorPresets -&gt; Import</code></p>
-<p>导入 <code>iTerm2-Color-Schemes/schemes/xxx.itermcolors</code></p>
-<p>打开 <strong>Status bar</strong> ：</p>
-<p><code>Preferences -&gt; Profiles -&gt; Session -&gt; Status bar -&gt; Configure Status Bar</code></p>
-<p>终端一般默认的shell都是 <strong>bash</strong>，建议安装更换 <strong>zsh</strong>、<strong>fish</strong> ...</p>
-<p>查看已安装的shell：<code>cat /etc/shells</code></p>
-<p>更换shell：<code>chsh -s [shell路径]</code></p>
-<h2 id="zsh">zsh</h2>
-<p>MacOS 默认的shell为 bash，但自带了 zsh</p>
-<ol type="1">
-<li><p>安装 <a target="_blank" rel="noopener" href="https://ohmyz.sh">oh-my-zsh</a> (切换到zsh后进行安装)</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Shell successfully changed to &#x27;/bin/zsh&#x27;.</span><br><span class="line">         __                                     __</span><br><span class="line">  ____  / /_     ____ ___  __  __   ____  _____/ /_</span><br><span class="line"> / __ \/ __ \   / __ `__ \/ / / /  /_  / / ___/ __ \</span><br><span class="line">/ /_/ / / / /  / / / / / / /_/ /    / /_(__  ) / / /</span><br><span class="line">\____/_/ /_/  /_/ /_/ /_/\__, /    /___/____/_/ /_/</span><br><span class="line">                        /____/                       ....is now installed!</span><br><span class="line">Please look over the ~/.zshrc file to select plugins, themes, and options.</span><br></pre></td></tr></table></figure></p></li>
-<li><p>更换<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/wiki/themes">主题</a></p>
-<p>下载 <a target="_blank" rel="noopener" href="https://github.com/romkatv/powerlevel10k#oh-my-zsh">powerlevel10k</a>（需要安装 Hack Nerd Font 字体和配置）</p>
-<p>编辑 <code>~/.zshrc</code> ，修改 <code>ZSH_THEME="powerlevel10k/powerlevel10k"</code></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180936607.jpg" /></p></li>
-<li><p>安装插件</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-syntax-highlighting"><strong>zsh-syntax-highlighting</strong></a>语法高亮</p>
-<p><code>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting</code></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions"><strong>zsh-autosuggestions</strong></a> 自动补全</p>
-<p><code>git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</code></p>
-<p>下载后编辑 <code>~/.zshrc</code> ，添加：</p>
-<p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plugins=(</span><br><span class="line">    git</span><br><span class="line">    zsh-syntax-highlighting</span><br><span class="line">    zsh-autosuggestions</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-<p>执行 <code>source ~/.zshrc</code> 后重启 zsh</p>
-<p><strong><a target="_blank" rel="noopener" href="https://mimosa-pudica.net/zsh-incremental.html">zsh-incremental</a></strong> 提示补全</p>
-<ol type="1">
-<li><code>brew install wget</code></li>
-<li><code>wget -O incr-0.2.zsh https://mimosa-pudica.net/src/incr-0.2.zsh</code></li>
-<li><code>cp incr-0.2.zsh ~/.oh-my-zsh/plugins/</code></li>
-<li>添加 <code>source ~/.oh-my-zsh/plugins/incr*.zsh</code> 到 <code>~/.zshrc</code> 中</li>
-</ol>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180937023.png" /> ## fish</p></li>
-</ol>
-<p>fish 开箱即用，不需要怎么配置</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180936558.jpg" /></p>
-<p>http://fishshell.com</p>
-<p><code>brew install fish</code></p>
-<blockquote>
-<p>按<code>Ctrl+F</code>或者 右方向键<code>→</code>， 即可自动补全</p>
-</blockquote>
-<p>设置fish为默认shell：</p>
-<p><code>sudo vim /etc/shells</code>，添加 /usr/local/bin/fish</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># List of acceptable shells for chpass(1).</span><br><span class="line"># Ftpd will not allow users to connect who are not using</span><br><span class="line"># one of these shells.</span><br><span class="line"></span><br><span class="line">/bin/bash</span><br><span class="line">/bin/csh</span><br><span class="line">/bin/ksh</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/zsh</span><br><span class="line">/usr/local/bin/fish</span><br></pre></td></tr></table></figure>
-<p><code>chsh -s /usr/local/bin/fish</code> 更换shell</p>
-<p>fish插件管理：<a target="_blank" rel="noopener" href="https://github.com/oh-my-fish/oh-my-fish">oh-my-fish</a></p>
-<p><code>fish_config</code> 网页可视化配置</p>
-<p>fish 的PATH路径为：<code>~/.config/fish/config.fish</code></p>
-<p>格式：<code>set PATH /usr/local/mysql/bin $PATH</code></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180936468.jpg" /></p>
-<h1 id="常用快捷键">常用快捷键</h1>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">快捷键</th>
-<th style="text-align: center;">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">Command+T</td>
-<td style="text-align: center;">新建标签页</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Command+W</td>
-<td style="text-align: center;">关闭标签页</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Command+N</td>
-<td style="text-align: center;">新建终端窗口</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Command+Q</td>
-<td style="text-align: center;">关闭终端窗口</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Command+N</td>
-<td style="text-align: center;">切换到第N个标签页（N=1，2，…）</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Command+-</td>
-<td style="text-align: center;">缩写窗口（包括窗口内的字体）</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Command+0</td>
-<td style="text-align: center;">普通大小（阿拉伯数字0）</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+D</td>
-<td style="text-align: center;">在空白处执行将结束当前会话</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+P</td>
-<td style="text-align: center;">显示上一条历史命令</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+N</td>
-<td style="text-align: center;">显示下一条历史命令</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+R</td>
-<td style="text-align: center;">反向搜索历史命令</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+J</td>
-<td style="text-align: center;">回车（同enter键功能）</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+M</td>
-<td style="text-align: center;">回车（同enter键功能）</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+O</td>
-<td style="text-align: center;">执行并保留命令</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+A</td>
-<td style="text-align: center;">光标移动到行的开头</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+E</td>
-<td style="text-align: center;">光标移动到行的结尾</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+B</td>
-<td style="text-align: center;">光标向后移动一个位置（backward）</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+F</td>
-<td style="text-align: center;">光标向前移动一个位置（forward）,补全提示</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+Left-Arrow</td>
-<td style="text-align: center;">光标移动到上一个单词的词首</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+Right-Arrow</td>
-<td style="text-align: center;">光标移动到下一个单词的词尾</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+T</td>
-<td style="text-align: center;">将光标字符和前一个字符进行位置交换</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+U</td>
-<td style="text-align: center;">剪切从行的开头到光标前一个所有字符</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+K</td>
-<td style="text-align: center;">剪切从光标位置到行末的所有字符</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+Y</td>
-<td style="text-align: center;">粘贴剪切的内容（撤销删除）</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+H</td>
-<td style="text-align: center;">删除光标前一个字符</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+*</td>
-<td style="text-align: center;">删除光标前一个字符</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+D</td>
-<td style="text-align: center;">删除光标后一个字符</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+C</td>
-<td style="text-align: center;">终止命令</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+W</td>
-<td style="text-align: center;">删除光标前一个单词</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+L</td>
-<td style="text-align: center;">清除当前屏幕内容</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Ctrl+S</td>
-<td style="text-align: center;">暂停屏幕输出</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Ctrl+Q</td>
-<td style="text-align: center;">继续屏幕输出</td>
-</tr>
-</tbody>
-</table>
-<p><strong>小提示</strong> Linux 下同理，把 <code>Command</code> 换成 <code>Ctrl+Shift</code> 或 <code>Ctrl</code> 在终端窗口命令提示符下，按一次 <code>Tab</code> 键补全；未匹配到命令时，连续按两次 <code>Tab</code> 键 或 按 <code>Ctrl+i</code> ，将显示所有的命令及工具名称</p>
-
-<div class="article-footer fs14">
-    <section id="license">
-      <div class="header"><span>许可协议</span></div>
-      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div>
-    </section>
-    </div>
-</article>
-<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/05/17/tmux/">上手终端复用神器 Tmux</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/03/07/homebrew/">Mac OS 手动安装 Homebrew</a></div></section></div>
-
-
-
-
+<div class="navbar top"><nav class="post"><a href="/">近期发布</a><a class="active" href="/categories">分类：Kubernetes</a><a href="/tags">标签</a><a href="/archives">归档</a></nav></div>
+<div class="post-list post"><a class="post-card post" href="/2024/06/14/go6/">
+<article class="md-text"><h2 class="post-title">构建应用程序为镜像并部署到 k8s 集群</h2><div class="excerpt"><p>Code → App → Docker Image → Hub → K8s</p></div><div class="meta cap"><span class="cap" id="post-meta"><svg style="margin-bottom:2px" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M6.94 2c.416 0 .753.324.753.724v1.46c.668-.012 1.417-.012 2.26-.012h4.015c.842 0 1.591 0 2.259.013v-1.46c0-.4.337-.725.753-.725s.753.324.753.724V4.25c1.445.111 2.394.384 3.09 1.055c.698.67.982 1.582 1.097 2.972L22 9H2v-.724c.116-1.39.4-2.302 1.097-2.972c.697-.67 1.645-.944 3.09-1.055V2.724c0-.4.337-.724.753-.724"/><path fill="currentColor" d="M22 14v-2c0-.839-.004-2.335-.017-3H2.01c-.013.665-.01 2.161-.01 3v2c0 3.771 0 5.657 1.172 6.828C4.343 22 6.228 22 10 22h4c3.77 0 5.656 0 6.828-1.172C22 19.658 22 17.772 22 14" opacity=".5"/><path fill="currentColor" d="M18 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><time datetime="2024-06-13T16:00:00.000Z">2024-06-14</time></span><span class="cap breadcrumb"><svg style="margin-bottom:1px" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M2 6.95c0-.883 0-1.324.07-1.692A4 4 0 0 1 5.257 2.07C5.626 2 6.068 2 6.95 2c.386 0 .58 0 .766.017a4 4 0 0 1 2.18.904c.144.119.28.255.554.529L11 4c.816.816 1.224 1.224 1.712 1.495a4 4 0 0 0 .848.352C14.098 6 14.675 6 15.828 6h.374c2.632 0 3.949 0 4.804.77c.079.07.154.145.224.224c.77.855.77 2.172.77 4.804V14c0 3.771 0 5.657-1.172 6.828C19.657 22 17.771 22 14 22h-4c-3.771 0-5.657 0-6.828-1.172C2 19.657 2 17.771 2 14z" opacity=".5"/><path fill="currentColor" d="M20 6.238c0-.298-.005-.475-.025-.63a3 3 0 0 0-2.583-2.582C17.197 3 16.965 3 16.5 3H9.988c.116.104.247.234.462.45L11 4c.816.816 1.224 1.224 1.712 1.495a4 4 0 0 0 .849.352C14.098 6 14.675 6 15.829 6h.373c1.78 0 2.957 0 3.798.238"/><path fill="currentColor" fill-rule="evenodd" d="M12.25 10a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5h-5a.75.75 0 0 1-.75-.75" clip-rule="evenodd"/></svg><span>Golang</span></span></div></article>
+</a></div>
 
 
 <footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> + <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.0">Stellar 1.29.0</a> 主题创建</p>
 </div></footer>
 <div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
-<div class="widgets">
-
-
-
-<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BE%8E%E5%8C%96%E7%BB%88%E7%AB%AF"><span class="toc-text">美化终端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#zsh"><span class="toc-text">zsh</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">常用快捷键</span></a></li></ol></div><div class="widget-footer">
-
-<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
-</div></aside><div class='float-panel blur'>
+</aside><div class='float-panel blur'>
   <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
   </button>
