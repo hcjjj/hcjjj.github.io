@@ -20,18 +20,17 @@
   <title>Kubernetes：从基础概念到应用部署 - H-sediment</title>
 
   
-    <meta name="description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，让我们简化服务的部署运维流程。 参考资料：https:&#x2F;&#x2F;kubernetes.io&#x2F;">
+    <meta name="description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，让我们简化服务的部署运维流程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kubernetes：从基础概念到应用部署">
 <meta property="og:url" content="http://example.com/2024/06/29/k8s/index.html">
 <meta property="og:site_name" content="H-sediment">
-<meta property="og:description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，让我们简化服务的部署运维流程。 参考资料：https:&#x2F;&#x2F;kubernetes.io&#x2F;">
+<meta property="og:description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，让我们简化服务的部署运维流程。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240629210114.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/Docker%20and%20Kubernetes.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/pic.svg">
 <meta property="article:published_time" content="2024-06-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-30T05:01:06.802Z">
+<meta property="article:modified_time" content="2024-07-07T02:29:23.883Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Kubernetes">
@@ -73,7 +72,7 @@
 <div class="widgets">
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2024/05/30/gosdk/"><span class="title">Go SDK：context、unsafe、reflect、errors</span></a><a class="item title" href="/2023/11/13/gocode/"><span class="title">Go 数据结构与算法、SQL 刷题 ⌨️</span></a><a class="item title" href="/2024/06/29/k8s/"><span class="title">Kubernetes：从基础概念到应用部署</span></a><a class="item title" href="/2024/06/14/go6/"><span class="title">构建应用程序为镜像并部署到 k8s 集群</span></a><a class="item title" href="/2024/04/16/MulVAL/"><span class="title">MulVAL - A Logic based Network Security Analyzer</span></a><a class="item title" href="/2023/12/05/CarVal/"><span class="title">IEEE S&P 2024 - 对车载攻击面的重新审视</span></a><a class="item title" href="/2023/11/18/readme/"><span class="title">程序员的 README</span></a><a class="item title" href="/2023/11/22/go2/"><span class="title">Go 底层原理与源码初探 👾</span></a><a class="item title" href="/2023/12/12/go3/"><span class="title">使用 Golang 实现的简易 Redis 🔨</span></a><a class="item title" href="/2019/11/28/linux/"><span class="title">Linux 入门</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2024/06/29/k8s/"><span class="title">Kubernetes：从基础概念到应用部署</span></a><a class="item title" href="/2023/11/13/gocode/"><span class="title">Go 数据结构与算法、SQL 刷题 ⌨️</span></a><a class="item title" href="/2024/05/30/gosdk/"><span class="title">Go SDK：context、unsafe、reflect、errors</span></a><a class="item title" href="/2024/06/14/go6/"><span class="title">构建应用程序为镜像并部署到 k8s 集群</span></a><a class="item title" href="/2024/04/16/MulVAL/"><span class="title">MulVAL - A Logic based Network Security Analyzer</span></a><a class="item title" href="/2023/12/05/CarVal/"><span class="title">IEEE S&P 2024 - 对车载攻击面的重新审视</span></a><a class="item title" href="/2023/11/18/readme/"><span class="title">程序员的 README</span></a><a class="item title" href="/2023/11/22/go2/"><span class="title">Go 底层原理与源码初探 👾</span></a><a class="item title" href="/2023/12/12/go3/"><span class="title">使用 Golang 实现的简易 Redis 🔨</span></a><a class="item title" href="/2019/11/28/linux/"><span class="title">Linux 入门</span></a></div></widget>
 </div>
 <footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" onclick="switchTheme()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" fill-rule="evenodd" d="M582.4 326.4c-140.8 0-256 115.2-256 256s115.2 256 256 256 256-115.2 256-256-115.2-256-256-256z m0 448c-70.4 0-131.2-36.8-164.8-92.8 12.8 3.2 27.2 4.8 40 4.8 121.6 0 219.2-99.2 219.2-219.2 0-17.6-1.6-35.2-6.4-52.8 60.8 32 102.4 96 102.4 169.6 1.6 104-84.8 190.4-190.4 190.4zM582.4 262.4c17.6 0 32-14.4 32-32v-128c0-17.6-14.4-32-32-32s-32 14.4-32 32v128c0 17.6 14.4 32 32 32zM262.4 582.4c0-17.6-14.4-32-32-32h-128c-17.6 0-32 14.4-32 32s14.4 32 32 32h128c17.6 0 32-14.4 32-32zM310.4 356.8c6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6 12.8-12.8 12.8-32 0-44.8l-91.2-91.2c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l91.2 91.2zM944 220.8c-12.8-12.8-32-12.8-44.8 0l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-33.6 0-44.8zM310.4 808l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-32 0-44.8-11.2-11.2-32-11.2-44.8 0z"></path></svg></a></div></footer>
 </div></aside><div class="l_main" id="main">
@@ -86,7 +85,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Kubernetes/">Kubernetes</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-06-28T16:00:00.000Z">2024-06-29</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-06-30T05:01:06.802Z">2024-06-30</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-06-28T16:00:00.000Z">2024-06-29</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-07-07T02:29:23.883Z">2024-07-07</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -98,8 +97,8 @@
     
   </div>
   </div><article class="md-text content"><p>K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，让我们简化服务的部署运维流程。</p>
-<p>参考资料：https://kubernetes.io/</p>
 <span id="more"></span>
+<p>官方文档：https://kubernetes.io/</p>
 <h2 id="kubernetes-基础">Kubernetes 基础</h2>
 <h3 id="简介">简介</h3>
 <p>Kubernetes (K8s) 是 Google 开源的容器编排引擎和容器集群管理工具，它为容器化应用提供了一个自动化的部署、扩展和管理平台。它允许开发者在集群中运行和管理容器应用，而无需关心底层的基础设施细节。其核心功能包括服务发现和负载均衡、自动部署和回滚、存储编排、自动扩展、自我修复、密钥与配置管理等。</p>
@@ -110,37 +109,75 @@
 <ul>
 <li><p><strong>控制平面（Control Plane）</strong>负责管理工作节点和维护集群状态，所有任务都由控制平面分配。</p>
 <ul>
-<li><code>api-server (api)</code> 是集群的核心，是k8s中最重要的组件，因为它是实现声明式 api 的关键。api-server 的核心功能是提供了Kubernetes各类资源对象（pod、RC、service 等）的增、删、改、查以及 watch 等 HTTP REST 接口。</li>
-<li><code>scheduler</code> 调度程序会考虑容器集的资源需求（例如 CPU 或内存）以及集群的运行状况，随后将容器集安排到适当的计算节点。</li>
-<li><code>controller-manager</code> 将多个控制器功能合而为一，降低了程序的复杂性：
-<ul>
-<li>节点控制器（Node Controller）：负责在节点出现故障时进行通知和响应。</li>
-<li>任务控制器（Job Controller）：监测代表一次性任务的 Job 对象，然后创建 Pods 来运行这些任务直至完成。</li>
-<li>端点控制器（Endpoints Controller）：负责填充端点（Endpoints）对象，连接 Service 与 Pod。</li>
-<li>服务帐户和令牌控制器（Service Account &amp; Token Controllers）：为新的命名空间自动创建默认的服务帐户和 API 访问令牌。</li>
-</ul></li>
-<li><a target="_blank" rel="noopener" href="https://www.redhat.com/zh/topics/containers/what-is-etcd"><code>etcd</code></a> 是一个键值对数据库，用于存储配置数据和集群状态信息。</li>
-<li><code>cloud-controller-manager</code> 是一个可选组件，它允许你将 Kubernetes 集群连接到云提供商的 API 之上，并将与该云平台交互的组件与集群的其他组件分离开来。</li>
+<li><code>api-server (api)</code> 是实现声明式 api 的关键，提供了 K8s 各类资源对象（pod、RC、service 等）的增、删、改、查以及 watch 等 HTTP REST 接口。</li>
+<li><code>kube-scheduler (sched)</code> 主要负责整个集群资源的调度功能，根据特定的调度算法和策略，将 Pod 调度到最优的工作节点上面去，从而更加合理、更加充分地利用集群的资源。</li>
+<li><code>controller-manager (c-m)</code> 的作用是保证集群中各种资源的实际状态 （status）和用户定义的期望状态 （spec）一致。</li>
+<li><code>cloud-controller-manager</code> 是一个可选组件，它允许将 K8s 集群连接到云提供商的 API 之上，并将与该云平台交互的组件与集群的其他组件分离开来。</li>
+<li><code>etcd</code> 是兼具一致性和高可用性的键值数据库，可用于服务发现以及配置中心。采用 raft 一致性算法，基于 Go 语言实现。是保存 K8s 所有集群数据的后台数据库，在整个云原生中发挥着极其重要的作用。</li>
 </ul></li>
 <li><p><strong>工作节点（Node）</strong>负责执行控制平面分配的请求任务，它们运行实际的应用和工作负载。</p>
 <ul>
-<li><code>kubelet</code> 会在集群的每个节点上运行，它保证容器都运行在 Pod 中。当控制平面需要在节点中执行某个操作时，kubelet 就会执行该操作。</li>
-<li><code>kube-proxy</code> 是集群中每个节点上运行的网络代理，是实现 Kubernetes 服务概念的一部分。它维护节点网络规则和转发流量，实现从集群内部或外部的网络与 Pod 进行网络通信。</li>
-<li><code>container runtime</code> 是负责运行容器的软件。K8s 支持许多容器运行环境，例如 containerd、Docker 或其他实现了 Kubernetes CRI (容器运行环境接口) 的容器。</li>
+<li><p><code>kubelet</code> 会在集群的每个节点上运行，它保证容器都运行在 Pod 中。当控制平面需要在节点中执行某个操作时，kubelet 就会执行该操作。</p></li>
+<li><p><code>kube-proxy</code> 是集群中每个节点上运行的网络代理，是实现 Kubernetes 服务概念的一部分。它维护节点网络规则和转发流量，实现从集群内部或外部的网络与 Pod 进行网络通信。</p></li>
+<li><p><code>container runtime</code> 是负责运行容器的软件。K8s 支持许多容器运行环境，例如 containerd、Docker 或其他实现了 Kubernetes CRI （容器运行环境接口）的容器。</p></li>
 </ul></li>
-<li><p><strong>Ingress 控制器</strong>提供了一个入口，让外部用户访问集群内部服务**</p></li>
-<li><p><strong>Kubectl</strong> 是 K8s 提供的命令行工具</p></li>
+</ul>
+<hr />
+<ul>
+<li><p><strong>Pod</strong> 是 K8s 中最小的可部署单元，中文可以翻译为“容器组”它是用于承载和管理容器的抽象层。一个 Pod 可以包含一个或多个紧密关联的容器，它们共享相同的网络命名空间、IP 地址和存储卷，并在同一个宿主机上运行。</p></li>
+<li><p><strong>ReplicaSet</strong> 的目的是维护一组在任何时候都处于运行状态的 Pod 副本的稳定集合。因此，它通常用来保证给定数量的、完全相同的 Pod 的可用性。通常我们不直接使用 ReplicaSet，而是在 Deployment 中声明。</p></li>
+<li><p><strong>Deployment</strong> 是对 ReplicaSet 和 Pod 更高级的抽象，它可以指挥 Kubernetes 如何创建和更新你部署的应用实例，创建 Deployment 后，Kubernetes master 会将应用程序调度到集群中的各个节点上，一般用来部署无状态应用。</p>
+<ul>
+<li>自愈、缩放</li>
+<li>滚动更新、版本回滚</li>
+</ul></li>
+<li><p><strong>Service</strong> 是将运行在一个或一组 Pod 上的网络应用程序公开为网络服务的抽象方法。Service 为一组 Pod 提供相同的 DNS 名，并且在它们之间进行负载均衡。Kubernetes 为 Pod 提供分配了IP 地址，但IP地址可能会发生变化，集群内的容器可以通过 service 名称访问服务，而不需要担心 Pod 的 IP 发生变化。</p>
+<ul>
+<li>ClusterIP：将服务公开在<strong>集群内部</strong>。kubernetes 会给服务分配一个集群内部的 IP，集群内的所有主机都可以通过这个 Cluster-IP访问服务。集群内部的 Pod 可以通过 service 名称访问服务。</li>
+<li>NodePort：通过每个节点的主机 IP 和静态端口（NodePort）暴露服务。 <strong>集群外部</strong>的主机可以使用节点 IP 和 NodePort 访问服务。</li>
+<li>ExternalName：将集群外部的网络引入集群内部。</li>
+<li>LoadBalancer：使用云提供商的负载均衡器向外部暴露服务。</li>
+</ul></li>
+<li><p><strong>Ingress</strong> 是对集群中服务的外部访问进行管理的 API 对象，典型的访问方式是 HTTP。可以通过 Ingress 资源来配置不同的转发规则，从而达到根据不同的规则设置访问集群内不同的 Service 所对应的后端 Pod。当集群位于公有云或私有云上时，要从互联网进行访问，需要使用公网IP或者域名，公网IP是相对稀缺的资源，不可能给所有主机都分配公网IP，并且随着公开的服务变多，众多的端口也变得难以管理。</p>
+<p>面对这种情况，我们可以使用Ingress。</p></li>
+<li><p><strong>Kubectl</strong> 是 K8s 提供的命令行工具。</p></li>
+<li><p><strong>Namespace</strong> 是一种资源隔离机制，将同一集群中的资源划分为相互隔离的组。命名空间作用域仅针对带有名字空间的对象，例如 Deployment、Service 等。Kubernetes 会创建四个初始命名空间：</p>
+<ul>
+<li>default 默认的命名空间，不可删除，未指定命名空间的对象都会被分配到 default 中。</li>
+<li>kube-system Kubernetes 系统对象(控制平面和Node组件)所使用的命名空间。</li>
+<li>kube-public 自动创建的公共命名空间，所有用户（包括未经过身份验证的用户）都可以读取它。通常我们约定，将整个集群中公用的可见和可读的资源放在这个空间中。</li>
+<li>kube-node-lease 租约（Lease）对象使用的命名空间。每个节点都有一个关联的 lease 对象，lease 是一种轻量级资源。lease对象通过发送心跳，检测集群中的每个节点是否发生故障。</li>
+</ul></li>
 </ul>
 <hr />
 <h3 id="运行流程">运行流程</h3>
-<p><strong>服务部署流程：</strong></p>
-<p>YAML 文件 → kubectl → [API Server → Scheduler → ECTD → Controller Mgr] → [Kubelet → Container runtime → Pod]</p>
-<p><strong>服务调用流程：</strong></p>
-<p>request → Ingress 控制器 → [Kube Proxy → Pod]</p>
-<h3 id="minikube">Minikube</h3>
-<h2 id="运行有状态应用">运行有状态应用</h2>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/Docker%20and%20Kubernetes.png" /></p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/pic.svg" /></p>
+<p><strong>管理对象的方式</strong></p>
+<ul>
+<li><strong>命令行指令</strong>
+<ul>
+<li>使用 <code>kubectl</code> 命令来创建和管理 Kubernetes 对象。命令行就好比口头传达，简单、快速、高效。但它功能有限，不适合复杂场景，操作不容易追溯，多用于开发和调试。</li>
+</ul></li>
+<li><strong>声明式配置</strong>
+<ul>
+<li>kubernetes 使用 yaml 文件来描述 Kubernetes 对象。声明式配置就好比申请表，学习难度大且配置麻烦。好处是操作留痕，适合操作复杂的对象，多用于生产。</li>
+</ul></li>
+<li><strong>可视化界面</strong>
+<ul>
+<li>如云平台容器服务</li>
+</ul></li>
+</ul>
+<p><strong>服务部署流程</strong></p>
+<p>YAML 文件 → kubectl → [API Server → Scheduler → ECTD → Controller Mgr] → [Kubelet → Container runtime → <strong>Pod</strong>]</p>
+<p><strong>服务调用流程</strong></p>
+<p>request → Ingress 控制器 → [Kube Proxy → <strong>Pod</strong>]</p>
+<h2 id="应用发布模式">应用发布模式</h2>
+<h2 id="cicd">CI/CD</h2>
+<h3 id="金丝雀部署">金丝雀部署</h3>
+<p><strong>金丝雀部署(canary deployment)</strong> 也被称为灰度发布。早期，工人下矿井之前会放入一只金丝雀检测井下是否存在有毒气体。采用金丝雀部署，你可以在生产环境的基础设施中小范围的部署新的应用代码。一旦应用签署发布，只有少数用户被路由到它，最大限度的降低影响。如果没有错误发生，则将新版本逐渐推广到整个基础设施。</p>
+<h2 id="蓝绿部署">蓝绿部署</h2>
+<h2 id="运行有状态应用">运行有状态应用</h2>
+<h3 id="mysql-集群">MySQL 集群</h3>
 <h2 id="部署前后端应用">部署前后端应用</h2>
 
 <div class="article-footer fs14">
@@ -165,7 +202,7 @@
 
 
 
-<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes-%E5%9F%BA%E7%A1%80"><span class="toc-text">Kubernetes 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-text">运行流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#minikube"><span class="toc-text">Minikube</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">运行有状态应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BA%94%E7%94%A8"><span class="toc-text">部署前后端应用</span></a></li></ol></div><div class="widget-footer">
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes-%E5%9F%BA%E7%A1%80"><span class="toc-text">Kubernetes 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-text">运行流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F"><span class="toc-text">应用发布模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cicd"><span class="toc-text">CI&#x2F;CD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%91%E4%B8%9D%E9%9B%80%E9%83%A8%E7%BD%B2"><span class="toc-text">金丝雀部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%93%9D%E7%BB%BF%E9%83%A8%E7%BD%B2"><span class="toc-text">蓝绿部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">运行有状态应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql-%E9%9B%86%E7%BE%A4"><span class="toc-text">MySQL 集群</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BA%94%E7%94%A8"><span class="toc-text">部署前后端应用</span></a></li></ol></div><div class="widget-footer">
 
 <a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
 </div></aside><div class='float-panel blur'>
