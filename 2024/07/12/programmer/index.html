@@ -17,18 +17,18 @@
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
   <meta name="theme-color" content="#f9fafb">
   
-  <title>如何减少偶然复杂度引发的问题 - H-sediment</title>
+  <title>Efficient Programmers' Way of Working - H-sediment</title>
 
   
     <meta name="description" content="10x 程序员工作法 - 郑晔">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何减少偶然复杂度引发的问题">
+<meta property="og:title" content="Efficient Programmers&#39; Way of Working">
 <meta property="og:url" content="http://example.com/2024/07/12/programmer/index.html">
 <meta property="og:site_name" content="H-sediment">
 <meta property="og:description" content="10x 程序员工作法 - 郑晔">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-11T21:27:55.000Z">
-<meta property="article:modified_time" content="2024-07-11T13:43:24.790Z">
+<meta property="article:modified_time" content="2024-07-12T12:58:53.510Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="programmer">
 <meta name="twitter:card" content="summary">
@@ -68,7 +68,7 @@
 <div class="widgets">
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2024/07/12/programmer/"><span class="title">如何减少偶然复杂度引发的问题</span></a><a class="item title" href="/2023/10/06/laws/"><span class="title">程序员生存定律</span></a><a class="item title" href="/2023/11/13/gocode/"><span class="title">Go 数据结构与算法、SQL 刷题 ⌨️</span></a><a class="item title" href="/2024/06/14/go6/"><span class="title">构建应用程序为镜像并部署到 k8s 集群</span></a><a class="item title" href="/2024/06/29/k8s/"><span class="title">Kubernetes：从基础概念到应用部署</span></a><a class="item title" href="/2024/05/30/gosdk/"><span class="title">Go SDK：context、unsafe、reflect、errors</span></a><a class="item title" href="/2024/04/16/MulVAL/"><span class="title">MulVAL - A Logic based Network Security Analyzer</span></a><a class="item title" href="/2023/12/05/CarVal/"><span class="title">IEEE S&P 2024 - 对车载攻击面的重新审视</span></a><a class="item title" href="/2023/11/18/readme/"><span class="title">程序员的 README</span></a><a class="item title" href="/2023/11/22/go2/"><span class="title">Go 底层原理与源码初探 👾</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2024/07/12/programmer/"><span class="title">Efficient Programmers' Way of Working</span></a><a class="item title" href="/2023/11/13/gocode/"><span class="title">Go 数据结构与算法、SQL 刷题 ⌨️</span></a><a class="item title" href="/2023/10/06/laws/"><span class="title">程序员生存定律</span></a><a class="item title" href="/2024/06/14/go6/"><span class="title">构建应用程序为镜像并部署到 k8s 集群</span></a><a class="item title" href="/2024/06/29/k8s/"><span class="title">Kubernetes：从基础概念到应用部署</span></a><a class="item title" href="/2024/05/30/gosdk/"><span class="title">Go SDK：context、unsafe、reflect、errors</span></a><a class="item title" href="/2024/04/16/MulVAL/"><span class="title">MulVAL - A Logic based Network Security Analyzer</span></a><a class="item title" href="/2023/12/05/CarVal/"><span class="title">IEEE S&P 2024 - 对车载攻击面的重新审视</span></a><a class="item title" href="/2023/11/18/readme/"><span class="title">程序员的 README</span></a><a class="item title" href="/2023/11/22/go2/"><span class="title">Go 底层原理与源码初探 👾</span></a></div></widget>
 </div>
 <footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" onclick="switchTheme()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path fill="currentColor" fill-rule="evenodd" d="M582.4 326.4c-140.8 0-256 115.2-256 256s115.2 256 256 256 256-115.2 256-256-115.2-256-256-256z m0 448c-70.4 0-131.2-36.8-164.8-92.8 12.8 3.2 27.2 4.8 40 4.8 121.6 0 219.2-99.2 219.2-219.2 0-17.6-1.6-35.2-6.4-52.8 60.8 32 102.4 96 102.4 169.6 1.6 104-84.8 190.4-190.4 190.4zM582.4 262.4c17.6 0 32-14.4 32-32v-128c0-17.6-14.4-32-32-32s-32 14.4-32 32v128c0 17.6 14.4 32 32 32zM262.4 582.4c0-17.6-14.4-32-32-32h-128c-17.6 0-32 14.4-32 32s14.4 32 32 32h128c17.6 0 32-14.4 32-32zM310.4 356.8c6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6 12.8-12.8 12.8-32 0-44.8l-91.2-91.2c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l91.2 91.2zM944 220.8c-12.8-12.8-32-12.8-44.8 0l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-33.6 0-44.8zM310.4 808l-91.2 91.2c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.4 9.6 22.4 9.6 8 0 16-3.2 22.4-9.6l91.2-91.2c12.8-12.8 12.8-32 0-44.8-11.2-11.2-32-11.2-44.8 0z"></path></svg></a></div></footer>
 </div></aside><div class="l_main" id="main">
@@ -81,36 +81,125 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Reading/">Reading</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-07-11T21:27:55.000Z">2024-07-12</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-07-11T13:43:24.790Z">2024-07-11</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-07-11T21:27:55.000Z">2024-07-12</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-07-12T12:58:53.510Z">2024-07-12</time></span></div></div></div>
     
     <div class="bottom only-title">
       
       <div class="text-area">
-        <h1 class="text title"><span>如何减少偶然复杂度引发的问题</span></h1>
+        <h1 class="text title"><span>Efficient Programmers' Way of Working</span></h1>
         
       </div>
     </div>
     
   </div>
-  </div><article class="md-text content"><p><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/100022301">10x 程序员工作法 - 郑晔</a></p>
+  </div><article class="md-text content"><p><strong><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/100022301">10x 程序员工作法 - 郑晔</a></strong></p>
 <span id="more"></span>
-<p>程序员解决的问题，大多不是程序问题，<strong>如何减少偶然复杂度引发的问题，让软件开发工作有序、高效地进行？</strong></p>
+<p>大部分程序员忙碌解决的问题，都不是程序问题，而是由偶然复杂度导致的问题。如何减少偶然复杂度引发的问题，让软件开发工作有序、高效地进行？</p>
 <ul>
 <li>本质复杂度（Essential Complexity）
 <ul>
 <li>指解决问题或实现功能时，不可避免存在的复杂性</li>
 <li>是由问题本身的复杂性所导致的，无法通过简化设计或改变方法来消除</li>
-<li>如：处理大规模数据时所面对的复杂性，即使采用最佳算法和数据结构，也无法避免</li>
+<li>例如：处理大规模数据时所面对的复杂性，即使采用最佳算法和数据结构，也无法避免</li>
 </ul></li>
-<li>偶然复杂度（Accident Complexity）：由于开发过程中的各种外部因素引入的额外复杂性
+<li>偶然复杂度（Accident Complexity）
 <ul>
-<li>指在软件开发过程中，由于设计、工具或技术选择等因素引入的额外复杂性</li>
+<li>指在软件开发过程中，由于设计、工具或技术选择等外部因素引入的额外复杂性</li>
 <li>是可以通过改变设计、优化工具选择或改进工作流程等方式来减少或消除的复杂性</li>
-<li>如：由于技术栈选择不当或设计不良引入的额外代码复杂性，例如过多的依赖或复杂的类继承结构</li>
+<li>例如：由于技术栈选择不当或设计不良引入的额外代码复杂性，例如过多的依赖或复杂的类继承结构</li>
 </ul></li>
 </ul>
 <h2 id="思考框架">思考框架</h2>
+<ul>
+<li>一个思考框架
+<ul>
+<li>Where are we?（<strong>现状</strong>）</li>
+<li>Where are we going?（<strong>目标</strong>）</li>
+<li>How can we get there?（<strong>路径</strong>）</li>
+</ul></li>
+<li>开发一个功能特性时，通常需要思考
+<ul>
+<li>为什么要做这个特性，它会给用户带来怎样的价值？</li>
+<li>什么样的用户会用到这个特性，他们在什么场景下使用，他们又会怎样使用它？</li>
+<li>达成这个目的是否有其它手段？是不是一定要开发一个系统？</li>
+<li>这个特性上线之后，怎么衡量它的有效性？</li>
+</ul></li>
+<li><strong>四个思考原则</strong>
+<ul>
+<li><strong>以终为始</strong>：在工作的一开始就确定好自己的目标</li>
+<li><strong>任务分解</strong>：将大目标拆分成一个一个可行的执行任务，工作分解得越细致，越能更好地掌控工作</li>
+<li><strong>沟通反馈</strong>：疏通与其他人交互的渠道（解决与人打交道出现的问题）
+<ul>
+<li>保证信息能够传达出去，减少因为理解偏差造成的工作疏漏</li>
+<li>保证我们能够准确接收外部信息，以免因为自我感觉良好，阻碍了进步</li>
+</ul></li>
+<li><strong>自动化</strong>：将繁琐的工作通过自动化的方式交给机器执行（解决与机器打交道出现的问题）</li>
+</ul></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">现在在哪？（现状）</th>
+<th style="text-align: left;">要到哪去？（目标）</th>
+<th>如何到达那里？（路径）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">你很清楚</td>
+<td style="text-align: left;">以终为始</td>
+<td>任务分解、沟通反馈、自动化</td>
+</tr>
+</tbody>
+</table>
 <h2 id="以终为始">以终为始</h2>
+<ul>
+<li><p><strong>以终为始：如何让你的努力不白费</strong></p>
+<ul>
+<li>把目光放长远是需要额外消耗能量的，“以终为始”是一种反直觉的思维方式</li>
+<li>任何事物都要经过两次创造：
+<ul>
+<li>一次是在头脑中的创造，也就是智力上的或者第一次创造（Mental/First Creation）</li>
+<li>然后才是付诸实践，也就是实际的构建或第二次创造（Physical/Second Creation）</li>
+</ul></li>
+<li>在今天的软件开发实践中，已经有很多采用了“以终为始”原则的实践
+<ul>
+<li>测试驱动开发</li>
+<li>持续集成</li>
+</ul></li>
+<li>践行“以终为始”就是在做事之前，先考虑结果，根据结果来确定要做的事情（遇到事情，倒着想）</li>
+</ul></li>
+<li><p><strong>DoD的价值：你完成了工作，为什么他们还不满意</strong></p>
+<ul>
+<li>DoD（Definition of Done，完成的定义）为了解决软件开发中常见的“完成”问题（理解鸿沟）而生的
+<ul>
+<li>例如：特性开发完成，表示开发人员经过了需求澄清、功能设计、编写代码、单元测试，通过了测试人员的验收，确保代码处于一个可部署的状态，相关文档已经编写完毕</li>
+<li>开发完成，表示开发人员编写好功能代码，编写好单元测试代码，编写好集成测试代码，测试可以通过，代码通过了代码风格检查、测试覆盖率检查</li>
+</ul></li>
+<li>DoD 是一个清单，清单是由一个个实际可检查的检查项组成，用来检查我们的工作完成情况</li>
+<li>DoD 是团队成员间彼此汇报的一种机制，在团队层面，也可以定义 DoD：
+<ul>
+<li>某个功能的 DoD，比如：这个功能特性已经开发完成，经过产品负责人的验收，处于一个可部署的状态</li>
+<li>一个迭代的 DoD，比如：这个迭代规划的所有功能已经完成</li>
+<li>一次发布的 DoD，比如：整个软件处于可发布的状态，上线计划已经明确</li>
+</ul></li>
+<li>DoD 不仅局限在团队内部协作上，在工作中用途非常广泛
+<ul>
+<li>例如“定义接口”的 DoD，需要检查：
+<ul>
+<li>服务方提供的接口是不是和这个可运行的接口返回值是一样的</li>
+<li>调用方是否可以和这个可运行的接口配合使用</li>
+</ul></li>
+</ul></li>
+<li>DoD 是一个思维模式，是一种尽可能消除不确定性，达成共识的方式</li>
+<li>本着“以终为始”的方式做事情，DoD 让我们能够在一开始就把“终”清晰地定义出来</li>
+<li><strong>在做任何事之前，先定义完成的标准</strong></li>
+</ul></li>
+<li><p><strong>接到需求任务，你要先做哪件事</strong></p>
+<ul>
+<li></li>
+</ul></li>
+</ul>
 <h2 id="任务分解">任务分解</h2>
 <h2 id="沟通反馈">沟通反馈</h2>
 <h2 id="自动化">自动化</h2>
