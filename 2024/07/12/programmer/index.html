@@ -30,11 +30,13 @@
 <meta property="og:site_name" content="H-sediment">
 <meta property="og:description" content="10x 程序员工作法 - 郑晔">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240719203914.png">
 <meta property="article:published_time" content="2024-07-11T21:27:55.000Z">
-<meta property="article:modified_time" content="2024-07-13T12:10:16.696Z">
+<meta property="article:modified_time" content="2024-07-19T12:47:20.996Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="programmer">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240719203914.png">
   
   
   
@@ -213,11 +215,41 @@
 </ul></li>
 <li><p><strong>接到需求任务，你要先做哪件事</strong></p>
 <ul>
-<li>用户故事（User Story）是站在用户的角度来描述了一个用户希望得到的功能，关注用户在系统中完成一个动作需要经过怎样的路径</li>
-<li>一个完整的用户故事大致包含以下几个部分（以用户密码登录为例）
+<li><p>用户故事（User Story）是站在用户的角度来描述了一个用户希望得到的功能，关注用户在系统中完成一个动作需要经过怎样的路径</p></li>
+<li><p>一个完整的用户故事大致包含以下几个部分</p>
+<ul>
+<li>标题，简要地说明这个用户故事的主要内容</li>
+<li>概述，简要地介绍这个用户故事的主要内容，一般会用这样的格式：- As a (Role), I want to (Activity), so that (Business Value)</li>
+<li><strong>验收标准</strong>，这个部分会描述一个正常使用的流程是怎样的，以及各种异常流程系统是如何给出响应的，把详述中很多叙述的部分变成一个具体的测试用例</li>
+</ul></li>
+<li><p>验收标准给出了这个需求最基本的测试用例，它保证了开发人员完成需求最基本的质量，其非常重要的一环是异常流程的描述</p></li>
+<li><p>BDD（Behavior-Driven Development，“行为驱动开发”）</p></li>
+<li><p>验收标准所给出实现细节应该是业务上的，程序员的发挥空间应该是在技术实现上</p></li>
+<li><p>虽然你名义上是程序员，但当拿到一个需求的时候，你要做的事不是立即动手写代码，而是扮演产品经理的角色，分析需求，圈定任务范围</p></li>
+<li><p>“最好维护的代码是没有写出来的代码”</p></li>
+</ul></li>
+<li><p><strong>持续集成：集成本身就是写代码的一个环节</strong></p>
+<ul>
+<li>当我们在一个团队中工作的时候，把不同人的代码放在一起，使之成为一个可工作软件的过程就是集成</li>
+<li>持续集成（Continuous Integration）一个关键的思维破局是，将原来分成两个阶段的开发与集成合二为一了，也就是一边开发一边集成</li>
+<li>每日构建作为早期的一种“最佳实践”被提了出来，当人们进一步“调小”参数后，诞生了一个更极致的实践：持续集成，也就是每次提交代码都进行集成</li>
+<li>一个好的做法是尽早把代码和已有代码集成到一起，而不应该等着所有代码都开发完了，再去做提交</li>
+</ul></li>
+<li><p><strong>精益创业：产品经理不靠谱，你该怎么办</strong></p>
+<ul>
+<li>我们必须要有自己的独立思考，多问几个为什么，尽可能减少掉到“坑”里之后再求救的次数</li>
+<li>软件开发的主流由面向确定性问题，逐渐变成了面向不确定性问题</li>
+<li>一旦一个问题变成通用问题，就有人尝试总结各种最佳实践，一旦最佳实践积累多了，就会形成一套新的方法论</li>
+<li>最早成型的面向不确定性创造新事物的方法论是精益创业（Lean Startup）</li>
+<li>精益创业是在尽可能少浪费的前提下，面向不确定性创造新事物，既然是不确定的，那你唯一能做的事情就是“试”</li>
+<li><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240719203914.png" style="display: block; margin-left: 0px; margin-right: auto; zoom: 25%;" alt="反馈循环" /></li>
+<li>最小可行产品 MVP（Minimum Viable Product）是精益创业提出的一个非常重要的概念（少花钱，多办事）</li>
+<li>“把软件完整地做出来是最大的浪费”</li>
+<li>默认所有需求都不做，直到弄清楚为什么要做这件事</li>
+</ul></li>
+<li><p><strong>解决了很多技术问题，为什么你依然在“坑”里</strong></p>
 <ul>
 <li></li>
-</ul></li>
 </ul></li>
 </ul>
 <h2 id="任务分解">任务分解</h2>

@@ -31,7 +31,7 @@
 <meta property="og:description" content="刷题记录和总结">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-13T12:33:19.945Z">
+<meta property="article:modified_time" content="2024-07-19T14:03:54.535Z">
 <meta property="article:author" content="hcjjj">
 <meta name="twitter:card" content="summary">
   
@@ -115,7 +115,6 @@
 <li><strong><a target="_blank" rel="noopener" href="https://programmercarl.com/">代码随想录</a></strong></li>
 <li><strong><a target="_blank" rel="noopener" href="https://www.hello-algo.com/">Hello 算法</a></strong></li>
 </ul>
-<p>刷题顺序：1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣1️⃣0️⃣</p>
 <h2 id="数组">数组</h2>
 <table>
 <thead>
@@ -353,60 +352,95 @@
 <tbody>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-preorder-traversal/">144. 二叉树的前序遍历</a>，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94. 中</a>，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-postorder-traversal/">145. 后</a></td>
-<td>递归（go 只有值传递没有引用传递，用函数式编程比较方便）</td>
-<td>递归法、迭代法</td>
+<td>递归（注意 slice 是一个值类型）</td>
+<td>1️⃣1️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-level-order-traversal/">102. 二叉树的层序遍历</a></td>
-<td>使用 []*TreeNode 保存每一层节点</td>
-<td>递归法、迭代法</td>
+<td>使用 <code>[]*TreeNode</code> 保存每一层节点</td>
+<td>1️⃣1️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/">226. 翻转二叉树</a></td>
-<td>每个节点的左右都翻转一下即整棵树翻转</td>
-<td></td>
+<td>每个节点的左右都交换一下即整棵树翻转（中序遍历不行）</td>
+<td>1️⃣2️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/symmetric-tree/">101. 对称二叉树</a></td>
-<td>dfs(left.Left, right.Right) &amp;&amp; dfs(left.Right, right.Left)</td>
-<td></td>
+<td>只能后序遍历</td>
+<td>1️⃣2️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. 二叉树的最大深度</a></td>
-<td>return max(maxDepth(root.Left), maxDepth(root.Right)) + 1</td>
-<td></td>
+<td>根节点的高度就是二叉树的最大深度</td>
+<td>1️⃣2️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">111. 二叉树的最小深度</a></td>
-<td>一边为 nil 一边不为 nil，得 + 1 后往不为 nil 的一边走</td>
-<td></td>
+<td>最小深度是从根节点到最近叶子节点的最短路径上的节点数量</td>
+<td>1️⃣2️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/balanced-binary-tree/">110.平衡二叉树</a></td>
 <td>计算以每个节点为根节点的二叉树的高度</td>
-<td></td>
+<td>1️⃣3️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-paths/">257. 二叉树的所有路径</a></td>
-<td>前序遍历 + 判断叶子节点收集结果</td>
-<td></td>
+<td>前序遍历，字符串的值传递隐含了回溯</td>
+<td>1️⃣3️⃣</td>
 </tr>
 <tr class="odd">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/description/">700.二叉搜索树中的搜索</a></td>
-<td>利用二叉搜索树的性质简化搜索流程</td>
-<td></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-left-leaves/">404. 左叶子之和</a></td>
+<td>通过节点的父节点来判断其左孩子是不是左叶子</td>
+<td>1️⃣3️⃣</td>
 </tr>
 <tr class="even">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">98.验证二叉搜索树</a></td>
-<td>中序遍历是有序的，一边遍历一边比较</td>
-<td></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-complete-tree-nodes/">222. 完全二叉树的节点个数</a></td>
+<td>可以利用完全二叉树的特性，公式求解</td>
+<td>1️⃣4️⃣</td>
 </tr>
 <tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">513. 找树左下角的值</a></td>
+<td>递归：深度最大的叶子节点是最后一行；迭代：模板</td>
+<td>1️⃣4️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum/">112. 路径总和</a></td>
+<td></td>
+<td>1️⃣4️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">106. 从中序与后序遍历序列构造二叉树</a></td>
+<td></td>
+<td>1️⃣4️⃣</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>1️⃣5️⃣</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>1️⃣5️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/description/">700.二叉搜索树中的搜索</a></td>
+<td>利用二叉搜索树的性质简化搜索流程</td>
+<td>1️⃣5️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">98.验证二叉搜索树</a></td>
+<td>中序遍历是有序的，一边遍历一边比较</td>
+<td>1️⃣5️⃣</td>
+</tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/insert-into-a-binary-search-tree/description/">701.二叉搜索树中的插入操作</a></td>
 <td>找到符合位置的空节点插入即可（如果不考虑重构</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-node-in-a-bst/">450.删除二叉搜索树中的节点</a></td>
 <td>特别考虑待删除节点左右非空的情况</td>
 <td></td>
@@ -945,6 +979,14 @@
 <p><strong>输入：</strong> 多个测试用例，每个测试用例一行。每行通过 <code>,</code> 隔开，有 n 个字符串，n＜100 <strong>输出：</strong> 对于每组用例输出一行排序后的字符串，用 <code>,</code> 隔开，无结尾空格</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 和上面那个一样的</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    sc := bufio.NewScanner(os.Stdin)</span><br><span class="line">    <span class="keyword">for</span> sc.Scan()&#123;</span><br><span class="line">        strs := strings.Split(sc.Text(),<span class="string">&quot;,&quot;</span>)</span><br><span class="line">        sort.Strings(strs)</span><br><span class="line">        fmt.Println(strings.Join(strs, <span class="string">&quot;,&quot;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="武器库">武器库</h2>
+<p><strong>标准库容器</strong></p>
+<ul>
+<li>slice（切片）</li>
+<li>map（散列表）</li>
+<li>list（双向链表）</li>
+<li>heap（堆）</li>
+<li>ring（环）</li>
+</ul>
 <p><strong>排序函数</strong></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;sort&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// in ascending order.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sortExample</span><span class="params">(exampleSlice []<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    sort.Slice(exampleSlice, <span class="function"><span class="keyword">func</span><span class="params">(i, j <span class="type">int</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> exampleSlice[i] &lt; exampleSlice[j]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sortExample</span><span class="params">(exampleSlice []<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    sort.Ints(exampleSlice)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>反转切片</strong></p>
