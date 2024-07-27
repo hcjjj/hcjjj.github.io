@@ -31,7 +31,7 @@
 <meta property="og:description" content="刷题记录和总结">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-22T03:05:15.541Z">
+<meta property="article:modified_time" content="2024-07-27T08:17:42.408Z">
 <meta property="article:author" content="hcjjj">
 <meta name="twitter:card" content="summary">
   
@@ -417,27 +417,27 @@
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">106. 从中序与后序遍历序列构造二叉树</a></td>
-<td></td>
+<td>用散列表记录元素再前序中的索引，切割数组的，[l, r]</td>
 <td>1️⃣4️⃣</td>
 </tr>
 <tr class="odd">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-binary-trees/">617. 合并二叉树</a></td>
-<td></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-binary-tree/">654. 最大二叉树</a></td>
+<td>前序遍历递归构建</td>
 <td>1️⃣5️⃣</td>
 </tr>
 <tr class="even">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-binary-tree/">654. 最大二叉树</a></td>
-<td></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-binary-trees/">617. 合并二叉树</a></td>
+<td>同时遍历两棵树，递归的优雅表现</td>
 <td>1️⃣5️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/description/">700.二叉搜索树中的搜索</a></td>
-<td></td>
+<td>利用二叉搜索树的性质</td>
 <td>1️⃣5️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">98.验证二叉搜索树</a></td>
-<td></td>
+<td>注意，不能陷入只判断局部</td>
 <td>1️⃣5️⃣</td>
 </tr>
 <tr class="odd">
@@ -462,13 +462,28 @@
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/insert-into-a-binary-search-tree/description/">701.二叉搜索树中的插入操作</a></td>
-<td>找到符合位置的空节点插入即可（如果不考虑重构</td>
+<td></td>
 <td>1️⃣7️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-node-in-a-bst/">450.删除二叉搜索树中的节点</a></td>
-<td>特别考虑待删除节点左右非空的情况</td>
+<td></td>
 <td>1️⃣7️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trim-a-binary-search-tree/">669. 修剪二叉搜索树</a></td>
+<td></td>
+<td>1️⃣8️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">108. 将有序数组转换为二叉搜索树</a></td>
+<td></td>
+<td>1️⃣8️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-bst-to-greater-tree/">538. 把二叉搜索树转换为累加树</a></td>
+<td></td>
+<td>1️⃣8️⃣</td>
 </tr>
 </tbody>
 </table>
@@ -485,42 +500,77 @@
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combinations/description/">77. 组合</a></td>
 <td>注意切片里面是指针不能直接放，要 copy 一下</td>
-<td></td>
+<td>1️⃣9️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/description/">216.组合总和III</a></td>
-<td>比上一题多了一个判断的条件</td>
-<td></td>
+<td>比上一题多了一个判断的条件，注意剪枝</td>
+<td>1️⃣9️⃣</td>
 </tr>
 <tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">17. 电话号码的字母组合</a></td>
+<td>构建映射，不同集合，所以 i 都是从 0 开始</td>
+<td>1️⃣9️⃣</td>
+</tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/">39. 组合总和</a></td>
-<td>排序剪枝</td>
-<td></td>
+<td>可重复选取，不用控制遍历的起始位置+1；排序剪枝</td>
+<td>2️⃣0️⃣</td>
 </tr>
-<tr class="even">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-ii/">40.组合总和II</a></td>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-ii/">40. 组合总和II</a></td>
 <td>如何在回溯中对同一层的元素去重，而不对同一枝去重</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/description/">78.子集</a></td>
-<td>收集所有节点，无需剪枝</td>
-<td></td>
+<td>2️⃣0️⃣</td>
 </tr>
 <tr class="even">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets-ii/description/">90.子集II</a></td>
-<td>排序、同层去重、同枝不去</td>
-<td></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/">131. 分割回文串</a></td>
+<td>切割线，切割问题抽象为组合问题</td>
+<td>2️⃣0️⃣</td>
 </tr>
 <tr class="odd">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/">46.全排列</a></td>
-<td>排列是有序的，需要标记使用过的元素</td>
-<td></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">93. 复原 IP 地址</a></td>
+<td>也是切割问题，终止条件判断不一样</td>
+<td>2️⃣1️⃣</td>
 </tr>
 <tr class="even">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations-ii/">47.全排列 II</a></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/description/">78. 子集</a></td>
+<td>集合无重复元素，收集所有节点，无需剪枝</td>
+<td>2️⃣1️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets-ii/description/">90. 子集II</a></td>
+<td>集合有重复元素，排序、同层去重、同枝不去</td>
+<td>2️⃣1️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-decreasing-subsequences/">491. 非递减子序列</a></td>
+<td>不能排序，对同层元素去重</td>
+<td>2️⃣2️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/">46. 全排列</a></td>
+<td>不需要 startIndex，需要标记一个排列里使用过的元素</td>
+<td>2️⃣2️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations-ii/">47. 全排列 II</a></td>
 <td>排序、同层去重、同枝不去</td>
+<td>2️⃣2️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reconstruct-itinerary/">332. 重新安排行程</a></td>
 <td></td>
+<td>🤡</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-queens/">51. N 皇后</a></td>
+<td></td>
+<td>🤡</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sudoku-solver/">37. 解数独</a></td>
+<td></td>
+<td>🤡</td>
 </tr>
 </tbody>
 </table>
