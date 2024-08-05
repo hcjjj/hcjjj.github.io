@@ -32,8 +32,14 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240719203914.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/202407241305222.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240801193606.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240801193732.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240802201635.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240803102105.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240803102132.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240804104237.png">
 <meta property="article:published_time" content="2024-07-11T13:27:55.000Z">
-<meta property="article:modified_time" content="2024-07-27T09:50:49.840Z">
+<meta property="article:modified_time" content="2024-08-04T02:58:57.252Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="programmer">
 <meta name="twitter:card" content="summary">
@@ -300,10 +306,119 @@
 </ul></li>
 <li><strong>测试也是程序员的事吗</strong>
 <ul>
-<li></li>
+<li>尽可能早地发现问题，修正问题，这样所消耗的成本才是最低的</li>
+<li>“以终为始”，就是在强调尽早发现问题，能从需求上解决的问题，就不要到开发阶段，在开发阶段能解决的问题，就不要留到测试阶段</li>
+<li>测试框架把自动化测试作为一种最佳实践引入到开发过程中，使得测试动作可以通过标准化的手段固定下来
+<ul>
+<li>单元测试框架只是一个自动化测试的工具而已，并不是用来定义测试类型</li>
+</ul></li>
+<li>关注最小程序模块的<strong>单元测试</strong>、将多个模块组合在一起的<strong>集成测试</strong>、将整个系统组合在一起的<strong>系统测试</strong></li>
+<li>根据不同测试的配比，也就有了不同的测试模型
+<ul>
+<li>冰淇淋蛋卷测试模型的人并不多，它是一种费时费力的模型，要准备高层测试实在是太麻烦了</li>
+<li><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240801193606.png" style="display: block; margin-left: 0px; margin-right: auto; zoom: 35%;" alt="冰淇淋蛋卷测试模型" /></li>
+<li>行业里的最佳实践：测试金字塔（越在底层测试，成本越低，执行越快；越在高层测试，成本越高，执行越慢）</li>
+<li><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240801193732.png" style="display: block; margin-left: 0px; margin-right: auto; zoom: 35%;" alt="测试金字塔" /></li>
+<li>虽然冰淇淋蛋卷更符合直觉，但测试金字塔才是行业的最佳实践</li>
+</ul></li>
+<li>在本地运行单元测试和集成测试，在持续集成服务器上运行系统测试</li>
+</ul></li>
+<li><strong>先写测试，就是测试驱动开发吗</strong>
+<ul>
+<li>先写测试，后写代码的实践指的是测试先行开发（Test First Development），而非测试驱动开发（Test Driven Development）</li>
+<li>二者的差别在于，TDD 还有一个更重要的环节：重构（refactoring），不能忽略了新增代码可能带来的“坏味道（Code Smell）
+<ul>
+<li><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240802201635.png" style="display: block; margin-left: 0px; margin-right: auto; zoom: 35%;" alt="TDD的节奏：“红-绿-重构”" /></li>
+<li>重构与测试是相辅相成的：没有测试，你只能是提心吊胆地重构；没有重构，代码的混乱程度是逐步增加的，测试也会变得越来越不好写</li>
+</ul></li>
+<li>先测试后写代码的方式，会让你看待代码的角度完全改变，甚至要调整你的设计，才能够更好地去测试（写代码前，先想怎么测）</li>
+<li>懂 TDD 的人会把 TDD 解释为测试驱动设计（Test Driven Design）</li>
+</ul></li>
+<li><strong>大师级程序员的工作秘笈</strong>
+<ul>
+<li>极限编程对于行业最大的贡献在于，它引入了大量的实践，比如持续集成、TDD、结对编程、现场客户等等</li>
+<li>极限编程之所以叫“极限”，它背后的理念就是把好的实践推向极限
+<ul>
+<li>如果集成是好的，我们就尽早集成，推向极限每一次修改都集成，这就是持续集成</li>
+<li>如果开发者测试是好的，我们就尽早测试，推向极限就是先写测试，再根据测试调整代码，这就是测试驱动开发</li>
+<li>如果代码评审是好的，我们就多做评审，推向极限就是随时随地地代码评审，这就是结对编程</li>
+<li>如果客户交流是好的，我们就和客户多交流，推向极限就是客户与开发团队时时刻刻在一起，这就是现场客户</li>
+</ul></li>
+<li>能把任务分解到很小，其实是证明你已经想清楚了；而大多数程序员之所以开发效率低，很多时候是没想清楚就动手了</li>
+<li>TDD 实践起来却不知道如何下手，中间就是缺了任务分解的环节（或是任务分解的粒度不够“小”）</li>
+</ul></li>
+<li><strong>一起练习分解任务</strong>
+<ul>
+<li>按照一个需求、一个需求的过程走，这样，任务是可以随时停下来的</li>
+<li>需求：<u>用户通过输入用户名和密码登录</u>，按照完整实现一个需求的顺序去安排分解出来的任务
+<ul>
+<li>分解前：</li>
+<li><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240803102105.png" style="display: block; margin-left: 0px; margin-right: auto; zoom: 25%;" /></li>
+<li>分解后：</li>
+<li><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240803102132.png" style="display: block; margin-left: 0px; margin-right: auto; zoom: 25%;" /></li>
+</ul></li>
+<li>检验每个任务项是否拆分到位，就是看你是否知道它应该怎么做了</li>
+<li>所有分解出来的任务，都是独立的，每做完一个任务，代码都是可以提交的（小步提交）</li>
+</ul></li>
+<li><strong>为什么你的测试不够好</strong>
+<ul>
+<li>测试的作用是保证代码的正确性，如何保证测试的正确性？把测试写简单，简单到一目了然，不需要证明它的正确性</li>
+<li>一般测试要具备的四段：前置准备、执行、<strong>断言（预期判断）</strong>和清理；没有断言的测试，是没有意义的</li>
+<li>测试不好写，往往是设计的问题，应该调整的是设计，而不是在测试这里做妥协</li>
+<li>当测试代码里出现各种判断和循环语句，基本上这个测试就有问题了，应该多写几个测试，每个测试覆盖一种场景</li>
+<li>怎么样的测试算是好的测试呢？一段旅程（A-TRIP）
+<ul>
+<li>Automatic，自动化 - 测试一定要有断言</li>
+<li>Thorough，全面的 - 测试覆盖率工具</li>
+<li>Repeatable，可重复的 - 不应依赖任何不在控制之下的环境</li>
+<li>Independent，独立的 - 试和测试之间不应该有任何依赖</li>
+<li>Professional，专业的 - 测试代码，也是代码</li>
+</ul></li>
+</ul></li>
+<li><strong>程序员也可以“砍”需求吗</strong>
+<ul>
+<li>“主题”只是帮你记住大方向，需要进一步分解；“用户故事”是需求管理的基本单位</li>
+<li>评价用户故事有一个 “INVEST 原则”，这是六个单词的缩写，分别是：
+<ul>
+<li>Independent，独立的。一个用户故事应该完成一个独立的功能，尽可能不依赖于其它用户故事，因为彼此依赖的用户故事会让管理优先级、预估工作量都变得更加困难。如果真的有依赖，一种好的做法是，将依赖部分拆出来，重新调整。</li>
+<li>Negotiable，可协商的。有事大家商量是一起工作的前提，我们无法保证所有的细节都能100%落实到用户故事里，这个时候最好的办法是大家商量。它也是满足其它评判标准的前提，就像前面提到的，一个用户故事不独立，需要分解，这也需要大家一起商量的。</li>
+<li>Valuable，有价值的。一个用户故事都应该有其自身价值，这一项应该最容易理解，没有价值的事不做。但正如我们一直在说的那样，做任何一个事情之前，先问问价值所在。</li>
+<li>Estimatable，可估算的。我们会利用用户故事估算的结果安排后续的工作计划。不能估算的用户故事，要么是因为有很多不确定的因素，要么是因为需求还是太大，这样的故事还没有到一个能开发的状态，还需要产品经理进一步分析。</li>
+<li>Small，小。步子大了，不行。不能在一定时间内完成的用户故事只应该有一个结果，拆分。小的用户故事才方便调度，才好安排工作。</li>
+<li>Testable，可测试的。不能测试谁知道你做得对不对。这个是我们在前面已经强调过的内容，也就是验收标准，你得知道怎样才算是工作完成。</li>
+</ul></li>
+<li>度量用户故事大小的方式有很多种，有人用 T 恤大小的方式，也就是S、M、L、XL、XXL。也有人用费波纳契数列，也就是1、2、3、5、8等等</li>
+<li>任务分解是基础中的基础，不学会分解，工作就只能依赖于感觉，很难成为一个靠谱的程序员（估算的结果是相对的，不是绝对精确的）</li>
+<li>这时候再说需求调整，调整的就不再是一个大主题，而是一个个具体的用户故事了</li>
+</ul></li>
+<li><strong>需求管理：太多人给你安排任务，怎么办</strong>
+<ul>
+<li>如果不了解需求是怎么管理的，即便是进行了需求分解，最终的结果很有可能依然是深陷泥潭</li>
+<li>一个有效的时间管理策略是艾森豪威尔矩阵（Eisenhower Matrix）
+<ul>
+<li><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240804104237.png" style="display: block; margin-left: 0px; margin-right: auto; zoom: 55%;" /></li>
+</ul></li>
+<li>如果不把精力放在重要的事情上，到最后可能都变成紧急的事情</li>
+<li>当有多个需求来源时，如何确认哪个需求是最重要的呢？当员工想不明白的事，换成老板的视角就全明白了</li>
+<li>很多所谓的人生难题不过是因为见识有限造成的。比如，如果你觉得公司内总有人跟你比技术，莫不如把眼光放得长远一些，把自己放在全行业的水平上去比较，因为你是为自己的职业生涯在工作，而不是一个公司</li>
+</ul></li>
+<li><strong>如何用最小的代价做产品</strong>
+<ul>
+<li>精益创业就是通过不断地尝试在真实世界中验证产品想法，其中一个重要的实践是最小可行产品（Minimum Viable Product，MVP）
+<ul>
+<li>“最小”：能不做的事情就不做，能简化的事情就简化</li>
+<li>“可行”：找到一条路径，给用户一个完整的体验</li>
+</ul></li>
+<li>当时间有限时，需要学会找到一条可行的路径，在完整用户体验和完整系统之间，找到一个平衡（”刚刚好”满足客户需求）</li>
 </ul></li>
 </ul>
 <h2 id="沟通反馈">沟通反馈</h2>
+<ul>
+<li><strong>为什么世界和你的理解不一样</strong>
+<ul>
+<li></li>
+</ul></li>
+</ul>
 <h2 id="自动化">自动化</h2>
 <h2 id="综合运用">综合运用</h2>
 

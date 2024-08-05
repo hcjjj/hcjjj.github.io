@@ -31,7 +31,7 @@
 <meta property="og:description" content="刷题记录和总结">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-27T08:17:42.408Z">
+<meta property="article:modified_time" content="2024-08-03T04:00:59.311Z">
 <meta property="article:author" content="hcjjj">
 <meta name="twitter:card" content="summary">
   
@@ -585,33 +585,98 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/">455.分发饼干</a></td>
-<td>两者都排序后，大饼干喂给胃口大的</td>
-<td></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/">455. 分发饼干</a></td>
+<td>两者都排序后，胃口主动遍历，饼干的被动</td>
+<td>2️⃣3️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wiggle-subsequence/">376. 摆动序列</a></td>
 <td>“删除”单调坡度上的中间节点（统计峰值节点）</td>
+<td>2️⃣3️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></td>
+<td>当前“连续和”为负数的时候立刻放弃</td>
+<td>2️⃣3️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">122. 买卖股票的最佳时机 II</a></td>
+<td>只收集相邻的每个正利润</td>
+<td>2️⃣4️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game/">55. 跳跃游戏</a></td>
+<td>判断跳跃覆盖范围能不能覆盖到终点</td>
+<td>2️⃣4️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game-ii/">45. 跳跃游戏 II</a></td>
+<td>每超过上一次可达最大范围，需要跳跃次数 +1 后扩大范围</td>
+<td>2️⃣4️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/">1005. K 次取反后最大化的数组和</a></td>
+<td>按绝对值进行排序</td>
+<td>2️⃣4️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/gas-station/">134. 加油站</a></td>
 <td></td>
+<td>2️⃣5️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/candy/">135. 分发糖果</a></td>
-<td>need 数组遍历两遍，left &gt; right (倒序) right &gt; left (正序)</td>
 <td></td>
+<td>2️⃣5️⃣</td>
 </tr>
 <tr class="even">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lemonade-change/">860.柠檬水找零</a></td>
-<td>模拟的思路暗含了贪心</td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lemonade-change/">860. 柠檬水找零</a></td>
 <td></td>
+<td>2️⃣5️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/queue-reconstruction-by-height/">406. 根据身高重建队列</a></td>
+<td></td>
+<td>2️⃣5️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">452. 用最少数量的箭引爆气球</a></td>
+<td>出现重叠的气球只需要一个箭；排序后，判断重叠区间，统计箭数</td>
+<td>2️⃣6️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-overlapping-intervals/">435. 无重叠区间</a></td>
+<td>按右界排序，用总数减去非重叠区间的个数；修改范围模拟移除</td>
+<td>2️⃣6️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-labels/">763. 划分字母区间</a></td>
+<td>字符最远出现位置下标和当前下标相等时即为分割点</td>
+<td>2️⃣6️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals/">56. 合并区间</a></td>
+<td>排序、遍历、比较（拿结果集的最后一个元素）、合并</td>
+<td>2️⃣7️⃣</td>
+</tr>
+<tr class="even">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/monotone-increasing-digits/">738. 单调递增的数字</a></td>
+<td>后往前遍历，-1 时触发 置 9</td>
+<td>2️⃣7️⃣</td>
+</tr>
+<tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-cameras/">968. 监控二叉树</a></td>
+<td></td>
+<td>🤡</td>
 </tr>
 </tbody>
 </table>
 <h2 id="动态规划">动态规划</h2>
 <table>
 <colgroup>
-<col style="width: 47%" />
-<col style="width: 47%" />
-<col style="width: 4%" />
+<col style="width: 48%" />
+<col style="width: 48%" />
+<col style="width: 3%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -624,17 +689,17 @@
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/">509. 斐波那契数</a></td>
 <td></td>
-<td><span class="math inline">\(O(n)\)</span></td>
+<td>2️⃣8️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/">70. 爬楼梯</a></td>
 <td>上一题套了一个壳</td>
-<td><span class="math inline">\(O(n)\)</span></td>
+<td>2️⃣8️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">746. 使用最小花费爬楼梯</a></td>
-<td>到达第 i 台阶所花费的最少体力为 dp[i]</td>
-<td><span class="math inline">\(O(n)\)</span></td>
+<td>到达第 <code>i</code> 台阶所花费的最少体力为 <code>dp[i]</code></td>
+<td>2️⃣8️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/">62.不同路径</a></td>
