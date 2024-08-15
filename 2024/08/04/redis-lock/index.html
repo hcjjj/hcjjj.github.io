@@ -31,15 +31,15 @@
 <meta property="og:description" content="基于 Redis 的分布式定时任务">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-04T08:27:55.000Z">
-<meta property="article:modified_time" content="2024-08-07T02:02:56.333Z">
+<meta property="article:modified_time" content="2024-08-14T06:52:05.944Z">
 <meta property="article:author" content="hcjjj">
-<meta property="article:tag" content="Redis">
 <meta property="article:tag" content="Golang">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
   
   
   
-  <meta name="keywords" content="Redis,Golang">
+  <meta name="keywords" content="Golang,Redis">
 
   <!-- feed -->
   
@@ -124,23 +124,18 @@
 <p><strong>sync.Mutex</strong></p>
 <h2 id="分布式锁">分布式锁</h2>
 <p>分布式锁是一种确保分布式系统互斥的机制。换句话说，即使系统跨越多台机器或多个节点，它也能保证在任何时候只有一个进程或节点可以持有锁。在多个进程可能需要访问共享资源或执行关键操作的分布式环境中，这对于协调行动和确保一致性至关重要。</p>
-<p><strong>分布式锁的 6 大使用案例</strong></p>
-<ol type="1">
-<li><p>领导者选举</p>
-<p>在分布式系统中，经常需要选举一个领导节点来协调行动或管理资源。分布式锁可用于确保在任何给定时间内只有一个节点成为领导者。</p></li>
-<li><p>任务调度</p>
-<p>在分布式任务调度器中，分布式锁可确保计划任务只由一个工作节点执行，防止重复执行。</p></li>
-<li><p>资源分配</p>
-<p>在管理共享资源（如文件系统、网络套接字或硬件设备）时，分布式锁可确保每次只有一个进程能访问资源，从而防止冲突并确保妥善的资源管理。</p></li>
-<li><p>微服务协调</p>
-<p>当多个微服务需要执行协调操作（如更新不同数据库中的相关数据）时，分布式锁可确保这些操作以受控和有序的方式执行。</p></li>
-<li><p>库存管理</p>
-<p>在电子商务平台中，分布式锁可以管理库存更新，确保在多个用户同时尝试购买同一商品时，库存水平得到准确维护。</p></li>
-<li><p>会话管理</p>
-<p>在分布式环境中处理用户会话时，分布式锁可确保用户会话一次只被一台服务器修改，防止出现不一致的情况。</p></li>
-</ol>
-<p><strong>实现分布式锁</strong></p>
-<p>分布式锁可以使用各种工具和框架来实现，例如：</p>
+<p>简单来说，分布式锁就是在分布式环境下不同实例之间抢一把锁，和普通的锁比起来，也就是抢锁的从线程（协程）变成了实例，分布式锁之所以难，基本上都和网络有关。</p>
+<p><strong>分布式锁使用案例</strong></p>
+<ul>
+<li>领导者选举：在分布式系统中，经常需要选举一个领导节点来协调行动或管理资源。分布式锁可用于确保在任何给定时间内只有一个节点成为领导者。</li>
+<li>任务调度：在分布式任务调度器中，分布式锁可确保计划任务只由一个工作节点执行，防止重复执行。</li>
+<li>资源分配：在管理共享资源（如文件系统、网络套接字或硬件设备）时，分布式锁可确保每次只有一个进程能访问资源，从而防止冲突并确保妥善的资源管理。</li>
+<li>微服务协调：当多个微服务需要执行协调操作（如更新不同数据库中的相关数据）时，分布式锁可确保这些操作以受控和有序的方式执行。</li>
+<li>库存管理：在电子商务平台中，分布式锁可以管理库存更新，确保在多个用户同时尝试购买同一商品时，库存水平得到准确维护。</li>
+<li>会话管理：在分布式环境中处理用户会话时，分布式锁可确保用户会话一次只被一台服务器修改，防止出现不一致的情况。</li>
+</ul>
+<p><strong>分布式锁的实现</strong></p>
+<p>分布式锁可以使用各种工具和框架来实现，如：</p>
 <ul>
 <li>ZooKeeper：Apache 项目，提供分布式同步原语（primitives），包括锁。</li>
 <li>Redis：通过 Redlock 算法支持分布式锁。</li>
@@ -148,6 +143,7 @@
 <li>Etcd：一种提供锁定机制的分布式键值存储。</li>
 </ul>
 <h2 id="基于-reids-实现">基于 Reids 实现</h2>
+<p>本质上 Redis 的分布式锁就是一个键值对，实现一个分布式锁的起点，就是利用 setnx 命令，确保可以排他地设置一个键值对。</p>
 <h3 id="加锁">加锁</h3>
 <h3 id="解锁">解锁</h3>
 <h3 id="续约">续约</h3>
@@ -161,7 +157,7 @@
 
 </article>
 
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/08/04/ingress/">基于 Nginx 的异构后端服务统一认证鉴权</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/07/24/cache/">确保数据一致性：缓存与数据库同步策略</a></div></section></div>
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/08/04/ingress/">基于 Nginx 的异构后端服务统一认证鉴权</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/07/22/payment_vip/">Go 对接第三方支付平台 - 以会员业务为例</a></div></section></div>
 
 
 
