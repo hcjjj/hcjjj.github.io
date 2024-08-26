@@ -30,11 +30,13 @@
 <meta property="og:site_name" content="H-sediment">
 <meta property="og:description" content="梳理 Redis 知识体系">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/redis-1.png">
 <meta property="article:published_time" content="2024-08-21T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-25T14:09:04.101Z">
+<meta property="article:modified_time" content="2024-08-26T09:44:57.953Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/redis-1.png">
   
   
   
@@ -89,7 +91,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Redis 核心原理与实践 🛢</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rdb"><span class="toc-text">RDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aof"><span class="toc-text">AOF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88"><span class="toc-text">混合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%9B%9E%E6%BB%9A"><span class="toc-text">错误&amp;回滚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7"><span class="toc-text">监控</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%9C%9F"><span class="toc-text">过期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%9C%9F%E8%AE%BE%E7%BD%AE"><span class="toc-text">过期设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5"><span class="toc-text">过期策略</span></a></li></ol></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Redis 核心原理与实践 🛢</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rdb"><span class="toc-text">RDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aof"><span class="toc-text">AOF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88"><span class="toc-text">混合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%9B%9E%E6%BB%9A"><span class="toc-text">错误&amp;回滚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7"><span class="toc-text">监控</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pipeline"><span class="toc-text">Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5"><span class="toc-text">过期策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0"><span class="toc-text">内存淘汰</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E5%88%86%E7%B1%BB"><span class="toc-text">策略分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E4%BF%AE%E6%94%B9"><span class="toc-text">策略修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%98%E6%B1%B0%E7%AE%97%E6%B3%95"><span class="toc-text">淘汰算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-text">消息队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">发布订阅模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#list-%E5%92%8C-zset-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">List 和 ZSet 的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E6%9E%81%E6%96%B9%E6%A1%88---stream"><span class="toc-text">终极方案 - Stream</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-text">分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></div></div></widget>
 
 
 
@@ -145,7 +147,7 @@
 <h1 class="article-title"><span>Redis 核心原理与实践 🛢</span></h1>
 <p>梳理 Redis 知识体系</p>
 <span id="more"></span>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   ▄████████    ▄████████ ████████▄   ▄█     ▄████████ </span><br><span class="line">  ███    ███   ███    ███ ███   ▀███ ███    ███    ███ </span><br><span class="line">  ███    ███   ███    █▀  ███    ███ ███▌   ███    █▀  </span><br><span class="line"> ▄███▄▄▄▄██▀  ▄███▄▄▄     ███    ███ ███▌   ███        </span><br><span class="line">▀▀███▀▀▀▀▀   ▀▀███▀▀▀     ███    ███ ███▌ ▀███████████ </span><br><span class="line">▀███████████   ███    █▄  ███    ███ ███           ███ </span><br><span class="line">  ███    ███   ███    ███ ███   ▄███ ███     ▄█    ███ </span><br><span class="line">  ███    ███   ██████████ ████████▀  █▀    ▄████████▀  </span><br><span class="line">  ███    ███                                           </span><br></pre></td></tr></table></figure>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/redis-1.png" style="zoom:50%;" /></p>
 <h2 id="持久化">持久化</h2>
 <p>Redis 持久化拥有以下三种方式：</p>
 <ul>
@@ -246,8 +248,25 @@ E --> |是| F(退出事务)
 E --> |否| G(执行并返回结果)</pre>
 <p><code>watch</code> 命令只能在客户端开启事务之前执行，在事务中执行 <code>watch</code> 命令会引发错误，但不会造成整个事务失败，即使在事务的执行过程中，k 值被修改了，因为调用了 <code>unwatch</code> 命令，整个事务依然会顺利执行。</p>
 <p>正常情况下 Redis 事务分为三个阶段：开启事务、命令入列、执行事务。Redis 事务并不支持运行时错误的事务回滚，但在某些入列错误，如 <code>set key</code> 或者是 <code>watch</code> 监控项被修改时，提供整个事务回滚的功能。</p>
-<h2 id="过期">过期</h2>
-<h3 id="过期设置">过期设置</h3>
+<h2 id="pipeline">Pipeline</h2>
+<p>管道技术（Pipeline）是客户端提供的一种批处理技术，用于一次处理多个 Redis 命令，从而提高整个交互的性能。</p>
+<pre class="mermaid">graph 
+    subgraph 普通命令模式
+    B -->|结果一| A
+    A[客户端] -->|命令一| B(服务器端)
+    end</pre>
+<pre class="mermaid">graph
+    subgraph 管道模式
+    B -->|结果一+结果二...| A
+    A[客户端] -->|命令一+命令二...| B(服务器端)
+    end</pre>
+<p>管道技术虽然有它的优势，但在使用时还需注意以下几个细节：</p>
+<ul>
+<li>发送的命令数量不会被限制，但输入缓存区也就是命令的最大存储体积为 1GB，当发送的命令超过此限制时，命令不会被执行，并且会被 Redis 服务器端断开此链接；</li>
+<li>如果管道的数据过多可能会导致客户端的等待时间过长，导致网络阻塞；</li>
+<li>部分客户端自己本身也有缓存区大小的设置，如果管道命令没有没执行或者是执行不完整，可以排查此情况或减少管道内的命令重新尝试执行。</li>
+</ul>
+<h2 id="过期策略">过期策略</h2>
 <p>Redis 中设置过期时间主要通过以下四种方式：</p>
 <ul>
 <li>expire key seconds：设置 key 在 n 秒后过期；</li>
@@ -266,7 +285,6 @@ E --> |否| G(执行并返回结果)</pre>
 <ul>
 <li>使用命令： <code>persist key</code> 可以移除键值的过期时间</li>
 </ul>
-<h3 id="过期策略">过期策略</h3>
 <p>Redis 中维护了一个字典，存储了所有设置了过期时间的键值（过期字典）</p>
 <pre class="mermaid">graph LR
     A(客户端) --请求--> C{在缓存字典中}
@@ -281,7 +299,127 @@ E --> |否| G(执行并返回结果)</pre>
 <li>惰性删除</li>
 <li>定期删除</li>
 </ul>
-<h1 id="参考资料">参考资料</h1>
+<p><strong>定时删除</strong></p>
+<p>在设置键值过期时间时，创建一个定时事件，当过期时间到达时，由事件处理器自动执行键的删除操作。</p>
+<ul>
+<li>优点：保证内存可以被尽快地释放。</li>
+<li>缺点：在 Redis 高负载的情况下或有大量过期键需要同时处理时，会造成 Redis 服务器卡顿，影响主业务执行。</li>
+</ul>
+<p><strong>惰性删除</strong></p>
+<p>不主动删除过期键，每次从数据库获取键值时判断是否过期，如果过期则删除键值，并返回 null。</p>
+<ul>
+<li>优点：因为每次访问时，才会判断过期键，所以此策略只会使用很少的系统资源。</li>
+<li>缺点：系统占用空间删除不及时，导致空间利用率降低，造成了一定的空间浪费。</li>
+</ul>
+<pre class="mermaid">graph LR
+    A[客户端] --请求--> B{检测是否过期}
+    B -- 是 --> C[删除键值并返回 null]
+    B -- 否 --> D[正常返回数据]</pre>
+<p><strong>定期删除</strong></p>
+<p>每隔一段时间检查一次数据库，随机删除一些过期键。Redis 默认每秒进行 10 次过期扫描，此配置可通过 Redis 的配置文件 <code>redis.conf</code> 进行配置，配置键为 hz 它的默认值是 <code>hz 10</code>。</p>
+<blockquote>
+<p>需要注意的是：Redis 每次扫描并不是遍历过期字典中的所有键，而是采用随机抽取判断并删除过期键的形式执行的。</p>
+</blockquote>
+<ul>
+<li><strong>优点：</strong>通过限制删除操作的时长和频率，来减少删除操作对 Redis 主业务的影响，同时也能删除一部分过期的数据减少了过期键对空间的无效占用。</li>
+<li><strong>缺点：</strong>内存清理方面没有定时删除效果好，同时没有惰性删除使用的系统资源少。</li>
+</ul>
+<pre class="mermaid">graph LR
+    A[开始扫描] --> B[从过期字典中获取20元素]
+    B --> C[删除过期键]
+    C --> D{判断过期键是否超过25%}
+    D -- 否 --> E[结束]
+    D -- 是 --> B</pre>
+<p>Redis 使用的是<strong>惰性删除</strong>加<strong>定期删除</strong>的过期策略。</p>
+<h2 id="内存淘汰">内存淘汰</h2>
+<ul>
+<li>Redis 过期策略指的是 Redis 使用哪种策略，来删除已经过期的键值对</li>
+<li>Redis 内存淘汰机制是指当 Redis 运行内存已经超过 Redis 设置的最大内存之后，采用什么策略来删除符合条件的键值对</li>
+</ul>
+<pre class="mermaid">graph LR
+    A[客户端] -->|发送命令| B{服务器端检查\n maxmemory 是否大于0}
+    B -- 是 --> D{检查运行内存\n是否大于 maxmemory}
+    D -- 是 --> E[执行淘汰策略]
+    B -- 否 --> F[结束]
+    D -- 否 --> F[结束]
+    E --> F</pre>
+<h3 id="策略分类">策略分类</h3>
+<p>早期版本的 Redis 有以下 6 种淘汰策略：</p>
+<ol type="1">
+<li><strong><code>noeviction</code></strong>：不淘汰任何数据，当内存不足时，新增操作会报错，<strong>Redis 默认内存淘汰策略</strong>；</li>
+<li><strong><code>allkeys-lru</code></strong>：淘汰整个键值中最久未使用的键值；</li>
+<li><strong><code>allkeys-random</code></strong>：随机淘汰任意键值；</li>
+<li><strong><code>volatile-lru</code></strong>：淘汰所有设置了过期时间的键值中最久未使用的键值；</li>
+<li><strong><code>volatile-random</code></strong>：随机淘汰设置了过期时间的任意键值；</li>
+<li><strong><code>volatile-ttl</code></strong>：优先淘汰更早过期的键值。</li>
+</ol>
+<p>在 Redis 4.0 版本中又新增了 2 种淘汰策略：</p>
+<ol type="1">
+<li><strong><code>volatile-lfu</code></strong>：淘汰所有设置了过期时间的键值中，最少使用的键值；</li>
+<li><strong><code>allkeys-lfu</code></strong>：淘汰整个键值中最少使用的键值。</li>
+</ol>
+<p>其中 <code>allkeys-xxx</code> 表示从所有的键值中淘汰数据，而 <code>volatile-xxx</code> 表示从设置了过期键的键值中淘汰数据。</p>
+<h3 id="策略修改">策略修改</h3>
+<p>设置内存淘汰策略有两种方法，这两种方法各有利弊，需要使用者自己去权衡。</p>
+<ul>
+<li>方式一：通过 <code>config set maxmemory-policy</code> 命令设置。它的优点是设置之后立即生效，不需要重启 Redis 服务，缺点是重启 Redis 之后，设置就会失效。</li>
+<li>方式二：通过修改 Redis 配置文件修改，设置 <code>maxmemory-policy</code> 策略，它的优点是重启 Redis 服务后配置不会丢失，缺点是必须重启 Redis 服务，设置才能生效。</li>
+</ul>
+<h3 id="淘汰算法">淘汰算法</h3>
+<p>从内存淘汰策略分类上，我们可以得知，除了随机删除和不删除之外，主要有两种淘汰算法：<strong>LRU 算法</strong>和 <strong>LFU 算法</strong>。 <strong>LRU 算法</strong> LRU 全称是 Least Recently Used 译为最近最少使用，是一种常用的页面置换算法，选择最近最久未使用的页面予以淘汰。 * LRU 算法需要基于链表结构，链表中的元素按照操作顺序从前往后排列，最新操作的键会被移动到表头，当需要内存淘汰时，只需要删除链表尾部的元素即可。 * <strong>Redis 使用的是一种近似 LRU 算法，目的是为了更好的节约内存</strong>，它的实现方式是给现有的数据结构添加一个额外的字段，用于记录此键值的最后一次访问时间，Redis 内存淘汰时，会使用随机采样的方式来淘汰数据，它是随机取 5 个值（此值可配置），然后淘汰最久没有使用的那个。 * LRU 算法有一个缺点，比如说很久没有使用的一个键值，如果最近被访问了一次，那么它就不会被淘汰，即使它是使用次数最少的缓存，那它也不会被淘汰，因此在 Redis 4.0 之后引入了 LFU 算法。</p>
+<p><strong>LFU 算法</strong> LFU 全称是 Least Frequently Used 翻译为最不常用的，最不常用的算法是根据总访问次数来淘汰数据的，它的核心思想是“<strong>如果数据过去被访问多次，那么将来被访问的频率也更高</strong>”。 * LFU 解决了偶尔被访问一次之后，数据就不会被淘汰的问题，相比于 LRU 算法也更合理一些。 * 在 Redis 中 LFU 存储分为两部分，16 bit 的 ldt（last decrement time）和 8 bit 的 logc（logistic counter）。 1. logc 是用来存储<strong>访问频次</strong>，8 bit 能表示的最大整数值为 255，它的值越小表示使用频率越低，越容易淘汰； 1. ldt 是用来存储上一次 logc 的<strong>更新时间</strong>。</p>
+<h2 id="消息队列">消息队列</h2>
+<h3 id="发布订阅模式">发布订阅模式</h3>
+<p>发布订阅模式的三个命令：</p>
+<ul>
+<li><code>subscribe channel</code> 普通订阅</li>
+<li><code>publish channel message</code> 消息推送</li>
+<li><code>psubscribe pattern</code> 主题订阅</li>
+</ul>
+<p>发布订阅模式存在以下两个缺点：</p>
+<ol type="1">
+<li>无法持久化保存消息，如果 Redis 服务器宕机或重启，那么所有的消息将会丢失；</li>
+<li>发布订阅模式是“发后既忘”的工作模式，如果有订阅者离线重连之后不能消费之前的历史消息。</li>
+</ol>
+<p>然而这些缺点在 Redis 5.0 添加了 Stream 类型之后会被彻底的解决。除了以上缺点外，发布订阅模式还有另一个需要注意问题：当消费端有一定的<strong>消息积压</strong>时，也就是<strong>生产者发送的消息，消费者消费不过来</strong>时，如果超过 32M 或者是 60s 内持续保持在 8M 以上，消费端会被强行断开，这个参数是在配置文件中设置的，默认值是 <code>client-output-buffer-limit pubsub 32mb 8mb 60</code>。</p>
+<h3 id="list-和-zset-的实现">List 和 ZSet 的实现</h3>
+<p><strong>List</strong> 方式是实现消息队列最简单和最直接的方式，它主要是通过 lpush 和 rpop 存入和读取实现消息队列</p>
+<pre class="mermaid">graph LR;A[生产者]-->|发送数据 lpush|C[List];E[消费者]-->|拉取数据 rpop|C;</pre>
+<p>当队列中如果没有数据的情况下，无限循环会一直消耗系统的资源，SDK 中可以使用 <code>brpop</code> 替代 <code>rpop</code> 来解决这个问题，b 是 blocking 的缩写，表示阻塞读，也就是当队列没有数据时，它会进入休眠状态，当有数据进入队列之后，它才会“苏醒”过来执行读取任务，<code>brpop()</code> 方法的第一个参数是设置超时时间的，设置 0 表示一直阻塞。</p>
+<p>List 优点：</p>
+<ul>
+<li>消息可以被<strong>持久化</strong>，借助 Redis 本身的持久化（AOF、RDB 或者是混合持久化），可以有效的保存数据；</li>
+<li>消费者可以<strong>积压消息</strong>，不会因为客户端的消息过多而被强行断开。</li>
+</ul>
+<p>List 缺点： - 消息<strong>不能被重复消费</strong>，一个消息消费完就会被删除； - <strong>没有主题订阅</strong>的功能。</p>
+<p><strong>ZSet</strong> 版消息队列相比于之前的两种方式，List 和发布订阅方式在实现上要复杂一些，但 ZSet 因为多了一个 score（分值）属性，从而使它具备更多的功能，例如我们可以用它来存储时间戳，以此来实现延迟消息队列等。它的实现思路和 List 相同也是利用 <code>zadd</code> 和 <code>zrangebyscore</code> 来实现存入和读取。</p>
+<p>ZSet 优点：</p>
+<ul>
+<li>支持消息持久化；</li>
+<li>相比于 List 查询更方便，ZSet 可以利用 score 属性很方便的完成检索，而 List 则需要遍历整个元素才能检索到某个值。</li>
+</ul>
+<p>ZSet 缺点：</p>
+<ul>
+<li>ZSet 不能存储相同元素的值，也就是如果有消息是重复的，那么只能插入一条信息在有序集合中；</li>
+<li>ZSet 是根据 score 值排序的，不能像 List 一样，按照插入顺序来排序；</li>
+<li>ZSet 没有向 List 的 brpop 那样的阻塞弹出的功能。</li>
+</ul>
+<h3 id="终极方案---stream">终极方案 - Stream</h3>
+<p>在 Redis 5.0 Stream 没出来之前，消息队列的实现方式都有着各自的缺陷，例如： - 发布订阅模式 PubSub，不能持久化也就无法可靠的保存消息，并且对于离线重连的客户端不能读取历史消息的缺陷； - 列表实现消息队列的方式不能重复消费，一个消息消费完就会被删除； - 有序集合消息队列的实现方式不能存储相同 value 的消息，并且不能阻塞读取消息。</p>
+<p>并且以上三种方式在实现消息队列时，只能存储单 value 值，也就是如果你要存储一个对象的情况下，必须先序列化成 JSON 字符串，在读取之后还要反序列化成对象才行，这也给用户的使用带来的不便。</p>
+<p>Redis 5.0 推出了 Stream 类型用于实现消息队列，它借鉴了 Kafka 的设计思路，它支持消息的持久化和消息轨迹的消费，支持 ack 确认消息的模式，让消息队列更加的稳定和可靠。</p>
+<p><strong>基本使用</strong></p>
+<ul>
+<li>xadd 添加消息；</li>
+<li>xlen 查询消息长度；</li>
+<li>xdel 根据消息 ID 删除消息；</li>
+<li>del 删除整个 Stream；</li>
+<li>xrange 读取区间消息；</li>
+<li>xread 读取某个消息之后的消息；</li>
+<li>xgroup 创建消费者群组；</li>
+</ul>
+<h2 id="分布式锁">分布式锁</h2>
+<h2 id="参考资料">参考资料</h2>
 <ul>
 <li><strong><a target="_blank" rel="noopener" href="https://github.com/redis/redis">Redis 仓库</a></strong></li>
 <li><strong><a target="_blank" rel="noopener" href="https://redis.io/">Redis 官网</a></strong></li>
