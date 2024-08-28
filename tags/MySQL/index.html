@@ -5,7 +5,7 @@
   <meta name="generator" content="Hexo 5.4.2">
   <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
   <meta charset="utf-8">
-  
+  <meta name="robots" content="noindex,follow">
 
   <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
@@ -20,30 +20,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>Go 对接第三方支付平台 - 以会员业务为例 - H-sediment</title>
+  <title>标签：MySQL - H-sediment</title>
 
   
-    <meta name="description" content="实习期间独立负责产品付费订阅模块的开发，一边探索一边开发，在此“脱密”后做一些记录">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Go 对接第三方支付平台 - 以会员业务为例">
-<meta property="og:url" content="http://example.com/2024/07/22/payment_vip/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="H-sediment">
+<meta property="og:url" content="http://example.com/tags/MySQL/index.html">
 <meta property="og:site_name" content="H-sediment">
-<meta property="og:description" content="实习期间独立负责产品付费订阅模块的开发，一边探索一边开发，在此“脱密”后做一些记录">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240722141417.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240722141451.png">
-<meta property="article:published_time" content="2024-07-22T05:27:55.000Z">
-<meta property="article:modified_time" content="2024-08-15T03:04:00.584Z">
 <meta property="article:author" content="hcjjj">
-<meta property="article:tag" content="Golang">
-<meta property="article:tag" content="Go-zero">
-<meta property="article:tag" content="Payment">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240722141417.png">
   
   
   
-  <meta name="keywords" content="Golang,Go-zero,Payment">
+  
 
   <!-- feed -->
   
@@ -76,10 +66,8 @@
   
 
 
-
-
   <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
+    <aside class='l_left' layout=''>
     
 
   
@@ -93,72 +81,41 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Go 对接第三方支付平台 - 以会员业务为例</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E6%8E%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E6%94%AF%E4%BB%98"><span class="toc-text">对接第三方支付</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98"><span class="toc-text">微信支付</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98"><span class="toc-text">支付宝支付</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%9A%E5%91%98%E4%B8%9A%E5%8A%A1"><span class="toc-text">会员业务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E4%B8%8E%E6%94%AF%E4%BB%98%E7%9A%84%E8%A7%A3%E8%80%A6"><span class="toc-text">业务与支付的解耦</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E9%80%9A%E4%BC%9A%E5%91%98"><span class="toc-text">开通会员</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E4%BB%98%E6%88%90%E5%8A%9F%E5%90%8E%E8%87%AA%E5%8A%A8%E8%B7%B3%E8%BD%AC"><span class="toc-text">支付成功后自动跳转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A2%E5%8D%95%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2"><span class="toc-text">订单信息查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E4%BC%9A%E5%91%98%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2"><span class="toc-text">用户会员信息查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E5%91%98%E5%88%B0%E6%9C%9F%E7%8A%B6%E6%80%81%E5%88%B7%E6%96%B0%E7%AD%96%E7%95%A5"><span class="toc-text">会员到期状态刷新策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E6%95%88%E6%9C%9F%E5%86%85%E6%94%AF%E4%BB%98%E9%93%BE%E6%8E%A5%E7%9A%84%E5%A4%8D%E7%94%A8"><span class="toc-text">有效期内支付链接的复用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></div></div></widget>
-
-
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2024/08/28/mysql/"><span class="title">MySQL /maɪ ˈsiːkwəl/ 原理与实践 💽</span></a><a class="item title" href="/2024/08/22/redis/"><span class="title">Redis 核心原理与实践 🚀</span></a><a class="item title" href="/2023/08/03/linux2/"><span class="title">简明 Linux 系统编程 🐧</span></a><a class="item title" href="/2023/09/01/cpp/"><span class="title">C++ 多线程编程</span></a><a class="item title" href="/2023/11/13/gocode/"><span class="title">Go 数据结构与算法、SQL 刷题 ⌨️</span></a></div></widget>
 
 
 </div>
 <footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
 
     </aside>
-    <div class='l_main'>
+    <div class='l_main list'>
+      
+  
+
+<header class="header mobile-only"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div></header>
+
+
+
       
 
-      
+  
 
 
+  
 
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Internship/">Internship</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-07-22T05:27:55.000Z">2024-07-22</time></div></div>
-
-<article class='md-text content post'>
-<h1 class="article-title"><span>Go 对接第三方支付平台 - 以会员业务为例</span></h1>
-<p>实习期间独立负责产品付费订阅模块的开发，一边探索一边开发，在此“脱密”后做一些记录</p>
-<span id="more"></span>
-<p>后端技术栈为 <code>Go-zero</code>、<code>MySQL</code>、<code>Redis</code>，前端是使用 AIGC 写的，主要用来梳理接口</p>
-<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240722141417.png" fancybox="true"/></div></div>
-<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240722141451.png" fancybox="true"/></div></div>
-<h2 id="对接第三方支付">对接第三方支付</h2>
-<h3 id="微信支付">微信支付</h3>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/docs/merchant/apis/native-payment/direct-jsons/native-prepay.html">Native下单 API</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/wechatpay-apiv3/wechatpay-go">微信支付 APIv3 的官方 Go Library</a></li>
-</ul>
-<h3 id="支付宝支付">支付宝支付</h3>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://opendocs.alipay.com/open/270/105898?pathHash=b3b2b667">电脑网站支付 API</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/smartwalle/alipay">支付宝 AliPay SDK for Go</a></li>
-</ul>
-<h2 id="会员业务">会员业务</h2>
-<h3 id="业务与支付的解耦">业务与支付的解耦</h3>
-<h3 id="开通会员">开通会员</h3>
-<h3 id="支付成功后自动跳转">支付成功后自动跳转</h3>
-<h3 id="订单信息查询">订单信息查询</h3>
-<h3 id="用户会员信息查询">用户会员信息查询</h3>
-<h3 id="会员到期状态刷新策略">会员到期状态刷新策略</h3>
-<h3 id="有效期内支付链接的复用">有效期内支付链接的复用</h3>
-<p>500-700ms → 100-200ms</p>
-<h2 id="参考资料">参考资料</h2>
-
-
-<!-- 
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div> -->
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/08/04/redis-lock/">基于 Redis 实现分布式锁🔒 - Golang</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/07/11/programmer/">Efficient Programmers' Way of Working</a></div></section></div>
-
-
-
+<div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：MySQL</a><a href="/archives">归档</a></nav></div>
+  <div class="post-list post"><a class="post-card post " href="/2024/08/28/mysql/">
+<article class="md-text"><h2 class="post-title">MySQL /maɪ ˈsiːkwəl/ 原理与实践 💽</h2><div class="excerpt"><p>梳理 MySQL 知识体系</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2024-08-27T16:00:00.000Z">2024-08-28</time></span><span class="cap breadcrumb">MySQL</span></div></article>
+</a></div>
+  
 
 
 
 
 
       <!-- 
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <span class="citation" data-cites="anonymity">[@anonymity]</span>(/) 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer> -->
 
       <div class='float-panel mobile-only blur' style='display:none'>
