@@ -20,16 +20,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>Kubernetes：从基础概念到应用部署 - H-sediment</title>
+  <title>「云计算」Kubernetes 从基础概念到应用部署 - H-sediment</title>
 
   
-    <meta name="description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，让我们简化服务的部署运维流程。">
+    <meta name="description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，简化了服务的部署运维流程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kubernetes：从基础概念到应用部署">
+<meta property="og:title" content="「云计算」Kubernetes 从基础概念到应用部署">
 <meta property="og:url" content="http://example.com/2024/06/29/k8s/index.html">
 <meta property="og:site_name" content="H-sediment">
-<meta property="og:description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，让我们简化服务的部署运维流程。">
+<meta property="og:description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，简化了服务的部署运维流程。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/xaas-DeUvn0Gb.svg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240912155133.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240629210114.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240806163046.png">
 <meta property="og:image" content="c:/Users/hcjjj/AppData/Roaming/Typora/typora-user-images/image-20240806163117036.png">
@@ -37,16 +39,17 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/image-20240806163217131.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240806163153.png">
 <meta property="article:published_time" content="2024-06-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-06T08:42:42.784Z">
+<meta property="article:modified_time" content="2024-09-12T09:33:11.136Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Kubernetes">
 <meta property="article:tag" content="Docker">
+<meta property="article:tag" content="cloud computing">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240629210114.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/xaas-DeUvn0Gb.svg">
   
   
   
-  <meta name="keywords" content="Kubernetes,Docker">
+  <meta name="keywords" content="Kubernetes,Docker,cloud computing">
 
   <!-- feed -->
   
@@ -97,7 +100,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Kubernetes：从基础概念到应用部署</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes-%E5%9F%BA%E7%A1%80"><span class="toc-text">Kubernetes 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-text">运行流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F"><span class="toc-text">应用发布模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%91%E4%B8%9D%E9%9B%80%E9%83%A8%E7%BD%B2"><span class="toc-text">金丝雀部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%93%9D%E7%BB%BF%E9%83%A8%E7%BD%B2"><span class="toc-text">蓝绿部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%A0%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">运行无状态应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BA%94%E7%94%A8"><span class="toc-text">部署前后端应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#golang"><span class="toc-text">Golang</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cicd"><span class="toc-text">CI&#x2F;CD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vite-react"><span class="toc-text">Vite + React</span></a></li></ol></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">「云计算」Kubernetes 从基础概念到应用部署</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97"><span class="toc-text">云计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#iaas-a%C9%AA%C3%A6s"><span class="toc-text">IaaS [aɪæs]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%9F%9F"><span class="toc-text">区域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%91%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-text">云虚拟机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%91%E7%A1%AC%E7%9B%98"><span class="toc-text">云硬盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C"><span class="toc-text">虚拟网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%85%E9%9A%9C%E4%B8%8E%E4%BC%B8%E7%BC%A9"><span class="toc-text">故障与伸缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%91%E4%B8%8A%E8%BF%90%E7%BB%B4"><span class="toc-text">云上运维</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#paas-p%C3%A6s"><span class="toc-text">PaaS [pæs]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8"><span class="toc-text">对象存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E6%89%98%E7%AE%A1"><span class="toc-text">应用托管</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE"><span class="toc-text">大数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%9C%8D%E5%8A%A1"><span class="toc-text">容器服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%A1%E7%AE%97"><span class="toc-text">无服务器计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ai-%E6%9C%8D%E5%8A%A1"><span class="toc-text">AI 服务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes"><span class="toc-text">Kubernetes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-text">运行流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F"><span class="toc-text">应用发布模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%91%E4%B8%9D%E9%9B%80%E9%83%A8%E7%BD%B2"><span class="toc-text">金丝雀部署</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%93%9D%E7%BB%BF%E9%83%A8%E7%BD%B2"><span class="toc-text">蓝绿部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%A0%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">运行无状态应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BA%94%E7%94%A8"><span class="toc-text">部署前后端应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#golang"><span class="toc-text">Golang</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cicd"><span class="toc-text">CI&#x2F;CD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vite-react"><span class="toc-text">Vite + React</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-text">相关资料</span></a></li></ol></div></div></widget>
 
 
 
@@ -116,19 +119,143 @@
 <div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Kubernetes/">Kubernetes</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-06-28T16:00:00.000Z">2024-06-29</time></div></div>
 
 <article class='md-text content post'>
-<h1 class="article-title"><span>Kubernetes：从基础概念到应用部署</span></h1>
-<p>K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，让我们简化服务的部署运维流程。</p>
+<h1 class="article-title"><span>「云计算」Kubernetes 从基础概念到应用部署</span></h1>
+<p>K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，简化了服务的部署运维流程。</p>
 <span id="more"></span>
-<p>官方文档：https://kubernetes.io/</p>
-<h2 id="kubernetes-基础">Kubernetes 基础</h2>
-<h3 id="简介">简介</h3>
+<h2 id="云计算">云计算</h2>
+<p><strong>云计算的演进总结：</strong></p>
+<ul>
+<li>工作负载的变化：从早期的物理服务器，通过虚拟化技术演进为虚拟机，再通过容器化技术演进为目前的 <strong>容器</strong>。</li>
+<li>隔离单元：无论是启动时间还是单元大小，物理机、虚拟机、容器一路走来，实现了 <strong>从重量级到轻量级</strong> 的转变。</li>
+<li>供应商：从闭源到开源（从 VMware 到 KVM，到 OpenStack，再到 <strong>Kubernetes</strong>），从单一供应商到跨越多个供应商（从公有云到自建云，再到混合云）。</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/xaas-DeUvn0Gb.svg" fancybox="true"/></div></div>
+<p><strong>XaaS 的简单归纳：</strong></p>
+<ul>
+<li><strong>IaaS</strong>（Infrastructure as a Service，基础设施即服务），指云计算所提供的计算、存储、网络等基本底层能力，客户不用关注物理机器，只需关注基础架构及应用程序；</li>
+<li><strong>PaaS</strong>（Platform as a Service，平台即服务），指基于云底层能力而构建的面向领域或场景的高层服务，如数据库、应用服务等，客户不用关注基础架构，只需关注应用程序；</li>
+<li>SaaS（Software as a Service，软件即服务），指基于云构建可开箱即用的各种业务应用，此外还有 <strong>FaaS</strong>（Function as a Service）、CaaS（Container as a Service），客户只需关注功能和数据。</li>
+</ul>
+<blockquote>
+<p>在过去的二十年间，云计算几乎重新定义了整个行业的格局，越来越多的企业开始降低对 IT 基础设施的直接资本投入，不再倾向于维护自建的数据中心，而是开始通过上云的方式来获取更强大的计算、存储能力，并实现按时按需付费。</p>
+<p>这不仅仅降低 IT 支出，同时也降低了整个行业的技术壁垒，使得更多的公司 <strong>尤其是初创公司可以更快地实践业务想法并迅速推送到市场。</strong>（正是在初创公司实习才开始使用到容器服务 ☁️）</p>
+</blockquote>
+<h3 id="iaas-aɪæs">IaaS [aɪæs]</h3>
+<p>IaaS 的本质，是对云数据中心和各类 IT 基础设施的抽象，是基于软件技术对物理硬件进行的封装和虚拟。</p>
+<h4 id="区域">区域</h4>
+<p>在云计算行业中，区域对应的则是云计算厂商在某个地理位置提供的所有云服务的组合，是厂商对外提供云服务的基本单位和容器。区域的设立和分布，相当程度地体现了云厂商的业务重点和地区倾向。云厂商在选址时一般会有两种思路：</p>
+<ul>
+<li>一种是考虑放在 <strong>人口稠密的中心城市</strong>，离用户和商业更近，以提供较快的接入体验；</li>
+<li>另一种则是在 <strong>相对偏远的地区</strong>，当地往往能够提供良好的气候条件、充足的建设空间，以及较低的电力、带宽等运营维护成本。</li>
+</ul>
+<p><strong>如何选择合适的区域</strong></p>
+<ol type="1">
+<li><strong>区域的地理位置本身。</strong> 如果场景中需要本地数据中心与云端进行互联，也就是混合云架构，其专线接入一般以同城或短距离接入为主，这样能够较好地控制费用，同时提高线路的稳定性。</li>
+<li><strong>区域之间云服务的差别。</strong> 换句话说，同一个云在不同的区域，所能提供的服务和规模可能是不同的。新旧区域哪个更好，需要根据你的服务需求和待选区域的实际情况来综合衡量。</li>
+<li><strong>成本因素。</strong> 即便是同一种服务的价格，在不同区域也往往是不相同的。区域的流量费用也需要注意，如果把区域作为一个有边界范围的实体圈起来，这个流量可以分为三类：入站流量、出站流量和内部流量。</li>
+</ol>
+<p><strong>多区域架构</strong></p>
+<p>多区域架构指的是部分关键应用，为了追求最佳的用户体验和高可用性，需要把多个区域的资源和能力结合起来进行构建。主流云厂商在跨区域方面也进行了大量建设和投资，主要体现为：</p>
+<ul>
+<li><strong>物理上</strong>，各区域之间建设有网络互联专线，一般称为骨干网（Backbone）。骨干网的存在使得同一个云在不同区域间的通信，能够有较高的带宽和较低的延时。</li>
+<li><strong>软件层面</strong>，允许位于不同区域的虚拟网络跨区域进行互联，使得多区域的私有内网能够借助自有骨干网无缝高速打通。</li>
+<li><strong>DNS 解析层面</strong>，通常会提供就近解析和智能路由能力，将分布广泛的 C 端流量引流到最近的数据中心，以获得最快的响应速度。</li>
+</ul>
+<p>公有云的基础设施（尤其是骨干网的存在）能够极大地方便我们构建多区域的应用程序。通过合理架构完全可以让多个区域的云服务融为一体。借助云的力量，小厂也能轻松拥有巨头的分布式部署能力。</p>
+<p>在应用架构层面，多区域并不意味着需要把某区域的资源复制到其他区域，而是可以根据实际情况各司其职，让不同区域担任不同的角色，联动起来达到业务目的。</p>
+<blockquote>
+<p>比如，可以将面向消费者服务的触点部署到多个区域，就近服务各地区的互联网流量，而偏后台的数据分析和 BI（Business Intelligence） 服务，则可以安置在性价比较高的非一线城市区域，业务数据可通过骨干网不断回传。这是一种经典的分工模式。</p>
+</blockquote>
+<p>当然，也不应当走向另一个极端：轻率、随意地拓展区域。每一个区域的增加，都会相应增加应用架构的复杂性和流量费用，也给我们的维护工作带来负担，这些额外的成本可能会抵消多区域架构带来的好处。</p>
+<p><strong>可用区</strong></p>
+<p>可用区是区域的下级概念，是指一个具备完整而独立的电力供应、冷却系统、网络设施的数据中心单元。</p>
+<ul>
+<li><strong>高可用性</strong></li>
+<li><strong>拓展性</strong></li>
+</ul>
+<p>尽管数据中心内部有着非常精密的运作系统和冗余机制，但地震、火灾、雷击等极端情况下，仍有可能造成数据中心级别的故障。为了避免单个数据中心故障让整个区域不可用，那自然就有必要建设多个相对独立的数据中心，也就是多个可用区了。</p>
+<p>区域本身也有扩展的需求。一些区域由于早期的容量规划和成本控制原因，很可能在若干年的运营后就会变得资源紧张、后劲不足。这时得益于可用区的机制，区域可以通过新建可用区，不断扩展自身容量，补充新鲜血液；而老旧的可用区，则可不对新用户开放，逐步封存甚至淘汰，这让区域形成了良好的新陈代谢机制。</p>
+<p>可用区的数量也可以成为一个衡量区域规模的重要指标。数量越多，意味着这个区域规模越大。</p>
+<h4 id="云虚拟机">云虚拟机</h4>
+<p>云虚拟机即在云端虚拟出的服务器，虚拟化技术是云虚拟机服务的核心，它本身是一个非常宏大的技术领域。比如你可能听说过 Xen、KVM、VMWare、HyperV 等等虚拟化产品和技术。云计算中所使用的虚拟化技术，也大都是从这些虚拟化实现方式演化而来的。云端的虚拟化技术在不断进步和发展，使得云端虚拟化的性能损耗在不断减少、资源利用率不断提升。</p>
+<p><strong>云虚拟机与传统虚拟机的不同</strong></p>
+<p>云虚拟机的体系结构是全面解耦的 <strong>计算存储分离</strong> 的设计思想。传统的虚拟化，往往是对单一物理机器资源的纵向切割，计算、存储、网络等各方面的能力都是一台物理机的子集，从 <strong>可伸缩性</strong> 的角度来说，传统虚拟机存在较大的局限，当物理机的局部出现故障时，也很容易影响到里面的虚拟机。以下是简化的示意图：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240912155133.png" fancybox="true"/></div></div>
+<p>这样虚拟出来的机器，我们在使用感受上其实与传统服务器并无不同，但在可扩展性和故障隔离方面，它就具有很大的优势了。各家厂商的云虚拟机服务的名称会略有不同，阿里云称为云服务器 ECS（Elastic Compute Service），AWS 称为 EC2（Elastic Compute Cloud），Azure 就叫 Virtual Machine，腾讯云则叫做云服务器 CVM（Cloud Virtual Machine）等等。</p>
+<p><strong>网络安全组（Network Security Group, NSG）</strong></p>
+<p>网络安全组可以理解为一层覆盖在虚拟机之外的网络防火墙。它能够控制虚拟机入站、出站的流量，并能根据协议、端口、流向等所设定的规则，来决定是否允许流量通过。</p>
+<p>网络安全组并不工作在操作系统层面，而是在操作系统层之外，是额外的一层防护。非法流量在尚未到达 OS 的网络堆栈之前，就已经被它阻断了。所以 <strong>NSG 的一个优点在于，它不会影响 VM 的性能。</strong></p>
+<p><strong>网络安全组是一种可复用的配置</strong>。如果有大量虚拟机适用于同样的网络控制规则，就能够很方便地让它们使用同一个网络安全组，它体现了云计算中 <strong>软件定义网络</strong> 的特点。</p>
+<p><strong>虚拟机类型</strong></p>
+<p>决定虚拟机配置的最重要的三个要素，即 <strong>类型、代别和实例大小</strong>。</p>
+<p>云厂商会提供通用均衡型、计算密集型、内存优化型、图形计算型等常见的虚拟机类型，CPU 数和内存大小（按 GB 计算）的比例，是决定和区分虚拟机类型的重要指征之一。</p>
+<ul>
+<li><strong>通用均衡型</strong> 的比例通常是 1:4，如 2 核 8G，这是一个经典的搭配，可用于建站、应用服务等各种常见负载，比如作为官网和企业应用程序的后端服务器等。</li>
+<li>如果 vCPU（Virtual CPU）和内存比是 1:2 甚至 1:1，那就是 <strong>计算密集型</strong> 的范畴，它可以用于进行科学计算、视频编码、代码编译等计算密集型负载。</li>
+<li>比例为 1:8 及以上，一般就会被归入 <strong>内存优化型</strong> 了，比如 8 核 64G 的搭配，它在数据库、缓存服务、大数据分析等应用场景较为常见。</li>
+<li><strong>图形计算型</strong> 就是带有 GPU 能力的虚拟机，一般用于机器学习和深度学习模型的训练和推理。</li>
+<li><strong>本地存储型</strong> 是指带有高性能或大容量的本地存储的机型。</li>
+</ul>
+<p>同类型虚拟机的更新换代，往往首先会带来相应 <strong>硬件</strong> CPU 的换代提升。随着一代新机型的推出，云厂商一般都会详细说明背后支撑的硬件详细信息。很多时候也伴随着底层软硬件架构的更新和提升，尤其是 <strong>虚拟化技术</strong> 的改进。</p>
+<p>实例大小（Size），也就是硬件计算资源的规模。业界常常使用 medium、large、xlarge 等字眼来进行命名区分，标准 large 对应的是 2vCPU 的配备，xlarge 则代表 4 个 vCPU，而更高的配置一般用 _n_xlarge 来表达，其中 n 与 xlarge 代表的 4vCPU 是乘法关系。</p>
+<blockquote>
+<p>因为超线程（HyperThreading）技术的普遍存在，常常一个核心能够虚拟出两个 vCPU 的算力，但也有些处理器不支持超线程</p>
+</blockquote>
+<p>在某些场景下，可能还会看到“metal”或者“bare metal”这样的描述规格的字眼，中文称为“裸金属”。它们就是云服务商尽最大可能 <strong>将物理裸机以云产品方式暴露出来</strong> 的实例，主要用于一些追求极致性能，或是需要在非虚拟化环境下运行软件的场景。</p>
+<h4 id="云硬盘">云硬盘</h4>
+<p>云硬盘，又叫做“云盘”或者“云磁盘”，就是云虚拟机上可以挂载和使用的硬盘。这里，它既包含了用于承载操作系统的系统盘，也包括了承载数据的数据盘。有时还会把云端磁盘服务叫做块存储（Block Storage），因为它们与 Linux 操作系统中的块设备相对应，是云上提供的“裸盘”，可以格式化并且施加文件系统。</p>
+<p>云硬盘与传统磁盘的真正差异在于，绝大多数的云硬盘都是远程的。在经典计算机的体系结构中，硬盘是通过本地机器内部主板的高速总线，与 CPU、内存等部件相连接；而在云端，你的硬盘则很可能并不在宿主机上，而是在专用的磁盘服务器阵列中，<strong>两者是通过数据中心内部的特有 IO 线路进行连接</strong>。这也正是 <strong>计算存储分离架构</strong> 的一种体现。</p>
+<p>当下的云硬盘经过了多次的软硬件迭代，尤其是 SSD 的迅速发展，吞吐量和随机读写能力等各项性能指标都已经不再是问题了。云硬盘的性能等级的分为 HDD、SSD/HDD、SSD、高性能 SSD：</p>
+<ul>
+<li>基于传统 HDD 硬盘构建而成的，性能一般，成本低，在不注重性能的测试环境，或者是个人自用的服务器；</li>
+<li>基于混合硬盘，也就是结合 HDD 和 SSD 硬盘构建的云硬盘，比较适合像是操作系统启动盘这样的常规负载；</li>
+<li>纯 SSD 硬盘，可以用它来承载生产环境中重要的关键业务应用，或是各类数据库等 IO 密集型应用；</li>
+<li>进一步优化增强的 SSD 云盘，采用更新一代的企业级闪存硬件，配合改进后的底层传输协议和虚拟化技术栈的优化来提供服务。</li>
+</ul>
+<p>同等的性能等级下，云硬盘的容量越大，一般来说它的性能就越高，直到达到这个等级的上限，这是由云上磁盘能力共享的底层设计所决定的，所以在某些时候，你可能需要刻意地增大所申请的云硬盘的容量，以获取更高的性能，即便这些额外的空间不一定能被用上。</p>
+<p>云盘的热挂载特性让它使用起来特别灵活方便，而且大小性能可以调度，挂载后和本地硬盘操作没有什么两样。当一些应用软件系统本身考虑到了硬件的不可靠性，设计了上层的存储冗余机制时，也可以考虑采用云虚拟机的本地磁盘，<strong>当机器关机或删除，以及出现硬件故障时，本地磁盘上的数据就可能损坏或丢失。</strong></p>
+<h4 id="虚拟网络">虚拟网络</h4>
+<p>通过合理的网络拓扑设置，既能够帮助我们实现架构上的隔离性和安全性，又能够让各组件互联互通、有序配合。、</p>
+<p><strong>虚拟私有网络</strong></p>
+<p>虚拟私有网络（Virtual Private Cloud，简称 VPC），是云计算网络端最重要的概念之一，它是指构建在云上的、相互隔离的、用户可以自主控制的私有网络环境，虚拟私有网络有时也称为专有网络或虚拟网络。私有网络就是一张内网，内网之内的服务器和设备可以比较自由地互相通信，与外界默认是隔离的。如果外部互联网，或者其他虚拟网络需要连接，则需要额外的配置。</p>
+<p>虚拟私有网络麻雀虽小，但五脏俱全。在传统数据中心里，经典网络架构中的概念和组件，在虚拟网络中你几乎都能找到对应。这里比较重要的一些概念包括：</p>
+<ul>
+<li><strong>网段</strong>，私有网络的内部 IP 区段，通常用无类别域间路由（Classless Inter-Domain Routing， CIDR） 形式来表达，如 192.168.0.0/16。</li>
+<li><strong>子网</strong>，私有网络的下级网络结构，一个私有网络可以划分多个子网，这和通常意义上的子网也是对应和一致的；</li>
+<li><strong>路由表</strong>，用于定义私有网络内流量的路由规则，决定着数据包的“下一跳”去向何方。每个子网都必须有一张关联的路由表，通常情况下，系统会自动帮你创建一个默认的路由表；</li>
+<li><strong>网关</strong>，是对进出私有网络的流量进行把守和分发的重要节点，根据用途的不同，有多种类型；</li>
+<li><strong>安全组</strong>，私有网络里虚拟机进出流量的通行或拦截规则，可以起到虚拟机网络防火墙的作用。</li>
+</ul>
+<p>可以建立跨可用区，也就是跨同区域内不同数据中心的私有网络，这是 VPC 的一个强大的特性，能够为我们私有网络的高可用性提供保障，可以让主力集群在一个可用区工作，备用集群在另一个可用区随时待命，需要时迅速切换，也可以把流量同时分发到不同的可用区，动态控制分发策略。</p>
+<p><strong>私有网络中的虚拟机</strong></p>
+<p>虚拟机和专有网络的连接点是虚拟机的网卡，又称弹性网卡（Elastic Network Interface， 简称 ENI）。云上的网卡，之所以被称为“弹性”网卡，是因为它具备以下特征：</p>
+<ol type="1">
+<li>一个虚拟机可以绑定多块网卡，有主网卡和辅助网卡之分；</li>
+<li>一块网卡隶属于一个子网，可以配置同一子网内的多个私有 IP；</li>
+<li>辅助网卡可以动态解绑，还能够绑定到另一台虚拟机上。</li>
+</ol>
+<p>对于生产环境尽量不要使用和依赖这个自动生成的公有 IP，因为它本质上是一个从公有云的 IP 池中临时租用给你的 IP，如果机器关闭或重启，下次获得的 IP 可能就完全不同了。这时，应该用到的是弹性 IP（Elastic IP），弹性 IP 一旦生成，它所对应的 IP 是固定、不会变化的，非常适合需要稳定 IP 的生产环境，它所谓的弹性，其实是指可以非常自由地解绑和再次绑定到任意目标。</p>
+<h4 id="故障与伸缩">故障与伸缩</h4>
+<h4 id="云上运维">云上运维</h4>
+<h3 id="paas-pæs">PaaS [pæs]</h3>
+<p>PaaS （Platform-as-a-Service）是指云计算提供的平台类服务，在这些平台的基础上，用户可以直接开发、运行、管理应用程序，而无需构建和维护底层的基础设施。</p>
+<p>PaaS 是在 IaaS 的基础上又做了许多工作，构建了很多关键抽象和可复用的单元，让用户能够在更上层进行应用的构建，把更多精力放在业务逻辑上。</p>
+<h4 id="对象存储">对象存储</h4>
+<h4 id="应用托管">应用托管</h4>
+<h4 id="大数据">大数据</h4>
+<h4 id="容器服务">容器服务</h4>
+<h4 id="无服务器计算">无服务器计算</h4>
+<h4 id="ai-服务">AI 服务</h4>
+<h2 id="kubernetes">Kubernetes</h2>
+<h3 id="基础概念">基础概念</h3>
+<h4 id="简介">简介</h4>
 <p>Kubernetes (K8s) 是 Google 开源的容器编排引擎和容器集群管理工具，它为容器化应用提供了一个自动化的部署、扩展和管理平台。它允许开发者在集群中运行和管理容器应用，而无需关心底层的基础设施细节。其核心功能包括服务发现和负载均衡、自动部署和回滚、存储编排、自动扩展、自我修复、密钥与配置管理等。</p>
-<h3 id="系统架构">系统架构</h3>
+<h4 id="系统架构">系统架构</h4>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240629210114.png" fancybox="true"/></div></div>
 <p>Kubernetes 的架构包括多个组件，如 API 服务器、调度器、控制器、etcd（用于存储集群状态）等，它们共同工作以实现集群管理的功能。此外，Kubernetes 还支持多种容器运行时，如 Docker、containerd、CRI-O 等，使其具有很好的灵活性和兼容性。</p>
-<p>一个 K8s 集群至少包含一个<strong>控制平面</strong>和一个或多个<strong>工作节点</strong>：</p>
+<p>一个 K8s 集群至少包含一个 <strong>控制平面</strong> 和一个或多个 <strong>工作节点</strong>：</p>
 <ul>
-<li><p><strong>控制平面（Control Plane）</strong>负责管理工作节点和维护集群状态，所有任务都由控制平面分配。</p>
+<li><p><strong>控制平面（Control Plane）</strong> 负责管理工作节点和维护集群状态，所有任务都由控制平面分配。</p>
 <ul>
 <li><code>api-server (api)</code> 是实现声明式 api 的关键，提供了 K8s 各类资源对象（pod、RC、service 等）的增、删、改、查以及 watch 等 HTTP REST 接口。</li>
 <li><code>kube-scheduler (sched)</code> 主要负责整个集群资源的调度功能，根据特定的调度算法和策略，将 Pod 调度到最优的工作节点上面去，从而更加合理、更加充分地利用集群的资源。</li>
@@ -136,7 +263,7 @@
 <li><code>cloud-controller-manager</code> 是一个可选组件，它允许将 K8s 集群连接到云提供商的 API 之上，并将与该云平台交互的组件与集群的其他组件分离开来。</li>
 <li><code>etcd</code> 是兼具一致性和高可用性的键值数据库，可用于服务发现以及配置中心。采用 raft 一致性算法，基于 Go 语言实现。是保存 K8s 所有集群数据的后台数据库，在整个云原生中发挥着极其重要的作用。</li>
 </ul></li>
-<li><p><strong>工作节点（Node）</strong>负责执行控制平面分配的请求任务，它们运行实际的应用和工作负载。</p>
+<li><p><strong>工作节点（Node）</strong> 负责执行控制平面分配的请求任务，它们运行实际的应用和工作负载。</p>
 <ul>
 <li><p><code>kubelet</code> 会在集群的每个节点上运行，它保证容器都运行在 Pod 中。当控制平面需要在节点中执行某个操作时，kubelet 就会执行该操作。</p></li>
 <li><p><code>kube-proxy</code> 是集群中每个节点上运行的网络代理，是实现 Kubernetes 服务概念的一部分。它维护节点网络规则和转发流量，实现从集群内部或外部的网络与 Pod 进行网络通信。</p></li>
@@ -153,29 +280,28 @@
 <li>自愈、缩放</li>
 <li>滚动更新、版本回滚</li>
 </ul></li>
-<li><p><strong>Service</strong> 是将运行在一个或一组 Pod 上的网络应用程序公开为网络服务的抽象方法。Service 为一组 Pod 提供相同的 DNS 名，并且在它们之间进行负载均衡。Kubernetes 为 Pod 提供分配了IP 地址，但IP地址可能会发生变化，集群内的容器可以通过 service 名称访问服务，而不需要担心 Pod 的 IP 发生变化。</p>
+<li><p><strong>Service</strong> 是将运行在一个或一组 Pod 上的网络应用程序公开为网络服务的抽象方法。Service 为一组 Pod 提供相同的 DNS 名，并且在它们之间进行负载均衡。Kubernetes 为 Pod 提供分配了 IP 地址，但 IP 地址可能会发生变化，集群内的容器可以通过 service 名称访问服务，而不需要担心 Pod 的 IP 发生变化。</p>
 <ul>
-<li>ClusterIP：将服务公开在<strong>集群内部</strong>。kubernetes 会给服务分配一个集群内部的 IP，集群内的所有主机都可以通过这个 Cluster-IP访问服务。集群内部的 Pod 可以通过 service 名称访问服务。</li>
-<li>NodePort：通过每个节点的主机 IP 和静态端口（NodePort）暴露服务。 <strong>集群外部</strong>的主机可以使用节点 IP 和 NodePort 访问服务。</li>
+<li>ClusterIP：将服务公开在 <strong>集群内部</strong>。kubernetes 会给服务分配一个集群内部的 IP，集群内的所有主机都可以通过这个 Cluster-IP 访问服务。集群内部的 Pod 可以通过 service 名称访问服务。</li>
+<li>NodePort：通过每个节点的主机 IP 和静态端口（NodePort）暴露服务。 <strong>集群外部</strong> 的主机可以使用节点 IP 和 NodePort 访问服务。</li>
 <li>ExternalName：将集群外部的网络引入集群内部。</li>
 <li>LoadBalancer：使用云提供商的负载均衡器向外部暴露服务。</li>
 </ul></li>
 </ul>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="C:\Users\hcjjj\AppData\Roaming\Typora\typora-user-images\image-20240806163117036.png" fancybox="true"/></div></div>
 <ul>
-<li><p><strong>Ingress</strong> 是对集群中服务的外部访问进行管理的 API 对象，典型的访问方式是 HTTP。可以通过 Ingress 资源来配置不同的转发规则，从而达到根据不同的规则设置访问集群内不同的 Service 所对应的后端 Pod。当集群位于公有云或私有云上时，要从互联网进行访问，需要使用公网IP或者域名，公网IP是相对稀缺的资源，不可能给所有主机都分配公网IP，并且随着公开的服务变多，众多的端口也变得难以管理。</p>
-<p>面对这种情况，我们可以使用Ingress。</p></li>
+<li><p><strong>Ingress</strong> 是对集群中服务的外部访问进行管理的 API 对象，典型的访问方式是 HTTP。可以通过 Ingress 资源来配置不同的转发规则，从而达到根据不同的规则设置访问集群内不同的 Service 所对应的后端 Pod。当集群位于公有云或私有云上时，要从互联网进行访问，需要使用公网 IP 或者域名，公网 IP 是相对稀缺的资源，不可能给所有主机都分配公网 IP，并且随着公开的服务变多，众多的端口也变得难以管理。</p>
+<p>面对这种情况，我们可以使用 Ingress。</p></li>
 <li><p><strong>Kubectl</strong> 是 K8s 提供的命令行工具。</p></li>
 <li><p><strong>Namespace</strong> 是一种资源隔离机制，将同一集群中的资源划分为相互隔离的组。命名空间作用域仅针对带有名字空间的对象，例如 Deployment、Service 等。Kubernetes 会创建四个初始命名空间：</p>
 <ul>
 <li>default 默认的命名空间，不可删除，未指定命名空间的对象都会被分配到 default 中。</li>
-<li>kube-system Kubernetes 系统对象(控制平面和Node组件)所使用的命名空间。</li>
+<li>kube-system Kubernetes 系统对象(控制平面和 Node 组件)所使用的命名空间。</li>
 <li>kube-public 自动创建的公共命名空间，所有用户（包括未经过身份验证的用户）都可以读取它。通常我们约定，将整个集群中公用的可见和可读的资源放在这个空间中。</li>
-<li>kube-node-lease 租约（Lease）对象使用的命名空间。每个节点都有一个关联的 lease 对象，lease 是一种轻量级资源。lease对象通过发送心跳，检测集群中的每个节点是否发生故障。</li>
+<li>kube-node-lease 租约（Lease）对象使用的命名空间。每个节点都有一个关联的 lease 对象，lease 是一种轻量级资源。lease 对象通过发送心跳，检测集群中的每个节点是否发生故障。</li>
 </ul></li>
 </ul>
-<hr />
-<h3 id="运行流程">运行流程</h3>
+<h4 id="运行流程">运行流程</h4>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/pic.svg" fancybox="true"/></div></div>
 <p><strong>管理对象的方式</strong></p>
 <ul>
@@ -196,17 +322,17 @@
 <p>YAML 文件 → kubectl → [API Server → Scheduler → ECTD → Controller Mgr] → [Kubelet → Container runtime → <strong>Pod</strong>]</p>
 <p><strong>服务调用流程</strong></p>
 <p>request → Ingress 控制器 → [Kube Proxy → <strong>Pod</strong>]</p>
-<h2 id="应用发布模式">应用发布模式</h2>
+<h3 id="应用发布模式">应用发布模式</h3>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/image-20240806163217131.png" fancybox="true"/></div></div>
-<h3 id="金丝雀部署">金丝雀部署</h3>
+<h4 id="金丝雀部署">金丝雀部署</h4>
 <p><strong>金丝雀部署（Canary Deployment）</strong> 是一种渐进式的发布策略，它通过在生产环境中仅向一小部分用户推出新版本来测试应用的稳定性和性能。这种策略得名于矿工使用金丝雀来检测矿井中的有毒气体，因为金丝雀对气体更为敏感，如果金丝雀出现问题，矿工就知道环境不安全。类似地，如果新版本出现问题，由于只有少数用户受到影响，因此可以快速发现并解决问题，从而避免影响到所有用户。如果新版本表现良好，它会逐渐被推广至更多用户，直至完全替代旧版本。这种方法有助于减少新版本可能带来的风险，并允许团队收集反馈以优化产品。</p>
-<h3 id="蓝绿部署">蓝绿部署</h3>
+<h4 id="蓝绿部署">蓝绿部署</h4>
 <p><strong>蓝绿部署（Blue Green Deployment）</strong> 是一种软件发布策略，通过维护两个完全相同的生产环境 —— 一个运行当前稳定版本（蓝环境），另一个准备部署新版本（绿环境），来实现快速、几乎零停机时间的服务更新。新版本在绿环境中经过充分测试后，通过快速切换流量至绿环境来发布更新；若发现问题，可立即切回蓝环境，确保服务稳定性和可用性。尽管此策略需要更多的资源投入，但它大大降低了部署风险，适用于对服务连续性要求极高的场景。</p>
-<h2 id="运行无状态应用">运行无状态应用</h2>
+<h3 id="运行无状态应用">运行无状态应用</h3>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240806163153.png" fancybox="true"/></div></div>
-<h2 id="部署前后端应用">部署前后端应用</h2>
+<h3 id="部署前后端应用">部署前后端应用</h3>
 <p><strong>Code → App → Docker Image → Hub → K8s</strong></p>
-<h3 id="golang">Golang</h3>
+<h4 id="golang">Golang</h4>
 <p>构建 Docker 镜像</p>
 <p>交叉编译</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Windows → Linux</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">powershell</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash"><span class="built_in">env</span>:GOOS=<span class="string">&quot;linux&quot;</span></span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash"><span class="built_in">env</span>:GOARCH=<span class="string">&quot;amd64&quot;</span></span></span><br><span class="line">go build -o .\build\webook</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mac → Linux</span></span><br><span class="line">GOOS=linux GOARCH=amd64 go build -o /build/webook</span><br></pre></td></tr></table></figure>
@@ -218,7 +344,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it -p 8888:8888 wechatpay:v0.0.1      </span><br><span class="line">Starting server at 0.0.0.0:8888...</span><br></pre></td></tr></table></figure>
 <p>推送到远程仓库</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登录腾讯云容器镜像服务 Docker Registry</span></span><br><span class="line">docker login xxx.tencentcloudcr.com --username xxx --password xxx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">向 Registry 中推送镜像</span></span><br><span class="line">docker tag [imageId] xxx.tencentcloudcr.com/xxx/xxx:[tag]</span><br><span class="line">docker push xxx.tencentcloudcr.com/xxx/xxx:[tag]</span><br></pre></td></tr></table></figure>
-<h3 id="cicd">CI/CD</h3>
+<h4 id="cicd">CI/CD</h4>
 <p><strong>Jenkinsfile</strong></p>
 <ol type="1">
 <li>Check Workspace</li>
@@ -227,9 +353,15 @@
 <li>Build Docker Image</li>
 <li>Push Docker Image</li>
 </ol>
-<h3 id="vite-react">Vite + React</h3>
+<h4 id="vite-react">Vite + React</h4>
 <p><strong>Dockerfile</strong></p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用较新的 Node.js 镜像作为构建环境</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-alpine AS build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制 package.json 和 package-lock.json</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package*.json ./</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install &amp;&amp; npm cache clean --force</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制项目文件</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建项目</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm run build</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Nginx 作为生产环境的 web 服务器</span></span><br><span class="line"><span class="keyword">FROM</span> nginx:alpine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制构建的文件到 Nginx 的默认公共目录</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=build /app/build /usr/share/nginx/html</span></span><br><span class="line"><span class="comment"># 将 Nginx 配置文件替换为自定义配置文件</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> nginx.conf /etc/nginx/conf.d/default.conf</span></span><br><span class="line"><span class="comment"># 暴露端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">9999</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 Nginx</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;nginx&quot;</span>, <span class="string">&quot;-g&quot;</span>, <span class="string">&quot;daemon off;&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+<h2 id="相关资料">相关资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/100046901">深入浅出云计算</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.thebyte.com.cn/">深入高可用架构原理与实践</a></li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/">Kubernetes 官网文档</a></li>
+</ul>
 
 
 <!-- 
@@ -238,7 +370,7 @@
 
 </article>
 
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/07/11/programmer/">Efficient Programmers' Way of Working</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/05/30/gosdk/">Go SDK：context、unsafe、reflect、errors</a></div></section></div>
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/08/04/ingress/">基于 Nginx 的异构后端统一鉴权服务</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/06/11/programmer/">Efficient Programmers' Way of Working</a></div></section></div>
 
 
 

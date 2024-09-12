@@ -31,7 +31,7 @@
 <meta property="og:description" content="刷题记录和总结">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-08T04:49:55.503Z">
+<meta property="article:modified_time" content="2024-09-11T09:41:52.462Z">
 <meta property="article:author" content="hcjjj">
 <meta name="twitter:card" content="summary">
   
@@ -618,7 +618,7 @@
 <tbody>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/">455. 分发饼干</a></td>
-<td>两者都排序后，胃口主动遍历，饼干的被动</td>
+<td>两者都排序后，胃口主动遍历，饼干的被动（优先满足胃口大的）</td>
 <td>2️⃣3️⃣</td>
 </tr>
 <tr class="even">
@@ -668,7 +668,7 @@
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/queue-reconstruction-by-height/">406. 根据身高重建队列</a></td>
-<td>按照身高大到小排序，优先按身高高的 k 来插入</td>
+<td>按照身高大到小、人数小到大排序，优先按身高高的 k 来插入</td>
 <td>2️⃣5️⃣</td>
 </tr>
 <tr class="even">
@@ -693,7 +693,7 @@
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/monotone-increasing-digits/">738. 单调递增的数字</a></td>
-<td>后往前遍历，-1 时触发 置 9</td>
+<td>后往前遍历，-1 时触发后面范围都置 9</td>
 <td>2️⃣7️⃣</td>
 </tr>
 <tr class="odd">
@@ -745,170 +745,185 @@
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/integer-break/">343. 整数拆分</a></td>
-<td>分拆数字 i，可以得到的最大乘积为 <code>dp[i]</code></td>
-<td>🤡</td>
+<td>分拆正整数 i 可以得到的最大乘积为 <code>dp[i]</code>，<code>max((i - j) * j), dp[i - j] * j)</code></td>
+<td>2️⃣9️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></td>
-<td></td>
+<td>1 - i 为节点组成的二叉搜索树的个数为dp[i]，递推公式不好找</td>
 <td>🤡</td>
 </tr>
 <tr class="even">
 <td><strong>01 背包（二维/一维）</strong></td>
-<td><code>dp[i][j]</code> 表示从下标为 <code>[0-i]</code> 的物品里任意取，放进容量为 <code>j</code> 的背包的价值总和</td>
-<td>3️⃣</td>
+<td>每个物品只有一个，一维需要从大小遍历背包</td>
+<td>3️⃣0️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/description/">416. 分割等和子集</a></td>
-<td>背包大小为 <code>sum / 2</code>，商品大小和价值一样，若 <code>dp[target] == target</code> 则存在</td>
+<td>背包大小为 <code>sum / 2</code>，商品大小和价值一样，若 <code>dp[target] == target</code> 则存在<strong>（装满背包的最大价值/重量）</strong></td>
 <td>3️⃣0️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/last-stone-weight-ii/">1049. 最后一块石头的重量 II</a></td>
-<td>让石头分成重量最相同的两堆，相撞之后剩下的石头最小</td>
+<td>让石头分成重量最相同的两堆，相撞之后剩下的石头最小<strong>（装满背包的最大价值/重量）</strong></td>
 <td>3️⃣1️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/">494. 目标和</a></td>
-<td><code>dp[j]</code> 表示填满 j（包括 j）这么大容积的包，有 <code>dp[j]</code> 种方法</td>
+<td><code>dp[j]</code> 表示填满 j（包括 j）这么大容积的包，有 <code>dp[j]</code> 种方法<strong>（装满背包的组合数）</strong></td>
 <td>🤨</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/">474. 一和零</a></td>
-<td>最多有 i 个 0 和 j 个 1 的 strs 的最大子集的大小为 <code>dp[i][j]</code>，物品的重量有两个维度</td>
+<td>物品的重量/背包 有两个维度<strong>（背包可以装的最大物品数量）</strong>🔢</td>
 <td>3️⃣1️⃣</td>
 </tr>
 <tr class="odd">
 <td><strong>完全背包</strong></td>
-<td>每件物品都有无限个，从小到大遍历背包</td>
+<td>每件物品都有无限个，一维需要从小到大遍历背包</td>
 <td>3️⃣1️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change-ii/">518. 零钱兑换 II</a></td>
-<td>凑成总金额 j 的货币组合数为 <code>dp[j]</code>，求装满背包有 <strong>几种方法</strong> <code>dp[j] += dp[j - nums[i]]</code></td>
+<td>凑成总金额 j 的货币组合数为 <code>dp[j]</code><strong>（装满背包的组合数）</strong></td>
 <td>3️⃣2️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iv/">377. 组合总和 Ⅳ</a></td>
-<td>注意对比上一题，这一题是“排列”，需要先遍历背包再遍历物品</td>
+<td>注意是“<strong>排列</strong>”数，需要先遍历背包再遍历物品<strong>（装满背包的排列数）</strong></td>
 <td>3️⃣2️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change/">322. 零钱兑换</a></td>
-<td>凑足总额为 <code>j</code> 所需钱币的 <strong>最少个数</strong> 为 <code>dp[j] = min(dp[j - coins[i]] + 1, dp[j])</code></td>
+<td>凑足总额为 <code>j</code> 所需钱币的最少个数为 <code>dp[j]</code><strong>（装满背包的最小物品数量，加是否装满的判断）🔢</strong></td>
 <td>3️⃣3️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数</a></td>
-<td>完全平方数就是物品，凑个正整数 n 就是背包，和为 j 的完全平方数的 <strong>最少数量</strong> 为 dp [j]，注意初始化</td>
+<td>和为 j 的完全平方数的最少数量为 dp [j]，注意初始化<strong>（装满背包的最小物品数量）🔢</strong></td>
 <td>3️⃣3️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-break/">139. 单词拆分</a></td>
-<td>wordDict 是物品，s 是背包（求排列数，主要叠加需要判断是否字符串是否相等）</td>
+<td>wordDict 是物品，s 是背包，物品能不能装入是看能不能和背包后缀匹配<strong>（装满背包的排列数）</strong></td>
 <td>3️⃣3️⃣</td>
 </tr>
 <tr class="odd">
+<td><strong>打家劫舍</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber/">198. 打家劫舍</a></td>
 <td>考虑下标 i（包括 i）以内的房屋，最多可以偷窃的金额为 <code>dp [i]</code></td>
 <td>3️⃣4️⃣</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-ii/">213. 打家劫舍 II</a></td>
 <td>包含首元素，不包含尾元素；包含尾元素，不包含首元素；两种情况取最大值</td>
 <td>3️⃣4️⃣</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-iii/">337. 打家劫舍 III</a></td>
-<td>dp 数组下标为 0 记录不偷该节点所得到的的最大金钱，下标为 1 记录偷该节点所得到的的最大金钱</td>
+<td>dp 数组下标为 0 记录不偷该节点所得到的的最大金钱，下标为 1 记录偷该节点所得到的的最大金钱<strong>（后序遍历）</strong></td>
 <td>3️⃣4️⃣</td>
+</tr>
+<tr class="odd">
+<td><strong>买卖股票</strong></td>
+<td>买入卖出，但是同时只能持有一支股票</td>
+<td></td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></td>
-<td><code>dp[i][0]</code> 表示第 i 天不持有股票所得最多现金，<code>dp[i][1]</code> 表示第 i 天持有股票所得最多现金</td>
+<td><code>dp[i][0]</code> 表示第 i 天不持有，<code>dp[i][1]</code> 表示第 i 天持有股票所得最多现金<strong>（只能买卖一次）</strong></td>
 <td>3️⃣5️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/description/">122.买卖股票的最佳时机 II</a></td>
-<td>可以完成多笔交易，最多只能持有一股股票（不能同时）</td>
+<td>可以完成多笔交易，最多只能持有一股股票<strong>（可以买卖多次）</strong></td>
 <td>3️⃣5️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/description/">123.买卖股票的最佳时机 III</a></td>
-<td>可以完成最多两笔交易，不能同时</td>
+<td>可以完成最多两笔交易，不能同时<strong>（可以买卖最多两次）</strong></td>
 <td>3️⃣5️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/">188. 买卖股票的最佳时机 IV</a></td>
-<td>可以完成最多 k 笔交易，不能同时（除了 0 以外，偶数就是卖出，奇数就是买入）</td>
+<td>可以完成最多 k 笔交易，，除了 0 以外，偶数就是卖出，奇数就是买入<strong>（可以买卖最多 k 次）</strong></td>
 <td>3️⃣6️⃣</td>
 </tr>
 <tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309. 买卖股票的最佳时机含冷冻期</a></td>
-<td>可以完成多笔，不能同时；交易状态为：持有、<strong>不持有（保持或今日卖出）、冷冻期</strong></td>
+<td>卖出股票后，你无法在第二天买入股票，即冷冻期为 1 天<strong>（可以买卖最多次）</strong></td>
 <td>3️⃣6️⃣</td>
 </tr>
 <tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费</a></td>
-<td>可以完成多笔交易，不能同时（卖出的时候加个手续费即可）</td>
+<td>卖出的时候加个手续费即可<strong>（可以买卖多次）</strong></td>
 <td>3️⃣6️⃣</td>
 </tr>
 <tr class="even">
+<td><strong>子序列问题</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-subsequence/description/">300.最长递增子序列</a></td>
 <td><code>dp[i]</code> 表示 <code>i</code> 之前包括 <code>i</code> 的以 <code>nums[i]</code> 结尾的最长递增子序列的长度</td>
 <td>3️⃣7️⃣</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-continuous-increasing-subsequence/description/">674. 最长连续递增序列</a></td>
 <td>只要比较 <code>nums[i]</code> 与 <code>nums[i - 1]</code>，而不用去比较 <code>nums[j]</code> 与 <code>nums[i]</code>（j 是在 0 到 i 之间遍历）</td>
 <td>3️⃣7️⃣</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-length-of-repeated-subarray/">718. 最长重复子数组</a></td>
 <td>子数组就是连续子序列，以下标 <code>i</code> 为结尾的 A，和以下标 <code>j</code> 为结尾的 B，最长重复子数组长度为 <code>dp[i][j]</code>，注意初始化</td>
 <td>3️⃣7️⃣</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-subsequence/">1143.最长公共子序列</a></td>
 <td>较上一题就是少了“连续”的要求，如果不等取各自前一个状态的最大值，注意初始化和上面有不同，<strong>两者都可以删除元素</strong></td>
 <td>3️⃣8️⃣</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/uncrossed-lines/description/">1035.不相交的线</a></td>
-<td>与上一题相同，只要相对顺序不变就行</td>
-<td>3️⃣8️⃣</td>
-</tr>
-<tr class="odd">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></td>
-<td><code>dp[i]</code> 表述以 <code>i</code> 为结尾的子数组的最大和</td>
+<td>与上一题相同，只要相对顺序不变就行（就是求最长公共子序列）</td>
 <td>3️⃣8️⃣</td>
 </tr>
 <tr class="even">
-<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence/">392. 判断子序列</a></td>
-<td>以下标 <code>i</code> 为结尾的 s，和以下标 <code>j</code> 为结尾的 t，相同子序列的长度为 <code>dp[i][j]</code>，<strong>删除元素只能是 t</strong></td>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></td>
+<td>（连续）子数组，<code>dp[i]</code> 表示以 <code>i</code> 为结尾的子数组的最大和</td>
 <td>3️⃣8️⃣</td>
 </tr>
 <tr class="odd">
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence/">392. 判断子序列</a></td>
+<td>以下标 <code>i</code> 为结尾的 s，和以下标 <code>j</code> 为结尾的 t，相同子序列的长度为 <code>dp[i][j]</code>，<strong>删除元素只能是 t（判断最长公共子序列长度是否和 t 长度一样即可）</strong></td>
+<td>3️⃣8️⃣</td>
+</tr>
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/distinct-subsequences/">115. 不同的子序列</a></td>
 <td>以下标 <code>i</code> 为结尾的 s 子序列中出现以 <code>j</code> 为结尾的 t 的个数为 <code>dp[i][j]</code>，较上一题初始化和递推公式不同</td>
 <td>3️⃣9️⃣</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-operation-for-two-strings/">583. 两个字符串的删除操作</a></td>
 <td>找出最长公共子序列，用两个字符串的总长度减去两个最长公共子序列的长度</td>
 <td>3️⃣9️⃣</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/edit-distance/">72. 编辑距离</a></td>
 <td></td>
 <td>3️⃣9️⃣</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindromic-substrings/">647. 回文子串</a></td>
 <td></td>
 <td>4️⃣0️⃣</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-subsequence/">516. 最长回文子序列</a></td>
 <td></td>
 <td>4️⃣0️⃣</td>
