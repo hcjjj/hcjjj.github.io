@@ -20,18 +20,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>「云计算」Kubernetes 从基础概念到应用部署 - H-sediment</title>
+  <title>Kubernetes： 从基础概念到应用部署 - H-sediment</title>
 
   
     <meta name="description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，简化了服务的部署运维流程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「云计算」Kubernetes 从基础概念到应用部署">
+<meta property="og:title" content="Kubernetes： 从基础概念到应用部署">
 <meta property="og:url" content="http://example.com/2024/06/29/k8s/index.html">
 <meta property="og:site_name" content="H-sediment">
 <meta property="og:description" content="K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，简化了服务的部署运维流程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/xaas-DeUvn0Gb.svg">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240912155133.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240629210114.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240806163046.png">
 <meta property="og:image" content="c:/Users/hcjjj/AppData/Roaming/Typora/typora-user-images/image-20240806163117036.png">
@@ -39,17 +37,16 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/image-20240806163217131.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240806163153.png">
 <meta property="article:published_time" content="2024-06-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-14T13:15:51.206Z">
+<meta property="article:modified_time" content="2024-09-15T02:21:05.772Z">
 <meta property="article:author" content="hcjjj">
-<meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Kubernetes">
-<meta property="article:tag" content="cloud computing">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/xaas-DeUvn0Gb.svg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240629210114.png">
   
   
   
-  <meta name="keywords" content="Docker,Kubernetes,cloud computing">
+  <meta name="keywords" content="Kubernetes,Docker">
 
   <!-- feed -->
   
@@ -100,7 +97,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">「云计算」Kubernetes 从基础概念到应用部署</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97"><span class="toc-text">云计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#iaas-a%C9%AA%C3%A6s"><span class="toc-text">IaaS [aɪæs]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%9F%9F"><span class="toc-text">区域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%91%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-text">云虚拟机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%91%E7%A1%AC%E7%9B%98"><span class="toc-text">云硬盘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C"><span class="toc-text">虚拟网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%85%E9%9A%9C%E4%B8%8E%E4%BC%B8%E7%BC%A9"><span class="toc-text">故障与伸缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%91%E4%B8%8A%E8%BF%90%E7%BB%B4"><span class="toc-text">云上运维</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#paas-p%C3%A6s"><span class="toc-text">PaaS [pæs]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8"><span class="toc-text">对象存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E6%89%98%E7%AE%A1"><span class="toc-text">应用托管</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE"><span class="toc-text">大数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%9C%8D%E5%8A%A1"><span class="toc-text">容器服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%A1%E7%AE%97"><span class="toc-text">无服务器计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ai-%E6%9C%8D%E5%8A%A1"><span class="toc-text">AI 服务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes"><span class="toc-text">Kubernetes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-text">运行流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F"><span class="toc-text">应用发布模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%91%E4%B8%9D%E9%9B%80%E9%83%A8%E7%BD%B2"><span class="toc-text">金丝雀部署</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%93%9D%E7%BB%BF%E9%83%A8%E7%BD%B2"><span class="toc-text">蓝绿部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%A0%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">运行无状态应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BA%94%E7%94%A8"><span class="toc-text">部署前后端应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#golang"><span class="toc-text">Golang</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cicd"><span class="toc-text">CI&#x2F;CD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vite-react"><span class="toc-text">Vite + React</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-text">相关资料</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Kubernetes： 从基础概念到应用部署</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#kubernetes"><span class="toc-text">Kubernetes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-text">运行流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F"><span class="toc-text">应用发布模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%91%E4%B8%9D%E9%9B%80%E9%83%A8%E7%BD%B2"><span class="toc-text">金丝雀部署</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%93%9D%E7%BB%BF%E9%83%A8%E7%BD%B2"><span class="toc-text">蓝绿部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%A0%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">运行无状态应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BA%94%E7%94%A8"><span class="toc-text">部署前后端应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#golang"><span class="toc-text">Golang</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cicd"><span class="toc-text">CI&#x2F;CD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vite-react"><span class="toc-text">Vite + React</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-text">相关资料</span></a></li></ol></div></div></widget>
 
 
 
@@ -119,212 +116,9 @@
 <div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Kubernetes/">Kubernetes</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-06-28T16:00:00.000Z">2024-06-29</time></div></div>
 
 <article class='md-text content post'>
-<h1 class="article-title"><span>「云计算」Kubernetes 从基础概念到应用部署</span></h1>
+<h1 class="article-title"><span>Kubernetes： 从基础概念到应用部署</span></h1>
 <p>K8s 本质上是应用服务和服务器之间的中间层，通过暴露一系列 API 能力，简化了服务的部署运维流程。</p>
 <span id="more"></span>
-<h2 id="云计算">云计算</h2>
-<p><strong>云计算的演进总结：</strong></p>
-<ul>
-<li>工作负载的变化：从早期的物理服务器，通过虚拟化技术演进为虚拟机，再通过容器化技术演进为目前的 <strong>容器</strong>。</li>
-<li>隔离单元：无论是启动时间还是单元大小，物理机、虚拟机、容器一路走来，实现了 <strong>从重量级到轻量级</strong> 的转变。</li>
-<li>供应商：从闭源到开源（从 VMware 到 KVM，到 OpenStack，再到 <strong>Kubernetes</strong>），从单一供应商到跨越多个供应商（从公有云到自建云，再到混合云）。</li>
-</ul>
-<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/xaas-DeUvn0Gb.svg" fancybox="true"/></div></div>
-<p><strong>XaaS 的简单归纳：</strong></p>
-<ul>
-<li><strong>IaaS</strong>（Infrastructure as a Service，基础设施即服务），指云计算所提供的计算、存储、网络等基本底层能力，客户不用关注物理机器，只需关注基础架构及应用程序；</li>
-<li><strong>PaaS</strong>（Platform as a Service，平台即服务），指基于云底层能力而构建的面向领域或场景的高层服务，如数据库、应用服务等，客户不用关注基础架构，只需关注应用程序；</li>
-<li>SaaS（Software as a Service，软件即服务），指基于云构建可开箱即用的各种业务应用，此外还有 <strong>FaaS</strong>（Function as a Service）、CaaS（Container as a Service），客户只需关注功能和数据。</li>
-</ul>
-<blockquote>
-<p>在过去的二十年间，云计算几乎重新定义了整个行业的格局，越来越多的企业开始降低对 IT 基础设施的直接资本投入，不再倾向于维护自建的数据中心，而是开始通过上云的方式来获取更强大的计算、存储能力，并实现按时按需付费。</p>
-<p>这不仅仅降低 IT 支出，同时也降低了整个行业的技术壁垒，使得更多的公司 <strong>尤其是初创公司可以更快地实践业务想法并迅速推送到市场。</strong>（正是在初创公司实习才开始使用到容器服务 ☁️）</p>
-</blockquote>
-<h3 id="iaas-aɪæs">IaaS [aɪæs]</h3>
-<p>IaaS 的本质，是对云数据中心和各类 IT 基础设施的抽象，是基于软件技术对物理硬件进行的封装和虚拟。</p>
-<h4 id="区域">区域</h4>
-<p>在云计算行业中，区域对应的则是云计算厂商在某个地理位置提供的所有云服务的组合，是厂商对外提供云服务的基本单位和容器。区域的设立和分布，相当程度地体现了云厂商的业务重点和地区倾向。云厂商在选址时一般会有两种思路：</p>
-<ul>
-<li>一种是考虑放在 <strong>人口稠密的中心城市</strong>，离用户和商业更近，以提供较快的接入体验；</li>
-<li>另一种则是在 <strong>相对偏远的地区</strong>，当地往往能够提供良好的气候条件、充足的建设空间，以及较低的电力、带宽等运营维护成本。</li>
-</ul>
-<p><strong>如何选择合适的区域</strong></p>
-<ol type="1">
-<li><strong>区域的地理位置本身。</strong> 如果场景中需要本地数据中心与云端进行互联，也就是混合云架构，其专线接入一般以同城或短距离接入为主，这样能够较好地控制费用，同时提高线路的稳定性。</li>
-<li><strong>区域之间云服务的差别。</strong> 换句话说，同一个云在不同的区域，所能提供的服务和规模可能是不同的。新旧区域哪个更好，需要根据你的服务需求和待选区域的实际情况来综合衡量。</li>
-<li><strong>成本因素。</strong> 即便是同一种服务的价格，在不同区域也往往是不相同的。区域的流量费用也需要注意，如果把区域作为一个有边界范围的实体圈起来，这个流量可以分为三类：入站流量、出站流量和内部流量。</li>
-</ol>
-<p><strong>多区域架构</strong></p>
-<p>多区域架构指的是部分关键应用，为了追求最佳的用户体验和高可用性，需要把多个区域的资源和能力结合起来进行构建。主流云厂商在跨区域方面也进行了大量建设和投资，主要体现为：</p>
-<ul>
-<li><strong>物理上</strong>，各区域之间建设有网络互联专线，一般称为骨干网（Backbone）。骨干网的存在使得同一个云在不同区域间的通信，能够有较高的带宽和较低的延时。</li>
-<li><strong>软件层面</strong>，允许位于不同区域的虚拟网络跨区域进行互联，使得多区域的私有内网能够借助自有骨干网无缝高速打通。</li>
-<li><strong>DNS 解析层面</strong>，通常会提供就近解析和智能路由能力，将分布广泛的 C 端流量引流到最近的数据中心，以获得最快的响应速度。</li>
-</ul>
-<p>公有云的基础设施（尤其是骨干网的存在）能够极大地方便我们构建多区域的应用程序。通过合理架构完全可以让多个区域的云服务融为一体。借助云的力量，小厂也能轻松拥有巨头的分布式部署能力。</p>
-<p>在应用架构层面，多区域并不意味着需要把某区域的资源复制到其他区域，而是可以根据实际情况各司其职，让不同区域担任不同的角色，联动起来达到业务目的。</p>
-<blockquote>
-<p>比如，可以将面向消费者服务的触点部署到多个区域，就近服务各地区的互联网流量，而偏后台的数据分析和 BI（Business Intelligence） 服务，则可以安置在性价比较高的非一线城市区域，业务数据可通过骨干网不断回传。这是一种经典的分工模式。</p>
-</blockquote>
-<p>当然，也不应当走向另一个极端：轻率、随意地拓展区域。每一个区域的增加，都会相应增加应用架构的复杂性和流量费用，也给我们的维护工作带来负担，这些额外的成本可能会抵消多区域架构带来的好处。</p>
-<p><strong>可用区</strong></p>
-<p>可用区是区域的下级概念，是指一个具备完整而独立的电力供应、冷却系统、网络设施的数据中心单元。</p>
-<ul>
-<li><strong>高可用性</strong></li>
-<li><strong>拓展性</strong></li>
-</ul>
-<p>尽管数据中心内部有着非常精密的运作系统和冗余机制，但地震、火灾、雷击等极端情况下，仍有可能造成数据中心级别的故障。为了避免单个数据中心故障让整个区域不可用，那自然就有必要建设多个相对独立的数据中心，也就是多个可用区了。</p>
-<p>区域本身也有扩展的需求。一些区域由于早期的容量规划和成本控制原因，很可能在若干年的运营后就会变得资源紧张、后劲不足。这时得益于可用区的机制，区域可以通过新建可用区，不断扩展自身容量，补充新鲜血液；而老旧的可用区，则可不对新用户开放，逐步封存甚至淘汰，这让区域形成了良好的新陈代谢机制。</p>
-<p>可用区的数量也可以成为一个衡量区域规模的重要指标。数量越多，意味着这个区域规模越大。</p>
-<h4 id="云虚拟机">云虚拟机</h4>
-<p>云虚拟机即在云端虚拟出的服务器，虚拟化技术是云虚拟机服务的核心，它本身是一个非常宏大的技术领域。比如你可能听说过 Xen、KVM、VMWare、HyperV 等等虚拟化产品和技术。云计算中所使用的虚拟化技术，也大都是从这些虚拟化实现方式演化而来的。云端的虚拟化技术在不断进步和发展，使得云端虚拟化的性能损耗在不断减少、资源利用率不断提升。</p>
-<p><strong>云虚拟机与传统虚拟机的不同</strong></p>
-<p>云虚拟机的体系结构是全面解耦的 <strong>计算存储分离</strong> 的设计思想。传统的虚拟化，往往是对单一物理机器资源的纵向切割，计算、存储、网络等各方面的能力都是一台物理机的子集，从 <strong>可伸缩性</strong> 的角度来说，传统虚拟机存在较大的局限，当物理机的局部出现故障时，也很容易影响到里面的虚拟机。以下是简化的示意图：</p>
-<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240912155133.png" fancybox="true"/></div></div>
-<p>这样虚拟出来的机器，我们在使用感受上其实与传统服务器并无不同，但在可扩展性和故障隔离方面，它就具有很大的优势了。各家厂商的云虚拟机服务的名称会略有不同，阿里云称为云服务器 ECS（Elastic Compute Service），AWS 称为 EC2（Elastic Compute Cloud），Azure 就叫 Virtual Machine，腾讯云则叫做云服务器 CVM（Cloud Virtual Machine）等等。</p>
-<p><strong>网络安全组（Network Security Group, NSG）</strong></p>
-<p>网络安全组可以理解为一层覆盖在虚拟机之外的网络防火墙。它能够控制虚拟机入站、出站的流量，并能根据协议、端口、流向等所设定的规则，来决定是否允许流量通过。</p>
-<p>网络安全组并不工作在操作系统层面，而是在操作系统层之外，是额外的一层防护。非法流量在尚未到达 OS 的网络堆栈之前，就已经被它阻断了。所以 <strong>NSG 的一个优点在于，它不会影响 VM 的性能。</strong></p>
-<p><strong>网络安全组是一种可复用的配置</strong>。如果有大量虚拟机适用于同样的网络控制规则，就能够很方便地让它们使用同一个网络安全组，它体现了云计算中 <strong>软件定义网络</strong> 的特点。</p>
-<p><strong>虚拟机类型</strong></p>
-<p>决定虚拟机配置的最重要的三个要素，即 <strong>类型、代别和实例大小</strong>。</p>
-<p>云厂商会提供通用均衡型、计算密集型、内存优化型、图形计算型等常见的虚拟机类型，CPU 数和内存大小（按 GB 计算）的比例，是决定和区分虚拟机类型的重要指征之一。</p>
-<ul>
-<li><strong>通用均衡型</strong> 的比例通常是 1:4，如 2 核 8G，这是一个经典的搭配，可用于建站、应用服务等各种常见负载，比如作为官网和企业应用程序的后端服务器等。</li>
-<li>如果 vCPU（Virtual CPU）和内存比是 1:2 甚至 1:1，那就是 <strong>计算密集型</strong> 的范畴，它可以用于进行科学计算、视频编码、代码编译等计算密集型负载。</li>
-<li>比例为 1:8 及以上，一般就会被归入 <strong>内存优化型</strong> 了，比如 8 核 64G 的搭配，它在数据库、缓存服务、大数据分析等应用场景较为常见。</li>
-<li><strong>图形计算型</strong> 就是带有 GPU 能力的虚拟机，一般用于机器学习和深度学习模型的训练和推理。</li>
-<li><strong>本地存储型</strong> 是指带有高性能或大容量的本地存储的机型。</li>
-</ul>
-<p>同类型虚拟机的更新换代，往往首先会带来相应 <strong>硬件</strong> CPU 的换代提升。随着一代新机型的推出，云厂商一般都会详细说明背后支撑的硬件详细信息。很多时候也伴随着底层软硬件架构的更新和提升，尤其是 <strong>虚拟化技术</strong> 的改进。</p>
-<p>实例大小（Size），也就是硬件计算资源的规模。业界常常使用 medium、large、xlarge 等字眼来进行命名区分，标准 large 对应的是 2vCPU 的配备，xlarge 则代表 4 个 vCPU，而更高的配置一般用 _n_xlarge 来表达，其中 n 与 xlarge 代表的 4vCPU 是乘法关系。</p>
-<blockquote>
-<p>因为超线程（HyperThreading）技术的普遍存在，常常一个核心能够虚拟出两个 vCPU 的算力，但也有些处理器不支持超线程</p>
-</blockquote>
-<p>在某些场景下，可能还会看到“metal”或者“bare metal”这样的描述规格的字眼，中文称为“裸金属”。它们就是云服务商尽最大可能 <strong>将物理裸机以云产品方式暴露出来</strong> 的实例，主要用于一些追求极致性能，或是需要在非虚拟化环境下运行软件的场景。</p>
-<h4 id="云硬盘">云硬盘</h4>
-<p>云硬盘，又叫做“云盘”或者“云磁盘”，就是云虚拟机上可以挂载和使用的硬盘。这里，它既包含了用于承载操作系统的系统盘，也包括了承载数据的数据盘。有时还会把云端磁盘服务叫做块存储（Block Storage），因为它们与 Linux 操作系统中的块设备相对应，是云上提供的“裸盘”，可以格式化并且施加文件系统。</p>
-<p>云硬盘与传统磁盘的真正差异在于，绝大多数的云硬盘都是远程的。在经典计算机的体系结构中，硬盘是通过本地机器内部主板的高速总线，与 CPU、内存等部件相连接；而在云端，你的硬盘则很可能并不在宿主机上，而是在专用的磁盘服务器阵列中，<strong>两者是通过数据中心内部的特有 IO 线路进行连接</strong>。这也正是 <strong>计算存储分离架构</strong> 的一种体现。</p>
-<p>当下的云硬盘经过了多次的软硬件迭代，尤其是 SSD 的迅速发展，吞吐量和随机读写能力等各项性能指标都已经不再是问题了。云硬盘的性能等级的分为 HDD、SSD/HDD、SSD、高性能 SSD：</p>
-<ul>
-<li>基于传统 HDD 硬盘构建而成的，性能一般，成本低，在不注重性能的测试环境，或者是个人自用的服务器；</li>
-<li>基于混合硬盘，也就是结合 HDD 和 SSD 硬盘构建的云硬盘，比较适合像是操作系统启动盘这样的常规负载；</li>
-<li>纯 SSD 硬盘，可以用它来承载生产环境中重要的关键业务应用，或是各类数据库等 IO 密集型应用；</li>
-<li>进一步优化增强的 SSD 云盘，采用更新一代的企业级闪存硬件，配合改进后的底层传输协议和虚拟化技术栈的优化来提供服务。</li>
-</ul>
-<p>同等的性能等级下，云硬盘的容量越大，一般来说它的性能就越高，直到达到这个等级的上限，这是由云上磁盘能力共享的底层设计所决定的，所以在某些时候，你可能需要刻意地增大所申请的云硬盘的容量，以获取更高的性能，即便这些额外的空间不一定能被用上。</p>
-<p>云盘的热挂载特性让它使用起来特别灵活方便，而且大小性能可以调度，挂载后和本地硬盘操作没有什么两样。当一些应用软件系统本身考虑到了硬件的不可靠性，设计了上层的存储冗余机制时，也可以考虑采用云虚拟机的本地磁盘，<strong>当机器关机或删除，以及出现硬件故障时，本地磁盘上的数据就可能损坏或丢失。</strong></p>
-<h4 id="虚拟网络">虚拟网络</h4>
-<p><strong>虚拟私有网络</strong></p>
-<p>虚拟私有网络（Virtual Private Cloud，简称 VPC），是云计算网络端最重要的概念之一，它是指构建在云上的、相互隔离的、用户可以自主控制的私有网络环境，虚拟私有网络有时也称为专有网络或虚拟网络。</p>
-<p>私有网络就是一张内网，内网之内的服务器和设备可以比较自由地互相通信，与外界默认是隔离的。如果外部互联网，或者其他虚拟网络需要连接，则需要额外的配置。</p>
-<p>在传统数据中心里，经典网络架构中的概念和组件，在虚拟网络中你几乎都能找到对应。比较重要的一些概念包括：</p>
-<ul>
-<li><strong>网段</strong>，私有网络的内部 IP 区段，通常用无类别域间路由（Classless Inter-Domain Routing， CIDR） 形式来表达，如 192.168.0.0/16。</li>
-<li><strong>子网</strong>，私有网络的下级网络结构，一个私有网络可以划分多个子网，这和通常意义上的子网也是对应和一致的；</li>
-<li><strong>路由表</strong>，用于定义私有网络内流量的路由规则，决定着数据包的“下一跳”去向何方。每个子网都必须有一张关联的路由表，通常情况下，系统会自动帮你创建一个默认的路由表；</li>
-<li><strong>网关</strong>，是对进出私有网络的流量进行把守和分发的重要节点，根据用途的不同，有多种类型；</li>
-<li><strong>安全组</strong>，私有网络里虚拟机进出流量的通行或拦截规则，可以起到虚拟机网络防火墙的作用。</li>
-</ul>
-<blockquote>
-<p>VPC 属于局域网，按照 RFC （Request for Comments，<em>互联网技术发展和标准化的核心资料</em>） 规范，能够使用的 IPv4 区段必须为 192.168.0.0/16、172.16.0.0/12、10.0.0.0/8 这三个或它们的子集。</p>
-<p>如果在没有 VPC 的情况下直接创建虚拟机，公有云一般都会自动生成 VPC。</p>
-</blockquote>
-<p>可以建立跨可用区，也就是跨同区域内不同数据中心的私有网络，这是 VPC 的一个强大的特性，能够为我们私有网络的高可用性提供保障。比如，可以让主力集群在一个可用区工作，备用集群在另一个可用区随时待命，需要时迅速切换，也可以把流量同时分发到不同的可用区，动态控制分发策略。</p>
-<p><strong>私有网络中的虚拟机</strong></p>
-<p>一个虚拟网络已经存在时，就可以 <strong>将新创建的虚拟机放置在这个虚拟网络中</strong>，虚拟机和专有网络的连接点是虚拟机的网卡，又称 <strong>弹性网卡</strong>（Elastic Network Interface， 简称 ENI）。虚拟机的网卡一方面是和虚拟机的本体进行绑定，另一方面则嵌入某个私有网络的子网，也会拥有至少一个私网 IP。云上的网卡，之所以被称为“弹性”网卡，是因为它具备以下特征：</p>
-<ol type="1">
-<li>一个虚拟机可以绑定多块网卡，有主网卡和辅助网卡之分；</li>
-<li>一块网卡隶属于一个子网，可以配置同一子网内的多个私有 IP；</li>
-<li>辅助网卡可以动态解绑，还能够绑定到另一台虚拟机上。</li>
-</ol>
-<blockquote>
-<p>当在创建虚拟机的时候，向导会询问这台虚拟机属于哪个 VPC，以及 VPC 下的哪个子网。<strong>这个选项的实质性结果，就是新虚拟机自动生成的主网卡，接入了所选 VPC 的所选子网。</strong></p>
-</blockquote>
-<p>对于生产环境尽量不要使用和依赖自动生成的 <strong>公有 IP</strong>，因为它本质上是一个从公有云的 IP 池中临时租用给你的 IP，如果机器关闭或重启，下次获得的 IP 可能就完全不同了。这时，应该用到的是弹性 IP（Elastic IP），弹性 IP 一旦生成，它所对应的 IP 是固定、不会变化的，非常适合需要稳定 IP 的生产环境，它所谓的弹性，其实是指可以非常自由地解绑和再次绑定到任意目标。</p>
-<p><strong>私有网络对外的出入口</strong></p>
-<p>如果一台云虚拟机没有被赋予公有 IP，为了安全控制，默认情况下它就失去了访问外网的能力，只能进行内网通信。但也有一些情况，<strong>希望内网的机器和外界并不完全隔离，一些互联网流量需要有序地引进来，一些内网机器也需要访问外网。</strong></p>
-<ul>
-<li>如果需要访问外网的虚拟机数量有很多，这种办法就需要很多弹性 IP，管理上就太麻烦了，成本也不划算</li>
-<li>还有一个问题是，弹性 IP 带来的是双向的开放，有时我们只想允许单向的连接</li>
-</ul>
-<p>这就是 <strong>网关</strong> 可以大显身手的场景了，它正是用来统一协调管理私有网络与外部通信的组件，网关有很多种类型，比如 NAT（Network Address Translation）网关，用于在私有网络与公共网络之间进行通信：</p>
-<ul>
-<li>目标网络地址转换（Destination Network Address Translation，DNAT）是 NAT 的一种形式，它主要用于将外部请求的目标 IP 地址转换为内部网络中的特定 IP 地址。</li>
-<li>源网络地址转换（Source Network Address Translation，SNAT）是 NAT 的另一种形式，它用于将内部网络中的源 IP 地址转换为公共网络可路由的 IP 地址。</li>
-</ul>
-<p>还有一种网关被称为 <strong>VPN 网关</strong>，也可以帮助外界连接到 VPC，它本质上是基于你所熟知的 VPN 技术。由于 VPN 能够基于互联网提供私有加密的通信，因此非常适合用来从任意其他私有设施安全地连接到 VPC。这些私有设施可以小到一台个人电脑或手机终端，也可以大到是你本地的数据中心，还可以是另一个 VPC。</p>
-<blockquote>
-<p>VPN 主要用于创建安全的远程连接和加密数据传输，而 SNAT 则是一种网络地址转换技术。</p>
-<p>当想要科学上网访问境外服务器时，需要使用 VPN 服务来连接到位于另一个国家的服务器，用户的网络流量就会通过这个远程服务器路由，从而绕过地理限制或审查制度。</p>
-<p>使用 VPN 时，数据传输会被加密，这意味着即使数据在传输过程中被截获，第三方也无法轻易解读内容。此外，VPN 还可以隐藏用户的真实 IP 地址，只显示 VPN 服务器的 IP 地址，从而保护用户的隐私和安全</p>
-</blockquote>
-<p><strong>多网连接的方式</strong></p>
-<p>公有云上是允许同时使用多个 VPC 的，这样可以构建更加复杂的网络架构，实现模块隔离和跨区域扩展等高级需求。</p>
-<ul>
-<li>云端 VPC 和 VPC 的互联可以采用 <strong>对等连接</strong>（VPC Peering）的方式，能够在不添加额外设备的情况下，让两个 VPC 无缝地互联起来，对等连接甚至还能够支持跨区域的私有网络互联，但是它 <strong>不具备传递性</strong>；</li>
-<li>如果需要多个 VPC 间任意路径的互联互通，可以考虑使用 <strong>专用网络设施</strong>，允许进行更精细的路由设置；</li>
-<li>公有云中的私有网络，还可以和企业本地数据中心进行互联，形成 <strong>混合云架构</strong>，可以先考虑使用 <strong>VPN</strong> 这种轻量的方式，通过公网线路为两边建立连接渠道，如果应用场景要求保证延迟和带宽就需要 <strong>专线</strong> 进行连接，一般专线还会和 VPN 一起组合使用，来保证通道的高可用性。</li>
-</ul>
-<blockquote>
-<p>混合云的构建是一项较为复杂的工程，通常需要由本地机房、云厂商、电信运营商三方配合进行，也牵涉到本地数据中心端的网络规划和路由设备适配。</p>
-</blockquote>
-<h4 id="故障与伸缩">故障与伸缩</h4>
-<p>服务等级协议（Service Level Agreement，SLA）主要是用来对服务的可靠性作出一个预期和保证。SLA 的可用性等级可能是 99.9%，也可能是 99.99%，再好的服务也不能达到理论上的 100%。</p>
-<blockquote>
-<p>从架构思维的角度上来说，需要假定故障就是可能会发生，对于它的影响事先就要做好准备，事先就进行推演并设置相关的冗余和预案，AWS 有一个非常著名的架构原则，叫做 Design For Failure。</p>
-</blockquote>
-<p>云上故障分类：</p>
-<ul>
-<li>第一种故障是在宿主机的级别，这也是从概率上来说最常见的一种故障。</li>
-<li>第二种规模更大的故障，是在数据中心，也就是可用区的层面。（火灾、雷击等物理破坏）</li>
-<li>第三种更严重的故障，就是整个区域级别的事故了。</li>
-</ul>
-<p>应对的基本思想是化单点为多点，形成不同层面、不同粒度的冗余。</p>
-<p><strong>弹性伸缩</strong></p>
-<p>弹性伸缩既可以提高工作负载洪峰来临时的吞吐和消化能力，提高业务稳定性，又能够在低谷期帮我们显著地节约成本。</p>
-<p>在 IaaS 端，能够弹性伸缩的最实用的产品形态，莫过于 <strong>虚拟机编组</strong> 了，也就是功能相同的多个虚拟机的集合。把它们作为一个单位来创建、管理和伸缩，是一种普遍应用的最佳实践。把多个虚拟机以弹性伸缩组的方式进行统一管理，能够极大地提高效率，减轻负担。因为弹性伸缩服务，会帮我们动态地创建和销毁虚拟机实例，自动根据我们指定的数量和扩缩容规则，来协调虚拟机的生命周期。</p>
-<p>弹性伸缩服务，在云端还有一个最佳拍档，就是 <strong>负载均衡器</strong>。将流量均匀地，或者按照一定权重或规则，分发到多台虚拟机上，正好可以和提供计算资源的弹性伸缩服务形成配合。当负载增大、虚拟机增加时，负载均衡也能够自动动态识别，将流量分发到新创建的虚拟机上。</p>
-<blockquote>
-<p>使用弹性伸缩服务来实现云端弹性架构，用它来管理一组虚拟机，并与负载均衡一起配合。这特别适合处理无状态类的计算需求，因为它会为你代劳底层计算资源的管理。</p>
-</blockquote>
-<h4 id="云上运维">云上运维</h4>
-<p>云的引入能够让我们在更高的层面去思考和解决问题，比如说，</p>
-<ul>
-<li>云端基础设施的存在，可以让运维从偏硬件服务器、偏物理机房的日常繁琐工作中解脱出来，更多地基于云在软件的层面，进行部署、监控、调整。</li>
-<li>而云上的高质量、高可用的服务，也能避免我们重复建设，不用自己造轮子，也大大减轻了运维负担。</li>
-</ul>
-<blockquote>
-<p>底层的机房运维、基础架构运维仍然会继续存在，但会向头部的云供应商大规模集中，这属于云厂商的运维视角</p>
-</blockquote>
-<p>云其实是提高了运维的效率，改变了运维的形态，与此同时，由于云上运维的软件属性显著增强了，它就自然地和研发会有更强的融合。近期 <strong>DevOps</strong> 理念和云原生热潮的兴起，就说明了这一点。许多工作慢慢地会分不清它究竟是属于运维还是研发，因为 <strong>两者的界限正在模糊</strong>。</p>
-<p><strong>云时代的运维利器</strong></p>
-<p>几乎每个云都推出了自己的命令行工具，比如 AWS CLI、Azure CLI、阿里云 <strong>CLI</strong> 等，除了命令行工具，各云还都提供了开发者工具包（SDK）。如果你的资源调度逻辑相当复杂，或者需要与你自己的程序集成，那么你可以考虑使用相应语言的 <strong>SDK</strong>，来进行云上的一些资源管理操作。</p>
-<p>如果要频繁地在云上部署一套包含众多资源项的复杂系统，还有另外一个得力的帮手：<strong>资源编排类云服务</strong>。属于这个领域的服务包括有 AWS CloudFormation、 Azure 的 ARM Template、阿里云资源编排服务（ROS）等，它们都可以通过使用一个 JSON 格式的文本文件，来描述和定义一个系统中所有的组件，以及它们互相之间的关系。</p>
-<p><strong>云运维由哪些工作组成</strong></p>
-<p>在云端，传统的运维工作仍然存在，其中包括你所熟知的 <strong>监控、部署、升级、备份</strong> 等</p>
-<ul>
-<li><strong>监控</strong> 一直是运维最核心的工作之一。几乎所有的云端服务都自带有一定的监控功能，默认提供了不少内置的维度指标和可视化图表，这些开箱即用的图表你要充分利用好，它们能够很好地帮助你了解相关服务的状态。</li>
-<li><strong>备份</strong> 是一个简单但又很容易被我们忽视的事项。在云上需要创造多层次的冗余，而备份在创造冗余方面也承担着重要的角色，有的时候它会是最后保障。</li>
-<li><strong>迁移</strong> 是带有云端特色的运维任务，因为只要不是在云上创建的全新业务，传统业务在逐步上云的过程中一定会面临迁移工作。</li>
-<li>云上的运维会包含和云厂商进行 <strong>对接</strong> 的工作，运维团队中需要有相应的角色对云的工单机制，以及技术支持侧的对接方式了然于胸，以备不时之需。</li>
-<li><strong>具有管理属性</strong>，比如对于云资源的命名、开通、清理等日常操作的规范，各类云上安全的控制和最佳实践，所有云资源的负责人、所属资源组和权限体系等，还有一项重要事务就是 <strong>成本管理</strong>。</li>
-</ul>
-<blockquote>
-<p>当前业界的一个重要趋势是，运维和开发的边界正在模糊。所以我在前面提到的诸多运维工作，可能是由开发者来负责，也可能是运维人员来承担。</p>
-<p>作为开发者，应该学习和掌握一些运维的知识和技巧，让自己变得更加全面和综合；</p>
-<p>作为运维人员，也应该学习了解现代软件构建和系统架构方面的知识，尤其是学习云、掌握云，为云端架构的全面到来做好准备。</p>
-</blockquote>
-<h3 id="paas-pæs">PaaS [pæs]</h3>
-<p>虚拟机、云磁盘、云网络等服务的特点是，和传统 IT 基础设施往往有一个对应关系，所以被称为基础设施即服务（Infrastructure-as-a-Service）。PaaS （Platform-as-a-Service），则是指云计算提供的平台类服务，在这些平台的基础上，用户可以直接开发、运行、管理应用程序，而无需构建和维护底层的基础设施。</p>
-<p>PaaS 是在 IaaS 的基础上又做了许多工作，构建了很多关键抽象和可复用的单元，让我们用户能够在更上层进行应用的构建，把更多精力放在业务逻辑上。</p>
-<p><strong>PaaS 服务的优势，就在于生产力，在于效率，尤其是在搭建和运维层面。</strong></p>
-<h4 id="对象存储">对象存储</h4>
-<h4 id="应用托管">应用托管</h4>
-<h4 id="大数据">大数据</h4>
-<h4 id="容器服务">容器服务</h4>
-<h4 id="无服务器计算">无服务器计算</h4>
-<h4 id="ai-服务">AI 服务</h4>
 <h2 id="kubernetes">Kubernetes</h2>
 <h3 id="基础概念">基础概念</h3>
 <h4 id="简介">简介</h4>
