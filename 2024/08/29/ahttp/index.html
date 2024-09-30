@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240905120540.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240905120929.png">
 <meta property="article:published_time" content="2024-08-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-06T08:02:51.019Z">
+<meta property="article:modified_time" content="2024-09-27T06:06:06.238Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="HTTP">
 <meta name="twitter:card" content="summary">
@@ -647,17 +647,17 @@ B -- "响应" --> A</pre>
 <h2 id="https">HTTPS</h2>
 <p>如果通信过程具备了四个特性，就可以认为是“安全”的，这四个特性是：机密性、完整性，身份认证和不可否认：</p>
 <ul>
-<li>机密性（Secrecy/Confidentiality）是指对数据的“保密”，只能由可信的人访问，对其他人是不可见的“秘密”，简单来说就是不能让不相关的人看到不该看的东西。</li>
-<li>完整性（Integrity，也叫一致性）是指数据在传输过程中没有被窜改，不多也不少，“完完整整”地保持着原状。</li>
-<li>身份认证（Authentication）是指确认对方的真实身份，也就是“证明你真的是你”，保证消息只能发送给可信的人。</li>
-<li>不可否认（Non-repudiation/Undeniable），也叫不可抵赖，意思是不能否认已经发生过的行为，不能“说话不算数”“耍赖皮”</li>
+<li><strong>机密性</strong>（Secrecy/Confidentiality）是指对数据的“保密”，只能由可信的人访问，对其他人是不可见的“秘密”，简单来说就是不能让不相关的人看到不该看的东西。</li>
+<li><strong>完整性</strong>（Integrity，也叫一致性）是指数据在传输过程中没有被<strong>窜改</strong>，不多也不少，“完完整整”地保持着原状。</li>
+<li><strong>身份认证</strong>（Authentication）是指确认对方的真实身份，也就是“证明你真的是你”，保证消息只能发送给可信的人。</li>
+<li><strong>不可否认</strong>（Non-repudiation/Undeniable），也叫不可抵赖，意思是不能否认已经发生过的行为，不能“说话不算数”“耍赖皮”</li>
 </ul>
 <p>只有同时具备了机密性、完整性、身份认证、不可否认这四个特性，通信双方的利益才能有保障，才能算得上是真正的安全</p>
 <p>HTTPS 名字里的“S”，是把 HTTP 下层的传输协议由 TCP/IP 换成了 SSL/TLS，由“HTTP over TCP/IP”变成了“HTTP over SSL/TLS”，让 HTTP 运行在了安全的 SSL/TLS 协议上</p>
 <h3 id="ssltls">SSL/TLS</h3>
 <p>SSL 即安全套接层（Secure Sockets Layer），在 OSI 模型中处于第 5 层（会话层），由网景公司于 1994 年发明，SSL 发展到 v3 时已经证明了它自身是一个非常好的安全通信协议，于是互联网工程组 IETF 在 1999 年把它改名为 TLS（传输层安全，Transport Layer Security），正式标准化，版本号从 1.0 重新算起，所以 TLS1.0 实际上就是 SSLv3.1。</p>
 <p>到今天 TLS 已经发展出了三个版本，分别是 2006 年的 1.1、2008 年的 1.2 和去年 2018 的 1.3，目前应用的最广泛的 TLS 是 1.2，而之前的协议（TLS1.1⁄1.0、SSLv3/v2）都已经被认为是不安全的，各大浏览器在 2020 年左右停止支持。</p>
-<p>浏览器和服务器在使用 TLS 建立连接时需要选择一组恰当的加密算法来实现安全通信，这些算法的组合被称为“密码套件”（cipher suite，也叫加密套件），TLS 的密码套件命名非常规范，基本的形式是“密钥交换算法 + 签名算法 + 对称加密算法 + 摘要算法”，如：</p>
+<p>浏览器和服务器在使用 TLS 建立连接时需要选择<strong>一组恰当的加密算法</strong>来实现安全通信，这些算法的组合被称为“密码套件”（cipher suite，也叫<strong>加密套件</strong>），TLS 的密码套件命名非常规范，基本的形式是“密钥交换算法 + 签名算法 + 对称加密算法 + 摘要算法”，如：</p>
 <p>“ECDHE-RSA-AES256-GCM-SHA384” - “握手时使用 ECDHE 算法进行密钥交换，用 RSA 签名和身份认证，握手后的通信使用 AES 对称算法，密钥长度 256 位，分组模式是 GCM，摘要算法 SHA384 用于消息认证和产生随机数。”</p>
 <p>OpenSSL 是一个著名的开源密码学程序库和工具包，几乎支持所有公开的加密算法和协议，已经成为了事实上的标准，许多应用软件都会使用它作为底层库来实现 TLS 功能，包括常用的 Web 服务器 Apache、Nginx 等。</p>
 <h3 id="对称与非对称加密">对称与非对称加密</h3>
@@ -668,7 +668,7 @@ B -- "响应" --> A</pre>
 <p>“对称加密”就是指加密和解密时使用的密钥都是同一个，是“对称”的，只要保证了密钥的安全，那整个通信过程就可以说具有了机密性。</p>
 <p>TLS 里有非常多的对称加密算法可供选择，比如 RC4、DES、3DES、AES、ChaCha20 等，但前三种算法都被认为是不安全的，通常都禁止使用，目前常用的只有 AES 和 ChaCha20。</p>
 <ul>
-<li>AES 的意思是“高级加密标准”（Advanced Encryption Standard），密钥长度可以是 128、192 或 256。它是 DES 算法的替代者，安全强度很高，性能也很好，而且有的硬件还会做特殊优化，所以非常流行，是应用最广泛的对称加密算法</li>
+<li><strong>AES</strong> 的意思是“高级加密标准”（Advanced Encryption Standard），密钥长度可以是 128、192 或 256。它是 DES 算法的替代者，安全强度很高，性能也很好，而且有的硬件还会做特殊优化，所以非常流行，是应用最广泛的对称加密算法</li>
 <li>ChaCha20 是 Google 设计的另一种加密算法，密钥长度固定为 256 位，纯软件运行性能要超过 AES，曾经在移动客户端上比较流行，但 ARMv8 之后也加入了 AES 硬件优化，所以现在不再具有明显的优势，但仍然算得上是一个不错算法</li>
 </ul>
 <p><strong>非对称加密</strong></p>
@@ -734,7 +734,6 @@ B -- "响应" --> A</pre>
 <li>有了主密钥和派生的会话密钥，握手就快结束了。客户端发一个“<strong>Change Cipher Spec</strong>”，然后再发一个“<strong>Finished</strong>”消息，把之前所有发送的数据做个摘要，再加密一下，让服务器做个验证</li>
 <li>服务器也是同样的操作，发“<strong>Change Cipher Spec</strong>”和“<strong>Finished</strong>”消息，双方都验证加密解密 OK，握手正式结束，后面就收发被加密的 HTTP 请求和响应了</li>
 </ol>
-<p><strong>RSA 握手过程</strong></p>
 <p><strong>双向认证</strong></p>
 <p>上面说的是“<strong>单向认证</strong>”握手过程，只认证了服务器的身份，而没有认证客户端的身份。这是因为通常单向认证通过后已经建立了安全通信，用账号、密码等简单的手段就能够确认用户的真实身份。</p>
 <p>但为了防止账号、密码被盗，有的时候（比如网上银行）还会使用 U 盾给用户颁发客户端证书，实现“<strong>双向认证</strong>”，这样会更加安全。</p>
