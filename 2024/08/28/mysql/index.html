@@ -91,7 +91,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">MySQL /maɪ ˈsiːkwəl/ 原理与实践 💽</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sql-%E6%89%A7%E8%A1%8C"><span class="toc-text">SQL 执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97"><span class="toc-text">日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redo-log"><span class="toc-text">redo log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#binlog"><span class="toc-text">binlog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4"><span class="toc-text">两阶段提交</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-text">隔离级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F"><span class="toc-text">启动方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%94%E7%A6%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">隔离的实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%B4%A2%E5%BC%95%E6%A8%A1%E5%9E%8B"><span class="toc-text">常见索引模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#innodb-%E7%B4%A2%E5%BC%95%E6%A8%A1%E5%9E%8B"><span class="toc-text">InnoDB 索引模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95-or-%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95"><span class="toc-text">唯一索引 OR 普通索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">索引的选择</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81"><span class="toc-text">锁 🔒</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%94%81"><span class="toc-text">全局锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BA%A7%E9%94%81"><span class="toc-text">表级锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E9%94%81"><span class="toc-text">行锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B"><span class="toc-text">死锁检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E-id"><span class="toc-text">自增 id</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">MySQL /maɪ ˈsiːkwəl/ 原理与实践 💽</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#sql-%E6%89%A7%E8%A1%8C"><span class="toc-text"> SQL 执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97"><span class="toc-text"> 日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redo-log"><span class="toc-text"> redo log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#binlog"><span class="toc-text"> binlog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4"><span class="toc-text"> 两阶段提交</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-text"> 事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-text"> 隔离级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F"><span class="toc-text"> 启动方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%94%E7%A6%BB%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text"> 隔离的实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text"> 索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%B4%A2%E5%BC%95%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 常见索引模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#innodb-%E7%B4%A2%E5%BC%95%E6%A8%A1%E5%9E%8B"><span class="toc-text"> InnoDB 索引模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95-or-%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95"><span class="toc-text"> 唯一索引 OR 普通索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text"> 索引的选择</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81"><span class="toc-text"> 锁 🔒</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%94%81"><span class="toc-text"> 全局锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BA%A7%E9%94%81"><span class="toc-text"> 表级锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E9%94%81"><span class="toc-text"> 行锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B"><span class="toc-text"> 死锁检测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E-id"><span class="toc-text"> 自增 id</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text"> 参考资料</span></a></li></ol></div></div></widget>
 
 
 
@@ -147,8 +147,8 @@
 <h1 class="article-title"><span>MySQL /maɪ ˈsiːkwəl/ 原理与实践 💽</span></h1>
 <p>梳理 MySQL 知识体系</p>
 <span id="more"></span>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/1024px-MySQL.ff87215b43fd7292af172e2a5d9b844217262571.png" style="zoom:30%;" /></p>
-<h2 id="sql-执行">SQL 执行</h2>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/1024px-MySQL.ff87215b43fd7292af172e2a5d9b844217262571.png" style="zoom:30%;" />              
+<h2 id="sql-执行"><a class="markdownIt-Anchor" href="#sql-执行"></a> SQL 执行</h2>
 <pre class="mermaid">graph LR
     客户端-->连接器
     连接器-->查询缓存
@@ -162,21 +162,22 @@
 <li><strong>Server 层</strong>：连接器、查询缓存、分析器、优化器、执行器等（包括内置函数、存储过程、触发器、视图等）
 <ul>
 <li>连接器：负责跟客户端建立连接、获取权限、维持和管理连接，客户端如果太长时间没动静，连接器就会自动将它断开</li>
-<li><del>查询缓存</del>：key 是查询的语句，value 是查询的结果（查询缓存命中率通常很低），8.0 版本将查询缓存的整块功能删除</li>
+<li><s>查询缓存</s>：key 是查询的语句，value 是查询的结果（查询缓存命中率通常很低），8.0 版本将查询缓存的整块功能删除</li>
 <li>分析器：根据词法分析的结果，语法分析器会根据语法规则，判断输入的这个 SQL 语句是否满足 MySQL 语法</li>
 <li>优化器：在表里面有多个索引的时候，决定使用哪个索引；或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序</li>
 <li>执行器：开始执行的时候，要先判断一下你对这个表 T 有没有执行的权限，然后使用引擎提供的接口</li>
-</ul></li>
+</ul>
+</li>
 <li><strong>存储引擎层</strong>：负责数据的存储和提取，插件式支持 <strong>InnoDB</strong>（5.5.5 后默认）、MyISAM、Memory 等存储引擎</li>
 </ul>
-<h2 id="日志">日志</h2>
+<h2 id="日志"><a class="markdownIt-Anchor" href="#日志"></a> 日志</h2>
 <p>与查询流程不一样的是，更新流程还涉及两个重要的日志模块：redo log（重做日志）和 binlog（归档日志）。</p>
-<h3 id="redo-log">redo log</h3>
-<p>MySQL 中的 <strong>WAL（Write-Ahead Logging）</strong>关键点就是先写日志，再写磁盘。当有一条记录需要更新的时候，InnoDB 引擎就会先把记录<strong>写到 redo log 里面，并更新内存</strong>，这个时候更新就算完成了。同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面，而这个更新往往是在系统比较空闲的时候做。</p>
+<h3 id="redo-log"><a class="markdownIt-Anchor" href="#redo-log"></a> redo log</h3>
+<p>MySQL 中的 <strong>WAL（Write-Ahead Logging）<strong>关键点就是先写日志，再写磁盘。当有一条记录需要更新的时候，InnoDB 引擎就会先把记录</strong>写到 redo log 里面，并更新内存</strong>，这个时候更新就算完成了。同时，InnoDB 引擎会在适当的时候，将这个操作记录更新到磁盘里面，而这个更新往往是在系统比较空闲的时候做。</p>
 <p>InnoDB 的 redo log 是固定大小的文件，从头开始写，写到末尾就又回到开头循环写。有了 redo log，InnoDB 就可以保证即使数据库发生异常重启，之前提交的记录都不会丢失，这个能力称为 <strong>crash-safe</strong>。</p>
-<h3 id="binlog">binlog</h3>
+<h3 id="binlog"><a class="markdownIt-Anchor" href="#binlog"></a> binlog</h3>
 <p>redo log 是 InnoDB 引擎特有的日志，而 Server 层也有自己的日志，称为 binlog（归档日志），这两种日志有以下三点不同：</p>
-<ol type="1">
+<ol>
 <li>redo log 是 InnoDB 引擎特有的；binlog 是 MySQL 的 Server 层实现的，所有引擎都可以使用。</li>
 <li>redo log 是 <strong>物理日志</strong>，记录的是“在某个数据页上做了什么修改”；binlog 是 <strong>逻辑日志</strong>，记录的是这个语句的原始逻辑，比如“给 ID = 2 这一行的 c 字段加 1 ”。</li>
 <li>redo log 是 <strong>循环写</strong> 的，空间固定会用完；binlog 是可以 <strong>追加写</strong> 入的。“追加写”是指 binlog 文件写到一定大小后会切换到下一个，并不会覆盖以前的日志。</li>
@@ -193,7 +194,7 @@ F --> G[新行更新到内存]
 G --> H[写入 redo log 处于 prepare 阶段]
 H --> I[写 binlog]
 I --> J[提交事务 redo log 处于 commit 状态]</pre>
-<h3 id="两阶段提交">两阶段提交</h3>
+<h3 id="两阶段提交"><a class="markdownIt-Anchor" href="#两阶段提交"></a> 两阶段提交</h3>
 <p>为了 <strong>让两份日志之间的逻辑一致</strong>，将 redo log 的写入拆成了两个步骤：prepare 和 commit，这就是”两阶段提交”。</p>
 <p>如果不使用“两阶段提交”，那么数据库的状态就有可能和用它的日志恢复出来的库的状态不一致。</p>
 <p>binlog 会记录所有的逻辑操作，并且是采用“追加写”的形式。如果 DBA 承诺说半个月内可以恢复，那么备份系统中一定会保存最近半个月的所有 binlog，同时系统会定期做整库备份。</p>
@@ -201,9 +202,9 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <li>redo log 用于保证 crash-safe 能力。innodb_flush_log_at_trx_commit 这个参数设置成 1 的时候，表示每次事务的 redo log 都直接持久化到磁盘，这样可以保证 MySQL 异常重启之后数据不丢失。</li>
 <li>sync_binlog 这个参数设置成 1 的时候，表示每次事务的 binlog 都持久化到磁盘，这样可以保证 MySQL 异常重启之后 binlog 不丢失。</li>
 </ul>
-<h2 id="事务">事务</h2>
+<h2 id="事务"><a class="markdownIt-Anchor" href="#事务"></a> 事务</h2>
 <p>简单来说，事务就是要保证一组数据库操作，要么全部成功，要么全部失败。在 MySQL 中，事务支持是在引擎层实现的。事务的 <strong>ACID（Atomicity、Consistency、Isolation、Durability）</strong> 即原子性、一致性、隔离性、持久性。</p>
-<h3 id="隔离级别">隔离级别</h3>
+<h3 id="隔离级别"><a class="markdownIt-Anchor" href="#隔离级别"></a> 隔离级别</h3>
 <p>当数据库上有 <strong>多个事务同时执行</strong> 的时候，就可能出现 <strong>脏读（dirty read）、不可重复读（non-repeatable read）、幻读（phantom read）</strong> 的问题，为了解决这些问题，就有了“隔离级别”的概念。</p>
 <p>隔离得越严实，效率就会越低，SQL 标准的事务隔离级别包括<strong>读未提交（read uncommitted）</strong>、<strong>读提交（read committed）</strong>、<strong>可重复读（repeatable read）</strong> 和 <strong>串行化（serializable ）</strong>：</p>
 <ul>
@@ -224,13 +225,13 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <p>假设管理一个个人银行账户表，一个表存了每个月月底的余额，一个表存了账单明细。这时候要做数据校对，也就是判断上个月的余额和当前余额的差额，是否与 <strong>本月的账单明细</strong> 一致。一定希望 <strong>在校对过程中，即使有用户发生了一笔新的交易，也不影响你的校对结果</strong>。</p>
 <p>这时候使用“可重复读”隔离级别就很方便。事务启动时的视图可以认为是静态的，不受其他事务更新的影响。</p>
 </blockquote>
-<h3 id="启动方式">启动方式</h3>
+<h3 id="启动方式"><a class="markdownIt-Anchor" href="#启动方式"></a> 启动方式</h3>
 <p>MySQL 的事务启动方式有以下几种：</p>
-<ol type="1">
+<ol>
 <li>显式启动事务语句， <code>begin</code> 或 <code>start transaction</code>。配套的提交语句是 <code>commit</code>，回滚语句是 <code>rollback</code>。</li>
 <li><code>set autocommit=0</code>，这个命令会将这个线程的 <strong>自动提交</strong> 关掉。意味着如果你只执行一个 select 语句，这个事务就启动了，而且并不会自动提交。这个事务持续存在直到你 <strong>主动</strong> 执行 <code>commit</code> 或 <code>rollback</code> 语句，或者断开连接。</li>
 </ol>
-<h3 id="隔离的实现">隔离的实现</h3>
+<h3 id="隔离的实现"><a class="markdownIt-Anchor" href="#隔离的实现"></a> 隔离的实现</h3>
 <p>在 MySQL 中，实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值，当没有事务再需要用到这些回滚日志时（就是当系统里没有比这个回滚日志更早的 read-view 的时候），回滚日志会被删除。</p>
 <p>假设一个值从 1 被按顺序改成了 2、3、4，不同时刻启动的事务查询这条记录会有不同的 read-view，即同一条记录在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）。</p>
 <blockquote>
@@ -238,13 +239,13 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <p>长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致 <strong>大量占用存储空间</strong>。除了对回滚段的影响，长事务还 <strong>占用锁资源</strong>，也可能拖垮整个库。</p>
 <p><strong>如何避免长事务对业务的影响？</strong></p>
 <p>从应用开发端来看：</p>
-<ol type="1">
+<ol>
 <li>确认是否使用了 set autocommit = 0。这个确认工作可以在测试环境中开展，把 MySQL 的 general_log 开起来，然后随便跑一个业务逻辑，通过 general_log 的日志来确认。一般框架如果会设置这个值，也就会提供参数来控制行为，<strong>目标就是把它改成 1</strong>。</li>
 <li>确认是否有不必要的 <strong>只读事务</strong>。有些框架会习惯不管什么语句先用 begin/commit 框起来。有些是业务并没有这个需要，但是也 <strong>把好几个 select 语句放到了事务中</strong>。这种只读事务可以去掉。</li>
 <li>业务连接数据库的时候，根据业务本身的预估，通过 SET MAX_EXECUTION_TIME 命令，来 <strong>控制每个语句执行的最长时间</strong>，避免单个语句意外执行太长时间。</li>
 </ol>
 <p>从数据库端来看：</p>
-<ol type="1">
+<ol>
 <li><strong>监控</strong> information_schema.Innodb_trx 表，设置长事务阈值，超过就报警 / 或者 kill；</li>
 <li>Percona 的 pt-kill 工具；</li>
 <li>在业务功能测试阶段要求输出所有的 general_log，分析日志行为提前发现问题；</li>
@@ -288,20 +289,21 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 
     A <-->|低水位| B
     B <-->|高水位| C
-    D --> B</pre>
+	D --> B</pre>
 <p>对于当前事务的启动瞬间来说，一个数据版本的 row trx_id，有以下几种可能：</p>
-<ol type="1">
+<ol>
 <li>如果落在绿色部分，表示这个版本是已提交的事务或者是当前事务自己生成的，这个数据是可见的；</li>
 <li>如果落在红色部分，表示这个版本是由将来启动的事务生成的，是肯定不可见的；</li>
 <li>如果落在黄色部分，那就包括两种情况
-<ol type="1">
+<ol>
 <li>若 row trx_id 在数组中，表示这个版本是由还没提交的事务生成的，不可见；</li>
 <li>若 row trx_id 不在数组中，表示这个版本是已经提交了的事务生成的，可见。</li>
-</ol></li>
+</ol>
+</li>
 </ol>
 <p><strong>InnoDB 利用了“所有数据都有多个版本”的这个特性，实现了“秒级创建快照”的能力。</strong></p>
 <p>一个数据版本，对于一个事务视图来说，除了自己的更新总是可见以外，有三种情况：</p>
-<ol type="1">
+<ol>
 <li>版本未提交，不可见；</li>
 <li>版本已提交，但是是在视图创建后提交的，不可见；</li>
 <li>版本已提交，而且是在视图创建前提交的，可见。</li>
@@ -318,8 +320,8 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <li>在读提交隔离级别下，<strong>每一个语句执行前</strong>都会重新算出一个新的视图。</li>
 </ul>
 <p>为什么<strong>表结构</strong>不支持“可重复读”？这是因为表结构没有对应的行数据，也没有 row trx_id，因此只能遵循<strong>当前读</strong>的逻辑，MySQL 8.0 已经可以把表结构放在 InnoDB 字典里了，也许以后会支持表结构的可重复读。</p>
-<h2 id="索引">索引</h2>
-<h3 id="常见索引模型">常见索引模型</h3>
+<h2 id="索引"><a class="markdownIt-Anchor" href="#索引"></a> 索引</h2>
+<h3 id="常见索引模型"><a class="markdownIt-Anchor" href="#常见索引模型"></a> 常见索引模型</h3>
 <p>索引的常见模型有哈希表、有序数组、搜索树：</p>
 <ul>
 <li><strong>哈希表</strong> 是一种以键 - 值（key-value）存储数据的结构，拉链法解决哈希冲突的问题，区间需要全部扫描，<strong>哈希表这种结构适用于只有等值查询的场景</strong>。</li>
@@ -332,10 +334,14 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <li>为了让一个查询尽量少地读磁盘，就必须让查询过程访问尽量少的数据块则使用“N 叉”树，“N”取决于数据块的大小</li>
 <li>以 InnoDB 的一个整数字段索引为例，这个 N 差不多是 1200。这棵树高是 4 的时候，就可以存 1200 的 3 次方个值，这已经 17 亿了</li>
 <li>树根的数据块总是在内存中的（第二层也有很大概率在），一个 10 亿行的表上一个整数字段的索引，查找一个值最多只需要访问 2-3 次磁盘</li>
-<li>N 叉树由于在读写上的性能优点，以及适配磁盘的访问模式，已经被广泛应用在数据库引擎中了 &gt; 在 MySQL 中，索引是在存储引擎层实现的，所以并没有统一的索引标准，即不同存储引擎的索引的工作方式并不一样，而即使多个存储引擎支持同一种类型的索引，其底层的实现也可能不同。</li>
-</ul></li>
+<li>N 叉树由于在读写上的性能优点，以及适配磁盘的访问模式，已经被广泛应用在数据库引擎中了</li>
 </ul>
-<h3 id="innodb-索引模型">InnoDB 索引模型</h3>
+</li>
+</ul>
+<blockquote>
+<p>在 MySQL 中，索引是在存储引擎层实现的，所以并没有统一的索引标准，即不同存储引擎的索引的工作方式并不一样，而即使多个存储引擎支持同一种类型的索引，其底层的实现也可能不同。</p>
+</blockquote>
+<h3 id="innodb-索引模型"><a class="markdownIt-Anchor" href="#innodb-索引模型"></a> InnoDB 索引模型</h3>
 <p>在 InnoDB 中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。InnoDB 使用了 B+ 树索引模型，所以数据都是存储在 B+ 树中的。</p>
 <p>根据叶子节点的内容，索引类型分为 <strong>主键索引</strong> 和 <strong>非主键索引</strong>：</p>
 <ul>
@@ -360,7 +366,7 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 </blockquote>
 <p><strong>覆盖索引</strong></p>
 <p><code>select * from T where k between 3 and 5</code> 的查找过程（k 上有索引）：</p>
-<ol type="1">
+<ol>
 <li>在 k 索引树上找到 k = 3 的记录，取得 ID = 300；</li>
 <li>再到 ID 索引树查到 ID = 300 对应的 R3；</li>
 <li>在 k 索引树取下一个值 k = 5，取得 ID = 500；</li>
@@ -388,7 +394,7 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from tuser where name like &#x27;张 %&#x27; and age=10 and ismale=1;</span><br></pre></td></tr></table></figure>
 <p>这个语句在搜索索引树的时候，只能用 “张”，找到第一个满足条件的记录，在 MySQL 5.6 之前需要回表到主键索引上找出数据行，再对比字段值。</p>
 <p>而 MySQL 5.6 引入的索引下推优化（index condition pushdown)， 可以在索引遍历过程中，<strong>对索引中包含的字段先做判断</strong>，直接过滤掉不满足条件的记录，减少回表次数。InnoDB <strong>在 (name, age) 索引内部就判断了 age 是否等于 10</strong>，对于不等于 10 的记录，直接判断并跳过</p>
-<h3 id="唯一索引-or-普通索引">唯一索引 OR 普通索引</h3>
+<h3 id="唯一索引-or-普通索引"><a class="markdownIt-Anchor" href="#唯一索引-or-普通索引"></a> 唯一索引 OR 普通索引</h3>
 <p><strong>查询过程</strong></p>
 <ul>
 <li>对于普通索引来说，查找到满足条件的第一个记录后，需要查找下一个记录，直到碰到第一个不满足条件的记录。</li>
@@ -400,10 +406,18 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <p><strong>更新过程</strong></p>
 <p>当需要更新一个数据页时：</p>
 <ul>
-<li><p>如果数据页在内存中就直接更新</p></li>
-<li><p>如果数据页还没有在内存中，在不影响数据一致性的前提下，InooDB 会将这些更新操作缓存在 <strong>change buffer</strong> 中，这样就不需要从磁盘中读入这个数据页了，在下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行 change buffer 中与这个页有关的操作（保证数据逻辑的正确性）</p></li>
-<li><p>change buffer 是可以持久化的数据其在内存中有拷贝，也会被写入到磁盘上，将 change buffer 中的操作应用到原数据页，得到最新结果的过程称为 merge</p></li>
-<li><p>除了访问这个数据页会触发 merge 外，系统有后台线程会定期 merge。在数据库正常关闭（shutdown）的过程中，也会执行 merge 操作</p></li>
+<li>
+<p>如果数据页在内存中就直接更新</p>
+</li>
+<li>
+<p>如果数据页还没有在内存中，在不影响数据一致性的前提下，InooDB 会将这些更新操作缓存在 <strong>change buffer</strong> 中，这样就不需要从磁盘中读入这个数据页了，在下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行 change buffer 中与这个页有关的操作（保证数据逻辑的正确性）</p>
+</li>
+<li>
+<p>change buffer 是可以持久化的数据其在内存中有拷贝，也会被写入到磁盘上，将 change buffer 中的操作应用到原数据页，得到最新结果的过程称为 merge</p>
+</li>
+<li>
+<p>除了访问这个数据页会触发 merge 外，系统有后台线程会定期 merge。在数据库正常关闭（shutdown）的过程中，也会执行 merge 操作</p>
+</li>
 </ul>
 <p>change buffer 用的是 buffer pool 里的内存，因此不能无限增大。change buffer 的大小，可以通过参数 innodb_change_buffer_max_size 来动态设置。这个参数设置为 50 的时候，表示 change buffer 的大小最多只能占用 buffer pool 的 50%。</p>
 <blockquote>
@@ -412,19 +426,37 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 </blockquote>
 <p>如果要在一张表中插入一个新记录，InnoDB 的处理流程：、</p>
 <ul>
-<li><p>第一种情况是，<strong>这个记录要更新的目标页在内存中</strong>。这时，InnoDB 的处理流程如下：</p>
+<li>
+<p>第一种情况是，<strong>这个记录要更新的目标页在内存中</strong>。这时，InnoDB 的处理流程如下：</p>
 <ul>
-<li><p>对于唯一索引来说，找到 3 和 5 之间的位置，判断到没有冲突，插入这个值，语句执行结束；</p></li>
-<li><p>对于普通索引来说，找到 3 和 5 之间的位置，插入这个值，语句执行结束。</p></li>
-<li><p>普通索引和唯一索引对更新语句性能影响的差别，只是一个判断，只会耗费微小的 CPU 时间。</p></li>
-</ul></li>
-<li><p>第二种情况是，<strong>这个记录要更新的目标页不在内存中</strong>。这时，InnoDB 的处理流程如下：</p>
+<li>
+<p>对于唯一索引来说，找到 3 和 5 之间的位置，判断到没有冲突，插入这个值，语句执行结束；</p>
+</li>
+<li>
+<p>对于普通索引来说，找到 3 和 5 之间的位置，插入这个值，语句执行结束。</p>
+</li>
+<li>
+<p>普通索引和唯一索引对更新语句性能影响的差别，只是一个判断，只会耗费微小的 CPU 时间。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>第二种情况是，<strong>这个记录要更新的目标页不在内存中</strong>。这时，InnoDB 的处理流程如下：</p>
 <ul>
-<li><p>对于唯一索引来说，需要将数据页读入内存，判断到没有冲突，插入这个值，语句执行结束；</p></li>
-<li><p>对于普通索引来说，则是将更新记录在 change buffer，语句执行就结束了。</p></li>
-<li><p>将数据从磁盘读入内存涉及随机 IO 的访问，是数据库里面成本最高的操作之一。</p></li>
-<li><p>change buffer 因为减少了随机磁盘访问，所以对更新性能的提升是会很明显的。</p></li>
-</ul></li>
+<li>
+<p>对于唯一索引来说，需要将数据页读入内存，判断到没有冲突，插入这个值，语句执行结束；</p>
+</li>
+<li>
+<p>对于普通索引来说，则是将更新记录在 change buffer，语句执行就结束了。</p>
+</li>
+<li>
+<p>将数据从磁盘读入内存涉及随机 IO 的访问，是数据库里面成本最高的操作之一。</p>
+</li>
+<li>
+<p>change buffer 因为减少了随机磁盘访问，所以对更新性能的提升是会很明显的。</p>
+</li>
+</ul>
+</li>
 </ul>
 <p><strong>change buffer 的使用场景</strong></p>
 <p>change buffer 只限于用在普通索引的场景下，而不适用于唯一索引。</p>
@@ -439,7 +471,7 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; insert into t(id,k) values(id1,k1),(id2,k2);</span><br></pre></td></tr></table></figure>
 <p>分析这条更新语句，它涉及了四个部分：<strong>InnoDB buffer pool、redo log（ib_log_fileX）、 数据表空间（t.ibd）、系统表空间（ibdata1）</strong></p>
 <p>这条更新语句做了如下的操作：</p>
-<ol type="1">
+<ol>
 <li>Page 1（k1 所在的页） 在<strong>内存</strong>中，直接更新内存；</li>
 <li>Page 2（k2 所在的页）没有在内存中，就在<strong>内存的 change buffer 区域</strong>，记录下“往 Page 2 插入一行”这个信息；</li>
 <li>将上述两个动作记入 redo log 中（写入磁盘）。</li>
@@ -447,34 +479,34 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <p>做完上面这些，事务就可以完成了，执行这条更新语句的成本很低，就是写了两处内存，然后写了一处磁盘（两次操作合在一起写了一次磁盘），而且还是顺序写的。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from t where k in (k1, k2)</span><br></pre></td></tr></table></figure>
 <p>如果读语句发生在更新语句后不久，内存中的数据都还在，那么此时的这两个读操作（k1，k2）就与系统表空间（ibdata1）和 redo log（ib_log_fileX）无关了</p>
-<ol type="1">
+<ol>
 <li>读 Page 1 的时候，直接从内存返回。WAL 之后如果读数据，是不是一定要读盘，是不是一定要从 redo log 里面把数据更新以后才可以返回？其实是不用，虽然磁盘上还是之前的数据，但直接从内存返回结果，结果是正确的。</li>
 <li>要读 Page 2 的时候，需要把 Page 2 从磁盘读入内存中，然后<strong>应用 change buffer 里面的操作日志</strong>，生成一个正确的版本并返回结果，所以直到需要读 Page 2 的时候，这个数据页才会被读入内存。</li>
 </ol>
 <p>redo log 主要节省的是<strong>随机写</strong>磁盘的 IO 消耗（转成顺序写），而 change buffer 主要节省的则是<strong>随机读</strong>磁盘的 IO 消耗。</p>
-<h3 id="索引的选择">索引的选择</h3>
+<h3 id="索引的选择"><a class="markdownIt-Anchor" href="#索引的选择"></a> 索引的选择</h3>
 <p>选择索引是优化器的工作，而优化器选择索引的目的，是找到一个最优的执行方案，并用最小的代价去执行语句。在数据库里面，<strong>扫描行数</strong>是影响执行代价的因素之一。扫描的行数越少，意味着访问磁盘数据的次数越少，消耗的 CPU 资源越少。</p>
 <blockquote>
 <p>扫描行数并不是唯一的判断标准，优化器还会结合是否使用临时表、是否排序等因素进行综合判断。</p>
 </blockquote>
-<h2 id="锁">锁 🔒</h2>
+<h2 id="锁"><a class="markdownIt-Anchor" href="#锁"></a> 锁 🔒</h2>
 <p>数据库锁设计的初衷是处理 <strong>并发问题</strong>。作为多用户共享的资源，当出现并发访问的时候，数据库需要合理地控制资源的访问规则，而锁就是用来实现这些访问规则的重要数据结构。根据加锁的范围，MySQL 里面的锁大致可以分成 <strong>全局锁、表级锁和行锁</strong> 三类。</p>
-<h3 id="全局锁">全局锁</h3>
-<p>全局锁就是对整个数据库实例加锁，MySQL 提供了一个加全局读锁的方法，命令是 <code>Flush tables with read lock</code>(FTWRL)，使用这个命令之后其他线程的以下语句会被阻塞：数据更新语句（数据的增删改）、数据定义语句（包括建表、修改表结构等）和更新类事务的提交语句。</p>
+<h3 id="全局锁"><a class="markdownIt-Anchor" href="#全局锁"></a> 全局锁</h3>
+<p>全局锁就是对整个数据库实例加锁，MySQL 提供了一个加全局读锁的方法，命令是 <code>Flush tables with read lock </code>(FTWRL)，使用这个命令之后其他线程的以下语句会被阻塞：数据更新语句（数据的增删改）、数据定义语句（包括建表、修改表结构等）和更新类事务的提交语句。</p>
 <p>全局锁的典型使用场景是，做 <strong>全库逻辑备份</strong>。也就是把整库每个表都 select 出来存成文本，但是业务就得停摆。</p>
 <p>官方自带的逻辑备份工具是 mysqldump。当 mysqldump 使用参数 –single-transaction 的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于 MVCC 的支持，这个过程中数据是可以正常更新的，single-transaction 方法只适用于所有的表使用事务引擎的库。</p>
 <blockquote>
 <p>既然要全库只读，为什么不使用 set global readonly = true 的方式呢？</p>
-<ol type="1">
+<ol>
 <li>在有些系统中，readonly 的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。因此，修改 global 变量的方式影响面更大。</li>
 <li>在异常处理机制上有差异。如果执行 FTWRL 命令之后由于客户端发生异常断开，那么 MySQL 会自动释放这个全局锁，整个库回到可以正常更新的状态。而将整个库设置为 readonly 之后，如果客户端发生异常，则数据库就会一直保持 readonly 状态，这样会导致整个库长时间处于不可写状态，风险较高。</li>
 </ol>
 </blockquote>
-<h3 id="表级锁">表级锁</h3>
+<h3 id="表级锁"><a class="markdownIt-Anchor" href="#表级锁"></a> 表级锁</h3>
 <p>表级别的锁有两种：一种是表锁，一种是元数据锁（meta data lock，MDL)</p>
 <p>表锁的语法是 <code>lock tables … read/write</code>。与 FTWRL 类似，可以用 unlock tables 主动释放锁，也可以在客户端断开的时候自动释放，lock tables 语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。</p>
 <blockquote>
-<p>如果在某个线程 A 中执行 <code>lock tables t1 read, t2 write;</code> 这个语句，则其他线程写 t1、读写 t2 的语句都会被阻塞。同时，线程 A 在执行 unlock tables 之前，也只能执行读 t1、读写 t2 的操作。</p>
+<p>如果在某个线程 A 中执行 <code>lock tables t1 read, t2 write; </code> 这个语句，则其他线程写 t1、读写 t2 的语句都会被阻塞。同时，线程 A 在执行 unlock tables 之前，也只能执行读 t1、读写 t2 的操作。</p>
 </blockquote>
 <p>对于 InnoDB 这种支持行锁的引擎，一般不使用 lock tables 命令来控制并发，毕竟锁住整个表的影响面还是太大。</p>
 <p>另一类表级的锁是 MDL（metadata lock)。<strong>MDL 不需要显式使用</strong>，在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。在 MySQL 5.5 版本中引入了 MDL，当对一个表做增删改查操作的时候，加 MDL 读锁；当要对表做结构变更操作的时候，加 MDL 写锁。</p>
@@ -484,21 +516,21 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 </ul>
 <blockquote>
 <p>如何安全地给小表加字段？</p>
-<p>要小心不要导致锁住线上查询和更新，如：读（未提交）写（被阻塞）读（被阻塞）...</p>
-<ol type="1">
+<p>要小心不要导致锁住线上查询和更新，如：读（未提交）写（被阻塞）读（被阻塞）…</p>
+<ol>
 <li>解决长事务，<strong>事务不提交，就会一直占着 MDL 锁</strong>，在 MySQL 的 information_schema 库的 innodb_trx 表中，可以查到当前执行中的事务。如果你要做 DDL 变更的表刚好有长事务在执行，要考虑先暂停 DDL，或者 kill 掉这个长事务。</li>
 <li>在 alter table 语句里面设定等待时间，如果在这个指定的等待时间里面能够拿到 MDL 写锁最好，拿不到也不要阻塞后面的业务语句，先放弃。</li>
 </ol>
 </blockquote>
 <p>MariaDB 已经合并了 AliSQL 的这个功能，所以这两个开源分支目前都支持 DDL NOWAIT/WAIT n 这个语法。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE tbl_name NOWAIT add column ...</span><br><span class="line">ALTER TABLE tbl_name WAIT N add column ... </span><br></pre></td></tr></table></figure>
-<h3 id="行锁">行锁</h3>
+<h3 id="行锁"><a class="markdownIt-Anchor" href="#行锁"></a> 行锁</h3>
 <p>行锁是在引擎层由各个引擎自己实现的，并不是所有的引擎都支持行锁，比如 MyISAM 引擎就不支持行锁，这也是 MyISAM 被 InnoDB 替代的重要原因之一。</p>
 <p>行锁就是针对数据表中行记录的锁，比如事务 A 更新了一行，而这时候事务 B 也要更新同一行，则必须等事务 A 的操作完成后才能进行更新。</p>
 <p>在 InnoDB 事务中，行锁是在需要的时候才加上的，但 <strong>并不是不需要了就立刻释放</strong>，而是要 <strong>等到事务结束时才释放</strong>。这个就是两阶段锁协议。</p>
 <blockquote>
 <p>如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度的锁尽量往后放，比如电影票在线交易业务，这个业务需要涉及到以下操作：</p>
-<ol type="1">
+<ol>
 <li>从顾客 A 账户余额中扣除电影票价；</li>
 <li>给影院 B 的账户余额增加这张电影票价；</li>
 <li>记录一条交易日志。</li>
@@ -507,7 +539,7 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <p>如果同时有另外一个顾客 C 要在影院 B 买票，那么这两个事务冲突的部分就是语句 2 了。因为它们要更新同一个影院账户的余额，需要修改同一行数据。</p>
 <p>如果你把语句 2 安排在最后，比如按照 3、1、2 这样的顺序，那么影院 <strong>账户余额这一行的锁时间就最少</strong>。这就最大程度地 <strong>减少了事务之间的锁等待，提升了并发度</strong>。</p>
 </blockquote>
-<h3 id="死锁检测">死锁检测</h3>
+<h3 id="死锁检测"><a class="markdownIt-Anchor" href="#死锁检测"></a> 死锁检测</h3>
 <p>当出现死锁以后，有两种策略：</p>
 <ul>
 <li>一种策略是，直接进入等待，直到超时。这个 <strong>超时时间</strong> 可以通过参数 innodb_lock_wait_timeout 来设置。</li>
@@ -527,13 +559,13 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <li><strong>控制并发度</strong>：在客户端做并发控制汇总到数据库服务端以后峰值并发数也很高，如果有中间件，可以考虑在中间件实现，基本思路就是，<strong>对于相同行的更新，在进入引擎之前排队</strong>，这样在 InnoDB 内部就不会有大量的死锁检测工作了。</li>
 <li><strong>业务设计上</strong>：通过将一行改成逻辑上的多行来减少锁冲突，可以考虑放在多条记录上，比如 10 个记录，影院的 <strong>账户总额等于这 10 个记录的值的总和</strong>（和记录表不一样的），这样每次要给影院账户加金额的时候，随机选其中一条记录来加。这样每次冲突概率变成原来的 <strong>1/10</strong>，可以减少锁等待个数，也就减少了死锁检测的 CPU 消耗。</li>
 </ul>
-<h2 id="自增-id">自增 id</h2>
+<h2 id="自增-id"><a class="markdownIt-Anchor" href="#自增-id"></a> 自增 id</h2>
 <p><strong>表定义自增值 id</strong></p>
 <p><strong>InnoDB 系统自增 row_id</strong></p>
 <p><strong>Xid</strong></p>
 <p><strong>Innodb trx_id</strong></p>
 <p><strong>thread_id</strong></p>
-<h2 id="参考资料">参考资料</h2>
+<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
 <ul>
 <li><strong><a target="_blank" rel="noopener" href="https://time.geekbang.org/column/intro/100020801">MySQL 实战 45 讲</a></strong></li>
 </ul>
@@ -555,7 +587,8 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 
 
       <!-- 
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <span class="citation" data-cites="anonymity">[@anonymity]</span>(/) 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br />
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer> -->
 
       <div class='float-panel mobile-only blur' style='display:none'>
