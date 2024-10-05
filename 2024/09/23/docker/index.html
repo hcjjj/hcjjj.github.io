@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/Ciqc1F9sDDSAQhNcAAD8rL1NLXc02.jpeg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20241004103807.png">
 <meta property="article:published_time" content="2024-09-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-04T03:29:13.711Z">
+<meta property="article:modified_time" content="2024-10-05T06:51:31.318Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -93,7 +93,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">容器技术实践与探索 - Docker 🐋</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%93%8D%E4%BD%9C"><span class="toc-text"> 基础概念与操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF"><span class="toc-text"> 容器技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text"> 核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%95%9C%E5%83%8F"><span class="toc-text"> 镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8"><span class="toc-text"> 容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%93%E5%BA%93"><span class="toc-text"> 仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="toc-text"> 架构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="toc-text"> 容器操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dockerfile"><span class="toc-text"> Dockerfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-%E5%AE%89%E5%85%A8"><span class="toc-text"> Docker 安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%9B%91%E6%8E%A7"><span class="toc-text"> 容器监控</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text"> 工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB"><span class="toc-text"> 资源隔离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6"><span class="toc-text"> 资源限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%BB%84%E6%88%90"><span class="toc-text"> 组件组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 网络模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-text"> 数据存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E9%A9%B1%E5%8A%A8"><span class="toc-text"> 文件存储驱动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92"><span class="toc-text"> 容器编排</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose"><span class="toc-text"> Docker compose</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-swarm"><span class="toc-text"> Docker Swarm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kubernetes"><span class="toc-text"> Kubernetes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5"><span class="toc-text"> 综合实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%9E%84%E5%BB%BA"><span class="toc-text"> 多阶段构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#devops"><span class="toc-text"> DevOps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cicd"><span class="toc-text"> CI&#x2F;CD</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text"> 参考资料</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">容器技术实践与探索 - Docker 🐋</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%93%8D%E4%BD%9C"><span class="toc-text">基础概念与操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF"><span class="toc-text">容器技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%95%9C%E5%83%8F"><span class="toc-text">镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8"><span class="toc-text">容器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%93%E5%BA%93"><span class="toc-text">仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="toc-text">架构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">容器操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dockerfile"><span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-%E5%AE%89%E5%85%A8"><span class="toc-text">Docker 安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%9B%91%E6%8E%A7"><span class="toc-text">容器监控</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%BB%84%E6%88%90"><span class="toc-text">组件组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB"><span class="toc-text">资源隔离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E9%99%90%E5%88%B6"><span class="toc-text">资源限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-text">网络模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-text">数据存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E9%A9%B1%E5%8A%A8"><span class="toc-text">文件存储驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#aufs"><span class="toc-text">AUFS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#devicemapper"><span class="toc-text">Devicemapper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#overlayfs"><span class="toc-text">OverlayFS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92"><span class="toc-text">容器编排</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-compose"><span class="toc-text">Docker compose</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-swarm"><span class="toc-text">Docker Swarm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kubernetes"><span class="toc-text">Kubernetes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5"><span class="toc-text">综合实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%9E%84%E5%BB%BA"><span class="toc-text">多阶段构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#devops"><span class="toc-text">DevOps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cicd"><span class="toc-text">CI&#x2F;CD</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol></div></div></widget>
 
 
 
@@ -150,49 +150,41 @@
 <p>梳理 Docker 知识体系</p>
 <span id="more"></span>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/Docker-Logo_Horizontel_279x131.b8a5c41e56b77706656d61080f6a0217a3ba356d.png" fancybox="true"/></div></div>
-<h2 id="基础概念与操作"><a class="markdownIt-Anchor" href="#基础概念与操作"></a> 基础概念与操作</h2>
-<h3 id="容器技术"><a class="markdownIt-Anchor" href="#容器技术"></a> 容器技术</h3>
+<h2 id="基础概念与操作">基础概念与操作</h2>
+<h3 id="容器技术">容器技术</h3>
 <ul>
-<li>
-<p><strong>chroot</strong></p>
+<li><strong>chroot</strong>
 <ul>
 <li>chroot 是在 Unix 和 Linux 系统的一个操作，<strong>针对正在运作的进程和它的子进程</strong>，改变它外显的根目录。一个运行在这个环境下，经由 chroot 设置根目录的程序，它不能够对这个指定根目录之外的文件进行访问动作，不能读取，也不能更改它的内容。</li>
 <li>通俗地说 ，chroot 就是可以改变某进程的根目录，<strong>使这个程序不能访问目录之外的其他目录</strong></li>
-</ul>
-</li>
-<li>
-<p><strong>Namespace</strong></p>
+</ul></li>
+<li><strong>Namespace</strong>
 <ul>
 <li>Namespace 是 Linux 内核的一项功能，该功能对内核资源进行隔离，<strong>使得容器中的进程都可以在单独的命名空间中运行</strong>，并且 <strong>只能访问当前容器命名空间的资源</strong></li>
 <li>Namespace 可以隔离 <strong>进程 ID、主机名、用户 ID、文件名、网络访问和进程间通信</strong> 等相关资源</li>
-</ul>
-</li>
-<li>
-<p><strong>Cgroups</strong></p>
+</ul></li>
+<li><strong>Cgroups</strong>
 <ul>
 <li>Cgroups 是一种 Linux 内核功能，可以 <strong>限制和隔离进程的资源使用情况</strong>（CPU、内存、磁盘 I/O、网络等）</li>
 <li>在容器的实现中，Cgroups 通常用来 <strong>限制容器的 CPU 和内存</strong> 等资源的使用</li>
-</ul>
-</li>
-<li>
-<p><strong>UnionFS</strong></p>
+</ul></li>
+<li><strong>UnionFS</strong>
 <ul>
 <li>联合文件系统是一种通过 <strong>创建文件层进程操作的文件系统</strong>，因此联合文件系统非常轻快</li>
 <li>Docker 使用联合文件系统为容器提供构建层，使得容器可以实现写时复制以及镜像的分层构建和存储</li>
 <li>常用的联合文件系统有 AUFS、Overlay 和 Devicemapper 等</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>容器技术从 1979 年 chroot 的首次问世便已崭露头角，但是到了 2013 年，Dokcer 的横空出世才使得容器技术迅速发展。另外， Docker 还提供了工具和平台来管理容器的生命周期：</p>
-<ol>
+<ol type="1">
 <li>使用容器 <strong>开发应用程序及其支持组件</strong></li>
 <li>容器成为 <strong>分发和测试应用程序的单元</strong></li>
 <li>可以 <strong>将应用程序作为容器或协调服务部署到生产环境中</strong>，无论生产环境是本地数据中心，云提供商还是两者的混合，其工作原理都相同</li>
 </ol>
-<h3 id="核心概念"><a class="markdownIt-Anchor" href="#核心概念"></a> 核心概念</h3>
-<h4 id="镜像"><a class="markdownIt-Anchor" href="#镜像"></a> <strong>镜像</strong></h4>
+<h3 id="核心概念">核心概念</h3>
+<h4 id="镜像"><strong>镜像</strong></h4>
 <p>镜像是一个 <strong>只读的文件和文件夹组合</strong>，它包含了容器运行时所需要的所有基础文件和配置信息，是容器启动的基础，如果想要使用一个镜像，可以用这两种方式：</p>
-<ol>
+<ol type="1">
 <li>自己创建镜像：在 <strong>基础镜像</strong> 上添加一些用户自定义的内容制作 <strong>业务镜像</strong></li>
 <li>从功能镜像仓库拉取别人制作好的镜像</li>
 </ol>
@@ -202,13 +194,12 @@
 <li>拉取镜像，使用 <code>docker pull</code> 命令拉取远程仓库的镜像到本地；
 <ul>
 <li><code>docker pull [Registry]/[Repository]/[Image]:[Tag]</code></li>
-</ul>
-</li>
+</ul></li>
 <li>重命名镜像，使用 <code>docker tag</code> 命令“重命名”镜像；
 <ul>
-<li><code>docker tag [SOURCE_IMAGE][:TAG] [TARGET_IMAGE][:TAG]</code>，两者指向同一个镜像文件，IMAGE ID 一样；</li>
-</ul>
+<li><code>docker tag [SOURCE_IMAGE][:TAG] [TARGET_IMAGE][:TAG]</code>，两者指向同一个镜像文件，IMAGE ID 一样；<br />
 </li>
+</ul></li>
 <li>查看镜像，使用 <code>docker image ls</code>/<code>docker images</code> 命令查看本地已经存在的镜像；</li>
 <li>删除镜像，使用 <code>docker rmi</code>/<code>docker image rm</code> 命令删除无用镜像；</li>
 <li>构建镜像，构建镜像有两种方式
@@ -216,74 +207,71 @@
 <li>第一种方式是使用 <code>docker build</code> 命令基于 Dockerfile 构建镜像，也是我比较推荐的镜像构建方式；
 <ul>
 <li>Dockerfile 是一个包含了用户所有构建命令的文本，通过 <code>docker build</code> 命令可以从 Dockerfile 生成镜像</li>
-</ul>
-</li>
+</ul></li>
 <li>第二种方式是使用 <code>docker commit</code> 命令基于已经运行的容器提交为镜像
 <ul>
 <li>需要先进入运行中的容器：<code>docker run --rm --name=xxx -it busybox sh</code></li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 </ul>
 <p><strong>Dockerfile 常用的指令</strong></p>
 <table>
 <thead>
-<tr>
-<th style="text-align:center">Dockerfile 指令</th>
-<th style="text-align:left">指令简介</th>
+<tr class="header">
+<th style="text-align: center;">Dockerfile 指令</th>
+<th style="text-align: left;">指令简介</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">FROM</td>
-<td style="text-align:left">Dockerfile 除了注释第一行必须是 FROM ，FROM 后面跟镜像名称，代表我们要基于哪个基础镜像构建我们的容器</td>
+<tr class="odd">
+<td style="text-align: center;">FROM</td>
+<td style="text-align: left;">Dockerfile 除了注释第一行必须是 FROM ，FROM 后面跟镜像名称，代表我们要基于哪个基础镜像构建我们的容器</td>
 </tr>
-<tr>
-<td style="text-align:center">RUN</td>
-<td style="text-align:left">RUN 后面跟一个具体的命令，类似于 Linux 命令行执行命令</td>
+<tr class="even">
+<td style="text-align: center;">RUN</td>
+<td style="text-align: left;">RUN 后面跟一个具体的命令，类似于 Linux 命令行执行命令</td>
 </tr>
-<tr>
-<td style="text-align:center">ADD</td>
-<td style="text-align:left">拷贝本机文件或者远程文件到镜像内</td>
+<tr class="odd">
+<td style="text-align: center;">ADD</td>
+<td style="text-align: left;">拷贝本机文件或者远程文件到镜像内</td>
 </tr>
-<tr>
-<td style="text-align:center">COPY</td>
-<td style="text-align:left">拷贝本机文件到镜像内</td>
+<tr class="even">
+<td style="text-align: center;">COPY</td>
+<td style="text-align: left;">拷贝本机文件到镜像内</td>
 </tr>
-<tr>
-<td style="text-align:center">USER</td>
-<td style="text-align:left">指定容器启动的用户</td>
+<tr class="odd">
+<td style="text-align: center;">USER</td>
+<td style="text-align: left;">指定容器启动的用户</td>
 </tr>
-<tr>
-<td style="text-align:center">ENTRYPOINT</td>
-<td style="text-align:left">容器的启动命令</td>
+<tr class="even">
+<td style="text-align: center;">ENTRYPOINT</td>
+<td style="text-align: left;">容器的启动命令</td>
 </tr>
-<tr>
-<td style="text-align:center">CMD</td>
-<td style="text-align:left">CMD 为 ENTRYPOINT 指令提供默认参数，也可以单独使用 CMD 指定容器启动参数</td>
+<tr class="odd">
+<td style="text-align: center;">CMD</td>
+<td style="text-align: left;">CMD 为 ENTRYPOINT 指令提供默认参数，也可以单独使用 CMD 指定容器启动参数</td>
 </tr>
-<tr>
-<td style="text-align:center">ENV</td>
-<td style="text-align:left">指定容器运行时的环境变量，格式为 key = value</td>
+<tr class="even">
+<td style="text-align: center;">ENV</td>
+<td style="text-align: left;">指定容器运行时的环境变量，格式为 key = value</td>
 </tr>
-<tr>
-<td style="text-align:center">ARG</td>
-<td style="text-align:left">定义外部变量，构建镜像时可以使用 build-arg = 的格式传递参数用于构建</td>
+<tr class="odd">
+<td style="text-align: center;">ARG</td>
+<td style="text-align: left;">定义外部变量，构建镜像时可以使用 build-arg = 的格式传递参数用于构建</td>
 </tr>
-<tr>
-<td style="text-align:center">EXPOSE</td>
-<td style="text-align:left">指定容器监听的端口，格式为 [port]/tcp 或者 [port]/udp</td>
+<tr class="even">
+<td style="text-align: center;">EXPOSE</td>
+<td style="text-align: left;">指定容器监听的端口，格式为 [port]/tcp 或者 [port]/udp</td>
 </tr>
-<tr>
-<td style="text-align:center">WORKDIR</td>
-<td style="text-align:left">为 Dockerfile 中跟在其后的所有 RUN、CMD、ENTRYPOINT、COPY 和 ADD 命令设置工作目录</td>
+<tr class="odd">
+<td style="text-align: center;">WORKDIR</td>
+<td style="text-align: left;">为 Dockerfile 中跟在其后的所有 RUN、CMD、ENTRYPOINT、COPY 和 ADD 命令设置工作目录</td>
 </tr>
 </tbody>
 </table>
 <p><strong>镜像的实现原理</strong></p>
 <p>Docker 镜像是由一系列镜像层（layer）组成的，每一层代表了镜像构建过程中的一次提交，Dockerfile 的每一行命令，都生成了一个镜像层，每一层的 diff 夹下只存放了增量数据。 Docker 镜像是静态的分层管理的文件组合，镜像底层的实现依赖于联合文件系统（UnionFS）。分层的结构使得 Docker 镜像非常轻量，每一层根据镜像的内容都有一个唯一的 ID 值，当不同的镜像之间有相同的镜像层时，便可以实现不同的镜像之间共享镜像层的效果。</p>
-<h4 id="容器"><a class="markdownIt-Anchor" href="#容器"></a> 容器</h4>
+<h4 id="容器">容器</h4>
 <p>容器是镜像的运行实体，像是静态的只读文件，而容器带有运行时需要的可写文件层，并且容器中的进程属于运行状态，即容器运行着真正的应用进程。</p>
 <p>虽然容器的本质是主机上运行的一个进程，但是容器有自己独立的命名空间隔离和资源限制（在容器内部，<strong>无法看到主机上的进程、环境变量、网络等信息</strong>，这是容器与直接运行在主机上进程的本质区别）。</p>
 <blockquote>
@@ -309,7 +297,7 @@
     F -->|docker unpause| C;
     A -->|docker run| C;
     D -->|docker start| C;</pre>
-<h4 id="仓库"><a class="markdownIt-Anchor" href="#仓库"></a> 仓库</h4>
+<h4 id="仓库">仓库</h4>
 <p>仓库（Repository）是存储和分发 Docker 镜像的地方</p>
 <pre class="mermaid">graph LR;
     镜像(Image) -->|创建| 容器(Container);
@@ -320,9 +308,8 @@
 <ul>
 <li>注册服务器是存放仓库的实际服务器，而仓库则可以被理解为一个具体的项目或者目录</li>
 <li>注册服务器可以包含很多个仓库，每个仓库又可以包含多个镜像</li>
-<li>例如：镜像地址为 <a target="_blank" rel="noopener" href="http://docker.io/centos%EF%BC%8Cdocker.io">docker.io/centos，docker.io</a> 是注册服务器，centos 是仓库名</li>
-</ul>
-</li>
+<li>例如：镜像地址为 docker.io/centos，docker.io 是注册服务器，centos 是仓库名</li>
+</ul></li>
 </ul>
 <pre class="mermaid">graph TB
   subgraph 注册服务器 Registry
@@ -348,21 +335,16 @@
 <li>例如：登录访问阿里云镜像服务器，则使用 <code>docker login registry.cn-beijing.aliyuncs.com</code></li>
 <li>在本地镜像推送到自定义仓库前，需要先用 <code>docker tag</code> 命令将镜像“重命名”</li>
 <li>镜像“重命名”后使用 <code>docker push</code> 命令就可以推送镜像到自己创建的仓库中</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li>搭建私有仓库
 <ul>
-<li>
-<p>启动本地仓库</p>
+<li><p>启动本地仓库</p>
 <ul>
 <li>Docker 官方提供了开源的镜像仓库 <a target="_blank" rel="noopener" href="https://github.com/docker/distribution">Distribution</a>，并且镜像存放在 Docker Hub 的 <a target="_blank" rel="noopener" href="https://hub.docker.com/_/registry">Registry</a> 仓库下供下载</li>
 <li><code>docker run -d -p 5000:5000 --name registry registry:2.7</code>，此时就拥有了一个私有镜像仓库，访问地址为 <code>localhost</code>，端口号为 5000</li>
-</ul>
-</li>
-<li>
-<p>持久化镜像存储</p>
+</ul></li>
+<li><p>持久化镜像存储</p>
 <ul>
 <li>容器是无状态的，上面私有仓库的启动方式可能会导致镜像丢失，因为并没有把仓库的数据信息持久化到主机磁盘上</li>
 <li>使用以下命令将镜像持久化到主机目录
@@ -371,31 +353,24 @@
 <li><code>-v</code> 的含义是把 Docker 容器的某个目录或文件挂载到主机上，保证容器被重建后数据不丢失</li>
 <li><code>-v</code> 参数冒号前面为 <strong>主机目录</strong>，冒号后面为 <strong>容器内目录</strong></li>
 <li>registry 的持久化存储除了支持本地文件系统还支持很多种类型，例如 S3、Google Cloud Platform、Microsoft Azure Blob Storage Service 等多种存储类型</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>构建外部可访问的镜像仓库</p>
+</ul></li>
+</ul></li>
+<li><p>构建外部可访问的镜像仓库</p>
 <ul>
 <li>Docker 要求非 <code>localhost</code> 访问的镜像仓库必须使用 HTTPS，这时候就需要构建外部可访问的镜像仓库</li>
 <li>使用 <code>-v</code> 参数把镜像数据持久化在 <code>/var/lib/registry/data</code> 目录中</li>
 <li>同时把主机上的证书文件挂载到了容器的 <code>/certs</code> 目录下</li>
 <li>同时通过 <code>-e</code> 参数设置 HTTPS 相关的环境变量参数，最后让仓库在主机上监听 443 端口</li>
-</ul>
-</li>
-<li>
-<p>私有仓库进阶</p>
+</ul></li>
+<li><p>私有仓库进阶</p>
 <ul>
 <li>Docker 官方开源的镜像仓库 <code>Distribution</code> 仅满足了镜像存储和管理的功能，用户权限管理相对较弱，并且没有管理界面</li>
 <li>Harbor 是一个基于 <code>Distribution</code> 项目开发的一款企业级镜像管理软件，拥有 RBAC （基于角色的访问控制）、管理用户界面以及审计等非常完善的功能</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">构建外部可访问的镜像仓库</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -d \</span></span><br><span class="line"><span class="language-bash">  --name registry \</span></span><br><span class="line"><span class="language-bash">  -v <span class="string">&quot;/var/lib/registry/data:/var/lib/registry \</span></span></span><br><span class="line"><span class="string"><span class="language-bash">  -v &quot;</span>/var/lib/registry/certs:/certs \</span></span><br><span class="line"><span class="language-bash">  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \</span></span><br><span class="line"><span class="language-bash">  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/regisry.xxxdocker.io.crt \</span></span><br><span class="line"><span class="language-bash">  -e REGISTRY_HTTP_TLS_KEY=/certs/regisry.xxxdocker.io.key \</span></span><br><span class="line"><span class="language-bash">  -p 443:443 \</span></span><br><span class="line"><span class="language-bash">  registry:2.7</span></span><br></pre></td></tr></table></figure>
-<h4 id="架构"><a class="markdownIt-Anchor" href="#架构"></a> 架构</h4>
+<h4 id="架构">架构</h4>
 <p>Docker 整体架构采用 C/S（客户端 / 服务器）模式。客户端负责发送操作指令，服务端负责接收和处理指令。客户端和服务端通信有多种方式，即可以在同一台机器上通过 <code>UNIX</code> 套接字通信，也可以通过网络连接远程通信。</p>
 <p><strong>Docker 客户端</strong></p>
 <p>Docker 命令是 Docker 客户端与 Docker 服务端交互的主要方式。除了使用 docker 命令的方式，还可以使用直接请求 REST API 的方式与 Docker 服务端交互，甚至还可以使用各种语言的 SDK 与 Docker 服务端交互。</p>
@@ -422,7 +397,7 @@
 <p><code>dockerd</code> 通过 gRPC 与 <code>containerd</code> 通信，由于 <code>dockerd</code> 与真正的容器运行时，<code>runC</code> 中间有了 <code>containerd</code> 这一 OCI 标准层，使得 <code>dockerd</code> 可以确保接口向下兼容。</p>
 <p><code>containerd-shim</code> 的意思是垫片，类似于拧螺丝时夹在螺丝和螺母之间的垫片。<code>containerd-shim</code> 的主要作用是将 <code>containerd</code> 和真正的容器进程解耦，使用 <code>containerd-shim</code> 作为容器进程的父进程，从而实现重启 <code>containerd</code> 不影响已经启动的容器进程。</p>
 <p>事实上，<code>dockerd</code> 启动的时候， <code>containerd</code> 就随之启动了。当执行 <code>docker run</code> 命令时，<code>containerd</code> 会创建 <code>containerd-shim</code> 充当 “垫片” 进程，然后启动容器的真正进程。</p>
-<h3 id="容器操作"><a class="markdownIt-Anchor" href="#容器操作"></a> 容器操作</h3>
+<h3 id="容器操作">容器操作</h3>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker create -it --name=busybox busybox</span><br><span class="line">docker start busybox</span><br><span class="line">docker run -it --name=busybox busybox</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-t 参数的作用是分配一个伪终</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-i 参数则可以终端的 STDIN 打开</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同时使用 -it 参数可以让我们进入交互模式</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在交互模式下，用户可以通过所创建的终端来输入命令</span></span><br></pre></td></tr></table></figure>
 <p>当使用 <code>docker run</code> 创建并启动容器时，Docker 后台执行的流程为：</p>
 <ul>
@@ -441,7 +416,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除容器命令的使用方式如下：docker <span class="built_in">rm</span> [OPTIONS] CONTAINER [CONTAINER...]</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除一个停止状态的容器</span></span><br><span class="line">docker rm busybox</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除正在运行中的容器</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加 -f (或 –force) 参数， Docker 会发送 SIGKILL 信号强制终止正在运行的容器</span></span><br><span class="line">docker rm -f busybox</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用docker <span class="built_in">export</span> CONTAINER命令导出一个容器到文件</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">导出容器前先进入容器</span></span><br><span class="line">docker exec -it busybox sh</span><br><span class="line">docker export busybox &gt; busybox.tar</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将该文件拷贝到其他机器上，通过导入命令实现容器的迁移</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">导入容器的命令格式为 docker import [OPTIONS] file|URL [REPOSITORY[:TAG]]</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">busybox.tar 被导入成为新的镜像，镜像名称为 busybox:<span class="built_in">test</span></span> </span><br><span class="line">docker import busybox.tar busybox:test</span><br><span class="line">docker run -it busybox:test sh</span><br></pre></td></tr></table></figure>
 <p>镜像包含了容器运行所需要的文件系统结构和内容，是 <strong>静态的只读文件</strong>，而容器则是在镜像的只读层上创建了 <strong>可写层</strong>，并且容器中的进程属于运行状态，<strong>容器是真正的应用载体</strong>。</p>
-<h3 id="dockerfile"><a class="markdownIt-Anchor" href="#dockerfile"></a> Dockerfile</h3>
+<h3 id="dockerfile">Dockerfile</h3>
 <p>生产实践中一定优先使用 Dockerfile 的方式构建镜像， Dockerfile 构建镜像可以带来很多好处：</p>
 <ul>
 <li>易于版本化管理，Dockerfile 本身是一个文本文件，方便存放在代码仓库做版本管理</li>
@@ -461,201 +436,166 @@
 <li>如果构建时发现要构建的镜像层的父镜像层已经存在，并且下一条命令使用了相同的指令，即可命中构建缓存</li>
 <li>基于 Docker 构建时的缓存特性，我们可以把不轻易改变的指令放到 Dockerfile 前面，例如安装软件包</li>
 <li>而可能经常发生改变的指令放在 Dockerfile 末尾，例如编译应用程序</li>
-</ul>
-</li>
+</ul></li>
 <li>正确设置时区
 <ul>
 <li>从 Docker Hub 拉取的官方操作系统镜像大多数都是 UTC 时间（世界标准时间）</li>
 <li>想要在容器中使用中国区标准时间（东八区），需要根据使用的操作系统修改相应的时区信息</li>
-<li>例如，Ubuntu、CentOS  和 Debian
+<li>例如，Ubuntu、CentOS 和 Debian
 <ul>
 <li><code>RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></li>
-<li><code>RUN echo &quot;Asia/Shanghai&quot; &gt;&gt; /etc/timezone</code></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><code>RUN echo "Asia/Shanghai" &gt;&gt; /etc/timezone</code></li>
+</ul></li>
+</ul></li>
 <li>使用国内软件源加快镜像构建速度</li>
 <li>最小化镜像层数，尽可能地减少 Dockerfile 指令行数</li>
 </ul>
 <p><strong>Dockerfile 指令书写建议</strong></p>
 <ul>
-<li>
-<p><code>RUN</code> 指令在构建时将会生成一个新的镜像层并且执行 <code>RUN</code> 指令后面的内容</p>
+<li><code>RUN</code> 指令在构建时将会生成一个新的镜像层并且执行 <code>RUN</code> 指令后面的内容
 <ul>
-<li>当 <code>RUN</code> 指令后面跟的内容比较复杂时，建议使用反斜杠（\） 结尾并且换行</li>
+<li>当 <code>RUN</code> 指令后面跟的内容比较复杂时，建议使用反斜杠（） 结尾并且换行</li>
 <li><code>RUN</code> 指令后面的内容尽量按照字母顺序排序，提高可读性</li>
-</ul>
-</li>
-<li>
-<p>CMD 和 ENTRYPOINT 指令都是容器运行的命令入口</p>
+</ul></li>
+<li>CMD 和 ENTRYPOINT 指令都是容器运行的命令入口
 <ul>
 <li><code>CMD</code> 和 <code>ENTRYPOINT</code> 的基本使用格式分为两种
 <ul>
 <li>第一种为 <code>CMD/ENTRYPOINT[“command” , “param”]</code>，这种格式是使用 Linux 的 <code>exec</code> 实现的， 一般称为 <code>exec</code> 模式，这种书写格式为 <code>CMD</code>/<code>ENTRYPOINT</code> 后面跟 json 数组，也是 Docker 推荐的使用格式 ✅</li>
 <li>另外一种格式为 <code>CMD/ENTRYPOINT command param</code> ，这种格式是基于 shell 实现的， 通常称为 <code>shell</code> 模式。当使用 <code>shell</code> 模式时，Docker 会以 /bin/sh -c command 的方式执行命令</li>
-</ul>
-</li>
+</ul></li>
 <li>Dockerfile 中如果使用了 ENTRYPOINT 指令，启动 Docker 容器时需要使用 –entrypoint 参数才能覆盖</li>
 <li>Dockerfile 中如果没有使用 <code>ENTRYPOINT</code> 指令 ，而使用 <code>CMD</code> 设置的命令则可以被 <code>docker run</code> 后面的参数直接覆盖</li>
 <li><code>ENTRYPOINT</code> 指令可以结合 <code>CMD</code> 指令使用，也可以单独使用，而 <code>CMD</code> 指令只能单独使用</li>
 <li>如果镜像只执行单一的具体程序，并且不希望用户在执行 <code>docker run</code> 时覆盖默认程序，建议使用 <code>ENTRYPOINT</code></li>
-</ul>
-</li>
-<li>
-<p>ADD 和 COPY 都是从外部往容器内添加文件</p>
+</ul></li>
+<li>ADD 和 COPY 都是从外部往容器内添加文件
 <ul>
 <li><code>COPY</code> 指令只支持基本的文件和文件夹拷贝功能</li>
 <li><code>ADD</code> 则支持更多文件来源类型，比如自动提取 tar 包，并且可以支持源文件为 URL 格式</li>
-</ul>
-</li>
-<li>
-<p>WORKDIR</p>
+</ul></li>
+<li>WORKDIR
 <ul>
 <li>为了使构建过程更加清晰明了，推荐使用 WORKDIR 来指定容器的工作路径</li>
 <li>应该尽量避免使用 <code>RUN cd /work/path &amp;&amp; do some work</code> 这样的指令</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="docker-安全"><a class="markdownIt-Anchor" href="#docker-安全"></a> Docker 安全</h3>
+<h3 id="docker-安全">Docker 安全</h3>
 <p><strong>Docker 与虚拟机区别</strong></p>
-<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/Ciqc1F9sDDSAQhNcAAD8rL1NLXc02.jpeg" style="zoom:80%;" />
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/Ciqc1F9sDDSAQhNcAAD8rL1NLXc02.jpeg" style="zoom:80%;" /></p>
 <ul>
-<li>
-<p>虚拟机</p>
+<li>虚拟机
 <ul>
 <li>虚拟机是通过管理系统（Hypervisor）<strong>模拟出 CPU、内存、网络等硬件</strong>，然后在这些模拟的硬件上 <strong>创建客户内核和操作系统</strong></li>
 <li><strong>虚拟机有自己的内核和操作系统</strong>，并且硬件都是通过虚拟机管理系统模拟出来的，用户程序无法直接使用到主机的操作系统和硬件资源，<strong>隔离性和安全性有着更好的保证</strong></li>
-</ul>
-</li>
-<li>
-<p>Docker 容器</p>
+</ul></li>
+<li>Docker 容器
 <ul>
 <li>Docker 容器是通过 <strong>Linux 内核的 Namespace 技术</strong> 实现了 <strong>文件系统、进程、设备以及网络</strong> 的隔离</li>
 <li>再 <strong>通过 Cgroups 对 CPU、 内存等资源进行限制</strong>，最终实现了容器之间相互不受影响</li>
 <li>容器与虚拟机相比，<strong>容器的性能损耗非常小，并且镜像也非常小</strong>，在业务快速开发和迭代的今天，容器秒级的启动等特性也非常匹配业务快速迭代的业务场景</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong>Docker 的安全问题</strong></p>
 <ul>
 <li>Docker 自身安全，Docker 作为一款容器引擎，本身也会存在一些安全漏洞
 <ul>
 <li>CVE（Common Vulnerabilities and Exposures）目前已经记录了多项与 Docker 相关的安全漏洞，主要有权限提升、信息泄露等几类安全问题，具体 Docker 官方记录的安全问题可以参考 <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/security/non-events/">这里</a></li>
-</ul>
-</li>
+</ul></li>
 <li>镜像安全，镜像的安全直接影响到容器的安全
 <ul>
 <li>镜像软件存在安全漏洞，如果软件包存在漏洞，则可能会被不法分子利用并且侵入容器，影响其他容器或主机安全</li>
 <li>仓库漏洞，无论是 Docker 官方的镜像仓库还是我们私有的镜像仓库，都有可能被攻击，然后篡改镜像</li>
 <li>用户程序漏洞，用户自己构建的软件包可能存在漏洞或者被植入恶意脚本，这样会导致运行时提权影响其他容器或主机安全</li>
-</ul>
-</li>
+</ul></li>
 <li>Linux 内核隔离性不够
 <ul>
 <li>目前 Namespace 已经提供了非常多的资源隔离类型，但是仍有部分关键内容没有被完全隔离，其中包括一些系统的关键性目录（如 /sys、/proc 等）</li>
 <li>这些关键性的目录可能会泄露主机上一些关键性的信息，让攻击者利用这些信息对整个主机甚至云计算中心发起攻击</li>
 <li>一旦内核的 Namespace 被突破，使用者就有可能直接提权获取到主机的超级权限，从而影响主机安全</li>
-</ul>
-</li>
+</ul></li>
 <li>所有容器共享主机内核
 <ul>
 <li>由于同一宿主机上所有容器共享主机内核，所以攻击者可以利用一些特殊手段导致内核崩溃，进而导致主机宕机影响主机上其他服务</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong>如何解决容器的安全问题</strong></p>
 <ul>
-<li>
-<p>Docker 自身安全性改进</p>
+<li>Docker 自身安全性改进
 <ul>
 <li>Docker 自身是基于 Linux 的多种 Namespace 实现的，其中有一个很重要的 Namespace 叫作 User Namespace</li>
 <li>Docker 从 1.10 版本开始，使用 User Namespace 做 <strong>用户隔离</strong>，实现了容器中的 root 用户映射到主机上的非 root 用户，从而大大减轻了容器被突破的风险</li>
-</ul>
-</li>
-<li>
-<p>保障镜像安全</p>
+</ul></li>
+<li>保障镜像安全
 <ul>
 <li>可以在私有镜像仓库安装镜像安全扫描组件，对上传的镜像进行检查</li>
 <li>在拉取镜像时，要确保只从受信任的镜像仓库拉取，并且与镜像仓库通信一定要使用 HTTPS 协议</li>
-</ul>
-</li>
-<li>
-<p>加强内核安全和管理</p>
+</ul></li>
+<li>加强内核安全和管理
 <ul>
 <li>宿主机及时升级内核漏洞，宿主机内核应该尽量安装最新补丁，因为更新的内核补丁往往有着更好的安全性和稳定性</li>
 <li>使用 Capabilities 划分权限，Capabilities 是 Linux 内核的概念，Linux 将系统权限分为了多个 Capabilities，Capabilities 实现了系统更细粒度的访问控制</li>
 <li>在虚拟机内我们可以赋予用户所有的权限，例如设置 cron 定时任务、操作内核模块、配置网络等权限</li>
 <li>而容器则需要针对每一项 Capabilities 更细粒度的去控制权限，例如容器是共享主机内核的，因此在容器内部一般不允许直接操作主机内核</li>
-</ul>
-</li>
-<li>
-<p>使用安全加固组件</p>
+</ul></li>
+<li>使用安全加固组件
 <ul>
 <li>Linux 的 SELinux、AppArmor、GRSecurity 组件都是 Docker 官方推荐的安全加固组件
 <ul>
 <li>SELinux (Secure Enhanced Linux): 是 Linux 的一个内核安全模块，提供了安全访问的策略机制，通过设置 SELinux 策略可以实现某些进程允许访问某些文件</li>
 <li>AppArmor: 类似于 SELinux，也是一个 Linux 的内核安全模块，普通的访问控制仅能控制到用户的访问权限，而 AppArmor 可以控制到用户程序的访问权限</li>
 <li>GRSecurity 是一个对内核的安全扩展，可通过智能访问控制，提供内存破坏防御，文件系统增强等多种防御形式</li>
-</ul>
-</li>
+</ul></li>
 <li>这三个组件可以限制一个容器对主机的内核或其他资源的访问控制，容器报告的一些安全漏洞中，很多都是通过对内核进行加强访问和隔离来实现的</li>
-</ul>
-</li>
-<li>
-<p>资源限制</p>
+</ul></li>
+<li>资源限制
 <ul>
-<li>
-<p>在生产环境中，建议每个容器都添加相应的资源限制</p>
-</li>
-<li>
-<p>例如想要启动一个 1 核 2G 的容器，并且限制在容器内最多只能创建 1000 个 PID，启动命令如下：</p>
+<li>在生产环境中，建议每个容器都添加相应的资源限制</li>
+<li>例如想要启动一个 1 核 2G 的容器，并且限制在容器内最多只能创建 1000 个 PID，启动命令如下：
 <ul>
 <li><code>docker run -it --cpus=1 -m=2048m --pids-limit=1000 busybox sh</code></li>
-</ul>
-</li>
-<li>
-<p>在生产环境中限制 CPU、内存、PID 等资源，这样即便应用程序有漏洞，也不会导致主机的资源完全耗尽，最大限度降低安全风险</p>
-</li>
-</ul>
-</li>
-<li>
-<p>使用 <strong>安全容器</strong></p>
+</ul></li>
+<li>在生产环境中限制 CPU、内存、PID 等资源，这样即便应用程序有漏洞，也不会导致主机的资源完全耗尽，最大限度降低安全风险</li>
+</ul></li>
+<li>使用 <strong>安全容器</strong>
 <ul>
 <li>容器有着 <strong>轻便快速启动</strong> 的优点，虚拟机有着 <strong>安全隔离</strong> 的优点</li>
 <li>安全容器是相较于普通容器的，安全容器与普通容器的主要区别在于，安全容器中的每个容器都运行在一个单独的微型虚拟机中，拥有独立的操作系统和内核，并且有虚拟化层的安全隔离</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/kata-containers">Kata Containers</a> 并不包含一个完整的操作系统，只有一个精简版的 Guest Kernel 运行着容器本身的应用，并且通过减少不必要的内存，尽量共享可以共享的内存来进一步减少内存的开销</li>
 <li>Kata Container 实现了 OCI 规范，可以直接使用 Docker 的镜像启动 Kata 容器，具有开销更小、秒级启动、安全隔离等许多优点</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left">Docker 容器的安全问题</th>
-<th style="text-align:left">解决办法</th>
+<tr class="header">
+<th style="text-align: left;">Docker 容器的安全问题</th>
+<th style="text-align: left;">解决办法</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">1. Docker 作为一款容器引擎，本身也会存在一些安全漏洞（权限提升、信息泄露）</td>
-<td style="text-align:left">使用 Docker 最新版本就可以得到更好的安全保障</td>
+<tr class="odd">
+<td style="text-align: left;">1. Docker 作为一款容器引擎，本身也会存在一些安全漏洞（权限提升、信息泄露）</td>
+<td style="text-align: left;">使用 Docker 最新版本就可以得到更好的安全保障</td>
 </tr>
-<tr>
-<td style="text-align:left">2. 镜像软件存在安全漏洞、仓库漏洞、用户程序漏洞</td>
-<td style="text-align:left">在私有镜像仓库库中安装安全扫描插件，对上传的镜像进行检查，通过与 CVE 数据库对比，一旦发现有漏洞的镜像及时通报并可中止相关镜像继续构建和分发</td>
+<tr class="even">
+<td style="text-align: left;">2. 镜像软件存在安全漏洞、仓库漏洞、用户程序漏洞</td>
+<td style="text-align: left;">在私有镜像仓库库中安装安全扫描插件，对上传的镜像进行检查，通过与 CVE 数据库对比，一旦发现有漏洞的镜像及时通报并可中止相关镜像继续构建和分发</td>
 </tr>
-<tr>
-<td style="text-align:left">3. Linux 内核 Namespace 隔离不够，仍有部分关键内容没有极完全隔离</td>
-<td style="text-align:left">1. 宿主机内核应该尽量安装更新补丁 2. 使用 Capabilities 划分权限 3. 使用 SELinux、AppArmor、GRSecurity 等安全组件加强安全 4. 每个容器都需要限制资源使用</td>
+<tr class="odd">
+<td style="text-align: left;">3. Linux 内核 Namespace 隔离不够，仍有部分关键内容没有极完全隔离</td>
+<td style="text-align: left;">1. 宿主机内核应该尽量安装更新补丁 2. 使用 Capabilities 划分权限 3. 使用 SELinux、AppArmor、GRSecurity 等安全组件加强安全 4. 每个容器都需要限制资源使用</td>
 </tr>
-<tr>
-<td style="text-align:left">4. 所有容器共享主机内内核，攻击者可以利用一些特殊手段导致内核崩溃，进而导致主机宕机或影响其他服务</td>
-<td style="text-align:left">使用更安全容器（例如 Kata Containers）来替代 runc</td>
+<tr class="even">
+<td style="text-align: left;">4. 所有容器共享主机内内核，攻击者可以利用一些特殊手段导致内核崩溃，进而导致主机宕机或影响其他服务</td>
+<td style="text-align: left;">使用更安全容器（例如 Kata Containers）来替代 runc</td>
 </tr>
 </tbody>
 </table>
-<h3 id="容器监控"><a class="markdownIt-Anchor" href="#容器监控"></a> 容器监控</h3>
+<h3 id="容器监控">容器监控</h3>
 <p>通过监控可以随时掌握容器的运行状态，做到线上隐患和问题早发现，早解决。容器的监控面临着更大的挑战，因为容器的行为和本质与传统的虚拟机是不一样的，总的来说，容器具有以下特性：</p>
 <ul>
 <li>容器是短期存活的，并且可以动态调度</li>
@@ -668,8 +608,7 @@
 <ul>
 <li>查看容器 CPU、内存、网络 IO、磁盘 IO、PID 等资源的使用情况</li>
 <li>只能获取本机数据，无法查看历史监控数据，没有可视化展示面板</li>
-</ul>
-</li>
+</ul></li>
 <li>cAdvisor
 <ul>
 <li>特点
@@ -677,158 +616,17 @@
 <li>不仅可以监控容器的资源使用情况，还可以监控主机的资源使用情况</li>
 <li>还提供了基础的查询界面和 HTTP 接口，方便与外部系统结合</li>
 <li>Kubernetes 也集成了 cAdvisor 作为容器监控指标的默认工具</li>
-</ul>
-</li>
+</ul></li>
 <li>监控原理
 <ul>
 <li>Docker 是基于 Namespace、Cgroups 和联合文件系统实现的</li>
-<li><strong>Cgroups</strong> 不仅可以用于容器资源的限制，还可以提供容器的资源使用率，无论何种监控方案的实现，底层数据都来源于 Cgroups</li>
+<li>Cgroups 不仅可以用于容器资源的限制，还可以提供容器的资源使用率，无论何种监控方案的实现，底层数据都来源于 Cgroups</li>
 <li>容器的监控原理其实就是定时读取 Linux 主机上相关的文件并展示给用户，例如，通过读取 memory.limit_in_bytes 文件即可获取到容器内存的限制值</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="工作原理"><a class="markdownIt-Anchor" href="#工作原理"></a> 工作原理</h2>
-<h3 id="资源隔离"><a class="markdownIt-Anchor" href="#资源隔离"></a> 资源隔离</h3>
-<p>Namespace 是 Linux 内核的一个特性，该特性可以实现在同一主机系统中，对进程 ID、主机名、用户 ID、文件名、网络和进程间通信等资源的隔离，Docker 利用 Linux 内核的 Namespace 特性，实现了每个容器的资源相互隔离，从而保证容器内部只能访问到自己 Namespace 的资源。</p>
-<blockquote>
-<p>Namespace 是 Linux 内核的一项功能，该功能对内核资源进行分区，以使一组进程看到一组资源，而另一组进程看到另一组资源。Namespace 的工作方式通过为一组资源和进程设置相同的 Namespace 而起作用，但是这些 Namespace 引用了不同的资源。资源可能存在于多个 Namespace 中。这些资源可以是 <strong>进程 ID、主机名、用户 ID、文件名、与网络访问相关的名称和进程间通信</strong>。</p>
-</blockquote>
-<p>Linux 5.6 内核中提供了 8 种类型的 Namespace：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"><strong>Namespace 名称</strong></th>
-<th style="text-align:left"><strong>作用</strong></th>
-<th style="text-align:left"><strong>内核版本</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Mount（mnt）</td>
-<td style="text-align:left">隔离挂载点</td>
-<td style="text-align:left">2.4.19</td>
-</tr>
-<tr>
-<td style="text-align:left">Process ID (pid)</td>
-<td style="text-align:left">隔离进程 ID</td>
-<td style="text-align:left">2.6.24</td>
-</tr>
-<tr>
-<td style="text-align:left">Network (net)</td>
-<td style="text-align:left">隔离网络设备，端口号等</td>
-<td style="text-align:left">2.6.29</td>
-</tr>
-<tr>
-<td style="text-align:left">Interprocess Communication (ipc)</td>
-<td style="text-align:left">隔离 System V IPC 和 POSIX message queues</td>
-<td style="text-align:left">2.6.19</td>
-</tr>
-<tr>
-<td style="text-align:left">UTS Namespace(uts)</td>
-<td style="text-align:left">隔离主机名和域名</td>
-<td style="text-align:left">2.6.19</td>
-</tr>
-<tr>
-<td style="text-align:left">User Namespace (user)</td>
-<td style="text-align:left">隔离用户和用户组</td>
-<td style="text-align:left">3.8</td>
-</tr>
-<tr>
-<td style="text-align:left">Control group (cgroup) Namespace</td>
-<td style="text-align:left">隔离 Cgroups 根目录</td>
-<td style="text-align:left">4.6</td>
-</tr>
-<tr>
-<td style="text-align:left">Time Namespace</td>
-<td style="text-align:left">隔离系统时间</td>
-<td style="text-align:left">5.6</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>unshare 是 util-linux 工具包中的一个工具，使用 unshare 命令可以实现创建并访问不同类型的 Namespace。</p>
-</blockquote>
-<p><strong>各种 Namespace 的作用</strong></p>
-<ul>
-<li><strong>Mount Namespace</strong>
-<ul>
-<li>用来隔离不同的进程或进程组看到的挂载点，可以实现在 <strong>不同的进程中看到不同的挂载目录</strong></li>
-<li>实现容器内只能看到自己的挂载信息，在容器内的挂载操作不会影响主机的挂载目录</li>
-</ul>
-</li>
-<li><strong>PID(Process Identification) Namespace</strong>
-<ul>
-<li>PID Namespace 的作用是用来 <strong>隔离进程</strong>，在不同的 PID Namespace 中，进程可以拥有相同的 PID 号</li>
-<li>利用 PID Namespace 可以实现每个容器的主进程为 1 号进程，而容器内的进程在主机上却拥有不同的 PID</li>
-</ul>
-</li>
-<li><strong>UTS(UNIX Time Sharing) namespace</strong>
-<ul>
-<li>UTS Namespace 主要是用来 <strong>隔离主机名</strong> 的，它允许每个 UTS Namespace 拥有一个独立的主机名。</li>
-</ul>
-</li>
-<li><strong>IPC(Interprocess communication) Namespace</strong>
-<ul>
-<li>IPC Namespace 主要是用来 <strong>隔离进程间通信</strong> 的</li>
-<li>PID Namespace 和 IPC Namespace 一起使用可以实现同一 IPC Namespace 内的进程彼此可以通信，不同 IPC Namespace 的进程却不能通信</li>
-</ul>
-</li>
-<li><strong>User Namespace</strong>
-<ul>
-<li>User Namespace 主要是用来 <strong>隔离用户和用户组</strong> 的，一个比较典型的应用场景就是在主机上以非 root 用户运行的进程可以在一个单独的 User Namespace 中映射成 root 用户</li>
-<li>使用 User Namespace 可以实现进程在容器内拥有 root 权限，而在主机上却只是普通用户</li>
-<li>在隔离的 User Namespace 中，<strong>并不能获取到主机的 root 权限</strong>，也就是说 User Namespace 实现了用户和用户组的隔离</li>
-</ul>
-</li>
-<li><strong>Net Namespace</strong>
-<ul>
-<li>Net Namespace 用来 <strong>隔离网络设备、IP 地址和端口</strong> 等信息，可以让每个进程拥有自己独立的 IP 地址，端口和网卡信息</li>
-</ul>
-</li>
-</ul>
-<p>Linux 内核从 2002 年 2.4.19 版本开始加入了 Mount Namespace，而直到内核 3.8 版本加入了 User Namespace 才为容器提供了足够的支持功能，当 Docker 新建一个容器时， 它会创建这六种 Namespace，然后将容器中的进程加入这些 Namespace 之中，使得 Docker 容器中的进程只能看到当前 Namespace 中的系统资源。</p>
-<p>正是由于 Docker 使用了 Linux 的这些 Namespace 技术，才实现了 Docker 容器的隔离，可以说没有 Namespace，就没有 Docker 容器。</p>
-<h3 id="资源限制"><a class="markdownIt-Anchor" href="#资源限制"></a> 资源限制</h3>
-<p>cgroups（全称：control groups）是 Linux 内核的一个功能，它可以实现 <strong>限制进程或者进程组的资源</strong>（如 CPU、内存、磁盘 IO 等）。</p>
-<blockquote>
-<p>在 2006 年，Google 的工程师（ Rohit Seth 和 Paul Menage 为主要发起人） 发起了这个项目，起初项目名称并不是 cgroups，而被称为进程容器（process containers）。在 2007 年 cgroups 代码计划合入 Linux 内核，但是当时在 Linux 内核中，容器（container）这个词被广泛使用，并且拥有不同的含义。为了避免命名混乱和歧义，进程容器被重名为 cgroups，并在 2008 年成功合入 Linux 2.6.24 版本中。cgroups 目前已经成为 systemd、Docker、Linux Containers（LXC） 等技术的基础。</p>
-</blockquote>
-<p><strong>cgroups 功能及核心概念</strong></p>
-<ul>
-<li>
-<p>cgroups 主要提供了如下功能</p>
-<ul>
-<li>资源限制： 限制资源的使用量，例如可以通过限制某个业务的内存上限，从而保护主机其他业务的安全运行</li>
-<li>优先级控制：不同的组可以有不同的资源（ CPU 、磁盘 IO 等）使用优先级</li>
-<li>审计：计算控制组的资源使用情况</li>
-<li>控制：控制进程的挂起或恢复</li>
-</ul>
-</li>
-<li>
-<p>cgroups 功能的实现依赖于三个核心概念：<strong>子系统、控制组、层级树</strong></p>
-<ul>
-<li>
-<p>子系统（subsystem）：是一个内核的组件，<strong>一个子系统代表一类资源调度控制器</strong>，例如内存子系统可以限制内存的使用量，CPU 子系统可以限制 CPU 的使用时间</p>
-</li>
-<li>
-<p>控制组（cgroup）：表示一组进程和一组带有参数的子系统的关联关系，例如一个进程使用了 CPU 子系统来限制 CPU 的使用时间，则这个 <strong>进程和 CPU 子系统的关联关系</strong> 称为控制组</p>
-</li>
-<li>
-<p>层级树（hierarchy）：是由一系列的控制组按照树状结构排列组成的。这种排列方式可以使得控制组拥有父子关系，子控制组默认拥有父控制组的属性，也就是子控制组会继承于父控制组。</p>
-<ul>
-<li>比如，系统中定义了一个控制组 c1，限制了 CPU 可以使用 1 核，然后另外一个控制组 c2 想实现既限制 CPU 使用 1 核，同时限制内存使用 2G，那么 c2 就可以直接继承 c1，无须重复定义 CPU 限制。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>cgroups 的三个核心概念中，子系统是最核心的概念，因为子系统是真正实现某类资源的限制的基础，cpu 和 memory 子系统是容器环境中使用最多的子系统。</p>
-<p>Docker 创建容器时，Docker 会根据启动容器的参数，在对应的 cgroups 子系统下创建以容器 ID 为名称的目录，然后根据容器启动时设置的资源限制参数，修改对应的 cgroups 子系统资源限制文件，从而达到资源限制的效果。</p>
-<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20241004103807.png" fancybox="true"/></div></div>
-<p>Cgroups 不仅可以实现资源的限制，还可以为用来统计资源的使用情况，容器监控系统的数据来源也是 cgroups 提供的。Cgroups 虽然可以实现资源的限制，但是不能保证资源的使用。例如，cgroups 限制某个容器最多使用 1 核 CPU，但不保证总是能使用到 1 核 CPU，当 CPU 资源发生竞争时，可能会导致实际使用的 CPU 资源产生竞争。</p>
-<h3 id="组件组成"><a class="markdownIt-Anchor" href="#组件组成"></a> 组件组成</h3>
+<h2 id="工作原理">工作原理</h2>
+<h3 id="组件组成">组件组成</h3>
 <p>Docker 整体架构采用 C/S（客户端 / 服务器）模式，主要由客户端和服务端两大部分组成。客户端负责发送操作指令，服务端负责接收和处理指令。客户端和服务端通信有多种方式，即可以在同一台机器上通过 UNIX 套接字通信，也可以通过网络连接远程通信。</p>
 <p>Docker 组件大体分为 Docker 相关组件、containerd 相关组件和容器运行时。件根据工作职责可以分为以下三大类：</p>
 <ul>
@@ -838,38 +636,30 @@
 </ul>
 <p><strong>Docker 相关的组件</strong></p>
 <ul>
-<li>
-<p>docker</p>
+<li>docker
 <ul>
 <li>docker 是 Docker 客户端的一个完整实现，它是一个二进制文件，对用户可见的操作形式为 docker 命令，通过 docker 命令可以完成所有的 Docker 客户端与服务端的通信（还可以通过 REST API、SDK 等多种形式与 Docker 服务端通信）</li>
 <li>Docker 客户端与服务端的交互过程是：docker 组件向服务端发送请求后，服务端根据请求执行具体的动作并将结果返回给 docker，docker 解析服务端的返回结果，并将结果通过命令行标准输出展示给用户</li>
-</ul>
-</li>
-<li>
-<p>dockerd</p>
+</ul></li>
+<li>dockerd
 <ul>
 <li>dockerd 是 Docker 服务端的后台常驻进程，用来接收客户端发送的请求，执行具体的处理任务，处理完成后将结果返回给客户端</li>
 <li>Docker 客户端可以通过多种方式向 dockerd 发送请求，常用的 Docker 客户端与 dockerd 的交互方式有三种：通过 <strong>UNIX 套接字（Unix domain socket）</strong> 与服务端通信、通过 TCP 与服务端通信、通过文件描述符的方式与服务端通信</li>
 <li>Docker 客户端和服务端的通信形式必须保持一致，否则将无法通信，只有当 dockerd 监听了 UNIX 套接字客户端才可以使用 UNIX 套接字的方式与服务端通信，UNIX 套接字也是 Docker 默认的通信方式</li>
 <li>如果想要通过远程的方式访问 dockerd，可以在 dockerd 启动的时候添加 -H 参数指定监听的 HOST 和 PORT</li>
-</ul>
-</li>
-<li>
-<p>docker-init</p>
+</ul></li>
+<li>docker-init
 <ul>
 <li>在容器内部，自己的业务进程没有回收子进程的能力时，在执行 docker run 启动容器时可以添加 –init 参数，此时 Docker 会使用 docker-init 作为 1 号进程，帮助管理容器内子进程，例如回收僵尸进程等</li>
-</ul>
-</li>
-<li>
-<p>docker-proxy</p>
+</ul></li>
+<li>docker-proxy
 <ul>
 <li>docker-proxy 主要是用来做 <strong>端口映射</strong> 的，当使用 docker run 命令启动容器时，如果使用了 -p 参数，docker-proxy 组件就会把容器内相应的端口映射到主机上来</li>
 <li>当启动一个容器时需要端口映射时， Docker 创建了一个 docker-proxy 进程，并且通过参数把我们的容器 IP 和端口传递给 docker-proxy 进程，然后 docker-proxy 通过 iptables 实现了 nat 转发</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <blockquote>
-<p><strong>Unix domain socket</strong> 或者 <strong>IPC socket</strong> 是一种终端，可以使同一台 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">操作系统</a> 上的两个或多个 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BF%9B%E7%A8%8B">进程</a> 进行数据通信。与 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%AE%A1%E9%81%93_(Unix)">管道</a>相比，Unix domain sockets 既可以使用 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AD%97%E7%AF%80%E6%B5%81">字节流</a>，又可以使用数据队列，而管道通信则只能使用 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AD%97%E7%AF%80%E6%B5%81">字节流</a>。Unix domain sockets 的接口和 Internet socket 很像，但它不使用网络底层协议来通信。</p>
+<p><strong>Unix domain socket</strong> 或者 <strong>IPC socket</strong> 是一种终端，可以使同一台操作系统上的两个或多个进程进行数据通信。与 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/管道_(Unix)">管道</a>相比，Unix domain sockets 既可以使用 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/字節流">字节流</a>，又可以使用数据队列，而管道通信则只能使用字节流。Unix domain sockets 的接口和 Internet socket 很像，但它不使用网络底层协议来通信。</p>
 </blockquote>
 <p>docker 是官方实现的标准客户端，dockerd 是 Docker 服务端的入口，负责接收客户端发送的指令并返回相应结果，而 docker-init 在业务主进程没有进程回收功能时则十分有用，docker-proxy 组件则是实现 Docker 网络访问的重要组件</p>
 <p><strong>containerd 相关的组件</strong></p>
@@ -884,24 +674,20 @@
 <li>接收 dockerd 的请求，通过适当的参数调用 runc 启动容器</li>
 <li>管理存储相关资源</li>
 <li>管理网络相关资源</li>
-</ul>
-</li>
+</ul></li>
 <li>containerd 包含一个后台常驻进程，默认的 socket 路径为 /run/containerd/containerd.sock，dockerd 通过 UNIX 套接字向 containerd 发送请求，containerd 接收到请求后负责执行相关的动作并把执行结果返回给 dockerd</li>
 <li>如果不想使用 dockerd，也可以直接使用 containerd 来管理容器，由于 containerd 更加简单和轻量，生产环境中越来越多的人开始直接使用 containerd 来管理容器</li>
-</ul>
-</li>
+</ul></li>
 <li>containerd-shim
 <ul>
 <li>containerd-shim 的意思是垫片，类似于拧螺丝时夹在螺丝和螺母之间的垫片</li>
 <li>containerd-shim 的主要作用是将 containerd 和真正的容器进程解耦，使用 containerd-shim 作为容器进程的父进程，从而实现重启 containerd 不影响已经启动的容器进程</li>
-</ul>
-</li>
+</ul></li>
 <li>ctr
 <ul>
 <li>ctr 实际上是 containerd-ctr，它是 containerd 的客户端，主要用来开发和调试</li>
 <li>在没有 dockerd 的环境中，ctr 可以充当 docker 客户端的部分角色，直接向 containerd 守护进程发送操作容器的请求</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong>容器运行时组件 runc</strong></p>
 <ul>
@@ -909,68 +695,385 @@
 </ul>
 <p>Docker 的组件虽然很多，但每个组件都有自己清晰的工作职责，Docker 相关的组件负责发送和接受 Docker 请求，contianerd 相关的组件负责管理容器的生命周期，而 runc 负责真正意义上创建和启动容器。这些组件相互配合，才使得 Docker 顺利完成了容器的管理工作。</p>
 <table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 64%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left">组件分类</th>
-<th style="text-align:left">组件名称</th>
-<th style="text-align:left">作用剖析</th>
+<tr class="header">
+<th style="text-align: left;">组件分类</th>
+<th style="text-align: left;">组件名称</th>
+<th style="text-align: left;">作用剖析</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">Docker 相关组件</td>
-<td style="text-align:left">docker</td>
-<td style="text-align:left">Docker 的客户端，负责发送 Docker 操作请求</td>
+<tr class="odd">
+<td style="text-align: left;">Docker 相关组件</td>
+<td style="text-align: left;">docker</td>
+<td style="text-align: left;">Docker 的客户端，负责发送 Docker 操作请求</td>
 </tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">dockerd</td>
-<td style="text-align:left">Docker 服务端入口，负责接收客户端请求并返回请求结果</td>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">dockerd</td>
+<td style="text-align: left;">Docker 服务端入口，负责接收客户端请求并返回请求结果</td>
 </tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">docker-init</td>
-<td style="text-align:left">当业务主进程退出回收能力时，docker-init 可以作为容器的 1 号进程，负责管理容器的子进程</td>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">docker-init</td>
+<td style="text-align: left;">当业务主进程退出回收能力时，docker-init 可以作为容器的 1 号进程，负责管理容器的子进程</td>
 </tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">docker-proxy</td>
-<td style="text-align:left">用来做 Docker 的网络实现，通过设置 iptables 规则可以使得访问到主机的流量可以转发到容器中</td>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">docker-proxy</td>
+<td style="text-align: left;">用来做 Docker 的网络实现，通过设置 iptables 规则可以使得访问到主机的流量可以转发到容器中</td>
 </tr>
-<tr>
-<td style="text-align:left">containerd 相关组件</td>
-<td style="text-align:left">containerd</td>
-<td style="text-align:left">负责管理容器的生命周期，负责接收 dockerd 的请求，执行启动或者销毁</td>
+<tr class="odd">
+<td style="text-align: left;">containerd 相关组件</td>
+<td style="text-align: left;">containerd</td>
+<td style="text-align: left;">负责管理容器的生命周期，负责接收 dockerd 的请求，执行启动或者销毁</td>
 </tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">containerd-shim</td>
-<td style="text-align:left">将 containerd 和真正的容器进程解耦，使用 containerd-shim 作为容器进程的父进程，可以实现重启 containerd 不影响已经启动的容器进程</td>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">containerd-shim</td>
+<td style="text-align: left;">将 containerd 和真正的容器进程解耦，使用 containerd-shim 作为容器进程的父进程，可以实现重启 containerd 不影响已经启动的容器进程</td>
 </tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">ctr</td>
-<td style="text-align:left">containerd 的客户端，可以直接向 containerd 发送容器操作请求，主要用来开发和调试</td>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">ctr</td>
+<td style="text-align: left;">containerd 的客户端，可以直接向 containerd 发送容器操作请求，主要用来开发和调试</td>
 </tr>
-<tr>
-<td style="text-align:left">容器运行时组件</td>
-<td style="text-align:left">runc</td>
-<td style="text-align:left">通过调用 Namespace、cgroups 等系统接口，实现容器的创建和运行</td>
+<tr class="even">
+<td style="text-align: left;">容器运行时组件</td>
+<td style="text-align: left;">runc</td>
+<td style="text-align: left;">通过调用 Namespace、cgroups 等系统接口，实现容器的创建和运行</td>
 </tr>
 </tbody>
 </table>
-<h3 id="网络模型"><a class="markdownIt-Anchor" href="#网络模型"></a> 网络模型</h3>
-<h3 id="数据存储"><a class="markdownIt-Anchor" href="#数据存储"></a> 数据存储</h3>
-<h3 id="文件存储驱动"><a class="markdownIt-Anchor" href="#文件存储驱动"></a> 文件存储驱动</h3>
-<h2 id="容器编排"><a class="markdownIt-Anchor" href="#容器编排"></a> 容器编排</h2>
-<h3 id="docker-compose"><a class="markdownIt-Anchor" href="#docker-compose"></a> Docker compose</h3>
-<h3 id="docker-swarm"><a class="markdownIt-Anchor" href="#docker-swarm"></a> Docker Swarm</h3>
-<h3 id="kubernetes"><a class="markdownIt-Anchor" href="#kubernetes"></a> Kubernetes</h3>
-<h2 id="综合实践"><a class="markdownIt-Anchor" href="#综合实践"></a> 综合实践</h2>
-<h3 id="多阶段构建"><a class="markdownIt-Anchor" href="#多阶段构建"></a> 多阶段构建</h3>
-<h3 id="devops"><a class="markdownIt-Anchor" href="#devops"></a> DevOps</h3>
-<h3 id="cicd"><a class="markdownIt-Anchor" href="#cicd"></a> CI/CD</h3>
-<h2 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h2>
+<h3 id="资源隔离">资源隔离</h3>
+<p>Namespace 是 Linux 内核的一个特性，该特性可以实现在同一主机系统中，对进程 ID、主机名、用户 ID、文件名、网络和进程间通信等资源的隔离，Docker 利用 Linux 内核的 Namespace 特性，实现了每个容器的资源相互隔离，从而保证容器内部只能访问到自己 Namespace 的资源。</p>
+<blockquote>
+<p>Namespace 是 Linux 内核的一项功能，该功能对内核资源进行分区，以使一组进程看到一组资源，而另一组进程看到另一组资源。Namespace 的工作方式通过为一组资源和进程设置相同的 Namespace 而起作用，但是这些 Namespace 引用了不同的资源。资源可能存在于多个 Namespace 中。这些资源可以是 <strong>进程 ID、主机名、用户 ID、文件名、与网络访问相关的名称和进程间通信</strong>。</p>
+</blockquote>
+<p>Linux 5.6 内核中提供了 8 种类型的 Namespace：</p>
+<table>
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 48%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Namespace 名称</strong></th>
+<th style="text-align: left;"><strong>作用</strong></th>
+<th style="text-align: left;"><strong>内核版本</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mount（mnt）</td>
+<td style="text-align: left;">隔离挂载点</td>
+<td style="text-align: left;">2.4.19</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Process ID (pid)</td>
+<td style="text-align: left;">隔离进程 ID</td>
+<td style="text-align: left;">2.6.24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Network (net)</td>
+<td style="text-align: left;">隔离网络设备，端口号等</td>
+<td style="text-align: left;">2.6.29</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Interprocess Communication (ipc)</td>
+<td style="text-align: left;">隔离 System V IPC 和 POSIX message queues</td>
+<td style="text-align: left;">2.6.19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">UTS Namespace(uts)</td>
+<td style="text-align: left;">隔离主机名和域名</td>
+<td style="text-align: left;">2.6.19</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">User Namespace (user)</td>
+<td style="text-align: left;">隔离用户和用户组</td>
+<td style="text-align: left;">3.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Control group (cgroup) Namespace</td>
+<td style="text-align: left;">隔离 Cgroups 根目录</td>
+<td style="text-align: left;">4.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Time Namespace</td>
+<td style="text-align: left;">隔离系统时间</td>
+<td style="text-align: left;">5.6</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>unshare 是 util-linux 工具包中的一个工具，使用 unshare 命令可以实现创建并访问不同类型的 Namespace。</p>
+</blockquote>
+<p><strong>各种 Namespace 的作用</strong></p>
+<ul>
+<li><strong>Mount Namespace</strong>
+<ul>
+<li>用来隔离不同的进程或进程组看到的挂载点，可以实现在 <strong>不同的进程中看到不同的挂载目录</strong></li>
+<li>实现容器内只能看到自己的挂载信息，在容器内的挂载操作不会影响主机的挂载目录</li>
+</ul></li>
+<li><strong>PID(Process Identification) Namespace</strong>
+<ul>
+<li>PID Namespace 的作用是用来 <strong>隔离进程</strong>，在不同的 PID Namespace 中，进程可以拥有相同的 PID 号</li>
+<li>利用 PID Namespace 可以实现每个容器的主进程为 1 号进程，而容器内的进程在主机上却拥有不同的 PID</li>
+</ul></li>
+<li><strong>UTS(UNIX Time Sharing) namespace</strong>
+<ul>
+<li>UTS Namespace 主要是用来 <strong>隔离主机名</strong> 的，它允许每个 UTS Namespace 拥有一个独立的主机名。</li>
+</ul></li>
+<li><strong>IPC(Interprocess communication) Namespace</strong>
+<ul>
+<li>IPC Namespace 主要是用来 <strong>隔离进程间通信</strong> 的</li>
+<li>PID Namespace 和 IPC Namespace 一起使用可以实现同一 IPC Namespace 内的进程彼此可以通信，不同 IPC Namespace 的进程却不能通信</li>
+</ul></li>
+<li><strong>User Namespace</strong>
+<ul>
+<li>User Namespace 主要是用来 <strong>隔离用户和用户组</strong> 的，一个比较典型的应用场景就是在主机上以非 root 用户运行的进程可以在一个单独的 User Namespace 中映射成 root 用户</li>
+<li>使用 User Namespace 可以实现进程在容器内拥有 root 权限，而在主机上却只是普通用户</li>
+<li>在隔离的 User Namespace 中，<strong>并不能获取到主机的 root 权限</strong>，也就是说 User Namespace 实现了用户和用户组的隔离</li>
+</ul></li>
+<li><strong>Net Namespace</strong>
+<ul>
+<li>Net Namespace 用来 <strong>隔离网络设备、IP 地址和端口</strong> 等信息，可以让每个进程拥有自己独立的 IP 地址，端口和网卡信息</li>
+</ul></li>
+</ul>
+<p>Linux 内核从 2002 年 2.4.19 版本开始加入了 Mount Namespace，而直到内核 3.8 版本加入了 User Namespace 才为容器提供了足够的支持功能，当 Docker 新建一个容器时， 它会创建这六种 Namespace，然后将容器中的进程加入这些 Namespace 之中，使得 Docker 容器中的进程只能看到当前 Namespace 中的系统资源。</p>
+<p>正是由于 Docker 使用了 Linux 的这些 Namespace 技术，才实现了 Docker 容器的隔离，可以说没有 Namespace，就没有 Docker 容器。</p>
+<h3 id="资源限制">资源限制</h3>
+<p>cgroups（全称：control groups）是 Linux 内核的一个功能，它可以实现 <strong>限制进程或者进程组的资源</strong>（如 CPU、内存、磁盘 IO 等）。</p>
+<blockquote>
+<p>在 2006 年，Google 的工程师（ Rohit Seth 和 Paul Menage 为主要发起人） 发起了这个项目，起初项目名称并不是 cgroups，而被称为进程容器（process containers）。在 2007 年 cgroups 代码计划合入 Linux 内核，但是当时在 Linux 内核中，容器（container）这个词被广泛使用，并且拥有不同的含义。为了避免命名混乱和歧义，进程容器被重名为 cgroups，并在 2008 年成功合入 Linux 2.6.24 版本中。cgroups 目前已经成为 systemd、Docker、Linux Containers（LXC） 等技术的基础。</p>
+</blockquote>
+<p><strong>cgroups 功能及核心概念</strong></p>
+<ul>
+<li>cgroups 主要提供了如下功能
+<ul>
+<li>资源限制： 限制资源的使用量，例如可以通过限制某个业务的内存上限，从而保护主机其他业务的安全运行</li>
+<li>优先级控制：不同的组可以有不同的资源（ CPU 、磁盘 IO 等）使用优先级</li>
+<li>审计：计算控制组的资源使用情况</li>
+<li>控制：控制进程的挂起或恢复</li>
+</ul></li>
+<li>cgroups 功能的实现依赖于三个核心概念：<strong>子系统、控制组、层级树</strong>
+<ul>
+<li><p>子系统（subsystem）：是一个内核的组件，<strong>一个子系统代表一类资源调度控制器</strong>，例如内存子系统可以限制内存的使用量，CPU 子系统可以限制 CPU 的使用时间</p></li>
+<li><p>控制组（cgroup）：表示一组进程和一组带有参数的子系统的关联关系，例如一个进程使用了 CPU 子系统来限制 CPU 的使用时间，则这个 <strong>进程和 CPU 子系统的关联关系</strong> 称为控制组</p></li>
+<li><p>层级树（hierarchy）：是由一系列的控制组按照树状结构排列组成的。这种排列方式可以使得控制组拥有父子关系，子控制组默认拥有父控制组的属性，也就是子控制组会继承于父控制组。</p>
+<ul>
+<li>比如，系统中定义了一个控制组 c1，限制了 CPU 可以使用 1 核，然后另外一个控制组 c2 想实现既限制 CPU 使用 1 核，同时限制内存使用 2G，那么 c2 就可以直接继承 c1，无须重复定义 CPU 限制。</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>cgroups 的三个核心概念中，子系统是最核心的概念，因为子系统是真正实现某类资源的限制的基础，cpu 和 memory 子系统是容器环境中使用最多的子系统。</p>
+<p>Docker 创建容器时，Docker 会根据启动容器的参数，在对应的 cgroups 子系统下创建以容器 ID 为名称的目录，然后根据容器启动时设置的资源限制参数，修改对应的 cgroups 子系统资源限制文件，从而达到资源限制的效果。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20241004103807.png" fancybox="true"/></div></div>
+<p>Cgroups 不仅可以实现资源的限制，还可以为用来统计资源的使用情况，容器监控系统的数据来源也是 cgroups 提供的。Cgroups 虽然可以实现资源的限制，但是不能保证资源的使用。例如，cgroups 限制某个容器最多使用 1 核 CPU，但不保证总是能使用到 1 核 CPU，当 CPU 资源发生竞争时，可能会导致实际使用的 CPU 资源产生竞争。</p>
+<h3 id="网络模型">网络模型</h3>
+<p>利用 Linux 的 Namespace 和 Cgroups 技术可以实现各种资源的隔离和主机资源的限制，让容器可以像一台虚拟机一样。但这时容器就像一台未联网的电脑，不能被外部访问到，也不能主动与外部通信，这样的容器只能做一些离线的处理任务，无法通过外部访问。 容器的网络标准便分为两大阵营 * 以 Docker 公司为代表的 CNM（Container Network Model） * 以 Google、Kubernetes、CoreOS 为代表的 CNI（Container Network Interface）</p>
+<p><strong>CNM（Container Network Model）</strong></p>
+<p>CNM 抽象了容器的网络接口 ，使得只要满足 CNM 接口的网络方案都可以接入到 Docker 容器网络，CNM 定义的网络标准包含三个重要元素：</p>
+<ul>
+<li><strong>沙箱（Sandbox）</strong>：沙箱代表了一系列网络堆栈的配置，其中包含路由信息、网络接口等网络资源的管理，沙箱的实现通常是 <strong>Linux 的 Net Namespace</strong>，但也可以通过其他技术来实现，比如 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/FreeBSD_jail">FreeBSD jail</a> 等</li>
+<li><strong>接入点（Endpoint）</strong>：接入点将沙箱连接到网络中，代表容器的网络接口，接入点的实现通常是 Linux 的 veth 设备对</li>
+<li><strong>网络（Network</strong>）：网络是一组可以互相通信的接入点，它将多接入点组成一个子网，并且多个接入点之间可以相互通信</li>
+</ul>
+<p>为了更好地构建容器网络标准，Docker 团队把网络功能从 Docker 中剥离出来，成为独立的项目 libnetwork，它通过插件的形式为 Docker 提供网络功能。Libnetwork 是开源的，使用 Golang 编写，它完全 <strong>遵循 CNM 网络规范，是 CNM 的官方实现</strong>。</p>
+<p><strong>Libnetwork 工作流程</strong></p>
+<p>Libnetwork 是 Docker 启动容器时，用来为 Docker 容器提供网络接入功能的插件，它可以让 Docker 容器顺利接入网络，<strong>实现主机和容器网络的互通</strong>。</p>
+<ol type="1">
+<li>Docker 通过调用 libnetwork.New 函数来创建 NetworkController 实例</li>
+<li>通过调用 NewNetwork 函数创建指定名称和类型的 Network</li>
+<li>通过调用 CreateEndpoint 来创建接入点（Endpoint）</li>
+<li>调用 NewSandbox 来创建容器沙箱，主要是初始化 Namespace 相关的资源</li>
+<li>调用 Endpoint 的 Join 函数将沙箱和网络接入点关联起来，此时容器就加入了 Docker 网络并具备了网络访问能力</li>
+</ol>
+<p><strong>Libnetwork 常见网络模式</strong></p>
+<p>Libnetwork 比较典型的网络模式主要有四种，这四种网络模式基本满足了我们单机容器的所有场景</p>
+<ul>
+<li>null 空网络模式，可以帮助构建一个没有网络接入的容器环境 <strong>（离线）</strong>
+<ul>
+<li>处理一些保密数据，出于安全考虑，需要一个隔离的网络环境执行一些纯计算任务</li>
+<li>这时候容器就像一个没有联网的电脑，处于一个相对较安全的环境，确保数据不被从网络窃取</li>
+</ul></li>
+<li>bridge 桥接模式，可以打通容器与容器间网络通信的需求 <strong>（与主机进行通信）</strong>
+<ul>
+<li>启动容器时默认的网络模式，使用 bridge 网络可以实现 <strong>容器与容器的互通</strong></li>
+<li>可以实现 <strong>主机与容器的互通</strong>，我们在容器内启动的业务，可以从主机直接请求</li>
+<li>Docker 的 bridge 模式是由 Linux 的 veth 和 bridge 技术实现的</li>
+<li>Docker 启动时，libnetwork 会在主机上创建 docker0 网桥，而 Docker 创建出的 brige 模式的容器则都会连接 docker0 上，从而实现网络互通</li>
+</ul></li>
+<li>host 主机网络模式，可以让容器内的进程共享主机网络，从而监听或修改主机网络 <strong>（没用网路隔离）</strong>
+<ul>
+<li>有些基础业务需要创建或更新主机的网络配置，使用 host 主机网络模式时
+<ul>
+<li>libnetwork 不会为容器创建新的网络配置和 Net Namespace</li>
+<li>Docker 容器中的进程直接共享主机的网络配置，可以直接使用主机的网络信息，此时，在容器内监听的端口，也将直接占用到主机的端口</li>
+<li>除了网络共享主机的网络外，其他的包括进程、文件系统、主机名等都是与主机隔离的</li>
+</ul></li>
+</ul></li>
+<li>container 网络模式，可以将两个容器放在同一个网络命名空间内，让两个业务通过 localhost 即可实现访问
+<ul>
+<li>当两个容器需要共享网络，但其他资源仍然需要隔离时就可以使用 container 网络模式 <strong>（不同容器使用同一个网络命名空间）</strong></li>
+<li>例如开发了一个 http 服务，但又想使用 nginx 的一些特性，让 nginx 代理外部的请求然后转发给自己的业务，这时使用 container 网络模式将自己开发的服务和 nginx 服务部署到 <strong>同一个网络命名空间</strong> 中</li>
+</ul></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 40%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Libnetwork 常见的网络模式</th>
+<th>作用</th>
+<th>业务场景</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>null 空网络模式</td>
+<td>不提供任何容器网络</td>
+<td>处理一些保密数据，出于安全考虑，需要一个隔离的网络环境执行一些纯计算任务</td>
+</tr>
+<tr class="even">
+<td>bridge 桥接模式</td>
+<td>使得容器和容器之间网络可以互通</td>
+<td>容器需要实现网络通信或者提供网络服务</td>
+</tr>
+<tr class="odd">
+<td>host 主机网络模式</td>
+<td>让容器内的程序可以使用到主机的网络</td>
+<td>容器需要控制主机网络或者用主机网络提供服务</td>
+</tr>
+<tr class="even">
+<td>container 网络模式</td>
+<td>将两个容器放到同一网络空间中，可以直接通过 localhost 本地访问</td>
+<td>两个容器之间需要直接通过 localhost 通信，一般用于网络接入较少的场景或本地通信任务</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数据存储">数据存储</h3>
+<p>Docker 网络实现为容器插上了网线，Docker 的卷为容器插上磁盘，实现容器数据的持久化。容器按照业务类型，总体可以分为两类：</p>
+<ul>
+<li>无状态的（数据不需要被持久化）</li>
+<li>有状态的（数据需要被持久化）</li>
+</ul>
+<p>Docker 提供了卷（Volume）的功能，使用 <code>docker volume</code> 命令可以实现对卷的创建、查看和删除等操作。</p>
+<p><strong>Docker 卷的操作</strong></p>
+<ul>
+<li>创建数据卷
+<ul>
+<li>使用 <code>docker volume create</code> 命令可以创建一个数据卷</li>
+<li>以在 Docker 启动时使用 <code>-v</code> 的方式指定容器内需要被持久化的路径</li>
+<li>默认情况下 ，Docker 创建的数据卷为 local 模式，仅能提供本主机的容器访问</li>
+</ul></li>
+<li>查看数据卷
+<ul>
+<li>已经创建的数据卷可以使用 <code>docker volume ls</code> 命令查看</li>
+<li><code>docker volume inspect</code> 查看卷的创建日期、命令、挂载路径信息</li>
+</ul></li>
+<li>使用数据卷
+<ul>
+<li>使用 <code>docker volume</code> 创建的卷在容器启动时，添加 <code>–mount</code> 参数指定卷的名称即可使用</li>
+<li>使用 Docker 卷后数据不会随着容器的删除而消失</li>
+</ul></li>
+<li>删除数据卷
+<ul>
+<li><code>docker volume rm</code> ，正在被使用中的数据卷无法删除</li>
+</ul></li>
+<li>容器与容器之间数据共享
+<ul>
+<li>两个容器之间会有共享数据的需求，很典型的一个场景就是容器内产生的日志需要一个专门的日志采集程序去采集日志内容</li>
+<li><code>docker volume create</code> 创建一个共享日志的数据卷，使用 <code>--volumes-from</code> 参数可以在启动新的容器时来挂载已经存在的容器的卷</li>
+<li>就像主机上的两个进程，一个向主机目录写数据，一个从主机目录读数据，利用主机的目录，实现了容器之间的数据共享</li>
+</ul></li>
+<li>主机与容器之间数据共享
+<ul>
+<li>Docker 卷的目录默认在 /var/lib/docker 下，想把主机的其他目录映射到容器内时，就需要用到主机与容器之间数据共享的方式</li>
+<li>例如，想把 MySQL 容器中的 /var/lib/mysql 目录映射到主机的 /var/lib/mysql 目录中</li>
+<li>只需要在启动容器的时候添加 <code>-v</code> 参数即可，使用格式为：<code>-v HOST_PATH:CONTIANAER_PATH</code></li>
+</ul></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 36%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>操作</th>
+<th>命令</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>创建数据卷</td>
+<td><code>docker volume create</code></td>
+<td>还可以使用 <code>docker run -v</code> 参数启动容器并创建数据卷</td>
+</tr>
+<tr class="even">
+<td>查看数据卷</td>
+<td><code>docker volume ls</code></td>
+<td>可以列出所有数据卷</td>
+</tr>
+<tr class="odd">
+<td>使用数据卷</td>
+<td><code>--mount source=&#123;volume-name&#125;,target=&#123;directory&#125;</code></td>
+<td>使用 mount 参数可以指定把卷挂载到容器中的特定目录</td>
+</tr>
+<tr class="even">
+<td>删除数据卷</td>
+<td><code>docker volume rm</code></td>
+<td>删除后数据不可恢复</td>
+</tr>
+<tr class="odd">
+<td>容器与容器之间的数据共享</td>
+<td><code>--mount source=&#123;volume-name&#125;,target=&#123;directory&#125;</code></td>
+<td>先使用 <code>docker volume create</code> 创建数据卷，然后需要共享数据卷的容器启动时使用 mount 参数挂载</td>
+</tr>
+<tr class="even">
+<td>主机与容器之间的数据共享</td>
+<td><code>docker run -v</code></td>
+<td>可以映射主机目录到容器</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Docker 卷的实现原理</strong></p>
+<blockquote>
+<p><strong>镜像和容器的文件系统原理：</strong> 镜像是由多层文件系统组成的，当我们想要启动一个容器时，Docker 会在镜像上层创建一个可读写层，容器中的文件都工作在这个读写层中，当容器删除时，与容器相关的工作文件将全部丢失</p>
+</blockquote>
+<p>Docker 容器的文件系统不是一个真正的文件系统，而是 <strong>通过联合文件系统实现的一个伪文件系统</strong>，而 <strong>Docker 卷则是直接利用主机的某个文件或者目录</strong>，它可以绕过联合文件系统，直接挂载主机上的文件或目录到容器中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker volume create volume-data</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">ls</span> -l /var/lib/docker/volumes</span></span><br><span class="line">drwxr-xr-x. 3 root root    19 Sep  8 10:59 volume-data</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo <span class="built_in">ls</span> -l /var/lib/docker/volumes/volume-data</span></span><br><span class="line">total 0</span><br><span class="line">drwxr-xr-x. 2 root root 6 Sep  8 10:59 _data</span><br></pre></td></tr></table></figure>
+<p>Docker 卷的实现原理是在主机的 /var/lib/docker/volumes 目录下，根据卷的名称创建相应的目录，然后在每个卷的目录下创建 _data 目录，在容器启动时如果使用 <code>–mount</code> 参数，Docker 会把主机上的目录直接映射到容器的指定目录下，实现数据持久化。</p>
+<h3 id="文件存储驱动">文件存储驱动</h3>
+<p>Docker 主要是基于 <strong>Namespace、cgroups 和联合文件系统</strong> 这三大核心技术实现的</p>
+<p><strong>联合文件系统</strong></p>
+<p>联合文件系统（Union File System，Unionfs）是一种分层的轻量级文件系统，它可以把多个目录内容联合挂载到同一目录下，从而形成一个单一的文件系统，这种特性可以让使用者像是使用一个目录一样使用联合文件系统。</p>
+<p>联合文件系统只是一个概念，Docker 中最常用的联合文件系统有三种：AUFS、Devicemapper 和 OverlayFS。</p>
+<h4 id="aufs">AUFS</h4>
+<h4 id="devicemapper">Devicemapper</h4>
+<h4 id="overlayfs">OverlayFS</h4>
+<h2 id="容器编排">容器编排</h2>
+<h3 id="docker-compose">Docker compose</h3>
+<h3 id="docker-swarm">Docker Swarm</h3>
+<h3 id="kubernetes">Kubernetes</h3>
+<h2 id="综合实践">综合实践</h2>
+<h3 id="多阶段构建">多阶段构建</h3>
+<h3 id="devops">DevOps</h3>
+<h3 id="cicd">CI/CD</h3>
+<h2 id="参考资料">参考资料</h2>
 <ul>
 <li><strong><a target="_blank" rel="noopener" href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=455">由浅入深吃透 Docker</a></strong></li>
 </ul>
@@ -992,8 +1095,7 @@
 
 
       <!-- 
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br />
-本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <span class="citation" data-cites="anonymity">[@anonymity]</span>(/) 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer> -->
 
       <div class='float-panel mobile-only blur' style='display:none'>
