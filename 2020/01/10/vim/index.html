@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181000677.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181001737.gif">
 <meta property="article:published_time" content="2020-01-10T13:10:55.000Z">
-<meta property="article:modified_time" content="2024-10-04T04:30:50.369Z">
+<meta property="article:modified_time" content="2024-10-06T07:12:05.151Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Neovim">
@@ -113,7 +113,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Vim/Neovim 的使用和配置</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8"><span class="toc-text">初次使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-text">指令详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%8C%89%E9%94%AE"><span class="toc-text">修改按键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AE%BE%E7%BD%AE"><span class="toc-text">修改设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Vim/Neovim 的使用和配置</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">初次使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">指令详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%8C%89%E9%94%AE"><span class="toc-number">3.</span> <span class="toc-text">修改按键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">修改设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol></div></div></widget>
 
 
 
@@ -169,7 +169,7 @@
 <ul>
 <li><code>i</code>：insert 在光标前插入</li>
 <li><code>I</code>：在行最前面插入，快捷键为 `Shift+i``</li>
-<li>`<code>a</code>：append 在光标后开始编辑</li>
+<li><code>a</code>：append 在光标后开始编辑</li>
 <li><code>A</code>：在行最后面开始编辑</li>
 <li><code>o</code>：在当前行下一行开始编辑</li>
 <li><code>O</code>：在当前行上一行开始编辑</li>
@@ -410,6 +410,20 @@
 
 
 
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body giscus'>
+      
+
+<svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="giscus" data-repo="hcjjj/blog-comments" data-repo-id="R_kgDOM8H5Mg" data-category="Announcements" data-category-id="DIC_kwDOM8H5Ms4CjGw7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous"></div>
+
+    </section>
+  </div>
+
 
 
       <!-- 
@@ -583,6 +597,34 @@
 
 
 <!-- optional -->
+
+  <script>
+  function loadJS() {
+    const els = document.querySelectorAll("#comments #giscus");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.log(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    loadJS();
+  });
+</script>
+
 
 
 
