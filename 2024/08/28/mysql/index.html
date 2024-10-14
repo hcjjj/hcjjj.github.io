@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/1024px-MySQL.ff87215b43fd7292af172e2a5d9b844217262571.png">
 <meta property="article:published_time" content="2024-08-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-23T12:14:02.116Z">
+<meta property="article:modified_time" content="2024-10-13T03:45:04.445Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -231,11 +231,11 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <li><code>set autocommit=0</code>，这个命令会将这个线程的 <strong>自动提交</strong> 关掉。意味着如果你只执行一个 select 语句，这个事务就启动了，而且并不会自动提交。这个事务持续存在直到你 <strong>主动</strong> 执行 <code>commit</code> 或 <code>rollback</code> 语句，或者断开连接。</li>
 </ol>
 <h3 id="隔离的实现">隔离的实现</h3>
-<p>在 MySQL 中，实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值，当没有事务再需要用到这些回滚日志时（就是当系统里没有比这个回滚日志更早的 read-view 的时候），回滚日志会被删除。</p>
-<p>假设一个值从 1 被按顺序改成了 2、3、4，不同时刻启动的事务查询这条记录会有不同的 read-view，即同一条记录在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）。</p>
+<p>在 MySQL 中，实际上<strong>每条记录在更新的时候都会同时记录一条回滚操作</strong>。记录上的最新值，通过回滚操作，都可以得到前一个状态的值，当没有事务再需要用到这些回滚日志时（就是当系统里没有比这个回滚日志更早的 read-view 的时候），回滚日志会被删除。</p>
+<p>假设一个值从 1 被按顺序改成了 2、3、4，不同时刻启动的事务查询这条记录会有不同的 read-view，即<strong>同一条记录在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）</strong>。</p>
 <blockquote>
 <p><strong>为什么尽量不要使用长事务？</strong></p>
-<p>长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致 <strong>大量占用存储空间</strong>。除了对回滚段的影响，长事务还 <strong>占用锁资源</strong>，也可能拖垮整个库。</p>
+<p>长事务意味着系统里面会存在很<strong>老的事务视图</strong>。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致 <strong>大量占用存储空间</strong>。除了对回滚段的影响，长事务还 <strong>占用锁资源</strong>，也可能拖垮整个库。</p>
 <p><strong>如何避免长事务对业务的影响？</strong></p>
 <p>从应用开发端来看：</p>
 <ol type="1">
@@ -254,19 +254,19 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <p><strong>事务到底是隔离的还是不隔离的？</strong></p>
 <p><code>begin/start transaction</code> 命令并不是一个事务的起点，在执行到它们之后的第一个操作 InnoDB 表的语句，事务才真正启动。如果想要马上启动一个事务，可以使用 <code>start transaction with consistent snapshot</code> 这个命令。</p>
 <blockquote>
-<p>第一种启动方式，一致性视图是在第执行第一个快照读语句时创建的； 第二种启动方式，一致性视图是在执行 start transaction with consistent snapshot 时创建的。</p>
+<p>第一种启动方式，一致性视图是在第执行第一个快照读语句时创建的； 第二种启动方式，一致性视图是在执行 <code>start transaction with consistent snapshot</code>时创建的。</p>
 </blockquote>
 <p>在 MySQL 里，有两个“视图”的概念：</p>
 <ul>
 <li>一个是 view。它是一个用查询语句定义的虚拟表，在调用的时候执行查询语句并生成结果。创建视图的语法是 <code>create view …</code> ，而它的查询方法与表一样。</li>
-<li>另一个是 InnoDB 在实现 MVCC 时用到的一致性读视图，即 consistent read view，用于支持 RC（Read Committed，读提交）和 RR（Repeatable Read，可重复读）隔离级别的实现。</li>
+<li>另一个是 InnoDB 在实现 MVCC 时用到的<strong>一致性读视图</strong>，即 consistent read view，用于支持 <strong>RC（Read Committed，读提交）</strong>和 <strong>RR（Repeatable Read，可重复读）</strong>隔离级别的实现。</li>
 </ul>
 <p>它没有物理结构，作用是事务执行期间用来定义“我能看到什么数据”。</p>
 <p><strong>“快照”在 MVCC 里是怎么工作的？</strong></p>
 <p>在可重复读隔离级别下，事务在启动的时候就“拍了个快照”。注意，这个快照是 <strong>基于整库</strong> 的（但并不需要拷贝整库数据）。</p>
 <ul>
-<li>InnoDB 里面每个事务有一个唯一的事务 ID，叫作 <strong>transaction id</strong>。它是在事务开始的时候向 InnoDB 的事务系统申请的，是按申请顺序严格递增的。</li>
-<li>而每行数据也都是有多个版本的。每次事务更新数据的时候，都会生成一个新的数据版本，并且把 transaction id 赋值给这个数据版本的事务 ID，记为 <strong>row trx_id</strong>。</li>
+<li>InnoDB 里面每个事务有一个唯一的事务 ID，叫作 <strong>transaction id</strong>。它是在事务开始的时候向 InnoDB 的事务系统申请的，是<strong>按申请顺序严格递增</strong>的。</li>
+<li>而<strong>每行数据也都是有多个版本的</strong>。每次事务更新数据的时候，都会生成一个新的数据版本，并且把 transaction id 赋值给这个数据版本的事务 ID，记为 <strong>row trx_id</strong>。</li>
 <li>数据表中的一行记录，其实可能有多个版本 (row)，每个版本有自己的 row trx_id。</li>
 </ul>
 <pre class="mermaid">graph LR
@@ -278,7 +278,7 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
     V1 -->|U1: set k=10<br>transaction id=15| V2
     V2 -->|U2: set k=k+1<br>transaction id=17| V3
     V3 -->|U3: set k=k*2<br>transaction id=25| V4</pre>
-<p>按照可重复读的定义，一个事务启动的时候，能够看到所有已经提交的事务结果。但是之后，这个事务执行期间，其他事务的更新对它不可见。即一个事务以启动的时刻为准，如果一个数据版本是在启动之前生成的，就认；如果是启动以后才生成的，就不认，如果是这个事务自己更新的数据，还是要认的。</p>
+<p>按照可重复读的定义，一个事务启动的时候，能够看到所有已经提交的事务结果。但是之后，<strong>这个事务执行期间，其他事务的更新对它不可见</strong>。即一个事务以启动的时刻为准，如果一个数据版本是在启动之前生成的就认；如果是启动以后才生成的就不认，如果是这个事务自己更新的数据，还是要认的。</p>
 <p>在实现上， <strong>InnoDB 为每个事务构造了一个数组，用来保存这个事务启动瞬间，当前正在“活跃”的所有事务 ID。</strong>“活跃”指的就是，启动了但还没提交。数组里面事务 ID 的最小值记为低水位，当前系统里面已经创建过的事务 ID 的最大值加 1 记为高水位。这个视图数组和高水位，就组成了当前事务的一致性视图（read-view）。而数据版本的可见性规则，就是基于数据的 row trx_id 和这个一致性视图的对比结果得到的。</p>
 <pre class="mermaid">graph LR
     A["<font color=green>已提交事务</font>"] 
@@ -300,21 +300,21 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 </ol></li>
 </ol>
 <p><strong>InnoDB 利用了“所有数据都有多个版本”的这个特性，实现了“秒级创建快照”的能力。</strong></p>
-<p>一个数据版本，对于一个事务视图来说，除了自己的更新总是可见以外，有三种情况：</p>
+<p>一个数据版本，对于一个事务视图来说，除了<strong>自己的更新总是可见</strong>以外，有三种情况：</p>
 <ol type="1">
 <li>版本未提交，不可见；</li>
-<li>版本已提交，但是是在视图创建后提交的，不可见；</li>
-<li>版本已提交，而且是在视图创建前提交的，可见。</li>
+<li>版本已提交，但是是在视图<strong>创建后</strong>提交的，不可见；</li>
+<li>版本已提交，而且是在视图<strong>创建前</strong>提交的，可见。</li>
 </ol>
 <p><strong>更新逻辑</strong></p>
-<p>当要去更新数据的时候，就不能再在历史版本上更新了，否则其他事务的更新就丢失了，这里就用到了这样一条规则：更新数据都是先读后写的，而这个读，只能读当前的值，称为“<strong>当前读</strong>”（current read）。 除了 update 语句外，select 语句如果加锁，也是当前读。</p>
-<p><code>select * from t where id=1</code> 改为修改一下，加上 <code>lock in share mode</code> 或 <code>for update</code>，下面这两个 select 语句，就是分别加了读锁（S 锁，共享锁）和写锁（X 锁，排他锁）。</p>
+<p>当要去更新数据的时候，就不能再在历史版本上更新了，否则其他事务的更新就丢失了，这里就用到了这样一条规则：更新数据都是<strong>先读后写</strong>的，而这个读，只能读当前的值，称为“<strong>当前读</strong>”（current read）。 <strong>除了 update 语句外，select 语句如果加锁，也是当前读</strong>。</p>
+<p><code>select * from t where id=1</code> 改为修改一下，加上 <code>lock in share mode</code> 或 <code>for update</code>，下面这两个 select 语句，就是分别加了<strong>读锁（S 锁，共享锁）</strong>和<strong>写锁（X 锁，排他锁）</strong>。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select k from t where id=1 lock in share mode;</span><br><span class="line">mysql&gt; select k from t where id=1 for update;</span><br></pre></td></tr></table></figure>
 <p>如果事务 C 没有提交，在同一行的写锁还没释放，事务 B 是当前读必须要读最新版本，而且必须加锁，因此就被锁住了，必须等到事务 C 释放这个锁，才能继续它的当前读。</p>
-<p><strong>可重复读的核心就是一致性读（consistent read）；而事务更新数据的时候，只能用当前读。如果当前的记录的行锁被其他事务占用的话，就需要进入锁等待。</strong></p>
+<p><strong>可重复读</strong>的核心就是<strong>一致性读（consistent read）</strong>；而事务<strong>更新数据</strong>的时候，只能用<strong>当前读</strong>。如果当前的记录的<strong>行锁</strong>被其他事务占用的话，就需要进入<strong>锁等待</strong>。</p>
 <p>而<strong>读提交</strong>的逻辑和<strong>可重复读</strong>的逻辑类似，它们最主要的区别是：</p>
 <ul>
-<li>在可重复读隔离级别下，只需要在<strong>事务开始的时候</strong>创建一致性视图，之后事务里的其他查询都共用这个一致性视图；</li>
+<li>在可重复读隔离级别下，只需要在<strong>事务开始的时候</strong>创建一致性视图，之后事务里的其他查询都共用这个<strong>一致性视图</strong>；</li>
 <li>在读提交隔离级别下，<strong>每一个语句执行前</strong>都会重新算出一个新的视图。</li>
 </ul>
 <p>为什么<strong>表结构</strong>不支持“可重复读”？这是因为表结构没有对应的行数据，也没有 row trx_id，因此只能遵循<strong>当前读</strong>的逻辑，MySQL 8.0 已经可以把表结构放在 InnoDB 字典里了，也许以后会支持表结构的可重复读。</p>
@@ -322,21 +322,21 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <h3 id="常见索引模型">常见索引模型</h3>
 <p>索引的常见模型有哈希表、有序数组、搜索树：</p>
 <ul>
-<li><strong>哈希表</strong> 是一种以键 - 值（key-value）存储数据的结构，拉链法解决哈希冲突的问题，区间需要全部扫描，<strong>哈希表这种结构适用于只有等值查询的场景</strong>。</li>
-<li><strong>有序数组</strong> 在等值查询和范围查询场景中的性能就都非常优秀，但是往中间插入一个记录就必须得挪动后面所有的记录，<strong>有序数组索引只适用于静态数据存储引擎</strong>。</li>
+<li><strong>哈希表</strong> 是一种以键 - 值（key-value）存储数据的结构，<strong>拉链法</strong>解决哈希冲突的问题，区间需要全部扫描，哈希表这种结构适用于只有<strong>等值查询</strong>的场景。</li>
+<li><strong>有序数组</strong> 在等值查询和范围查询场景中的性能就都非常优秀，但是往中间插入一个记录就必须得挪动后面所有的记录，有序数组索引只适用于<strong>静态数据存储</strong>引擎。</li>
 <li><strong>二叉搜索树</strong> 为了维持 O(log(N)) 的查询复杂度，就需要保持这棵树是平衡二叉树，为了做这个保证，更新的时间复杂度也是 O(log(N))。</li>
 <li><strong>N 叉树</strong>
 <ul>
-<li>树可以有二叉，也可以有多叉，二叉树是搜索效率最高的，但是实际上大多数的数据库存储却并不使用二叉树，因为索引不止存在内存中，还要写到磁盘上</li>
+<li>树可以有二叉，也可以有多叉，<strong>二叉树是搜索效率最高的</strong>，但是实际上大多数的数据库存储却并不使用二叉树，因为<strong>索引不止存在内存中，还要写到磁盘上</strong></li>
 <li>100 万节点的平衡二叉树，树高 20。一次查询可能需要访问 20 个数据块，在机械硬盘时代，从磁盘随机读一个数据块需要 10 ms 左右的寻址时间</li>
 <li>为了让一个查询尽量少地读磁盘，就必须让查询过程访问尽量少的数据块则使用“N 叉”树，“N”取决于数据块的大小</li>
 <li>以 InnoDB 的一个整数字段索引为例，这个 N 差不多是 1200。这棵树高是 4 的时候，就可以存 1200 的 3 次方个值，这已经 17 亿了</li>
-<li>树根的数据块总是在内存中的（第二层也有很大概率在），一个 10 亿行的表上一个整数字段的索引，查找一个值最多只需要访问 2-3 次磁盘</li>
-<li>N 叉树由于在读写上的性能优点，以及适配磁盘的访问模式，已经被广泛应用在数据库引擎中了 &gt; 在 MySQL 中，索引是在存储引擎层实现的，所以并没有统一的索引标准，即不同存储引擎的索引的工作方式并不一样，而即使多个存储引擎支持同一种类型的索引，其底层的实现也可能不同。</li>
+<li>树根的数据块总是在内存中的（第二层也有很大概率在），一个 <strong>10 亿行</strong>的表上一个整数字段的索引，查找一个值最多只需要访问 2-3 次磁盘</li>
+<li>N 叉树由于在<strong>读写上的性能优点</strong>，以及<strong>适配磁盘的访问模式</strong>，已经被广泛应用在数据库引擎中了 &gt; <strong>在 MySQL 中，索引是在存储引擎层实现的</strong>，所以并没有统一的索引标准，即不同存储引擎的索引的工作方式并不一样，而即使多个存储引擎支持同一种类型的索引，其底层的实现也可能不同。</li>
 </ul></li>
 </ul>
 <h3 id="innodb-索引模型">InnoDB 索引模型</h3>
-<p>在 InnoDB 中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。InnoDB 使用了 B+ 树索引模型，所以数据都是存储在 B+ 树中的。</p>
+<p>在 InnoDB 中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为<strong>索引组织表</strong>。InnoDB 使用了 B+ 树索引模型，所以数据都是存储在 B+ 树中的。</p>
 <p>根据叶子节点的内容，索引类型分为 <strong>主键索引</strong> 和 <strong>非主键索引</strong>：</p>
 <ul>
 <li>主键索引的叶子节点存的是整行数据，<strong>主键索引也被称为聚簇索引</strong>（clustered index）</li>
@@ -375,8 +375,8 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <p>由于覆盖索引可以减少树的搜索次数，显著提升查询性能，所以使用覆盖索引是一个常用的性能优化手段。</p>
 <blockquote>
 <p><strong>是否有必要将身份证号和名字建立联合索引？</strong></p>
-<p>如果有根据身份证号查询市民信息的需求，只要在身份证号字段上建立索引就够了。而再建立一个（身份证号、姓名）的联合索引，是不是浪费空间？如果有一个高频请求，要 <strong>根据市民的身份证号查询他的姓名</strong>，用到了覆盖索引，不再需要回表查整行记录，减少语句的执行时间。</p>
-<p>索引字段的维护总是有代价的，在建立冗余索引来支持覆盖索引时就需要权衡考虑了。</p>
+<p>如果有根据身份证号查询市民信息的需求，只要在身份证号字段上建立索引就够了。而再建立一个（身份证号、姓名）的联合索引，是不是浪费空间？如果有一个高频请求，要 <strong>根据市民的身份证号查询他的姓名</strong>，用到了<strong>覆盖索引</strong>，不再需要回表查整行记录，减少语句的执行时间。</p>
+<p><strong>索引字段的维护</strong>总是有代价的，在建立冗余索引来支持覆盖索引时就需要权衡考虑了。</p>
 </blockquote>
 <p><strong>最左前缀原则</strong></p>
 <p>建立（name，age）联合索引，<code>where name like ‘张%’</code>，能够用上这个索引，查找到第一个符合条件的记录然后向后遍历，直到不满足条件为止。</p>
@@ -385,9 +385,9 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <p>但是如果查询条件里面只有 b 的语句，是无法使用 (a, b) 这个联合索引的，这时候你不得不维护另外一个索引，也就是说你需要同时维护 (a, b)、(b) 这两个索引，这时候要考虑的原则就是空间了，比如 name 字段是比 age 字段大的，则创建一个（name, age) 的联合索引和一个 (age) 的单字段索引。</p>
 <p><strong>索引下推</strong></p>
 <p>建立（name，age）联合索引</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from tuser where name like &#x27;张 %&#x27; and age=10 and ismale=1;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from user where name like &#x27;张 %&#x27; and age=10 and ismale=1;</span><br></pre></td></tr></table></figure>
 <p>这个语句在搜索索引树的时候，只能用 “张”，找到第一个满足条件的记录，在 MySQL 5.6 之前需要回表到主键索引上找出数据行，再对比字段值。</p>
-<p>而 MySQL 5.6 引入的索引下推优化（index condition pushdown)， 可以在索引遍历过程中，<strong>对索引中包含的字段先做判断</strong>，直接过滤掉不满足条件的记录，减少回表次数。InnoDB <strong>在 (name, age) 索引内部就判断了 age 是否等于 10</strong>，对于不等于 10 的记录，直接判断并跳过</p>
+<p>而 MySQL 5.6 引入的索引下推优化（index condition pushdown)， 可以在索引遍历过程中，<strong>对索引中包含的字段先做判断</strong>，直接过滤掉不满足条件的记录，<strong>减少回表次数</strong>。InnoDB <strong>在 (name, age) 索引内部就判断了 age 是否等于 10</strong>，对于不等于 10 的记录，直接判断并跳过</p>
 <h3 id="唯一索引-or-普通索引">唯一索引 OR 普通索引</h3>
 <p><strong>查询过程</strong></p>
 <ul>
@@ -396,21 +396,21 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 </ul>
 <p>那么，这个不同带来的性能差距会有多少呢？答案是，微乎其微。</p>
 <p>InnoDB 的数据是按数据页为单位来读写的。也就是说，当需要读一条记录的时候，并不是将这个记录本身从磁盘读出来，而是以页为单位，将其整体读入内存。在 InnoDB 中，每个数据页的大小默认是 16KB。</p>
-<p>因为引擎是<strong>按页读写</strong>的，当找到满足条件的记录的时候，它所在的数据页就都在内存里了，对于普通索引来说，要多做的那一次“查找和判断下一条记录”的操作，就只需要一次指针寻找和一次计算。如果满足条件的记录刚好是这个数据页的最后一个记录，那么要取下一个记录，必须读取下一个数据页，这种情况的概率会很低，计算平均性能差异时，仍可以认为这个操作成本对于现在的 CPU 来说可以忽略不计。</p>
+<p>因为引擎是<strong>按页读写</strong>的，当找到满足条件的记录的时候，它所在的数据页就都在内存里了，对于普通索引来说，要<strong>多做的那一次“查找和判断下一条记录”的操作</strong>，就只需要一次指针寻找和一次计算。如果满足条件的记录刚好是这个数据页的最后一个记录，那么要取下一个记录，必须读取下一个数据页，这种情况的概率会很低，计算平均性能差异时，仍可以认为<strong>这个操作成本对于现在的 CPU 来说可以忽略不计</strong>。</p>
 <p><strong>更新过程</strong></p>
 <p>当需要更新一个数据页时：</p>
 <ul>
 <li><p>如果数据页在内存中就直接更新</p></li>
 <li><p>如果数据页还没有在内存中，在不影响数据一致性的前提下，InooDB 会将这些更新操作缓存在 <strong>change buffer</strong> 中，这样就不需要从磁盘中读入这个数据页了，在下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行 change buffer 中与这个页有关的操作（保证数据逻辑的正确性）</p></li>
-<li><p>change buffer 是可以持久化的数据其在内存中有拷贝，也会被写入到磁盘上，将 change buffer 中的操作应用到原数据页，得到最新结果的过程称为 merge</p></li>
-<li><p>除了访问这个数据页会触发 merge 外，系统有后台线程会定期 merge。在数据库正常关闭（shutdown）的过程中，也会执行 merge 操作</p></li>
+<li><p>change buffer 是可以持久化的数据，其在内存中有拷贝，也会被写入到磁盘上，将 change buffer 中的操作应用到原数据页，得到最新结果的过程称为 merge</p></li>
+<li><p>除了<strong>访问这个数据页会触发 merge 外</strong>，系统有<strong>后台线程会定期 merge</strong>。在<strong>数据库正常关闭（shutdown）的过程</strong>中，也会执行 merge 操作</p></li>
 </ul>
 <p>change buffer 用的是 buffer pool 里的内存，因此不能无限增大。change buffer 的大小，可以通过参数 innodb_change_buffer_max_size 来动态设置。这个参数设置为 50 的时候，表示 change buffer 的大小最多只能占用 buffer pool 的 50%。</p>
 <blockquote>
 <p><strong>什么条件下可以使用 change buffer 呢？</strong></p>
-<p>对于唯一索引来说，所有的更新操作都要先判断这个操作是否违反唯一性约束，而这必须要将数据页读入内存才能查找判断，如果都已经读入到内存了，那直接更新内存会更快，就没必要使用 change buffer 了。因此，<strong>唯一索引的更新就不能使用 change buffer，实际上也只有普通索引可以使用。</strong></p>
+<p>对于唯一索引来说，所有的更新操作都<strong>要先判断这个操作是否违反唯一性约束</strong>，而这必须要将数据页读入内存才能查找判断，如果都已经读入到内存了，那直接更新内存会更快，就没必要使用 change buffer 了。因此，<strong>唯一索引的更新就不能使用 change buffer，实际上也只有普通索引可以使用。</strong></p>
 </blockquote>
-<p>如果要在一张表中插入一个新记录，InnoDB 的处理流程：、</p>
+<p>如果要在一张表中插入一个新记录，InnoDB 的处理流程：</p>
 <ul>
 <li><p>第一种情况是，<strong>这个记录要更新的目标页在内存中</strong>。这时，InnoDB 的处理流程如下：</p>
 <ul>
@@ -427,7 +427,7 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 </ul></li>
 </ul>
 <p><strong>change buffer 的使用场景</strong></p>
-<p>change buffer 只限于用在普通索引的场景下，而不适用于唯一索引。</p>
+<p><strong>change buffer 只限于用在普通索引的场景下</strong>，而不适用于唯一索引。</p>
 <p>因为 merge 的时候是真正进行数据更新的时刻，而 change buffer 的主要目的就是将记录的变更动作缓存下来，所以在一个数据页做 merge 之前，change buffer 记录的变更越多（也就是这个页面上要更新的次数越多），收益就越大。</p>
 <p>对于<strong>写多读少</strong>的业务来说，页面在写完以后马上被访问到的概率比较小，此时 change buffer 的使用效果最好。这种业务模型常见的就是账单类、日志类的系统。</p>
 <p>假设一个业务的更新模式是<strong>写入之后马上会做查询</strong>，那么即使满足了条件，将更新先记录在 change buffer，但之后由于马上要访问这个数据页，会立即触发 merge 过程。这样随机访问 IO 的次数不会减少，反而增加了 change buffer 的维护代价。所以，对于这种业务模式来说，change buffer 反而起到了副作用。</p>
@@ -471,7 +471,7 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 </ol>
 </blockquote>
 <h3 id="表级锁">表级锁</h3>
-<p>表级别的锁有两种：一种是表锁，一种是元数据锁（meta data lock，MDL)</p>
+<p>表级别的锁有两种：一种是<strong>表锁</strong>，一种是<strong>元数据锁</strong>（meta data lock，MDL)</p>
 <p>表锁的语法是 <code>lock tables … read/write</code>。与 FTWRL 类似，可以用 unlock tables 主动释放锁，也可以在客户端断开的时候自动释放，lock tables 语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。</p>
 <blockquote>
 <p>如果在某个线程 A 中执行 <code>lock tables t1 read, t2 write;</code> 这个语句，则其他线程写 t1、读写 t2 的语句都会被阻塞。同时，线程 A 在执行 unlock tables 之前，也只能执行读 t1、读写 t2 的操作。</p>
@@ -480,20 +480,20 @@ I --> J[提交事务 redo log 处于 commit 状态]</pre>
 <p>另一类表级的锁是 MDL（metadata lock)。<strong>MDL 不需要显式使用</strong>，在访问一个表的时候会被自动加上。MDL 的作用是，保证读写的正确性。在 MySQL 5.5 版本中引入了 MDL，当对一个表做增删改查操作的时候，加 MDL 读锁；当要对表做结构变更操作的时候，加 MDL 写锁。</p>
 <ul>
 <li>读锁之间不互斥，因此可以有多个线程同时对一张表增删改查。</li>
-<li>读写锁之间、写锁之间是互斥的，用来保证变更表结构操作的安全性。因此，如果有两个线程要同时给一个表加字段，其中一个要等另一个执行完才能开始执行。</li>
+<li>读写锁之间、写锁之间是互斥的，用来<strong>保证变更表结构操作的安全性</strong>。因此，如果有两个线程要同时给一个表加字段，其中一个要等另一个执行完才能开始执行。</li>
 </ul>
 <blockquote>
 <p>如何安全地给小表加字段？</p>
 <p>要小心不要导致锁住线上查询和更新，如：读（未提交）写（被阻塞）读（被阻塞）...</p>
 <ol type="1">
 <li>解决长事务，<strong>事务不提交，就会一直占着 MDL 锁</strong>，在 MySQL 的 information_schema 库的 innodb_trx 表中，可以查到当前执行中的事务。如果你要做 DDL 变更的表刚好有长事务在执行，要考虑先暂停 DDL，或者 kill 掉这个长事务。</li>
-<li>在 alter table 语句里面设定等待时间，如果在这个指定的等待时间里面能够拿到 MDL 写锁最好，拿不到也不要阻塞后面的业务语句，先放弃。</li>
+<li>在 <strong>alter table 语句里面设定等待时间</strong>，如果在这个指定的等待时间里面能够拿到 MDL 写锁最好，拿不到也不要阻塞后面的业务语句，先放弃。</li>
 </ol>
 </blockquote>
 <p>MariaDB 已经合并了 AliSQL 的这个功能，所以这两个开源分支目前都支持 DDL NOWAIT/WAIT n 这个语法。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE tbl_name NOWAIT add column ...</span><br><span class="line">ALTER TABLE tbl_name WAIT N add column ... </span><br></pre></td></tr></table></figure>
 <h3 id="行锁">行锁</h3>
-<p>行锁是在引擎层由各个引擎自己实现的，并不是所有的引擎都支持行锁，比如 MyISAM 引擎就不支持行锁，这也是 MyISAM 被 InnoDB 替代的重要原因之一。</p>
+<p><strong>行锁是在引擎层由各个引擎自己实现的</strong>，并不是所有的引擎都支持行锁，比如 <strong>MyISAM 引擎就不支持行锁</strong>，这也是 MyISAM 被 InnoDB 替代的重要原因之一。</p>
 <p>行锁就是针对数据表中行记录的锁，比如事务 A 更新了一行，而这时候事务 B 也要更新同一行，则必须等事务 A 的操作完成后才能进行更新。</p>
 <p>在 InnoDB 事务中，行锁是在需要的时候才加上的，但 <strong>并不是不需要了就立刻释放</strong>，而是要 <strong>等到事务结束时才释放</strong>。这个就是两阶段锁协议。</p>
 <blockquote>

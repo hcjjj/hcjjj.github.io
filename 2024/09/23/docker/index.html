@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/Ciqc1F9sDDSAQhNcAAD8rL1NLXc02.jpeg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20241004103807.png">
 <meta property="article:published_time" content="2024-09-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-09T02:39:54.331Z">
+<meta property="article:modified_time" content="2024-10-14T12:46:02.089Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -1174,11 +1174,176 @@
 <p>Swarm 使用入口负载均衡（ingress load balancing）的模式将服务暴露在主机上，该模式下每一个服务会被分配一个公开端口（PublishedPort），可以指定使用某个未被占用的公开端口，也可以让 Swarm 自动分配一个。</p>
 <p>Swarm 集群的公开端口可以从集群内的任意节点上访问到，当请求达到集群中的一个节点时，如果该节点没有要请求的服务，则会将请求转发到实际运行该服务的节点上，从而响应用户的请求。公有云的云负载均衡器（cloud load balancers）可以利用这一特性将流量导入到集群中的一个或多个节点，从而实现利用公有云的云负载均衡器将流量导入到集群中的服务。</p>
 <h3 id="kubernetes">Kubernetes</h3>
-<p>Docker 虽然在容器领域有着不可撼动的地位，然而在容器的编排领域，却有着另外一个事实标准，那就是 Kubernetes。</p>
+<p>Docker 虽然在容器领域有着不可撼动的地位，然而在容器的编排领域，却有着另外一个事实标准，那就是 Kubernetes</p>
+<p>云计算这个概念是 2006 年由 Google 提起的，云计算从起初的概念演变为现在的 AWS、阿里云等实实在在的云产品。当大家以为云计算领域已经变成了以虚拟机为代表的云平台时，Docker 在 2013 年横空出世，提出了镜像、仓库等核心概念，规范了服务的交付标准，使得复杂服务的落地变得更加简单，之后 Docker 又定义了 OCI 标准，可以说在容器领域 Docker 已经成了事实的标准。</p>
+<p>然而 Docker 诞生只是帮助我们定义了开发和交付标准，如果想要在生产环境中大批量的使用容器，还离不开的容器的编排技术。于是，在 2014 年 6 月 7 日，Kubernetes（Kubernetes 简称为 K8S，8 代表 ubernete 8 个字母） 的第一个 commit（提交）拉开了容器编排标准定义的序幕。</p>
+<p>Kubernetes 是舵手的意思，我们把 Docker 比喻成一个个集装箱，而 Kubernetes 正是运输这些集装箱的舵手。早期的 Kubernetes 主要参考 Google 内部的 Borg 系统，经过将近一年的沉淀和积累，Kubernetes 于 2015 年 7 月 21 日对外发布了第一个正式版本 v1.0，正式走入了大众的视线。</p>
+<p><strong>Kubernetes 架构</strong></p>
+<p>Kubernetes 采用典型的 <strong>主从架构</strong>，分为 Master 和 Node 两个角色</p>
+<ul>
+<li>Mater 是 Kubernetes 集群的控制节点，负责对集群中所有容器的调度，各种资源对象的控制，以及响应集群的所有请求
+<ul>
+<li>kube-apiserver，负责提供 Kubernetes 的 API 服务，所有的组件都需要与 kube-apiserver 交互获取或者更新资源信息，它是 Kubernetes Master 中最前端组件</li>
+<li>kube-scheduler，用于监听未被调度的 Pod，然后根据一定调度策略将 Pod 调度到合适的 Node 节点上运行</li>
+<li>kube-controller-manager，一系列资源控制器的总称，负责维护整个集群的状态和资源的管理，例如多个副本数量的保证</li>
+<li>etcd，k8s 的“数据中心”，生产环境中 etcd 一定要部署多个实例以确保集群的高可用</li>
+</ul></li>
+<li>Node 为工作节点，负责业务容器的生命周期管理
+<ul>
+<li>kubelet，负责管理容器的生命周期</li>
+<li>kube-proxy，通过维护集群上的网络规则，实现集群内部可以通过负载均衡的方式访问到后端的容器</li>
+</ul></li>
+</ul>
+<p><strong>Kubernetes 核心概念</strong></p>
+<ul>
+<li>集群
+<ul>
+<li>集群是一组被 Kubernetes 统一管理和调度的节点，被 Kubernetes 纳管的节点可以是物理机或者虚拟机，其中一部分节点作为 Master 节点，另一部分作为 Node 节点</li>
+</ul></li>
+<li>标签（Label）
+<ul>
+<li>一组键值对，每一个资源对象都会拥有此字段。Kubernetes 中使用 Label 对资源进行标记，然后根据 Label 对资源进行分类和筛选</li>
+</ul></li>
+<li>命名空间（Namespace）
+<ul>
+<li>通过命名空间来实现资源的虚拟化隔离，将一组相关联的资源放到同一个命名空间内，避免不同租户的资源发生命名冲突，从逻辑上实现了多租户的资源隔离</li>
+</ul></li>
+<li>容器组（Pod）
+<ul>
+<li>Pod 是 Kubernetes 中的最小调度单位，它由一个或多个容器组成，一个 Pod 内的容器共享相同的网络命名空间和存储卷</li>
+<li>Pod 是真正的业务进程的载体，在 Pod 运行前，Kubernetes 会先启动一个 Pause 容器开辟一个网络命名空间，完成网络和存储相关资源的初始化，然后再运行业务容器</li>
+</ul></li>
+<li>部署（Deployment）
+<ul>
+<li>Deployment 是一组 Pod 的抽象，通过 Deployment 控制器保障用户指定数量的容器副本正常运行，并且实现了滚动更新等高级功能</li>
+<li>当需要更新业务版本时，Deployment 会按照我们指定策略自动的杀死旧版本的 Pod 并且启动新版本的 Pod</li>
+</ul></li>
+<li>状态副本集（StatefulSet）
+<ul>
+<li>StatefulSet 和 Deployment 类似，也是一组 Pod 的抽象，但是 StatefulSet 主要用于有状态应用的管理，StatefulSet 生成的 Pod 名称是固定且有序的，确保每个 Pod 独一无二的身份标识</li>
+</ul></li>
+<li>守护进程集（DaemonSet）
+<ul>
+<li>DaemonSet 确保每个 Node 节点上运行一个 Pod，当我们集群有新加入的 Node 节点时，Kubernetes 会自动帮助我们在新的节点上运行一个 Pod</li>
+<li>一般用于日志采集，节点监控等场景</li>
+</ul></li>
+<li>任务（Job）
+<ul>
+<li>Job 可以帮助创建一个 Pod 并且保证 Pod 的正常退出</li>
+<li>如果 Pod 运行过程中出现了错误，Job 控制器可以帮助我们创建新的 Pod，直到 Pod 执行成功或者达到指定重试次数</li>
+</ul></li>
+<li>服务（Service）
+<ul>
+<li>一组 Pod 访问配置的抽象，由于 Pod 的地址是动态变化的，我们不能直接通过 Pod 的 IP 去访问某个服务，Service 通过在主机上配置一定的网络规则，帮助我们实现通过一个固定的地址访问一组 Pod</li>
+</ul></li>
+<li>配置集（ConfigMap）
+<ul>
+<li>用于存放我们业务的配置信息，使用 Key-Value 的方式存放于 Kubernetes 中，使用 ConfigMap 可以帮助 <strong>将配置数据和应用程序代码分开</strong></li>
+</ul></li>
+<li>加密字典（Secret）
+<ul>
+<li>用于存放业务的敏感配置信息，类似于 ConfigMap，使用 Key-Value 的方式存在于 Kubernetes 中，主要用于存放密码和证书等敏感信息</li>
+</ul></li>
+</ul>
 <h2 id="综合实践">综合实践</h2>
 <h3 id="多阶段构建">多阶段构建</h3>
+<p>Docker 镜像是分层的，并且每一层镜像都会额外占用存储空间，一个 Docker 镜像层数越多，这个镜像占用的存储空间则会越多，镜像构建最重要的一个原则就是要保持镜像体积尽可能小，要实现这个目标通常可以从两个方面入手：</p>
+<ul>
+<li>基础镜像体积应该尽量小</li>
+<li>尽量减少 Dockerfile 的行数，因为 Dockerfile 的每一条指令都会生成一个镜像层</li>
+</ul>
+<p>Docker 在 17.05 推出了多阶段构建（multistage-build）的解决方案，允许在 Dockerfile 中使用多个 FROM 语句，而每个 FROM 语句都可以使用不同基础镜像，最终生成的镜像，是以最后一条 FROM 为准。</p>
+<p>所以可以在一个 Dockerfile 中声明多个 FROM，然后选择性地将一个阶段生成的文件拷贝到另外一个阶段中，从而实现最终的镜像只保留我们需要的环境和文件，多阶段构建的主要使用场景是 <strong>分离编译环境和运行环境。</strong>（比如 Go 语言可以直接编译为特定平台的可执行文件，不需要安装 Go）</p>
+<p>多阶段构建的其他使用方式</p>
+<ul>
+<li>为构建阶段命名，使用 AS 指令</li>
+<li>停止在特定的构建阶段，将构建阶段停止在指定阶段，从而方便我们调试代码编译过程</li>
+<li>使用现有镜像作为构建阶段，可以使用 <code>COPY --from</code> 指令从一个指定的镜像（本地或远程仓库）中拷贝文件</li>
+</ul>
 <h3 id="devops">DevOps</h3>
+<p>早期的计算软件交付流程：设计—开发—自测—发布—部署—维护，随着计算机软件规模的增大，软件也越来越复杂，这时一个人已经无法完成一个软件完整的生命周期管理。分工之后软件开发流程：研发工程师做代码设计和开发，测试工程师做专业的测试工作，运维工程师负责将软件部署并负责维护软件。</p>
+<p>瀑布模型，这种模式将软件生命周期划分为制定计划、需求分析、软件设计、程序编写、软件测试和运行维护等六个基本活动，并且规定了它们自上而下、相互衔接的固定次序，如瀑布流水一样，逐级的下降。随着互联网的出现，软件迭代速度越来越快，软件开发越来越“敏捷”，敏捷开发”把大的时间点变成细小的时间点，快速迭代开发，软件更新速度也越来越快。敏捷开发使得开发和运维工程师之间的矛盾变得越来越深，为了解决这个问题，DevOps 诞生了。</p>
+<blockquote>
+<p>DevOps（Development 和 Operations 的组合词）是一种重视“软件开发人员（Dev）”和“IT 运维技术人员（Ops）”之间沟通合作的文化、运动或惯例。透过自动化“软件交付”和“架构变更”的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。</p>
+</blockquote>
+<p>DevOps 的整体目标是促进开发和运维人员之间的配合，并且通过自动化的手段缩短软件的整个交付周期，提高软件的可靠性。Docker 几乎满足了微服务的所有需求，Docker 为 DevOps 提供了很好的基础支撑。</p>
+<ul>
+<li>DevOps 1.0 - 在 Docker 技术出现之前
+<ul>
+<li>通常更加关注如何做好 CI（Continuous Integration，持续集成）/CD（Continuous Delivery 持续交付）以及 IAAS（基础设施即服务）</li>
+</ul></li>
+<li>DevOps 2.0 - 随着 Docker 技术的诞生
+<ul>
+<li>Docker 足够轻量，微服务实现快速迭代</li>
+<li>Docker 可以构建任何语言的运行环境</li>
+<li>Docker 更好地隔离开发环境和生产环境</li>
+</ul></li>
+</ul>
+<p>这时的研发和运维都开始关注软件统一交付的格式和软件生命周期的管理，而不像之前一样研发只关注“打包前”，而运维只关注“打包后”的模式，DevOps 无论是研发环境还是生产环境都开始围绕 Docker 进行构建。</p>
+<p><strong>微服务、Docker 与 DevOps 三者之间的关系</strong></p>
+<ol type="1">
+<li>云平台作为底层基础，采用 Docker 技术将服务做容器化部署，并且使用资源管理和调度平台（例如 Kubernetes 或 Swarm）来自动化地管理容器</li>
+<li>DevOps 平台在云基础平台之上，通过流程自动化以及工具自动化的手段，为可持续集成和交付提供能力支持</li>
+<li>有了云平台和 DevOps 的支撑，微服务才能够发挥更大的作用，使得我们的业务更加成熟和稳定</li>
+</ol>
+<p><strong>容器如何助力 DevOps</strong></p>
+<p>Docker 可以在 DevOps 各个阶段发挥重要作用，例如 Docker 可以帮助我们在开发阶段提供统一的开发环境，在持续集成阶段帮助我们快速构建应用，在部署阶段帮助我们快速发布或更新生产环境的应用</p>
+<ul>
+<li>开发流程
+<ul>
+<li>在本地或者开发机上快速安装一个 Docker 环境，然后使用 Docker 可以快速启动和部署一个复杂的开发环境</li>
+<li>相比传统的配置开发环境的方式，不仅大大提升了开发环境部署的效率，同时也保证了不同开发人员的环境一致</li>
+</ul></li>
+<li>集成流程
+<ul>
+<li>通过编写 Dockerfile 可以将业务容器化</li>
+<li>基于已有的 Dockerfile 来构建应用镜像，可以极大提升持续集成的构建速度
+<ul>
+<li>Docker 镜像使用了写时复制（Copy On Write）和联合文件系统（Union FileSystem）的机制</li>
+<li>Docker 镜像分层存储，相同层仅会保存一份，不同镜像的相同层可以复用</li>
+<li>当开始新一轮的测试时，可以直接复用已有的镜像层，大大提升了构建速度</li>
+</ul></li>
+</ul></li>
+<li>部署流程
+<ul>
+<li>镜像仓库的存在使得 Docker 镜像分发变得十分简单</li>
+<li>Docker 结合 Kubernetes 或者其他容器管理平台，可以轻松地实现蓝绿发布等流程，当升级应用观察到流量异常时，可以快速回滚到稳定版本</li>
+</ul></li>
+</ul>
+<p><strong>DevOps 工具介绍</strong></p>
+<ul>
+<li>Git - 分布式的版本控制工具</li>
+<li>Jenkins - CI/CD 构建工具</li>
+<li>Ansible - 配置管理工具</li>
+<li>Kubernetes - 容器编排工具</li>
+</ul>
 <h3 id="cicd">CI/CD</h3>
+<ul>
+<li>CI 持续集成（Continuous Integration）- 小步快走
+<ul>
+<li>CI 持续集成要求开发人员频繁地（甚至是每天）将代码提交到共享分支中，一旦开发人员的代码被合并，将会自动触发构建流程来构建应用，并通过触发自动化测试（单元测试或者集成测试）来验证这些代码的提交，确保这些更改没有对应用造成影响</li>
+<li>如果发现提交的代码在测试过程中或者构建过程中有问题，则会马上通知研发人员确认，修改代码并重新提交</li>
+<li>通过将以往的定期合并代码的方式，改变为频繁提交代码并且自动构建和测试的方式，可以帮助我们<strong>及早地发现问题和解决冲突，减少代码出错</strong></li>
+<li>当应用容器化后，应用构建的结果就是 Docker 镜像。代码检查完毕没有缺陷后合并入主分支，此时启动构建流程，构建系统会自动将应用打包成 Docker 镜像，并且推送到镜像仓库</li>
+</ul></li>
+<li>CD 持续交付（Continuous Delivery）- 测试工作
+<ul>
+<li>持续交付要求实现自动化准备测试环境、自动化测试应用、自动化监控代码质量，并且自动化交付生产环境镜像</li>
+<li>借助于容器技术可以很方便地构建出一个测试环境，并且可以保证开发和测试环境的一致性，这样不仅可以提高测试效率，还可以提高敏捷性</li>
+</ul></li>
+<li>CD 持续部署（Continuous Deployment）- 部署到生产环境
+<ul>
+<li>持续部署是最后阶段，它作为持续交付的延伸，可以自动将生产环境的镜像<strong>发布到生产环境</strong>中</li>
+</ul></li>
+</ul>
+<p>构建和部署一个应用的流程可以分为五部分：</p>
+<ol type="1">
+<li>首先需要配置 GitLab SSH 访问公钥，使得我们可以直接通过 SSH 拉取或推送代码到 GitLab</li>
+<li>接着将代码通过 SSH 上传到 GitLab</li>
+<li>再在 Jenkins 创建构建任务，使得 Jenkins 可以成功拉取 GitLab 的代码并进行构建</li>
+<li>然后配置代码变更自动构建流程，使得代码变更可以触发自动构建 Docker 镜像</li>
+<li>最后配置自动部署流程，镜像构建完成后<strong>自动将镜像发布到测试或生产环境</strong></li>
+</ol>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><strong><a target="_blank" rel="noopener" href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=455">由浅入深吃透 Docker</a></strong></li>
