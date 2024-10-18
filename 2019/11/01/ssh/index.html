@@ -92,7 +92,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">SSH 连接云服务器</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">连接服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E5%AF%86%E7%99%BB%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">免密登入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">上传下载文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">配置文件</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">SSH 连接云服务器</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text"> 连接服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E5%AF%86%E7%99%BB%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text"> 免密登入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text"> 上传下载文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text"> 配置文件</span></a></li></ol></div></div></widget>
 
 
 
@@ -112,55 +112,97 @@
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>SSH 连接云服务器</span></h1>
-<p>SSH （Secure Shell）是一种网络协议，可以用于计算机之间的加密登录 <span id="more"></span></p>
-<h2 id="连接服务器">连接服务器</h2>
+<p>SSH （Secure Shell）是一种网络协议，可以用于计算机之间的加密登录</p>
+<span id="more"></span>
+<h2 id="连接服务器"><a class="markdownIt-Anchor" href="#连接服务器"></a> 连接服务器</h2>
 <ul>
-<li><p><code>ssh user@remote (-v -p port)</code>，如：ssh root@112.74.xx.xx</p>
+<li>
+<p><code>ssh user@remote (-v -p port) </code>，如：ssh root@112.74.xx.xx</p>
 <ul>
-<li><p><code>user</code> 是在远程机器上的用户名</p></li>
-<li><p><code>remote</code> 是云服务器的地址，可以是 IP 或域名</p></li>
-<li><p><code>port</code> 是 SSH Server 监听的端口，默认值为 22</p></li>
-<li><p><code>-v</code> 打印出详细的连接信息</p></li>
-<li><p><code>-p</code> 指定连接 SSH Server 的端口</p></li>
-</ul></li>
-<li><p><code>ssh user@remote [指令]</code> 连接远程服务器并执行指令，发回 stdout 到本机后结束连接</p></li>
+<li>
+<p><code>user</code> 是在远程机器上的用户名</p>
+</li>
+<li>
+<p><code>remote</code> 是云服务器的地址，可以是 IP 或域名</p>
+</li>
+<li>
+<p><code>port</code> 是 SSH Server 监听的端口，默认值为 22</p>
+</li>
+<li>
+<p><code>-v</code> 打印出详细的连接信息</p>
+</li>
+<li>
+<p><code>-p</code> 指定连接 SSH Server 的端口</p>
+</li>
 </ul>
-<h2 id="免密登入">免密登入</h2>
+</li>
+<li>
+<p><code>ssh user@remote [指令]</code> 连接远程服务器并执行指令，发回 stdout 到本机后结束连接</p>
+</li>
+</ul>
+<h2 id="免密登入"><a class="markdownIt-Anchor" href="#免密登入"></a> 免密登入</h2>
 <p>公私钥非对称加密方式登入，方便又安全：</p>
 <ul>
-<li><p>配置公钥</p>
+<li>
+<p>配置公钥</p>
 <ul>
-<li><p>在自己计算机的终端中执行 <code>ssh-keygen</code> 即可生成 SSH 钥匙 （一路回车即可）</p></li>
-<li><p>生成的文件在 <code>~/.ssh</code><br />
-</p></li>
-</ul></li>
-<li><p>上传公钥到服务器</p>
-<ul>
-<li><p>执行 <code>ssh-copy-id user@remote</code> ，如：ssh-copy-id root@112.74.xx.xx</p></li>
-<li><p>让远程服务器记住我们自己的计算机，文件保存在服务器的 <code>~/.ssh/authorized_keys</code></p></li>
-</ul></li>
+<li>
+<p>在自己计算机的终端中执行 <code>ssh-keygen</code> 即可生成 SSH 钥匙 （一路回车即可）</p>
+</li>
+<li>
+<p>生成的文件在 <code>~/.ssh</code></p>
+</li>
 </ul>
-<h2 id="上传下载文件">上传下载文件</h2>
+</li>
+<li>
+<p>上传公钥到服务器</p>
+<ul>
+<li>
+<p>执行 <code>ssh-copy-id user@remote</code> ，如：ssh-copy-id root@112.74.xx.xx</p>
+</li>
+<li>
+<p>让远程服务器记住我们自己的计算机，文件保存在服务器的 <code>~/.ssh/authorized_keys</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="上传下载文件"><a class="markdownIt-Anchor" href="#上传下载文件"></a> 上传下载文件</h2>
 <p><strong>s</strong> ecure <strong>c</strong> o <strong>p</strong> y</p>
 <ul>
-<li>上传本地文件到服务器
+<li>
+<p>上传本地文件到服务器</p>
 <ul>
-<li><p><code>scp /path/filename（本地文件） username@remote:/remote_dir（远程目录或文件）</code></p></li>
-<li><p><code>scp -r /local_dir/（本地目录） username@remote:/remote_dir/（远程目录）</code></p></li>
-</ul></li>
-<li>下载服务器上的文件
-<ul>
-<li><p><code>scp username@remote:/path/filename（远程文件）/local_dir（本地目录或文件）</code></p></li>
-<li><p><code>scp -r username@remote:/remote_dir/（远程目录） /local_dir/（本地目录）</code></p></li>
-</ul></li>
+<li>
+<p><code>scp /path/filename（本地文件） username@remote:/remote_dir（远程目录或文件）</code></p>
+</li>
+<li>
+<p><code>scp -r /local_dir/（本地目录） username@remote:/remote_dir/（远程目录）</code></p>
+</li>
 </ul>
-<h2 id="配置文件">配置文件</h2>
+</li>
+<li>
+<p>下载服务器上的文件</p>
+<ul>
+<li>
+<p><code>scp username@remote:/path/filename（远程文件）/local_dir（本地目录或文件）</code></p>
+</li>
+<li>
+<p><code>scp -r username@remote:/remote_dir/（远程目录） /local_dir/（本地目录）</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="配置文件"><a class="markdownIt-Anchor" href="#配置文件"></a> 配置文件</h2>
 <p><strong>本地</strong>：</p>
 <p>编辑 <code>~/.ssh/config</code>，添加</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">    ServerAliveInterval 60</span><br><span class="line">    <span class="comment"># 每 60 秒发送一个 no-op 包，防止空闲时被服务器断开</span></span><br><span class="line">    <span class="comment"># 保持 ssh 连接不断开</span></span><br><span class="line">    </span><br><span class="line">Host yun</span><br><span class="line">    Hostname 112.74.xx.xx</span><br><span class="line">    User root</span><br><span class="line">    Port 22</span><br><span class="line">    </span><br><span class="line">Host xxx</span><br><span class="line">   ......</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p><code>yun</code> 服务器别名、<code>Hostname</code> 服务器地址</p></li>
-<li><p>保存后即可使用 <code>ssh yun</code> 来登入对应的服务器</p></li>
+<li>
+<p><code>yun</code> 服务器别名、<code>Hostname</code> 服务器地址</p>
+</li>
+<li>
+<p>保存后即可使用 <code>ssh yun</code> 来登入对应的服务器</p>
+</li>
 </ul>
 <p><strong>服务端</strong>：</p>
 <p>文件在 <code>/etc/ssh/ssh_config</code></p>
@@ -199,7 +241,8 @@
 
 
       <!-- 
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <span class="citation" data-cites="anonymity">[@anonymity]</span>(/) 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br />
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer> -->
 
       <div class='float-panel mobile-only blur' style='display:none'>
