@@ -23,15 +23,15 @@
   <title>基于 Redis 实现分布式锁 🔒 - Golang - H-sediment</title>
 
   
-    <meta name="description" content="基于 Redis 的分布式定时任务（任务调度）">
+    <meta name="description" content="基于 Redis 的分布式锁，确保计划任务只由一个实例执行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于 Redis 实现分布式锁 🔒 - Golang">
 <meta property="og:url" content="http://example.com/2024/07/04/redis-lock/index.html">
 <meta property="og:site_name" content="H-sediment">
-<meta property="og:description" content="基于 Redis 的分布式定时任务（任务调度）">
+<meta property="og:description" content="基于 Redis 的分布式锁，确保计划任务只由一个实例执行">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-04T08:27:55.000Z">
-<meta property="article:modified_time" content="2024-10-15T03:35:01.630Z">
+<meta property="article:modified_time" content="2024-10-18T08:34:07.757Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Golang">
 <meta property="article:tag" content="Redis">
@@ -90,7 +90,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">基于 Redis 实现分布式锁 🔒 - Golang</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text"> 并发控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">2.</span> <span class="toc-text"> 分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text"> 实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#setnx"><span class="toc-number">3.1.</span> <span class="toc-text"> SETNX</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E9%94%81"><span class="toc-number">3.1.1.</span> <span class="toc-text"> 加锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%94%81"><span class="toc-number">3.1.2.</span> <span class="toc-text"> 解锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%AD%E7%BA%A6"><span class="toc-number">3.1.3.</span> <span class="toc-text"> 续约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lua-%E8%84%9A%E6%9C%AC"><span class="toc-number">3.1.4.</span> <span class="toc-text"> Lua 脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.1.5.</span> <span class="toc-text"> 总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redlock"><span class="toc-number">3.2.</span> <span class="toc-text"> Redlock</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">4.</span> <span class="toc-text"> 定时任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0"><span class="toc-number">4.1.</span> <span class="toc-text"> 本地</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text"> 分布式</span></a></li></ol></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">基于 Redis 实现分布式锁 🔒 - Golang</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">1.</span> <span class="toc-text">分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-redis-%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">基于 Redis 实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lua-%E8%84%9A%E6%9C%AC"><span class="toc-number">2.1.</span> <span class="toc-text">Lua 脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setnx"><span class="toc-number">2.2.</span> <span class="toc-text">SETNX</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E9%94%81"><span class="toc-number">2.2.1.</span> <span class="toc-text">加锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%94%81"><span class="toc-number">2.2.2.</span> <span class="toc-text">解锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%AD%E7%BA%A6"><span class="toc-number">2.2.3.</span> <span class="toc-text">续约</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redlock"><span class="toc-number">2.3.</span> <span class="toc-text">Redlock</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">3.</span> <span class="toc-text">定时任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0"><span class="toc-number">3.1.</span> <span class="toc-text">本地</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-number">3.2.</span> <span class="toc-text">分布式</span></a></li></ol></li></ol></div></div></widget>
 
 
 
@@ -110,24 +110,15 @@
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>基于 Redis 实现分布式锁 🔒 - Golang</span></h1>
-<p>基于 Redis 的分布式定时任务（任务调度）</p>
+<p>基于 Redis 的分布式锁，确保计划任务只由一个实例执行</p>
 <span id="more"></span>
-<h2 id="并发控制"><a class="markdownIt-Anchor" href="#并发控制"></a> 并发控制</h2>
-<p><strong>Go 的同步原语</strong></p>
-<ul>
-<li>sync.Mutex</li>
-<li>sync.RWMutex</li>
-<li>sync.WaitGroup</li>
-<li>sync.Once</li>
-<li>sync.Cond</li>
-</ul>
-<h2 id="分布式锁"><a class="markdownIt-Anchor" href="#分布式锁"></a> 分布式锁</h2>
-<p>分布式锁是一种确保分布式系统互斥的机制。换句话说，即使系统跨越多台机器或多个节点，它也能保证在任何时候只有一个进程或节点可以持有锁。在多个进程可能需要访问共享资源或执行关键操作的分布式环境中，这对于协调行动和确保一致性至关重要。</p>
-<p>简单来说，分布式锁就是在分布式环境下不同实例之间抢一把锁，和普通的锁比起来，也就是抢锁的从线程（协程）变成了实例，分布式锁之所以难，基本上都和网络有关。</p>
+<h2 id="分布式锁">分布式锁</h2>
+<p>分布式锁是一种在分布式系统中使用的锁机制，用来确保多个节点在执行关键代码或访问共享资源时互斥，避免并发冲突。分布式锁的目的是保证在一个多节点的分布式环境中，某个共享资源（如数据库记录、缓存对象、任务队列等）在同一时刻只能由一个节点操作。</p>
+<p>普通锁的 <strong>作用对象是线程或进程</strong>，而分布式锁的作用对象是 <strong>跨节点的实例</strong>。</p>
 <p><strong>分布式锁使用案例</strong></p>
 <ul>
 <li>领导者选举：在分布式系统中，经常需要选举一个领导节点来协调行动或管理资源。分布式锁可用于确保在任何给定时间内只有一个节点成为领导者。</li>
-<li>任务调度：在分布式任务调度器中，分布式锁可确保计划任务只由一个工作节点执行，防止重复执行。</li>
+<li><strong>任务调度：在分布式任务调度器中，分布式锁可确保计划任务只由一个工作节点执行，防止重复执行。</strong></li>
 <li>资源分配：在管理共享资源（如文件系统、网络套接字或硬件设备）时，分布式锁可确保每次只有一个进程能访问资源，从而防止冲突并确保妥善的资源管理。</li>
 <li>微服务协调：当多个微服务需要执行协调操作（如更新不同数据库中的相关数据）时，分布式锁可确保这些操作以受控和有序的方式执行。</li>
 <li>库存管理：在电子商务平台中，分布式锁可以管理库存更新，确保在多个用户同时尝试购买同一商品时，库存水平得到准确维护。</li>
@@ -136,94 +127,13 @@
 <p><strong>分布式锁的实现</strong></p>
 <p>分布式锁可以使用各种工具和框架来实现，如：</p>
 <ul>
-<li>ZooKeeper：Apache 项目，提供分布式同步原语（primitives），包括锁。</li>
-<li>Redis：通过 Redlock 算法支持分布式锁。</li>
-<li>Consul：HashiCorp 的服务网格解决方案，包含分布式锁功能。</li>
-<li>Etcd：一种提供锁定机制的分布式键值存储。</li>
+<li>ZooKeeper：主要用于提供分布式协调服务，包括配置管理、分布式锁、领导者选举等</li>
+<li>Redis：广泛用于缓存、会话管理等场景，通过 SETNX 或 Redlock 算法支持分布式锁</li>
+<li>Consul：用于服务发现、配置管理和服务网格的工具，除了服务网格功能，Consul 也提供分布式锁机制</li>
+<li>Etcd：分布式键值存储系统，主要用于存储配置数据、提供分布式协调等功能</li>
 </ul>
-<h2 id="实现方式"><a class="markdownIt-Anchor" href="#实现方式"></a> 实现方式</h2>
-<p>常见的 Redis 分布式锁实现方式包括使用 <strong>SETNX（SET if Not eXists）</strong> 命令和 <strong>Redlock</strong> 算法。</p>
-<h3 id="setnx"><a class="markdownIt-Anchor" href="#setnx"></a> SETNX</h3>
-<p>本质上 Redis 的分布式锁就是一个键值对，实现一个分布式锁的起点，就是利用 <code>setnx</code> 命令，确保可以排他地设置一个键值对。</p>
-<h4 id="加锁"><a class="markdownIt-Anchor" href="#加锁"></a> 加锁</h4>
-<ul>
-<li>加锁流程
-<ul>
-<li>使用 SETNX 命令尝试设置一个锁标志</li>
-<li>如果键不存在，SETNX 会设置键值并返回 1，表示成功获取锁</li>
-<li>如果键已存在，SETNX 返回 0，表示锁已被其他客户端持有</li>
-</ul>
-</li>
-<li>设置锁的过期时间
-<ul>
-<li>使用 <code>EXPIRE</code> 设置锁的有效时间，避免死锁（锁持有者崩溃后，锁不会自动释放）</li>
-</ul>
-</li>
-<li>设置唯一的标识
-<ul>
-<li>唯一标识（比如 UUID）用来确定这是由哪个实例加上的锁，避免发生误删锁的情况</li>
-<li>UUID 没有绝对的唯一性保证，但其设计使得在大规模分布式环境下，生成重复的概率极小</li>
-</ul>
-</li>
-</ul>
-<h4 id="解锁"><a class="markdownIt-Anchor" href="#解锁"></a> 解锁</h4>
-<ul>
-<li>释放锁流程（先检查它是否是当前客户端持有的锁再释放）
-<ul>
-<li>检查是否是自己加的锁（比较 Key 对应的 Value）</li>
-<li>如果确认是自己加的锁，使用 <code>DEL</code> 命令删除锁标志，释放锁</li>
-</ul>
-</li>
-</ul>
-<h4 id="续约"><a class="markdownIt-Anchor" href="#续约"></a> 续约</h4>
-<ul>
-<li>
-<p>续约引入的原因</p>
-<ul>
-<li>很难确定锁的过期时间应该设置多长</li>
-<li>设置短了，那么业务还没完成，锁就超时了</li>
-<li>设置长了，万一实例真的崩溃了，那么其它实例长时间拿不到锁</li>
-</ul>
-</li>
-<li>
-<p>续约逻辑</p>
-<ul>
-<li>不必将超时时间设置得太长，因为有自动续约机制</li>
-<li>当实例正常运行时，可以在锁的有效期内自动续约</li>
-<li>如果实例崩溃，则不再续约，过一段时间后锁自然就会过期，其他实例就能够获取到锁</li>
-</ul>
-</li>
-<li>
-<p>自动续约/续约</p>
-<ul>
-<li>
-<p>自动续约需要考虑 AutoRefresh</p>
-<ul>
-<li>每一次调用续约，超时时间多长？</li>
-<li>隔多久续约一次？</li>
-<li>每次续约续多长？</li>
-</ul>
-</li>
-<li>
-<p>续约 Refresh</p>
-<ul>
-<li>Refresh 和释放锁一样，也需要检查是不是自己的锁，所以也用 lua 脚本来执行</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>注意事项</p>
-<ul>
-<li>即便进行了一定的封装，依旧要处理一些异常情况</li>
-<li>加锁超时了怎么办？此时可能加成功了，可能没加成功</li>
-<li>释放锁超时了怎么办？此时可能释放成功了，也可能没成功，可以直接重试</li>
-<li>续约超时了怎么办？此时可能成功，也可能没成功，可以直接重试</li>
-<li>续约失败了怎么办？也就是你怎么中断你的业务</li>
-</ul>
-</li>
-</ul>
-<h4 id="lua-脚本"><a class="markdownIt-Anchor" href="#lua-脚本"></a> Lua 脚本</h4>
+<h2 id="基于-redis-实现">基于 Redis 实现</h2>
+<h3 id="lua-脚本">Lua 脚本</h3>
 <p>使用 Lua 脚本是为了确保在 Redis 中的操作 <strong>原子性</strong>，特别是在分布式锁场景中，Lua 脚本可以确保多个 Redis 命令在同一个执行周期内被原子地执行，避免并发问题（被其他客户端的操作打断）。</p>
 <ul>
 <li><strong>原子性保证</strong>：Lua 脚本内部的多个操作会在一个事务中完成，保证不会有其他客户端插入的命令破坏执行顺序。</li>
@@ -231,93 +141,125 @@
 <li><strong>高效性</strong>：由于脚本中的命令是直接在 Redis 服务器上执行的，减少了客户端与 Redis 之间的通信开销。</li>
 </ul>
 <blockquote>
-<p>Redis 的 pipeline 是一种在客户端一次性发送多条命令给 Redis，然后批量执行和返回结果的模式。它的主要目的是减少客户端与 Redis 之间的通信次数，提高执行效率。Pipeline  模式无原子性保证，<strong>每条命令依旧是独立执行的</strong>，其他客户端可以在 pipeline 执行过程中插入命令，因此如果涉及多个操作的状态依赖，就可能导致不一致性。</p>
+<p>Redis 的 pipeline 是一种在客户端一次性发送多条命令给 Redis，然后批量执行和返回结果的模式。它的主要目的是减少客户端与 Redis 之间的通信次数，提高执行效率。Pipeline 模式无原子性保证，<strong>每条命令依旧是独立执行的</strong>，其他客户端可以在 pipeline 执行过程中插入命令，因此如果涉及多个操作的状态依赖，就可能导致不一致性。</p>
 </blockquote>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>特性</th>
 <th>Pipeline</th>
 <th>Lua 脚本</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><strong>原子性</strong></td>
 <td>无法保证原子性，操作可能被其他命令打断</td>
 <td>保证原子性，所有操作在同一事务中执行</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>执行方式</strong></td>
 <td>批量发送命令，但 Redis 逐个顺序执行</td>
 <td>将多个命令封装在一个脚本中，原子执行</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>并发操作</strong></td>
 <td>支持高效批量并发操作</td>
 <td>适合需要多个命令组合原子操作的场景</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>复杂逻辑</strong></td>
 <td>只能执行单个命令，无条件判断、循环等复杂逻辑</td>
 <td>支持复杂的逻辑，如条件判断、循环等</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>使用场景</strong></td>
 <td>批量执行独立的、无依赖的操作</td>
 <td>原子操作、多步骤逻辑的复杂操作</td>
 </tr>
-<tr>
+<tr class="even">
 <td><strong>性能</strong></td>
 <td>减少了客户端与 Redis 的网络通信开销</td>
 <td>减少了网络开销，同时避免了操作间的并发问题</td>
 </tr>
-<tr>
+<tr class="odd">
 <td><strong>常见应用</strong></td>
 <td>批量写入、批量获取、批量修改</td>
 <td>分布式锁、事务性操作、多步条件逻辑</td>
 </tr>
 </tbody>
 </table>
-<h4 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h4>
+<p>在 Lua 脚本中，<code>KEYS</code> 和 <code>ARGV</code> 是由外部传入的参数：</p>
 <ul>
-<li>使用分布式锁时，不能指望框架提供绝对可靠的解决方案；仍然需要自行处理各种异常情况（例如超时）</li>
-<li>自行实现分布式锁时，需要考虑锁的过期时间和是否需要自动续约</li>
-<li>在对锁进行任何操作之前，首先需要确认这把锁确实是属于当前实例的</li>
-<li>大多数时候，与其选择复杂的解决方案，不如直接让业务失败，这样可能会有更低的成本
+<li><strong><code>KEYS</code></strong> 用于传递键名，通常用于指定需要操作的 Redis 键</li>
+<li><strong><code>ARGV</code></strong> 用于传递附加参数，如锁的值和过期时间等</li>
+</ul>
+<p>在客户端（例如 Go 代码）调用 Redis 的 <code>EVAL</code> 命令时，可以将键名和参数以列表形式传入，<code>KEYS</code> 和 <code>ARGV</code> 会相应地映射为脚本中的输入</p>
+<h3 id="setnx">SETNX</h3>
+<p>不直接使用 <code>SETNX</code> 指令，而是通过 Lua 脚本完成锁的获取与过期设置，因为 Lua 脚本保证多个操作的原子性，可以提供更复杂的控制逻辑，包括锁的可重入和延长过期时间，避免 <code>SETNX</code> 和 <code>EXPIRE</code> 分开执行导致的死锁风险。使用 Lua 脚本的优势：</p>
 <ul>
-<li>有时候直接承担损失，可能比部署大量节点、招聘大量开发者以及维护多个数据中心的成本要低得多，而且通常会低很多</li>
-<li>选择适当的方案，而不是追求完美的方案</li>
+<li><strong>原子性检查与更新</strong>：Lua 脚本可以在同一个执行流中完成检查锁的持有者和更新锁的操作，避免了分布式环境下的竞态问题</li>
+<li><strong>可重入锁</strong>：代码中的 Lua 脚本实现了锁的可重入逻辑。如果当前客户端已经持有锁，那么它可以通过脚本延长锁的过期时间，这对于某些需要长时间运行并延长锁持有时间的场景是非常有用的</li>
 </ul>
-</li>
+<blockquote>
+<p>在 Redis 2.6.12 及以上版本，<code>SET</code> 命令可以通过带多个参数实现和 <code>SETNX</code> 类似的功能，同时设置过期时间</p>
+</blockquote>
+<h4 id="加锁">加锁</h4>
+<p><strong>Lua 脚本解析</strong></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> val = redis.call(<span class="string">&#x27;get&#x27;</span>, KEYS[<span class="number">1</span>])</span><br><span class="line"><span class="comment">-- 获取当前锁的持有者</span></span><br><span class="line"><span class="keyword">if</span> val == <span class="literal">false</span> <span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- key 不存在，表示锁没有被持有，进行加锁</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&#x27;set&#x27;</span>, KEYS[<span class="number">1</span>], ARGV[<span class="number">1</span>], <span class="string">&#x27;EX&#x27;</span>, ARGV[<span class="number">2</span>])</span><br><span class="line"><span class="keyword">elseif</span> val == ARGV[<span class="number">1</span>] <span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- 锁的持有者是当前客户端，刷新过期时间，支持可重入</span></span><br><span class="line">    redis.call(<span class="string">&#x27;expire&#x27;</span>, KEYS[<span class="number">1</span>], ARGV[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="comment">-- 锁被其他客户端持有，返回空字符串</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><code>KEYS[1]</code></strong>：传入的锁的键名，表示锁的唯一标识</li>
+<li><strong><code>ARGV[1]</code></strong>：表示锁的值，用于标识持有锁的客户端，通常是一个唯一的字符串</li>
+<li><strong><code>ARGV[2]</code></strong>：锁的过期时间，单位是秒，用于防止死锁的发生</li>
 </ul>
-<h3 id="redlock"><a class="markdownIt-Anchor" href="#redlock"></a> Redlock</h3>
-<p>使用 SETNX 适用于简单场景，尤其是在单一 Redis 实例下，Redlock 提供了更加鲁棒的分布式锁解决方案，适用于分布式多节点环境。</p>
-<p><a target="_blank" rel="noopener" href="https://redis.io/docs/latest/develop/use/patterns/distributed-locks/">https://redis.io/docs/latest/develop/use/patterns/distributed-locks/</a></p>
-<h2 id="定时任务"><a class="markdownIt-Anchor" href="#定时任务"></a> 定时任务</h2>
-<h3 id="本地"><a class="markdownIt-Anchor" href="#本地"></a> 本地</h3>
+<p><strong>Go 代码解析</strong></p>
+<p><code>Client</code> 和 <code>Lock</code> 结构体</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Client <span class="keyword">struct</span> &#123;</span><br><span class="line">	client redis.Cmdable      <span class="comment">// Redis 客户端接口</span></span><br><span class="line">	g      singleflight.Group <span class="comment">// 用于防止缓存击穿的工具，可以让并发请求变成单个请求</span></span><br><span class="line">	valuer <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="type">string</span>      <span class="comment">// 用于生成唯一的值，确保锁的持有者唯一（通常是 UUID）</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Lock <span class="keyword">struct</span> &#123;</span><br><span class="line">	client           redis.Cmdable <span class="comment">// 持有的 Redis 客户端，用于操作锁</span></span><br><span class="line">	key              <span class="type">string</span>        <span class="comment">// 锁的键，用于标识锁</span></span><br><span class="line">	value            <span class="type">string</span>        <span class="comment">// 锁的值，用于标识持有者，避免误释放其他客户端的锁</span></span><br><span class="line">	expiration       time.Duration <span class="comment">// 锁的过期时间</span></span><br><span class="line">	unlock           <span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125; <span class="comment">// 用于信号化锁的释放操作，退出自动续约逻辑</span></span><br><span class="line">	signalUnlockOnce sync.Once     <span class="comment">// 确保解锁操作只执行一次，防止重复释放</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Lock</code> 方法实现</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> RetryStrategy <span class="keyword">interface</span> &#123;</span><br><span class="line">	<span class="comment">// Next 返回下一次重试的间隔，如果不需要继续重试，那么第二参数发挥 false</span></span><br><span class="line">	Next() (time.Duration, <span class="type">bool</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> FixIntervalRetry <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">// 重试间隔</span></span><br><span class="line">	Interval time.Duration</span><br><span class="line">	<span class="comment">// 最大次数</span></span><br><span class="line">	Max <span class="type">int</span></span><br><span class="line">	cnt <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *FixIntervalRetry)</span></span> Next() (time.Duration, <span class="type">bool</span>) &#123;</span><br><span class="line">	f.cnt++</span><br><span class="line">	<span class="keyword">return</span> f.Interval, f.cnt &lt;= f.Max</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Client)</span></span> Lock(ctx context.Context, key <span class="type">string</span>, expiration time.Duration, retry RetryStrategy, timeout time.Duration) (*Lock, <span class="type">error</span>) &#123;</span><br><span class="line">    val := c.valuer()  <span class="comment">// 生成唯一的锁值，标识当前客户端</span></span><br><span class="line">    <span class="keyword">var</span> timer *time.Timer</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> timer != <span class="literal">nil</span> &#123;</span><br><span class="line">            timer.Stop()  <span class="comment">// 在退出之前停止定时器，避免资源泄露</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        lctx, cancel := context.WithTimeout(ctx, timeout)  <span class="comment">// 为每次获取锁尝试设置超时</span></span><br><span class="line">        res, err := c.client.Eval(lctx, luaLock, []<span class="type">string</span>&#123;key&#125;, val, expiration.Seconds()).Result()</span><br><span class="line">        cancel()</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &amp;&amp; !errors.Is(err, context.DeadlineExceeded) &#123;</span><br><span class="line">            <span class="comment">// 非超时错误，比如 Redis server 崩溃、网络异常等，不再继续尝试</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> res == <span class="string">&quot;OK&quot;</span> &#123;</span><br><span class="line">            <span class="comment">// 锁获取成功，返回锁对象</span></span><br><span class="line">            <span class="keyword">return</span> newLock(c.client, key, val, expiration), <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">        interval, ok := retry.Next()</span><br><span class="line">        <span class="keyword">if</span> !ok &#123;</span><br><span class="line">            <span class="comment">// 如果重试次数耗尽，返回错误</span></span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                err = fmt.Errorf(<span class="string">&quot;最后一次重试错误: %w&quot;</span>, err)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                err = fmt.Errorf(<span class="string">&quot;锁被人持有: %w&quot;</span>, ErrFailedToPreemptLock)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">&quot;rlock: 重试机会耗尽，%w&quot;</span>, err)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 设置重试的等待时间</span></span><br><span class="line">        <span class="keyword">if</span> timer == <span class="literal">nil</span> &#123;</span><br><span class="line">            timer = time.NewTimer(interval)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            timer.Reset(interval)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 等待重试或者上下文结束</span></span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> &lt;-timer.C: <span class="comment">// 定时器到达，表示重试间隔已过，可以再次尝试获取锁</span></span><br><span class="line">        <span class="keyword">case</span> &lt;-ctx.Done(): <span class="comment">// 上下文 ctx 被取消</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span>, ctx.Err()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="解锁">解锁</h4>
+<p>Lua 脚本解析</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> redis.call(<span class="string">&quot;get&quot;</span>, KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- 如果锁的值与传入的值一致，表示当前客户端持有该锁</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&quot;del&quot;</span>, KEYS[<span class="number">1</span>])  <span class="comment">-- 删除键，释放锁</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>  <span class="comment">-- 锁未被当前客户端持有，返回 0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>Go 代码解析</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Lock)</span></span> Unlock(ctx context.Context) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="comment">// 使用 Lua 脚本进行解锁操作，保证原子性</span></span><br><span class="line">	res, err := l.client.Eval(ctx, luaUnlock, []<span class="type">string</span>&#123;l.key&#125;, l.value).Int64()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// 确保只进行一次解锁信号操作，防止重复解锁引起 panic</span></span><br><span class="line">		l.signalUnlockOnce.Do(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">			l.unlock &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;  <span class="comment">// 向 unlock 通道发送信号</span></span><br><span class="line">			<span class="built_in">close</span>(l.unlock)         <span class="comment">// 关闭 unlock 通道</span></span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err == redis.Nil &#123;</span><br><span class="line">		<span class="comment">// 锁不存在或者锁的值与预期不符，表示当前锁不属于调用者</span></span><br><span class="line">		<span class="keyword">return</span> ErrLockNotHold</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="comment">// Redis 操作出错，返回错误</span></span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> res != <span class="number">1</span> &#123;</span><br><span class="line">		<span class="comment">// Lua 脚本执行结果不是 1，表示锁未被成功释放</span></span><br><span class="line">		<span class="keyword">return</span> ErrLockNotHold</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>  <span class="comment">// 成功释放锁</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="续约">续约</h4>
+<p>约操作对于长时间运行的任务非常重要，以确保在任务未完成时锁不会意外过期导致其他客户端获得锁，从而引起竞态条件。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> redis.call(<span class="string">&quot;get&quot;</span>, KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- 如果锁的值与传入的值一致，表示当前客户端持有该锁</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&quot;expire&quot;</span>, KEYS[<span class="number">1</span>], ARGV[<span class="number">2</span>])  <span class="comment">-- 更新锁的过期时间</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>  <span class="comment">-- 锁未被当前客户端持有，返回 0 表示续约失败</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Lock)</span></span> Refresh(ctx context.Context) <span class="type">error</span> &#123;</span><br><span class="line">    <span class="comment">// 使用 Lua 脚本执行锁续约操作，保证续约的原子性</span></span><br><span class="line">    res, err := l.client.Eval(ctx, luaRefresh,</span><br><span class="line">        []<span class="type">string</span>&#123;l.key&#125;, l.value, l.expiration.Seconds()).Int64()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// Redis 操作出错，返回错误</span></span><br><span class="line">        <span class="keyword">return</span> err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> res != <span class="number">1</span> &#123;</span><br><span class="line">        <span class="comment">// Lua 脚本执行结果不是 1，表示锁续约失败，可能是锁不存在或者锁的值不匹配</span></span><br><span class="line">        <span class="keyword">return</span> ErrLockNotHold</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>  <span class="comment">// 成功续约锁</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自动续约机制 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Lock)</span></span> AutoRefresh(interval time.Duration, timeout time.Duration) <span class="type">error</span> &#123;</span><br><span class="line">    <span class="comment">// 创建一个定时器，每隔 interval 时间触发一次</span></span><br><span class="line">    ticker := time.NewTicker(interval)</span><br><span class="line">    <span class="comment">// 刷新超时 channel，用于通知在发生超时时重试</span></span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// 确保在函数退出时停止定时器并关闭通道</span></span><br><span class="line">        ticker.Stop()</span><br><span class="line">        <span class="built_in">close</span>(ch)</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> &lt;-ticker.C:</span><br><span class="line">            <span class="comment">// 定时器触发时创建一个带有超时时间的上下文，用于刷新锁</span></span><br><span class="line">            ctx, cancel := context.WithTimeout(context.Background(), timeout)</span><br><span class="line">            err := l.Refresh(ctx)</span><br><span class="line">            cancel()</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果刷新操作超时，则继续尝试</span></span><br><span class="line">            <span class="keyword">if</span> err == context.DeadlineExceeded &#123;</span><br><span class="line">                <span class="comment">// 因为有两个地方可能要写入数据到 ch，而 ch 容量只有 1</span></span><br><span class="line">                <span class="comment">// 如果写入不成功，则说明前一次调用超时且尚未被处理</span></span><br><span class="line">                <span class="keyword">select</span> &#123;</span><br><span class="line">                <span class="keyword">case</span> ch &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;:</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果刷新过程中出现了其他错误，则返回错误</span></span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-ch:</span><br><span class="line">            <span class="comment">// 超时处理，重新尝试刷新锁</span></span><br><span class="line">            ctx, cancel := context.WithTimeout(context.Background(), timeout)</span><br><span class="line">            err := l.Refresh(ctx)</span><br><span class="line">            cancel()</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果仍然超时，则继续重试</span></span><br><span class="line">            <span class="keyword">if</span> err == context.DeadlineExceeded &#123;</span><br><span class="line">                <span class="keyword">select</span> &#123;</span><br><span class="line">                <span class="keyword">case</span> ch &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;:</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 处理其他错误</span></span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-l.unlock:</span><br><span class="line">            <span class="comment">// 当检测到 unlock 信号时，退出续约逻辑，说明锁已经被释放</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="redlock">Redlock</h3>
+<p><strong><a target="_blank" rel="noopener" href="https://redis.io/docs/latest/develop/use/patterns/distributed-locks/">Redlock</a></strong> 是一种 Redis 分布式锁实现方案，旨在提供比单实例 Redis 锁更高的 <strong>容错性和可靠性</strong>。Redlock 是由 Redis 的创造者提出的一种分布式锁算法，它通过在多个 Redis 节点（通常为 5 个）上进行锁的操作来实现分布式锁的可靠性。Redlock 的核心思想是将锁保存在多个独立的 Redis 实例中，以实现容错性：</p>
+<ul>
+<li>客户端需要在多数（即超过一半） Redis 实例上成功获取锁，才能认为锁获取成功。</li>
+<li>通过多实例的方案来避免单点故障的问题，如果部分 Redis 实例不可用，只要多数节点仍可用，系统依然可以正常工作。</li>
+</ul>
+<p>在单实例实现中，通过 <code>SET key value NX PX ttl</code> 或通过 <code>GET</code> + <code>DEL</code> 来实现分布式锁的获取和释放，同时还使用了自动续约机制，保证锁在任务长时间运行期间不会过期。</p>
+<ul>
+<li>锁的获取是一个单实例上的简单原子操作</li>
+<li>锁的释放和续约使用了 Lua 脚本，确保在 Redis 服务器端以原子操作方式执行</li>
+<li>自动续约机制 用于延长锁的过期时间，确保在任务执行较长时间时不会因为锁的自然过期导致其他客户端意外获取到锁</li>
+</ul>
+<p>Redlock 在设计时使用了一组步骤来确保锁的获取过程既高效又一致：</p>
+<ol type="1">
+<li>客户端按照顺序对每个 Redis 实例尝试加锁（通过 <code>SET NX PX</code> 操作），并设置一个较短的超时时间，确保获取锁操作不会阻塞</li>
+<li>客户端必须在所有节点上尝试加锁的时间内成功获取到大多数节点的锁，才能认为获取锁成功</li>
+<li>锁的超时时间应该比客户端操作的预计完成时间更长，以确保操作能够在锁过期之前完成</li>
+<li>在所有操作完成后，客户端会尝试对所有节点释放锁</li>
+</ol>
+<h2 id="定时任务">定时任务</h2>
+<h3 id="本地">本地</h3>
 <p><strong>time</strong></p>
 <ul>
-<li>time.Tick</li>
-<li>time.After</li>
+<li><strong><code>time.Tick</code></strong>：用于创建一个周期性的定时器，返回一个在固定时间间隔发送信号的通道。适用于需要周期性执行的任务，但需注意内存泄漏风险，建议使用 <code>time.NewTicker</code> 以确保资源的可管理性</li>
+<li><strong><code>time.After</code></strong>：用于创建一个延迟执行的定时器，在经过指定的时间后向通道发送信号，适用于一次性延迟或超时控制</li>
 </ul>
-<p><strong>Cron</strong></p>
-<p>Cron 是一种用于调度任务的工具，常用于 Unix-like 系统中。它允许用户设置定时任务，这些任务会在指定的时间间隔内自动执行。Cron 使用一种特殊的表达式来定义任务的执行时间，这种表达式通常称为 Cron 表达式。</p>
-<p>Cron 表达式由六个或七个字段组成，从左到右依次表示秒、分钟、小时、月份中的哪一天、月份、一周中的哪一天（某些 Cron 实现支持第七个字段，即年份）。每个字段都可以是一个具体的数字、星号（表示任何可能的值）、逗号分隔的列表或斜杠分隔的范围。例如：</p>
-<ul>
-<li><code>0 0 * * *</code> 表示每天凌晨 0 点执行。</li>
-<li><code>*/5 * * * *</code> 表示每 5 分钟执行一次。</li>
-</ul>
-<h3 id="分布式"><a class="markdownIt-Anchor" href="#分布式"></a> 分布式</h3>
-<p>在分布式环境中，由于存在多个节点，单个节点的定时任务不足以满足整个系统的需要，分布式定时任务是指在分布式系统中协调和管理定时任务的一种机制，它可以确保即使在节点故障的情况下也能可靠地执行定时任务</p>
-<p>分布式定时任务的特点包括：</p>
-<ul>
-<li>高可用性：能够处理节点故障，确保任务即使在一个或多个节点不可用的情况下也能继续执行</li>
-<li>容错性：具有重试机制，当任务执行失败时能够自动重试</li>
-<li>负载均衡：能够根据系统的负载情况分配任务给不同的节点</li>
-<li>一致性：确保所有节点之间的一致性，防止并发问题导致的任务重复执行</li>
-<li>扩展性：随着系统规模的增长，可以轻松地增加更多的节点来处理更多的任务</li>
-</ul>
+<p><strong>cron</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/robfig/cron"><strong>robfig/cron</strong></a> 基于时间调度器、时间解析器、Ticker 和 Goroutine 实现了类似 Unix <code>cron</code> 的功能。通过 Cron 表达式灵活地定义任务的执行时间，并使用 Go 的并发特性（Goroutine）来确保任务可以高效并发执行，广泛用于 Go 程序中需要定时任务调度的场景。</p>
+<blockquote>
+<p>使用 <a target="_blank" rel="noopener" href="https://crontab.guru/">在线工具</a> 可以帮助验证 Cron 表达式是否符合预期</p>
+</blockquote>
+<h3 id="分布式">分布式</h3>
+<p>本地定时任务加上分布式锁可以实现分布式定时任务的效果。通过使用分布式锁机制，能够有效避免多个节点同时执行同一任务的问题，从而实现协调多个节点的执行，确保任务在集群环境下只执行一次。</p>
 
 
 <!-- 
@@ -350,8 +292,7 @@
 
 
       <!-- 
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br />
-本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <span class="citation" data-cites="anonymity">[@anonymity]</span>(/) 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer> -->
 
       <div class='float-panel mobile-only blur' style='display:none'>
