@@ -91,7 +91,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Redis 核心原理与实践 🚀</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">持久化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pipeline"><span class="toc-number">3.</span> <span class="toc-text">Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5"><span class="toc-number">4.</span> <span class="toc-text">过期策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0"><span class="toc-number">5.</span> <span class="toc-text">内存淘汰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-number">6.</span> <span class="toc-text">消息队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">7.</span> <span class="toc-text">分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97"><span class="toc-number">8.</span> <span class="toc-text">延迟队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">9.</span> <span class="toc-text">定时任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5"><span class="toc-number">10.</span> <span class="toc-text">主从同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="toc-number">11.</span> <span class="toc-text">哨兵模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">12.</span> <span class="toc-text">集群模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%85%E9%9A%9C"><span class="toc-number">13.</span> <span class="toc-text">故障</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">14.</span> <span class="toc-text">布隆过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redisearch"><span class="toc-number">15.</span> <span class="toc-text">RediSearch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">16.</span> <span class="toc-text">性能测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%85%A2%E6%9F%A5%E8%AF%A2"><span class="toc-number">17.</span> <span class="toc-text">慢查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">18.</span> <span class="toc-text">性能优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98"><span class="toc-number">19.</span> <span class="toc-text">缓存问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">20.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Redis 核心原理与实践 🚀</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">持久化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pipeline"><span class="toc-number">3.</span> <span class="toc-text">Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5"><span class="toc-number">4.</span> <span class="toc-text">过期策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0"><span class="toc-number">5.</span> <span class="toc-text">内存淘汰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-number">6.</span> <span class="toc-text">消息队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">7.</span> <span class="toc-text">分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97"><span class="toc-number">8.</span> <span class="toc-text">延迟队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">9.</span> <span class="toc-text">定时任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5"><span class="toc-number">10.</span> <span class="toc-text">主从同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="toc-number">11.</span> <span class="toc-text">哨兵模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">12.</span> <span class="toc-text">集群模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%85%E9%9A%9C"><span class="toc-number">13.</span> <span class="toc-text">故障</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">14.</span> <span class="toc-text">布隆过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RediSearch"><span class="toc-number">15.</span> <span class="toc-text">RediSearch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">16.</span> <span class="toc-text">性能测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%85%A2%E6%9F%A5%E8%AF%A2"><span class="toc-number">17.</span> <span class="toc-text">慢查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">18.</span> <span class="toc-text">性能优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98"><span class="toc-number">19.</span> <span class="toc-text">缓存问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">20.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div></widget>
 
 
 
@@ -147,7 +147,7 @@
 <h1 class="article-title"><span>Redis 核心原理与实践 🚀</span></h1>
 <p>梳理 Redis 知识体系</p>
 <span id="more"></span>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/redis-1.png" style="zoom:50%;" /></p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/redis-1.png" style="zoom:50%;" />              
 <h2 id="持久化">持久化</h2>
 <p>Redis 持久化拥有以下三种方式：</p>
 <ul>
@@ -180,7 +180,7 @@
 <li>RDB 使用快照的形式来持久化整个 Redis 数据，而 AOF 只是将每次执行的命令追加到 AOF 文件中，因此从理论上说，RDB 比 AOF 更健壮。</li>
 </ul>
 <pre class="mermaid">graph 
-    subgraph 混合持久化
+	subgraph 混合持久化
     A[Redis 启动] --> B{开启AOF}
     B -- 是 --> C{文件开头为RDB格式}
     C -- 是 --> D[加载RDB]
@@ -226,15 +226,25 @@ C --> |是| F(执行命令)
 F --> G(返回执行结果)</pre>
 <p><strong>错误&amp;回滚</strong></p>
 <ul>
-<li><p><strong>执行时错误：</strong> 即使事务队列中某个命令在执行期间发生了错误，事务也会继续执行，直到事务队列中所有命令执行完成</p></li>
-<li><p><strong>入列错误不会导致事务结束：</strong> 重复执行 <code>multi</code> 会导致入列错误，但不会终止事务，最终查询的结果是事务执行成功了</p></li>
-<li><p><strong>入列错误导致事务结束：</strong> <code>exec</code> 时候不会运行事务</p></li>
-<li><p>不支持事务回滚的原因有以下两个：</p>
+<li>
+<p><strong>执行时错误：</strong> 即使事务队列中某个命令在执行期间发生了错误，事务也会继续执行，直到事务队列中所有命令执行完成</p>
+</li>
+<li>
+<p><strong>入列错误不会导致事务结束：</strong> 重复执行 <code>multi</code> 会导致入列错误，但不会终止事务，最终查询的结果是事务执行成功了</p>
+</li>
+<li>
+<p><strong>入列错误导致事务结束：</strong> <code>exec</code> 时候不会运行事务</p>
+</li>
+<li>
+<p>不支持事务回滚的原因有以下两个：</p>
 <ul>
 <li>他认为 Redis 事务的执行时，错误通常都是编程错误造成的，这种错误通常只会出现在开发环境中，而 <strong>很少会在实际的生产环境中出现</strong>，所以他认为没有必要为 Redis 开发事务回滚功能；</li>
 <li>不支持事务回滚是因为这种复杂的功能和 Redis 追求的简单高效的设计主旨不符合。</li>
-</ul></li>
-<li><p>这里不支持事务回滚，指的是 <strong>不支持运行时错误的事务回滚</strong>。</p></li>
+</ul>
+</li>
+<li>
+<p>这里不支持事务回滚，指的是 <strong>不支持运行时错误的事务回滚</strong>。</p>
+</li>
 </ul>
 <p><strong>监控</strong></p>
 <p><code>watch</code> 命令用于客户端并发情况下，为事务提供一个乐观锁（CAS，Check And Set），也就是可以用 <code>watch</code> 命令来监控一个或多个变量，如果在事务的过程中，某个 <strong>监控项被修改</strong> 了，那么 <strong>整个事务</strong> 就会 <strong>终止执行</strong>。</p>
@@ -247,7 +257,7 @@ E --> |是| F(退出事务)
 E --> |否| G(执行并返回结果)</pre>
 <p><code>watch</code> 命令只能在客户端开启事务之前执行，在事务中执行 <code>watch</code> 命令会引发错误，但不会造成整个事务失败，即使在事务的执行过程中，k 值被修改了，因为调用了 <code>unwatch</code> 命令，整个事务依然会顺利执行。</p>
 <p>正常情况下 Redis 事务分为三个阶段：开启事务、命令入列、执行事务。Redis 事务并不支持运行时错误的事务回滚，但在某些入列错误，如 <code>set key</code> 或者是 <code>watch</code> 监控项被修改时，提供整个事务回滚的功能。</p>
-<h2 id="pipeline">Pipeline</h2>
+<h2 id="Pipeline">Pipeline</h2>
 <p>管道技术（Pipeline）是 <strong>客户端</strong> 提供的一种 <strong>批处理技术</strong>，用于一次处理多个 Redis 命令，从而提高整个交互的性能。</p>
 <blockquote>
 <p>管道技术解决了多个命令集中请求时造成网络资源浪费的问题，加快了 Redis 的响应速度，让 Redis 拥有更高的运行速度。但要注意的一点是，管道技术本质上是客户端提供的功能，而非 Redis 服务器端的功能。</p>
@@ -347,7 +357,7 @@ E --> |否| G(执行并返回结果)</pre>
     E --> F</pre>
 <p><strong>策略分类</strong></p>
 <p>早期版本的 Redis 有以下 6 种淘汰策略：</p>
-<ol type="1">
+<ol>
 <li><strong><code>noeviction</code></strong>：不淘汰任何数据，当内存不足时，新增操作会报错，<strong>Redis 默认内存淘汰策略</strong>；</li>
 <li><strong><code>allkeys-lru</code></strong>：淘汰整个键值中最久未使用的键值；</li>
 <li><strong><code>allkeys-random</code></strong>：随机淘汰任意键值；</li>
@@ -356,7 +366,7 @@ E --> |否| G(执行并返回结果)</pre>
 <li><strong><code>volatile-ttl</code></strong>：优先淘汰更早过期的键值。</li>
 </ol>
 <p>在 Redis 4.0 版本中又新增了 2 种淘汰策略：</p>
-<ol type="1">
+<ol>
 <li><strong><code>volatile-lfu</code></strong>：淘汰所有设置了过期时间的键值中，最少使用的键值；</li>
 <li><strong><code>allkeys-lfu</code></strong>：淘汰整个键值中最少使用的键值。</li>
 </ol>
@@ -368,13 +378,25 @@ E --> |否| G(执行并返回结果)</pre>
 <li>方式二：通过修改 Redis 配置文件修改，设置 <code>maxmemory-policy</code> 策略，它的优点是重启 Redis 服务后配置不会丢失，缺点是必须重启 Redis 服务，设置才能生效。</li>
 </ul>
 <p><strong>淘汰算法</strong></p>
-<p>从内存淘汰策略分类上，可以得知，除了随机删除和不删除之外，主要有两种淘汰算法：<strong>LRU 算法</strong> 和 <strong>LFU 算法</strong>。 <strong>LRU 算法</strong> LRU 全称是 Least Recently Used 译为最近最少使用，是一种常用的页面置换算法，选择最近最久未使用的页面予以淘汰。</p>
+<p>从内存淘汰策略分类上，可以得知，除了随机删除和不删除之外，主要有两种淘汰算法：<strong>LRU 算法</strong> 和 <strong>LFU 算法</strong>。<br>
+<strong>LRU 算法</strong><br>
+LRU 全称是 Least Recently Used 译为最近最少使用，是一种常用的页面置换算法，选择最近最久未使用的页面予以淘汰。</p>
 <ul>
 <li>LRU 算法需要基于链表结构，链表中的元素按照操作顺序从前往后排列，最新操作的键会被移动到表头，当需要内存淘汰时，只需要删除链表尾部的元素即可。</li>
 <li><strong>Redis 使用的是一种近似 LRU 算法，目的是为了更好的节约内存</strong>，它的实现方式是给现有的数据结构添加一个额外的字段，用于记录此键值的最后一次访问时间，Redis 内存淘汰时，会使用随机采样的方式来淘汰数据，它是随机取 5 个值（此值可配置），然后淘汰最久没有使用的那个。</li>
 <li>LRU 算法有一个缺点，比如说很久没有使用的一个键值，如果最近被访问了一次，那么它就不会被淘汰，即使它是使用次数最少的缓存，那它也不会被淘汰，因此在 Redis 4.0 之后引入了 LFU 算法。</li>
 </ul>
-<p><strong>LFU 算法</strong> LFU 全称是 Least Frequently Used 翻译为最不常用的，最不常用的算法是根据总访问次数来淘汰数据的，它的核心思想是“<strong>如果数据过去被访问多次，那么将来被访问的频率也更高</strong>”。 * LFU 解决了偶尔被访问一次之后，数据就不会被淘汰的问题，相比于 LRU 算法也更合理一些。 * 在 Redis 中 LFU 存储分为两部分，16 bit 的 ldt（last decrement time）和 8 bit 的 logc（logistic counter）。 1. logc 是用来存储 <strong>访问频次</strong>，8 bit 能表示的最大整数值为 255，它的值越小表示使用频率越低，越容易淘汰； 1. ldt 是用来存储上一次 logc 的 <strong>更新时间</strong>。</p>
+<p><strong>LFU 算法</strong><br>
+LFU 全称是 Least Frequently Used 翻译为最不常用的，最不常用的算法是根据总访问次数来淘汰数据的，它的核心思想是“<strong>如果数据过去被访问多次，那么将来被访问的频率也更高</strong>”。</p>
+<ul>
+<li>LFU 解决了偶尔被访问一次之后，数据就不会被淘汰的问题，相比于 LRU 算法也更合理一些。</li>
+<li>在 Redis 中 LFU 存储分为两部分，16 bit 的 ldt（last decrement time）和 8 bit 的 logc（logistic counter）。
+<ol>
+<li>logc 是用来存储 <strong>访问频次</strong>，8 bit 能表示的最大整数值为 255，它的值越小表示使用频率越低，越容易淘汰；</li>
+<li>ldt 是用来存储上一次 logc 的 <strong>更新时间</strong>。</li>
+</ol>
+</li>
+</ul>
 <h2 id="消息队列">消息队列</h2>
 <p><strong>发布订阅模式</strong></p>
 <p>发布订阅模式的三个命令：</p>
@@ -384,7 +406,7 @@ E --> |否| G(执行并返回结果)</pre>
 <li><code>psubscribe pattern</code> 主题订阅</li>
 </ul>
 <p>发布订阅模式存在以下两个缺点：</p>
-<ol type="1">
+<ol>
 <li>无法持久化保存消息，如果 Redis 服务器宕机或重启，那么所有的消息将会丢失；</li>
 <li>发布订阅模式是“发后既忘”的工作模式，如果有订阅者离线重连之后不能消费之前的历史消息。</li>
 </ol>
@@ -398,7 +420,11 @@ E --> |否| G(执行并返回结果)</pre>
 <li>消息可以被 <strong>持久化</strong>，借助 Redis 本身的持久化（AOF、RDB 或者是混合持久化），可以有效的保存数据；</li>
 <li>消费者可以 <strong>积压消息</strong>，不会因为客户端的消息过多而被强行断开。</li>
 </ul>
-<p>List 缺点： - 消息 <strong>不能被重复消费</strong>，一个消息消费完就会被删除； - <strong>没有主题订阅</strong> 的功能。</p>
+<p>List 缺点：</p>
+<ul>
+<li>消息 <strong>不能被重复消费</strong>，一个消息消费完就会被删除；</li>
+<li><strong>没有主题订阅</strong> 的功能。</li>
+</ul>
 <p><strong>ZSet</strong> 版消息队列相比于之前的两种方式，List 和发布订阅方式在实现上要复杂一些，但 ZSet 因为多了一个 score（分值）属性，从而使它具备更多的功能，例如可以用它来存储时间戳，以此来实现延迟消息队列等。它的实现思路和 List 相同也是利用 <code>zadd</code> 和 <code>zrangebyscore</code> 来实现存入和读取。</p>
 <p>ZSet 优点：</p>
 <ul>
@@ -411,8 +437,13 @@ E --> |否| G(执行并返回结果)</pre>
 <li>ZSet 是根据 score 值排序的，不能像 List 一样，按照插入顺序来排序；</li>
 <li>ZSet 没有向 List 的 brpop 那样的阻塞弹出的功能。</li>
 </ul>
-<p><strong>终极方案 - Stream</strong></p>
-<p>在 Redis 5.0 Stream 没出来之前，消息队列的实现方式都有着各自的缺陷，例如： - 发布订阅模式 PubSub，不能持久化也就无法可靠的保存消息，并且对于离线重连的客户端不能读取历史消息的缺陷； - 列表实现消息队列的方式不能重复消费，一个消息消费完就会被删除； - 有序集合消息队列的实现方式不能存储相同 value 的消息，并且不能阻塞读取消息。</p>
+<p><strong>终极方案  - Stream</strong></p>
+<p>在 Redis 5.0 Stream 没出来之前，消息队列的实现方式都有着各自的缺陷，例如：</p>
+<ul>
+<li>发布订阅模式 PubSub，不能持久化也就无法可靠的保存消息，并且对于离线重连的客户端不能读取历史消息的缺陷；</li>
+<li>列表实现消息队列的方式不能重复消费，一个消息消费完就会被删除；</li>
+<li>有序集合消息队列的实现方式不能存储相同 value 的消息，并且不能阻塞读取消息。</li>
+</ul>
 <p>并且以上三种方式在实现消息队列时，只能存储单 value 值，也就是如果你要存储一个对象的情况下，必须先序列化成 JSON 字符串，在读取之后还要反序列化成对象才行，这也给用户的使用带来的不便。</p>
 <p>Redis 5.0 推出了 Stream 类型用于实现消息队列，它借鉴了 Kafka 的设计思路，它支持消息的持久化和消息轨迹的消费，支持 ack 确认消息的模式，让消息队列更加的稳定和可靠。</p>
 <p><strong>基本使用</strong></p>
@@ -444,7 +475,7 @@ D -->|排队等待| E
 E <--> F(资源)</pre>
 <p><strong>分布式锁的实现</strong></p>
 <p>分布式锁比较常见的实现方式有三种：</p>
-<ol type="1">
+<ol>
 <li>Memcached 实现的分布式锁：使用 add 命令，添加成功的情况下，表示创建分布式锁成功。</li>
 <li>ZooKeeper 实现的分布式锁：使用 ZooKeeper 顺序临时节点来实现分布式锁。</li>
 <li>Redis 实现的分布式锁。</li>
@@ -475,7 +506,7 @@ end</pre>
 <p>锁被误删的解决方案是在使用 set 命令创建锁时，给 value 值设置一个归属人标识，例如给应用关联一个 UUID，每次在删除之前先要判断 UUID 是不是属于当前的线程，如果属于在删除，这样就避免了锁被误删的问题。</p>
 <p>如果是在代码中执行删除，不能使用先判断再删除的方法，因为判断代码和删除代码不具备原子性，因此也不能这样使用，这个时候可以使用 <strong>Lua 脚本</strong> 来执行判断和删除的操作，因为多条 Lua 命令可以保证 <strong>原子性</strong>。</p>
 <p>执行超时问题的解决：</p>
-<ol type="1">
+<ol>
 <li>把执行比较耗时的任务不要放到加锁的方法内，锁内的方法尽量控制执行时长；</li>
 <li>把最大超时时间可以适当的设置长一点，正常情况下锁用完之后会被手动的删除掉，因此适当的把最大超时时间设置的长一点，也是可行的。</li>
 <li><strong>续约机制。</strong></li>
@@ -484,7 +515,7 @@ end</pre>
 <p>延迟队列是指把当前要做的事情，往后推迟一段时间再做。</p>
 <p><strong>使用场景</strong></p>
 <p>延迟队列的常见使用场景有以下几种：</p>
-<ol type="1">
+<ol>
 <li>超过 30 分钟未支付的订单，将会被取消</li>
 <li>外卖商家超过 5 分钟未接单的订单，将会被取消</li>
 <li>在平台注册但 30 天内未登录的用户，发短信提醒</li>
@@ -497,32 +528,44 @@ end</pre>
 <ul>
 <li>优点：开发比较方便，可以直接在代码中使用，代码实现比较简单</li>
 <li>缺点：不支持持久化保存，不支持分布式系统</li>
-</ul></li>
+</ul>
+</li>
 <li>第二类是通过 MQ 框架来实现，例如 RabbitMQ 可以通过 rabbitmq-delayed-message-exchange 插件来实现延迟队列
 <ul>
 <li>优点：支持分布式，支持持久化</li>
 <li>缺点：框架比较重，需要搭建和配置 MQ</li>
-</ul></li>
+</ul>
+</li>
 <li>第三类就是通过 Redis 的方式来实现延迟队列</li>
 </ul>
 <p>Redis 是通过有序集合（ZSet）的方式来实现延迟消息队列的，ZSet 有一个 Score 属性可以用来存储延迟执行的时间。</p>
 <ul>
-<li><p><strong>实现</strong></p>
+<li>
+<p><strong>实现</strong></p>
 <ul>
-<li><p>第一种是利用 <code>zrangebyscore</code> 查询符合条件的所有待处理任务，循环执行队列任务。</p></li>
-<li><p>第二种实现方式是每次查询最早的一条消息，判断这条信息的执行时间是否小于等于此刻的时间，如果是则执行此任务，否则继续循环检测。</p></li>
-</ul></li>
-<li><p><strong>优点</strong></p>
+<li>
+<p>第一种是利用 <code>zrangebyscore</code> 查询符合条件的所有待处理任务，循环执行队列任务。</p>
+</li>
+<li>
+<p>第二种实现方式是每次查询最早的一条消息，判断这条信息的执行时间是否小于等于此刻的时间，如果是则执行此任务，否则继续循环检测。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>优点</strong></p>
 <ul>
 <li>灵活方便，Redis 是互联网公司的标配，无序额外搭建相关环境；</li>
 <li>可进行消息持久化，大大提高了延迟队列的可靠性；</li>
 <li>分布式支持，不像 JDK 自身的 DelayQueue；</li>
 <li>高可用性，利用 Redis 本身高可用方案，增加了系统健壮性。</li>
-</ul></li>
-<li><p><strong>缺点</strong></p>
+</ul>
+</li>
+<li>
+<p><strong>缺点</strong></p>
 <ul>
 <li>需要使用 <strong>无限循环的方式</strong> 来执行任务检查，会消耗少量的系统资源。</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <h2 id="定时任务">定时任务</h2>
 <p><strong>键空间通知</strong></p>
@@ -588,17 +631,20 @@ D -->|复制| G[从节点]</pre>
 <li>完整数据同步
 <ul>
 <li>当有新的从服务器连接时，为了保障多个数据库的一致性，主服务器会执行一次 bgsave 命令生成一个 RDB 文件，然后再以 Socket 的方式发送给从服务器，从服务器收到 RDB 文件之后再把所有的数据加载到自己的程序中，就完成了一次全量的数据同步。</li>
-</ul></li>
+</ul>
+</li>
 <li>部分数据同步
 <ul>
 <li>Redis 2.8 的优化方法是当从服务离线之后，主服务器会把离线之后的写入命令，存储在一个特定大小的队列中，队列是可以保证先进先出的执行顺序的，当从服务器重写恢复上线之后，主服务会判断离线这段时间内的命令是否还在队列中，如果在就直接把队列中的数据发送给从服务器，这样就避免了完整同步的资源浪费。</li>
 <li>存储离线命令的队列大小默认是 1MB，使用者可以自行修改队列大小的配置项 repl-backlog-size。</li>
-</ul></li>
+</ul>
+</li>
 <li>无盘数据同步
 <ul>
 <li>如果主服务器是非固态硬盘的时候，系统的 I/O 操作是非常高的，为了缓解这个问题，Redis 2.8.18 新增了无盘复制功能，无盘复制功能不会在本地创建 RDB 文件，而是会派生出一个子进程，然后由子进程通过 Socket 的方式，直接将 RDB 文件写入到从服务器，这样主服务器就可以在不创建 RDB 文件的情况下，完成与从服务器的数据同步。</li>
 <li>要使用无盘复制功能，只需把配置项 repl-diskless-sync 的值设置为 yes 即可，它默认配置值为 no。</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <p><strong>关闭主从同步</strong></p>
 <p>可以使用 <code>replicaof no one</code> 命令来停止从服务器的复制：</p>
@@ -609,7 +655,8 @@ D -->|复制| G[从节点]</pre>
 <li>数据一致性问题
 <ul>
 <li>当从服务器已经完成和主服务的数据同步之后，再新增的命令会以异步的方式发送至从服务器，在这个过程中主从同步会有短暂的数据不一致，如在这个异步同步发生之前主服务器宕机了，会造成数据不一致。</li>
-</ul></li>
+</ul>
+</li>
 <li>从服务器只读性
 <ul>
 <li>默认在情况下，处于复制模式的主服务器既可以执行写操作也可以执行读操作，而从服务器则只能执行读操作。</li>
@@ -618,12 +665,15 @@ D -->|复制| G[从节点]</pre>
 <li>在从服务器上写的数据不会同步到主服务器；</li>
 <li>当键值相同时主服务器上的数据可以覆盖从服务器；</li>
 <li>在进行完整数据同步时，从服务器数据会被清空。</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>复制命令的变化
 <ul>
 <li>Redis 5.0 之前使用的复制命令是 slaveof，在 Redis 5.0 之后复制命令才被改为 replicaof，在高版本（Redis 5+）中应该尽量使用 replicaof，因为 slaveof 命令可能会被随时废弃掉。</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <h2 id="哨兵模式">哨兵模式</h2>
 <p>主从复制模式，它是属于 Redis 多机运行的基础，但这种模式本身存在一个致命的问题，当主节点奔溃之后，需要人工干预才能恢复 Redis 的正常使用。需要一个自动的工具——Redis Sentinel（哨兵模式）来把手动的过程变成自动的，让 Redis 拥有自动容灾恢复（failover）的能力。</p>
@@ -672,7 +722,8 @@ end</pre>
 <li>新主节点竞选优先级设置
 <ul>
 <li>redis.conf 中的 replica-priority 选项来设置竞选新主节点的优先级，它的默认值是 100，它的最大值也是 100，这个值越小它的权重就越高，例如从节点 A 的 replica-priority 值为 100，从节点 B 的值为 50，从节点 C 的值为 5，那么在竞选时从节点 C 会作为新的主节点。</li>
-</ul></li>
+</ul>
+</li>
 <li>新主节点竞选规则
 <ul>
 <li>新主节点的竞选会排除不符合条件的从节点，然后再剩余的从节点按照优先级来挑选</li>
@@ -681,18 +732,22 @@ end</pre>
 <li>排除所有已经下线以及长时间没有回复心跳检测的疑似已下线从服务器；</li>
 <li>排除所有长时间没有与主服务器通信，数据状态过时的从服务器；</li>
 <li>排除所有优先级（replica-priority）为 0 的服务器。</li>
-</ul></li>
+</ul>
+</li>
 <li>符合条件的从节点竞选顺序：
 <ul>
 <li>优先级最高的从节点将会作为新主节点；</li>
 <li>优先级相等则判断复制偏移量，偏移量最大的从节点获胜；</li>
 <li>如果以上两个条件都相同，选择 Redis 运行时随机生成 ID 最小那个为新的主服务器。</li>
-</ul></li>
+</ul>
+</li>
 <li>旧主节点恢复上线
 <ul>
 <li>如果之前的旧主节点恢复上线，会作为从节点运行在主从服务器模式中</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p><strong>哨兵工作原理</strong></p>
 <p>首先每个 Sentinel 会以 <strong>每秒钟 1 次的频率</strong>，向已知的 <strong>主服务器、从服务器和以及其他 Sentinel 实例</strong>，发送一个 PING 命令。</p>
@@ -751,16 +806,26 @@ end</pre>
 <p>一个节点发现某个节点疑似下线，它会将这条信息 <strong>向整个集群广播</strong>，其它节点就会收到这个消息，并且通过 PING 的方式监测某节点是否真的下线了。如果一个节点收到某个节点疑似下线的数量超过集群数量的一半以上，就可以标记该节点为确定下线状态，然后向整个集群广播，强迫其它节点也接收该节点已经下线的事实，并立即对该失联节点进行主从切换。</p>
 <p><strong>故障转移</strong></p>
 <p>当一个节点被集群标识为确认下线之后就可以执行故障转移了，故障转移的执行流程如下：</p>
-<ol type="1">
-<li><p>从下线的主节点的所有从节点中，选择一个从节点；</p></li>
-<li><p>从节点会执行 SLAVEOF NO ONE 命令，关闭这个从节点的复制功能，并从从节点转变回主节点，原来同步所得的数据集不会被丢弃；</p></li>
-<li><p>新的主节点会撤销所有对已下线主节点的槽指派，并将这些槽全部指派给自己；</p></li>
-<li><p>新的主节点向集群广播一条 PONG 消息，这条 PONG 消息是让集群中的其他节点知道此节点已经由从节点变成了主节点，并且这个主节点已经接管了原本由已下线节点负责处理的槽位信息；</p></li>
-<li><p>新的主节点开始处理相关的命令请求，此故障转移过程完成。</p></li>
+<ol>
+<li>
+<p>从下线的主节点的所有从节点中，选择一个从节点；</p>
+</li>
+<li>
+<p>从节点会执行 SLAVEOF NO ONE 命令，关闭这个从节点的复制功能，并从从节点转变回主节点，原来同步所得的数据集不会被丢弃；</p>
+</li>
+<li>
+<p>新的主节点会撤销所有对已下线主节点的槽指派，并将这些槽全部指派给自己；</p>
+</li>
+<li>
+<p>新的主节点向集群广播一条 PONG 消息，这条 PONG 消息是让集群中的其他节点知道此节点已经由从节点变成了主节点，并且这个主节点已经接管了原本由已下线节点负责处理的槽位信息；</p>
+</li>
+<li>
+<p>新的主节点开始处理相关的命令请求，此故障转移过程完成。</p>
+</li>
 </ol>
 <p><strong>新主节点选举原则</strong></p>
 <p>新主节点选举的方法是这样的：</p>
-<ol type="1">
+<ol>
 <li>集群的纪元（epoch）是一个自增计数器，初始值为 0；</li>
 <li>而每个主节点都有一次投票的机会，主节点会把这一票投给第一个要求投票的从节点；</li>
 <li>当从节点发现自己正在复制的主节点确认下线之后，就会向集群广播一条消息，要求所有有投票权的主节点给此从节点投票；</li>
@@ -772,7 +837,7 @@ end</pre>
 <p><strong>使用</strong></p>
 <p>在 Redis 中不能直接使用布隆过滤器，但可以通过 Redis 4.0 版本之后提供的 modules（扩展模块）的方式引入。</p>
 <p>布隆过滤器的命令主要包含以下几个：</p>
-<ol type="1">
+<ol>
 <li>bf.add：添加元素</li>
 <li>bf.exists：判断某个元素是否存在</li>
 <li>bf.madd：添加多个元素</li>
@@ -808,7 +873,7 @@ end</pre>
 <li>判断一个元素在亿级数据中是否存在</li>
 </ul>
 <p>布隆过滤器在数据库领域的使用也比较广泛，例如：HBase、Cassandra、LevelDB、RocksDB 内部都有使用布隆过滤器。</p>
-<h2 id="redisearch">RediSearch</h2>
+<h2 id="RediSearch">RediSearch</h2>
 <p>RediSearch 是一个高性能的全文搜索引擎，它可以作为一个 Redis Module（扩展模块）运行在 Redis 服务器上。</p>
 <p>RediSearch 主要特性如下：</p>
 <ul>
@@ -834,7 +899,7 @@ end</pre>
 <h2 id="性能测试">性能测试</h2>
 <p><strong>为什么需要性能测试</strong></p>
 <p>性能测试的使用场景有很多，例如以下几个：</p>
-<ol type="1">
+<ol>
 <li>技术选型，比如测试 Memcached 和 Redis；</li>
 <li>对比单机 Redis 和集群 Redis 的吞吐量；</li>
 <li>评估不同类型的存储性能，例如集合和有序集合；</li>
@@ -845,7 +910,7 @@ end</pre>
 <p>等等，诸如此类的情况，都需要进行性能测试。</p>
 <p><strong>性能测试的几种方式</strong></p>
 <p>目前比较主流的性能测试分为两种：</p>
-<ol type="1">
+<ol>
 <li>编写代码模拟并发进行性能测试；</li>
 <li>使用 redis-benchmark 进行测试。</li>
 </ol>
@@ -855,10 +920,18 @@ end</pre>
 <p><strong>如何进行慢查询</strong></p>
 <p>Redis 慢查询重要的配置项：</p>
 <ul>
-<li><p>slowlog-log-slower-than：用于设置慢查询的评定时间，也就是说超过此配置项的命令，将会被当成慢操作记录在慢查询日志中，它执行单位是微秒（1 秒等于 1000000 微秒）；</p></li>
-<li><p>slowlog-max-len：用来配置慢查询日志的最大记录数。</p></li>
-<li><p>slowlog-log-slower-than 和 slowlog-max-len 可以通过 <code>config set xxx</code> 的模式来修改，例如 <code>config set slowlog-max-len 200</code> 设置慢查询最大记录数为 200 条。</p></li>
-<li><p>使用 <code>slowlog show</code> 来查询慢日志，当慢查询日志超过设定的最大存储条数之后，会把最早的执行命令依次舍弃。</p></li>
+<li>
+<p>slowlog-log-slower-than：用于设置慢查询的评定时间，也就是说超过此配置项的命令，将会被当成慢操作记录在慢查询日志中，它执行单位是微秒（1 秒等于 1000000 微秒）；</p>
+</li>
+<li>
+<p>slowlog-max-len：用来配置慢查询日志的最大记录数。</p>
+</li>
+<li>
+<p>slowlog-log-slower-than 和 slowlog-max-len 可以通过 <code>config set xxx</code> 的模式来修改，例如 <code>config set slowlog-max-len 200</code> 设置慢查询最大记录数为 200 条。</p>
+</li>
+<li>
+<p>使用 <code>slowlog show</code> 来查询慢日志，当慢查询日志超过设定的最大存储条数之后，会把最早的执行命令依次舍弃。</p>
+</li>
 </ul>
 <p><strong>慢查询其他相关命令</strong></p>
 <ul>
@@ -871,56 +944,56 @@ end</pre>
 <p>键值对的长度是和性能成反比的，做一组写入数据的性能测试，执行结果如下：</p>
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">数据量</th>
-<th style="text-align: left;">key 大小</th>
-<th style="text-align: left;">value 大小</th>
-<th style="text-align: left;">string: set 平均耗时</th>
-<th style="text-align: left;">hash: hset 平均耗时</th>
+<tr>
+<th style="text-align:left">数据量</th>
+<th style="text-align:left">key 大小</th>
+<th style="text-align:left">value 大小</th>
+<th style="text-align:left">string: set 平均耗时</th>
+<th style="text-align:left">hash: hset 平均耗时</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">100w</td>
-<td style="text-align: left;">20byte</td>
-<td style="text-align: left;">512byte</td>
-<td style="text-align: left;">1.13 微秒</td>
-<td style="text-align: left;">10.28 微秒</td>
+<tr>
+<td style="text-align:left">100w</td>
+<td style="text-align:left">20byte</td>
+<td style="text-align:left">512byte</td>
+<td style="text-align:left">1.13 微秒</td>
+<td style="text-align:left">10.28 微秒</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">100w</td>
-<td style="text-align: left;">20byte</td>
-<td style="text-align: left;">200byte</td>
-<td style="text-align: left;">0.74 微秒</td>
-<td style="text-align: left;">8.08 微秒</td>
+<tr>
+<td style="text-align:left">100w</td>
+<td style="text-align:left">20byte</td>
+<td style="text-align:left">200byte</td>
+<td style="text-align:left">0.74 微秒</td>
+<td style="text-align:left">8.08 微秒</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">100w</td>
-<td style="text-align: left;">20byte</td>
-<td style="text-align: left;">100byte</td>
-<td style="text-align: left;">0.65 微秒</td>
-<td style="text-align: left;">7.92 微秒</td>
+<tr>
+<td style="text-align:left">100w</td>
+<td style="text-align:left">20byte</td>
+<td style="text-align:left">100byte</td>
+<td style="text-align:left">0.65 微秒</td>
+<td style="text-align:left">7.92 微秒</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">100w</td>
-<td style="text-align: left;">20byte</td>
-<td style="text-align: left;">50byte</td>
-<td style="text-align: left;">0.59 微秒</td>
-<td style="text-align: left;">6.74 微秒</td>
+<tr>
+<td style="text-align:left">100w</td>
+<td style="text-align:left">20byte</td>
+<td style="text-align:left">50byte</td>
+<td style="text-align:left">0.59 微秒</td>
+<td style="text-align:left">6.74 微秒</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">100w</td>
-<td style="text-align: left;">20byte</td>
-<td style="text-align: left;">20byte</td>
-<td style="text-align: left;">0.55 微秒</td>
-<td style="text-align: left;">6.60 微秒</td>
+<tr>
+<td style="text-align:left">100w</td>
+<td style="text-align:left">20byte</td>
+<td style="text-align:left">20byte</td>
+<td style="text-align:left">0.55 微秒</td>
+<td style="text-align:left">6.60 微秒</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">100w</td>
-<td style="text-align: left;">20byte</td>
-<td style="text-align: left;">5byte</td>
-<td style="text-align: left;">0.53 微秒</td>
-<td style="text-align: left;">6.53 微秒</td>
+<tr>
+<td style="text-align:left">100w</td>
+<td style="text-align:left">20byte</td>
+<td style="text-align:left">5byte</td>
+<td style="text-align:left">0.53 微秒</td>
+<td style="text-align:left">6.53 微秒</td>
 </tr>
 </tbody>
 </table>
@@ -941,9 +1014,16 @@ end</pre>
 <p><strong>禁用耗时长的查询命令</strong></p>
 <p>其中 O(1) 表示可以安全使用的，而 O(N) 就应该当心了，N 表示不确定，数据越大查询的速度可能会越慢。因为 Redis 只用一个线程来做数据查询，如果这些指令耗时很长，就会阻塞 Redis，造成大量延时。</p>
 <blockquote>
-<p>https://redis.io/docs/latest/commands/</p>
+<p><a target="_blank" rel="noopener" href="https://redis.io/docs/latest/commands/">https://redis.io/docs/latest/commands/</a></p>
 </blockquote>
-<p>要避免 O(N) 命令对 Redis 造成的影响，可以从以下几个方面入手改造： - 决定禁止使用 keys 命令； - 避免一次查询所有的成员，要使用 scan 命令进行分批的，游标式的遍历； - 通过机制严格控制 Hash、Set、Sorted Set 等结构的数据大小； - 将排序、并集、交集等操作放在客户端执行，以减少 Redis 服务器运行压力； - 删除（del）一个大数据的时候，可能会需要很长时间，所以建议用异步删除的方式 unlink，它会启动一个新的线程来删除目标数据，而不阻塞 Redis 的主线程。</p>
+<p>要避免 O(N) 命令对 Redis 造成的影响，可以从以下几个方面入手改造：</p>
+<ul>
+<li>决定禁止使用 keys 命令；</li>
+<li>避免一次查询所有的成员，要使用 scan 命令进行分批的，游标式的遍历；</li>
+<li>通过机制严格控制 Hash、Set、Sorted Set 等结构的数据大小；</li>
+<li>将排序、并集、交集等操作放在客户端执行，以减少 Redis 服务器运行压力；</li>
+<li>删除（del）一个大数据的时候，可能会需要很长时间，所以建议用异步删除的方式 unlink，它会启动一个新的线程来删除目标数据，而不阻塞 Redis 的主线程。</li>
+</ul>
 <p><strong>使用 slowlog 优化耗时命令</strong></p>
 <p>可以根据实际的业务情况进行相应的配置，其中慢日志是按照插入的顺序倒序存入慢查询日志中，使用 <code>slowlog get n</code> 来获取相关的慢查询日志，再找到这些慢查询对应的业务进行相关的优化。</p>
 <p><strong>使用 Pipeline 批量操作数据</strong></p>
@@ -1003,13 +1083,17 @@ E -->|无数据| D</pre>
 <p>缓存穿透是指查询数据库和缓存都无数据，因为 <strong>数据库查询无数据</strong>，出于容错考虑，不会将结果保存到缓存中，因此每次请求都会去查询数据库，这种情况就叫做缓存穿透。</p>
 <p>常用解决方案：</p>
 <ul>
-<li><p>使用过滤器：使用过滤器来减少对数据库的请求，例如每次查询之前，先使用布隆过滤器过滤掉一定不存在的无效请求，从而避免了无效请求给数据库带来的查询压力。</p></li>
-<li><p><strong>缓存空结果</strong>：把每次从数据库查询的数据都保存到缓存中，为了提高前台用户的使用体验 (解决长时间内查询不到任何信息的情况)，我们可以将空结果的缓存时间设置得短一些，例如 3~5 分钟。</p></li>
+<li>
+<p>使用过滤器：使用过滤器来减少对数据库的请求，例如每次查询之前，先使用布隆过滤器过滤掉一定不存在的无效请求，从而避免了无效请求给数据库带来的查询压力。</p>
+</li>
+<li>
+<p><strong>缓存空结果</strong>：把每次从数据库查询的数据都保存到缓存中，为了提高前台用户的使用体验 (解决长时间内查询不到任何信息的情况)，我们可以将空结果的缓存时间设置得短一些，例如 3~5 分钟。</p>
+</li>
 </ul>
 <p><strong>缓存预热</strong></p>
 <p>缓存预热并不是一个问题，而是使用缓存时的一个优化方案，它可以提高前台用户的使用体验。缓存预热指的是在系统启动的时候，先把查询结果预存到缓存中，以便用户后面查询时可以直接从缓存中读取，以节约用户的等待时间。</p>
 <p>缓存预热的实现思路有以下三种：</p>
-<ol type="1">
+<ol>
 <li>把需要缓存的方法写在系统初始化的方法中，这样系统在启动的时候就会自动的加载数据并缓存数据；</li>
 <li>把需要缓存的方法挂载到某个页面或后端接口上，手动触发缓存预热；</li>
 <li>设置定时任务，定时自动进行缓存预热。</li>
@@ -1052,7 +1136,8 @@ E -->|无数据| D</pre>
 
 
       <!-- 
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <span class="citation" data-cites="anonymity">[@anonymity]</span>(/) 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer> -->
 
       <div class='float-panel mobile-only blur' style='display:none'>

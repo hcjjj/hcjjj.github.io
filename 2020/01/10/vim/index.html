@@ -137,7 +137,7 @@
 <span id="more"></span>
 <p><a target="_blank" rel="noopener" href="https://www.vim.org/">Vim</a> 是文本/代码编辑器之中最为优秀经典的上古神器之一，也是早年 Vi 编辑器的加强版，强大、高效、免费开源且跨平台。</p>
 <p><a target="_blank" rel="noopener" href="https://neovim.io">Neovim</a> 可以说是 Vim 的改进版，而且与 Vim 的编辑模型和 Vimscript 语言完全兼容。</p>
-<h1 id="基础操作">基础操作</h1>
+<h1>基础操作</h1>
 <p>Vim 在终端中启动命令为 <code>vim</code>，Neovim 为 <code>nvim</code>， 共分为三种模式：</p>
 <ul>
 <li>命令模式（Command mode）</li>
@@ -145,7 +145,7 @@
 <li>底线命令模式（Last line mode）</li>
 </ul>
 <h2 id="初次使用">初次使用</h2>
-<p>进入 vim 后初始为命令模式，<code>k</code> <code>j</code> <code>h</code> <code>l</code> 为上下左右移动光标</p>
+<p>进入 vim 后初始为命令模式，<code>k</code> <code> j</code> <code> h</code> <code>l</code> 为上下左右移动光标</p>
 <ul>
 <li>按 <code>i</code> 进入 <strong>写入模式</strong>，<code>ESC</code> 回到 <strong>命令模式</strong></li>
 <li>在命令模式下，按 <code>:</code> 进入 <strong>底线命令模式</strong></li>
@@ -158,12 +158,24 @@
 <p>主要是掌握 <strong>操作逻辑</strong> , 都是以 <strong>先指令后动作</strong> 这个模式</p>
 <p><strong>移动</strong></p>
 <ul>
-<li><p><code>w</code>：跳到下一个单词的开头</p></li>
-<li><p><code>e</code>：跳到下一个单词的结尾</p></li>
-<li><p><code>b</code>：跳到上一个单词的开头，由 blank 字符分隔的单词，使用 <code>W</code> 和 <code>E</code></p></li>
-<li><p><code>%</code>：匹配括号移动（需要把光标先移到括号上）</p></li>
-<li><p><code>*</code>：匹配光标当前所在的单词（下一个）</p></li>
-<li><p><code>#</code>：匹配光标当前所在的单词（上一个）</p></li>
+<li>
+<p><code>w</code>：跳到下一个单词的开头</p>
+</li>
+<li>
+<p><code>e</code>：跳到下一个单词的结尾</p>
+</li>
+<li>
+<p><code>b</code>：跳到上一个单词的开头，由 blank 字符分隔的单词，使用 <code>W</code> 和 <code>E</code></p>
+</li>
+<li>
+<p><code>%</code>：匹配括号移动（需要把光标先移到括号上）</p>
+</li>
+<li>
+<p><code>*</code>：匹配光标当前所在的单词（下一个）</p>
+</li>
+<li>
+<p><code>#</code>：匹配光标当前所在的单词（上一个）</p>
+</li>
 </ul>
 <p><strong>插入</strong></p>
 <ul>
@@ -176,44 +188,70 @@
 </ul>
 <p><strong>删除</strong></p>
 <ul>
-<li><p><code>s</code>：删除当前字符并进入插入模式</p></li>
-<li><p><code>u</code>：撤回上一步操作</p></li>
-<li><p><code>Ctrl + R</code> ：重做</p></li>
-<li><p><code>U</code>： 撤销对整行的操作</p></li>
-<li><p><code>x</code>：删除光标下的字符</p></li>
-<li><p><code>dl</code>：删除光标右边的字符 ( 同 <code>x</code> )</p></li>
-<li><p><code>dh</code>：删除光标左边的字符</p></li>
-<li><p><code>d3l</code> ：删除光标右边的三个字符</p></li>
-<li><p><code>dd</code>：删除该行(等于剪贴，<code>p</code> 粘贴）</p></li>
-<li><p><code>dj</code>：删除该行和下一行</p></li>
-<li><p><code>dG</code> ： 删除当前行至文档尾部</p></li>
-<li><p><code>dt"</code> ：删除 " 前的所有内容</p></li>
-<li><p><code>cc</code> ：与 <code>d</code> 操作同理，删除并进入写入模式</p></li>
+<li>
+<p><code>s</code>：删除当前字符并进入插入模式</p>
+</li>
+<li>
+<p><code>u</code>：撤回上一步操作</p>
+</li>
+<li>
+<p><code>Ctrl + R</code> ：重做</p>
+</li>
+<li>
+<p><code>U</code>： 撤销对整行的操作</p>
+</li>
+<li>
+<p><code>x</code>：删除光标下的字符</p>
+</li>
+<li>
+<p><code>dl</code>：删除光标右边的字符 ( 同 <code>x</code> )</p>
+</li>
+<li>
+<p><code>dh</code>：删除光标左边的字符</p>
+</li>
+<li>
+<p><code>d3l</code> ：删除光标右边的三个字符</p>
+</li>
+<li>
+<p><code>dd</code>：删除该行(等于剪贴，<code>p</code> 粘贴）</p>
+</li>
+<li>
+<p><code>dj</code>：删除该行和下一行</p>
+</li>
+<li>
+<p><code>dG</code> ： 删除当前行至文档尾部</p>
+</li>
+<li>
+<p><code>dt&quot;</code> ：删除 &quot; 前的所有内容</p>
+</li>
+<li>
+<p><code>cc</code> ：与 <code>d</code> 操作同理，删除并进入写入模式</p>
+</li>
 </ul>
 <p><strong>复制</strong></p>
 <ul>
 <li><code>y、d、x</code> 都会把文本复制到剪切板（默认不与系统剪切板共享）</li>
-<li><code>"+y</code> 复制文本共享至系统剪切板</li>
+<li><code>&quot;+y</code> 复制文本共享至系统剪切板</li>
 <li><code>y</code>：与 <code>d</code> 操作同理</li>
 </ul>
 <p><strong>更改</strong></p>
 <ul>
-<li><code>r</code>：替换光标所在位置的字符</li>
+<li><code>r </code>：替换光标所在位置的字符</li>
 <li><code>R</code>：连续替换字符</li>
 <li><code>c3l</code>：替换右边三个字符</li>
 <li><code>cw</code>：更改下一个词</li>
 <li><code>cb</code>：更改上一个词</li>
 <li><code>cc</code>：替换整行</li>
-<li><code>ci"</code>：修改双引号内的字符</li>
+<li><code>ci&quot;</code>：修改双引号内的字符</li>
 </ul>
 <blockquote>
-<p>change in "</p>
+<p>change in &quot;</p>
 </blockquote>
 <ul>
-<li><code>f"</code> ：光标跳到当前行下一个 "</li>
+<li><code>f&quot;</code> ：光标跳到当前行下一个 &quot;</li>
 <li><code>3fa</code>：光标跳到当前行第三个出现的 a</li>
 <li><code>F</code> ：反向查找</li>
-<li><code>t"</code>：光标跳到当前行下一个 " 的前一个字符</li>
+<li><code>t&quot;</code>：光标跳到当前行下一个 &quot; 的前一个字符</li>
 <li><code>T</code>：反向</li>
 <li><code>cfx</code>：修改 x 字符前的内容(包括 x)</li>
 </ul>
@@ -227,7 +265,7 @@
 <p><strong>分屏</strong></p>
 <ul>
 <li><code>:split</code> 上下分屏</li>
-<li><code>:vsplit</code> 左右分屏</li>
+<li><code>:vsplit </code>  左右分屏</li>
 <li><code>:set vsplitright</code> 光标右边</li>
 <li><code>:e [文件路径]</code> 打开新文件</li>
 <li><code>Ctrl+w 后按 hjkl</code> 光标在分屏中移动</li>
@@ -246,21 +284,21 @@
 <li><code>v</code> ：字符选中</li>
 <li><code>V</code> ：行选中</li>
 <li><code>Ctrl+v</code> ：块选中</li>
-<li><code>vi"</code>：选中 " 中的字符</li>
+<li><code>vi&quot;</code>：选中 &quot; 中的字符</li>
 </ul>
 <p><strong>替换</strong></p>
 <ul>
 <li><code>:s/from/to/</code> 将当前行中的第一个 from 替换成 to</li>
-<li><code>:s/from/to/g</code> 将当前行中的所有 from 都替换成 to</li>
+<li><code>:s/from/to/g </code> 将当前行中的所有 from 都替换成 to</li>
 <li><code>:%s/from/to/g</code> 对所有行的内容进行替换</li>
 </ul>
 <p><strong>配色</strong></p>
-<p><code>:color</code> (color 后一个空格 按 Tab 选择, 通过插件安装更好看的配色)</p>
-<hr />
+<p><code>:color </code> (color 后一个空格 按 Tab 选择, 通过插件安装更好看的配色)</p>
+<hr>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180955207.png" fancybox="true"/></div></div>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180955560.png" fancybox="true"/></div></div>
-<hr />
-<h1 id="配置">配置</h1>
+<hr>
+<h1>配置</h1>
 <p>通过修改 vim 的配置文件和安装插件，能让它更加强大高效</p>
 <ul>
 <li>vim 的配置文件目录在：<code>~/.vimrc</code></li>
@@ -272,10 +310,10 @@
 </ul>
 <p>创建软链接，方便修改</p>
 <ul>
-<li><code>ln -s ~/.config/nvim/init.vim .nvim</code></li>
+<li><code> ln -s ~/.config/nvim/init.vim .nvim</code></li>
 </ul>
 <blockquote>
-<p>在配置文件中 <code>"</code> 为注释</p>
+<p>在配置文件中  <code>&quot;</code> 为注释</p>
 </blockquote>
 <p>::: collapse 把 macOS 终端默认的文本编辑器由 vim 替换为 neovim</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">❯ <span class="built_in">where</span> vim</span><br><span class="line">/usr/bin/vim</span><br><span class="line">❯ <span class="built_in">where</span> nvim</span><br><span class="line">/usr/local/bin/nvim</span><br><span class="line">❯ sudo <span class="built_in">mv</span> /usr/bin/vim /usr/bin/vim-original</span><br><span class="line">❯ sudo <span class="built_in">ln</span> /usr/local/bin/nvim /usr/bin/vim</span><br></pre></td></tr></table></figure>
@@ -288,7 +326,7 @@
 <h2 id="安装插件">安装插件</h2>
 <p><strong>vim-plug</strong></p>
 <p>Vim 的一款插件管理器</p>
-<p>https://github.com/junegunn/vim-plug</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/junegunn/vim-plug">https://github.com/junegunn/vim-plug</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181002722.gif" fancybox="true"/></div></div>
 <p><strong>安装</strong></p>
 <p>Vim</p>
@@ -306,94 +344,97 @@
 </ul>
 <p>如果想暂时禁用某个插件，但不删除它：</p>
 <p>在 inti.vim 中注释掉该插件 或者 <code>Plug '插件名', &#123; 'on': [] &#125;</code></p>
-<hr />
+<hr>
 <p><strong>vim-airline</strong></p>
 <p>状态栏插件</p>
-<p>https://github.com/vim-airline/vim-airline</p>
-<p>https://github.com/vim-airline/vim-airline-themes</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vim-airline/vim-airline">https://github.com/vim-airline/vim-airline</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vim-airline/vim-airline-themes">https://github.com/vim-airline/vim-airline-themes</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180956087.gif" fancybox="true"/></div></div>
 <p>在配置文件中添加：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line">Plug &#x27;vim-airline/vim-airline&#x27; </span><br><span class="line">Plug &#x27;vim-airline/vim-airline/vim-airline-themes&#x27;</span><br><span class="line">call plug#end()</span><br></pre></td></tr></table></figure>
-<p>保存后输入命令 <code>PlugInstall</code>（按 Tab 键可以补全），显示 <strong>Finishing ... Done!</strong> 就安装好了</p>
+<p>保存后输入命令 <code>PlugInstall</code>（按 Tab 键可以补全），显示 <strong>Finishing … Done!</strong>  就安装好了</p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180957821.jpg" fancybox="true"/></div></div>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181005285.jpg" fancybox="true"/></div></div>
 <p><strong>vim-snazzy</strong></p>
 <p>配色主题</p>
-<p>https://github.com/connorholyday/vim-snazzy</p>
-<p>https://github.com/w0ng/vim-hybrid</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/connorholyday/vim-snazzy">https://github.com/connorholyday/vim-snazzy</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/w0ng/vim-hybrid">https://github.com/w0ng/vim-hybrid</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.ax1x.com/2019/09/15/ncKGY6.png" fancybox="true"/></div></div>
 <p><strong>vim-devicons</strong></p>
 <p>显示图标</p>
-<p>https://github.com/ryanoasis/vim-devicons</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ryanoasis/vim-devicons">https://github.com/ryanoasis/vim-devicons</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181000452.jpg" fancybox="true"/></div></div>
 <p><strong>nerdtree</strong></p>
 <p>文件树</p>
-<p>https://github.com/scrooloose/nerdtree</p>
-<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.ax1x.com/2019/09/14/n6Vc8J.png" fancybox="true"/></div></div>
+<p><a target="_blank" rel="noopener" href="https://github.com/scrooloose/nerdtree">https://github.com/scrooloose/nerdtree</a></p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.ax1x.com/2019/09/14/n6Vc8J.png" fancybox="true"/></div></div>  
 <p><strong>vim-nerdtree-syntax-highlight</strong></p>
 <p>nerdtree 文件名高亮</p>
-<p>https://github.com/tiagofumo/vim-nerdtree-syntax-highlight</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tiagofumo/vim-nerdtree-syntax-highlight">https://github.com/tiagofumo/vim-nerdtree-syntax-highlight</a></p>
 <p><strong>vim-floaterm</strong></p>
 <p>悬浮窗口使用终端</p>
-<p>https://github.com/voldikss/vim-floaterm</p>
-<p>https://zhuanlan.zhihu.com/p/107749687 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180959426.gif" fancybox="true"/></div></div></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/voldikss/vim-floaterm">https://github.com/voldikss/vim-floaterm</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/107749687">https://zhuanlan.zhihu.com/p/107749687</a> <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180959426.gif" fancybox="true"/></div></div></p>
 <p><strong>coc.nvim</strong></p>
 <p>一款针对 neovim 所开发的代码补全插件</p>
-<p>https://github.com/neoclide/coc.nvim</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/neoclide/coc.nvim">https://github.com/neoclide/coc.nvim</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181004842.gif" fancybox="true"/></div></div>
 <p>::: collapse 示例安装 java 代码补全</p>
-<p>安装插件：<code>Plug 'neoclide/coc.nvim', &#123;'branch': 'release'&#125;</code> 执行：<code>CocInstall coc-java</code><br />
-<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180958185.jpg" fancybox="true"/></div></div></p>
-<p>安装成功： <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181004193.jpg" fancybox="true"/></div></div></p>
-<p>打开 java 文件会自动下载 jdt.ls： <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181003207.jpg" fancybox="true"/></div></div></p>
-<p>默认下载地址是 eclipse.org ：</p>
-<p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181006830.jpg" fancybox="true"/></div></div></p>
+<p>安装插件：<code>Plug 'neoclide/coc.nvim', &#123;'branch': 'release'&#125;</code><br>
+执行：<code>CocInstall coc-java</code></p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180958185.jpg" fancybox="true"/></div></div>
+<p>安装成功：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181004193.jpg" fancybox="true"/></div></div>
+<p>打开 java 文件会自动下载 <a target="_blank" rel="noopener" href="http://jdt.ls">jdt.ls</a>：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181003207.jpg" fancybox="true"/></div></div>
+<p>默认下载地址是 <a target="_blank" rel="noopener" href="http://eclipse.org">eclipse.org</a> ：</p>
+ <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181006830.jpg" fancybox="true"/></div></div>
 <p>下载太慢的话可以从 <a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/eclipse/jdtls/snapshots/">中科大镜像站</a> 下载，解压文件至 <code>~/.config/coc/extensions/coc-java-data/server</code></p>
 <p>:::</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39302327">Coc.nvim 系列（一）： 为了更好的补全体验</a></p>
 <p><strong>tagbar</strong></p>
 <p>生成标签</p>
-<p>https://github.com/majutsushi/tagbar</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/majutsushi/tagbar">https://github.com/majutsushi/tagbar</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181003073.jpg" fancybox="true"/></div></div>
 <p>如果在加载该插件时，报错: Tagbar: Exuberant ctags not found!</p>
 <p>安装 ctags 即可解决问题</p>
 <p>Manjaro Linux：<code>sudo pacman -S ctags</code></p>
 <p>macOS：<code>brew install ctags</code></p>
 <p><strong>Markdown Preview for Neovim</strong></p>
-<p>https://github.com/iamcco/markdown-preview.nvim</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/iamcco/markdown-preview.nvim">https://github.com/iamcco/markdown-preview.nvim</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/ia_100000000506.gif" fancybox="true"/></div></div>
 <p><strong>goyo</strong></p>
 <p>优雅的文本编辑体验</p>
-<p>https://github.com/junegunn/goyo.vim</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/junegunn/goyo.vim">https://github.com/junegunn/goyo.vim</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180957590.jpg" fancybox="true"/></div></div>
 <p><strong>vim-startify</strong></p>
 <p>快捷启动页</p>
-<p>https://github.com/mhinz/vim-startify</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mhinz/vim-startify">https://github.com/mhinz/vim-startify</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.ax1x.com/2019/09/14/n6wXyn.png" fancybox="true"/></div></div>
 <p><strong>indentLine</strong></p>
-<p>缩进 "刻度尺"</p>
-<p>https://github.com/Yggdroot/indentLine</p>
+<p>缩进 “刻度尺”</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Yggdroot/indentLine">https://github.com/Yggdroot/indentLine</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181000677.jpg" fancybox="true"/></div></div>
 <p><strong>nerdcommenter</strong></p>
 <p>代码注释</p>
-<p>https://github.com/scrooloose/nerdcommenter</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/scrooloose/nerdcommenter">https://github.com/scrooloose/nerdcommenter</a></p>
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181001737.gif" fancybox="true"/></div></div>
 <p><strong>undotree</strong></p>
 <p>编辑历史记录</p>
-<p>https://github.com/mbbill/undotree</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mbbill/undotree">https://github.com/mbbill/undotree</a></p>
 <p><strong>auto-pairs</strong></p>
 <p>自动补全一对括号</p>
-<p>https://github.com/jiangmiao/auto-pairs</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jiangmiao/auto-pairs">https://github.com/jiangmiao/auto-pairs</a></p>
 <p><strong>YouCompleteMe</strong></p>
 <p>强大的代码补全</p>
-<p>https://github.com/ycm-core/YouCompleteMe</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ycm-core/YouCompleteMe">https://github.com/ycm-core/YouCompleteMe</a></p>
 <p>安装：</p>
 <p><code>cd ~/.vim/plugged/YouCompleteMe</code></p>
 <p><code>sudo python3 install.py</code></p>
 <h2 id="参考">参考</h2>
 <ul>
-<li>https://www.bilibili.com/video/av55498503</li>
-<li>https://www.imooc.com/learn/1129</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av55498503">https://www.bilibili.com/video/av55498503</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.imooc.com/learn/1129">https://www.imooc.com/learn/1129</a></li>
 </ul>
 
 
@@ -427,7 +468,8 @@
 
 
       <!-- 
-<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <span class="citation" data-cites="anonymity">[@anonymity]</span>(/) 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。 本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer> -->
 
       <div class='float-panel mobile-only blur' style='display:none'>
