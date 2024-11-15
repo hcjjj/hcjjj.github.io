@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>《程序员的 README》 - H-sediment</title>
+
+  
+    <meta name="description" content="[美] 克里斯·里科米尼（Chris Riccomini）&#x2F; [美] 德米特里·里亚博伊（Dmitriy Ryaboy） 2023-7-10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《程序员的 README》">
+<meta property="og:url" content="http://example.com/2023/11/18/readme/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="[美] 克里斯·里科米尼（Chris Riccomini）&#x2F; [美] 德米特里·里亚博伊（Dmitriy Ryaboy） 2023-7-10">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231117172048.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/tx3725.jpg">
+<meta property="article:published_time" content="2023-11-18T01:10:55.000Z">
+<meta property="article:modified_time" content="2024-10-28T09:15:52.216Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="programmer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231117172048.png">
+  
+  
+  
+  <meta name="keywords" content="programmer">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">《程序员的 README》</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-%E5%89%8D%E9%9D%A2%E7%9A%84%E6%97%85%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">第1章 前面的旅程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0-%E6%AD%A5%E5%85%A5%E8%87%AA%E8%A7%89%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">第2章 步入自觉阶段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E7%8E%A9%E8%BD%AC%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">第3章 玩转代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC4%E7%AB%A0-%E7%BC%96%E5%86%99%E5%8F%AF%E7%BB%B4%E6%8A%A4%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text">第4章 编写可维护的代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC5%E7%AB%A0-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text">第5章 依赖管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC6%E7%AB%A0-%E6%B5%8B%E8%AF%95"><span class="toc-number">6.</span> <span class="toc-text">第6章 测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC7%E7%AB%A0-%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1"><span class="toc-number">7.</span> <span class="toc-text">第7章 代码评审</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC8%E7%AB%A0-%E8%BD%AF%E4%BB%B6%E4%BA%A4%E4%BB%98"><span class="toc-number">8.</span> <span class="toc-text">第8章 软件交付</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC9%E7%AB%A0-On-Call"><span class="toc-number">9.</span> <span class="toc-text">第9章 On-Call</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC10%E7%AB%A0-%E6%8A%80%E6%9C%AF%E8%AE%BE%E8%AE%A1%E6%B5%81%E7%A8%8B"><span class="toc-number">10.</span> <span class="toc-text">第10章 技术设计流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC11%E7%AB%A0-%E6%9E%84%E5%BB%BA%E5%8F%AF%E6%BC%94%E8%BF%9B%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="toc-number">11.</span> <span class="toc-text">第11章 构建可演进的架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC12%E7%AB%A0-%E6%95%8F%E6%8D%B7%E8%AE%A1%E5%88%92"><span class="toc-number">12.</span> <span class="toc-text">第12章 敏捷计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC13%E7%AB%A0-%E4%B8%8E%E7%AE%A1%E7%90%86%E8%80%85%E5%90%88%E4%BD%9C"><span class="toc-number">13.</span> <span class="toc-text">第13章 与管理者合作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC14%E7%AB%A0-%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF%E8%A7%84%E5%88%92"><span class="toc-number">14.</span> <span class="toc-text">第14章 职业生涯规划</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Reading/">Reading</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-11-18T01:10:55.000Z">2023-11-18</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>《程序员的 README》</span></h1>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231117172048.png" style="zoom:50%" />
+
+<blockquote>
+<p> [美] 克里斯·里科米尼（Chris Riccomini）&#x2F; [美] 德米特里·里亚博伊（Dmitriy Ryaboy）</p>
+<p>2023-7-10</p>
+</blockquote>
+<span id="more"></span>
+
+<p>译者序：“翻译完本书的最后一章时，正好是我踏入软件行业的12年整，此时的我却觉得自己的职业生涯好像才刚刚开始。”</p>
+<p><del>有些地方的翻译好像有点怪怪的…</del></p>
+<h1 id="程序员的-README"><a href="#程序员的-README" class="headerlink" title="程序员的 README"></a>程序员的 <code>README</code></h1><h2 id="第1章-前面的旅程"><a href="#第1章-前面的旅程" class="headerlink" title="第1章 前面的旅程"></a>第1章 前面的旅程</h2><ul>
+<li><p><strong>目的地 ☸️</strong></p>
+<ul>
+<li>技术知识</li>
+<li>执行力</li>
+<li>沟通能力</li>
+<li>领导力</li>
+</ul>
+</li>
+<li><p><strong>地图 🗺</strong></p>
+<ul>
+<li>新手营</li>
+<li>试炼之河</li>
+<li>贡献者之角</li>
+<li>运维之海</li>
+<li>胜任之湾</li>
+</ul>
+</li>
+</ul>
+<h2 id="第2章-步入自觉阶段"><a href="#第2章-步入自觉阶段" class="headerlink" title="第2章 步入自觉阶段"></a>第2章 步入自觉阶段</h2><ul>
+<li><p><strong>学习如何学习</strong></p>
+<ul>
+<li>虽然说持续进步非常重要，但是把所有清醒的时间都花在工作上是不健康的</li>
+<li>在工作的前几个月里，你要学习一切如何运作</li>
+<li>错误是不可避免的。如果你失败了，也不要被击垮：写下经验教训，然后继续前行</li>
+<li>调试器是你运行实例代码时最好的朋友</li>
+<li>在复杂的情况下，特别是在多线程的应用程序中，输出调试信息可能会产生误导</li>
+<li>不要试图一下子把所有东西都读完。请从团队文档和设计文档入手</li>
+<li>不要像阅读小说一样从前到后地通读代码：请利用你的IDE来浏览代码</li>
+<li>出版物大多很可靠，只是有些过时。在线资源则正好相反，不那么可靠，但很能跟上潮流</li>
+<li>跟随一名高级工程师是学习新技能的好方法</li>
+<li>从长远来看，获得明确的信息将保护你免受挫折（be careful</li>
+</ul>
+</li>
+<li><p><strong>提出问题</strong></p>
+<ul>
+<li>有效地提出问题将帮助你快速地学习，而不会烦扰其他人</li>
+<li>动手调查</li>
+<li>设置一个时间限制</li>
+<li>写下全过程</li>
+<li>别打扰别人</li>
+<li>多用“非打扰式”交流</li>
+<li>批量处理</li>
+</ul>
+</li>
+<li><p><strong>克服成长的障碍</strong></p>
+<ul>
+<li>冒充者综合征 — “有意识的无能力”</li>
+<li>邓宁-克鲁格效应 — “无意识的无能力”</li>
+</ul>
+</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">多尝试和实验代码</td>
+<td align="center">只是大量炮制劣质代码</td>
+</tr>
+<tr>
+<td align="center">多阅读设计文档和他人的代码</td>
+<td align="center">害怕承担风险和失败</td>
+</tr>
+<tr>
+<td align="center">参加一些聚会、在线社区、兴趣小组和导师计划</td>
+<td align="center">过于频繁地参加研讨会</td>
+</tr>
+<tr>
+<td align="center">多读论文和博客</td>
+<td align="center">害怕提出问题</td>
+</tr>
+<tr>
+<td align="center">多采用“非打扰式”交流</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">旁听面试以及参与软件的熵轮换</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第3章-玩转代码"><a href="#第3章-玩转代码" class="headerlink" title="第3章 玩转代码"></a>第3章 玩转代码</h2><ul>
+<li><p><strong>软件的熵</strong></p>
+<ul>
+<li>这种走向无序的趋势被称为软件的熵（software entropy）</li>
+<li>持续的重构可以减少熵</li>
+</ul>
+</li>
+<li><p><strong>技术债</strong></p>
+<ul>
+<li><p>技术债是为了修复现有的代码不足而欠下的未来工作</p>
+</li>
+<li><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">鲁葬的</th>
+<th align="center">谨慎的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">有意的</td>
+<td align="center">““我们没有时间去设计”</td>
+<td align="center">““让我们先发布再处理后续”</td>
+</tr>
+<tr>
+<td align="center">无意的</td>
+<td align="center">“什么是分层结构?”</td>
+<td align="center">“现在我们知道了当时应该怎么做”</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>技术债总是不可避免的，因为你无法防止无意中的错误</p>
+</li>
+<li><p>技术债甚至可能是成功的标志：项目只有存活了足够长的时间，才会变得无序</p>
+</li>
+<li><p>不要把你的呼吁建立在价值判断上（“这代码又老又难看”），将重点放在技术债的成本和修复它带来的好处上</p>
+</li>
+</ul>
+</li>
+<li><p><strong>变更代码</strong></p>
+<ul>
+<li>善于利用现有代码</li>
+<li>过手的代码要比之前更干净</li>
+<li>对重构要务实</li>
+<li>善用 IDE</li>
+<li>请使用 VCS 的最佳实践</li>
+</ul>
+</li>
+<li><p><strong>避“坑”指南</strong></p>
+<ul>
+<li>保守一些的技术选型</li>
+<li>不要特立独行</li>
+<li>不要只分叉而不向上游提交修改</li>
+<li>克制重构的冲动</li>
+</ul>
+</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">进行渐进式的重构</td>
+<td align="center">过度使用“技术债”这个词</td>
+</tr>
+<tr>
+<td align="center">从新特性的提交中剥离重构的部分</td>
+<td align="center">为了适应测试而将变量或方法变成公共的</td>
+</tr>
+<tr>
+<td align="center">保持以小规模的方式修改伐码</td>
+<td align="center">成为编程语言上的“势利眼”</td>
+</tr>
+<tr>
+<td align="center">将过手的代码整理得比之前更干净</td>
+<td align="center">忽视你公司的标准和工具集</td>
+</tr>
+<tr>
+<td align="center">使用保守的技术选型</td>
+<td align="center">只分叉而不向上游提交修改</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第4章-编写可维护的代码"><a href="#第4章-编写可维护的代码" class="headerlink" title="第4章 编写可维护的代码"></a>第4章 编写可维护的代码</h2><ul>
+<li><p><strong>防御式编程</strong></p>
+<ul>
+<li>避免空值</li>
+<li>保持变量不可变</li>
+<li>使用类型提示和静态类型检查器</li>
+<li>验证输入</li>
+<li>不接受 Word 文档（非纯文本）</li>
+<li>善用异常，异常要有精确含义</li>
+<li>早抛晚捕，不能忽略</li>
+<li>智能重试，何时重试以及重试的频率都需要技巧</li>
+<li>构建幂等系统，幂等的操作是可以被进行多次并且仍然产生相同结果的操作</li>
+<li>及时释放资源</li>
+</ul>
+</li>
+<li><p><strong>关于日志的使用</strong></p>
+<ul>
+<li>给日志分级</li>
+<li>日志的原子性，所谓原子日志，就是指在一行消息中包含所有相关的信息</li>
+<li>关注日志性能</li>
+<li>不要记录敏感数据</li>
+</ul>
+</li>
+<li><p><strong>系统监控</strong></p>
+<ul>
+<li>使用标准的监控组件</li>
+<li>测量一切<ul>
+<li>资源池</li>
+<li>缓存</li>
+<li>数据结构</li>
+<li>CPU 密集型操作</li>
+<li>I&#x2F;O 密集型操作</li>
+<li>数据大小</li>
+<li>异常和错误</li>
+<li>远程请求和响应</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>跟踪器</strong></p>
+</li>
+<li><p><strong>配置相关注意事项</strong></p>
+<ul>
+<li>配置无须新花样</li>
+<li>记录并校验所有的配置</li>
+<li>提供默认值</li>
+<li>给配置分组</li>
+<li>将配置视为代码</li>
+<li>保持配置文件清爽</li>
+<li>不要编辑已经部署的配置</li>
+</ul>
+</li>
+<li><p><strong>工具集</strong></p>
+</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">宁愿编译出错，也不要运行出错</td>
+<td align="center">在程序逻辑中应用异常</td>
+</tr>
+<tr>
+<td align="center">尽可能使事情不可变</td>
+<td align="center">在异常处理中只返回错误码</td>
+</tr>
+<tr>
+<td align="center">校验输入和输出</td>
+<td align="center">捕获你无法处理的异常</td>
+</tr>
+<tr>
+<td align="center">学习开放式 Web 应用程序安全项目 (OWASP) 的十大报告</td>
+<td align="center">写入带折行的日志</td>
+</tr>
+<tr>
+<td align="center">使用 bug 检查工具和类型提示的特性</td>
+<td align="center">在日志中记载秘密或敏感的数据</td>
+</tr>
+<tr>
+<td align="center">在异常之后清理资源（尤其是端口、文件指针和内存)</td>
+<td align="center">单独在某台计算机上手动修改配置</td>
+</tr>
+<tr>
+<td align="center">使用系统指标来监控你的代码</td>
+<td align="center">在配置文件中存储密码或者秘密信息</td>
+</tr>
+<tr>
+<td align="center">让你的程序可以配置</td>
+<td align="center">写定制化的配置格式</td>
+</tr>
+<tr>
+<td align="center">检验和记录所有的配置</td>
+<td align="center">在可以避免的情况下使用动态配置</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第5章-依赖管理"><a href="#第5章-依赖管理" class="headerlink" title="第5章 依赖管理"></a>第5章 依赖管理</h2><ul>
+<li><p><strong>依赖管理基础知识</strong></p>
+<ul>
+<li>相依性是指你的代码所依赖的代码</li>
+<li>语义化版本（主版本号、次版本号和补丁版本号&#x2F;微版本号 - 预发布版本）</li>
+<li>语义化版本同时具有唯一性、可比性、信息性</li>
+<li>传递依赖</li>
+</ul>
+</li>
+<li><p><strong>相依性地狱</strong></p>
+<ul>
+<li>比较常见的相依性地狱的罪魁祸首是<strong>循环依赖</strong>、<strong>钻石依赖</strong>和<strong>版本冲突</strong></li>
+</ul>
+</li>
+<li><p><strong>避免相依性地狱</strong></p>
+<ul>
+<li>隔离依赖项<ul>
+<li>在某些场景下，可以打破 DRY（Don’t Repeat Yourself）原则，将某些导致依赖问题的代码直接拷贝到项目中</li>
+</ul>
+</li>
+<li>按需添加依赖项</li>
+<li>指定依赖项的版本</li>
+<li>依赖范围最小化</li>
+<li>保护自己免受循环依赖的影响</li>
+</ul>
+</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">务必使用语义化版本</td>
+<td align="center">使用Git的哈希值当作版本号</td>
+</tr>
+<tr>
+<td align="center">明确指定依赖版本的范围</td>
+<td align="center">在收益未超过成本时添加依赖项</td>
+</tr>
+<tr>
+<td align="center">务必使用依赖关系报告工具来分析传递依赖</td>
+<td align="center">直接使用传递来的依赖项</td>
+</tr>
+<tr>
+<td align="center">添加新的依赖项时，请务必持怀疑态度</td>
+<td align="center">引入循环依赖</td>
+</tr>
+<tr>
+<td align="center">精确地使用依赖范围</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第6章-测试"><a href="#第6章-测试" class="headerlink" title="第6章 测试"></a>第6章 测试</h2><ul>
+<li><p><strong>测试的多种用途</strong></p>
+<ul>
+<li>检查代码是否正常工作</li>
+<li>保护代码不会被将来那些无意中的修改所影响</li>
+<li>鼓励清爽的代码</li>
+<li>强迫开发者试用他们自己的 API</li>
+<li>记录组件之间如何交互</li>
+</ul>
+</li>
+<li><p><strong>测试类型</strong></p>
+<ul>
+<li>单元测试</li>
+<li>集成测试</li>
+<li>系统测试</li>
+<li>性能测试</li>
+<li>验收测试</li>
+</ul>
+</li>
+<li><p><strong>测试工具</strong></p>
+<ul>
+<li>模拟库</li>
+<li>测试框架</li>
+<li>代码质量工具</li>
+<li>自己动手编写测试<ul>
+<li>编写干净的测试</li>
+<li>避免过度测试</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>测试中的确定性</strong></p>
+<ul>
+<li>几种可以避免出现非确定性测试的手段<ul>
+<li>用一个常数作为随机数生成器的种子</li>
+<li>不要在单元测试中调用远程系统</li>
+<li>采用注入式时间戳</li>
+<li>避免使用休眠和超时</li>
+<li>记得关闭网络套接字和文件句柄</li>
+<li>将网络套接字都绑定到0端口（操作系统会自动选择一个开放的端口）</li>
+<li>动态地生成唯一的文件路径和数据库位置</li>
+<li>隔离并清理剩余的测试状态</li>
+<li>测试不应该依赖于特定的执行顺序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">使用测试去重现bug</td>
+<td align="center">忽视添加新测试工具时的成本</td>
+</tr>
+<tr>
+<td align="center">使用模拟工具去帮助编写单元测试</td>
+<td align="center">依赖干他人为你编写测试用例</td>
+</tr>
+<tr>
+<td align="center">使用代码质量工具去检查覆盖率、格式和复杂度</td>
+<td align="center">仅仅为了提高覆盖率而编写测试</td>
+</tr>
+<tr>
+<td align="center">在测试中使用常教种子的随机救生成器</td>
+<td align="center">仅仅将代码覆盖率作为代码质量的衡量标准</td>
+</tr>
+<tr>
+<td align="center">在测试后关闭网络套接字和文件句柄</td>
+<td align="center">在测试中使用可以避免的休眠和超时</td>
+</tr>
+<tr>
+<td align="center">在测试中生成唯-的文件路径和数据库位置</td>
+<td align="center">在单元测试中调用远程系统</td>
+</tr>
+<tr>
+<td align="center">在测试执行的间隙清理掉遗留的测试状态</td>
+<td align="center">依赖于测试执行顺序</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第7章-代码评审"><a href="#第7章-代码评审" class="headerlink" title="第7章 代码评审"></a>第7章 代码评审</h2><ul>
+<li><p><strong>为什么需要评审代码</strong></p>
+<ul>
+<li>代码评审是一种教学和学习工具</li>
+<li>为了安全性与合规性，需要代码评审</li>
+<li>对代码库的共同理解有助于团队更有凝聚力地扩展代码</li>
+</ul>
+</li>
+<li><p><strong>当你的代码被评审时</strong></p>
+<ul>
+<li>代码修改由准备、提交、评审、最后批准和合并这几个环节组成</li>
+<li>用评审草案降低风险</li>
+<li>提交评审请勿触发测试</li>
+<li>预排大体量的代码修改</li>
+<li>评审意见是针对代码的，而不是针对个人的</li>
+<li>保持同理心，但不要容忍粗鲁</li>
+<li>不要羞于要求别人评审你的代码</li>
+</ul>
+</li>
+<li><p><strong>评审别人的代码时</strong></p>
+<ul>
+<li>分流评审请求（轻重缓急）</li>
+<li>给评审预留时间</li>
+<li>理解修改的意图</li>
+<li>提供全面的反馈<ul>
+<li>代码修改的正确性、可实施性、可维护性、可读性和安全性</li>
+</ul>
+</li>
+<li>要承认优点</li>
+<li>区分问题、建议和挑剔<ul>
+<li>在反馈前加上字样</li>
+<li>“可选” （optional）</li>
+<li>“接受或不接受” （take it or leave it）</li>
+<li>“非必须” （nonblocking）</li>
+</ul>
+</li>
+<li>不要只做橡皮图章</li>
+<li>不要只局限于使用网页版的评审工具</li>
+<li>不要忘记评审测试代码</li>
+<li>推动决断（不要拖）</li>
+</ul>
+</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">在提交评审请求之前保证通过了测试和代码检测工具的检查</td>
+<td align="center">仅仅为了触发持续集成（CI）系统而提交评审请求</td>
+</tr>
+<tr>
+<td align="center">为代码评审预留出专门的时间，像对待其他工作–样对待评审工作</td>
+<td align="center">只做橡皮图章</td>
+</tr>
+<tr>
+<td align="center">当评审意见很粗鲁、没有建设性或者有不当言论的时候，请明确指出来</td>
+<td align="center">和代码“坠入爱河”或者把评审的反馈意见当作私人恩怨</td>
+</tr>
+<tr>
+<td align="center">通过适当提供相应修改的背景信息来帮助评审者</td>
+<td align="center">在不了解整项政动的大背景的情况下就直接纠缠代码细节</td>
+</tr>
+<tr>
+<td align="center">在进行代码评审时，超越肤浅的对代码风格的指摘</td>
+<td align="center">过度地挑剔</td>
+</tr>
+<tr>
+<td align="center">用尽一切工具去理解棘手的代码改动，不要只依赖评审工具自身的界面</td>
+<td align="center">让“完美”成为“优秀”的敌人</td>
+</tr>
+<tr>
+<td align="center">将测试代码纳入评审范围</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第8章-软件交付"><a href="#第8章-软件交付" class="headerlink" title="第8章 软件交付"></a>第8章 软件交付</h2><ul>
+<li><p><strong>软件交付流程</strong></p>
+<ul>
+<li>构建、发布、部署 和 <del>展开</del>（上线、投产）</li>
+</ul>
+</li>
+<li><p><strong>分支策略</strong></p>
+<ul>
+<li>频繁地合并被称为持续集成（CI）</li>
+</ul>
+</li>
+<li><p><strong>构建环节</strong></p>
+<ul>
+<li>打包需要带版本号</li>
+<li>将不同的资源单独打包</li>
+</ul>
+</li>
+<li><p><strong>发布环节</strong></p>
+<ul>
+<li>请勿只想着发布</li>
+<li>将包发布到仓库</li>
+<li>保持版本不变性</li>
+<li>频繁发布</li>
+<li>对发布计划保持透明</li>
+<li>撰写变更日志和发行说明</li>
+</ul>
+</li>
+<li><p><strong>部署环节</strong></p>
+<ul>
+<li>自动部署</li>
+<li>部署的原子性</li>
+<li>独立地部署应用</li>
+</ul>
+</li>
+<li><p><strong>上线环节</strong></p>
+</li>
+<li><p>系统监控</p>
+<ul>
+<li>特性开关</li>
+<li>熔断器</li>
+<li>并行的服务版本梯队<ul>
+<li>金丝雀部署（金丝雀报警器）</li>
+<li>蓝绿部署</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><del>摸黑启动</del>（灰度发布）</p>
+</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/tx3725.jpg" fancybox="true"/></div></div>
+
+<ul>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">使用基于主干的分支模式并在可能的条件下持续集成</td>
+<td align="center">发布未署版本号的包</td>
+</tr>
+<tr>
+<td align="center">使用 VCS 工具来管理分支</td>
+<td align="center">把配置、模式、图片和语言包–并打包在一起</td>
+</tr>
+<tr>
+<td align="center">与发布和运维团队合作为你的应用建立正确的流程</td>
+<td align="center">盲目地依赖发布经理和运维团队</td>
+</tr>
+<tr>
+<td align="center">一并发布变更日志和发行说明</td>
+<td align="center">使用 VCS 来分发软件</td>
+</tr>
+<tr>
+<td align="center">在新版发布时通知用户</td>
+<td align="center">更改已经发布的软件包</td>
+</tr>
+<tr>
+<td align="center">使用现成的工具来自动化部署</td>
+<td align="center">在没有监控结果的情况下执行展开步骤</td>
+</tr>
+<tr>
+<td align="center">使用特性开关逐步推出更新</td>
+<td align="center">依赖于顺序部署</td>
+</tr>
+<tr>
+<td align="center">使用熔断器防止应用造成重大的破坏</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">使用影子流量或摸黑启动来进行重大变更</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第9章-On-Call"><a href="#第9章-On-Call" class="headerlink" title="第9章 On-Call"></a>第9章 On-Call</h2><ul>
+<li><p><strong>On-Call 的工作方式</strong></p>
+<ul>
+<li>对事故分流、缓解症状和最终解决</li>
+</ul>
+</li>
+<li><p><strong>On-Call 技能包</strong></p>
+<ul>
+<li><p>随时响应</p>
+</li>
+<li><p>保持专注</p>
+</li>
+<li><p>确定工作优先级</p>
+<ul>
+<li>优先级分类<ul>
+<li>P1：严重影响（critical impact） — 服务在生产环境中无法使用</li>
+<li>P2：高影响（high impact） — 服务的使用受到严重损害</li>
+<li>P3：中等影响（medium impact） — 服务的使用部分受损</li>
+<li>P4：低影响（low impact） — 服务完全可用</li>
+</ul>
+</li>
+<li>服务水平指标（SLI）：如错误率、请求延迟和每秒请求数</li>
+<li>服务水平目标（SLO） 为健康的应用程序行为定义了 SLI 的目标</li>
+<li>服务水平协议（SLA）是关于越过 SLO 范围时将会发生什么的协议</li>
+</ul>
+</li>
+<li><p>清晰的沟通</p>
+</li>
+<li><p>跟踪你的工作</p>
+</li>
+<li><p>事故处理</p>
+<ul>
+<li>事故响应的 5个阶段：分流、协同、应急方案、解决方案、后续行动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">将呼叫你的号码添加到电话联系人的白名单中</td>
+<td align="center">无视警告</td>
+</tr>
+<tr>
+<td align="center">使用优先级类别、SLI、SLO 和 SLA 来确定事故响应的优先级</td>
+<td align="center">在分流阶段就尝试排除故障</td>
+</tr>
+<tr>
+<td align="center">针对严重的事故采取分流、协同、应急方案、解决方案、后续行动的策略</td>
+<td align="center">在问题尚未缓解的情况下就去做根本原因分析</td>
+</tr>
+<tr>
+<td align="center">使用科学的方式去排除故障</td>
+<td align="center">在事后回顾总结的时候指责别人</td>
+</tr>
+<tr>
+<td align="center">在事故的后续行动环节使用 5W（Why）的方式来追根溯源</td>
+<td align="center">对关闭那些无响应的支持请求犹豫</td>
+</tr>
+<tr>
+<td align="center">确认响应支持类的请求</td>
+<td align="center">询问支持的请求者他们的优先级是什么，不询问问题的影响</td>
+</tr>
+<tr>
+<td align="center">针对下一次回复给予明确的时间预期</td>
+<td align="center">逞英雄修复所有的事情</td>
+</tr>
+<tr>
+<td align="center">在关闭请求类的任务票之前确认问题都已经修改好了</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">将支持请求重定向到适当的沟通渠道</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第10章-技术设计流程"><a href="#第10章-技术设计流程" class="headerlink" title="第10章 技术设计流程"></a>第10章 技术设计流程</h2><ul>
+<li><p><strong>技术设计的 V 形结构</strong></p>
+<ul>
+<li>队友之间 - 团队内部 - 团队之间（确定性和清晰度 ↑ ）</li>
+</ul>
+</li>
+<li><p><strong>关于设计的思考</strong></p>
+<ul>
+<li>定义问题</li>
+<li>着手调查</li>
+<li>进行实验</li>
+<li>给些时间</li>
+</ul>
+</li>
+<li><p><strong>撰写设计文档</strong></p>
+<ul>
+<li>文档持续变更</li>
+<li>了解撰写文档的目的</li>
+<li>学会写作</li>
+<li>保证文档是最新的</li>
+</ul>
+</li>
+<li><p><strong>使用设计文档模板</strong></p>
+<ul>
+<li><p>概要</p>
+</li>
+<li><p>现状与背景</p>
+</li>
+<li><p>变更的目的</p>
+</li>
+<li><p>需求</p>
+<ul>
+<li>面向用户的需求</li>
+<li>技术需求</li>
+<li>安全性与合规性需求</li>
+<li>其他（截至期限、预算）</li>
+</ul>
+</li>
+<li><p>潜在的解决方案</p>
+</li>
+<li><p>建议的解决方案</p>
+</li>
+<li><p>设计与架构</p>
+<ul>
+<li>系统构成图</li>
+<li>UI (user interface design) &#x2F; UX (user experience design) 变更点</li>
+<li>代码变更点</li>
+<li>API 变更点</li>
+<li>持久层变更点</li>
+</ul>
+</li>
+<li><p>测试计划</p>
+</li>
+<li><p>发布计划</p>
+</li>
+<li><p>遗留的问题</p>
+</li>
+<li><p>附录</p>
+</li>
+</ul>
+</li>
+<li><p><strong>协作设计</strong></p>
+<ul>
+<li>理解你的团队的设计评审流程</li>
+<li>不要让人惊讶</li>
+<li>用设计讨论来进行头脑风暴</li>
+<li>为设计出力</li>
+</ul>
+</li>
+<li><p>行为准则</p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">使用设计文档模板</td>
+<td align="center">在意早晚会变的实验性的代码</td>
+</tr>
+<tr>
+<td align="center">阅读博客、论文和–些演讲文稿来获取灵感</td>
+<td align="center">只讨论一项解决方案</td>
+</tr>
+<tr>
+<td align="center">对于你看到的一切保持批判性思考</td>
+<td align="center">让非母语阻止你写作</td>
+</tr>
+<tr>
+<td align="center">在设计阶段就编写实验性的代码</td>
+<td align="center">在具体实施方案和计划有些偏离时忘记更新设计文档</td>
+</tr>
+<tr>
+<td align="center">学会清晰地写作，并经常练习</td>
+<td align="center">消极地参与团队设计讨论</td>
+</tr>
+<tr>
+<td align="center">对设计文档进行版本控制</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">对队友的设计提出问题</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第11章-构建可演进的架构"><a href="#第11章-构建可演进的架构" class="headerlink" title="第11章 构建可演进的架构"></a>第11章 构建可演进的架构</h2><ul>
+<li><p><strong>理解复杂性</strong></p>
+<ul>
+<li>高依赖性</li>
+<li>高隐蔽性</li>
+<li>高惯性</li>
+</ul>
+</li>
+<li><p><strong>可演进的设计</strong></p>
+<ul>
+<li>你不是真的需要（You ain’t gonna need it，YAGNI）</li>
+<li>最小惊讶原则（别搞一些骚操作⛏）</li>
+<li>封装专业领域知识<ul>
+<li>领域驱动设计（domain-driven design，DDD）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>可演进的 API</strong></p>
+<ul>
+<li><p>保持 API 小巧</p>
+<ul>
+<li>默认值可使大型 API 在感觉上很小巧</li>
+</ul>
+</li>
+<li><p>公开定义良好的服务端 API</p>
+</li>
+<li><p>保持 API 变更的兼容性</p>
+</li>
+<li><p>API 版本化</p>
+<ul>
+<li>API 版本通常由 API 网关或服务网格来管理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>可持续的数据管理</strong></p>
+<ul>
+<li><p>数据库隔离</p>
+</li>
+<li><p>使用 schema</p>
+<ul>
+<li>采用无模式的方法会产生明显的数据完整性和复杂性问题</li>
+<li>不要将无模式的数据隐藏在已经模式化的数据中</li>
+</ul>
+</li>
+<li><p>schema 自动化迁移</p>
+</li>
+<li><p>保持 schema 的兼容性</p>
+</li>
+</ul>
+</li>
+<li><p>行为准则</p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">牢记 YAGNI 原则：“You Aren’t Gonna Need It”</td>
+<td align="center">无目的地构建过多的抽象模型</td>
+</tr>
+<tr>
+<td align="center">使用标准类库和开发模型</td>
+<td align="center">编写隐含排序需求和参数需求的方法</td>
+</tr>
+<tr>
+<td align="center">使用 接口定义语言（IDL）来定义你的 API</td>
+<td align="center">使用怪异代码让其他开发者感到惊讶</td>
+</tr>
+<tr>
+<td align="center">对外部 API 和文档进行版本管理</td>
+<td align="center">对 API 进行不兼容的变更</td>
+</tr>
+<tr>
+<td align="center">隔离不同应用程序的数据库</td>
+<td align="center">对内部 API 的版本控制持教条态度</td>
+</tr>
+<tr>
+<td align="center">对所有的数据定义显式的 schema</td>
+<td align="center">在字符串或字节字段中嵌入无模式数据</td>
+</tr>
+<tr>
+<td align="center">使用迁移工具来进行数据库 schema 的自动化管理</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">如果下游数据消费者使用到了你的数据，保持 schema 的兼容性</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第12章-敏捷计划"><a href="#第12章-敏捷计划" class="headerlink" title="第12章 敏捷计划"></a>第12章 敏捷计划</h2><p>（针对的是 <strong>项目经理</strong> 和 <strong>程序经理</strong>）</p>
+<ul>
+<li><p><strong>敏捷宣言</strong></p>
+<ul>
+<li>个人和互动高于流程和工具</li>
+<li>工作的软件高于详尽的文档</li>
+<li>客户合作高于合同谈判</li>
+<li>响应变化高于遵循计划</li>
+</ul>
+</li>
+<li><p><strong>敏捷计划的框架</strong></p>
+<ul>
+<li>Scrum</li>
+<li>看板</li>
+</ul>
+</li>
+<li><p><strong>Scrum 框架</strong></p>
+<ul>
+<li>用户故事</li>
+<li>任务分解</li>
+<li>故事点</li>
+<li>消化积压</li>
+<li>冲刺计划</li>
+</ul>
+</li>
+<li><p><strong>站会</strong>（Scrum 会议 &#x2F; huddle会）</p>
+</li>
+<li><p><strong>评审机制</strong></p>
+</li>
+<li><p><strong>回顾会</strong></p>
+</li>
+<li><p><strong>路线图</strong></p>
+<ul>
+<li>“在准备战斗时，我总是发现计划是无用的，但计划是不可缺少的。”</li>
+</ul>
+</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">保持站会简短</td>
+<td align="center">痴迷于敏捷开发的“正确做法”</td>
+</tr>
+<tr>
+<td align="center">为用户故事写下详细的验收标准</td>
+<td align="center">害怕改变敏捷流程</td>
+</tr>
+<tr>
+<td align="center">承诺可以在冲刺迭代中实际完成的工作</td>
+<td align="center">将常规任务描述强加给“用户故事”</td>
+</tr>
+<tr>
+<td align="center">如果你无法在冲刺迭代中完成大块工作，请将其分解</td>
+<td align="center">忘记跟踪计划和设计工作</td>
+</tr>
+<tr>
+<td align="center">使用故事点来预估工作量</td>
+<td align="center">尚未完成已提交的工作时又在冲刺开始后追加工作</td>
+</tr>
+<tr>
+<td align="center">务必使用相对尺度和T恤尺码来帮助估算</td>
+<td align="center">盲目地遵循流程</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第13章-与管理者合作"><a href="#第13章-与管理者合作" class="headerlink" title="第13章 与管理者合作"></a>第13章 与管理者合作</h2><ul>
+<li><p><strong>管理者是做什么的</strong></p>
+<ul>
+<li>管理者们构建团队、指导和培养工程师，并进行人际关系的动态管理</li>
+<li>工程经理还计划和协调产品的开发</li>
+<li>管理者们通过与高管或董事（“向上”）合作</li>
+<li>与其他管理者（“横向”）合作</li>
+<li>与他们的团队（“向下”）合作</li>
+</ul>
+</li>
+<li><p><strong>沟通、目标与成长</strong></p>
+<ul>
+<li><p>一对一面谈</p>
+</li>
+<li><p>进展、计划与问题（progress-plans-problems，PPP）</p>
+<ul>
+<li>PPP 是一种常用的更新工作状态的格式</li>
+</ul>
+</li>
+<li><p>目标、关键和结果（Objective, Key, Result，OKR）</p>
+<ul>
+<li>OKR 框架是公司定义目标和衡量其是否成功的一种方式</li>
+</ul>
+</li>
+<li><p>关键绩效指标（Key Performance Indicator，KPI）</p>
+<ul>
+<li>放弃了“O”，只关注关键结果 —关键绩效指标(KPI)，而不明确说明目标</li>
+</ul>
+</li>
+<li><p>绩效考核</p>
+<ul>
+<li>你今年做了什么？</li>
+<li>今年有什么事情进展顺利？</li>
+<li>今年有什么事情可以做得更好？</li>
+<li>你在职业生涯中想得到什么？你认为自己在3到5年内会到达什么样的高度？</li>
+<li>不要忘了非工程类的项目<ul>
+<li>辅导实习生、代码评审、参与面试、博客文章、演讲、文档 …</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>向上管理</strong></p>
+<ul>
+<li><p>接收反馈</p>
+</li>
+<li><p>给予反馈</p>
+<ul>
+<li>在提供反馈时，使用情况、行为和影响（situation-behavior-impact，SBI）框架</li>
+</ul>
+</li>
+<li><p>讨论你的目标</p>
+</li>
+<li><p>事情不顺时要采取行动</p>
+</li>
+<li><p>如果你已经给出了反馈意见，并保持了耐心，但事情仍然没有进展，那就起身离开</p>
+</li>
+</ul>
+</li>
+<li><p><strong>行为准则</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">需要做的</th>
+<th align="center">不应该做的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">期望管理者能够平易近人且具有透明度</td>
+<td align="center">向管理者隐瞒困难</td>
+</tr>
+<tr>
+<td align="center">明确告知你的管理者你需要什么</td>
+<td align="center">仅仅把一对一面谈当作更新工作状态的会议</td>
+</tr>
+<tr>
+<td align="center">为一对一面谈设置议程</td>
+<td align="center">仅凭记忆进行自我总结</td>
+</tr>
+<tr>
+<td align="center">保有一对一面谈的纪要</td>
+<td align="center">给予他人肤浅的反馈</td>
+</tr>
+<tr>
+<td align="center">按照你希望收到的反馈来撰写具有可操作性的反馈</td>
+<td align="center">被 OKR 框住</td>
+</tr>
+<tr>
+<td align="center">跟踪工作成果，这样在自我评价时会更容易</td>
+<td align="center">将反馈视为攻击</td>
+</tr>
+<tr>
+<td align="center">采用 SBI 框架来减少反馈对个人的针对性</td>
+<td align="center">忍受糟糕的管理</td>
+</tr>
+<tr>
+<td align="center">考虑长期的职业目标</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="第14章-职业生涯规划"><a href="#第14章-职业生涯规划" class="headerlink" title="第14章 职业生涯规划"></a>第14章 职业生涯规划</h2><ul>
+<li><p><strong>迈向资深之路</strong></p>
+<ul>
+<li>从初级工程师或软件工程师到资深工程师</li>
+<li>从资深工程师到主任工程师或首席工程师</li>
+</ul>
+</li>
+<li><p><strong>职业生涯建议</strong></p>
+<ul>
+<li><p>T 型人才（一专多长）</p>
+</li>
+<li><p>参加工程师训练营</p>
+</li>
+<li><p>主导你自己的晋升</p>
+</li>
+<li><p>换工作需谨慎</p>
+</li>
+<li><p>自我调节</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>你的职业生涯是一场马拉松，而不是短跑冲刺 ~</p>
+</blockquote>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/11/22/go2/">Go 底层原理与源码初探 👾</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/11/13/gocode/">Go 数据结构与算法、SQL 刷题 ⌨️</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

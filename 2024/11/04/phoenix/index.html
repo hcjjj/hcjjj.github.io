@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>《凤凰架构：构建可靠的大型分布式系统》🪽 - H-sediment</title>
+
+  
+    <meta name="description" content="有老朽，有消亡，有重生，有更迭，才是生态运行的合理规律">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《凤凰架构：构建可靠的大型分布式系统》🪽">
+<meta property="og:url" content="http://example.com/2024/11/04/phoenix/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="有老朽，有消亡，有重生，有更迭，才是生态运行的合理规律">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20241103221022.png">
+<meta property="article:published_time" content="2024-11-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-08T08:39:48.683Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="architecture">
+<meta property="article:tag" content="distributed">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20241103221022.png">
+  
+  
+  
+  <meta name="keywords" content="architecture,distributed">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">《凤凰架构：构建可靠的大型分布式系统》🪽</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%94%E8%BF%9B%E4%B8%AD%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">演进中的架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%B6%E4%BB%A3"><span class="toc-number">1.1.</span> <span class="toc-text">原始分布式时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%BD%93%E7%B3%BB%E7%BB%9F%E6%97%B6%E4%BB%A3"><span class="toc-number">1.2.</span> <span class="toc-text">单体系统时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SOA-%E6%97%B6%E4%BB%A3"><span class="toc-number">1.3.</span> <span class="toc-text">SOA 时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%97%B6%E4%BB%A3"><span class="toc-number">1.4.</span> <span class="toc-text">微服务时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%97%B6%E4%BB%A3"><span class="toc-number">1.5.</span> <span class="toc-text">后微服务时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%9C%8D%E5%8A%A1%E6%97%B6%E4%BB%A3"><span class="toc-number">1.6.</span> <span class="toc-text">无服务时代</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E5%B8%88%E7%9A%84%E8%A7%86%E8%A7%92"><span class="toc-number">2.</span> <span class="toc-text">架构师的视角</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">访问远程调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">事务处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E5%A4%9A%E7%BA%A7%E5%88%86%E6%B5%81%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.3.</span> <span class="toc-text">透明多级分流系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">架构安全性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E5%9F%BA%E7%9F%B3"><span class="toc-number">3.</span> <span class="toc-text">分布式的基石</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD"><span class="toc-number">4.</span> <span class="toc-text">不可变基础设施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%96%B9%E6%B3%95%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">技术方法论</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@v10/dist/mermaid.min.js"></script>
+
+  <script>
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    if (window.mermaid) {
+      mermaid.initialize(mermaid_config);
+    }
+  </script>
+
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Reading/">Reading</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-11-03T16:00:00.000Z">2024-11-04</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>《凤凰架构：构建可靠的大型分布式系统》🪽</span></h1>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20241103221022.png" style="zoom:80%;" />
+
+<p>有老朽，有消亡，有重生，有更迭，才是生态运行的合理规律</p>
+<span id="more"></span>
+
+<blockquote>
+<p>作者：周志明，出版时间：2021-06</p>
+</blockquote>
+<h1 id="凤凰架构：构建可靠的大型分布式系统"><a href="#凤凰架构：构建可靠的大型分布式系统" class="headerlink" title="凤凰架构：构建可靠的大型分布式系统"></a>凤凰架构：构建可靠的大型分布式系统</h1><p>架构演变最重要的驱动力，或者说这种“从大到小”的变化趋势的最根本驱动力，始终都是 <strong>为了方便某个服务能够顺利地“死去”与“重生”</strong>，个体服务的生死更迭，是关系到整个系统能否可靠存续的关键因素。</p>
+<h2 id="演进中的架构"><a href="#演进中的架构" class="headerlink" title="演进中的架构"></a>演进中的架构</h2><pre class="mermaid">graph LR
+    A[大型机<br>Mainframe] -->|演变| B[原始分布式<br>Distributed]
+    B -->|演变| C[大型单体<br>Monolithic]
+    C -->|演变| D[面向服务<br>Service-Oriented]
+    D -->|演变| E[微服务<br>Microservice]
+    E -->|演变| F[服务网格<br>Service Mesh]
+    F -->|演变| G[无服务<br>Serverless]
+
+    style A fill:#e0e0e0,stroke:#333,stroke-width:1px;
+    style B fill:#c8e6c9,stroke:#333,stroke-width:1px;
+    style C fill:#bbdefb,stroke:#333,stroke-width:1px;
+    style D fill:#ffe0b2,stroke:#333,stroke-width:1px;
+    style E fill:#f8bbd0,stroke:#333,stroke-width:1px;
+    style F fill:#d1c4e9,stroke:#333,stroke-width:1px;
+    style G fill:#f0f4c3,stroke:#333,stroke-width:1px;</pre>
+
+<h3 id="原始分布式时代"><a href="#原始分布式时代" class="headerlink" title="原始分布式时代"></a>原始分布式时代</h3><ul>
+<li>在 20 世纪 70 年代末期到 80 年代初，计算机科学刚经历了从以 <strong>大型机</strong> 为主向以 <strong>微型机</strong> 为主的蜕变</li>
+<li>为突破硬件算力的限制，寻找使用多台计算机共同协作来支撑同一套软件系统的可行方案</li>
+<li>负责制定 UNIX 系统技术标准的“开放软件基金会”（Open Software Foundation，OSF（邀请当时业界主流的计算机厂商一起参与，共同制订了名为“分布式运算环境”（Distributed Computing Environment，DCE）的分布式技术体系</li>
+<li>由于 OSF 本身的 UNIX 背景，当时对这些技术的研究都带着浓厚的 UNIX 设计风格，有一个预设的重要原则是要使分布式环境中的服务调用、资源访问、数据存储等操作尽可能 <strong>透明化、简单化</strong>，从而使开发人员不必过于关注他们访问的方法或其他资源是位于本地还是远程</li>
+<li>尽管“调用远程方法”与“调用本地方法”只有两字之差，但若要兼顾简单、透明、性能、正确、鲁棒、一致等特点，两者的复杂度就完全不可同日而语了，光是“远程”二字带来的网络环境下的新问题，例如：<ul>
+<li>远程的服务在哪里（<strong>服务发现</strong>）</li>
+<li>有多少个（<strong>负载均衡</strong>）</li>
+<li>网络出现分区、超时或者服务出错了怎么办（<strong>熔断、隔离、降级</strong>）</li>
+<li>方法的参数与返回结果如何表示（<strong>序列化协议</strong>）</li>
+<li>信息如何传输（<strong>传输协议</strong>）</li>
+<li>服务权限如何管理（<strong>认证、授权</strong>）</li>
+<li>如何保证通信安全（<strong>网络安全层</strong>）</li>
+<li>如何令调用不同机器的服务返回相同的结果（<strong>分布式数据一致性</strong>）</li>
+</ul>
+</li>
+<li>为解决这样做带来的服务发现、跟踪、通信、容错、隔离、配置、传输、数据一致性和编码复杂度等方面的问题所付出的代价已远远超过了分布式所取得的收益</li>
+<li>在那个时代的机器硬件条件下，为了让程序在运行效率上可被用户接受，开发者只能在方法本身运行时间很长、可以相对忽略远程调用成本时的情况下考虑分布式</li>
+<li>以上结论是有违 UNIX 设计哲学的，却是当时现实情况下不得不做出的让步。摆在计算机科学面前有两条通往更大规模软件系统的道路：<ul>
+<li>一条是尽快提升单机的处理能力，以避免分布式带来的种种问题</li>
+<li>另一条是找到更完美的、解决如何构建分布式系统的解决方案</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>原始分布式时代提出的构建符合 UNIX 设计哲学的、如同本地调用一般简单透明的分布式系统的这个目标，是软件开发者对分布式系统最初的美好愿景，但迫于现实，它会在一定时期内被妥协、被舍弃。</p>
+<p>在三十多年后的 21 世纪 10 年代，随着分布式架构逐渐成熟、完善，并取代单体成为大型软件的主流架构风格以后，这个美好的愿景终将会重新被开发者拾起。</p>
+</blockquote>
+<h3 id="单体系统时代"><a href="#单体系统时代" class="headerlink" title="单体系统时代"></a>单体系统时代</h3><ul>
+<li>单体架构风格的应用也称作“巨石系统”(Monolithic Application)，是出现时间最早（小型单体）、应用范围最广、使用人数最多、统治历史最长的一种架构风格，但“单体”这个名称，却是在微服务开始流行之后才“事后追认”所形成的概念</li>
+<li>单体系统的不足，必须在软件的性能需求超过了单机、软件的开发人员规模明显超过了“2 Pizza Team”（6-12 人）范畴的前提下才有讨论的价值</li>
+<li>使用多个独立的分布式服务共同构建一个更大型系统的设想与实际尝试，反而要比今天大家所了解的 <strong>大型单体系统</strong> 出现的时间更早</li>
+<li>在“拆分”这方面：<ul>
+<li>从纵向角度来看，分层架构（Layered Architecture）已是现在所有信息系统建设中普遍认可、采用的软件设计方法，无论是单体还是微服务，抑或是其他架构风格</li>
+<li>从横向角度来看，单体架构也支持按照技术、功能、职责等维度，将软件拆分为各种模块，以便重用和管理代码</li>
+<li>即使是从横向扩展（Scale Horizontally）的角度来衡量，在负载均衡器之后同时部署若干个相同的单体系统副本，以达到分摊流量压力的效果，也是非常常见的需求</li>
+</ul>
+</li>
+<li>单体系统的真正缺陷不在如何拆分，而在拆分之后的 <strong>自治与隔离</strong> 能力上<ul>
+<li>由于所有代码都运行在同一个进程内，在获得进程内调用的简单、高效等好处的同时，也意味着如果任何一部分代码出现缺陷，过度消耗了进程空间内的资源，所造成的影响也是全局性的、难以隔离的（“<strong>单点故障</strong>”）</li>
+<li>由于所有代码都共享同一个进程，不能隔离，也就无法（不便）做到单独停止、更新、升级某一部分代码，从 <strong>可维护性</strong> 来说，单体系统也是不占优势的</li>
+<li>由于隔离能力的缺失，单体除了难以阻断错误传播、不便于动态更新程序以外，还面临难以 <strong>技术异构的困难</strong>，每个模块的代码通常都需要使用一样的程序语言，乃至一样的编程框架去开发</li>
+</ul>
+</li>
+<li>随着软件架构演进，构建可靠系统的观念从“追求尽量不出错”到正视“出错是必然”的转变，以微服务取代单体系统成为潮流趋势的根本原因是：单体系统很难兼容“Phoenix”的特性</li>
+<li>为了 <strong>允许程序出错</strong>，获得 <strong>自治与隔离的能力</strong>，以及实现可以 <strong>技术异构</strong> 等目标，是继 <strong>性能与算力</strong> 之后，再次选择分布式的理由</li>
+</ul>
+<blockquote>
+<p>开发分布式程序也并不意味着一定要依靠今天的微服务架构才能实现，在新旧世纪之交，将一个大的单体系统拆分为若干个更小的、不运行在同一个进程的 <strong>独立服务</strong>，这些服务拆分方法后来带来了 <strong>面向服务架构（Service-Oriented Architecture）</strong> 的一段兴盛期</p>
+</blockquote>
+<h3 id="SOA-时代"><a href="#SOA-时代" class="headerlink" title="SOA 时代"></a>SOA 时代</h3><p>为了对大型的单体系统进行拆分，让每一个子系统都能独立地部署、运行、更新，三种较有代表性的架构模式：</p>
+<ul>
+<li>烟囱式架构（Information Silo Architecture）：信息烟囱又名信息孤岛（Information Island），使用这种架构的系统也被称为孤岛式信息系统或者烟囱式信息系统，它指的是一种与其他相关信息系统完全没有互操作或者协调工作的设计模式。</li>
+<li>微内核架构（Microkernel Architecture）：微内核架构也被称为插件式架构（Plug-in Architecture），<ul>
+<li>既然在烟囱式架构中，没有业务往来关系的系统也可能需要共享人员、组织、权限等一些公共的主数据，那不妨就将这些主数据，连同其他可能被各子系统用到的公共服务、数据、资源集中到一块，组成一个被所有业务系统共同依赖的核心（Kernel，也称为 Core System）</li>
+<li>具体的业务系统以插件模块(Plug-in Module)的形式存在，这样也可提供可扩展的、灵活的、天然隔离的功能特性，即微内核架构</li>
+<li>微内核架构也有局限性，它假设系统中各个插件模块之间互不认识，且不可预知系统将安装哪些模块，因此这些插件可以访问内核中一些公共的资源，但不会直接交互</li>
+</ul>
+</li>
+<li>事件驱动架构（Event-Driven Architecture）：为了能让子系统互相通信，一种可行的方案是在子系统之间建立一套事件队列管道(Event Queue)<ul>
+<li>来自系统外部的消息将以事件的形式发送至管道中，各个子系统可以从管道里获取自己感兴趣、能够处理的事件消息</li>
+<li>也可以为事件新增或者修改其中的附加信息，甚至可以自己发布一些新的事件到管道队列中去</li>
+<li>如此，每一条消息的处理者都是独立的、高度解耦的，但又能与其他处理者（如果存在其他消息处理者的话）通过事件管道进行交互</li>
+</ul>
+</li>
+</ul>
+<p>软件架构来到 SOA 时代，其包含的许多概念、思想都已经能在今天的微服务中找到对应的身影了，譬如服务之间的松散耦合、注册、发现、治理，隔离、编排等，这些在微服务中耳熟能详的概念，大多数也是在分布式服务刚被提出时就已经可以预见的困难点。SOA 针对这些问题，甚至是针对“软件开发”这件事情本身，都进行了更具体、更系统的探索。</p>
+<ul>
+<li>“更具体”：尽管 SOA 本身还属于抽象概念，而不是特指某一种具体的技术，但它比单体架构和前面所列举的三种架构模式的操作性更强，已经不能简单视为一种架构风格，而是 <strong>一套软件设计的基础平台</strong><ul>
+<li>有领导制定技术标准的组织 Open CSA，有清晰的软件设计的指导原则</li>
+<li>明确了采用 SOAP 作为远程调用协议，依靠 SOAP 协议族（WSDL、UDDI 和 WS-*协议）来完成服务的发布、发现和治理</li>
+<li>利用企业服务总线（Enterprise Service Bus，ESB）的消息管道来实现各个子系统之间的交互</li>
+<li>使用服务数据对象（Service Data Object，SDO）来访问和表示数据</li>
+<li>使用服务组件架构（Service Component Architecture，SCA）来定义服务封装的形式和服务运行的容器</li>
+</ul>
+</li>
+<li>“更系统”：SOA 的终极目标是希望总结出一套自上而下的软件研发方法论，做到企业只需要跟着 SOA 的思路，就能够一揽子解决掉软件开发过程中的全部问题，譬如该如何挖掘需求、如何将需求分解为业务能力、如何编排已有服务、如何开发&#x2F;测试&#x2F;部署新的功能等</li>
+</ul>
+<blockquote>
+<p>经过三十年的技术发展，信息系统经历了巨石、烟囱、插件、事件、SOA 等架构模式，应用受架构复杂度的牵绊却越来越大，已经 <strong>距离“透明”二字越来越远</strong> 了，这是否算不自觉间忘掉了当年的初心呢？（SOA → 微服务）</p>
+</blockquote>
+<h3 id="微服务时代"><a href="#微服务时代" class="headerlink" title="微服务时代"></a>微服务时代</h3><p>“微服务”这个技术名词最早在 2005 年就已经被提出，由 Peter Rodgers 博士在 2005 年的云计算博览会（Web Services Edge 2005）上首次使用，当时的说法是“Micro-Web-Service”，指的是一种专注于单一职责的、与语言无关的细粒度 Web 服务（Granular Web Service），它 <strong>最初</strong> 可以说是 SOA 发展时催生的产物，这一阶段的微服务是作为 SOA 的一种轻量化的补救方案而被提出的，是 SOA 的一种变体。</p>
+<hr>
+<p>2012 年，在波兰克拉科夫举行的“33rd Degree Conference”大会上，Thoughtworks 首席咨询师 James Lewis 做了题为“Microservices-Java, the UNIX Way”的主题演讲，其中提到了 <strong>单一服务职责、康威定律、自动扩展、领域驱动设计</strong> 等原则，却只字未提 SOA，反而号召应该重拾 UNIX 的设计哲学(As Well Behaved UNIX Service)。</p>
+<p>微服务真正崛起是在 2014 年，Martin Fowler 与 James Lewis 合写的文章“Microservices：A Definition of This New Architectural Term”，此文首先给出了现代微服务的概念：“微服务是一种 <strong>通过多个小型服务组合来构建单个应用的架构风格</strong>，这些服务围绕业务能力而非特定的技术标准来构建，各个服务可以采用 <strong>不同的编程语言、不同的数据存储技术，运行在不同的进程之中</strong>，服务采取 <strong>轻量级的通信机制</strong> 和 <strong>自动化的部署机制</strong> 实现通信与运维。”</p>
+<p>此外，文中列举了微服务的 <strong>九个核心的业务与技术特征</strong>：</p>
+<ul>
+<li>围绕业务能力构建（Organized around Business Capability）</li>
+<li>分散治理（Decentralized Governance）</li>
+<li>通过服务来实现独立自治的组件（Componentization via Service）</li>
+<li>产品化思维（Product not Project）</li>
+<li>数据去中心化（Decentralized Data Management）</li>
+<li>强终端弱管道（Smart Endpoint and Dumb Pipe）</li>
+<li>容错性设计（Design for Failure）</li>
+<li>演进式设计（Evolutionary Design）</li>
+<li>基础设施自动化（Infrastructure Automation）</li>
+</ul>
+<p>微服务追求的是更加自由的架构风格，摒弃了几乎所有 SOA 里可以抛弃的约束和规定，<strong>提倡以“实践标准”代替“规范标准”</strong>，对于服务的注册发现、跟踪治理、负载均衡、故障隔离、认证授权、伸缩扩展、传输通信、事务处理等问题，微服务中将 <strong>不再有统一的解决方案</strong>。</p>
+<ul>
+<li>仅一个服务间远程调用问题，可以列入解决方案的候选清单的就有：RMI(Sun&#x2F;Oracle)、Thrift(Facebook)、Dubbo（阿里巴巴）、gRPC(Google)、Motan2（新浪）、Finagle(Twitter)、brpc（百度）、Arvo(Hadoop)、JSON-RPC、REST 等</li>
+<li>仅一个服务发现问题，可以选择的就有 Eureka(Netflix)、Consul(HashiCorp)、Nacos（阿里巴巴）、ZooKeeper(Apache)、etcd(CoreOS)、CoreDNS(CNCF)等，其他领域也与此类似</li>
+</ul>
+<blockquote>
+<p>技术架构者的第一职责就是决策权衡，有利有弊才需要决策，有取有舍才需要权衡，如果架构者本身的知识面不足以覆盖所需要决策的内容，不清楚其中利弊，恐怕将无可避免地陷入选择困难症的境遇之中。微服务时代充满着自由的气息，微服务时代充斥着迷茫的选择。</p>
+</blockquote>
+<h3 id="后微服务时代"><a href="#后微服务时代" class="headerlink" title="后微服务时代"></a>后微服务时代</h3><p>布式架构中出现的问题，如 <strong>注册发现、跟踪治理、负载均衡、传输通信</strong> 等，其实在 SOA 时代甚至从原始分布式时代起就已经存在了，只要是分布式架构的系统，就无法完全避免，这些问题一定要由软件系统自己来解决吗？如果不局限于采用软件的方式，这些问题几乎都有对应的硬件解决方案，譬如：</p>
+<ul>
+<li>某个系统需要 <strong>伸缩扩容</strong>，通常会购买新的服务器，部署若干副本实例来分担压力</li>
+<li>如果某个系统需要解决 <strong>负载均衡</strong> 问题，通常会布置负载均衡器，选择恰当的均衡算法来分流</li>
+<li>如果需要解决 <strong>传输安全</strong> 问题，通常会布置 TLS 传输链路，配置好 CA 证书以保证通信不被窃听篡改</li>
+<li>如果需要解决 <strong>服务发现</strong> 问题，通常会设置 DNS 服务器，让服务访问依赖稳定的记录名而不是易变的 IP 地址</li>
+</ul>
+<p>在微服务时代，人们之所以选择在软件的代码层面而不是硬件的基础设施层面去解决这些分布式问题，很大程度上是因为由 <strong>硬件构成的基础设施跟不上由软件构成的应用服务的灵活性</strong> 的无奈之举，软件可以只使用键盘命令就拆分出不同的服务，只通过拷贝、启动就能够实现伸缩扩容服务，<strong>硬件难道就不可以通过键盘命令变出相应的应用服务器、负载均衡器、DNS 服务器、网络链路这些设施吗？</strong></p>
+<hr>
+<p>微服务时代所取得的成就，本身就离不开以 <strong>Docker</strong> 为代表的早期容器化技术的巨大贡献。早期的容器只被简单地视为一种可快速启动的服务运行环境，目的是方便程序的分发部署，在这个阶段，针对单个应用进行封装的容器并未真正解决分布式架构问题。</p>
+<p>一场持续了三年时间，以 Docker Swarm、Apache Mesos 与 Kubernetes 为主要竞争者的“容器编排战争”，<strong>Kubernetes</strong> 登基加冕是容器发展中一个时代的终章，也将是软件架构发展下一个纪元的开端。Kubernetes 中提供的 <strong>基础设施层面的解决方案</strong> 与传统 Spring Cloud 中提供的 <strong>应用层面的解决方案</strong> 的对比，尽管因为各自出发点不同，解决问题的方法和效果都有所差异，但这无疑是提供了一条全新的、前途更加广阔的解题思路。</p>
+<table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>Kubernetes</strong></th>
+<th><strong>Spring Cloud</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>弹性伸缩</td>
+<td>Autoscaling</td>
+<td>N&#x2F;A</td>
+</tr>
+<tr>
+<td>服务发现</td>
+<td>KubeDNS &#x2F; CoreDNS</td>
+<td>Spring Cloud Eureka</td>
+</tr>
+<tr>
+<td>配置中心</td>
+<td>ConfigMap &#x2F; Secret</td>
+<td>Spring Cloud Config</td>
+</tr>
+<tr>
+<td>服务网关</td>
+<td>Ingress Controller</td>
+<td>Spring Cloud Zuul</td>
+</tr>
+<tr>
+<td>负载均衡</td>
+<td>Load Balancer</td>
+<td>Spring Cloud Ribbon</td>
+</tr>
+<tr>
+<td>服务安全</td>
+<td>RBAC API</td>
+<td>Spring Cloud Security</td>
+</tr>
+<tr>
+<td>跟踪监控</td>
+<td>Metrics API &#x2F; Dashboard</td>
+<td>Spring Cloud Turbine</td>
+</tr>
+<tr>
+<td>降级熔断</td>
+<td>N&#x2F;A</td>
+<td>Spring Cloud Hystrix</td>
+</tr>
+</tbody></table>
+<p>当虚拟化的基础设施从单个服务的容器扩展至由多个容器构成的服务集群、通信网络和存储设施时，软件与硬件的界限便已模糊。一旦虚拟化的硬件能够跟上软件的灵活性，那些与业务无关的技术性问题便有可能从软件层面剥离，悄无声息地在硬件基础设施之内解决，<strong>让软件得以只专注业务</strong>，真正围绕业务能力构建团队与产品。</p>
+<p>从 <strong>软件层面独立应对</strong> 分布式架构所带来的各种问题，发展到 <strong>应用代码与基础设施软、硬一体，合力应对</strong> 架构问题，这个新的时代现在常被媒体冠以“云原生”这个颇为抽象的名字加以宣传。云原生时代追求的目标与此前微服务时代追求的目标并没有本质改变，都是在服务架构演进的历史进程中，<strong>称云原生时代为“后微服务时代”</strong>。</p>
+<p><strong>服务网格（Service Mesh）</strong></p>
+<p>基础设施是针对整个容器来管理的，粒度相对粗犷，只能到容器层面，对单个远程服务则很难有效管控，类似的，在服务的监控、认证、授权、安全、负载均衡等方面都有可能面临细化管理的需求。为了解决这一类问题，虚拟化的基础设施很快完成了第二次进化，引入了今天被称为“服务网格”（Service Mesh）的“边车代理模式”（Sidecar Proxy）。</p>
+<p>在虚拟化场景中的边车指的是由系统自动在服务容器（通常是指 Kubernetes 的 Pod）中注入一个通信代理服务器，以类似网络安全里中间人攻击的方式进行流量劫持，在应用毫无感知的情况下，悄然接管应用所有对外通信。</p>
+<ul>
+<li>这个代理除了实现正常的服务间通信外（称为数据平面通信），还接收来自控制器的指令（称为控制平面通信），根据控制平面中的配置，对数据平面通信的内容进行分析处理，以实现熔断、认证、度量、监控、负载均衡等各种附加功能</li>
+<li>通过边车代理模式，便实现了既不需要在应用层面加入额外的处理代码，也提供了几乎不亚于程序代码的 <strong>精细管理能力</strong></li>
+</ul>
+<h3 id="无服务时代"><a href="#无服务时代" class="headerlink" title="无服务时代"></a>无服务时代</h3><p>对软件研发而言，不去做分布式无疑是最简单的，如果单台服务器的性能可以是无限的，那架构演进的结果肯定会与今天有很大差别。</p>
+<p>绝对意义上的无限性能必然是不存在的，但在云计算落地已有十余年的今天，相对意义的无限性能已经成为现实。</p>
+<p>无服务现在还没有一个特别权威的“官方”定义，它只涉及两块内容：后端设施（Backend）和函数（Function）：</p>
+<ul>
+<li><strong>后端设施</strong> 是指 <strong>数据库、消息队列、日志、存储</strong> 等这类用于支撑业务逻辑运行，但本身无业务含义的技术组件，这些后端设施都运行在云中，在无服务中将它们称为“后端即服务”（Backend as a Service，BaaS）</li>
+<li><strong>函数</strong> 是指业务逻辑代码，这里函数的概念与粒度都已经很接近于程序编码角度的函数了，其区别是无服务中的函数运行在云端，不必考虑算力问题，也不必考虑容量规划（从技术角度），在无服务中将其称为“函数即服务”（Function as a Service，FaaS）</li>
+</ul>
+<p>无服务的愿景是让开发者只需要纯粹地关注业务：</p>
+<ul>
+<li>不需要考虑 <strong>技术组件</strong>，后端的技术组件是现成的，可以直接取用，没有采购、版权和选型的烦恼</li>
+<li>不需要考虑如何 <strong>部署</strong>，部署过程完全托管到云端，由云端自动完成</li>
+<li>不需要考虑 <strong>算力</strong>，有整个数据中心支撑，算力可以认为是无限的</li>
+<li>不需要操心 <strong>运维</strong>，维护系统持续平稳运行是云计算服务商的责任而不再是开发者的责任</li>
+</ul>
+<p>在 UC Berkeley 的论文中，把无服务架构下开发者不再关心这些技术层面的细节，类比成 <strong>当年软件开发从汇编语言踏进高级语言的发展过程</strong>，开发者可以不去关注寄存器、信号、中断等与机器底层相关的细节，从而令生产力得到极大解放。</p>
+<p>无服务架构能够降低一些应用的开发和运维环节的成本，但无服务云函数会有冷启动时间，不便依赖服务端状态，响应的性能不太好：</p>
+<ul>
+<li>优势：不需要交互的 <strong>离线大规模计算</strong>、多数 Web 资讯类网站、小程序、公共 API 服务、移动应用服务端等都契合于无服务架构所擅长的短链接、无状态、适合 <strong>事件驱动的交互形式</strong></li>
+<li>劣势：对于那些信息管理系统、网络游戏等应用，或者说对于 <strong>具有业务逻辑复杂、依赖服务端状态、响应速度要求较高、需要长链接等特征的应用</strong>，至少目前是相对不那么适合的</li>
+</ul>
+<blockquote>
+<p>如果说微服务架构是分布式系统这条路当前所能做到的极致，那无服务架构，也许就是“不分布式”的云端系统这条路的起点。</p>
+<p>将无服务作为技术层面的架构，将微服务视为应用层面的架构，把它们组合起来使用是完全合理可行的。以后，无论是物理机、虚拟机、容器，抑或是无服务云函数，都会是微服务实现方案的候选项之一。 <strong>（微服务与无服务并存）</strong></p>
+</blockquote>
+<h2 id="架构师的视角"><a href="#架构师的视角" class="headerlink" title="架构师的视角"></a>架构师的视角</h2><h3 id="访问远程调用"><a href="#访问远程调用" class="headerlink" title="访问远程调用"></a>访问远程调用</h3><blockquote>
+<p>远程服务调用（Remote Procedure Call，RPC）在计算机科学中已经存在超过四十年时间</p>
+</blockquote>
+<ul>
+<li>进程间通信<ul>
+<li>一个进程内的函数调用依赖<strong>栈内存</strong></li>
+<li>不同进程之间交换数据的问题被称为“进程间通信”（Inter-Process Communication，IPC）<ul>
+<li><strong>管道</strong>（Pipe）&#x2F; <strong>具名管道</strong>（Named Pipe）<ul>
+<li>普通管道只用于有亲缘关系的进程（由一个进程启动的另外一个进程）间的通信</li>
+<li>具名管道允许无亲缘关系的进程间的通信，管道典型的应用就是命令行中的“<code>|</code>”操作符</li>
+</ul>
+</li>
+<li><strong>信号</strong>（Signal）用于通知目标进程有某种事件发生，除进程间通信外，进程还可以给自身发送信号<ul>
+<li><code>kill -9 pid</code> 表示由 Shell 进程向指定 PID 的进程发送 SIGKILL 信号</li>
+</ul>
+</li>
+<li><strong>信号量</strong>（Semaphore）用于在两个进程之间同步协作手段，相当于操作系统提供的一个特殊变量</li>
+<li><strong>消息队列</strong>（Message Queue）<ul>
+<li>克服了信号承载信息量少、管道只能用于无格式字节流以及缓冲区大小受限等缺点</li>
+<li>但实时性相对受限</li>
+</ul>
+</li>
+<li><strong>共享内存</strong>（Shared Memory）允许多个进程访问共同一块公共内存空间，这是效率最高的进程间通信形式</li>
+<li><strong>本地套接字接口</strong>（UNIX&#x2F;IPC Socket），套接字接口则是更普适的进程间通信机制，可用于不同机器之间的进程通信<ul>
+<li>当 <strong>仅限于本机进程间通信时</strong>，套接字接口被优化，不会经过网络协议栈，不需要打包拆包、计算校验和、维护序号和应答等操作</li>
+<li>将应用层数据从一个进程复制到另一个进程，这种进程间通信方式即本地套接字接口（UNIX Domain Socket &#x2F; IPC Socket）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通信的成本<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h3 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h3><h3 id="透明多级分流系统"><a href="#透明多级分流系统" class="headerlink" title="透明多级分流系统"></a>透明多级分流系统</h3><h3 id="架构安全性"><a href="#架构安全性" class="headerlink" title="架构安全性"></a>架构安全性</h3><h2 id="分布式的基石"><a href="#分布式的基石" class="headerlink" title="分布式的基石"></a>分布式的基石</h2><h2 id="不可变基础设施"><a href="#不可变基础设施" class="headerlink" title="不可变基础设施"></a>不可变基础设施</h2><h2 id="技术方法论"><a href="#技术方法论" class="headerlink" title="技术方法论"></a>技术方法论</h2>
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/10/28/availability/">《深入架构原理与实践》📖✍🏻</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

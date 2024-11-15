@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Go 数据结构与算法、SQL 刷题 ⌨️ - H-sediment</title>
+
+  
+    <meta name="description" content="刷题记录和总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go 数据结构与算法、SQL 刷题 ⌨️">
+<meta property="og:url" content="http://example.com/2023/11/13/gocode/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="刷题记录和总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-15T11:10:20.959Z">
+<meta property="article:author" content="hcjjj">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Go 数据结构与算法、SQL 刷题 ⌨️</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="toc-number">3.</span> <span class="toc-text">哈希表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">4.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97"><span class="toc-number">5.</span> <span class="toc-text">栈与队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E8%B0%83%E6%A0%88"><span class="toc-number">6.</span> <span class="toc-text">单调栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">7.</span> <span class="toc-text">二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%BA%AF"><span class="toc-number">8.</span> <span class="toc-text">回溯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%AA%E5%BF%83"><span class="toc-number">9.</span> <span class="toc-text">贪心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-number">10.</span> <span class="toc-text">动态规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E8%AE%BA"><span class="toc-number">11.</span> <span class="toc-text">图论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LC%F0%9F%94%A5100"><span class="toc-number">12.</span> <span class="toc-text">LC🔥100</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86-I-O"><span class="toc-number">13.</span> <span class="toc-text">标准 I&#x2F;O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">14.</span> <span class="toc-text">构造二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A6%E5%99%A8%E5%BA%93"><span class="toc-number">15.</span> <span class="toc-text">武器库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%8E%92%E5%BA%8F"><span class="toc-number">16.</span> <span class="toc-text">常见排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8E%E4%B8%BA%E7%AC%94%E8%AF%95%E5%9B%9E%E9%A1%BE"><span class="toc-number">17.</span> <span class="toc-text">华为笔试回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%96%99"><span class="toc-number">18.</span> <span class="toc-text">资料</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Golang/">Golang</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-11-12T16:00:00.000Z">2023-11-13</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Go 数据结构与算法、SQL 刷题 ⌨️</span></h1>
+<p>刷题记录和总结</p>
+<span id="more"></span>
+
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><table>
+<thead>
+<tr>
+<th align="left">题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">704. 二分查找</a></td>
+<td>有序无重是前提，左右指针，不断缩小查找范围，注意边界处理</td>
+<td>1️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">27. 移除元素</a></td>
+<td>快慢指针替换位置</td>
+<td>1️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">977. 有序数组的平方</a></td>
+<td>两头对比选择，从后往前填充</td>
+<td>2️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/">209. 长度最小的子数组</a></td>
+<td>双指针滑动收缩窗口</td>
+<td>2️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix-ii/">59. 螺旋矩阵 II</a></td>
+<td>模拟过程，一圈圈往里缩，注意统一 [i, j) 填充范围</td>
+<td>2️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/">15. 三数之和</a></td>
+<td>排序 + 双指针 + 剪枝</td>
+<td>✅</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum/">18. 四数之和</a></td>
+<td>排序 + 双指针 + 剪枝（上一题多加一个 for）</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><table>
+<thead>
+<tr>
+<th align="left">题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-linked-list-elements/">203. 移除链表元素</a></td>
+<td>设置虚拟头节点，统一处理</td>
+<td>3️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/">707. 设计链表</a></td>
+<td>注意 for 后 cur 的定位</td>
+<td>3️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">206. 反转链表</a></td>
+<td>双指针同步移动，注意循环终止条件</td>
+<td>3️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/">24. 两两交换链表中的节点</a></td>
+<td>虚拟头节点 + 两个记录节点</td>
+<td>4️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">19. 删除链表的倒数第 N 个结点</a></td>
+<td>虚拟头节点，快慢指针</td>
+<td>4️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/">面试题 02.07. 链表相交</a></td>
+<td>双指针走完互换起点，结尾的 nil 也可看做是交点</td>
+<td>4️⃣</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/">142. 环形链表 II</a></td>
+<td>快慢指针环内相遇后，起点位置和慢指针同步移动一定会相遇</td>
+<td>4️⃣</td>
+</tr>
+</tbody></table>
+<h2 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h2><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-anagram/">242. 有效的字母异位词</a></td>
+<td>分别遍历，先 ++ 后 –，最后判断</td>
+<td>5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-arrays/">349. 两个数组的交集</a></td>
+<td>分别遍历，判断收集去重</td>
+<td>5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/happy-number/">202. 快乐数</a></td>
+<td>模拟，map 判断是否出现过</td>
+<td>5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></td>
+<td>遍历，一边判断一边存 [val] index</td>
+<td>5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum-ii/">454. 四数相加 II</a></td>
+<td>两个双重循环，用 map 优化</td>
+<td>6️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ransom-note/">383. 赎金信</a></td>
+<td>++ 后 –，– 时判断是否  &lt; 0</td>
+<td>6️⃣</td>
+</tr>
+</tbody></table>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">344. 反转字符串</a></td>
+<td>双指针，往里夹</td>
+<td>7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string-ii/">541. 反转字符串 II</a></td>
+<td>局部的反转 + 最后的边界判断</td>
+<td>7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string/">151. 反转字符串中的单词</a></td>
+<td>双指针删除冗余空格&#x2F;定位单词 + 反转整体再反转每个单词</td>
+<td>8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">28. 找出字符串中第一个匹配项的下标</a></td>
+<td>Knuth-Morris-Pratt 字符串查找算法</td>
+<td>🤡 $O(n * m)$ → $O(n + m)$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/repeated-substring-pattern/">459. 重复的子字符串</a></td>
+<td>KMP 基础上，首尾拼接查中间</td>
+<td>🤡</td>
+</tr>
+</tbody></table>
+<h2 id="栈与队列"><a href="#栈与队列" class="headerlink" title="栈与队列"></a>栈与队列</h2><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-stack-using-queues/">225. 用队列实现栈</a></td>
+<td>使用两个 <code>slice</code> ，每添加一个元素都需要倒腾</td>
+<td>9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-queue-using-stacks/">232. 用栈实现队列</a></td>
+<td>输入栈 + 输出栈，出的时候触发倒腾</td>
+<td>9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">20. 有效的括号</a></td>
+<td>用 <code>slice</code> 模拟栈，遍历时添加或消除括号</td>
+<td>9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/">1047. 删除字符串中的所有相邻重复项</a></td>
+<td>在栈中玩消消乐</td>
+<td>9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/">150. 逆波兰表达式求值</a></td>
+<td>“后缀表达式” 求解，用栈模拟</td>
+<td>1️⃣0️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sliding-window-maximum/">239. 滑动窗口最大值</a></td>
+<td>实现 “单调队列”，记录窗口内的最大值</td>
+<td>1️⃣0️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-elements/">347. 前 K 个高频元素</a></td>
+<td>“优先队列”（添加和移除元素的时候维护单调性）；统计后排序（偷懒做法）</td>
+<td>1️⃣0️⃣</td>
+</tr>
+</tbody></table>
+<h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/daily-temperatures/">739. 每日温度</a></td>
+<td>栈顶到栈底递增（即遇到 <strong>第一个</strong> 更高温，才开始更新等待的天数）</td>
+<td>4️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/">496. 下一个更大元素 I</a></td>
+<td>上一题套了一个哈希映射</td>
+<td>4️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-ii/">503. 下一个更大元素 II</a></td>
+<td>在遍历的过程中使用 % 模拟走两遍 <code>nums</code></td>
+<td>4️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trapping-rain-water/">42. 接雨水</a></td>
+<td>凹，横着计算面积，算完一个面积后记得更新栈顶元素</td>
+<td>4️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/largest-rectangle-in-histogram/">84. 柱状图中最大的矩形</a></td>
+<td>凸，数组头尾加个 0 避免数组原来就有序不走计算逻辑和拿不到 left</td>
+<td>4️⃣2️⃣</td>
+</tr>
+</tbody></table>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-preorder-traversal/">144. 二叉树的前序遍历</a>，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94. 中</a>，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-postorder-traversal/">145. 后</a></td>
+<td>递归（注意 slice 是一个值类型）；迭代用个栈，注意中序的访问和处理节点不一致；后序为【左右中】即【中右左】的反转</td>
+<td>1️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-level-order-traversal/">102. 二叉树的层序遍历</a></td>
+<td>使用 <code>[]*TreeNode</code> 保存每一层节点</td>
+<td>1️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/">226. 翻转二叉树</a></td>
+<td>每个节点的左右都交换一下即整棵树翻转（中序遍历不行）</td>
+<td>1️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/symmetric-tree/">101. 对称二叉树</a></td>
+<td>只能后序遍历（左右中 + 右左中）</td>
+<td>1️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. 二叉树的最大深度</a></td>
+<td>根节点的高度就是二叉树的最大深度（后序）</td>
+<td>1️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">111. 二叉树的最小深度</a></td>
+<td>和上一题对比，区别在于处理非叶子节点的逻辑（后序）</td>
+<td>1️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/balanced-binary-tree/">110.平衡二叉树</a></td>
+<td>计算以每个节点为根节点的二叉树的高度（后序）</td>
+<td>1️⃣3️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-paths/">257. 二叉树的所有路径</a></td>
+<td>前序遍历，字符串的值传递隐含了回溯（先序）</td>
+<td>1️⃣3️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-left-leaves/">404. 左叶子之和</a></td>
+<td>通过节点的父节点来判断其左孩子是不是左叶子</td>
+<td>1️⃣3️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-complete-tree-nodes/">222. 完全二叉树的节点个数</a></td>
+<td>可以利用完全二叉树的特性，公式求解（后序）</td>
+<td>1️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">513. 找树左下角的值</a></td>
+<td>递归：深度最大的叶子节点是最后一行（先序）；迭代：模板</td>
+<td>1️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum/">112. 路径总和</a></td>
+<td>函数的值传递隐含了回溯，递归函数需要返回值</td>
+<td>1️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum-ii/">113. 路径总和 II</a></td>
+<td>递归函数不需要返回值，注意指针类型会被修改要 copy 一下</td>
+<td>1️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">106. 从中序与后序遍历序列构造二叉树</a></td>
+<td>用散列表记录元素再前序中的索引，根据子树元素个数切割数组，[l, r]</td>
+<td>1️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-binary-tree/">654. 最大二叉树</a></td>
+<td>前序遍历递归构建</td>
+<td>1️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-binary-trees/">617. 合并二叉树</a></td>
+<td>同时遍历两棵树，递归的优雅表现</td>
+<td>1️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/description/">700.二叉搜索树中的搜索</a></td>
+<td>利用二叉搜索树的性质</td>
+<td>1️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">98.验证二叉搜索树</a></td>
+<td>注意，不能陷入只判断局部（先序）</td>
+<td>1️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">236. 二叉树的最近公共祖先</a></td>
+<td>遍历整棵树，判断两种情况（后序）</td>
+<td>1️⃣6️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-mode-in-binary-search-tree/">501. 二叉搜索树中的众数</a></td>
+<td>计数法不使用额外空间， <code>prev</code> 指针（中序）</td>
+<td>1️⃣6️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">530. 二叉搜索树的最小绝对差</a></td>
+<td>在一个有序数组上求差值（中序）</td>
+<td>1️⃣6️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/">235. 二叉搜索树的最近公共祖先</a></td>
+<td>遇到 cur 节点数值在 [q, p] 区间中，即是最近公共祖先（往一边走就行，后序）</td>
+<td>1️⃣7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/insert-into-a-binary-search-tree/description/">701.二叉搜索树中的插入操作</a></td>
+<td>通过递归返回值来加入新节点，不涉及结构的调整（后序查找目标位置）</td>
+<td>1️⃣7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-node-in-a-bst/">450.删除二叉搜索树中的节点</a></td>
+<td>删除节点操作涉及到结构的调整（后序查找目标位置）</td>
+<td>1️⃣7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trim-a-binary-search-tree/">669. 修剪二叉搜索树</a></td>
+<td>不需要删除，只需要做结构的调整</td>
+<td>1️⃣8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">108. 将有序数组转换为二叉搜索树</a></td>
+<td>寻找分割点 <code>len(nums) / 2</code>，递归左区间和右区间</td>
+<td>1️⃣8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-bst-to-greater-tree/">538. 把二叉搜索树转换为累加树</a></td>
+<td>即有序数组求 <strong>从后到前</strong> 的累加数组，反中序（右左中）遍历顺序累加</td>
+<td>1️⃣8️⃣</td>
+</tr>
+</tbody></table>
+<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combinations/description/">77. 组合</a></td>
+<td>注意切片里面是指针不能直接放，要 copy 一下（组合不考虑顺序）</td>
+<td>1️⃣9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/description/">216.组合总和 III</a></td>
+<td>比上一题多了一个判断的条件，注意剪枝</td>
+<td>1️⃣9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">17. 电话号码的字母组合</a></td>
+<td>构建映射，不同集合，所以 i 都是从 0 开始</td>
+<td>1️⃣9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/">39. 组合总和</a></td>
+<td>可重复选取，不用控制遍历的起始位置+1；排序剪枝</td>
+<td>2️⃣0️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-ii/">40. 组合总和 II</a></td>
+<td>只能选取一次，在回溯中对同一层的元素去重，而不对同一枝去重</td>
+<td>2️⃣0️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/">131. 分割回文串</a></td>
+<td>切割线，切割问题抽象为组合问题</td>
+<td>2️⃣0️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">93. 复原 IP 地址</a></td>
+<td>也是切割问题，终止条件判断不一样</td>
+<td>2️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/description/">78. 子集</a></td>
+<td>集合无重复元素，无条件收集所有节点，无需剪枝</td>
+<td>2️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets-ii/description/">90. 子集 II</a></td>
+<td>集合有重复元素，排序、同层去重、同枝不去</td>
+<td>2️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-decreasing-subsequences/">491. 非递减子序列</a></td>
+<td>不能排序，对同枝元素去重，注意 used 数组的位置，只负责本层</td>
+<td>2️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/">46. 全排列</a></td>
+<td>不包含重复元素，不需要 startIndex，需要标记一个排列里使用过的元素</td>
+<td>2️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations-ii/">47. 全排列 II</a></td>
+<td>包含重复元素，排序、同层去重、同枝不去</td>
+<td>2️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reconstruct-itinerary/">332. 重新安排行程</a></td>
+<td></td>
+<td>🤡</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-queens/">51. N 皇后</a></td>
+<td></td>
+<td>🤡</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sudoku-solver/">37. 解数独</a></td>
+<td></td>
+<td>🤡</td>
+</tr>
+</tbody></table>
+<h2 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h2><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/">455. 分发饼干</a></td>
+<td>两者都排序后，胃口主动遍历，饼干的被动（优先满足胃口大的）</td>
+<td>2️⃣3️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wiggle-subsequence/">376. 摆动序列</a></td>
+<td>“删除”单调坡度上的中间节点（统计峰值节点）</td>
+<td>2️⃣3️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></td>
+<td>当前“连续和”为负数的时候立刻放弃</td>
+<td>2️⃣3️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">122. 买卖股票的最佳时机 II</a></td>
+<td>只收集相邻的每个正利润</td>
+<td>2️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game/">55. 跳跃游戏</a></td>
+<td>判断跳跃覆盖范围能不能覆盖到终点</td>
+<td>2️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game-ii/">45. 跳跃游戏 II</a></td>
+<td>每超过上一次可达最大范围，需要跳跃次数 +1 后扩大范围</td>
+<td>2️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/">1005. K 次取反后最大化的数组和</a></td>
+<td>按绝对值进行排序</td>
+<td>2️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/gas-station/">134. 加油站</a></td>
+<td>当前累加 <code>rest[i]</code> 的和 <code>curSum</code> 一旦小于 0，起始位置至少要是 <code>i+1</code></td>
+<td>2️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/candy/">135. 分发糖果</a></td>
+<td>先 → 比 右 ＞ 左，再 ← 比  左 ＞ 右</td>
+<td>2️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lemonade-change/">860. 柠檬水找零</a></td>
+<td>简单模拟</td>
+<td>2️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/queue-reconstruction-by-height/">406. 根据身高重建队列</a></td>
+<td>按照身高大到小、人数小到大排序，优先按身高高的 k 来插入</td>
+<td>2️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">452. 用最少数量的箭引爆气球</a></td>
+<td>出现重叠的气球只需要一个箭；排序后，判断重叠区间，统计箭数</td>
+<td>2️⃣6️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-overlapping-intervals/">435. 无重叠区间</a></td>
+<td>按右界排序，用总数减去非重叠区间的个数；修改范围模拟移除</td>
+<td>2️⃣6️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-labels/">763. 划分字母区间</a></td>
+<td>字符最远出现位置下标和当前下标相等时即为分割点</td>
+<td>2️⃣6️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals/">56. 合并区间</a></td>
+<td>排序、遍历、比较（拿结果集的最后一个元素）、合并</td>
+<td>2️⃣7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/monotone-increasing-digits/">738. 单调递增的数字</a></td>
+<td>后往前遍历，-1 时触发后面范围都置 9</td>
+<td>2️⃣7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-cameras/">968. 监控二叉树</a></td>
+<td></td>
+<td>🤡</td>
+</tr>
+</tbody></table>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/">509. 斐波那契数</a></td>
+<td>感受一下</td>
+<td>2️⃣8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/">70. 爬楼梯</a></td>
+<td>上一题套了一个壳</td>
+<td>2️⃣8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/">746. 使用最小花费爬楼梯</a></td>
+<td>到达第 <code>i</code> 台阶所花费的最少体力为 <code>dp[i]</code></td>
+<td>2️⃣8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/">62.不同路径</a></td>
+<td>从 (0, 0) 出发，到 (i, j)  有 <code>dp[i][j]</code> 条不同的路径</td>
+<td>2️⃣9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths-ii/">63. 不同路径 II</a></td>
+<td>障碍标记对应的 <code>dp[i][j]</code> 保持初始值（0）</td>
+<td>2️⃣9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/integer-break/">343. 整数拆分</a></td>
+<td>分拆正整数 i 可以得到的最大乘积为 <code>dp[i]</code>，<code>max((i - j) * j), dp[i - j] * j)</code></td>
+<td>2️⃣9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></td>
+<td>1 - i 为节点组成的二叉搜索树的个数为 dp [i]，递推公式不好找</td>
+<td>🤡</td>
+</tr>
+<tr>
+<td><strong>01 背包（二维&#x2F;一维）</strong></td>
+<td>每个物品只有一个，一维需要从大小遍历背包</td>
+<td>3️⃣0️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/description/">416. 分割等和子集</a></td>
+<td>背包大小为 <code>sum / 2</code>，商品大小和价值一样，若 <code>dp[target] == target</code> 则存在 <strong>（装满背包的最大价值&#x2F;重量）</strong></td>
+<td>3️⃣0️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/last-stone-weight-ii/">1049. 最后一块石头的重量 II</a></td>
+<td>让石头分成重量最相同的两堆，相撞之后剩下的石头最小 <strong>（装满背包的最大价值&#x2F;重量）</strong></td>
+<td>3️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/">494. 目标和</a></td>
+<td><code>dp[j]</code> 表示填满 j（包括 j）这么大容积的包，有 <code>dp[j]</code> 种方法 <strong>（装满背包的组合数）</strong></td>
+<td>🤨</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/">474. 一和零</a></td>
+<td>物品的重量&#x2F;背包 有两个维度 <strong>（背包可以装的最大物品数量）</strong> 🔢</td>
+<td>3️⃣1️⃣</td>
+</tr>
+<tr>
+<td><strong>完全背包</strong></td>
+<td>每件物品都有无限个，一维需要从小到大遍历背包</td>
+<td>3️⃣1️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change-ii/">518. 零钱兑换 II</a></td>
+<td>凑成总金额 j 的货币组合数为 <code>dp[j]</code> <strong>（装满背包的组合数）</strong></td>
+<td>3️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iv/">377. 组合总和 Ⅳ</a></td>
+<td>注意是“<strong>排列</strong>”数，需要先遍历背包再遍历物品 <strong>（装满背包的排列数）</strong></td>
+<td>3️⃣2️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change/">322. 零钱兑换</a></td>
+<td>凑足总额为 <code>j</code> 所需钱币的最少个数为 <code>dp[j]</code> <strong>（装满背包的最小物品数量，加是否装满的判断）🔢</strong></td>
+<td>3️⃣3️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数</a></td>
+<td>和为 j 的完全平方数的最少数量为 dp [j]，注意初始化 <strong>（装满背包的最小物品数量）🔢</strong></td>
+<td>3️⃣3️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-break/">139. 单词拆分</a></td>
+<td>wordDict 是物品，s 是背包，物品能不能装入是看能不能和背包后缀匹配 <strong>（装满背包的排列数）</strong></td>
+<td>3️⃣3️⃣</td>
+</tr>
+<tr>
+<td><strong>打家劫舍</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber/">198. 打家劫舍</a></td>
+<td>考虑下标 i（包括 i）以内的房屋，最多可以偷窃的金额为 <code>dp [i]</code></td>
+<td>3️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-ii/">213. 打家劫舍 II</a></td>
+<td>包含首元素，不包含尾元素；包含尾元素，不包含首元素；两种情况取最大值</td>
+<td>3️⃣4️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-iii/">337. 打家劫舍 III</a></td>
+<td>dp 数组下标为 0 记录不偷该节点所得到的的最大金钱，下标为 1 记录偷该节点所得到的的最大金钱 <strong>（后序遍历）</strong></td>
+<td>3️⃣4️⃣</td>
+</tr>
+<tr>
+<td><strong>买卖股票</strong></td>
+<td>买入卖出，但是同时只能持有一支股票</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></td>
+<td><code>dp[i][0]</code> 表示第 i 天不持有，<code>dp[i][1]</code> 表示第 i 天持有股票所得最多现金 <strong>（只能买卖一次）</strong></td>
+<td>3️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/description/">122.买卖股票的最佳时机 II</a></td>
+<td>可以完成多笔交易，最多只能持有一股股票 <strong>（可以买卖多次）</strong></td>
+<td>3️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/description/">123.买卖股票的最佳时机 III</a></td>
+<td>可以完成最多两笔交易，不能同时 <strong>（可以买卖最多两次）</strong></td>
+<td>3️⃣5️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/">188. 买卖股票的最佳时机 IV</a></td>
+<td>可以完成最多 k 笔交易，，除了 0 以外，偶数就是卖出，奇数就是买入 <strong>（可以买卖最多 k 次）</strong></td>
+<td>3️⃣6️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309. 买卖股票的最佳时机含冷冻期</a></td>
+<td>卖出股票后，你无法在第二天买入股票，即冷冻期为 1 天 <strong>（可以买卖最多次）</strong></td>
+<td>3️⃣6️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费</a></td>
+<td>卖出的时候加个手续费即可 <strong>（可以买卖多次）</strong></td>
+<td>3️⃣6️⃣</td>
+</tr>
+<tr>
+<td><strong>子序列问题</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-subsequence/description/">300.最长递增子序列</a></td>
+<td><code>dp[i]</code> 表示 <code>i</code> 之前包括 <code>i</code> 的以 <code>nums[i]</code> 结尾的最长递增子序列的长度</td>
+<td>3️⃣7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-continuous-increasing-subsequence/description/">674. 最长连续递增序列</a></td>
+<td>只要比较 <code>nums[i]</code> 与 <code>nums[i - 1]</code>，而不用去比较 <code>nums[j]</code> 与 <code>nums[i]</code>（j 是在 0 到 i 之间遍历）</td>
+<td>3️⃣7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-length-of-repeated-subarray/">718. 最长重复子数组</a></td>
+<td>子数组就是连续子序列，以下标 <code>i</code> 为结尾的 A，和以下标 <code>j</code> 为结尾的 B，最长重复子数组长度为 <code>dp[i][j]</code>，注意初始化</td>
+<td>3️⃣7️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-subsequence/">1143.最长公共子序列</a></td>
+<td>较上一题就是少了“连续”的要求，如果不等取各自前一个状态的最大值，注意初始化和上面有不同，<strong>两者都可以删除元素</strong></td>
+<td>3️⃣8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/uncrossed-lines/description/">1035.不相交的线</a></td>
+<td>与上一题相同，只要相对顺序不变就行（就是求最长公共子序列）</td>
+<td>3️⃣8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></td>
+<td>（连续）子数组，<code>dp[i]</code> 表示以 <code>i</code> 为结尾的子数组的最大和</td>
+<td>3️⃣8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence/">392. 判断子序列</a></td>
+<td>以下标 <code>i</code> 为结尾的 s，和以下标 <code>j</code> 为结尾的 t，相同子序列的长度为 <code>dp[i][j]</code>，<strong>删除元素只能是 t（判断最长公共子序列长度是否和 t 长度一样即可）</strong></td>
+<td>3️⃣8️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/distinct-subsequences/">115. 不同的子序列</a></td>
+<td>以下标 <code>i</code> 为结尾的 s 子序列中出现以 <code>j</code> 为结尾的 t 的个数为 <code>dp[i][j]</code>，较上一题初始化和递推公式不同</td>
+<td>3️⃣9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-operation-for-two-strings/">583. 两个字符串的删除操作</a></td>
+<td>找出最长公共子序列，用两个字符串的总长度减去两个最长公共子序列的长度</td>
+<td>3️⃣9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/edit-distance/">72. 编辑距离</a></td>
+<td></td>
+<td>3️⃣9️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindromic-substrings/">647. 回文子串</a></td>
+<td></td>
+<td>4️⃣0️⃣</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-subsequence/">516. 最长回文子序列</a></td>
+<td></td>
+<td>4️⃣0️⃣</td>
+</tr>
+</tbody></table>
+<h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="LC🔥100"><a href="#LC🔥100" class="headerlink" title="LC🔥100"></a>LC🔥100</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/studyplan/top-100-liked/">LeetCode 热题 100</a></p>
+<table>
+<thead>
+<tr>
+<th>题号</th>
+<th>思路</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>哈希</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/">1. 两数之和</a></td>
+<td>哈希（key: val，val: index）</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/group-anagrams/">49. 字母异位词分组</a></td>
+<td><code>map[string][]string</code>、排序每个元素后作为 key</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-consecutive-sequence/">128. 最长连续序列</a></td>
+<td>map 用来快速查询某个元素是否存在并去重优化</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>双指针</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/">283. 移动零</a></td>
+<td>快慢指针，移动非 0，末尾置 0</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/container-with-most-water/">11. 盛最多水的容器</a></td>
+<td>左右指针往里夹，短板效应</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/">15. 三数之和</a></td>
+<td>排序去重，一数外循环，两数左右指针往里夹</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum/">18. 四数之和</a></td>
+<td>套个 for + 三数之和</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trapping-rain-water/">42. 接雨水</a></td>
+<td>维护单调栈（栈底到栈顶递减），识别凹槽，持续按照行计算 ⬅️</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>滑动窗口</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">3. 无重复字符的最长子串</a></td>
+<td>一边遍历一边使用 map 记录字符的最后位置，滑动窗口</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-all-anagrams-in-a-string/">438. 找到字符串中所有字母异位词</a></td>
+<td>滑动窗口 + [] int 记录判断是否为异位词</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>子串</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subarray-sum-equals-k/">560. 和为 K 的子数组</a></td>
+<td>前缀和 + 哈希表优化（记录每个前缀和出现的次数）</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sliding-window-maximum/">239. 滑动窗口最大值</a></td>
+<td>实现 “单调队列”，记录窗口内的最大值</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/">76. 最小覆盖子串</a></td>
+<td>哈希表记录，覆盖到后缩小范围，移除无用元素</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>普通数组</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></td>
+<td>贪心：遇到负数直接置零；动规：取考虑 num [i] 后的最大值</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals/">56. 合并区间</a></td>
+<td>排序后遍历，判断修改右边界 or 直接添加</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-array/">189. 轮转数组</a></td>
+<td>整体翻转后再翻转两个局部</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/product-of-array-except-self/">238. 除自身以外数组的乘积</a></td>
+<td>遍历两次，计算每个元素左侧&#x2F;右侧乘积</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/first-missing-positive/">41. 缺失的第一个正数</a></td>
+<td>把每个数放在 <code>nums[nums[i] - 1]</code> 的位置上，再遍历检查</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>矩阵</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/set-matrix-zeroes/">73. 矩阵置零</a></td>
+<td>使用第一行&#x2F;列记录该行&#x2F;列是否有 0，再遍历一次判断置 0</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix/">54. 螺旋矩阵</a></td>
+<td>定义好四个边界，模拟</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-image/">48. 旋转图像</a></td>
+<td>先转置（行列交换）再左右对称交换位置</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix-ii/">240. 搜索二维矩阵 II</a></td>
+<td>初始定位到第一行的最后一个元素，之后遍历判断移动行&#x2F;列</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>链表</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/">160. 相交链表</a></td>
+<td>到头了就走一遍对方的路</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">206. 反转链表</a></td>
+<td>pre cur temp</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-linked-list/">234. 回文链表</a></td>
+<td>快慢指针找到链表中点，反转后半部分后逐个与前半部分比较</td>
+<td>$O(1)$ 空间</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle/">141. 环形链表</a></td>
+<td>快慢指针，如果有环一定回相遇，有一个为 nil 就算没环</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/">142. 环形链表 II</a></td>
+<td>快慢相遇后，头节点和慢指针同步移动，返回相遇点；或者哈希</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-sorted-lists/">21. 合并两个有序链表</a></td>
+<td>模拟合并，判断处理剩余部分</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-two-numbers/">2. 两数相加</a></td>
+<td>模拟相加，记录进位，节点为 nil 给个默认值 0</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">19. 删除链表的倒数第 N 个结点</a></td>
+<td>快慢指针，fast 先移动，到位后一起移动 slow 定位到待删除节点前一个位置</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/">24. 两两交换链表中的节点</a></td>
+<td>设置虚拟头节点加两个临时记录的指针</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-nodes-in-k-group/">25. K 个一组翻转链表</a></td>
+<td>反转链表（head, tail → tail, head），上一个子链的 tail 是下一个的 hair</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/copy-list-with-random-pointer/">138. 随机链表的复制</a></td>
+<td><code>map[*Node]*Node</code> 建立新旧节点的映射关系，map [旧] → 新</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-list/">148. 排序链表</a></td>
+<td>归并排序，快慢指针找到中点，合并两个有序链表</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-k-sorted-lists/">23. 合并 K 个升序链表</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lru-cache/">146. LRU 缓存</a></td>
+<td>双向链表 + 哈希表</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>二叉树</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94. 二叉树的中序遍历</a></td>
+<td>递归&#x2F;迭代（用个栈优先向左子树方向保存节点）</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. 二叉树的最大深度</a></td>
+<td>后序递归，<code>depth := max(leftDepth, rightDepth) + 1</code></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/">226. 翻转二叉树</a></td>
+<td>后序递归，翻转每一个节点的左右孩子</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/symmetric-tree/">101. 对称二叉树</a></td>
+<td><code>dfs(left.Left, right.Right) &amp;&amp; dfs(left.Right, right.Left)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/diameter-of-binary-tree/">543. 二叉树的直径</a></td>
+<td>后序递归，和二叉树最大深度是一样的，中间多了一个判断收集结果</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-level-order-traversal/">102. 二叉树的层序遍历</a></td>
+<td>用两个队列，<code>curLevel</code> 和 <code>nextLevel</code> 轮换，两个 for</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">108. 将有序数组转换为二叉搜索树</a></td>
+<td>前序遍历，<code>idx := len(nums)/2</code></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">98. 验证二叉搜索树</a></td>
+<td>前序遍历，检查的时候需要传递节点的</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-smallest-element-in-a-bst/">230. 二叉搜索树中第 K 小的元素</a></td>
+<td>中序遍历是有序的，一边遍历一遍计算是否到第 K 个数</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-right-side-view/">199. 二叉树的右视图</a></td>
+<td>层序列遍历只收集每一层的最后一个节点</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/">114. 二叉树展开为链表</a></td>
+<td>前序遍历后构建链表&#x2F;前序遍历和展开同步进行</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">105. 从前序与中序遍历序列构造二叉树</a></td>
+<td>查找划分、递归构造</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum-iii/">437. 路径总和 III</a></td>
+<td>递归遍历每个节点，并在每个节点上去查找路径</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">236. 二叉树的最近公共祖先</a></td>
+<td>后序遍历，使用左右子树的递归结果来决定当前节点是否是最近公共祖先</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/">124. 二叉树中的最大路径和</a></td>
+<td>后序遍历，注意向上传递的额时候只能传递左右的一边</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>图论</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-islands/">200. 岛屿数量</a></td>
+<td>遇到一个岛屿则 DFS&#x2F;BFS（单源） 进行标记</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotting-oranges/">994. 腐烂的橘子</a></td>
+<td>多源 BFS（队列里面同时有多个元素），烂 🍊 入队并统计新 🍊 数量</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/course-schedule/">207. 课程表</a></td>
+<td>检测课程之间的依赖关系是否存在环（DFS 构建邻接表 &#x2F;BFS 移除入度为 0 的节点）</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-trie-prefix-tree/">208. 实现 Trie (前缀树)</a></td>
+<td>注意结构体的定义，其余都是遍历判断每个字符</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>回溯</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/">46. 全排列</a></td>
+<td>排列问题，可回头，不需要 start，使用 <code>used</code> 避免重复选择一个数字</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/">78. 子集</a></td>
+<td>组合问题，不可回头，需要遍历下标 start</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">17. 电话号码的字母组合</a></td>
+<td>组合问题，构建映射表，需要遍历下标 start</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/">39. 组合总和</a></td>
+<td>用 start 避免重复组合和支持无限次取，可排序剪枝</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/generate-parentheses/">22. 括号生成</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-search/">79. 单词搜索</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/">131. 分割回文串</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-queens/">51. N 皇后</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>二分查找</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-insert-position/">35. 搜索插入位置</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix/">74. 搜索二维矩阵</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/">34. 在排序数组中查找元素的第一个和最后一个位置</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-rotated-sorted-array/">33. 搜索旋转排序数组</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/">153. 寻找旋转排序数组中的最小值</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/median-of-two-sorted-arrays/">4. 寻找两个正序数组的中位数</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>栈</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">20. 有效的括号</a></td>
+<td>左括号入栈，右括号优先匹配或入栈，最后判断栈是否为空</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-stack/">155. 最小栈</a></td>
+<td>维护两个栈，一个用于存储所有的元素，另一个用于维护历史最小值</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/decode-string/">394. 字符串解码</a></td>
+<td>一个栈用于存储重复次数 <code>k</code>，另一个栈用于存储当前累积的字符串部分</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/daily-temperatures/">739. 每日温度</a></td>
+<td>维护一个单调递减栈（栈底到栈顶是递减的，栈顶是最小的）， 栈中存储的是索引</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/largest-rectangle-in-histogram/">84. 柱状图中最大的矩形</a></td>
+<td>维护一个单调递增栈（栈底到栈顶是递增的，栈顶是最大的）</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>堆</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-largest-element-in-an-array/">215. 数组中的第 K 个最大元素</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-elements/">347. 前 K 个高频元素</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-median-from-data-stream/">295. 数据流的中位数</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>贪心算法</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></td>
+<td>一次遍历模拟时间流逝，不断交易取最值</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game/">55. 跳跃游戏</a></td>
+<td>维护最大覆盖范围，遍历判断</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game-ii/">45. 跳跃游戏 II</a></td>
+<td>维护当前遍历位置最远可达，如果遍历位置到达最远可达则 <code>jump++</code></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-labels/">763. 划分字母区间</a></td>
+<td>遍历字符串并记录每个字符的最后出现位置，注意遍历的时候 end 需要取 max</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>动态规划</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/">70. 爬楼梯</a></td>
+<td>注意循环的结束条件</td>
+<td>$f(n) &#x3D; f(n-1) + f(n-2)$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pascals-triangle/">118. 杨辉三角</a></td>
+<td>创建模拟逐层填充</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber/">198. 打家劫舍</a></td>
+<td><code>dp[i]</code> 表示偷窃到 <code>i</code> 号房屋所获取的最高金额</td>
+<td>$dp[i]&#x3D;max(dp[i−1],nums[i]+dp[i−2])$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/perfect-squares/">279. 完全平方数</a></td>
+<td><code>dp[i]</code> 表示数字 <code>i</code> 最少可以由多少个完全平方数组成</td>
+<td>$dp[i]&#x3D;min(dp[i],dp[i−j^2]+1)$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change/">322. 零钱兑换</a></td>
+<td><code>dp[i]</code> 表示凑成金额 <code>i</code> 所需的最少硬币数</td>
+<td>$dp[i]&#x3D;min(dp[i],dp[i−coin]+1)$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-break/">139. 单词拆分</a></td>
+<td><code>dp[i]</code> 表示字符串 <code>s</code> 的前 <code>i</code> 个字符是否可以用字典中的单词拼接出来</td>
+<td>$dp[i] &#x3D; dp[j]$  &amp;&amp; $s[j:i] ∈ wordDict$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-subsequence/">300. 最长递增子序列</a></td>
+<td><code>dp[i]</code> 表示以 <code>nums[i]</code> 结尾的最长递增子序列的长度</td>
+<td>$dp[i]&#x3D;max(dp[i],dp[j]+1)$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-product-subarray/">152. 乘积最大子数组</a></td>
+<td>通过维护 <code>maxProd</code> 和 <code>minProd</code> 同时处理了包含当前元素的最大子数组乘积和最小子数组乘积的情况，而不需要回溯或进行额外的遍历（一次遍历即可）</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/">416. 分割等和子集</a></td>
+<td>0&#x2F;1 背包问题（先物后背，背倒序），<code>dp[i]</code> 表示是否能找到和为 <code>i</code> 的子集</td>
+<td>$dp[i] &#x3D; dp[i]$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-valid-parentheses/">32. 最长有效括号</a></td>
+<td>用栈来做更方便，先把 <code>-1</code> 压入栈作为哨兵</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>多维动态规划</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/">62. 不同路径</a></td>
+<td><code>dp[i][j]</code> 表示从左上角 <code>(0, 0)</code> 走到位置 <code>(i, j)</code> 的路径数</td>
+<td>$dp[i][j]&#x3D;dp[i−1][j]+dp[i][j−1]$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-path-sum/">64. 最小路径和</a></td>
+<td><code>dp[i][j]</code> 表示从左上角 <code>(0, 0)</code> 到达位置 <code>(i, j)</code> 的最小路径和</td>
+<td>$grid[i][j]+min(dp[i−1][j],dp[i][j−1])$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/">5. 最长回文子串</a></td>
+<td><code>dp[i][j]</code> 表示子串 <code>s[i:j+1]</code> 是否是回文</td>
+<td>$dp[i][j]&#x3D;(s[i]&#x3D;&#x3D;s[j])∧dp[i+1][j−1]$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-subsequence/">1143. 最长公共子序列</a></td>
+<td><code>dp[i][j]</code> 表示字符串 <code>text1</code> 的前 <code>i</code> 个字符和 <code>text2</code> 的前 <code>j</code> 个字符的最长公共子序列的长度</td>
+<td>$dp[i][j]&#x3D;dp[i−1][j−1]+1$$dp[i][j]&#x3D;max(dp[i−1][j],dp[i][j−1])$</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/edit-distance/">72. 编辑距离</a></td>
+<td><code>dp[i][j]</code> 表示将 <code>word1</code> 的前 <code>i</code> 个字符转换为 <code>word2</code> 的前 <code>j</code> 个字符所需的最少操作数</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>技巧</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/single-number/">136. 只出现一次的数字</a></td>
+<td>全部元素的异或运算结果即为数组中只出现一次的数字</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/majority-element/">169. 多数元素</a></td>
+<td>摩尔投票法，不通的元素数量 – 抵消、相同的 ++</td>
+<td>$O(1)$ 空间</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-colors/">75. 颜色分类</a></td>
+<td>分别遍历判断交换元素，确定 0 和 1 的位置</td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-permutation/">31. 下一个排列</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-duplicate-number/">287. 寻找重复数</a></td>
+<td>数字都在 <code>[1, n]</code> 范围内，快慢指针，即 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/huan-xing-lian-biao-ii-by-leetcode/">142. 环形链表 II</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="标准-I-O"><a href="#标准-I-O" class="headerlink" title="标准 I&#x2F;O"></a>标准 I&#x2F;O</h2><p><code>fmt.Scan()</code>、<code>fmt.Scanln()</code>、<code>bufio.NewScanner(os.Stdin)</code></p>
+<blockquote>
+<p>多组输入、大批量输请使用 <code>bufio.Reader</code> 来替换 <code>fmt.Scan</code> ❗️ 不然可能会出现超时</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/5657#question">OJ 在线编程常见输入输出练习场 </a></p>
+<p><strong>输入：</strong> 包括两个正整数 a, b (1 &lt;&#x3D; a, b &lt;&#x3D; 10^9)，输入数据包括多组<br><strong>输出：</strong>  a+b 的结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组数不确定，组内元素数量确定，无结束输入条件</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> a, b <span class="type">int</span></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="comment">//也可以用 fmt.Scan</span></span><br><span class="line">        n, _ := fmt.Scanln(&amp;a, &amp;b)  </span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span> &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fmt.Printf(<span class="string">&quot;%d\n&quot;</span>, a+b)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入：</strong> 第一行包括一个数据组数 t (1 &lt;&#x3D; t &lt;&#x3D; 100)，接下来每行包括两个正整数 a, b (1 &lt;&#x3D; a, b &lt;&#x3D; 10^9)<br><strong>输出：</strong> a+b 的结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组数确定，组内元素数量确定</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t, a, b <span class="type">int</span></span><br><span class="line">    fmt.Scanln(&amp;t)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; t; i++ &#123;</span><br><span class="line">        fmt.Scanln(&amp;a, &amp;b)</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%d\n&quot;</span>, a + b)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	reader := bufio.NewReader(os.Stdin)</span><br><span class="line">	<span class="comment">// 输入的组数</span></span><br><span class="line">	time, _ := reader.ReadString(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">	times, _ := strconv.Atoi(strings.TrimSpace(time))</span><br><span class="line">	<span class="comment">// 每一组两个元素</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; times; i++ &#123;</span><br><span class="line">		<span class="comment">// 读取 n 和 k</span></span><br><span class="line">		line, _ := reader.ReadString(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">		params := strings.Fields(line)</span><br><span class="line">		n, _ := strconv.Atoi(params[<span class="number">0</span>])</span><br><span class="line">		k, _ := strconv.Atoi(params[<span class="number">1</span>])</span><br><span class="line">		fmt.Println(n, k)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入：</strong> 包括两个正整数 a, b (1 &lt;&#x3D; a, b &lt;&#x3D; 10^9)，输入数据有多组，如果输入为 0 0 则结束输入<br><strong>输出：</strong> a+b 的结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组数不确定，组内元素确定，有结束输入条件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> a, b <span class="type">int</span></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        fmt.Scanln(&amp;a, &amp;b)</span><br><span class="line">        <span class="keyword">if</span> a == <span class="number">0</span> &amp;&amp; b == <span class="number">0</span> &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fmt.Printf(<span class="string">&quot;%d\n&quot;</span>, a + b)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入：</strong> 输入数据包括多组。每组数据一行，每行的第一个整数为整数的个数 n (1 &lt;&#x3D; n &lt;&#x3D; 100)，n 为 0 的时候结束输入。接下来 n 个正整数，即需要求和的每个正整数。<br><strong>输出：</strong> 每组数据输出求和的结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组数不确定，组内元素数量确定并用数组装，有结束输入条件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t <span class="type">int</span></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> sum <span class="type">int</span></span><br><span class="line">        fmt.Scan(&amp;t)</span><br><span class="line">        <span class="keyword">if</span> t == <span class="number">0</span> &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            a := <span class="built_in">make</span>([]<span class="type">int</span>, t)</span><br><span class="line">            <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; t; i++ &#123;</span><br><span class="line">                fmt.Scan(&amp;a[i])</span><br><span class="line">                sum += a[i]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Println(sum)</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入：</strong> 第一行包括一个正整数 t (1 &lt;&#x3D; t &lt;&#x3D; 100)，表示数据组数。接下来 t 行, 每行一组数据。每行的第一个整数为整数的个数 n (1 &lt;&#x3D; n &lt;&#x3D; 100)。接下来 n 个正整数，即需要求和的每个正整数。<br><strong>输出：</strong> 每组数据输出求和的结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组数确定，组内元素数量确定</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t <span class="type">int</span></span><br><span class="line">    fmt.Scan(&amp;t)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; t; i++ &#123;</span><br><span class="line">        <span class="keyword">var</span> num, sum, a <span class="type">int</span></span><br><span class="line">        fmt.Scan(&amp;num)</span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; num; j++ &#123;</span><br><span class="line">            fmt.Scan(&amp;a)</span><br><span class="line">            sum += a</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Println(sum)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入：</strong> 输入数据有多组，每行表示一组输入数据。每行的第一个整数为整数的个数 n(1 &lt;&#x3D; n &lt;&#x3D; 100)。接下来 n 个正整数, 即需要求和的每个正整数。<br><strong>输出：</strong> 每组数据输出求和的结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组数不确定，组内元素数量确定并用数组装，无结束输入条件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t <span class="type">int</span></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> sum <span class="type">int</span></span><br><span class="line">        n, _ := fmt.Scan(&amp;t)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span> &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            nums := <span class="built_in">make</span>([]<span class="type">int</span>, t)</span><br><span class="line">            <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; t; i++ &#123;</span><br><span class="line">                fmt.Scan(&amp;nums[i])</span><br><span class="line">                sum += nums[i]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Println(sum)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入：</strong> 输入数据有多组，每行表示一组输入数据。每行不定有 n (1 &lt;&#x3D; n &lt;&#x3D; 100) 个整数，空格隔开。<br><strong>输出：</strong> 每组数据输出求和的结果</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组数不确定，组内元素数量不确定⚠️，无结束输入条件</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;bufio&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;os&quot;</span></span><br><span class="line">    <span class="string">&quot;strconv&quot;</span></span><br><span class="line">    <span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    sc := bufio.NewScanner(os.Stdin)</span><br><span class="line">    <span class="comment">//每次读入一行</span></span><br><span class="line">    <span class="keyword">for</span> sc.Scan() &#123; </span><br><span class="line">        <span class="comment">//通过空格将他们分割，并存入一个字符串切片</span></span><br><span class="line">        strs := strings.Split(sc.Text(), <span class="string">&quot; &quot;</span>)  </span><br><span class="line">        <span class="keyword">var</span> sum <span class="type">int</span></span><br><span class="line">        <span class="keyword">for</span> i := <span class="keyword">range</span> strs &#123;</span><br><span class="line">            <span class="comment">//将字符串转换为 int</span></span><br><span class="line">            val, _ := strconv.Atoi(strs[i])   </span><br><span class="line">            sum += val</span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Println(sum)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入：</strong> 输入有两行，第一行 n，第二行是 n 个空格隔开的字符串<br><strong>输出：</strong> 输出一行排序后的字符串，空格隔开，无结尾空格</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组数确定，组内元素数量确定</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;sort&quot;</span></span><br><span class="line">	<span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> t <span class="type">int</span></span><br><span class="line">    fmt.Scanln(&amp;t)</span><br><span class="line">    strs := <span class="built_in">make</span>([]<span class="type">string</span>, t)</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; t; i++ &#123;</span><br><span class="line">        fmt.Scan(&amp;strs[i])</span><br><span class="line">    &#125;</span><br><span class="line">    sort.Strings(strs)</span><br><span class="line">    fmt.Println(strings.Join(strs, <span class="string">&quot; &quot;</span>))</span><br><span class="line">    </span><br><span class="line">	<span class="comment">// sc := bufio.NewScanner(os.Stdin)</span></span><br><span class="line">	<span class="comment">// for sc.Scan() &#123;</span></span><br><span class="line">	<span class="comment">// 	strs := strings.Split(sc.Text(), &quot; &quot;)</span></span><br><span class="line">	<span class="comment">// 	sort.Strings(strs)</span></span><br><span class="line">	<span class="comment">// 	fmt.Println(strings.Join(strs, &quot; &quot;))</span></span><br><span class="line">	<span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>输入：</strong> 多个测试用例，每个测试用例一行。每行通过空格隔开，有 n 个字符串，n＜100<br><strong>输出：</strong> 对于每组测试用例，输出一行排序过的字符串，每个字符串通过空格隔开</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组数不确定，组内元素数量不确定⚠️</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    sc := bufio.NewScanner(os.Stdin)</span><br><span class="line">    <span class="keyword">for</span> sc.Scan() &#123;</span><br><span class="line">        strs := strings.Split(sc.Text(), <span class="string">&quot; &quot;</span>)</span><br><span class="line">        sort.Strings(strs)</span><br><span class="line">        fmt.Println(strings.Join(strs, <span class="string">&quot; &quot;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入：</strong> 多个测试用例，每个测试用例一行。每行通过 <code>,</code> 隔开，有 n 个字符串，n＜100<br><strong>输出：</strong> 对于每组用例输出一行排序后的字符串，用 <code>,</code> 隔开，无结尾空格</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 和上面那个一样的</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    sc := bufio.NewScanner(os.Stdin)</span><br><span class="line">    <span class="keyword">for</span> sc.Scan()&#123;</span><br><span class="line">        strs := strings.Split(sc.Text(),<span class="string">&quot;,&quot;</span>)</span><br><span class="line">        sort.Strings(strs)</span><br><span class="line">        fmt.Println(strings.Join(strs, <span class="string">&quot;,&quot;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造二叉树"><a href="#构造二叉树" class="headerlink" title="构造二叉树"></a>构造二叉树</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TreeNode <span class="keyword">struct</span> &#123;</span><br><span class="line">	Val   <span class="type">int</span></span><br><span class="line">	Left  *TreeNode</span><br><span class="line">	Right *TreeNode</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">constructBinaryTree</span><span class="params">(array []<span class="type">int</span>)</span></span> *TreeNode &#123;</span><br><span class="line">	<span class="keyword">var</span> root *TreeNode</span><br><span class="line">	nodes := <span class="built_in">make</span>([]*TreeNode, <span class="built_in">len</span>(array))</span><br><span class="line">	<span class="comment">// 初始化二叉树节点</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(nodes); i++ &#123;</span><br><span class="line">		<span class="keyword">var</span> node *TreeNode</span><br><span class="line">		<span class="keyword">if</span> array[i] != <span class="number">-1</span> &#123;</span><br><span class="line">			node = &amp;TreeNode&#123;Val: array[i]&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		nodes[i] = node</span><br><span class="line">		<span class="keyword">if</span> i == <span class="number">0</span> &#123;</span><br><span class="line">			root = node</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 串联节点</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i*<span class="number">2</span>+<span class="number">2</span> &lt; <span class="built_in">len</span>(nodes); i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> nodes[i] != <span class="literal">nil</span> &#123;</span><br><span class="line">			nodes[i].Left = nodes[i*<span class="number">2</span>+<span class="number">1</span>]</span><br><span class="line">			nodes[i].Right = nodes[i*<span class="number">2</span>+<span class="number">2</span>]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> root</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 层序列遍历</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printBinaryTree</span><span class="params">(root *TreeNode)</span></span> &#123;</span><br><span class="line">	res := <span class="built_in">make</span>([][]<span class="type">int</span>, <span class="number">0</span>)</span><br><span class="line">	<span class="keyword">if</span> root == <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(res)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	curLevel := []*TreeNode&#123;root&#125;</span><br><span class="line">	<span class="keyword">for</span> <span class="built_in">len</span>(curLevel) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		nextLevel := <span class="built_in">make</span>([]*TreeNode, <span class="number">0</span>)</span><br><span class="line">		vals := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">for</span> _, node := <span class="keyword">range</span> curLevel &#123;</span><br><span class="line">			vals = <span class="built_in">append</span>(vals, node.Val)</span><br><span class="line">			<span class="keyword">if</span> node.Left != <span class="literal">nil</span> &#123;</span><br><span class="line">				nextLevel = <span class="built_in">append</span>(nextLevel, node.Left)</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> node.Right != <span class="literal">nil</span> &#123;</span><br><span class="line">				nextLevel = <span class="built_in">append</span>(nextLevel, node.Right)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		res = <span class="built_in">append</span>(res, vals)</span><br><span class="line">		curLevel = nextLevel</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 用 -1 来表示 nil</span></span><br><span class="line">	array := []<span class="type">int</span>&#123;<span class="number">4</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">3</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">8</span>&#125;</span><br><span class="line">	root := constructBinaryTree(array)</span><br><span class="line">	printBinaryTree(root)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="武器库"><a href="#武器库" class="headerlink" title="武器库"></a>武器库</h2><p><strong>标准库容器</strong></p>
+<ul>
+<li>slice（切片）</li>
+<li>map（散列表）</li>
+<li>list（双向链表）</li>
+<li>heap（堆）</li>
+<li>ring（环）</li>
+</ul>
+<p><strong>排序函数</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;sort&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// in ascending order.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sortExample</span><span class="params">(exampleSlice []<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    sort.Slice(exampleSlice, <span class="function"><span class="keyword">func</span><span class="params">(i, j <span class="type">int</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> exampleSlice[i] &lt; exampleSlice[j]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sortExample</span><span class="params">(exampleSlice []<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    sort.Ints(exampleSlice)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>反转切片</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReverseSlice</span><span class="params">(slice []<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(slice)/<span class="number">2</span>; i++ &#123;</span><br><span class="line">		j := <span class="built_in">len</span>(slice) - i - <span class="number">1</span></span><br><span class="line">		slice[i], slice[j] = slice[j], slice[i]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用 Map 计数</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example of using map for counting occurrences of elements in a slice.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">countOccurrences</span><span class="params">(nums []<span class="type">int</span>)</span></span> <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">int</span> &#123;</span><br><span class="line">	counts := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">int</span>)</span><br><span class="line">	<span class="keyword">for</span> _, num := <span class="keyword">range</span> nums &#123;</span><br><span class="line">		counts[num]++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> counts</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>检查 Map 中是否存在某个元素</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Example of using map for checking if an element exists.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkElements</span><span class="params">(numsMap <span class="keyword">map</span>[<span class="type">int</span>]<span class="type">int</span>, certainValue <span class="type">int</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="comment">// Check if the certainValue exists in the numsMap</span></span><br><span class="line">	_, exists := numsMap[certainValue]</span><br><span class="line">	<span class="keyword">return</span> exists</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>栈的 Push 和 Pop</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Stack Define a struct for the Stack</span></span><br><span class="line"><span class="keyword">type</span> Stack <span class="keyword">struct</span> &#123;</span><br><span class="line">	data []<span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Push adds an element to the top of the stack</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Stack)</span></span> Push(item <span class="keyword">interface</span>&#123;&#125;) &#123;</span><br><span class="line">	s.data = <span class="built_in">append</span>(s.data, item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Pop removes and returns the top element from the stack</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Stack)</span></span> Pop() <span class="keyword">interface</span>&#123;&#125; &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(s.data) == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span> <span class="comment">// Stack is empty</span></span><br><span class="line">	&#125;</span><br><span class="line">	item := s.data[<span class="built_in">len</span>(s.data)<span class="number">-1</span>]</span><br><span class="line">	s.data = s.data[:<span class="built_in">len</span>(s.data)<span class="number">-1</span>]</span><br><span class="line">	<span class="keyword">return</span> item</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Peek returns the top element of the stack without removing it</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Stack)</span></span> Peek() <span class="keyword">interface</span>&#123;&#125; &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(s.data) == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span> <span class="comment">// Stack is empty</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s.data[<span class="built_in">len</span>(s.data)<span class="number">-1</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// isEmpty returns true if the stack is empty, false otherwise</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Stack)</span></span> isEmpty() <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">len</span>(s.data) == <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Create a new stack</span></span><br><span class="line">	stack := Stack&#123;&#125;</span><br><span class="line">	<span class="comment">// Push elements onto the stack</span></span><br><span class="line">	stack.Push(<span class="number">1</span>)</span><br><span class="line">	stack.Push(<span class="number">2</span>)</span><br><span class="line">	stack.Push(<span class="number">3</span>)</span><br><span class="line">	<span class="comment">// Peek at the top element</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;Top element:&quot;</span>, stack.Peek())</span><br><span class="line">	<span class="comment">// Pop elements from the stack</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;Popped element:&quot;</span>, stack.Pop())</span><br><span class="line">	fmt.Println(<span class="string">&quot;Popped element:&quot;</span>, stack.Pop())</span><br><span class="line">	<span class="comment">// Check if the stack is empty</span></span><br><span class="line">	fmt.Println(<span class="string">&quot;Is stack empty?&quot;</span>, stack.isEmpty())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见排序"><a href="#常见排序" class="headerlink" title="常见排序"></a>常见排序</h2><p><strong>冒泡</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">bubbleSort</span><span class="params">(nums []<span class="type">int</span>)</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(nums) &lt;= <span class="number">1</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> nums</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(nums); i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="built_in">len</span>(nums)-i<span class="number">-1</span>; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> nums[j] &gt; nums[j+<span class="number">1</span>] &#123;</span><br><span class="line">				nums[j], nums[j+<span class="number">1</span>] = nums[j+<span class="number">1</span>], nums[j]</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> nums</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>快速</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 快速排序 */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">quickSort</span><span class="params">(nums []<span class="type">int</span>, left, right <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 子数组长度为 1 时终止递归</span></span><br><span class="line">	<span class="keyword">if</span> left &gt;= right &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 哨兵划分</span></span><br><span class="line">	pivot := partition(nums, left, right)</span><br><span class="line">	<span class="comment">// 递归左子数组、右子数组</span></span><br><span class="line">	quickSort(nums, left, pivot<span class="number">-1</span>)</span><br><span class="line">	quickSort(nums, pivot+<span class="number">1</span>, right)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 哨兵划分 */</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">partition</span><span class="params">(nums []<span class="type">int</span>, left, right <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	<span class="comment">// 以 nums[left] 为基准数</span></span><br><span class="line">	i, j := left, right</span><br><span class="line">	<span class="keyword">for</span> i &lt; j &#123;</span><br><span class="line">		<span class="keyword">for</span> i &lt; j &amp;&amp; nums[j] &gt;= nums[left] &#123;</span><br><span class="line">			j-- <span class="comment">// 从右向左找首个小于基准数的元素</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> i &lt; j &amp;&amp; nums[i] &lt;= nums[left] &#123;</span><br><span class="line">			i++ <span class="comment">// 从左向右找首个大于基准数的元素</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 元素交换</span></span><br><span class="line">		nums[i], nums[j] = nums[j], nums[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 将基准数交换至两子数组的分界线</span></span><br><span class="line">    <span class="comment">// 此时 i 位置上的值并不会比基准数大</span></span><br><span class="line">	nums[i], nums[left] = nums[left], nums[i]</span><br><span class="line">	<span class="keyword">return</span> i <span class="comment">// 返回基准数的索引</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="华为笔试回顾"><a href="#华为笔试回顾" class="headerlink" title="华为笔试回顾"></a>华为笔试回顾</h2><blockquote>
+<p>2024.05.22 实习笔试沿用到秋招</p>
+<p>2024.10.25 面试没问到笔试复盘</p>
+</blockquote>
+<p><strong>题目</strong>：给定两个链表，获取两者中相同节点值的 <strong>最大连续片段</strong>。如果没有公共片段，返回 -1</p>
+<p><strong>解答要求</strong>：时间限制: C&#x2F;C++ 1000ms, 其他语言: 2000ms 内存限制: C&#x2F;C++ 256MB, 其他语言: 512MB</p>
+<p><strong>输入</strong>：第一行表示链表 1，第二行表示链表 2，每条链表长度不超过 20 个元素，链表不会为空</p>
+<p><strong>输出</strong>：公共链表片段</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查找两个链表中最长的公共连续片段</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMaxCommonSegment</span><span class="params">(head1 *ListNode, head2 *ListNode)</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">	list1 := linkedListToList(head1)</span><br><span class="line">	list2 := linkedListToList(head2)</span><br><span class="line"></span><br><span class="line">	n := <span class="built_in">len</span>(list1)</span><br><span class="line">	m := <span class="built_in">len</span>(list2)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建 DP 表</span></span><br><span class="line">	dp := <span class="built_in">make</span>([][]<span class="type">int</span>, n+<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> dp &#123;</span><br><span class="line">		dp[i] = <span class="built_in">make</span>([]<span class="type">int</span>, m+<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	maxLen := <span class="number">0</span>  <span class="comment">// 记录最长公共片段的长度</span></span><br><span class="line">	endIdx := <span class="number">-1</span> <span class="comment">// 记录最长公共片段的结束位置</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 动态规划填表</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= n; i++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">1</span>; j &lt;= m; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> list1[i<span class="number">-1</span>] == list2[j<span class="number">-1</span>] &#123;</span><br><span class="line">				dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span></span><br><span class="line">				<span class="keyword">if</span> dp[i][j] &gt; maxLen &#123;</span><br><span class="line">					maxLen = dp[i][j]</span><br><span class="line">					endIdx = i - <span class="number">1</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 如果没有公共片段，返回 -1</span></span><br><span class="line">	<span class="keyword">if</span> maxLen == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> []<span class="type">int</span>&#123;<span class="number">-1</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 获取最长公共片段</span></span><br><span class="line">	startIdx := endIdx - maxLen + <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> list1[startIdx : endIdx+<span class="number">1</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将链表转换为数组</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">linkedListToList</span><span class="params">(head *ListNode)</span></span> []<span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> list []<span class="type">int</span></span><br><span class="line">	<span class="keyword">for</span> head != <span class="literal">nil</span> &#123;</span><br><span class="line">		list = <span class="built_in">append</span>(list, head.Val)</span><br><span class="line">		head = head.Next</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> list</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目</strong>：露天矿采矿作业的特点是规模大，矿石和废料的移动量达到百万吨，运输成本开销较大，需要寻求一种最优的运输路径节省成本。</p>
+<p>已知矿场可以划分成 N*M 的网格图，每个网格存在地形的差异，因此通过不同网格时，成本开销存在差异</p>
+<ol>
+<li>标志为’S’的网格为运输起点；</li>
+<li>标志为’E”的网格时运输终点；</li>
+<li>标志为’B’的网格为阻塞点，不允许通行；</li>
+<li>标志为’C’的网格为检查点，矿车在运输路径中，至少需要进入一次检查点。</li>
+<li>标志为‘数字”的网格，其数字表示经过该网格的成本开销。</li>
+</ol>
+<p>运输矿车只能上下左右 4 个方向运行，不允许斜对角进入其他网格。必要时可重复进入网格，请根据输入的网格图，寻求一条从 S 网格到 E 网格，并且至少经过一次检查点的最低成本运输路径，并输出其成本开销</p>
+<p><strong>解答要求</strong>：时间限制: C&#x2F;C++ 1000ms, 其他语言: 2000ms 内存限制: C&#x2F;C++ 256MB, 其他语言: 512MB</p>
+<p><strong>输入</strong>：</p>
+<ul>
+<li>第一行：网格图的行数 N [3,200] 和网格图的列数 M [3,200]，使用空格隔开。</li>
+<li>第二行至第 N+1 行：网格图每一行的元素，可以为’S’，E’，’B’，‘C’或者数字 [0,100]，并且有且仅有一个’S’和一个’E’，同时存在一个或者多个‘C’，并依次使用空格隔开。</li>
+</ul>
+<p><strong>输出</strong>：第一行：输出运输最低成本开销。如果不存在可达通路，请输出-1</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;math&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Node <span class="keyword">struct</span> &#123;</span><br><span class="line">	x, y      <span class="type">int</span>  <span class="comment">// 当前节点的坐标</span></span><br><span class="line">	cost      <span class="type">int</span>  <span class="comment">// 到达该节点的开销</span></span><br><span class="line">	visitedC  <span class="type">bool</span> <span class="comment">// 是否访问过检查点</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> directions = [][<span class="number">2</span>]<span class="type">int</span>&#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">inBounds</span><span class="params">(x, y, N, M <span class="type">int</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> x &gt;= <span class="number">0</span> &amp;&amp; x &lt; N &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; M</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主函数：最短路径求解</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">findMinCostPath</span><span class="params">(grid [][]<span class="type">string</span>, N, M <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> startX, startY, endX, endY <span class="type">int</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 构建cost图</span></span><br><span class="line">	costGrid := <span class="built_in">make</span>([][]<span class="type">int</span>, N)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; N; i++ &#123;</span><br><span class="line">		costGrid[i] = <span class="built_in">make</span>([]<span class="type">int</span>, M)</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; M; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> grid[i][j] == <span class="string">&quot;S&quot;</span> &#123;</span><br><span class="line">				startX, startY = i, j</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> grid[i][j] == <span class="string">&quot;E&quot;</span> &#123;</span><br><span class="line">				endX, endY = i, j</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> grid[i][j] == <span class="string">&quot;B&quot;</span> &#123;</span><br><span class="line">				costGrid[i][j] = math.MaxInt32 <span class="comment">// 阻塞点不可达</span></span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> grid[i][j] == <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line">				costGrid[i][j] = <span class="number">0</span> <span class="comment">// 检查点本身无需额外成本</span></span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				fmt.Sscanf(grid[i][j], <span class="string">&quot;%d&quot;</span>, &amp;costGrid[i][j])</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 定义 BFS 队列</span></span><br><span class="line">	queue := []Node&#123;&#123;startX, startY, <span class="number">0</span>, <span class="literal">false</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 记录访问状态和最小成本</span></span><br><span class="line">	visited := <span class="built_in">make</span>([][][]<span class="type">bool</span>, N)</span><br><span class="line">	minCost := <span class="built_in">make</span>([][][]<span class="type">int</span>, N)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> visited &#123;</span><br><span class="line">		visited[i] = <span class="built_in">make</span>([][]<span class="type">bool</span>, M)</span><br><span class="line">		minCost[i] = <span class="built_in">make</span>([][]<span class="type">int</span>, M)</span><br><span class="line">		<span class="keyword">for</span> j := <span class="keyword">range</span> visited[i] &#123;</span><br><span class="line">			visited[i][j] = <span class="built_in">make</span>([]<span class="type">bool</span>, <span class="number">2</span>) <span class="comment">// 记录是否访问过该点，分为是否经过检查点的两种状态</span></span><br><span class="line">			minCost[i][j] = []<span class="type">int</span>&#123;math.MaxInt32, math.MaxInt32&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	visited[startX][startY][<span class="number">0</span>] = <span class="literal">true</span></span><br><span class="line">	minCost[startX][startY][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 开始 BFS</span></span><br><span class="line">	<span class="keyword">for</span> <span class="built_in">len</span>(queue) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		node := queue[<span class="number">0</span>]</span><br><span class="line">		queue = queue[<span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line">		x, y, cost, visitedC := node.x, node.y, node.cost, node.visitedC</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 到达终点并且经过了检查点</span></span><br><span class="line">		<span class="keyword">if</span> x == endX &amp;&amp; y == endY &amp;&amp; visitedC &#123;</span><br><span class="line">			<span class="keyword">return</span> cost</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 扩展到四个方向</span></span><br><span class="line">		<span class="keyword">for</span> _, dir := <span class="keyword">range</span> directions &#123;</span><br><span class="line">			nx, ny := x+dir[<span class="number">0</span>], y+dir[<span class="number">1</span>]</span><br><span class="line">			<span class="keyword">if</span> !inBounds(nx, ny, N, M) || grid[nx][ny] == <span class="string">&quot;B&quot;</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			newCost := cost + costGrid[nx][ny]</span><br><span class="line">			newVisitedC := visitedC || grid[nx][ny] == <span class="string">&quot;C&quot;</span></span><br><span class="line"></span><br><span class="line">			state := <span class="number">0</span></span><br><span class="line">			<span class="keyword">if</span> newVisitedC &#123;</span><br><span class="line">				state = <span class="number">1</span></span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 如果新状态的代价小于当前记录的最小代价，则更新并加入队列</span></span><br><span class="line">			<span class="keyword">if</span> newCost &lt; minCost[nx][ny][state] &#123;</span><br><span class="line">				minCost[nx][ny][state] = newCost</span><br><span class="line">				queue = <span class="built_in">append</span>(queue, Node&#123;nx, ny, newCost, newVisitedC&#125;)</span><br><span class="line">				visited[nx][ny][state] = <span class="literal">true</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 无法找到满足条件的路径</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> N, M <span class="type">int</span></span><br><span class="line">	fmt.Scan(&amp;N, &amp;M)</span><br><span class="line"></span><br><span class="line">	grid := <span class="built_in">make</span>([][]<span class="type">string</span>, N)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; N; i++ &#123;</span><br><span class="line">		grid[i] = <span class="built_in">make</span>([]<span class="type">string</span>, M)</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">0</span>; j &lt; M; j++ &#123;</span><br><span class="line">			fmt.Scan(&amp;grid[i][j])</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	result := findMinCostPath(grid, N, M)</span><br><span class="line">	fmt.Println(result)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://programmercarl.com/">代码随想录</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.hello-algo.com/">Hello 算法</a></strong></li>
+</ul>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/11/18/readme/">《程序员的 README》</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/10/28/go/">Go 基础与语法特性 🚪</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

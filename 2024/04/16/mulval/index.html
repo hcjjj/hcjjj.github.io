@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>MulVAL - A Logic based Network Security Analyzer - H-sediment</title>
+
+  
+    <meta name="description" content="MulVAL：基于逻辑推理的攻击图生成及风险评估工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MulVAL - A Logic based Network Security Analyzer">
+<meta property="og:url" content="http://example.com/2024/04/16/mulval/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="MulVAL：基于逻辑推理的攻击图生成及风险评估工具">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-12T01:58:27.817Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Automotive">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="Automotive">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">MulVAL - A Logic based Network Security Analyzer</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">相关资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#README"><span class="toc-number">2.</span> <span class="toc-text">README</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Running"><span class="toc-number">2.1.</span> <span class="toc-text">Running</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OPTIONS"><span class="toc-number">2.2.</span> <span class="toc-text">OPTIONS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adapters"><span class="toc-number">2.3.</span> <span class="toc-text">Adapters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advanced-Usage"><span class="toc-number">2.4.</span> <span class="toc-text">Advanced Usage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#REFERENCES"><span class="toc-number">2.5.</span> <span class="toc-text">REFERENCES</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">攻击图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MulVAL"><span class="toc-number">4.</span> <span class="toc-text">MulVAL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">4.2.</span> <span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">核心文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="toc-number">4.4.</span> <span class="toc-text">技术细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-number">4.5.</span> <span class="toc-text">案例分析</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Research/">Research</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-04-15T16:00:00.000Z">2024-04-16</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>MulVAL - A Logic based Network Security Analyzer</span></h1>
+<p>MulVAL：基于逻辑推理的攻击图生成及风险评估工具</p>
+<span id="more"></span>
+
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.arguslab.org/software/mulval.html">官网</a> <a target="_blank" rel="noopener" href="https://www.usenix.org/legacy/event/sec05/tech/full_papers/ou/ou.pdf">论文</a> <a target="_blank" rel="noopener" href="https://github.com/risksense/mulval">仓库</a></li>
+</ul>
+<h2 id="README"><a href="#README" class="headerlink" title="README"></a>README</h2><p>Multi host, multi stage Vulnerability Analysis tool</p>
+<ol>
+<li>安装 <a target="_blank" rel="noopener" href="http://xsb.sourceforge.net/">XSB 逻辑引擎</a></li>
+<li>安装 <a target="_blank" rel="noopener" href="http://www.graphviz.org/">GraphViz</a></li>
+<li>确保都在 PATH 路径</li>
+</ol>
+<p>设置环境变量 MULVALROOT 应指向此软件包的根文件夹。在 PATH 中包含 <code>$MULVALROOT$/bin</code> 和 <code>$MULVALROOT/utils</code>。键入 <code>make</code> 来编译所有内容。可以直接运行 MulVAL 攻击图生成器，如果您已经有了一个输入文件；或者您可以运行相应的适配器来创建输入文件，然后运行攻击图生成器。</p>
+<h3 id="Running"><a href="#Running" class="headerlink" title="Running"></a>Running</h3><p><code>graph_gen.sh INPUT_FILE [OPTIONS]</code><br>在 testcases&#x2F;3host 文件夹中有一个简单的输入文件 <code>input.P</code>。这个输入文件用于 MulVAL 文献中的 3 主机示例 [1,2]。您可以运行它来检查攻击图生成器是否正常工作。<br><code>graph_gen.sh input.P -v -p</code><br>这将生成一个与论文中描述相符的攻击图。请注意，对于生产环境，不应调用 <code>-p</code> 选项，因为它会指数级减慢攻击图生成过程，而且它只是使攻击图在视觉上更美观（尝试使用上面的命令但不带 <code>-p</code> 选项）。<br>默认情况下，MulVAL 以文本格式（AttackGraph.txt）和 XML 格式（AttackGraph.xml）输出攻击图。这些格式的含义是不言自明的。当调用 <code>-v</code> 选项时，攻击图的可视化表示将通过 GraphViz 生成在 <code>AttackGraph.pdf</code> 中。如果设置了环境变量 <code>PDF_READER</code>，程序将自动使用该程序打开 pdf 文件。<br>当指定适当的选项时（请参阅下文），MulVAL 还会以 CSV 格式输出攻击图信息：<code>VERTICES.CSV</code> 和 <code>ARCS.CSV</code>。CSV 文件可供渲染程序稍后生成攻击图的各种视图（请参阅下文）。<br>MulVAL 还将在运行程序的文件夹中输出一些其他临时文件。因此，最好在单独的文件夹中运行它以避免杂乱。</p>
+<h3 id="OPTIONS"><a href="#OPTIONS" class="headerlink" title="OPTIONS"></a>OPTIONS</h3><ul>
+<li><p>图形生成选项：</p>
+<ul>
+<li><p><code>-l</code>：以 .CSV 格式输出攻击图</p>
+</li>
+<li><p><code>-v</code>：以 .CSV 和 .PDF 格式输出攻击图</p>
+</li>
+<li><p><code>-p</code>：对攻击图进行深度修剪以改善可视化效果（在生产环境中不要调用）</p>
+</li>
+</ul>
+</li>
+<li><p>推理选项： </p>
+<ul>
+<li><p><code>-r | --rulefile RULE_FILE</code>：将 RULE_FILE 用作交互规则集</p>
+</li>
+<li><p><code>-a | --additional ADDITIONAL_RULE_FILE</code>：除了指定的交互规则集外，还使用 ADDITIONAL_RULE_FILE</p>
+</li>
+<li><p><code>-g | --goal ATTACK_GOAL</code>：指定单个攻击目标</p>
+</li>
+<li><p><code>--cvss</code>：使用输入文件中包含的 CVSS 信息</p>
+</li>
+<li><p><code>-ma</code>：使用输入文件中包含的 CVSS 信息，并对输入文件进行分组。使用此选项时，输入文件必须包含分组信息（见下文第 II 节）</p>
+</li>
+</ul>
+</li>
+<li><p>渲染选项： </p>
+<ul>
+<li><p><code>--arclabel</code>：输出弧的标签</p>
+</li>
+<li><p><code>--reverse</code>：以相反的顺序输出弧</p>
+</li>
+<li><p><code>--nometric</code>：不显示度量信息</p>
+</li>
+<li><p><code>--simple</code>：不显示顶点事实标签。当攻击图变得过大无法可视化时使用此选项。</p>
+</li>
+<li><p><code>--nopdf</code>：不生成 PDF。当您需要 DOT 文件但不需要 PDF 文件时使用此选项。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>在运行 <code>graph_gen.sh</code> 脚本之后，您还可以调用 <code>render.sh</code> 使用不同的渲染选项。只需在相同目录中发出 <code>render.sh [RENDERING OPTIONS]</code>。</p>
+<h3 id="Adapters"><a href="#Adapters" class="headerlink" title="Adapters"></a>Adapters</h3><p>该软件包包含了一些适配器程序，可帮助从企业网络中创建 MulVAL 输入文件。需要按照以下步骤进行操作。</p>
+<p>…</p>
+<h3 id="Advanced-Usage"><a href="#Advanced-Usage" class="headerlink" title="Advanced Usage"></a>Advanced Usage</h3><p><strong>Creating customized rule set</strong></p>
+<p>要开发自己的交互规则，您可以创建新的规则文件，例如 “my_interaction_rules.P”，并使用 <code>-r</code> 或 <code>-a</code> 选项来加载您的规则文件。默认的规则文件可以在该软件包的 kb&#x2F; 文件夹中找到。</p>
+<p>在规则文件的开头，您必须声明原始和派生谓词，并将所有派生谓词进行表格化。具有原始谓词的事实来自输入，具有派生谓词的事实由交互规则定义。每个交互规则使用的谓词必须具有 “primitive” 或 “derived” 的声明，否则在评估过程中可能会收到 “undefined predicate” 的错误消息，并且攻击图生成可能会因缺少谓词声明而失败，并显示一条警告消息，告诉您缺少哪个谓词的声明。通过表格化，可以防止 XSB 推理引擎陷入无限循环，并通过对中间结果进行记忆化来提高推理的效率。</p>
+<p>每个交互规则由 “interaction_rule(Rule, Label)” 引入，其中 Rule 是一个 Datalog 规则，Label 是一些说明其含义的纯文本。标签将成为攻击图中的注释。一旦开发了自己的规则集，您可以使用 <code>-r RULEFILE</code> 选项来测试它，该选项将让 <code>graph_gen.sh</code> 加载 RULEFILE 而不是使用默认规则集。如果您希望您的规则文件添加到默认规则集中，您可以使用 <code>-a RULEFILE</code> 选项。</p>
+<p><strong>Calculating risk metrics based on CVSS and MulVAL attack graph</strong></p>
+<p>我们已经包含了一个基于 Wang 等人的定量风险评估算法 [4]。它结合了 CVSS 指标和攻击图，为企业网络计算概率风险指标。要运行度量程序，请在攻击图输出所在的位置输入以下命令：<code>probAssess.sh</code></p>
+<p>还有一个脚本集成了多个步骤：创建 MulVAL 攻击图、运行风险度量算法并显示带有度量的攻击图：<code>riskAssess.sh INPUT [OPTIONS]</code></p>
+<p>它将在输入文件上运行 MulVAL。此脚本将始终使用 <code>-ma</code>（模型化工件）选项来生成攻击图。请使用 summ_oval.P（由 oval_translate.sh 生成）或 summ_nessus.P（由 nessus_translate.sh 生成）作为输入。使用 OPTIONS 将任何其他选项传递给 MulVAL 攻击图生成器（graph_gen.sh）。</p>
+<h3 id="REFERENCES"><a href="#REFERENCES" class="headerlink" title="REFERENCES"></a>REFERENCES</h3><ol>
+<li>Xinming Ou, Wayne F. Boyer, and Miles A.McQueen. <strong>A scalable approach to attack graph generation</strong>. In 13th ACM Conference on Computer and Communications Security (CCS), 2006.</li>
+<li>Xinming Ou, Sudhakar Govindavajhala, and Andrew W. Appel. <strong>MulVAL: A logic-based network security analyzer</strong>. In 14th USENIX Security Symposium, 2005.</li>
+<li>Su Zhang, Xinming Ou, and John Homer. <strong>Effective network vulnerability assessment through model abstraction</strong>. In Eighth Conference on Detection of Intrusions and Malware &amp; Vulnerability Assessment (DIMVA), Amsterdam, The Netherlands, 2011.</li>
+<li>Lingyu Wang, Tania Islam, Tao Long, Anoop Singhal, and Sushil Jajodia. <strong>An attack graph-based probabilistic security metric</strong>. In Proceedings of The 22nd Annual IFIP WG 11.3 Working Conference on Data and Applications Security (DBSEC’08), 2008.</li>
+</ol>
+<h2 id="攻击图"><a href="#攻击图" class="headerlink" title="攻击图"></a>攻击图</h2><p>攻击图是一种风险评估方法，用于枚举攻击者为破坏网络组织而可能采取的<strong>攻击路径</strong>，表示潜在的攻击者可以通过利用网络上的一系列漏洞并在每个步骤获得某些特权来入侵目标网络的可能方式，可向用户<strong>展示网络漏洞分析过程</strong>，用于网络安全风险分析。</p>
+<p>在理论上攻击图可以构建完整的网络安全模型，反映网络中各个节点的脆弱性并刻画出攻击者攻陷重要节点的所有途径，弥补了以往技术只能根据漏洞数量和威胁等级评估节点和全网的安全性，而不能根据节点在网络中的位置和功能进行评估的缺陷。</p>
+<ul>
+<li>参考资料<ul>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Issac_Liew_X/article/details/107234000">攻击图技术</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/KoiC/p/17216322.html">攻击图技术总结</a></p>
+</li>
+</ul>
+</li>
+<li>攻击图定义<ul>
+<li>攻击图是一种有向图，展示攻击者可能发动的攻击顺序和攻击效果，由<strong>顶点</strong>和<strong>有向边</strong>两部分构成</li>
+<li><strong>顶点</strong>可以表示：主机、服务、 漏洞、权限等网络安全相关要素，也可以表示账户被攻击者破解、权限被攻击者获取等网络安全状态</li>
+<li><strong>有向边</strong>用于表示攻击者攻击行为的先后顺序</li>
+<li><strong>规则</strong>和<strong>推导</strong>是攻击图理论的核心<ul>
+<li>攻击图的规则系统由许许多多的规则组成，而攻击图的推导引擎依据规则系统自动完成攻击路径的推导</li>
+<li>攻击路径就是从“初始条件”到“要证目标”的推导过程，将这个推导过程可视化便成了攻击树</li>
+<li>由于推导过程可能有多种可能，就有多条攻击树，形成了攻击图</li>
+</ul>
+</li>
+<li>攻击图规则系统决定了该攻击图工具能适用于哪种网络<ul>
+<li>如使用<strong>企业网络</strong>的规则系统，则可以适用于企业网络</li>
+<li>若使用<strong>车联网</strong>的规则系统，则可适用于车联网</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>攻击图的类型<ul>
+<li>状态攻击图</li>
+<li>逻辑攻击图</li>
+<li>属性攻击图</li>
+<li>贝叶斯攻击图</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<h2 id="MulVAL"><a href="#MulVAL" class="headerlink" title="MulVAL"></a>MulVAL</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Dalongggggg/article/details/134149701?spm=1001.2014.3001.5502">https://blog.csdn.net/Dalongggggg/article/details/134149701?spm=1001.2014.3001.5502</a></p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>逻辑攻击图</strong></p>
+<p><strong>属性攻击图</strong></p>
+<p><strong>贝叶斯攻击图</strong></p>
+<p><strong>Datalog</strong></p>
+<p><strong>XSB logic engine</strong></p>
+<p><strong>GraphViz</strong></p>
+<h3 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h3><h3 id="核心文件"><a href="#核心文件" class="headerlink" title="核心文件"></a>核心文件</h3><p><strong>MulVAL目录</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">├── bin <span class="comment"># src目录下功能文件编译后存放该目录下</span></span><br><span class="line">│   ├── adapter</span><br><span class="line">│   └── metrics</span><br><span class="line">├── doc <span class="comment"># 说明文档</span></span><br><span class="line">├── docker <span class="comment"># 构建镜像</span></span><br><span class="line">├── kb <span class="comment"># 默认规则目录</span></span><br><span class="line">├── lib <span class="comment"># 库文件</span></span><br><span class="line">├── src <span class="comment"># 功能实现</span></span><br><span class="line">│   ├── adapter</span><br><span class="line">│   ├── analyzer</span><br><span class="line">│   ├── attack_graph</span><br><span class="line">│   └── metrics</span><br><span class="line">├── testcases <span class="comment"># 测试案例</span></span><br><span class="line">│   └── 3host</span><br><span class="line">└── utils <span class="comment"># 部分调用脚本，功能脚本</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><h3 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h3>
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/05/05/gosdk/">Go SDK：context、sync、reflect、errors</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/12/12/go3/">使用 Golang 实现的简易 Redis 🔨</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

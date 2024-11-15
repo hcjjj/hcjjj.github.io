@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>MIT Missing Semester - H-sediment</title>
+
+  
+    <meta name="description" content="计算机教育中缺失的一课资料：官方讲义、仓库 中文：讲义、双语字幕">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT Missing Semester">
+<meta property="og:url" content="http://example.com/2023/06/04/missing/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="计算机教育中缺失的一课资料：官方讲义、仓库 中文：讲义、双语字幕">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202307241103333.png">
+<meta property="article:published_time" content="2023-06-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-11T04:10:56.505Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202307241103333.png">
+  
+  
+  
+  <meta name="keywords" content="tools">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">MIT Missing Semester</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%A7%88%E4%B8%8E-Shell"><span class="toc-number">1.</span> <span class="toc-text">课程概览与 Shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell-%E5%B7%A5%E5%85%B7%E5%92%8C%E8%84%9A%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">Shell 工具和脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%88Vim%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">编辑器（Vim）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">数据整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">5.</span> <span class="toc-text">命令行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%88Git%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">版本控制（Git）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E5%8F%8A%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">7.</span> <span class="toc-text">调试及性能分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%BC%96%E7%A8%8B"><span class="toc-number">8.</span> <span class="toc-text">元编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%92%8C%E5%AF%86%E7%A0%81%E5%AD%A6"><span class="toc-number">9.</span> <span class="toc-text">安全和密码学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E6%9D%82%E7%83%A9"><span class="toc-number">10.</span> <span class="toc-text">大杂烩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E9%97%AE-%E5%9B%9E%E7%AD%94"><span class="toc-number">11.</span> <span class="toc-text">提问&amp;回答</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Course/">Course</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-06-03T16:00:00.000Z">2023-06-04</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>MIT Missing Semester</span></h1>
+<h1 id="计算机教育中缺失的一课"><a href="#计算机教育中缺失的一课" class="headerlink" title="计算机教育中缺失的一课"></a>计算机教育中缺失的一课</h1><p>资料：<a target="_blank" rel="noopener" href="https://missing.csail.mit.edu/">官方讲义</a>、<a target="_blank" rel="noopener" href="https://github.com/missing-semester/missing-semester">仓库</a></p>
+<p>中文：<a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/">讲义</a>、<a target="_blank" rel="noopener" href="https://space.bilibili.com/518734451/video">双语字幕</a></p>
+<span id="more"></span>
+
+<h2 id="课程概览与-Shell"><a href="#课程概览与-Shell" class="headerlink" title="课程概览与 Shell"></a>课程概览与 Shell</h2><blockquote>
+<p> 一些类Unix shell的简单命令，包括重定向输入输出流和管道符</p>
+</blockquote>
+<h2 id="Shell-工具和脚本"><a href="#Shell-工具和脚本" class="headerlink" title="Shell 工具和脚本"></a>Shell 工具和脚本</h2><blockquote>
+<p>bash作为脚本语言的一些基础操作和几种常用的shell工具</p>
+</blockquote>
+<ul>
+<li>查找文件：<a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/find.1.html"><code>find</code></a> 、<a target="_blank" rel="noopener" href="https://github.com/sharkdp/fd"><code>fd</code></a> </li>
+<li>查找代码：<a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man1/grep.1.html"><code>grep</code></a>、<a target="_blank" rel="noopener" href="https://beyondgrep.com/"><code>ack</code></a>、 <a target="_blank" rel="noopener" href="https://github.com/ggreer/the_silver_searcher"><code>ag</code></a>、<a target="_blank" rel="noopener" href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a></li>
+<li>查找shell命令：<ul>
+<li><code>history | grep xxx</code>、<code>Ctrl + R</code></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings#ctrl-r"><code>fzf</code></a> 、<a target="_blank" rel="noopener" href="https://fishshell.com/"><code>fish</code></a>、 <a target="_blank" rel="noopener" href="https://github.com/zsh-users/zsh-autosuggestions"><strong>zsh-autosuggestions</strong></a></li>
+</ul>
+</li>
+<li>目录导航： <a target="_blank" rel="noopener" href="https://github.com/clvv/fasd"><code>fasd</code></a>、<a target="_blank" rel="noopener" href="https://github.com/wting/autojump"><code>autojump</code></a>、 <a target="_blank" rel="noopener" href="https://linux.die.net/man/1/tree"><code>tree</code></a>、<a target="_blank" rel="noopener" href="https://github.com/Canop/broot"><code>broot</code></a> 、<a target="_blank" rel="noopener" href="https://github.com/jarun/nnn"><code>nnn</code></a> 、<a target="_blank" rel="noopener" href="https://github.com/ranger/ranger"><code>ranger</code></a></li>
+</ul>
+<h2 id="编辑器（Vim）"><a href="#编辑器（Vim）" class="headerlink" title="编辑器（Vim）"></a>编辑器（Vim）</h2><blockquote>
+<p><strong>Vim</strong> 是程序员为程序员编写的编辑器</p>
+</blockquote>
+<p>除了 Vim，Neovim，还有模拟 Vim 的插件，比如  IdeaVim，VSCodeVim，Vimium …</p>
+<ul>
+<li>normal</li>
+<li>insert</li>
+<li>replace</li>
+<li>visual<ul>
+<li>line</li>
+<li>block</li>
+</ul>
+</li>
+<li>command-line</li>
+</ul>
+<h2 id="数据整理"><a href="#数据整理" class="headerlink" title="数据整理"></a>数据整理</h2><blockquote>
+<p>将某种格式存储的数据转换成另外一种格式</p>
+</blockquote>
+<p>正则表达式调试器：<a target="_blank" rel="noopener" href="https://regex101.com/">https://regex101.com/</a></p>
+<ul>
+<li>流编辑器：<code>sed</code></li>
+<li>列流编辑器：<code>awk</code></li>
+<li>排序工具：<code>sort</code></li>
+<li>统计信息：<code>wc</code></li>
+<li>统计整理工具：<code>uniq</code></li>
+<li>查看：<code>cat</code>、<code>head</code>、<code>tail</code></li>
+<li>合并工具：<code>paste</code></li>
+<li>计算器：<code>bc</code></li>
+<li><code>xargs</code>   可以将输入列表转换为参数</li>
+</ul>
+<h2 id="命令行环境"><a href="#命令行环境" class="headerlink" title="命令行环境"></a>命令行环境</h2><blockquote>
+<p>如何更加“优雅”地使用命令行环境</p>
+</blockquote>
+<ul>
+<li>Job Control（任务控制）<ul>
+<li>信号机制</li>
+</ul>
+</li>
+<li>Terminal Multiplexers（终端复用器）<ul>
+<li><code>tmux</code></li>
+</ul>
+</li>
+<li>Dotfiles（配置文件）<ul>
+<li><code>alias</code></li>
+<li><code>~/.bashrc</code>、<code>~/.vimrc</code>、<code>~/.config/...</code></li>
+<li>使用<strong>dotfiles仓库</strong>和<strong>符号链接</strong>进行统一管理</li>
+</ul>
+</li>
+<li>Remote Machines（远程设备）<ul>
+<li><code>ssh</code></li>
+<li><code>ssh-keygen</code></li>
+<li><code>ssh-copy-id</code></li>
+<li><code>scp</code></li>
+<li><code>rsync</code></li>
+<li><code>~/.ssh/config</code></li>
+</ul>
+</li>
+<li>Shells &amp; Frameworks（Shell和框架）</li>
+<li>Terminal Emulators（终端模拟器）</li>
+</ul>
+<h2 id="版本控制（Git）"><a href="#版本控制（Git）" class="headerlink" title="版本控制（Git）"></a>版本控制（Git）</h2><blockquote>
+<p><strong>Git</strong> Version Control System</p>
+</blockquote>
+<p>   官方手册：<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">https://git-scm.com/book/zh/v2</a></p>
+<ul>
+<li>数据模型</li>
+<li>分支、合并</li>
+<li>手动处理合并冲突</li>
+<li>远程仓库</li>
+</ul>
+<p><strong>Git 本地的三个工作区域：</strong></p>
+<ul>
+<li>工作目录 （Working Directory）</li>
+<li>暂存区 （Stage&#x2F;Index）</li>
+<li>资源库 （Repository&#x2F;Git Directory）</li>
+</ul>
+<p><strong>文件的四种状态：</strong></p>
+<ul>
+<li>Untracked: 未跟踪，不参与版本控制，<code>git add</code> 变为 Staged</li>
+<li>Staged: 暂存状态，<code>git commit</code> 同步到库中</li>
+<li>Unmodified: 修改后变为Modified，<code>git rm </code> 移出版本库，变为Untracked</li>
+<li>Modified: 文件已修改，<code>git add</code> 进入staged状态, <code>git checkout</code> 丢弃修改</li>
+</ul>
+<h2 id="调试及性能分析"><a href="#调试及性能分析" class="headerlink" title="调试及性能分析"></a>调试及性能分析</h2><ul>
+<li>打印调试</li>
+<li>日志记录</li>
+<li>调试器</li>
+<li>专门工具<ul>
+<li><a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man1/strace.1.html"><code>strace</code></a> </li>
+<li><a target="_blank" rel="noopener" href="https://www.wireshark.org/">Wireshark</a></li>
+<li>开发者工具</li>
+</ul>
+</li>
+<li>静态分析</li>
+<li>性能分析</li>
+</ul>
+ <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202307241103333.png" style="zoom: 50%;" />
+
+<h2 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h2><blockquote>
+<p>这里的“元编程” ，不是指用于操作程序的程序，更像是自动化流程</p>
+</blockquote>
+<ul>
+<li>构建系统<ul>
+<li><code>make</code></li>
+</ul>
+</li>
+<li>依赖管理</li>
+<li>持续集成系统</li>
+</ul>
+<h2 id="安全和密码学"><a href="#安全和密码学" class="headerlink" title="安全和密码学"></a>安全和密码学</h2><ul>
+<li>熵</li>
+<li>散列函数</li>
+<li>密钥生成函数<ul>
+<li>对称加密</li>
+<li>非对称加密</li>
+<li>混合加密</li>
+</ul>
+</li>
+</ul>
+<h2 id="大杂烩"><a href="#大杂烩" class="headerlink" title="大杂烩"></a>大杂烩</h2><ul>
+<li>修改键位映射</li>
+<li>守护进程</li>
+<li>FUSE（用户空间文件系统）</li>
+<li>备份</li>
+<li>API（应用程序接口）</li>
+<li>常见命令行标志参数及模式</li>
+<li>窗口管理器</li>
+<li>VPN</li>
+<li>Markdown</li>
+<li>Hammerspoon (macOS桌面自动化)</li>
+<li>开机引导以及 Live USB</li>
+<li>Docker, Vagrant, VMs, Cloud, OpenStack</li>
+<li>交互式记事本编程</li>
+<li>GitHub</li>
+</ul>
+<h2 id="提问-回答"><a href="#提问-回答" class="headerlink" title="提问&amp;回答"></a><a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/qa/">提问&amp;回答</a></h2>
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/06/06/CMU445/">CMU 15-445 Database Systems</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/05/23/softSkills2/">《软技能2：软件开发者职业生涯指南》</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

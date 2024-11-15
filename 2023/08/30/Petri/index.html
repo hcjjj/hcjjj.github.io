@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>广义随机 Petri 网 (GSPN) - H-sediment</title>
+
+  
+    <meta name="description" content="Petri 网的基础知识和建模工具介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="广义随机 Petri 网 (GSPN)">
+<meta property="og:url" content="http://example.com/2023/08/30/Petri/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="Petri 网的基础知识和建模工具介绍">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20230801210692411.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/image-20230807133606104.png">
+<meta property="article:published_time" content="2023-08-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-15T11:14:23.531Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Petri net">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20230801210692411.png">
+  
+  
+  
+  <meta name="keywords" content="Petri net">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">广义随机 Petri 网 (GSPN)</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Petri-Net"><span class="toc-number">1.</span> <span class="toc-text">Petri Net</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC-Petri-%E7%BD%91"><span class="toc-number">1.1.</span> <span class="toc-text">基本 Petri 网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA-Petri-%E7%BD%91"><span class="toc-number">1.2.</span> <span class="toc-text">随机 Petri 网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E9%9A%8F%E6%9C%BA-Petri-%E7%BD%91"><span class="toc-number">1.3.</span> <span class="toc-text">广义随机 Petri 网</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">分析方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CTMC-%E6%B1%82%E8%A7%A3"><span class="toc-number">1.3.2.</span> <span class="toc-text">CTMC 求解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">1.3.3.</span> <span class="toc-text">性能分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E6%A8%A1%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.</span> <span class="toc-text">建模工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PIPE"><span class="toc-number">1.5.</span> <span class="toc-text">PIPE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TimeNET"><span class="toc-number">1.6.</span> <span class="toc-text">TimeNET</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E4%B8%8E%E7%BB%9F%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">概率与统计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%8A%E6%9D%BE%E5%88%86%E5%B8%83"><span class="toc-number">2.1.</span> <span class="toc-text">泊松分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83"><span class="toc-number">2.2.</span> <span class="toc-text">指数分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A8%81%E5%B8%83%E5%B0%94%E5%88%86%E5%B8%83"><span class="toc-number">2.3.</span> <span class="toc-text">威布尔分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%86%E5%8F%98%E6%8D%A2%E9%87%87%E6%A0%B7"><span class="toc-number">2.4.</span> <span class="toc-text">逆变换采样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4"><span class="toc-number">2.5.</span> <span class="toc-text">置信区间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97%E6%A8%A1%E6%8B%9F"><span class="toc-number">2.6.</span> <span class="toc-text">蒙特卡罗模拟</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Research/">Research</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-08-29T16:00:00.000Z">2023-08-30</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>广义随机 Petri 网 (GSPN)</span></h1>
+<p>Petri 网的基础知识和建模工具介绍</p>
+<span id="more"></span>
+
+<h2 id="Petri-Net"><a href="#Petri-Net" class="headerlink" title="Petri Net"></a>Petri Net</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.informatik.uni-hamburg.de/TGI/PetriNets/index.php"><strong>Petri Nets World</strong></a></p>
+</li>
+<li><p><strong>ISO&#x2F;IEC 15909</strong> （Systems and software engineering — High-level Petri nets）《系统和软件工程 - 高级 Petri 网》</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/445870321">车辆功能安全与可靠性的关系分析</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.ctfiot.com/51833.html">厘清功能安全VS预期功能安全VS网络安全的关系</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.sdust.edu.cn/info/1038/14041.htm">吴哲辉：中国计算机学会Petri网专业委员会的成立与早期发展——我校在其中发挥过重要作用</a></p>
+</li>
+<li><p><strong>书籍</strong></p>
+<ul>
+<li>《Petri网导论》 - 吴哲辉</li>
+<li>《随机Petri网与系统性能分析》 -  林闯</li>
+<li>《Petri网原理与应用》 - 袁崇义</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p> Petri 网在系统可靠性分析中的应用主要有以下几个方面：<strong>基本行为描述</strong>、<strong>故障树的表示与简化</strong>、<strong>可靠性指标的解析计算</strong>以及<strong>可靠性仿真</strong>等</p>
+</blockquote>
+<h3 id="基本-Petri-网"><a href="#基本-Petri-网" class="headerlink" title="基本 Petri 网"></a>基本 Petri 网</h3><p><strong>Petri 网（ PN ）</strong> 为一个三元组，即 $PN&#x3D;(P,T;F)$ ，其中：</p>
+<ol>
+<li>$P&#x3D;(p_1,p_2,\cdots p_n)$ 为有限库所集， $n$ 为库所个数；</li>
+<li>$T&#x3D;(t_1,t_2,\cdots t_m)$  为有限变迁集， $m$ 为变迁个数；</li>
+<li>$P\cap T&#x3D;\emptyset $ ，即库所集合 $P$ 和变迁集合 $T$ 不相交；$P\cup T\neq\emptyset$ ，即库所集合 $P$ 和变迁集合 $T$ 不同时为空；</li>
+<li>$F\subseteq(P{\times}T)\cup(T{\times}P)$ 为流关系，即弧集合;</li>
+<li>$dom(F)\bigcup cod(F)&#x3D;P\bigcup T$ ，即没有孤立元素，其中 $dom(F)&#x3D;{x\mid\exists y:(x,y)\in F}$，$cod(F)&#x3D;{y\mid\exists x:(x,y)\in F}$ 分别为 $F$ 的定义域和值域；</li>
+<li>集合 $X&#x3D;P\cup T$ 是网元素集合。</li>
+</ol>
+<p><strong>库所&#x2F;变迁（P&#x2F;T）系统</strong>为一个六元组 $\Sigma&#x3D;\left(P,T;F,K,W,M_0\right)$ ，其中：</p>
+<ol>
+<li>$PN&#x3D;(P,T;F)$ 是一个网， $P$ 元素是位置，$T$ 元素是变迁；</li>
+<li>$K:\ P\to N^+\cup{\infty}$ 称为位置容量函数（capacity function），容量表示每个位置存储资源的最大数量，但它不是当前实际的资源数量；</li>
+<li>$W:F\to N^+$ 称为 $PN$ 上的弧权函数，表示实际消耗或产生的资源量；</li>
+<li>$M_0:P\to N$ 是 $PN$ 初始的标识(marking)，满足：$\forall p\in P:M_0(p)\leq K(p)$ ，标识是标记在库所中的一种分布。</li>
+</ol>
+<p>Petri 网的图形化表述为一种网状模型：</p>
+<ul>
+<li>库所（Place）</li>
+<li>变迁（Transition）</li>
+<li>有向弧（Connection）</li>
+<li>令牌（token）</li>
+</ul>
+<p>Petri 网的主要性质：</p>
+<ul>
+<li>结构性质：和Petri网初始标识无关的性质</li>
+<li>动态性质：可达性、活性与死锁、冲突、可逆性、可覆盖性、有界性、安全性</li>
+</ul>
+<h3 id="随机-Petri-网"><a href="#随机-Petri-网" class="headerlink" title="随机 Petri 网"></a>随机 Petri 网</h3><p>Stochastic Petri Nets（SPN）</p>
+<p>把固定时间参数引入Petri网的网模型叫做时间Petri网，在每个变迁的可激发与激发之间联系一个随机的延迟时间，这种类型的Petri网叫做随机Petri网（SPN）。</p>
+<p>随机Petri网 $SPN&#x3D;(P,T;F,W,M_0,\lambda)$ ，其中 $(P,T;F,W,M_0)$ 是一 个 $P&#x2F;T$ 系统， $\lambda&#x3D;{\lambda_1,\lambda_2,\cdots,\lambda_m}$ 是变迁平均实施速率集合。</p>
+<blockquote>
+<p>$\lambda_i$ 是变迁 $t_{i}\in T$ 的平均实施速率，表示在可实施的情况下单位时间内平均实 施次数，单位是 <u>次数／单位时间</u>。<strong>在机械可靠性研究中，$\lambda_i$ 可用来表示零部件的故障率及维修率。</strong></p>
+</blockquote>
+<p>大多数随机Petri网的性能分析是建立在<strong>其状态空间与马尔可夫链同构</strong>的基础上的。随机Petri网为系统的性能模型提供良好的描述手段；随机马尔可夫过程为模型的评价提供坚实的数学基础。</p>
+<h3 id="广义随机-Petri-网"><a href="#广义随机-Petri-网" class="headerlink" title="广义随机 Petri 网"></a>广义随机 Petri 网</h3><p>Generalized Stochastic Petri nets (GSPN) </p>
+<p>SPN的状态空间会随着问题的增大而指数性地增长，使得SPN同构的MC难以求解。广义随机Petri网（generalized stochastic Petri nets，GSPN）的提出为缓解状态爆炸提供了一种途径。</p>
+<p>GSPN是SPN的一种扩充，主要表现在将变迁分成两类：</p>
+<ul>
+<li>一种为<strong>瞬时变迁</strong>与随机开关关联（根据一个概率分布函数）且实施延时为零；</li>
+<li>令一种为<strong>时间变迁</strong>与指数随机分布的实施延时相关联。</li>
+</ul>
+<p>一个 $GSPN&#x3D;(P,T;F,W,M_0,\lambda)$ ，其中：</p>
+<ol>
+<li>$P$，$W$，$M_0$，$\lambda$ 与 $SPN$ 的定义相同；</li>
+<li>$F$ 中允许有禁止弧，禁止弧仅存在于从库所到变迁的弧。禁止弧所连接的库所的原可实施条件变为不可实施（disenable）条件，原不可实施条件变为可实施条件，且在相连变迁实施时，没有标记从相连的库所移出；</li>
+<li>变迁集 $T$ 划分为两个子集：$T&#x3D;T_t\cup T_i$ ，$T_t\cap T_i&#x3D;\emptyset $ ，时间（timed）变迁集 $T_t&#x3D;\left{t_1,t_2,\cdots,t_k\right}$ ，瞬时(immediate)变迁集 $T_{i}&#x3D;\left{t_{k+1},t_{k+2},\cdots,t_{n}\right}$ ，与时间变迁集相关联的平均实施速率集合 $\lambda&#x3D;{\lambda_1,\lambda_2,\cdots,\lambda_t}$。</li>
+<li>为在一个标识 $M$ 下多个可实施瞬时变迁定义一个随机开关，确定他们之间实施概率选择。</li>
+</ol>
+<p>$GSPN$ 建模元素的图形化表示：</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20230801210692411.png" style="zoom: 33%;" />
+
+<h4 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h4><p>Petri 网分析方法：</p>
+<ul>
+<li>可达树（可达图）</li>
+<li>关联矩阵</li>
+<li>状态方程</li>
+<li>化简分析</li>
+<li><strong>马尔科夫链同构</strong></li>
+<li><strong>仿真模拟</strong></li>
+</ul>
+<p><strong>马尔科夫链同构法：</strong></p>
+<p>马尔科夫 $GSPN$ 模型，能通过数值分析或者仿真分析的方法，可以得到库所中标记转移概率、变迁的激发概率的瞬态变化过程以及稳态结果；非马尔科夫 $GSPN$ 网络，只能通过仿真的方式来分析，主要得到库所标记转移和变迁激发的稳态结果。</p>
+<p>当Petri网变迁的时延服从指数分布时，一个Petri网同构于一个连续时间马尔可夫链（MC），每个标识对应马尔可夫链的一个状态。两者同构的条件有两个，一个是<strong>变迁的实施速率服从指数分布所导致的无记忆性</strong>，另一个是<strong>标识的可数性</strong>。在Petri网模型的可达图上可以很容易地获得 MC 转移速率矩阵的参数，能够计算出 MC的每个状态（标识）的稳定状态下的稳定概率，对Petri网进行分析。</p>
+<ol>
+<li>PN Generation</li>
+<li>Deadlock and Liveness Analysis</li>
+<li>Model Parameter Assignment</li>
+<li>Performance Analysis<ol>
+<li>Reachability Graph Creation</li>
+<li>Markov Chain Creation</li>
+<li>Transition Probability Computation</li>
+<li>Design Matrix Evaluation</li>
+<li>Reliability Prediction</li>
+<li>Sensitivity analysis</li>
+</ol>
+</li>
+</ol>
+<p><strong>蒙特卡罗模拟法：</strong></p>
+<p>通过逆变换从指数分布采样，$t&#x3D;\frac{-\ln(K)}{\lambda}$，$K$ 的取值范围是 $[0,1]$ ，利用蒙特卡洛模拟可以确定 $K$ 的取值进而每一步仿真得到随机延迟 $t$，进而进行petri 网模型的模拟。</p>
+<p>基于 Petri 网的蒙特卡洛模拟流程：</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/image-20230807133606104.png" style="zoom: 67%;" />
+
+<h4 id="CTMC-求解"><a href="#CTMC-求解" class="headerlink" title="CTMC 求解"></a>CTMC 求解</h4><p>GSPN 模型可达集同构于连续时间马尔可夫链 （<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Continuous-time_Markov_chain">Continuous-time Markov chain，CTMC</a>）</p>
+<p><strong>求解步骤：</strong></p>
+<ol>
+<li>构建<strong>转移速率矩阵</strong></li>
+<li>Kolmogorov 正向方程 $\boldsymbol{P}^{\prime}(t)&#x3D;\boldsymbol{P}(t)\boldsymbol{Q}$</li>
+<li>实存状态的稳态概率满足：$\begin{cases}P\cdot Q&#x3D;0\\sum_{i&#x3D;1}^lP_i&#x3D;1&amp;\end{cases}$</li>
+<li>三个式子组成方程组，求解即为稳态：<ul>
+<li>$P&#x3D;[p_1,p_2,\ldots,p_n]$，是稳态概率分布的向量，其中 $p_{i}$ 表示状态 $i$ 的稳态概率</li>
+<li>Kolmogorov 正向方程：$\frac d{dt}P(t)&#x3D;P(t)\cdot Q$</li>
+<li>平衡方程：$P\cdot Q&#x3D;0$</li>
+<li><em>P</em> 的和为1：$\sum_{i&#x3D;1}^np_i&#x3D;1$</li>
+</ul>
+</li>
+</ol>
+<p><strong>案例分析：</strong></p>
+<p>稳态概率向量：$P&#x3D;[p_0,p_2,\ldots,p_8]$</p>
+<p>转移速率矩阵：</p>
+<p>$Q &#x3D; \begin{bmatrix}<br>  &amp; M_0 &amp; M_1 &amp; M_2 &amp; M_3 &amp; M_4 &amp; M_5 &amp; M_6 &amp; M_7 &amp; M_8 \<br>M_0 &amp; q_{00} &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \<br>M_1 &amp; \lambda_{15} &amp; q_{11} &amp; \lambda_{6} &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \<br>M_2 &amp; \lambda_{15} &amp; 0 &amp; q_{22} &amp; 0 &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \<br>M_3 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; q_{33} &amp; \lambda_6 &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 &amp; 0 \<br>M_4 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; q_{44} &amp; 0 &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 \<br>M_5 &amp; 0 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; q_{55} &amp; \lambda_{6} &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 \<br>M_6 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; q_{66} &amp; 0 &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} \<br>M_7 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; q_{77} &amp; \lambda_{6} \<br>M_8 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; q_{88}<br>\end{bmatrix}$</p>
+<p>$q_{ii}&#x3D;-\sum_{j\neq i}q_{ij}$</p>
+<p>$\lambda_a &#x3D; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13}$</p>
+<p>$Q &#x3D; \begin{bmatrix}<br>  &amp; M_0 &amp; M_1 &amp; M_2 &amp; M_3 &amp; M_4 &amp; M_5 &amp; M_6 &amp; M_7 &amp; M_8 \<br>M_0 &amp; -(\lambda_7+\lambda_9+\lambda_{11}+\lambda_{13}) &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \<br>M_1 &amp; \lambda_{15} &amp; -(\lambda_{15} + \lambda_{6} + \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13}) &amp; \lambda_{6} &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \<br>M_2 &amp; \lambda_{15} &amp; 0 &amp; -(\lambda_{15} + \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13}) &amp; 0 &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \<br>M_3 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; -(\lambda_{15} + \lambda_6 + \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13}) &amp; \lambda_6 &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 &amp; 0 \<br>M_4 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; -(\lambda_{15} + \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13}) &amp; 0 &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 &amp; 0 \<br>M_5 &amp; 0 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; -(\lambda_{15} + \lambda_{6} + \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13}) &amp; \lambda_{6} &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} &amp; 0 \<br>M_6 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; -(\lambda_{15} + \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13}) &amp; 0 &amp; \lambda_7+\lambda_9+\lambda_{11}+\lambda_{13} \<br>M_7 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; -(\lambda_{15} + \lambda_{6}) &amp; \lambda_{6} \<br>M_8 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \lambda_{15} &amp; 0 &amp; -\lambda_{15}<br>\end{bmatrix}$</p>
+<p>解方程组：</p>
+<p>$P(0)&#x3D;[1,0,0,0,0,0,0,0,0]$，$M_0$为初态</p>
+<p>$\frac d{dt}P(t)&#x3D;P(t)\cdot Q$</p>
+<p>$\begin{cases}{P}^{\prime}(t)&#x3D;{P}(0)\cdot Q\P(t&#x3D;\infty)\cdot Q&#x3D;0\\sum_{i&#x3D;0}^8P_i&#x3D;1&amp;\end{cases}$</p>
+<p>这个方程组描述了连续时间马尔可夫链的稳态概率。在这里，$P(t)$ 是状态分布向量，$Q$ 是状态转移速率矩阵。</p>
+<p>首先，我们可以通过解微分方程 $\frac d{dt}P(t)&#x3D;P(0)\cdot Q$ 来得到稳态概率分布，这个微分方程的解是 $P(t)&#x3D;P(0)\cdot e^{tQ}$</p>
+<p>接下来，我们需要找到稳态概率分布 $P(t&#x3D;\infty)$，这可以通过解方程 $P(t&#x3D;\infty)\cdot Q&#x3D;0$ 来实现。解这个方程可以得到马尔可夫链的稳态概率分布。</p>
+<p>最后，我们需要确保概率分布的总和为1，即$\sum_{i&#x3D;0}^8P_i&#x3D;1$</p>
+<p>使用 python 求解：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> odeint</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义矩阵 Q</span></span><br><span class="line">Q = np.array([</span><br><span class="line">    [-<span class="number">360.0000645</span>, <span class="number">360.0000645</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">3600</span>, -<span class="number">3961.000065</span>, <span class="number">1</span>, <span class="number">360.0000645</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">3600</span>, <span class="number">0</span>, -<span class="number">3960.000065</span>, <span class="number">0</span>, <span class="number">360.0000645</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">3600</span>, <span class="number">0</span>, -<span class="number">3961.000065</span>, <span class="number">1</span>, <span class="number">360.0000645</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">3600</span>, <span class="number">0</span>, -<span class="number">3960.000065</span>, <span class="number">0</span>, <span class="number">360.0000645</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3600</span>, <span class="number">0</span>, -<span class="number">3961.000065</span>, <span class="number">1</span>, <span class="number">360.0000645</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3600</span>, <span class="number">0</span>, -<span class="number">3960.000065</span>, <span class="number">0</span>, <span class="number">360.0000645</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3600</span>, <span class="number">0</span>, -<span class="number">3601</span>, <span class="number">1</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3600</span>, <span class="number">0</span>, -<span class="number">3600</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义初始条件</span></span><br><span class="line">P0 = np.array([<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义微分方程组</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dPdt</span>(<span class="params">P, t</span>):</span><br><span class="line">    dPdt = P @ Q</span><br><span class="line">    <span class="keyword">return</span> dPdt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数值求解</span></span><br><span class="line">t = np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">100</span>)  <span class="comment"># 时间步长</span></span><br><span class="line">sol = odeint(dPdt, P0, t)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出结果</span></span><br><span class="line"><span class="built_in">print</span>(sol[-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义速率矩阵 Q</span></span><br><span class="line"></span><br><span class="line">Q = np.array([</span><br><span class="line">    [-<span class="number">360.0000645</span>, <span class="number">360.0000645</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],</span><br><span class="line">    [<span class="number">3600</span>, -<span class="number">3961.000065</span>, <span class="number">1.0</span>, <span class="number">360.0000645</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],</span><br><span class="line">    [<span class="number">3600</span>, <span class="number">0.0</span>, -<span class="number">3960.000065</span>, <span class="number">0.0</span>, <span class="number">360.0000645</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],</span><br><span class="line">    [<span class="number">0.0</span>, <span class="number">3600</span>, <span class="number">0.0</span>, -<span class="number">3961.000065</span>, <span class="number">1.0</span>, <span class="number">360.0000645</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],</span><br><span class="line">    [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">3600</span>, <span class="number">0.0</span>, -<span class="number">3960.000065</span>, <span class="number">0.0</span>, <span class="number">360.0000645</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],</span><br><span class="line">    [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">3600</span>, <span class="number">0.0</span>, -<span class="number">3961.000065</span>, <span class="number">1.0</span>, <span class="number">360.0000645</span>, <span class="number">0.0</span>],</span><br><span class="line">    [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">3600</span>, <span class="number">0.0</span>, -<span class="number">3960.000065</span>, <span class="number">0.0</span>, <span class="number">360.0000645</span>],</span><br><span class="line">    [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">3600</span>, <span class="number">0.0</span>, -<span class="number">3601</span>, <span class="number">1.0</span>],</span><br><span class="line">    [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">3600</span>, <span class="number">0.0</span>, -<span class="number">3600</span>],</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 求解稳态概率</span></span><br><span class="line">w, v = np.linalg.eig(Q.T)</span><br><span class="line">pi = v[:, <span class="number">0</span>] / np.<span class="built_in">sum</span>(v[:, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出稳态概率</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;稳态概率向量:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(pi)</span><br></pre></td></tr></table></figure>
+
+<p>使用 Mathematica 求解：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*定义未知向量 P*)</span><span class="variable">P</span> <span class="operator">=</span> <span class="built_in">Array</span><span class="punctuation">[</span><span class="variable">p</span><span class="operator">,</span> <span class="number">9</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*定义转移速率矩阵 Q*)</span></span><br><span class="line"><span class="variable">Q</span> <span class="operator">=</span> <span class="punctuation">&#123;</span><span class="punctuation">&#123;</span><span class="operator">-</span><span class="punctuation">(</span><span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="punctuation">)</span><span class="operator">,</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span></span><br><span class="line">     <span class="number">0</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">\[Lambda]</span><span class="number">15</span><span class="operator">,</span> <span class="operator">-</span><span class="punctuation">(</span><span class="variable">\[Lambda]</span><span class="number">15</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">6</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="punctuation">)</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">6</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="variable">\[Lambda]</span><span class="number">15</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="operator">-</span><span class="punctuation">(</span><span class="variable">\[Lambda]</span><span class="number">15</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">13</span><span class="punctuation">)</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="number">0</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">15</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="operator">-</span><span class="punctuation">(</span><span class="variable">\[Lambda]</span><span class="number">15</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">6</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="punctuation">)</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">6</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">15</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="operator">-</span><span class="punctuation">(</span><span class="variable">\[Lambda]</span><span class="number">15</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">13</span><span class="punctuation">)</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">15</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="operator">-</span><span class="punctuation">(</span><span class="variable">\[Lambda]</span><span class="number">15</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">6</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="punctuation">)</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">6</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="operator">,</span> <span class="number">0</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">15</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="operator">-</span><span class="punctuation">(</span><span class="variable">\[Lambda]</span><span class="number">15</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> \</span><br><span class="line"><span class="variable">\[Lambda]</span><span class="number">13</span><span class="punctuation">)</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">7</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">9</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">11</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">13</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span></span><br><span class="line">     <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">15</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="operator">-</span><span class="punctuation">(</span><span class="variable">\[Lambda]</span><span class="number">15</span> <span class="operator">+</span> <span class="variable">\[Lambda]</span><span class="number">6</span><span class="punctuation">)</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">6</span><span class="punctuation">&#125;</span><span class="operator">,</span> <span class="punctuation">&#123;</span><span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> </span><br><span class="line">    <span class="number">0</span><span class="operator">,</span> <span class="variable">\[Lambda]</span><span class="number">15</span><span class="operator">,</span> <span class="number">0</span><span class="operator">,</span> <span class="operator">-</span><span class="variable">\[Lambda]</span><span class="number">15</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*定义方程组*)</span></span><br><span class="line"><span class="variable">eqns</span> <span class="operator">=</span> <span class="punctuation">&#123;</span><span class="variable">P</span> <span class="operator">.</span> <span class="variable">Q</span> <span class="operator">==</span> <span class="built_in">ConstantArray</span><span class="punctuation">[</span><span class="number">0</span><span class="operator">,</span> <span class="number">9</span><span class="punctuation">]</span><span class="operator">,</span> <span class="built_in">Total</span><span class="punctuation">[</span><span class="variable">P</span><span class="punctuation">]</span> <span class="operator">==</span> <span class="number">1</span><span class="punctuation">&#125;</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*求解方程组*)</span></span><br><span class="line"><span class="variable">sol</span> <span class="operator">=</span> <span class="built_in">Solve</span><span class="punctuation">[</span><span class="variable">eqns</span><span class="operator">,</span> <span class="variable">P</span><span class="punctuation">]</span><span class="operator">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*打印解*)</span></span><br><span class="line"><span class="variable">sol</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h4><ol>
+<li><strong>稳态概率</strong>：分析系统达到稳态时不同库所令牌分布的概率。这有助于了解系统在长期运行中各个状态的概率分布。</li>
+<li>吞吐量：计算系统在单位时间内完成的任务数或处理的事务数量。吞吐量是衡量系统性能的一个重要指标。</li>
+<li>平均延迟：计算任务或事务从提交到完成所需的平均时间。平均延迟是衡量系统响应时间的指标。</li>
+<li>资源利用率：分析系统中各个资源（如处理器、内存等）的利用率，以评估资源的使用效率。</li>
+<li>并发性：分析系统中并发执行的任务或事务数量，了解系统的并行处理能力。</li>
+<li>死锁分析：检查系统是否存在死锁情况，即无法进行任何进一步状态转移的情况。</li>
+<li>故障分析：通过引入故障或随机性来模拟系统的可靠性，以评估系统在故障情况下的性能表现。</li>
+<li>灵敏度分析：分析系统参数的变化对性能指标的影响，帮助优化系统设计和参数配置。</li>
+<li>优化：根据性能分析的结果，优化系统结构、资源分配或策略，以提高系统性能。</li>
+</ol>
+<h3 id="建模工具"><a href="#建模工具" class="headerlink" title="建模工具"></a>建模工具</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/sarahtattersall/PIPE"><strong>PIPE</strong></a><br>PIPE 5 is currently in beta stage due to an entire re-write of the back end and so is missing most of the analysis modules. If you require Petri net analysis, please use <a target="_blank" rel="noopener" href="https://pipe2.sourceforge.net/about.html">PIPE 4</a>.</li>
+<li><a target="_blank" rel="noopener" href="https://cpnide.org/"><strong>CPN IDE</strong></a><br><a target="_blank" rel="noopener" href="https://cpntools.org/">CPN Tools</a> has been replaced now by <a target="_blank" rel="noopener" href="https://cpnide.org/">CPN IDE</a>. Development on CPN Tools has stopped.</li>
+<li><a target="_blank" rel="noopener" href="https://timenet.tu-ilmenau.de/#/"><strong>TimeNET</strong></a></li>
+<li><a target="_blank" rel="noopener" href="http://www.pntool.ac.tuiasi.ro/index.php"><strong>Net Toolbox for MATLAB</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://grif.totalenergies.com/en/products/simulation-package/module-petri"><strong>GRIF Petri – Petri Net software</strong></a>（收费）</li>
+</ol>
+<h3 id="PIPE"><a href="#PIPE" class="headerlink" title="PIPE"></a>PIPE</h3><h3 id="TimeNET"><a href="#TimeNET" class="headerlink" title="TimeNET"></a>TimeNET</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://gdv1.prakinf.tu-ilmenau.de/sse_file/ManualHTML4/UserManual.html#german:supplementary">TimeNET 4.0 User Manual</a></p>
+</li>
+<li><p><strong>Objects</strong></p>
+<ul>
+<li><p>Places</p>
+</li>
+<li><p>Exponential transitions</p>
+<p>指数跃迁的激发速率必须通过取其倒数来转换为延迟</p>
+</li>
+<li><p>Immediate transitions</p>
+</li>
+<li><p>Arc</p>
+</li>
+<li><p>Inhibitor arcs</p>
+</li>
+<li><p>Constant definition</p>
+</li>
+<li><p>Performance measures</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Validate</strong></p>
+<ul>
+<li>Statespace 状态空间</li>
+</ul>
+</li>
+<li><p>Traps 陷阱</p>
+<ul>
+<li>Siphons 虹吸管</li>
+</ul>
+</li>
+<li><p><strong>Analysis</strong></p>
+<ul>
+<li><p>Transient </p>
+<p>运行一周后，系统仍然可运行的概率是多少？</p>
+<p>制造系统重新设置后一小时生产了多少零件？</p>
+</li>
+<li><p>Stationary (Steady-State)</p>
+<p>通信通道的最大带宽是多少？</p>
+<p>制造系统缓冲区中的预期零件数量是多少？</p>
+</li>
+<li><p>Analysis</p>
+<p>通过对可达性图的充分探索来进行直接、准确的数值性能评估</p>
+</li>
+<li><p>Approximation </p>
+<p>也是直接数值技术，但尝试通过允许某种不准确性来避免一些昂贵的评估部分</p>
+</li>
+<li><p>Simulation</p>
+<p>不计算可达性图，而是遵循标准蒙特卡罗风格模拟方法并进行一些改进</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Evaluation</strong></p>
+</li>
+</ul>
+<h2 id="概率与统计"><a href="#概率与统计" class="headerlink" title="概率与统计"></a>概率与统计</h2><p><strong>概率分布</strong>（Poisson Distribution）就是在统计图中表示概率，横轴是数据的值，纵轴是横轴上对应数据值的概率。</p>
+<h3 id="泊松分布"><a href="#泊松分布" class="headerlink" title="泊松分布"></a>泊松分布</h3><p>某个时间范围内，发生某件事情x次的概率是多大，如一个月内某机器损坏的次数。若某事件的发生是完全随机的，则在单位时间（或空间）事件发生0次、1次、2次、…、<em>X</em>次相应的概率为：<br>$$<br>P(X&#x3D;k)&#x3D;\frac{e^{-\lambda}\lambda^k}{k!},k&#x3D;0,1,2,\cdots<br>$$<br>则称该事件的发生服从参数为 $𝜆$ 的Poisson分布，$𝜆$ 是其唯一参数，为Poisson分布的均数(𝜆＞0)，式中 $e &#x3D;2.71828$ 为自然对数的底，是常数，$X$ 是事件发生次数，$P(X)$ 为事件发生次数为 $X$ 时的概率。</p>
+<h3 id="指数分布"><a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h3><p>指数分布（Exponential distribution）是一种形式简单地连续型分布，传统上常用于表述电子元器件或某些产品的寿命分布规律。若产品在一定时间区间内的失效数服从<strong>泊松分布</strong>，则该产品的寿命服从<strong>指数分布</strong>。若产品的寿命分布服从指数分布，则其失效率为常数。</p>
+<p>指数分布的<strong>故障密度函数</strong>（概率密度函数）为：<br>$$<br>f(x)&#x3D;\left{\begin{array}{cc}{\lambda}e^{-{\lambda}x}&amp;,&amp;x\geq0,\0&amp;,&amp;x&lt;0.\end{array}\right.<br>$$</p>
+<p><strong>累积分布函数</strong>为：<br>$$<br>F(x)&#x3D;\left{\begin{array}{cc}1-e^{-{\lambda}x}&amp;,&amp;x\geq0,\0&amp;,&amp;x&lt;0.\end{array}\right.<br>$$</p>
+<p>指数分布具有“无记忆性”，这是指数分布的重要性质。即产品的寿命服从指数分布，则已工作了 t 时间正常的产品，在 t 时间以后的剩余寿命与新的产品一样，与 t 无关。</p>
+<h3 id="威布尔分布"><a href="#威布尔分布" class="headerlink" title="威布尔分布"></a>威布尔分布</h3><p>威布尔分布（Weibull distribution）在可靠性工程中被广泛使用。威布尔分布有三参数和两参数两种形式。</p>
+<p>三参数威布尔分布的概率密度函数为：<br>$$<br>f(t)&#x3D;\begin{cases}\dfrac{m}{t}(t-\gamma)^{m-1}\exp[-\dfrac{(t-\gamma)^m}{t_0}]&amp;&amp;t\geq\gamma\l_0&amp;&amp;t&lt;\gamma&amp;\end{cases}<br>$$<br>三参数威布尔分布记为 $T\sim W(m,t_0,\gamma)$，其中 m 为形状参数， $t_0$为尺度参数，$\gamma$ 为位置参数，其取值范围都是$(0,\infty)$ 。</p>
+<p>在可靠性工程中，通常取 $\gamma$ &#x3D; 0，则三参数威布尔分布简化为两参数威布尔分布，其概率密度函数为：<br>$$<br>f(t)&#x3D;\frac{m}{t_0}t^{m-1}\exp(-\frac{t^m}{t_0})\quad\quad t\geq0<br>$$<br>根据 m 值的不同，威布尔分布等价或近似于其他分布。例如，当 m &#x3D; 1 时， 威布尔分布等同于<strong>指数分布</strong>；当 m &#x3D;2.5 时，威布尔分布近似于<strong>对数正态分布</strong>； 当 m &#x3D; 3.6 时，威布尔分布近似于<strong>正态分布</strong>。</p>
+<p><strong>由于威布尔分布的参数众多，指数分布、正态分布、瑞利分布等均可看作是它特例，所以它适用范围很广。</strong> 国外常把它作为机械产品和电子产品的通用故障分布，每当遇到故障分布很不明显，难以断定时，就当威布尔分布来统计、检验， 在工程上往往可得到圆满的结果。</p>
+<h3 id="逆变换采样"><a href="#逆变换采样" class="headerlink" title="逆变换采样"></a>逆变换采样</h3><p>在已知任意概率分布的累积分布函数时，可用于从该分布中生成随机样本。即，<strong>生成符合特定概率分布的随机数</strong>。</p>
+<p><strong>从指数分布采样</strong>：</p>
+<p>指数分布的概率密度<br>$$<br>f(x;\lambda)&#x3D;\left{\begin{array}{ll}\lambda e^{-\lambda x}&amp;,&amp;\quad x\geq0,\0&amp;,&amp;\quad x&lt;0.\end{array}\right.<br>$$<br>从采样逆变换可知，如果我们<strong>让指数分布的累积分布函数服从均匀分布</strong>，那么其<strong>逆函数</strong>服从指数分布，<br>$$<br>P(x)&#x3D;\mathrm{P}(V\leqslant x)&#x3D;\int_0^xp(x)\mathrm{d}x&#x3D;1-\mathrm{e}^{-{\lambda}x}<br>$$<br>求逆函数：<br>$$<br>x&#x3D;\frac{-\ln(1-u)}{\lambda}<br>$$<br>因此从均匀分布 $U[0,1]$ 中采样一系列的 $u_i$ ，代入上式得到的 $xi$ 就是符合指数分布的随机变量。</p>
+<blockquote>
+<p> $xi$ （随机延迟时间）服从指数分布，用于模拟随机Petri网中时间变迁的触发间隔</p>
+</blockquote>
+<h3 id="置信区间"><a href="#置信区间" class="headerlink" title="置信区间"></a>置信区间</h3><p>置信水平（Confidence Intervals）：区间包含总体平均值的概率</p>
+<p>置信区间（Confidence Level）：误差范围</p>
+<p>95%置信区间表示在重复抽样的情况下，有95%的概率包含了总体参数的真实值。置信区间通常以估计值加减一个误差范围来表示。当我们进行蒙特卡罗模拟时，会生成大量的随机样本，并基于这些样本进行统计分析。利用蒙特卡罗模拟得到的参数估计值和方差（或标准差），我们可以计算置信区间。</p>
+<h3 id="蒙特卡罗模拟"><a href="#蒙特卡罗模拟" class="headerlink" title="蒙特卡罗模拟"></a>蒙特卡罗模拟</h3><p><strong>蒙特卡罗方法</strong>（Monte Carlo method），也称<strong>统计模拟方法</strong>，是1940年代中期由于科学技术的发展和电子计算机的发明，而提出的一种<strong>以概率统计理论为指导的数值计算方法</strong>。作为一种常用的模拟技术，其主要出现在风险管理知识领域中的定量风险分析过程，是用于做项目<strong>定量风险分析的工具之一</strong>，同时蒙特卡洛模拟也可以用于估算进度或成本以及制定进度计划等。</p>
+<p>蒙特卡罗仿真的基本流程如下：</p>
+<ol>
+<li>系统建模。根据系统的目标和结构构建一个合理的数学逻辑模型。建模型的方法有多种，如对系统的动态变化建立系统的 SPN 模型。</li>
+<li>确定随机变量及其分布，在可靠性仿真中，元件的寿命分布和维修时间分布是仿真的基础，这些分布函数的获得可以通过以往的经验及大量统计来完成。</li>
+<li>确定随机变量的分布后，选择适当的随机变量抽样方法，实现对已知概率分布抽样。即通过产生随机数的方式进行对已知概率分布的抽样。这是蒙特卡罗仿真最为主要的一步，也是蒙特卡罗仿真思想的体现。</li>
+<li>统计计算。得到仿真数据后，对系统及元件进行可靠性指标分析。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34217180">蒙特卡洛模拟(Monte Carlo Simulation)浅析</a></p>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/09/01/cpp/">C++ 多线程编程</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/08/28/mindset/">《程序员的底层思维》</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

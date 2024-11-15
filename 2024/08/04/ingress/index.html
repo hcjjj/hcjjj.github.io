@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>基于 Nginx 的异构后端统一鉴权服务🛡️ - H-sediment</title>
+
+  
+    <meta name="description" content="JWT authorization with NGINX Ingress Controller">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 Nginx 的异构后端统一鉴权服务🛡️">
+<meta property="og:url" content="http://example.com/2024/08/04/ingress/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="JWT authorization with NGINX Ingress Controller">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240805164624.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240805165418.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240806160759.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/Untitled%20diagram-2024-08-06-072719.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240805165509.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240808191113.png">
+<meta property="article:published_time" content="2024-08-04T09:37:55.000Z">
+<meta property="article:modified_time" content="2024-10-15T03:32:11.975Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="JWT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240805164624.png">
+  
+  
+  
+  <meta name="keywords" content="Nginx,Kubernetes,JWT">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">基于 Nginx 的异构后端统一鉴权服务🛡️</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT"><span class="toc-number">1.</span> <span class="toc-text">JWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%89%A9%E5%B1%95"><span class="toc-number">1.2.</span> <span class="toc-text">相关扩展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%89%B4%E6%9D%83%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.3.</span> <span class="toc-text">鉴权服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx"><span class="toc-number">2.</span> <span class="toc-text">Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-1"><span class="toc-number">2.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">2.3.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-number">2.4.</span> <span class="toc-text">常用模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9F%E4%B8%80%E9%89%B4%E6%9D%83"><span class="toc-number">2.5.</span> <span class="toc-text">统一鉴权</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ingress"><span class="toc-number">3.</span> <span class="toc-text">Ingress</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx-Ingress"><span class="toc-number">3.1.</span> <span class="toc-text">Nginx Ingress</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%89%A9%E5%B1%95-1"><span class="toc-number">3.2.</span> <span class="toc-text">相关扩展</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Internship/">Internship</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-08-04T09:37:55.000Z">2024-08-04</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>基于 Nginx 的异构后端统一鉴权服务🛡️</span></h1>
+<p><strong>JWT authorization with NGINX Ingress Controller</strong></p>
+<span id="more"></span>
+
+<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>JWT（JSON Web Token）是一种开放标准（RFC 7519），用于在网络应用环境中安全地传递信息。JWT 的设计目的是为了在各方之间安全地传输声明（claim），这些声明可以包含关于用户身份（ID）、权限或其他元数据的信息。</p>
+<p><strong>JWT 的结构</strong></p>
+<p>一个 JWT 通常由三部分组成，分别用点（<code>.</code>）分隔：</p>
+<ul>
+<li><strong>头部（Header）</strong><ul>
+<li>包含令牌的类型（通常是 “JWT”）和所使用的签名算法（如 HMAC SHA256、RSA、ECDSA）</li>
+</ul>
+</li>
+<li><strong>负载（Payload）</strong><ul>
+<li>包含实际的数据（声明）。这些声明可以是公开声明、私有声明或注册声明。</li>
+<li>公开声明：可以包含在 JWT 中的标准化声明，例如 <code>iss</code>（发行者）、<code>exp</code>（过期时间）、<code>sub</code>（主题）等。</li>
+<li>私有声明：用户自定义的数据，不是标准化的声明，需要双方协商一致。</li>
+<li>注册声明：一些预定义的声明，用于在 JWT 中传递用户相关的基本信息。</li>
+<li>负载部分的内容是 Base64Url 编码的 JSON 对象。</li>
+</ul>
+</li>
+<li><strong>签名（Signature）</strong><ul>
+<li>由头部和负载部分的数据以及一个密钥经过特定算法（如 HMAC SHA256、RSA 等）生成，用于验证 JWT 的<strong>完整性</strong>。</li>
+</ul>
+</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240805164624.png" fancybox="true"/></div></div>
+
+<p><strong>无状态特性</strong></p>
+<p>JWT 包含了所有必要的用户身份和权限信息（如用户 ID、权限等），并通过签名保证数据的完整性。当客户端每次发送请求时，会将 JWT 令牌包含在请求头中，服务器通过验证该令牌来进行身份验证和授权，而不需要维护和查询服务器端的会话数据。服务器只需检查 JWT 的签名和有效性，而不需要存储任何会话数据。</p>
+<p><strong>安全性考虑</strong></p>
+<p>JWT（JSON Web Token）的数据通常<strong>不被加密</strong>，而是<strong>签名</strong>来保证数据的完整性和真实性，签名的目的是确保 JWT 的数据没有被篡改。接收方使用相同的签名算法和密钥来验证签名是否匹配。如果不匹配，表明数据可能被篡改。</p>
+<p>JWT 的头部（Header）和负载（Payload）部分一般<strong>不加密</strong>，只进行 Base64Url 编码。这种编码只是将数据转换为 URL 安全的字符串形式，并不提供任何安全性，任何人都可以解码 JWT，查看其中的内容。这意味着敏感信息不应该直接存储在 JWT 的负载中，除非数据经过加密或采取了其他安全措施。</p>
+<ul>
+<li><p><strong>数据加密</strong>：如果需要在 JWT 中存储敏感信息，可以对数据进行加密后再放入负载中。这样，即使 JWT 被截获，未经授权的第三方也无法解密和查看数据。</p>
+</li>
+<li><p><strong>使用 HTTPS</strong>：为了防止 JWT 在传输过程中被截获，应该使用 HTTPS 进行加密通信。</p>
+</li>
+<li><p>如果使用 <strong>JWE（JSON Web Encryption）</strong> 规范，可以对 JWT 进行加密，只有持有解密密钥的方能读取。</p>
+</li>
+</ul>
+<h3 id="相关扩展"><a href="#相关扩展" class="headerlink" title="相关扩展"></a>相关扩展</h3><ul>
+<li><p><strong>OAuth 2.0</strong></p>
+<ul>
+<li><p>类型：授权框架</p>
+</li>
+<li><p>用途：主要用于在不同的应用程序或服务之间提供授权。常用于第三方应用程序访问用户数据，而不暴露用户的凭证。</p>
+</li>
+<li><p>特点：使用访问令牌（Access Token）来代表用户的权限。访问令牌通常有有限的寿命，可以由刷新令牌（Refresh Token）延长。</p>
+</li>
+<li><p>工作流程：包括授权代码流程、隐式流程、密码凭据流程和客户端凭据流程等多种方式。OAuth 2.0 不依赖于特定的认证方法，可以结合多种认证方式使用。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Cookie</strong></p>
+<ul>
+<li><p>类型：客户端存储技术</p>
+</li>
+<li><p>用途：用于存储少量的数据（如会话标识、用户偏好）在用户的浏览器中，以便在不同的网页之间共享状态。</p>
+</li>
+<li><p>特点：数据存储在客户端，由服务器生成和管理。可以设置失效时间或设置为会话结束时失效。</p>
+</li>
+<li><p>安全性：可标记为 HttpOnly 和 Secure，以提高安全性。HttpOnly 标记可防止 JavaScript 访问，Secure 标记可确保通过 HTTPS 传输。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Session</strong></p>
+<ul>
+<li><p>类型：服务器端存储技术</p>
+</li>
+<li><p>用途：用于在服务器上存储用户会话数据。常用于跟踪用户的登录状态和在会话中的状态信息。</p>
+</li>
+<li><p>特点：数据存储在服务器端，客户端通常只持有一个 Session ID（通常通过 Cookie 传递）。Session 数据在用户会话结束后可以被清除。</p>
+</li>
+<li><p>安全性：Session 数据不直接暴露给客户端，较为安全。需要保护 Session ID 的传输和存储安全。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>JWT</strong></p>
+<ul>
+<li><p>类型：自包含的身份验证令牌</p>
+</li>
+<li><p>用途：用于在各方之间安全地传输信息，尤其是用户身份信息。常用于 API 的身份验证和授权。</p>
+</li>
+<li><p>特点：JWT 是一个自包含的令牌，包含用户信息和签名。通常由三个部分组成：头部（Header）、负载（Payload）和签名（Signature）。</p>
+</li>
+<li><p>安全性：使用签名确保数据未被篡改。可以通过公钥&#x2F;私钥对（非对称加密）或共享密钥（对称加密）签名。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>联系与区别</strong></p>
+<ul>
+<li><p>OAuth 2.0、Cookie、Session 和 JWT 都可以用于身份验证和授权。</p>
+</li>
+<li><p>JWT 可以用作 OAuth 2.0 的访问令牌。</p>
+</li>
+<li><p>Cookie 和 Session 都可以用来管理用户的登录状态，通常是结合使用的。</p>
+</li>
+<li><p>OAuth 2.0 是一个授权框架，不直接处理认证，而是授权第三方访问资源。</p>
+</li>
+<li><p>Cookie 是客户端存储的数据，Session 是服务器端存储的数据。</p>
+</li>
+<li><p>JWT 是一种令牌形式，可以在无状态的环境中使用，而 Session 通常需要服务器维护状态。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="鉴权服务"><a href="#鉴权服务" class="headerlink" title="鉴权服务"></a>鉴权服务</h3><p>用户服务做 JWT 的签发与注销（需要依赖第三方组件做记录），鉴权服务这边只做 JWT 的验证和 JWT 声明的解析，<strong>后续可以进行一系列的扩展，如限流、RBAC等</strong></p>
+<p><strong>请求不带 JWT  或  JWT 校验失败：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">hcjjj: ~ ❯ curl -i http://127.0.0.1:7777/api/auth</span>                                                       </span><br><span class="line">HTTP/1.1 401 Unauthorized</span><br><span class="line">Access-Control-Allow-Headers: Content-Type, Origin, X-CSRF-Token, Authorization, AccessToken, Token, Range</span><br><span class="line">Access-Control-Allow-Methods: GET, HEAD, POST, PATCH, PUT, DELETE</span><br><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Access-Control-Expose-Headers: Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers</span><br><span class="line">Access-Control-Max-Age: 86400</span><br><span class="line">Content-Type: text/plain; charset=utf-8</span><br><span class="line">Traceparent: 00-229a8d047c093eb9637d020dd9471d3a-b59927828a3f7d87-00</span><br><span class="line">Vary: Origin</span><br><span class="line">X-Content-Type-Options: nosniff</span><br><span class="line">Date: Mon, 05 Aug 2024 11:42:26 GMT</span><br><span class="line">Content-Length: 13</span><br><span class="line"></span><br><span class="line">Unauthorized</span><br></pre></td></tr></table></figure>
+
+<p><strong>请求带正确的 JWT ：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">hcjjj: ~ ❯ curl -H <span class="string">&quot;Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1IiwidHlwZSI6IkFDQ0VTU19UT0tFTiIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzI1Njc3NjEzLCJpYXQiOjE3MjA0OTM2MTN9.Z0CXV0B-7USnB6VhHRT4RsN3lxv11R_5h7wxvGoeoLQ&quot;</span>  -i http://127.0.0.1:7777/api/auth</span></span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Access-Control-Allow-Headers: Content-Type, Origin, X-CSRF-Token, Authorization, AccessToken, Token, Range</span><br><span class="line">Access-Control-Allow-Methods: GET, HEAD, POST, PATCH, PUT, DELETE</span><br><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Access-Control-Expose-Headers: Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers</span><br><span class="line">Access-Control-Max-Age: 86400</span><br><span class="line">Traceparent: 00-02f50d29723ccdd50dfab510b294e763-17fb6226dc8b5e07-00</span><br><span class="line">Vary: Origin</span><br><span class="line">X-User-Id: 5</span><br><span class="line">X-User-Role: USER</span><br><span class="line">Date: Mon, 05 Aug 2024 11:43:47 GMT</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><h3 id="基本概念-1"><a href="#基本概念-1" class="headerlink" title="基本概念"></a>基本概念</h3><p>Nginx 是目前最流行的 <strong>Web 服务器</strong>，最初由一位俄罗斯程序员 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Igor_Sysoev">Igor Sysoev</a> 开发。2019 年，Nginx 被美国的 F5 公司以 6.7 亿美元收购。</p>
+<ul>
+<li>Nginx 的开源版本主要分为两种：<ul>
+<li>主线版 (mainline)：最新版本，包含较多新功能和正在开发的实验性模块功能，可能存在一些新的 bug。</li>
+<li>稳定版 (stable)：经过长时间测试，bug 较少，功能较为稳定。</li>
+</ul>
+</li>
+<li>安装方式：<ul>
+<li>源码编译安装：拉取源代码后自己编译为可执行文件。</li>
+<li>预编译二进制包：直接下载编译好的可执行文件。</li>
+<li>Docker Compose：拉取镜像后运行在容器中。</li>
+</ul>
+</li>
+<li>主要用途：<ul>
+<li>正向&#x2F;反向代理：为客户端发出请求或为服务器接收请求。</li>
+<li>负载均衡：将请求分发到多个操作单元上执行。</li>
+<li>HTTP 服务器：Nginx 也可以作为静态资源服务器使用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>Nginx 的主要配置文件通常是 <code>nginx.conf</code>，并且一般位于 <code>/etc/nginx/</code> 目录下。使用 <code>nginx -t</code> 命令可以测试配置文件的有效性而不需要实际重启 Nginx 服务。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Nginx 配置文件</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 全局块</span></span><br><span class="line"><span class="attribute">worker_processes</span>  <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Events 块</span></span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="comment"># 定义事件处理模型</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># HTTP 块</span></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="comment"># 可以在这里定义全局的 HTTP 设置，例如 MIME 类型映射、默认错误页面等。</span></span><br><span class="line"></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="comment"># Server 址块</span></span><br><span class="line">        <span class="attribute">listen</span>       <span class="number">80</span>;  <span class="comment"># 示例: 监听 80 端口</span></span><br><span class="line">        <span class="attribute">server_name</span>  localhost;  <span class="comment"># 示例: 指定服务器名称</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Location 块</span></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="comment"># 这里可以指定如何处理请求到根目录 &quot;/&quot; 的所有请求</span></span><br><span class="line">            <span class="attribute">root</span>   html;  <span class="comment"># 示例: 指定根目录</span></span><br><span class="line">            <span class="attribute">index</span>  index.html index.htm;  <span class="comment"># 示例: 指定索引文件</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 更多 location 块可以根据需要添加</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>全局块</strong> </p>
+<p>全局块是配置文件的第一个块，也是配置文件的主体部分。它主要用来设置一些影响 Nginx 服务器整体运行的配置指令，包括但不限于配置运行 Nginx 服务器的用户（组）、允许生成的 worker process 数量、进程 PID 存放路径、日志存放路径和类型以及配置文件的引入等。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定运行 Nginx 服务器的用户，只能在全局块配置</span></span><br><span class="line"><span class="comment"># 将 user 指令注释掉，或者配置成 nobody 的话所有用户都可以运行</span></span><br><span class="line"><span class="comment"># user [user] [group];</span></span><br><span class="line"><span class="comment"># user nobody nobody;</span></span><br><span class="line"><span class="attribute">user</span> nginx;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定生成的worker进程的数量，也可使用自动模式，只能在全局块配置</span></span><br><span class="line"><span class="attribute">worker_processes</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 错误日志存放路径和类型</span></span><br><span class="line"><span class="attribute">error_log</span> /var/log/nginx/<span class="literal">error</span>.log <span class="literal">warn</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进程PID存放路径</span></span><br><span class="line"><span class="attribute">pid</span> /var/run/nginx.pid;</span><br></pre></td></tr></table></figure>
+
+<p><strong>events 块</strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="comment"># 指定使用哪种网络IO模型，只能在events块中进行配置</span></span><br><span class="line">    <span class="comment"># use epoll;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每个worker process允许的最大连接数</span></span><br><span class="line">    <span class="attribute">worker_connections</span> <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>http 块</strong></p>
+<p>http 块是配置文件的主要部分，包括 http 全局块和 server 块  </p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="comment"># 引入其他配置文件</span></span><br><span class="line">    <span class="attribute">include</span> /etc/nginx/mime.types;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 默认类型，如果请求的URL没有包含文件类型，则使用默认类型</span></span><br><span class="line">    <span class="attribute">default_type</span> application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 开启高效文件传输模式</span></span><br><span class="line">    <span class="attribute">sendfile</span> <span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 连接超时时间</span></span><br><span class="line">    <span class="attribute">keepalive_timeout</span> <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Access log 日志存放路径和类型</span></span><br><span class="line">    <span class="comment"># 格式为：access_log &lt;path&gt; [format [buffer=size] [gzip[=level]] [flush=time] [if=condition]];</span></span><br><span class="line">    <span class="attribute">access_log</span> /var/log/nginx/access.log main;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义日志格式</span></span><br><span class="line">    <span class="attribute">log_format</span> main <span class="string">&#x27;<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &#x27;</span></span><br><span class="line">                    <span class="string">&#x27;&quot;<span class="variable">$request</span>&quot; <span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> &quot;<span class="variable">$http_referer</span>&quot; &#x27;</span></span><br><span class="line">                    <span class="string">&#x27;&quot;<span class="variable">$http_user_agent</span>&quot; &quot;<span class="variable">$http_x_forwarded_for</span>&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置sendfile最大传输片段大小，默认为0，表示不限制</span></span><br><span class="line">    <span class="comment"># sendfile_max_chunk 1m;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每个连接的请求次数</span></span><br><span class="line">    <span class="comment"># keepalive_requests 100;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 开启gzip压缩</span></span><br><span class="line">    <span class="comment"># gzip on;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 开启gzip压缩的最小文件大小</span></span><br><span class="line">    <span class="comment"># gzip_min_length 1k;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># gzip压缩级别，1-9，级别越高压缩率越高，但是消耗CPU资源也越多</span></span><br><span class="line">    <span class="comment"># gzip_comp_level 2;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># gzip压缩文件类型</span></span><br><span class="line">    <span class="comment"># gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># upstream指令用于定义一组服务器，一般用来配置反向代理和负载均衡</span></span><br><span class="line">    <span class="section">upstream</span> www.example.com &#123;</span><br><span class="line">        <span class="comment"># ip_hash指令用于设置负载均衡的方式，ip_hash表示使用客户端的IP进行hash，</span></span><br><span class="line">        <span class="comment"># 这样可以保证同一个客户端的请求每次都会分配到同一个服务器，解决了session共享的问题</span></span><br><span class="line">        ip_hash;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># weight 用于设置权重，权重越高被分配到的几率越大</span></span><br><span class="line">        <span class="attribute">server</span> <span class="number">192.168.50.11:80</span> weight=<span class="number">3</span>;</span><br><span class="line">        <span class="attribute">server</span> <span class="number">192.168.50.12:80</span>;</span><br><span class="line">        <span class="attribute">server</span> <span class="number">192.168.50.13:80</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># server 块</span></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="comment"># 参考server块的配置</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>server 块</strong></p>
+<p>server 块是配置虚拟主机的，⼀个 http 块可以包含多个 server 块，每个 server 块就是⼀个虚拟主机 </p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="comment"># 监听IP和端口</span></span><br><span class="line">    <span class="comment"># listen的格式为：</span></span><br><span class="line">    <span class="comment"># listen [ip]:port [default_server] [ssl] [http2] [spdy]</span></span><br><span class="line">    <span class="comment"># [proxy_protocol] [setfib=number] [fastopen=number] [backlog=number];</span></span><br><span class="line">    <span class="comment"># listen指令非常灵活，可以指定多个IP和端口，也可以使用通配符</span></span><br><span class="line">    <span class="comment"># 下面是一些实际的例子：</span></span><br><span class="line">    <span class="comment"># listen 127.0.0.1:80; # 监听来自127.0.0.1的80端口的请求</span></span><br><span class="line">    <span class="comment"># listen 80; # 监听来自所有IP的80端口的请求</span></span><br><span class="line">    <span class="comment"># listen *:80; # 监听来自所有IP的80端口的请求，同上</span></span><br><span class="line">    <span class="comment"># listen 127.0.0.1; # 监听来自127.0.0.1的80端口，默认端口为80</span></span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># server_name 用来指定虚拟主机的域名，可以使用精确匹配、通配符匹配和正则匹配等方式</span></span><br><span class="line">    <span class="comment"># server_name example.org www.example.org; # 精确匹配</span></span><br><span class="line">    <span class="comment"># server_name *.example.org; # 通配符匹配</span></span><br><span class="line">    <span class="comment"># server_name ~^www\d+\.example\.net$; # 正则匹配</span></span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># location块用来配置请求的路由，一个server块可以包含多个location块，每个</span></span><br><span class="line">    <span class="comment"># location块就是一个请求路由</span></span><br><span class="line">    <span class="comment"># location块的格式是：</span></span><br><span class="line">    <span class="comment"># location [=|~|~*|^~] /uri/ &#123; ... &#125;</span></span><br><span class="line">    <span class="comment"># = 表示精确匹配，只有完全匹配上才能生效</span></span><br><span class="line">    <span class="comment"># ~ 表示区分大小写的正则匹配</span></span><br><span class="line">    <span class="comment"># ~* 表示不区分大小写的正则匹配</span></span><br><span class="line">    <span class="comment"># ^~ 表示普通字符匹配，如果匹配成功，则不再匹配其他location</span></span><br><span class="line">    <span class="comment"># /uri/ 表示请求的URI，可以是字符串，也可以是正则表达式</span></span><br><span class="line">    <span class="comment"># &#123; ... &#125; 表示location块的配置内容</span></span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="comment"># root指令用于指定请求的根目录，可以是绝对路径，也可以是相对路径</span></span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html; <span class="comment"># 根目录</span></span><br><span class="line">        <span class="comment"># index指令用于指定默认文件，如果请求的是目录，则会在目录下查找默认文件</span></span><br><span class="line">        <span class="attribute">index</span> index.html index.htm; <span class="comment"># 默认文件</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 下面是一些location的示例：</span></span><br><span class="line">    <span class="section">location</span> = / &#123; <span class="comment"># 精确匹配请求</span></span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">        <span class="attribute">index</span> index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="section">location</span><span class="regexp"> ^~</span> /images/ &#123; <span class="comment"># 匹配以/images/开头的请求</span></span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="section">location</span> <span class="regexp">~* \.(gif|jpg|jpeg)$</span> &#123; <span class="comment"># 匹配以gif、jpg或者jpeg结尾的请求</span></span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="section">location</span> !<span class="regexp">~ \.(gif|jpg|jpeg)$</span> &#123; <span class="comment"># 不匹配以gif、jpg或者jpeg结尾的请求</span></span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="section">location</span> !<span class="regexp">~* \.(gif|jpg|jpeg)$</span> &#123; <span class="comment"># 不匹配以gif、jpg或者jpeg结尾的请求</span></span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># error_page 用于指定错误页面，可以指定多个，按照优先级从高到低依次查找</span></span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html; <span class="comment"># 错误页面</span></span><br><span class="line">    <span class="section">location</span> = /50x.html &#123;</span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nginx <span class="comment"># 启动Nginx</span></span><br><span class="line">nginx -c filename <span class="comment"># 指定配置文件</span></span><br><span class="line">nginx -V <span class="comment"># 查看Nginx的版本和编译参数等信息</span></span><br><span class="line">nginx -t <span class="comment"># 检查配置文件是否正确，也可用来定位配置文件的位置</span></span><br><span class="line">nginx -s quit <span class="comment"># 优雅停止Nginx</span></span><br><span class="line">nginx -s stop <span class="comment"># 快速停止Nginx</span></span><br><span class="line">nginx -s reload <span class="comment"># 热启动，重新加载配置文件</span></span><br><span class="line">nginx -s reopen <span class="comment"># 重新打开日志文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="常用模块"><a href="#常用模块" class="headerlink" title="常用模块"></a>常用模块</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nginx -V</span></span><br><span class="line">nginx version: nginx/1.25.5</span><br><span class="line">built by gcc 12.2.0 (Debian 12.2.0-14) </span><br><span class="line">built with OpenSSL 3.0.9 30 May 2023 (running with OpenSSL 3.0.11 19 Sep 2023)</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-http_v3_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt=<span class="string">&#x27;-g -O2 -ffile-prefix-map=/data/builder/debuild/nginx-1.25.5/debian/debuild-base/nginx-1.25.5=. -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC&#x27;</span> --with-ld-opt=<span class="string">&#x27;-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>模块名（Module Name）</th>
+<th>描述（Description）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>http_access_module</td>
+<td>接受或拒绝特定的客户端请求</td>
+</tr>
+<tr>
+<td><strong>http_auth_request_module</strong></td>
+<td>根据子请求的结果实现客户端授权</td>
+</tr>
+<tr>
+<td>http_auth_basic_module</td>
+<td>使用用户名和密码进行 HTTP 基本认证，限制对资源的访问</td>
+</tr>
+<tr>
+<td>http_autoindex_module</td>
+<td>自动生成目录列表</td>
+</tr>
+<tr>
+<td>http_browser_module</td>
+<td>从 User-Agent 请求头中识别客户端浏览器</td>
+</tr>
+<tr>
+<td>http_charset_module</td>
+<td>为 Content-Type 响应头添加特定字符集</td>
+</tr>
+<tr>
+<td>http_empty_gif_module</td>
+<td>返回一个 1 像素的透明 GIF 图片</td>
+</tr>
+<tr>
+<td>http_fastcgi_module</td>
+<td>提供 FastCGI 支持</td>
+</tr>
+<tr>
+<td>http_geo_module</td>
+<td>根据 IP 地址获取地理位置信息</td>
+</tr>
+<tr>
+<td>http_gzip_module</td>
+<td>支持 Gzip 压缩</td>
+</tr>
+<tr>
+<td>http_limit_conn_module</td>
+<td>限制并发连接数</td>
+</tr>
+<tr>
+<td>http_limit_req_module</td>
+<td>限制请求速率</td>
+</tr>
+<tr>
+<td>http_map_module</td>
+<td>基于变量映射获取值</td>
+</tr>
+<tr>
+<td>http_memcached_module</td>
+<td>提供 Memcached 支持</td>
+</tr>
+<tr>
+<td>http_proxy_module</td>
+<td>提供反向代理支持</td>
+</tr>
+<tr>
+<td>http_referer_module</td>
+<td>防止盗链</td>
+</tr>
+<tr>
+<td>http_rewrite_module</td>
+<td>支持 URL 重写</td>
+</tr>
+<tr>
+<td>http_scgi_module</td>
+<td>将请求转发到 SCGI 服务器</td>
+</tr>
+<tr>
+<td>http_ssi_module</td>
+<td>处理和支持 SSI（服务器端包含）</td>
+</tr>
+<tr>
+<td>http_split_clients_module</td>
+<td>根据客户端 IP 地址或其他变量将客户端分组，通常用于 A&#x2F;B 测试</td>
+</tr>
+<tr>
+<td>http_upstream_hash_module</td>
+<td>提供一致性哈希负载均衡</td>
+</tr>
+<tr>
+<td>http_upstream_ip_hash_module</td>
+<td>提供 IP 哈希负载均衡</td>
+</tr>
+<tr>
+<td>http_upstream_keepalive_module</td>
+<td>支持长连接负载均衡</td>
+</tr>
+<tr>
+<td>http_upstream_least_conn_module</td>
+<td>提供最少连接负载均衡</td>
+</tr>
+<tr>
+<td>http_upstream_zone_module</td>
+<td>提供共享内存负载均衡</td>
+</tr>
+<tr>
+<td>http_userid_module</td>
+<td>为客户端设置唯一的 ID（UID、cookie）</td>
+</tr>
+<tr>
+<td>http_uwsgi_module</td>
+<td>将请求转发到 uWSGI 服务器，通常用于 Python 应用</td>
+</tr>
+</tbody></table>
+<h3 id="统一鉴权"><a href="#统一鉴权" class="headerlink" title="统一鉴权"></a>统一鉴权</h3><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240805165418.png" fancybox="true"/></div></div>
+
+<ul>
+<li><p>鉴权服务地址：<a target="_blank" rel="noopener" href="http://127.0.0.1:7777/api/auth">http://127.0.0.1:7777/api/auth</a> （部署在本地的 Docker 容器）</p>
+</li>
+<li><p>后端应用服务：<a target="_blank" rel="noopener" href="http://127.0.0.1:8888/">http://127.0.0.1:8888</a> （直接本地运行的后端应用）</p>
+</li>
+<li><p>转发和鉴权配置：</p>
+</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 内部鉴权位置，不要对外暴露</span></span><br><span class="line">    <span class="section">location</span> = /auth-internal &#123;</span><br><span class="line">        internal;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://host.docker.internal:7777/api/auth;</span><br><span class="line">        <span class="attribute">proxy_intercept_errors</span> <span class="literal">on</span>; <span class="comment"># 确保拦截错误</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 自定义 401 错误响应</span></span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">401</span> = <span class="variable">@auth_error</span>;</span><br><span class="line">    <span class="section">location</span> <span class="variable">@auth_error</span> &#123;</span><br><span class="line">        <span class="attribute">return</span> <span class="number">401</span> Unauthorize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 需要鉴权的请求</span></span><br><span class="line">    <span class="section">location</span> /api/payment/ &#123;</span><br><span class="line">        <span class="comment"># 使用 http_auth_request_module 鉴权</span></span><br><span class="line">        <span class="attribute">auth_request</span> /auth-internal;</span><br><span class="line">        <span class="comment"># 如果鉴权通过，设置请求头</span></span><br><span class="line">        <span class="attribute">auth_request_set</span> <span class="variable">$user_role</span> <span class="variable">$upstream_http_x_user_role</span>;</span><br><span class="line">        <span class="attribute">auth_request_set</span> <span class="variable">$user_id</span> <span class="variable">$upstream_http_x_user_id</span>;</span><br><span class="line">        <span class="comment"># 设置鉴权通过后的自定义头部</span></span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-User-Role <span class="variable">$user_role</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-User-ID <span class="variable">$user_id</span>;</span><br><span class="line">        <span class="comment"># 转发到后端服务</span></span><br><span class="line">        <span class="attribute">proxy_pass</span> http://host.docker.internal:8888;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>效果：</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240806160759.png" fancybox="true"/></div></div>
+
+<h2 id="Ingress"><a href="#Ingress" class="headerlink" title="Ingress"></a>Ingress</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/Untitled%20diagram-2024-08-06-072719.png" fancybox="true"/></div></div>
+
+<p><strong>Ingress</strong> 是对集群中服务的外部访问进行管理的 API 对象，Ingress可以提供统一的入口控制、HTTP&#x2F;HTTPS路由、SSL终止和负载均衡等功能。如通过 Ingress 资源来配置不同的转发规则，从而达到<strong>根据不同的规则设置访问集群内不同的 Service 所对应的后端 Pod</strong>。</p>
+<blockquote>
+<p>API对象（Application Programming Interface Object）通常指的是在软件系统中定义的一组接口和协议，它们允许不同的软件应用程序之间进行交互。API对象可以是数据结构、函数、类或服务，它们提供了一种标准化的方法来访问一个应用程序或服务的功能或数据。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/kubernetes/ingress-nginx">Nginx Ingress Controller</a> 是 Kubernetes 生态系统中广泛使用的 Ingress 控制器之一，上文统一鉴权是用 Nginx 的 <strong>auth_request</strong> 模块，部署在 K8s 的后需要使用 Nginx Ingress Controller 的 <strong>auth-url 注解</strong>（ <a target="_blank" rel="noopener" href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#external-authentication">External Authentication</a> ）或插入<strong>自定义 Nginx 配置</strong>（<a target="_blank" rel="noopener" href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet">Configuration snippet</a>）来实现。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240805165509.png" fancybox="true"/></div></div>
+
+<h3 id="Nginx-Ingress"><a href="#Nginx-Ingress" class="headerlink" title="Nginx Ingress"></a>Nginx Ingress</h3><ol>
+<li>安装 <a target="_blank" rel="noopener" href="https://helm.sh/">heml</a></li>
+<li>安装 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/">Kubectl</a></li>
+<li><code>kubectl</code> 连接集群</li>
+<li><code>helm</code> 安装 ingress-nginx</li>
+<li>版本与升级 <a target="_blank" rel="noopener" href="https://github.com/kubernetes/ingress-nginx?tab=readme-ov-file#supported-versions-table">Supported Versions table</a></li>
+<li>新建 <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a></li>
+</ol>
+<hr>
+<ul>
+<li><code>Ingress</code> 的 <code>annotations</code> 主要用于配置全局的行为和特性，如超时、重写规则等，但不能直接修改或插入复杂的 <code>location</code> 配置</li>
+<li>使用 <code>nginx.ingress.kubernetes.io/server-snippet</code> 可以添加全局的自定义 <code>location</code> 块，但不能针对单个路径</li>
+<li>使用 <code>nginx.ingress.kubernetes.io/location-snippet</code> 可以针对特定路径添加自定义的 <code>location</code> 配置</li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240808191113.png" fancybox="true"/></div></div>
+
+<h3 id="相关扩展-1"><a href="#相关扩展-1" class="headerlink" title="相关扩展"></a>相关扩展</h3><p><strong>Kubernetes 资源对象</strong></p>
+<ul>
+<li>定义: Kubernetes 资源对象是 Kubernetes 集群中用于描述和管理各种资源的 API 对象。它们定义了集群中需要运行和管理的服务、应用程序、网络、存储等。</li>
+<li>种类: 包括多种类型，如 <code>Pod</code>、<code>Service</code>、<code>Deployment</code>、<code>Ingress</code>、<code>ConfigMap</code>、<code>Secret</code>、<code>PersistentVolume</code> 等。</li>
+<li>功能: 它们用于声明和管理集群中的资源状态。例如，<code>Deployment</code> 资源用于管理应用的副本和滚动更新，<code>Service</code> 资源用于定义服务的访问方式。</li>
+<li>运行方式: 资源对象本身不直接运行在 Pod 中，它们是 Kubernetes 集群的配置和管理单位。它们通过 Kubernetes 控制平面（控制器）和调度器来管理集群中的实际工作负载。</li>
+</ul>
+<p><strong>Pod</strong></p>
+<ul>
+<li>定义: <code>Pod</code> 是 Kubernetes 中最基本的部署单元，是运行在集群节点上的一个或多个容器的集合。Pod 提供了容器运行时所需的网络和存储资源。</li>
+<li>功能: Pod 是实际运行应用程序代码的地方。每个 Pod 包含一个或多个容器，这些容器共享网络和存储。Pod 还可以包括 Init 容器、存储卷等。</li>
+<li>运行方式: Pod 是 Kubernetes 集群中的实际工作负载，它们被 Kubernetes 调度器分配到节点上，并由容器运行时（如 Docker、containerd）执行容器。Pod 通过 Deployment、DaemonSet 或 StatefulSet 等控制器进行管理和调度。</li>
+</ul>
+<p><strong>关系</strong></p>
+<ul>
+<li>资源对象 vs Pod: <code>Pod</code> 是一种 Kubernetes 资源对象（<code>kind: Pod</code>），它用于定义和运行容器。其他资源对象（如 <code>Deployment</code>）用于管理 Pod 的生命周期。资源对象提供了集群的配置和管理功能，而 Pod 是实际运行应用程序的实体。</li>
+<li>管理: Kubernetes 控制平面和调度器使用资源对象来管理和调度 Pod。通过创建和更新资源对象，用户可以控制 Pod 的部署、扩展、更新等操作。</li>
+</ul>
+<p><strong>Ingress 资源</strong></p>
+<ul>
+<li><p>定义: <code>Ingress</code> 是 Kubernetes 的一个标准 API 资源，用于管理集群外部访问服务的路由规则。</p>
+</li>
+<li><p>功能: 它定义了如何将 HTTP 和 HTTPS 请求路由到集群内部的服务。通过 <code>Ingress</code> 资源，可以指定路径、主机、证书等信息。</p>
+</li>
+<li><p>实现: <code>Ingress</code> 可以由不同的控制器来实现，包括 Nginx、Traefik、HAProxy、Istio 等。具体的功能和配置会依赖于你使用的 <code>Ingress</code> 控制器。</p>
+</li>
+<li><p>运行: <code>Ingress</code> 本身不是一个运行中的组件，它只是一个 Kubernetes 资源对象。它定义了路由规则、主机、路径等，控制如何将请求转发到服务。</p>
+<p>部署: 你通过 <code>kubectl apply</code> 命令创建或更新 <code>Ingress</code> 资源，它会被 Kubernetes 控制平面管理，并与相应的 Ingress 控制器一起工作。</p>
+</li>
+</ul>
+<p><strong>NginxIngress 控制器</strong></p>
+<ul>
+<li>定义: <code>NginxIngress</code> 控制器（即 <code>Ingress-Nginx</code> 控制器）是实现 <code>Ingress</code> 资源的具体方案之一。</li>
+<li>功能: 它使用 Nginx 作为反向代理服务器，将外部请求根据 <code>Ingress</code> 规则转发到集群内部的服务。它提供了许多高级功能，如自定义 Nginx 配置、TLS 终止、路径重写等。</li>
+<li>配置: <code>Ingress-Nginx</code> 控制器通常通过 <code>ConfigMap</code>、<code>Ingress</code> 注解等方式进行配置。它还允许使用注解来修改或扩展 Nginx 的行为。</li>
+<li>运行: <code>NginxIngress</code> 控制器运行在 Kubernetes 集群中的 Pod 中。它通常是一个或多个 Pod 的集合，这些 Pod 运行着 Nginx 实例，负责根据 <code>Ingress</code> 资源的规则处理和路由流量。</li>
+<li>部署: <code>Ingress-Nginx</code> 控制器作为 Kubernetes 的 Deployment 或 DaemonSet 部署，通常会在 <code>kube-system</code> 命名空间中或其他指定的命名空间中运行。</li>
+</ul>
+<p><strong>关系</strong></p>
+<ul>
+<li>Ingress Controller 是一个运行在 Kubernetes 集群中的应用程序，它负责实现 Ingress 资源定义的规则。它监听 Ingress 资源的变化，并根据这些变化来配置自己的负载均衡和服务路由规则。你提供的 Service 配置是 NGINX Ingress Controller 的一部分，它作为服务运行在集群中，并被 Kubernetes API 管理。</li>
+<li>Ingress 资源 是 Kubernetes 的 API 对象，它定义了如何将外部请求路由到集群内的服务。Ingress 资源包含了路由规则，例如基于域名或路径的路由。</li>
+<li>首先，你需要部署一个 Ingress Controller（比如 NGINX Ingress Controller）到你的 Kubernetes 集群中。这个 Controller 会作为一个服务运行，并且监听 API Server 以获取 Ingress 资源的变化。</li>
+<li>然后，你创建 Ingress 资源，定义了路由规则。这些规则告诉 Ingress Controller 如何将进入的请求转发到集群内的特定服务。</li>
+<li>当外部请求到达时，它们首先会被 Ingress Controller 接收，然后根据 Ingress 资源中定义的规则，将请求路由到正确的服务。</li>
+<li>Ingress Controller 是实现 Ingress 规则的组件，而 Ingress 资源定义了这些规则</li>
+</ul>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/08/28/mysql/">MySQL /maɪ ˈsiːkwəl/ 原理与实践 💽</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/07/04/redis-lock/">基于 Redis 实现分布式锁 🔒 - Golang</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

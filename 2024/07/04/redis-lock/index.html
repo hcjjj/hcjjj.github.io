@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>基于 Redis 实现分布式锁 🔒 - Golang - H-sediment</title>
+
+  
+    <meta name="description" content="基于 Redis 的分布式锁，确保计划任务只由一个实例执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 Redis 实现分布式锁 🔒 - Golang">
+<meta property="og:url" content="http://example.com/2024/07/04/redis-lock/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="基于 Redis 的分布式锁，确保计划任务只由一个实例执行">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-04T08:27:55.000Z">
+<meta property="article:modified_time" content="2024-10-18T08:34:07.757Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Golang">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="Golang,Redis">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">基于 Redis 实现分布式锁 🔒 - Golang</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">1.</span> <span class="toc-text">分布式锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-Redis-%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">基于 Redis 实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lua-%E8%84%9A%E6%9C%AC"><span class="toc-number">2.1.</span> <span class="toc-text">Lua 脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SETNX"><span class="toc-number">2.2.</span> <span class="toc-text">SETNX</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E9%94%81"><span class="toc-number">2.2.1.</span> <span class="toc-text">加锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%94%81"><span class="toc-number">2.2.2.</span> <span class="toc-text">解锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%AD%E7%BA%A6"><span class="toc-number">2.2.3.</span> <span class="toc-text">续约</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redlock"><span class="toc-number">2.3.</span> <span class="toc-text">Redlock</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">3.</span> <span class="toc-text">定时任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0"><span class="toc-number">3.1.</span> <span class="toc-text">本地</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-number">3.2.</span> <span class="toc-text">分布式</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Internship/">Internship</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-07-04T08:27:55.000Z">2024-07-04</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>基于 Redis 实现分布式锁 🔒 - Golang</span></h1>
+<p>基于 Redis 的分布式锁，确保计划任务只由一个实例执行</p>
+<span id="more"></span>
+
+<h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><p>分布式锁是一种在分布式系统中使用的锁机制，用来确保多个节点在执行关键代码或访问共享资源时互斥，避免并发冲突。分布式锁的目的是保证在一个多节点的分布式环境中，某个共享资源（如数据库记录、缓存对象、任务队列等）在同一时刻只能由一个节点操作。</p>
+<p>普通锁的 <strong>作用对象是线程或进程</strong>，而分布式锁的作用对象是 <strong>跨节点的实例</strong>。</p>
+<p><strong>分布式锁使用案例</strong></p>
+<ul>
+<li>领导者选举：在分布式系统中，经常需要选举一个领导节点来协调行动或管理资源。分布式锁可用于确保在任何给定时间内只有一个节点成为领导者。</li>
+<li><strong>任务调度：在分布式任务调度器中，分布式锁可确保计划任务只由一个工作节点执行，防止重复执行。</strong></li>
+<li>资源分配：在管理共享资源（如文件系统、网络套接字或硬件设备）时，分布式锁可确保每次只有一个进程能访问资源，从而防止冲突并确保妥善的资源管理。</li>
+<li>微服务协调：当多个微服务需要执行协调操作（如更新不同数据库中的相关数据）时，分布式锁可确保这些操作以受控和有序的方式执行。</li>
+<li>库存管理：在电子商务平台中，分布式锁可以管理库存更新，确保在多个用户同时尝试购买同一商品时，库存水平得到准确维护。</li>
+<li>会话管理：在分布式环境中处理用户会话时，分布式锁可确保用户会话一次只被一台服务器修改，防止出现不一致的情况。</li>
+</ul>
+<p><strong>分布式锁的实现</strong></p>
+<p>分布式锁可以使用各种工具和框架来实现，如：</p>
+<ul>
+<li>ZooKeeper：主要用于提供分布式协调服务，包括配置管理、分布式锁、领导者选举等</li>
+<li>Redis：广泛用于缓存、会话管理等场景，通过 SETNX 或 Redlock 算法支持分布式锁</li>
+<li>Consul：用于服务发现、配置管理和服务网格的工具，除了服务网格功能，Consul 也提供分布式锁机制</li>
+<li>Etcd：分布式键值存储系统，主要用于存储配置数据、提供分布式协调等功能</li>
+</ul>
+<h2 id="基于-Redis-实现"><a href="#基于-Redis-实现" class="headerlink" title="基于 Redis 实现"></a>基于 Redis 实现</h2><h3 id="Lua-脚本"><a href="#Lua-脚本" class="headerlink" title="Lua 脚本"></a>Lua 脚本</h3><p>使用 Lua 脚本是为了确保在 Redis 中的操作 <strong>原子性</strong>，特别是在分布式锁场景中，Lua 脚本可以确保多个 Redis 命令在同一个执行周期内被原子地执行，避免并发问题（被其他客户端的操作打断）。</p>
+<ul>
+<li><strong>原子性保证</strong>：Lua 脚本内部的多个操作会在一个事务中完成，保证不会有其他客户端插入的命令破坏执行顺序。</li>
+<li><strong>操作灵活性</strong>：Lua 脚本中可以包含复杂的逻辑，如条件判断、循环、计算等，因此可以实现比单独使用 Redis 命令更复杂的操作。</li>
+<li><strong>高效性</strong>：由于脚本中的命令是直接在 Redis 服务器上执行的，减少了客户端与 Redis 之间的通信开销。</li>
+</ul>
+<blockquote>
+<p>Redis 的 pipeline 是一种在客户端一次性发送多条命令给 Redis，然后批量执行和返回结果的模式。它的主要目的是减少客户端与 Redis 之间的通信次数，提高执行效率。Pipeline  模式无原子性保证，<strong>每条命令依旧是独立执行的</strong>，其他客户端可以在 pipeline 执行过程中插入命令，因此如果涉及多个操作的状态依赖，就可能导致不一致性。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Pipeline</th>
+<th>Lua 脚本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>原子性</strong></td>
+<td>无法保证原子性，操作可能被其他命令打断</td>
+<td>保证原子性，所有操作在同一事务中执行</td>
+</tr>
+<tr>
+<td><strong>执行方式</strong></td>
+<td>批量发送命令，但 Redis 逐个顺序执行</td>
+<td>将多个命令封装在一个脚本中，原子执行</td>
+</tr>
+<tr>
+<td><strong>并发操作</strong></td>
+<td>支持高效批量并发操作</td>
+<td>适合需要多个命令组合原子操作的场景</td>
+</tr>
+<tr>
+<td><strong>复杂逻辑</strong></td>
+<td>只能执行单个命令，无条件判断、循环等复杂逻辑</td>
+<td>支持复杂的逻辑，如条件判断、循环等</td>
+</tr>
+<tr>
+<td><strong>使用场景</strong></td>
+<td>批量执行独立的、无依赖的操作</td>
+<td>原子操作、多步骤逻辑的复杂操作</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>减少了客户端与 Redis 的网络通信开销</td>
+<td>减少了网络开销，同时避免了操作间的并发问题</td>
+</tr>
+<tr>
+<td><strong>常见应用</strong></td>
+<td>批量写入、批量获取、批量修改</td>
+<td>分布式锁、事务性操作、多步条件逻辑</td>
+</tr>
+</tbody></table>
+<p>在 Lua 脚本中，<code>KEYS</code> 和 <code>ARGV</code> 是由外部传入的参数：</p>
+<ul>
+<li><strong><code>KEYS</code></strong> 用于传递键名，通常用于指定需要操作的 Redis 键</li>
+<li><strong><code>ARGV</code></strong> 用于传递附加参数，如锁的值和过期时间等</li>
+</ul>
+<p>在客户端（例如 Go 代码）调用 Redis 的 <code>EVAL</code> 命令时，可以将键名和参数以列表形式传入，<code>KEYS</code> 和 <code>ARGV</code> 会相应地映射为脚本中的输入</p>
+<h3 id="SETNX"><a href="#SETNX" class="headerlink" title="SETNX"></a>SETNX</h3><p>不直接使用 <code>SETNX</code> 指令，而是通过 Lua 脚本完成锁的获取与过期设置，因为 Lua 脚本保证多个操作的原子性，可以提供更复杂的控制逻辑，包括锁的可重入和延长过期时间，避免 <code>SETNX</code> 和 <code>EXPIRE</code> 分开执行导致的死锁风险。使用 Lua 脚本的优势：</p>
+<ul>
+<li><strong>原子性检查与更新</strong>：Lua 脚本可以在同一个执行流中完成检查锁的持有者和更新锁的操作，避免了分布式环境下的竞态问题</li>
+<li><strong>可重入锁</strong>：代码中的 Lua 脚本实现了锁的可重入逻辑。如果当前客户端已经持有锁，那么它可以通过脚本延长锁的过期时间，这对于某些需要长时间运行并延长锁持有时间的场景是非常有用的</li>
+</ul>
+<blockquote>
+<p>在 Redis 2.6.12 及以上版本，<code>SET</code> 命令可以通过带多个参数实现和 <code>SETNX</code> 类似的功能，同时设置过期时间</p>
+</blockquote>
+<h4 id="加锁"><a href="#加锁" class="headerlink" title="加锁"></a>加锁</h4><p><strong>Lua 脚本解析</strong></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> val = redis.call(<span class="string">&#x27;get&#x27;</span>, KEYS[<span class="number">1</span>])</span><br><span class="line"><span class="comment">-- 获取当前锁的持有者</span></span><br><span class="line"><span class="keyword">if</span> val == <span class="literal">false</span> <span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- key 不存在，表示锁没有被持有，进行加锁</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&#x27;set&#x27;</span>, KEYS[<span class="number">1</span>], ARGV[<span class="number">1</span>], <span class="string">&#x27;EX&#x27;</span>, ARGV[<span class="number">2</span>])</span><br><span class="line"><span class="keyword">elseif</span> val == ARGV[<span class="number">1</span>] <span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- 锁的持有者是当前客户端，刷新过期时间，支持可重入</span></span><br><span class="line">    redis.call(<span class="string">&#x27;expire&#x27;</span>, KEYS[<span class="number">1</span>], ARGV[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="comment">-- 锁被其他客户端持有，返回空字符串</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>**<code>KEYS[1]</code>**：传入的锁的键名，表示锁的唯一标识</li>
+<li>**<code>ARGV[1]</code>**：表示锁的值，用于标识持有锁的客户端，通常是一个唯一的字符串</li>
+<li>**<code>ARGV[2]</code>**：锁的过期时间，单位是秒，用于防止死锁的发生</li>
+</ul>
+<p><strong>Go 代码解析</strong></p>
+<p><code>Client</code> 和 <code>Lock</code> 结构体</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Client <span class="keyword">struct</span> &#123;</span><br><span class="line">	client redis.Cmdable      <span class="comment">// Redis 客户端接口</span></span><br><span class="line">	g      singleflight.Group <span class="comment">// 用于防止缓存击穿的工具，可以让并发请求变成单个请求</span></span><br><span class="line">	valuer <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="type">string</span>      <span class="comment">// 用于生成唯一的值，确保锁的持有者唯一（通常是 UUID）</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Lock <span class="keyword">struct</span> &#123;</span><br><span class="line">	client           redis.Cmdable <span class="comment">// 持有的 Redis 客户端，用于操作锁</span></span><br><span class="line">	key              <span class="type">string</span>        <span class="comment">// 锁的键，用于标识锁</span></span><br><span class="line">	value            <span class="type">string</span>        <span class="comment">// 锁的值，用于标识持有者，避免误释放其他客户端的锁</span></span><br><span class="line">	expiration       time.Duration <span class="comment">// 锁的过期时间</span></span><br><span class="line">	unlock           <span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125; <span class="comment">// 用于信号化锁的释放操作，退出自动续约逻辑</span></span><br><span class="line">	signalUnlockOnce sync.Once     <span class="comment">// 确保解锁操作只执行一次，防止重复释放</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Lock</code> 方法实现</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> RetryStrategy <span class="keyword">interface</span> &#123;</span><br><span class="line">	<span class="comment">// Next 返回下一次重试的间隔，如果不需要继续重试，那么第二参数发挥 false</span></span><br><span class="line">	Next() (time.Duration, <span class="type">bool</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> FixIntervalRetry <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">// 重试间隔</span></span><br><span class="line">	Interval time.Duration</span><br><span class="line">	<span class="comment">// 最大次数</span></span><br><span class="line">	Max <span class="type">int</span></span><br><span class="line">	cnt <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f *FixIntervalRetry)</span></span> Next() (time.Duration, <span class="type">bool</span>) &#123;</span><br><span class="line">	f.cnt++</span><br><span class="line">	<span class="keyword">return</span> f.Interval, f.cnt &lt;= f.Max</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Client)</span></span> Lock(ctx context.Context, key <span class="type">string</span>, expiration time.Duration, retry RetryStrategy, timeout time.Duration) (*Lock, <span class="type">error</span>) &#123;</span><br><span class="line">    val := c.valuer()  <span class="comment">// 生成唯一的锁值，标识当前客户端</span></span><br><span class="line">    <span class="keyword">var</span> timer *time.Timer</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> timer != <span class="literal">nil</span> &#123;</span><br><span class="line">            timer.Stop()  <span class="comment">// 在退出之前停止定时器，避免资源泄露</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        lctx, cancel := context.WithTimeout(ctx, timeout)  <span class="comment">// 为每次获取锁尝试设置超时</span></span><br><span class="line">        res, err := c.client.Eval(lctx, luaLock, []<span class="type">string</span>&#123;key&#125;, val, expiration.Seconds()).Result()</span><br><span class="line">        cancel()</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &amp;&amp; !errors.Is(err, context.DeadlineExceeded) &#123;</span><br><span class="line">            <span class="comment">// 非超时错误，比如 Redis server 崩溃、网络异常等，不再继续尝试</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> res == <span class="string">&quot;OK&quot;</span> &#123;</span><br><span class="line">            <span class="comment">// 锁获取成功，返回锁对象</span></span><br><span class="line">            <span class="keyword">return</span> newLock(c.client, key, val, expiration), <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">        interval, ok := retry.Next()</span><br><span class="line">        <span class="keyword">if</span> !ok &#123;</span><br><span class="line">            <span class="comment">// 如果重试次数耗尽，返回错误</span></span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                err = fmt.Errorf(<span class="string">&quot;最后一次重试错误: %w&quot;</span>, err)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                err = fmt.Errorf(<span class="string">&quot;锁被人持有: %w&quot;</span>, ErrFailedToPreemptLock)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">&quot;rlock: 重试机会耗尽，%w&quot;</span>, err)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 设置重试的等待时间</span></span><br><span class="line">        <span class="keyword">if</span> timer == <span class="literal">nil</span> &#123;</span><br><span class="line">            timer = time.NewTimer(interval)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            timer.Reset(interval)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 等待重试或者上下文结束</span></span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> &lt;-timer.C: <span class="comment">// 定时器到达，表示重试间隔已过，可以再次尝试获取锁</span></span><br><span class="line">        <span class="keyword">case</span> &lt;-ctx.Done(): <span class="comment">// 上下文 ctx 被取消</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span>, ctx.Err()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="解锁"><a href="#解锁" class="headerlink" title="解锁"></a>解锁</h4><p> Lua 脚本解析</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> redis.call(<span class="string">&quot;get&quot;</span>, KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- 如果锁的值与传入的值一致，表示当前客户端持有该锁</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&quot;del&quot;</span>, KEYS[<span class="number">1</span>])  <span class="comment">-- 删除键，释放锁</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>  <span class="comment">-- 锁未被当前客户端持有，返回 0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>Go 代码解析</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Lock)</span></span> Unlock(ctx context.Context) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="comment">// 使用 Lua 脚本进行解锁操作，保证原子性</span></span><br><span class="line">	res, err := l.client.Eval(ctx, luaUnlock, []<span class="type">string</span>&#123;l.key&#125;, l.value).Int64()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// 确保只进行一次解锁信号操作，防止重复解锁引起 panic</span></span><br><span class="line">		l.signalUnlockOnce.Do(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">			l.unlock &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;  <span class="comment">// 向 unlock 通道发送信号</span></span><br><span class="line">			<span class="built_in">close</span>(l.unlock)         <span class="comment">// 关闭 unlock 通道</span></span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err == redis.Nil &#123;</span><br><span class="line">		<span class="comment">// 锁不存在或者锁的值与预期不符，表示当前锁不属于调用者</span></span><br><span class="line">		<span class="keyword">return</span> ErrLockNotHold</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="comment">// Redis 操作出错，返回错误</span></span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> res != <span class="number">1</span> &#123;</span><br><span class="line">		<span class="comment">// Lua 脚本执行结果不是 1，表示锁未被成功释放</span></span><br><span class="line">		<span class="keyword">return</span> ErrLockNotHold</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span>  <span class="comment">// 成功释放锁</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="续约"><a href="#续约" class="headerlink" title="续约"></a>续约</h4><p>约操作对于长时间运行的任务非常重要，以确保在任务未完成时锁不会意外过期导致其他客户端获得锁，从而引起竞态条件。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> redis.call(<span class="string">&quot;get&quot;</span>, KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- 如果锁的值与传入的值一致，表示当前客户端持有该锁</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&quot;expire&quot;</span>, KEYS[<span class="number">1</span>], ARGV[<span class="number">2</span>])  <span class="comment">-- 更新锁的过期时间</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>  <span class="comment">-- 锁未被当前客户端持有，返回 0 表示续约失败</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Lock)</span></span> Refresh(ctx context.Context) <span class="type">error</span> &#123;</span><br><span class="line">    <span class="comment">// 使用 Lua 脚本执行锁续约操作，保证续约的原子性</span></span><br><span class="line">    res, err := l.client.Eval(ctx, luaRefresh,</span><br><span class="line">        []<span class="type">string</span>&#123;l.key&#125;, l.value, l.expiration.Seconds()).Int64()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// Redis 操作出错，返回错误</span></span><br><span class="line">        <span class="keyword">return</span> err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> res != <span class="number">1</span> &#123;</span><br><span class="line">        <span class="comment">// Lua 脚本执行结果不是 1，表示锁续约失败，可能是锁不存在或者锁的值不匹配</span></span><br><span class="line">        <span class="keyword">return</span> ErrLockNotHold</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>  <span class="comment">// 成功续约锁</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自动续约机制</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Lock)</span></span> AutoRefresh(interval time.Duration, timeout time.Duration) <span class="type">error</span> &#123;</span><br><span class="line">    <span class="comment">// 创建一个定时器，每隔 interval 时间触发一次</span></span><br><span class="line">    ticker := time.NewTicker(interval)</span><br><span class="line">    <span class="comment">// 刷新超时 channel，用于通知在发生超时时重试</span></span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// 确保在函数退出时停止定时器并关闭通道</span></span><br><span class="line">        ticker.Stop()</span><br><span class="line">        <span class="built_in">close</span>(ch)</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> &lt;-ticker.C:</span><br><span class="line">            <span class="comment">// 定时器触发时创建一个带有超时时间的上下文，用于刷新锁</span></span><br><span class="line">            ctx, cancel := context.WithTimeout(context.Background(), timeout)</span><br><span class="line">            err := l.Refresh(ctx)</span><br><span class="line">            cancel()</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果刷新操作超时，则继续尝试</span></span><br><span class="line">            <span class="keyword">if</span> err == context.DeadlineExceeded &#123;</span><br><span class="line">                <span class="comment">// 因为有两个地方可能要写入数据到 ch，而 ch 容量只有 1</span></span><br><span class="line">                <span class="comment">// 如果写入不成功，则说明前一次调用超时且尚未被处理</span></span><br><span class="line">                <span class="keyword">select</span> &#123;</span><br><span class="line">                <span class="keyword">case</span> ch &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;:</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果刷新过程中出现了其他错误，则返回错误</span></span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-ch:</span><br><span class="line">            <span class="comment">// 超时处理，重新尝试刷新锁</span></span><br><span class="line">            ctx, cancel := context.WithTimeout(context.Background(), timeout)</span><br><span class="line">            err := l.Refresh(ctx)</span><br><span class="line">            cancel()</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果仍然超时，则继续重试</span></span><br><span class="line">            <span class="keyword">if</span> err == context.DeadlineExceeded &#123;</span><br><span class="line">                <span class="keyword">select</span> &#123;</span><br><span class="line">                <span class="keyword">case</span> ch &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;:</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 处理其他错误</span></span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-l.unlock:</span><br><span class="line">            <span class="comment">// 当检测到 unlock 信号时，退出续约逻辑，说明锁已经被释放</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Redlock"><a href="#Redlock" class="headerlink" title="Redlock"></a>Redlock</h3><p><strong><a target="_blank" rel="noopener" href="https://redis.io/docs/latest/develop/use/patterns/distributed-locks/">Redlock</a></strong> 是一种 Redis 分布式锁实现方案，旨在提供比单实例 Redis 锁更高的 <strong>容错性和可靠性</strong>。Redlock 是由 Redis 的创造者提出的一种分布式锁算法，它通过在多个 Redis 节点（通常为 5 个）上进行锁的操作来实现分布式锁的可靠性。Redlock 的核心思想是将锁保存在多个独立的 Redis 实例中，以实现容错性：</p>
+<ul>
+<li>客户端需要在多数（即超过一半） Redis 实例上成功获取锁，才能认为锁获取成功。</li>
+<li>通过多实例的方案来避免单点故障的问题，如果部分 Redis 实例不可用，只要多数节点仍可用，系统依然可以正常工作。</li>
+</ul>
+<p>在单实例实现中，通过 <code>SET key value NX PX ttl</code> 或通过 <code>GET</code> + <code>DEL</code> 来实现分布式锁的获取和释放，同时还使用了自动续约机制，保证锁在任务长时间运行期间不会过期。</p>
+<ul>
+<li>锁的获取是一个单实例上的简单原子操作</li>
+<li>锁的释放和续约使用了 Lua 脚本，确保在 Redis 服务器端以原子操作方式执行</li>
+<li>自动续约机制 用于延长锁的过期时间，确保在任务执行较长时间时不会因为锁的自然过期导致其他客户端意外获取到锁</li>
+</ul>
+<p>Redlock 在设计时使用了一组步骤来确保锁的获取过程既高效又一致：</p>
+<ol>
+<li>客户端按照顺序对每个 Redis 实例尝试加锁（通过 <code>SET NX PX</code> 操作），并设置一个较短的超时时间，确保获取锁操作不会阻塞</li>
+<li>客户端必须在所有节点上尝试加锁的时间内成功获取到大多数节点的锁，才能认为获取锁成功</li>
+<li>锁的超时时间应该比客户端操作的预计完成时间更长，以确保操作能够在锁过期之前完成</li>
+<li>在所有操作完成后，客户端会尝试对所有节点释放锁</li>
+</ol>
+<h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><h3 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h3><p><strong>time</strong></p>
+<ul>
+<li>**<code>time.Tick</code>**：用于创建一个周期性的定时器，返回一个在固定时间间隔发送信号的通道。适用于需要周期性执行的任务，但需注意内存泄漏风险，建议使用 <code>time.NewTicker</code> 以确保资源的可管理性</li>
+<li>**<code>time.After</code>**：用于创建一个延迟执行的定时器，在经过指定的时间后向通道发送信号，适用于一次性延迟或超时控制</li>
+</ul>
+<p><strong>cron</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/robfig/cron"><strong>robfig&#x2F;cron</strong></a>  基于时间调度器、时间解析器、Ticker 和 Goroutine 实现了类似 Unix <code>cron</code> 的功能。通过 Cron 表达式灵活地定义任务的执行时间，并使用 Go 的并发特性（Goroutine）来确保任务可以高效并发执行，广泛用于 Go 程序中需要定时任务调度的场景。</p>
+<blockquote>
+<p> 使用 <a target="_blank" rel="noopener" href="https://crontab.guru/">在线工具</a> 可以帮助验证 Cron 表达式是否符合预期</p>
+</blockquote>
+<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>本地定时任务加上分布式锁可以实现分布式定时任务的效果。通过使用分布式锁机制，能够有效避免多个节点同时执行同一任务的问题，从而实现协调多个节点的执行，确保任务在集群环境下只执行一次。</p>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/08/04/ingress/">基于 Nginx 的异构后端统一鉴权服务🛡️</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/06/15/cc/">「云计算」背景知识概览 ☁️</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

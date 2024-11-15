@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Go SDK：context、sync、reflect、errors - H-sediment</title>
+
+  
+    <meta name="description" content="Go 语言类库要点整理 📄">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go SDK：context、sync、reflect、errors">
+<meta property="og:url" content="http://example.com/2024/05/05/gosdk/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="Go 语言类库要点整理 📄">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/30c621a657fb4a0bf4234e1f20f7ce91333fd71.png">
+<meta property="article:published_time" content="2024-05-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-31T03:14:18.555Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/30c621a657fb4a0bf4234e1f20f7ce91333fd71.png">
+  
+  
+  
+  <meta name="keywords" content="Golang">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Go SDK：context、sync、reflect、errors</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#context"><span class="toc-number">1.</span> <span class="toc-text">context</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E8%AF%86-Context"><span class="toc-number">1.1.</span> <span class="toc-text">初识 Context</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-%E6%A0%91"><span class="toc-number">1.2.</span> <span class="toc-text">Context 树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E6%B6%88%E5%A4%9A%E4%B8%AA%E5%8D%8F%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">取消多个协程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-%E4%BC%A0%E5%80%BC"><span class="toc-number">1.4.</span> <span class="toc-text">Context 传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-%E4%BD%BF%E7%94%A8%E5%8E%9F%E5%88%99"><span class="toc-number">1.5.</span> <span class="toc-text">Context 使用原则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sync"><span class="toc-number">2.</span> <span class="toc-text">sync</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E7%AB%9E%E4%BA%89"><span class="toc-number">2.1.</span> <span class="toc-text">资源竞争</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD"><span class="toc-number">2.2.</span> <span class="toc-text">同步原语</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reflect"><span class="toc-number">3.</span> <span class="toc-text">reflect</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#reflect-Value"><span class="toc-number">3.1.</span> <span class="toc-text">reflect.Value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reflect-Type"><span class="toc-number">3.2.</span> <span class="toc-text">reflect.Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#string-%E2%86%94%EF%B8%8F-struct"><span class="toc-number">3.3.</span> <span class="toc-text">string ↔️ struct</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#errors"><span class="toc-number">4.</span> <span class="toc-text">errors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defer"><span class="toc-number">5.</span> <span class="toc-text">defer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#panic"><span class="toc-number">6.</span> <span class="toc-text">panic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#recover"><span class="toc-number">7.</span> <span class="toc-text">recover</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unsafe"><span class="toc-number">8.</span> <span class="toc-text">unsafe</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#others"><span class="toc-number">9.</span> <span class="toc-text">others</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-%E5%92%8C-byte"><span class="toc-number">9.1.</span> <span class="toc-text">String 和 [] byte</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-%E5%92%8C-make"><span class="toc-number">9.2.</span> <span class="toc-text">new 和 make</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%EF%BC%88%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-number">9.3.</span> <span class="toc-text">闭包（匿名函数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#loopvar"><span class="toc-number">9.4.</span> <span class="toc-text">loopvar</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@v10/dist/mermaid.min.js"></script>
+
+  <script>
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    if (window.mermaid) {
+      mermaid.initialize(mermaid_config);
+    }
+  </script>
+
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Golang/">Golang</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-05-04T16:00:00.000Z">2024-05-05</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Go SDK：context、sync、reflect、errors</span></h1>
+<p>Go 语言类库要点整理 📄</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/30c621a657fb4a0bf4234e1f20f7ce91333fd71.png" style="zoom:50%;" />
+<span id="more"></span>
+
+<h2 id="context"><a href="#context" class="headerlink" title="context"></a>context</h2><p><strong>协程如何退出</strong></p>
+<p>一个协程启动后，大部分情况需要等待里面的代码执行完毕，协程才会自行退出，如何让协程提前退出？</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">	<span class="string">&quot;sync&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	wg.Add(<span class="number">1</span>)</span><br><span class="line">	stopCh := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">bool</span>) <span class="comment">//用来停止监控狗</span></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">defer</span> wg.Done()</span><br><span class="line">		watchDog(stopCh, <span class="string">&quot;【监控狗1】&quot;</span>)</span><br><span class="line">	&#125;()</span><br><span class="line">	time.Sleep(<span class="number">5</span> * time.Second) <span class="comment">//先让监控狗监控5秒</span></span><br><span class="line">	stopCh &lt;- <span class="literal">true</span>              <span class="comment">//发停止指令</span></span><br><span class="line">	wg.Wait()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">watchDog</span><span class="params">(stopCh <span class="keyword">chan</span> <span class="type">bool</span>, name <span class="type">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="comment">//开启 for select 循环，一直后台监控</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> &lt;-stopCh:</span><br><span class="line">			fmt.Println(name, <span class="string">&quot;停止指令已收到，马上停止&quot;</span>)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			fmt.Println(name, <span class="string">&quot;正在监控……&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现了通过 select + channel 发送指令让监控狗停止，进而达到协程退出的目的。</p>
+<h3 id="初识-Context"><a href="#初识-Context" class="headerlink" title="初识 Context"></a>初识 Context</h3><p>如果希望做到同时取消很多个协程或定时取消协程又该怎么办？这时候 <strong>select + channel</strong> 的局限性就凸现出来了，即使定义了多个 channel 解决问题，代码逻辑也会非常复杂、难以维护。</p>
+<p>通过 Context 重写上面的示例，实现让监控狗停止的功能：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	wg.Add(<span class="number">1</span>)</span><br><span class="line">	ctx, stop := context.WithCancel(context.Background())</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">defer</span> wg.Done()</span><br><span class="line">		watchDog(ctx, <span class="string">&quot;【监控狗1】&quot;</span>)</span><br><span class="line">	&#125;()</span><br><span class="line">	time.Sleep(<span class="number">5</span> * time.Second) <span class="comment">//先让监控狗监控5秒</span></span><br><span class="line">	stop()                      <span class="comment">//发停止指令</span></span><br><span class="line">	wg.Wait()</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">watchDog</span><span class="params">(ctx context.Context, name <span class="type">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="comment">//开启for select循环，一直后台监控</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> &lt;-ctx.Done():</span><br><span class="line">			fmt.Println(name, <span class="string">&quot;停止指令已收到，马上停止&quot;</span>)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			fmt.Println(name, <span class="string">&quot;正在监控……&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相比 select+channel 的方案，Context 方案主要有 4 个改动点：</p>
+<ol>
+<li>watchDog 的 stopCh 参数换成了 ctx，类型为 context.Context。</li>
+<li>原来的 <code>case &lt;-stopCh</code> 改为 <code>case &lt;-ctx.Done()</code>，用于判断是否停止。</li>
+<li>使用 <code>context.WithCancel(context.Background())</code> 函数生成一个可以取消的 Context，用于发送停止指令。这里的 <code>context.Background()</code> 用于生成一个空 Context，一般作为整个 Context 树的根节点。</li>
+<li>原来的 <code>stopCh &lt;- true</code> 停止指令，改为 <code>context.WithCancel</code> 函数返回的取消函数 <code>stop()</code>。</li>
+</ol>
+<p>这和修改前的整体代码结构一样，只不过从 channel 换成了 Context。</p>
+<p><strong>什么是 Context</strong></p>
+<p>一个任务会有很多个协程协作完成，一次 HTTP 请求也会触发很多个协程的启动，而这些协程有可能会启动更多的子协程，并且无法预知有多少层协程、每一层有多少个协程。</p>
+<p>如果因为某些原因导致任务终止了，HTTP 请求取消了，那么它们启动的协程怎么办？该如何取消呢？因为取消这些协程可以节约内存，提升性能，同时避免不可预料的 Bug。</p>
+<p>Context 就是用来简化解决这些问题的，并且是并发安全的。Context 是一个接口，它具备手动、定时、超时发出取消信号、传值等功能，主要用于控制多个协程之间的协作，尤其是取消操作。一旦取消指令下达，那么被 Context 跟踪的这些协程都会收到取消信号，就可以做清理和退出操作。</p>
+<p>Context 接口只有四个方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Context <span class="keyword">interface</span> &#123;</span><br><span class="line">   Deadline() (deadline time.Time, ok <span class="type">bool</span>)</span><br><span class="line">   Done() &lt;-<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">   Err() <span class="type">error</span></span><br><span class="line">   Value(key <span class="keyword">interface</span>&#123;&#125;) <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Deadline 方法可以获取设置的截止时间，第一个返回值 deadline 是截止时间，到了这个时间点，Context 会自动发起取消请求，第二个返回值 ok 代表是否设置了截止时间。</li>
+<li>Done 方法返回一个只读的 channel，类型为 struct{}。在协程中，如果该方法返回的 chan 可以读取，则意味着 Context 已经发起了取消信号。通过 Done 方法收到这个信号后，就可以做清理操作，然后退出协程，释放资源。</li>
+<li>Err 方法返回取消的错误原因，即因为什么原因 Context 被取消。</li>
+<li>Value 方法获取该 Context 上绑定的值，是一个键值对，所以要通过一个 key 才可以获取对应的值。</li>
+</ol>
+<p>Context 接口的四个方法中最常用的就是 Done 方法，它返回一个只读的 channel，用于接收取消信号。当 Context 取消的时候，会关闭这个只读 channel，也就等于发出了取消信号。</p>
+<h3 id="Context-树"><a href="#Context-树" class="headerlink" title="Context 树"></a>Context 树</h3><p>Go 语言提供了函数可以帮助生成不同的 Context，通过这些函数可以生成一颗 Context 树，这样 Context 才可以关联起来，父 Context 发出取消信号的时候，子 Context 也会发出，这样就可以控制不同层级的协程退出。</p>
+<p>从使用功能上分，有四种实现好的 Context。</p>
+<ol>
+<li><strong>空 Context</strong>：不可取消，没有截止时间，主要用于 Context 树的根节点。</li>
+<li><strong>可取消的 Context</strong>：用于发出取消信号，当取消的时候，它的子 Context 也会取消。</li>
+<li><strong>可定时取消的 Context</strong>：多了一个定时的功能。</li>
+<li><strong>值 Context</strong>：用于存储一个 key-value 键值对。</li>
+</ol>
+<p>在 Go 语言中，可以通过 context.Background() 获取一个根节点 Context，有了根节点 Context 后，使用 Go 语言提供的四个函数生成这棵 Context 树：</p>
+<ol>
+<li>**WithCancel(parent Context)**：生成一个可取消的 Context。</li>
+<li>**WithDeadline(parent Context, d time.Time)**：生成一个可定时取消的 Context，参数 d 为定时取消的具体时间。</li>
+<li>**WithTimeout(parent Context, timeout time.Duration)**：生成一个可超时取消的 Context，参数 timeout 用于设置多久后取消</li>
+<li>**WithValue(parent Context, key, val interface{})**：生成一个可携带 key-value 键值对的 Context。</li>
+</ol>
+<p>以上四个生成 Context 的函数中，前三个都属于可取消的 Context，它们是一类函数，最后一个是值 Context，用于存储一个 key-value 键值对。</p>
+<h3 id="取消多个协程"><a href="#取消多个协程" class="headerlink" title="取消多个协程"></a>取消多个协程</h3><p>要取消多个协程，把 Context 作为参数传递给协程即可，还是以监控狗为例，如下所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	wg.Add(<span class="number">3</span>)</span><br><span class="line">	ctx, stop := context.WithCancel(context.Background())</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">defer</span> wg.Done()</span><br><span class="line">		watchDog(ctx, <span class="string">&quot;【监控狗1】&quot;</span>)</span><br><span class="line">	&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">defer</span> wg.Done()</span><br><span class="line">		watchDog(ctx, <span class="string">&quot;【监控狗2】&quot;</span>)</span><br><span class="line">	&#125;()</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">defer</span> wg.Done()</span><br><span class="line">		watchDog(ctx, <span class="string">&quot;【监控狗3】&quot;</span>)</span><br><span class="line">	&#125;()</span><br><span class="line">	time.Sleep(<span class="number">5</span> * time.Second)</span><br><span class="line">    <span class="comment">// 发出取消信号，这三个协程都会退出，他们的根节点都是 main 中的 ctx</span></span><br><span class="line">	stop() </span><br><span class="line">	wg.Wait()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">watchDog</span><span class="params">(ctx context.Context, name <span class="type">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> &lt;-ctx.Done():</span><br><span class="line">			fmt.Println(name, <span class="string">&quot;停止指令已收到，马上停止&quot;</span>)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			fmt.Println(name, <span class="string">&quot;正在监控……&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Context-传值"><a href="#Context-传值" class="headerlink" title="Context 传值"></a>Context 传值</h3><p>Context 不仅可以取消，还可以传值，通过这个能力，可以把 Context 存储的值供其他协程使用。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">	wg.Add(<span class="number">1</span>)</span><br><span class="line">	ctx, cancelFunc := context.WithCancel(context.Background())</span><br><span class="line">	valCtx := context.WithValue(ctx, <span class="string">&quot;userId&quot;</span>, <span class="number">2</span>)</span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">defer</span> wg.Done()</span><br><span class="line">		getUser(valCtx)</span><br><span class="line">	&#125;()</span><br><span class="line">	time.Sleep(<span class="number">5</span> * time.Second)</span><br><span class="line">	cancelFunc()</span><br><span class="line">	wg.Wait()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getUser</span><span class="params">(ctx context.Context)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> &lt;-ctx.Done():</span><br><span class="line">			fmt.Println(<span class="string">&quot;【获取用户】&quot;</span>, <span class="string">&quot;协程退出&quot;</span>)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			userId := ctx.Value(<span class="string">&quot;userId&quot;</span>)</span><br><span class="line">			fmt.Println(<span class="string">&quot;【获取用户】&quot;</span>, <span class="string">&quot;用户ID为：&quot;</span>, userId)</span><br><span class="line">			time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>context.WithValue()</code> 函数存储一个 userId 为 2 的键值对，就可以在 getUser 函数中通过 <code>ctx.Value(&quot;userId&quot;)</code> 方法把对应的值取出来，达到传值的目的。</p>
+<h3 id="Context-使用原则"><a href="#Context-使用原则" class="headerlink" title="Context 使用原则"></a>Context 使用原则</h3><p>Context 是一种非常好的工具，使用它可以很方便地控制取消多个协程。在 Go 语言标准库中也使用了它们，比如 net&#x2F;http 中使用 Context 取消网络的请求。</p>
+<p>要更好地使用 Context，有一些使用原则需要尽可能地遵守。</p>
+<ol>
+<li>Context 不要放在结构体中，要以参数的方式传递。</li>
+<li>Context 作为函数的参数时，要放在第一位，也就是第一个参数。</li>
+<li>要使用 <code>context.Background()</code> 函数生成根节点的 Context，也就是最顶层的 Context。</li>
+<li>Context 传值要传递必须的值，而且要尽可能地少，不要什么都传。</li>
+<li>Context 多协程安全，可以在多个协程中放心使用。</li>
+</ol>
+<p>以上原则是规范类的，Go 语言的编译器并不会做这些检查，要靠自己遵守。</p>
+<h2 id="sync"><a href="#sync" class="headerlink" title="sync"></a>sync</h2><p>channel 为什么是并发安全的呢？是因为 <strong>channel 内部使用了互斥锁</strong> 来保证并发的安全。在 Go 语言中，不仅有 channel 这类比较易用且高级的同步机制，还有 sync.Mutex、sync.WaitGroup 等比较原始的同步机制。通过它们可以更加灵活地 <strong>控制数据的同步和多协程的并发</strong>。</p>
+<h3 id="资源竞争"><a href="#资源竞争" class="headerlink" title="资源竞争"></a>资源竞争</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//共享的资源</span></span><br><span class="line"><span class="keyword">var</span> sum = <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//开启100个协程让sum+10</span></span><br><span class="line">   <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">      <span class="keyword">go</span> add(<span class="number">10</span>)</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//防止提前退出</span></span><br><span class="line">   time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">   fmt.Println(<span class="string">&quot;和为:&quot;</span>,sum)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(i <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">   sum += i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>小技巧：使用 go build、go run、go test 这些 Go 语言工具链提供的命令时，添加 -race 标识可以帮检查 Go 语言代码是否存在资源竞争。</p>
+</blockquote>
+<h3 id="同步原语"><a href="#同步原语" class="headerlink" title="同步原语"></a>同步原语</h3><p><strong>sync.Mutex</strong></p>
+<p><strong>互斥锁</strong> 指的是在同一时刻只有一个协程执行某段代码，其他协程都要等待该协程执行完毕后才能继续执行。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span>(</span><br><span class="line">   sum <span class="type">int</span></span><br><span class="line">   mutex sync.Mutex</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(i <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">   mutex.Lock()</span><br><span class="line">   <span class="keyword">defer</span> mutex.Unlock()</span><br><span class="line">   sum += i</span><br><span class="line">   <span class="comment">// mutex.Unlock()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上被加锁保护的 sum+&#x3D; i 代码片段又称为 <strong>临界区</strong>。在同步的程序设计中，临界区段指的是一个访问共享资源的程序片段，而这些共享资源又有无法同时被多个协程访问的特性。当有协程进入临界区段时，其他协程必须等待，这样就保证了临界区的并发安全。</p>
+<p><strong>sync.RWMutex</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">      <span class="keyword">go</span> add(<span class="number">10</span>)</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> i:=<span class="number">0</span>; i&lt;<span class="number">10</span>;i++ &#123;</span><br><span class="line">      <span class="keyword">go</span> fmt.Println(<span class="string">&quot;和为:&quot;</span>,readSum())</span><br><span class="line">   &#125;</span><br><span class="line">   time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//增加了一个读取sum的函数，便演示并发</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">readSum</span><span class="params">()</span></span> <span class="type">int</span> &#123;</span><br><span class="line">   mutex.Lock()</span><br><span class="line">   <span class="keyword">defer</span> mutex.Unlock()</span><br><span class="line">   b:=sum</span><br><span class="line">   <span class="keyword">return</span> b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解决了多个 goroutine 同时读写的资源竞争问题，但是又遇到另外一个问题——性能。因为每次读写共享资源都要加锁，所以性能低下，有以下几种情况：</p>
+<ol>
+<li>写的时候不能同时读，因为这个时候读取的话可能读到脏数据（不正确的数据）；</li>
+<li>读的时候不能同时写，因为也可能产生不可预料的结果；</li>
+<li><strong>读的时候可以同时读</strong>，因为数据不会改变，所以不管多少个 goroutine 读都是并发安全的。</li>
+</ol>
+<p>通过读写锁 sync.RWMutex 来优化这段代码，提升性能：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mutex sync.RWMutex</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">readSum</span><span class="params">()</span></span> <span class="type">int</span> &#123;</span><br><span class="line">   <span class="comment">//只获取读锁</span></span><br><span class="line">   mutex.RLock()</span><br><span class="line">   <span class="keyword">defer</span> mutex.RUnlock()</span><br><span class="line">   b:=sum</span><br><span class="line">   <span class="keyword">return</span> b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>把锁的声明换成读写锁 sync.RWMutex，把函数 readSum 读取数据的代码换成读锁，也就是 RLock 和 RUnlock，这样性能就会有很大的提升，因为多个 goroutine 可以同时读数据，不再相互等待。</p>
+<p><strong>sync.WaitGroup</strong></p>
+<p>上面代码的 <code>time.Sleep(2 * time.Second)</code>，这是为了防止主函数 main 返回使用，一旦 main 函数返回了，程序也就退出了，因为不知道 100 个执行 add 的协程和 10 个执行 readSum 的协程什么时候完全执行完毕，所以设置了一个比较长的等待时间，也就是两秒。</p>
+<p>有没有办法监听所有协程的执行，一旦全部执行完毕，程序马上退出，这样既可保证所有协程执行完毕，又可以及时退出节省时间，提升性能。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   run()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">   <span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">   <span class="comment">//因为要监控110个协程，所以设置计数器为110</span></span><br><span class="line">   wg.Add(<span class="number">110</span>)</span><br><span class="line">   <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</span><br><span class="line">      <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">         <span class="comment">//计数器值减1</span></span><br><span class="line">         <span class="keyword">defer</span> wg.Done()</span><br><span class="line">         add(<span class="number">10</span>)</span><br><span class="line">      &#125;()</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">for</span> i:=<span class="number">0</span>; i&lt;<span class="number">10</span>;i++ &#123;</span><br><span class="line">      <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">         <span class="comment">//计数器值减1</span></span><br><span class="line">         <span class="keyword">defer</span> wg.Done()</span><br><span class="line">         fmt.Println(<span class="string">&quot;和为:&quot;</span>,readSum())</span><br><span class="line">      &#125;()</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//一直等待，只要计数器值为0</span></span><br><span class="line">   wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过 sync.WaitGroup 可以很好地跟踪协程。在协程执行完毕后，整个 run 函数才能执行完毕，时间不多不少，正好是协程执行的时间。</p>
+<p><strong>sync.Once</strong></p>
+<p>让代码只执行一次，哪怕是在高并发的情况下，比如创建一个单例。针对这种情形，Go 语言为提供了 sync.Once 来保证代码只执行一次</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   doOnce()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doOnce</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">var</span> once sync.Once</span><br><span class="line">   onceBody := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">      fmt.Println(<span class="string">&quot;Only once&quot;</span>)</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//用于等待协程执行完毕</span></span><br><span class="line">   done := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">bool</span>)</span><br><span class="line"></span><br><span class="line">   <span class="comment">//启动10个协程执行once.Do(onceBody)</span></span><br><span class="line">   <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">      <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">         <span class="comment">//把要执行的函数(方法)作为参数传给once.Do方法即可</span></span><br><span class="line">         once.Do(onceBody)</span><br><span class="line">         done &lt;- <span class="literal">true</span></span><br><span class="line">      &#125;()</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">      &lt;-done</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>sync.Cond</strong></p>
+<p>sync.WaitGroup 用于最终完成的场景，关键点在于一定要等待所有协程都执行完毕；而 sync.Cond 可以用于发号施令，一声令下所有协程都可以开始执行，关键点在于协程开始的时候是等待的，要等待 sync.Cond 唤醒才能执行。</p>
+<p>sync.Cond 从字面意思看是条件变量，它具有阻塞协程和唤醒协程的功能，所以可以在满足一定条件的情况下唤醒协程，但条件变量只是它的一种使用场景。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//10个人赛跑，1个裁判发号施令</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">race</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   cond :=sync.NewCond(&amp;sync.Mutex&#123;&#125;)</span><br><span class="line">   <span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">   wg.Add(<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;<span class="number">10</span>; i++ &#123;</span><br><span class="line">      <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(num <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">         <span class="keyword">defer</span>  wg.Done()</span><br><span class="line">         fmt.Println(num,<span class="string">&quot;号已经就位&quot;</span>)</span><br><span class="line">         cond.L.Lock()</span><br><span class="line">         cond.Wait()<span class="comment">//等待发令枪响</span></span><br><span class="line">         fmt.Println(num,<span class="string">&quot;号开始跑……&quot;</span>)</span><br><span class="line">         cond.L.Unlock()</span><br><span class="line">      &#125;(i)</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//等待所有goroutine都进入wait状态</span></span><br><span class="line">   time.Sleep(<span class="number">2</span>*time.Second)</span><br><span class="line"></span><br><span class="line">   <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="keyword">defer</span>  wg.Done()</span><br><span class="line">      fmt.Println(<span class="string">&quot;裁判已经就位，准备发令枪&quot;</span>)</span><br><span class="line">      fmt.Println(<span class="string">&quot;比赛开始，大家准备跑&quot;</span>)</span><br><span class="line">      cond.Broadcast()<span class="comment">//发令枪响</span></span><br><span class="line">   &#125;()</span><br><span class="line">   <span class="comment">//防止函数提前返回退出</span></span><br><span class="line">   wg.Wait()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>sync.Cond 有三个方法，它们分别是：</p>
+<ol>
+<li><strong>Wait</strong>，阻塞当前协程，直到被其他协程调用 Broadcast 或者 Signal 方法唤醒，使用的时候需要加锁，使用 sync.Cond 中的锁即可，也就是 L 字段。</li>
+<li><strong>Signal</strong>，唤醒一个等待时间最长的协程。</li>
+<li><strong>Broadcast</strong>，唤醒所有等待的协程。</li>
+</ol>
+<blockquote>
+<p>在调用 Signal 或者 Broadcast 之前，要确保目标协程处于 Wait 阻塞状态，不然会出现死锁问题。</p>
+</blockquote>
+<h2 id="reflect"><a href="#reflect" class="headerlink" title="reflect"></a>reflect</h2><p>反射提供了一种可以在运行时操作任意类型对象的能力，比如查看一个接口变量的具体类型、看看一个结构体有多少字段、修改某个字段的值等。</p>
+<p>Go 语言是静态编译类语言，比如在定义一个变量的时候，已经知道了它是什么类型，那么为什么还需要反射呢？比如定义了一个函数，它有一个 <strong>interface{}</strong> （any）类型的参数，这也就意味着调用者可以传递任何类型的参数给这个函数。在这种情况下，如果想知道调用者传递的是什么类型的参数，就需要用到反射。如果想知道 <strong>一个结构体有哪些字段和方法</strong>，也需要反射。</p>
+<p>在 Go 语言的反射定义中，任何接口都由两部分组成：接口的具体类型，以及具体类型对应的值。</p>
+<blockquote>
+<p>interface{} 是空接口，可以表示任何类型，也就是说可以把任何类型转换为空接口，它通常用于 <strong>反射、类型断言</strong>，以减少重复代码，简化编程。</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   i:=<span class="number">3</span></span><br><span class="line">   iv:=reflect.ValueOf(i)</span><br><span class="line">   it:=reflect.TypeOf(i)</span><br><span class="line">   fmt.Println(iv,it)  <span class="comment">// 3 int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="reflect-Value"><a href="#reflect-Value" class="headerlink" title="reflect.Value"></a>reflect.Value</h3><p>在 Go 语言中，reflect.Value 被定义为一个 struct 结构体：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Value <span class="keyword">struct</span> &#123;</span><br><span class="line">   typ *rtype</span><br><span class="line">   ptr unsafe.Pointer</span><br><span class="line">   flag</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它的常用方法有三类：</p>
+<ul>
+<li>一类用于获取和修改对应的 <strong>值</strong>；</li>
+<li>一类和 struct 类型的 <strong>字段</strong> 有关，用于获取对应的字段；</li>
+<li>一类和类型上的 <strong>方法集</strong> 有关，用于获取对应的方法。</li>
+</ul>
+<p><strong>获取原始类型</strong></p>
+<p>reflect.Value 和 int 类型互转</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   i:=<span class="number">3</span></span><br><span class="line">   <span class="comment">//int to reflect.Value</span></span><br><span class="line">   iv:=reflect.ValueOf(i)</span><br><span class="line">   <span class="comment">//reflect.Value to int</span></span><br><span class="line">   i1:=iv.Interface().(<span class="type">int</span>)</span><br><span class="line">   fmt.Println(i1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改对应的值</strong></p>
+<p>因为 reflect.ValueOf 函数返回的是一份值的拷贝，所以要传入变量的指针，因为传递的是一个指针，所以需要调用 Elem 方法找到这个指针指向的值，这样才能修改。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改一个变量的值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   i:=<span class="number">3</span></span><br><span class="line">   ipv:=reflect.ValueOf(&amp;i)</span><br><span class="line">   ipv.Elem().SetInt(<span class="number">4</span>)</span><br><span class="line">   fmt.Println(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改 struct 结构体字段的值，可总结出以下步骤：</p>
+<ol>
+<li>传递一个 struct 结构体的指针，获取对应的 reflect.Value；</li>
+<li>通过 Elem 方法获取指针指向的值；</li>
+<li>通过 Field 方法获取要修改的字段；</li>
+<li>通过 Set 系列方法修改成对应的值。</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改 struct 结构体字段的值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   p:=person&#123;Name: <span class="string">&quot;hcjjj&quot;</span>, Age: <span class="number">26</span>&#125;</span><br><span class="line">   ppv:=reflect.ValueOf(&amp;p)</span><br><span class="line">   ppv.Elem().Field(<span class="number">0</span>).SetString(<span class="string">&quot;HCJ&quot;</span>)</span><br><span class="line">   fmt.Println(p)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">   Name <span class="type">string</span></span><br><span class="line">   Age <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在程序运行时通过反射修改一个变量或字段的值的规则：</p>
+<ol>
+<li>可被寻址，通俗地讲就是要向 reflect.ValueOf 函数传递一个指针作为参数。</li>
+<li>如果要修改 struct 结构体字段值的话，该字段需要是可导出的，而不是私有的，也就是该字段的首字母为大写。</li>
+<li>记得使用 Elem 方法获得指针指向的值，这样才能调用 Set 系列方法进行修改。</li>
+</ol>
+<p><strong>获取对应的底层类型</strong></p>
+<p>底层类型对应的主要是基础类型，比如接口、结构体、指针……因为可以通过 type 关键字声明很多新的类型。变量 p 的实际类型是 person，但是 person 对应的底层类型是 struct 这个结构体类型，而 &amp;p 对应的则是指针类型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   p:=person&#123;Name: <span class="string">&quot;hcjjj&quot;</span>,Age: <span class="number">26</span>&#125;</span><br><span class="line">   ppv:=reflect.ValueOf(&amp;p)</span><br><span class="line">   fmt.Println(ppv.Kind())  <span class="comment">// ptr</span></span><br><span class="line">   pv:=reflect.ValueOf(p)</span><br><span class="line">   fmt.Println(pv.Kind())   <span class="comment">// struct</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="reflect-Type"><a href="#reflect-Type" class="headerlink" title="reflect.Type"></a>reflect.Type</h3><p>reflect.Value 可以用于与值有关的操作中，而如果是和变量类型本身有关的操作，则最好使用 reflect.Type，比如要获取结构体对应的字段名称或方法。</p>
+<p><strong>接口定义</strong></p>
+<p>和 reflect.Value 不同，reflect.Type 是一个接口，而不是一个结构体，所以也只能使用它的方法。对比 reflect.Value 的方法功能， reflect.Type 几个特有的方法如下：</p>
+<ol>
+<li>Implements 方法用于判断是否实现了接口 u；</li>
+<li>AssignableTo 方法用于判断是否可以赋值给类型 u，其实就是是否可以使用 &#x3D;，即赋值运算符；</li>
+<li>ConvertibleTo 方法用于判断是否可以转换成类型 u，其实就是是否可以进行类型转换；</li>
+<li>Comparable 方法用于判断该类型是否是可比较的，其实就是是否可以使用关系运算符进行比较。</li>
+</ol>
+<p><strong>遍历结构体的字段和方法</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   p:=person&#123;Name: <span class="string">&quot;hcjjj&quot;</span>,Age: <span class="number">26</span>&#125;</span><br><span class="line">   pt:=reflect.TypeOf(p)</span><br><span class="line">   <span class="comment">//遍历person的字段</span></span><br><span class="line">   <span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;pt.NumField();i++&#123;</span><br><span class="line">      fmt.Println(<span class="string">&quot;字段：&quot;</span>,pt.Field(i).Name)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//遍历person的方法</span></span><br><span class="line">   <span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;pt.NumMethod();i++&#123;</span><br><span class="line">      fmt.Println(<span class="string">&quot;方法：&quot;</span>,pt.Method(i).Name)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以通过 FieldByName 方法获取指定的字段，也可以通过 MethodByName 方法获取指定的方法，这在需要获取某个特定的字段或者方法时非常高效，而不是使用遍历。</p>
+</blockquote>
+<p><strong>是否实现某接口</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   p:=person&#123;Name: <span class="string">&quot;hcjjj&quot;</span>,Age: <span class="number">26</span>&#125;</span><br><span class="line">   pt:=reflect.TypeOf(p)</span><br><span class="line">   stringerType:=reflect.TypeOf((*fmt.Stringer)(<span class="literal">nil</span>)).Elem()</span><br><span class="line">   writerType:=reflect.TypeOf((*io.Writer)(<span class="literal">nil</span>)).Elem()</span><br><span class="line">   fmt.Println(<span class="string">&quot;是否实现了fmt.Stringer：&quot;</span>,pt.Implements(stringerType))</span><br><span class="line">   fmt.Println(<span class="string">&quot;是否实现了io.Writer：&quot;</span>,pt.Implements(writerType))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>尽可能通过类型断言的方式判断是否实现了某接口，而不是通过反射。</p>
+</blockquote>
+<h3 id="string-↔️-struct"><a href="#string-↔️-struct" class="headerlink" title="string ↔️ struct"></a>string ↔️ struct</h3><p>字符串和结构体互转的场景中，使用最多的就是 JSON 和 struct 互转，还有配置文件和 struct 的转换</p>
+<p><strong>JSON 和 Struct 互转</strong></p>
+<p>Go 语言的标准库有一个 json 包，通过 json.Marshal 函数，可以把一个 struct 转为 JSON 字符串。通过 json.Unmarshal 函数，可以把一个 JSON 字符串转为 struct。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   p:=person&#123;Name: <span class="string">&quot;hcjjj&quot;</span>,Age: <span class="number">26</span>&#125;</span><br><span class="line">   <span class="comment">//struct to json</span></span><br><span class="line">   jsonB,err:=json.Marshal(p)</span><br><span class="line">   <span class="keyword">if</span> err==<span class="literal">nil</span> &#123;</span><br><span class="line">      fmt.Println(<span class="type">string</span>(jsonB))</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//json to struct</span></span><br><span class="line">   respJSON:=<span class="string">&quot;&#123;\&quot;Name\&quot;:\&quot;hcjjj\&quot;,\&quot;Age\&quot;:26&#125;&quot;</span></span><br><span class="line">   json.Unmarshal([]<span class="type">byte</span>(respJSON),&amp;p)</span><br><span class="line">   fmt.Println(p)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>JSON 字符串的 Key 和 struct 结构体的字段名称一样</p>
+<p><strong>Struct Tag</strong></p>
+<p>struct tag 是一个添加在 struct 字段上的标记，使用它进行辅助，可以完成一些额外的操作，比如 json 和 struct 互转。如果想把输出的 json 字符串的 Key 改为小写的 name 和 age，可以通过为 struct 字段添加 tag 的方式。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">   Name <span class="type">string</span> <span class="string">`json:&quot;name&quot;`</span></span><br><span class="line">   Age <span class="type">int</span> <span class="string">`json:&quot;age&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>json 作为 Key，是 Go 语言自带的 json 包解析 JSON 的一种约定，它会通过 json 这个 Key 找到对应的值，用于 JSON 的 Key 值。</p>
+</blockquote>
+<p>这个 tag 就像是为 struct 字段起的别名，那么 json 包是如何获得这个 tag 的呢？这就需要反射了。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//遍历person字段中key为json的tag</span></span><br><span class="line"><span class="comment">// pt:=reflect.TypeOf(p)</span></span><br><span class="line"><span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;pt.NumField();i++&#123;</span><br><span class="line">   sf:=pt.Field(i)</span><br><span class="line">   fmt.Printf(<span class="string">&quot;字段%s上,json tag为%s\n&quot;</span>,sf.Name,sf.Tag.Get(<span class="string">&quot;json&quot;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结构体的字段可以有多个 tag，用于不同的场景，比如 json 转换、bson 转换、orm 解析等。如果有多个 tag，要使用空格分隔。采用不同的 Key 可以获得不同的 tag：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//遍历person字段中key为json、bson的tag</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// pt:=reflect.TypeOf(p)</span></span><br><span class="line"><span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;pt.NumField();i++&#123;</span><br><span class="line">   sf:=pt.Field(i)</span><br><span class="line">   fmt.Printf(<span class="string">&quot;字段%s上,json tag为%s\n&quot;</span>,sf.Name,sf.Tag.Get(<span class="string">&quot;json&quot;</span>))</span><br><span class="line">   fmt.Printf(<span class="string">&quot;字段%s上,bson tag为%s\n&quot;</span>,sf.Name,sf.Tag.Get(<span class="string">&quot;bson&quot;</span>))</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">   Name <span class="type">string</span> <span class="string">`json:&quot;name&quot; bson:&quot;b_name&quot;`</span></span><br><span class="line">   Age <span class="type">int</span> <span class="string">`json:&quot;age&quot; bson:&quot;b_name&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">字段Name上,key为json的tag为name</span><br><span class="line">字段Name上,key为bson的tag为b_name</span><br><span class="line">字段Age上,key为json的tag为age</span><br><span class="line">字段Age上,key为bson的tag为b_name</span><br></pre></td></tr></table></figure>
+
+<p>通过不同的 Key，使用 Get 方法就可以获得自定义的不同的 tag。</p>
+<p><strong>实现 Struct 转 JSON</strong></p>
+<p>自定义的 jsonBuilder 负责 json 字符串的拼接，通过 for 循环把每一个字段拼接成 json 字符串。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   p:=person&#123;Name: <span class="string">&quot;hcjjj&quot;</span>,Age: <span class="number">26</span>&#125;</span><br><span class="line">   pv:=reflect.ValueOf(p)</span><br><span class="line">   pt:=reflect.TypeOf(p)</span><br><span class="line">    </span><br><span class="line">   <span class="comment">//自己实现的struct to json</span></span><br><span class="line">   jsonBuilder:=strings.Builder&#123;&#125;</span><br><span class="line">   jsonBuilder.WriteString(<span class="string">&quot;&#123;&quot;</span>)</span><br><span class="line">   num:=pt.NumField()</span><br><span class="line">   <span class="keyword">for</span> i:=<span class="number">0</span>;i&lt;num;i++&#123;</span><br><span class="line">      jsonTag:=pt.Field(i).Tag.Get(<span class="string">&quot;json&quot;</span>) <span class="comment">//获取json tag</span></span><br><span class="line">      jsonBuilder.WriteString(<span class="string">&quot;\&quot;&quot;</span>+jsonTag+<span class="string">&quot;\&quot;&quot;</span>)</span><br><span class="line">      jsonBuilder.WriteString(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">      <span class="comment">//获取字段的值</span></span><br><span class="line">      jsonBuilder.WriteString(fmt.Sprintf(<span class="string">&quot;\&quot;%v\&quot;&quot;</span>,pv.Field(i)))</span><br><span class="line">      <span class="keyword">if</span> i&lt;num<span class="number">-1</span>&#123;</span><br><span class="line">         jsonBuilder.WriteString(<span class="string">&quot;,&quot;</span>)</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   jsonBuilder.WriteString(<span class="string">&quot;&#125;&quot;</span>)</span><br><span class="line">   fmt.Println(jsonBuilder.String())<span class="comment">//打印json字符串</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>json 字符串的转换只是 struct tag 的一个应用场景，完全可以把 struct tag 当成结构体中字段的元数据配置，使用它来做想做的任何事情，比如 orm 映射、xml 转换、生成 swagger 文档等。</p>
+<p><strong>反射定律</strong></p>
+<p>反射是计算机语言中程序 <strong>检视其自身结构</strong> 的一种方法，它属于元编程的一种形式。反射灵活、强大，但也存在不安全。它可以绕过编译器的很多静态检查，如果过多使用便会造成混乱。Go 语言的作者在博客上总结了 <a target="_blank" rel="noopener" href="https://blog.golang.org/laws-of-reflection">反射的三大定律</a>。</p>
+<ol>
+<li>任何接口值 interface{} 都可以反射出反射对象，也就是 reflect.Value 和 reflect.Type，通过函数 reflect.ValueOf 和 reflect.TypeOf 获得。</li>
+<li>反射对象也可以还原为 interface{} 变量，也就是第 1 条定律的可逆性，通过 reflect.Value 结构体的 Interface 方法获得。</li>
+<li>要修改反射的对象，该值必须可设置，也就是 <strong>可寻址</strong>。</li>
+</ol>
+<h2 id="errors"><a href="#errors" class="headerlink" title="errors"></a>errors</h2><p>错误是通过内置的 error 接口表示，它只有一个 Error 方法用来返回具体的错误信息：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="type">error</span> <span class="keyword">interface</span> &#123;</span><br><span class="line">   Error() <span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一般而言，error 接口用于当方法或者函数执行遇到错误时进行返回，而且是第二个返回值。通过这种方式，可以让调用者自己根据错误信息决定如何进行下一步处理。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   i,err:=strconv.Atoi(<span class="string">&quot;a&quot;</span>)</span><br><span class="line">   <span class="keyword">if</span> err!=<span class="literal">nil</span> &#123;</span><br><span class="line">      fmt.Println(err)</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      fmt.Println(i)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Atoi</span><span class="params">(s <span class="type">string</span>)</span></span> (<span class="type">int</span>, <span class="type">error</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>error 工厂函数</strong></p>
+<p>自己定义的函数也可以返回错误信息给调用者：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(a, b <span class="type">int</span>)</span></span> (<span class="type">int</span>, <span class="type">error</span>)&#123;</span><br><span class="line">   <span class="keyword">if</span> a&lt;<span class="number">0</span> || b&lt;<span class="number">0</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>, errors.New(<span class="string">&quot;a 或者 b 不能为负数&quot;</span>)</span><br><span class="line">   &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> a+b,<span class="literal">nil</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sum,err := add(<span class="number">-1</span>,<span class="number">2</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">   fmt.Println(err)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   fmt.Println(sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>自定义 error</strong></p>
+<p>采用工厂返回错误信息的方式只能传递一个字符串，也就是携带的信息只有字符串，如果想要携带更多信息（比如错误码信息）就需要自定义 error 。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> commonError <span class="keyword">struct</span> &#123;</span><br><span class="line">   errorCode <span class="type">int</span> <span class="comment">//错误码</span></span><br><span class="line">   errorMsg <span class="type">string</span> <span class="comment">//错误信息</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(ce *commonError)</span></span> Error() <span class="type">string</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> ce.errorMsg</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="number">0</span>, &amp;commonError &#123;</span><br><span class="line">   errorCode: <span class="number">1</span>,</span><br><span class="line">   errorMsg:  <span class="string">&quot;a 或者 b 不能为负数&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>error 断言</strong></p>
+<p>需要先把返回的 error 接口转换为自定义的错误类型</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sum, err := add(<span class="number">-1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="keyword">if</span> cm,ok := err.(*commonError); ok &#123;</span><br><span class="line">   fmt.Println(<span class="string">&quot;错误代码为:&quot;</span>, cm.errorCode, <span class="string">&quot;，错误信息为：&quot;</span>, cm.errorMsg)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   fmt.Println(sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>错误嵌套</strong></p>
+<p>调用一个函数，返回了一个错误信息 error，在不想丢失这个 error 的情况下，又想添加一些额外信息返回新的 error。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyError <span class="keyword">struct</span> &#123;</span><br><span class="line">    err <span class="type">error</span></span><br><span class="line">    msg <span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>让 MyError 这个 struct 实现 error 接口，然后在初始化 MyError 的时候传递存在的 error 和新的错误信息：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *MyError)</span></span> Error() <span class="type">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> e.err.Error() + e.msg</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//err是一个存在的错误，可以从另外一个函数返回</span></span><br><span class="line">    newErr := MyError&#123;err, <span class="string">&quot;数据上传问题&quot;</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Error Wrapping</strong> </p>
+<p>这种方式可以满足的需求，但是非常烦琐，因为既要定义新的类型还要实现 error 接口。所以从 Go 语言 1.13 版本开始，Go 标准库新增了 Error Wrapping 功能，可以基于一个存在的 error 生成新的 error，并且可以保留原 error 信息：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">e := errors.New(<span class="string">&quot;原始错误e&quot;</span>)</span><br><span class="line">w := fmt.Errorf(<span class="string">&quot;Wrap 了一个错误: %w&quot;</span>, e)</span><br><span class="line">fmt.Println(w)</span><br></pre></td></tr></table></figure>
+
+<p>Go 语言没有提供 Wrap 函数，而是扩展了 fmt.Errorf 函数，然后加了一个 %w，通过这种方式，便可以生成 wrapping error。</p>
+<p><strong>errors.Unwrap 函数</strong></p>
+<p>Go 语言提供了 errors.Unwrap 用于获取被嵌套的 error，比如以上例子中的错误变量 w ，就可以对它进行 unwrap，获取被嵌套的原始错误 e。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(errors.Unwrap(w))</span><br></pre></td></tr></table></figure>
+
+<p><strong>errors.Is 函数</strong></p>
+<p>有了 Error Wrapping 后，会发现原来用的判断两个 error 是不是同一个 error 的方法失效了，比如 Go 语言标准库经常用到的如下代码中的方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> err == os.ErrExist</span><br></pre></td></tr></table></figure>
+
+<p>于是 Go 语言为提供了 errors.Is 函数，用来判断两个 error 是否是同一个：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Is</span><span class="params">(err, target <span class="type">error</span>)</span></span> <span class="type">bool</span></span><br></pre></td></tr></table></figure>
+
+<p>以上就是 errors.Is 函数的定义，可以解释为：</p>
+<ul>
+<li>如果 err 和 target 是同一个，那么返回 true。</li>
+<li>如果 err 是一个 wrapping error，target 也包含在这个嵌套 error 链中的话，也返回 true。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(errors.Is(w,e))</span><br></pre></td></tr></table></figure>
+
+<p><strong>errors.As 函数</strong></p>
+<p>有了 error 嵌套后，error 断言也不能用了，因为不知道一个 error 是否被嵌套，又嵌套了几层。所以 Go 语言为解决这个问题提供了 errors.As 函数，比如前面 error 断言的例子，可以使用 errors.As 函数重写，效果是一样的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cm *commonError</span><br><span class="line"><span class="keyword">if</span> errors.As(err, &amp;cm) &#123;</span><br><span class="line">   fmt.Println(<span class="string">&quot;错误代码为:&quot;</span>, cm.errorCode,<span class="string">&quot;，错误信息为：&quot;</span>, cm.errorMsg)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   fmt.Println(sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以在 Go 语言提供的 Error Wrapping 能力下，写的代码要尽可能地使用 Is、As 这些函数做判断和转换。</p>
+<h2 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h2><ul>
+<li>defer 调用栈</li>
+<li>return x 不是一个原子语句</li>
+</ul>
+<p>Go 语言为提供了 defer 函数，可以保证文件关闭（资源的释放）后一定会被执行，不管自定义的函数出现异常还是错误。</p>
+<p>下面的代码是 Go 语言标准包 ioutil 中的 ReadFile 函数，它需要打开一个文件，然后通过 defer 关键字确保在 ReadFile 函数执行结束后，f.Close() 方法被执行，这样文件的资源才一定会释放。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReadFile</span><span class="params">(filename <span class="type">string</span>)</span></span> ([]<span class="type">byte</span>, <span class="type">error</span>) &#123;</span><br><span class="line">   f, err := os.Open(filename)</span><br><span class="line">   <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">defer</span> f.Close()</span><br><span class="line">   <span class="comment">//省略无关代码</span></span><br><span class="line">   <span class="keyword">return</span> readAll(f, n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>defer 关键字用于修饰一个函数或者方法，使得该函数或者方法在返回前才会执行，也就说被延迟，但又可以保证一定会执行。</p>
+<p>以上面的 ReadFile 函数为例，被 defer 修饰的 f.Close 方法延迟执行，也就是说会先执行 readAll(f, n)，然后在整个 ReadFile 函数 return 之前执行 f.Close 方法。</p>
+<p>defer 语句常被用于成对的操作，如文件的打开和关闭，加锁和释放锁，连接的建立和断开等。不管多么复杂的操作，都可以保证资源被正确地释放。</p>
+<h2 id="panic"><a href="#panic" class="headerlink" title="panic"></a>panic</h2><p>Go 语言是一门静态的强类型语言，很多问题都尽可能地在编译时捕获，但是有一些只能在运行时检查，比如数组越界访问、不相同的类型强制转换等，这类运行时的问题会引起 panic 异常。</p>
+<p>除了运行时可以产生 panic 外，自己也可以抛出 panic 异常。假设需要连接 MySQL 数据库，可以写一个连接 MySQL 的函数 connectMySQL，如下面的代码所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">connectMySQL</span><span class="params">(ip,username,password <span class="type">string</span>)</span></span>&#123;</span><br><span class="line">   <span class="keyword">if</span> ip ==<span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">      <span class="built_in">panic</span>(<span class="string">&quot;ip不能为空&quot;</span>)</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//省略其他代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 connectMySQL 函数中，如果 ip 为空会直接抛出 panic 异常。这种逻辑是正确的，因为数据库无法连接成功的话，整个程序运行起来也没有意义，所以就抛出 panic 终止程序的运行。</p>
+<p>panic 是 Go 语言内置的函数，可以接受 interface{} 类型的参数，也就是任何类型的值都可以传递给 panic 函数，如下所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">panic</span><span class="params">(v <span class="keyword">interface</span>&#123;&#125;)</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>小提示：interface{} 是空接口的意思，在 Go 语言中代表任意类型。</p>
+</blockquote>
+<p>panic 异常是一种非常严重的情况，会让程序中断运行，使程序崩溃，所以 <strong>如果是不影响程序运行的错误，不要使用 panic，使用普通错误 error 即可。</strong></p>
+<h2 id="recover"><a href="#recover" class="headerlink" title="recover"></a>recover</h2><p>通常情况下，不对 panic 异常做任何处理，因为既然它是影响程序运行的异常，就让它直接崩溃即可。但是也的确有一些特例，比如在程序崩溃前做一些资源释放的处理，这时候就需要从 panic 异常中恢复，才能完成处理。</p>
+<p>在 Go 语言中，可以通过内置的 recover 函数恢复 panic 异常。因为在程序 panic 异常崩溃的时候，只有被 defer 修饰的函数才能被执行，所以 recover 函数要结合 defer 关键字使用才能生效。</p>
+<p>下面的示例是通过 <strong>defer 关键字 + 匿名函数 + recover 函数</strong> 从 panic 异常中恢复的方式。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">      <span class="keyword">if</span> p:=<span class="built_in">recover</span>();p!=<span class="literal">nil</span>&#123;</span><br><span class="line">         fmt.Println(p)</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;()</span><br><span class="line">   connectMySQL(<span class="string">&quot;&quot;</span>,<span class="string">&quot;root&quot;</span>,<span class="string">&quot;123456&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行这个代码，可以看到如下的打印输出，这证明 recover 函数成功捕获了 panic 异常。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip 不能为空</span><br></pre></td></tr></table></figure>
+
+<p>通过这个输出的结果也可以发现，recover 函数返回的值就是通过 panic 函数传递的参数值。</p>
+<h2 id="unsafe"><a href="#unsafe" class="headerlink" title="unsafe"></a>unsafe</h2><p>Go 将其定义为这个包名，也是为了让尽可能地不使用它。不过虽然不安全，它也有优势，那就是可以绕过 Go 的内存安全机制，直接对内存进行读写。所以有时候出于性能需要，还是会冒险使用它来对内存进行操作。</p>
+<p><strong>指针类型转换</strong></p>
+<p>Go 是强类型的静态语言，强类型意味着一旦定义了，类型就不能改变；静态意味着类型检查在运行前就做了。同时出于安全考虑，Go 语言是不允许两个指针类型进行转换的。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   i := <span class="number">10</span></span><br><span class="line">   ip := &amp;i</span><br><span class="line">   <span class="keyword">var</span> fp *<span class="type">float64</span> = (*<span class="type">float64</span>)(ip)</span><br><span class="line">   fmt.Println(fp)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在编译的时候，会提示 <em>cannot convert ip (type * int) to type * float64</em>，也就是不能进行强制转型。那如果还是需要转换呢？这就需要使用 unsafe 包里的 Pointer 了。</p>
+<p><strong>unsafe.Pointer</strong></p>
+<p>unsafe.Pointer 是一种特殊意义的指针，可以表示任意类型的地址，类似 C 语言里的 void * 指针，是全能型的。正常情况下，* int 无法转换为 *float64，但是通过 unsafe.Pointer 做中转就可以了。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   i:= <span class="number">10</span></span><br><span class="line">   ip:=&amp;i</span><br><span class="line">   <span class="keyword">var</span> fp *<span class="type">float64</span> = (*<span class="type">float64</span>)(unsafe.Pointer(ip))</span><br><span class="line">   *fp = *fp * <span class="number">3</span></span><br><span class="line">   fmt.Println(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>按 Go 语言官方的注释，ArbitraryType 可以表示任何类型，而 unsafe.Pointer 又是 *ArbitraryType，也就是说 unsafe.Pointer 是任何类型的指针，也就是一个通用型的指针，足以表示任何内存地址。</p>
+<p><strong>uintptr 指针类型</strong></p>
+<p>uintptr 也是一种指针类型，它足够大，可以表示任何指针。unsafe.Pointer 不能进行运算，比如不支持 +（加号）运算符操作，但是 uintptr 可以对指针偏移进行计算，这样就可以访问特定的内存，达到对特定内存读写的目的，这是真正内存级别的操作。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   p := <span class="built_in">new</span>(person)</span><br><span class="line">   <span class="comment">//Name是person的第一个字段不用偏移，即可通过指针修改</span></span><br><span class="line">   pName := (*<span class="type">string</span>)(unsafe.Pointer(p))</span><br><span class="line">   *pName = <span class="string">&quot;gogogo&quot;</span></span><br><span class="line">   <span class="comment">//Age 并不是 person 的第一个字段，所以需要进行偏移，这样才能正确定位到 Age 字段这块内存，才可以正确的修改</span></span><br><span class="line">   pAge := (*<span class="type">int</span>)(unsafe.Pointer(<span class="type">uintptr</span>(unsafe.Pointer(p))+unsafe.Offsetof(p.Age)))</span><br><span class="line">   *pAge = <span class="number">20</span></span><br><span class="line">   fmt.Println(*p)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">   Name <span class="type">string</span></span><br><span class="line">   Age <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>指针转换规则</strong></p>
+<pre class="mermaid">graph LR
+A[*T] <--互转---> B(unsafe.Pointer)
+B <--互转--->  C(uintptr)</pre>
+
+<p>Go 语言中存在三种类型的指针，它们分别是常用的 *T、unsafe.Pointer 及 uintptr，这三者的转换规则：</p>
+<ol>
+<li>任何类型的 *T 都可以转换为 unsafe.Pointer；</li>
+<li>unsafe.Pointer 也可以转换为任何类型的 *T；</li>
+<li>unsafe.Pointer 可以转换为 uintptr；</li>
+<li>uintptr 也可以转换为 unsafe.Pointer。</li>
+</ol>
+<p>unsafe.Pointer 主要用于<strong>指针类型的转换</strong>，而且是各个指针类型转换的桥梁。uintptr 主要用于<strong>指针运算</strong>，尤其是通过偏移量定位不同的内存。</p>
+<h2 id="others"><a href="#others" class="headerlink" title="others"></a>others</h2><h3 id="String-和-byte"><a href="#String-和-byte" class="headerlink" title="String 和 [] byte"></a>String 和 [] byte</h3><p>字符串 string 也是一个不可变的字节序列，所以可以直接转为字节切片 [] byte：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s:=<span class="string">&quot;Hello 世界&quot;</span></span><br><span class="line">bs:=[]<span class="type">byte</span>(s)</span><br></pre></td></tr></table></figure>
+
+<p>string 不止可以直接转为 [] byte，还可以使用 [] 操作符获取指定索引的字节值：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">s:=<span class="string">&quot;Hello 世界&quot;</span></span><br><span class="line">bs:=[]<span class="type">byte</span>(s)</span><br><span class="line">fmt.Println(bs)</span><br><span class="line">fmt.Println(s[<span class="number">0</span>],s[<span class="number">1</span>],s[<span class="number">6</span>])</span><br><span class="line"><span class="comment">// 字节长度 12 (6 + 3*2)</span></span><br><span class="line">fmt.Println(<span class="built_in">len</span>(s))</span><br><span class="line"><span class="comment">// 字符长度 8</span></span><br><span class="line">fmt.Println(utf8.RuneCountInString(s))</span><br><span class="line"><span class="comment">// 逐个遍历字符</span></span><br><span class="line"><span class="keyword">for</span> i, r := <span class="keyword">range</span> s &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%d %c\n&quot;</span>, i, r)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="new-和-make"><a href="#new-和-make" class="headerlink" title="new 和 make"></a>new 和 make</h3><p>Go 语言程序所管理的虚拟内存空间会被分为两部分：堆内存和栈内存。栈内存主要由 Go 语言来管理，开发者无法干涉太多，堆内存才是开发者发挥能力的舞台，因为程序的数据大部分分配在堆内存上，一个程序的大部分内存占用也是在堆内存上。常说的 Go 语言的内存垃圾回收是针对 <strong>堆内存</strong> 的垃圾回收。</p>
+<p><strong>变量的声明</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s <span class="type">string</span> <span class="comment">// 声明并未初始化，string 的零值：&quot;&quot;（空字符串）</span></span><br><span class="line"><span class="keyword">var</span> sp *<span class="type">string</span> <span class="comment">// 指针类型变量的零值：nil，它没有指向的内存，无法使用</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>变量的赋值</strong></p>
+<p>如果在声明一个变量的时候就给这个变量赋值，这种操作就称为变量的初始化。<strong>指针类型的变量</strong> 如果没有分配内存，就默认是零值 nil，它没有指向的内存，所以无法使用，强行使用就会得到 nil 指针错误。而对于 <strong>值类型的变量</strong> 来说，即使只声明一个变量，没有对其初始化，该变量也会有分配好的内存。</p>
+<blockquote>
+<p>struct 结构体，是一个值类型，Go 语言自动分配了内存，所以可以直接使用，不会报 nil 异常。</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 <span class="type">string</span> = <span class="string">&quot;Go&quot;</span></span><br><span class="line">s2 := <span class="string">&quot;Go&quot;</span></span><br><span class="line">s3 = <span class="string">&quot;Go&quot;</span> <span class="comment">// 假设已经声明变量 s</span></span><br><span class="line"><span class="keyword">var</span> sp *<span class="type">string</span></span><br><span class="line">*sp = <span class="string">&quot;Go&quot;</span> <span class="comment">// runtime error: invalid memory address or nil pointer dereference</span></span><br></pre></td></tr></table></figure>
+
+<p>如果要对一个变量赋值，这个变量必须有对应的分配好的内存，这样才可以对这块内存操作，完成赋值的目的。所以一个变量必须要经过 <strong>声明</strong>、<strong>内存分配</strong> 才能 <strong>赋值</strong>，才可以在声明的时候进行 <strong>初始化</strong>。指针类型在声明的时候，Go 语言并没有自动分配内存，所以不能对其进行赋值操作，这和值类型不一样。</p>
+<blockquote>
+<p>map 和 chan 也一样，因为它们本质上也是指针类型。</p>
+</blockquote>
+<p><strong>new 函数</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The new built-in function allocates memory. The first argument is a type,</span></span><br><span class="line"><span class="comment">// not a value, and the value returned is a pointer to a newly</span></span><br><span class="line"><span class="comment">// allocated zero value of that type.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">new</span><span class="params">(Type)</span></span> *Type</span><br></pre></td></tr></table></figure>
+
+<p>new 函数的作用是根据传入的类型申请一块内存，然后返回指向这块内存的指针，指针指向的数据就是该类型的 <strong>零值</strong>。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sp *<span class="type">string</span></span><br><span class="line">sp = <span class="built_in">new</span>(<span class="type">string</span>) <span class="comment">// *sp = &quot;&quot;</span></span><br><span class="line">*sp = <span class="string">&quot;Go&quot;</span> <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>变量的初始化</strong></p>
+<p>当声明了一些类型的变量时，这些变量的零值并不能满足要求，这时就需要在变量声明的同时进行赋值（修改变量的值），这个过程称为变量的初始化。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s <span class="type">string</span> = <span class="string">&quot;Go&quot;</span></span><br><span class="line">s1 := <span class="string">&quot;Go&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">   name <span class="type">string</span></span><br><span class="line">   age <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line">p := person&#123;name: <span class="string">&quot;Go&quot;</span>, age: <span class="number">15</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>指针变量初始化</strong></p>
+<p>new 函数可以申请内存并返回一个指向该内存的指针，但是这块内存中数据的值默认是该类型的零值，在一些情况下并不满足业务需求。可以自定义一个函数，对指针变量进行初始化：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewPerson</span><span class="params">(name <span class="type">string</span>, age <span class="type">int</span>)</span></span> *person&#123;</span><br><span class="line">   p := <span class="built_in">new</span>(person)</span><br><span class="line">   p.name = name</span><br><span class="line">   p.age = age</span><br><span class="line">   <span class="keyword">return</span> p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>NewPerson 函数就是工厂函数，除了使用 new 函数创建一个 person 指针外，还对它进行了赋值，也就是初始化。</p>
+<p><strong>make 函数</strong></p>
+<p>在使用 make 函数创建 map 的时候，其实调用的是 makemap 函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// makemap implements Go map creation for make(map[k]v, hint).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">makemap</span><span class="params">(t *maptype, hint <span class="type">int</span>, h *hmap)</span></span> *hmap&#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>makemap 函数返回的是 *hmap 类型，而 hmap 是一个结构体，它的定义如下面的代码所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A header for a Go map.</span></span><br><span class="line"><span class="keyword">type</span> hmap <span class="keyword">struct</span> &#123;</span><br><span class="line">   <span class="comment">// Note: the format of the hmap is also encoded in cmd/compile/internal/gc/reflect.go.</span></span><br><span class="line">   <span class="comment">// Make sure this stays in sync with the compiler&#x27;s definition.</span></span><br><span class="line">   count     <span class="type">int</span> <span class="comment">// # live cells == size of map.  Must be first (used by len() builtin)</span></span><br><span class="line">   flags     <span class="type">uint8</span></span><br><span class="line">   B         <span class="type">uint8</span>  <span class="comment">// log_2 of # of buckets (can hold up to loadFactor * 2^B items)</span></span><br><span class="line">   noverflow <span class="type">uint16</span> <span class="comment">// approximate number of overflow buckets; see incrnoverflow for details</span></span><br><span class="line">   hash0     <span class="type">uint32</span> <span class="comment">// hash seed</span></span><br><span class="line">   buckets    unsafe.Pointer <span class="comment">// array of 2^B Buckets. may be nil if count==0.</span></span><br><span class="line">   oldbuckets unsafe.Pointer <span class="comment">// previous bucket array of half the size, non-nil only when growing</span></span><br><span class="line">   nevacuate  <span class="type">uintptr</span>        <span class="comment">// progress counter for evacuation (buckets less than this have been evacuated)</span></span><br><span class="line">   extra *mapextra <span class="comment">// optional fields</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要想使用这样的 hmap，不是简单地通过 new 函数返回一个 *hmap 就可以，还需要对其进行初始化，这就是 make 函数要做的事情，如下所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其实 make 函数就是 map 类型的工厂函数，它可以根据传递它的 K-V 键值对类型，创建不同类型的 map，同时可以初始化 map 的大小。</p>
+<blockquote>
+<p>make 函数不只是 map 类型的工厂函数，还是 chan、slice 的工厂函数。它同时可以用于 slice、chan 和 map 这三种类型的初始化。</p>
+</blockquote>
+<ul>
+<li><p>new 函数只用于分配内存，并且把内存清零，也就是返回一个指向对应类型零值的指针。new 函数一般用于需要显式地返回指针的情况，不是太常用。</p>
+</li>
+<li><p>make 函数只用于 slice、chan 和 map 这三种内置类型的创建和初始化，因为这三种类型的结构比较复杂，比如 slice 要提前初始化好内部元素的类型，slice 的长度和容量等，这样才可以更好地使用它们。</p>
+</li>
+</ul>
+<h3 id="闭包（匿名函数）"><a href="#闭包（匿名函数）" class="headerlink" title="闭包（匿名函数）"></a>闭包（匿名函数）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    cl:=colsure()</span><br><span class="line">    fmt.Println(cl()) <span class="comment">// 1</span></span><br><span class="line">    fmt.Println(cl()) <span class="comment">// 2</span></span><br><span class="line">    fmt.Println(cl()) <span class="comment">// 3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注意这个返回值是一个闭包</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">colsure</span><span class="params">()</span></span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    i := <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="type">int</span> &#123;</span><br><span class="line">        i++</span><br><span class="line">        <span class="keyword">return</span> i</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>闭包对其作用域内变量的 <strong>捕获和持有</strong>。闭包捕获并持有了变量 i 的引用，而不是其值，因此每次调用闭包时，它都操作同一个 i 变量，而</p>
+<p>不是每次重新初始化 i。</p>
+<h3 id="loopvar"><a href="#loopvar" class="headerlink" title="loopvar"></a>loopvar</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// go1.22</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    done := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">bool</span>)</span><br><span class="line"></span><br><span class="line">    values := []<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> _, v := <span class="keyword">range</span> values &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">            fmt.Println(v)</span><br><span class="line">            done &lt;- <span class="literal">true</span></span><br><span class="line">        &#125;()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// wait for all goroutines to complete before exiting</span></span><br><span class="line">    <span class="keyword">for</span> _ = <span class="keyword">range</span> values &#123;</span><br><span class="line">        &lt;-done</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1.21 可能输出一样的值，也可能不一样</span></span><br><span class="line"><span class="comment">// 1.22 每个值都会输出，但是顺序有可能随机</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rightLoop</span><span class="params">()</span></span> &#123;</span><br><span class="line">    done := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">bool</span>)</span><br><span class="line"></span><br><span class="line">    values := []<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> _, v := <span class="keyword">range</span> values &#123;</span><br><span class="line">        <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(str <span class="type">string</span>)</span></span> &#123;</span><br><span class="line">            fmt.Println(str)</span><br><span class="line">            done &lt;- <span class="literal">true</span></span><br><span class="line">        &#125;(v)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// wait for all goroutines to complete before exiting</span></span><br><span class="line">    <span class="keyword">for</span> <span class="keyword">range</span> values &#123;</span><br><span class="line">        &lt;-done</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// a b c</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>go1.22 版本之后解决了 for 循环变量共享的问题，注意必须 go 版本和 gomod 版本都 &gt;&#x3D; 1.22 才会使用新的 loopvar</li>
+<li>虽然之前版本的变量共享，但在协程里可能会输出不同的值，不该想当然以为值永远是最后一个。</li>
+</ul>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/05/22/redis/">Redis 核心原理与实践 🚀</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/04/16/mulval/">MulVAL - A Logic based Network Security Analyzer</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

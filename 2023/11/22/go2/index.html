@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Go 底层原理与源码初探 👾 - H-sediment</title>
+
+  
+    <meta name="description" content="学习 Go 的底层原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go 底层原理与源码初探 👾">
+<meta property="og:url" content="http://example.com/2023/11/22/go2/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="学习 Go 的底层原理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/222.png">
+<meta property="article:published_time" content="2023-11-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-19T11:31:32.363Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/222.png">
+  
+  
+  
+  <meta name="keywords" content="Golang">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Go 底层原理与源码初探 👾</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86-Go"><span class="toc-number">2.</span> <span class="toc-text">重新认识  Go</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E7%89%87"><span class="toc-number">3.2.</span> <span class="toc-text">切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map"><span class="toc-number">3.3.</span> <span class="toc-text">map</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Goroutine-%E5%8D%8F%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">Goroutine 协程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%81-%F0%9F%94%92"><span class="toc-number">5.</span> <span class="toc-text">锁 🔒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ChanneI-%E7%AE%A1%E9%81%93"><span class="toc-number">6.</span> <span class="toc-text">ChanneI 管道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-number">7.</span> <span class="toc-text">TCP 网络编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E-GC"><span class="toc-number">8.</span> <span class="toc-text">内存模型与 GC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7"><span class="toc-number">9.</span> <span class="toc-text">其他高级特性</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Golang/">Golang</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-11-21T16:00:00.000Z">2023-11-22</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Go 底层原理与源码初探 👾</span></h1>
+ <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/222.png" style="zoom:33%;" />
+
+<p>学习 Go 的底层原理</p>
+<span id="more"></span>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://draveness.me/golang">《Go 语言设计与实现》</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://chai2010.cn/advanced-go-programming-book/">《Go 语言高级编程》</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://tiancaiamao.gitbooks.io/go-internals/content/zh/index.html">《深入解析 Go》</a></strong></li>
+</ul>
+<h2 id="重新认识-Go"><a href="#重新认识-Go" class="headerlink" title="重新认识  Go"></a>重新认识  Go</h2><ul>
+<li><strong>C&#x2F;C++</strong><ul>
+<li>C 语言不是面向对象</li>
+<li>直接编译为机器码，不需要执行环境</li>
+<li>一次编码只能适用一种平台（不同平台源代码不一样）</li>
+<li>需要自己处理垃圾回收（GC）问题</li>
+</ul>
+</li>
+<li><strong>Java</strong><ul>
+<li>编译为中间码（字节码）</li>
+<li>需要特定执行环境（JVM）</li>
+<li>一次编译多处执行</li>
+<li>有虚拟化损失</li>
+</ul>
+</li>
+<li><strong>JavaScript</strong><ul>
+<li>不需要编译，直接解释执行</li>
+<li>需要执行环境（浏览器）</li>
+<li>有虚拟化损失</li>
+</ul>
+</li>
+<li><strong>Go</strong><ul>
+<li>直接编译为二进制，没有虚拟化损失</li>
+<li>自带运行环境，无需处理 GC 问题</li>
+<li>一次编码可以适用多种平台（不同平台源代码一样）</li>
+<li>超强的并发支持能力与并发易用性</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">一次编码</th>
+<th align="center">一次编译</th>
+<th align="center">不需要运行环境</th>
+<th align="center">没有虚拟化损失</th>
+<th align="center">不需要自行处理GC</th>
+<th align="center">面向对象</th>
+<th align="center">非常易用的并发能力</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>C</strong></td>
+<td align="center">❌</td>
+<td align="center">✔️</td>
+<td align="center">✔️</td>
+<td align="center">✔️</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+</tr>
+<tr>
+<td align="center"><strong>C++</strong></td>
+<td align="center">❌</td>
+<td align="center">✔️</td>
+<td align="center">✔️</td>
+<td align="center">✔️</td>
+<td align="center">❌</td>
+<td align="center">✔️</td>
+<td align="center">❌</td>
+</tr>
+<tr>
+<td align="center"><strong>Java</strong></td>
+<td align="center">✔️</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✔️</td>
+<td align="center">✔️</td>
+<td align="center">❌</td>
+</tr>
+<tr>
+<td align="center"><strong>JavaScript</strong></td>
+<td align="center">✔️</td>
+<td align="center">⭕</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✔️</td>
+<td align="center">✔️</td>
+<td align="center">❌</td>
+</tr>
+<tr>
+<td align="center"><strong>Go</strong></td>
+<td align="center">✔️</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✔️</td>
+<td align="center">✔️</td>
+<td align="center">✔️</td>
+<td align="center">✔️</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>什么是 Runtime</strong></p>
+<ul>
+<li>Runtime 就是程序的运行环境</li>
+<li>Java：JVM</li>
+<li>JavaScript：浏览器内核</li>
+</ul>
+</li>
+<li><p><strong>Go 的 Runtime</strong></p>
+<ul>
+<li>Go 没有虚拟机的概念</li>
+<li>Runtime 作为程序的一部分打包进二进制产物</li>
+<li>Runtime 随用户程序一起运行</li>
+<li>Runtime 与用户程序没有明显界限，直接通过函数调用</li>
+</ul>
+</li>
+<li><p><strong>Go Runtime 的能力</strong></p>
+<ul>
+<li>内存管理能力</li>
+<li>垃圾回收能力</li>
+<li>超强的并发能力（协程调度）</li>
+<li>Runtime 有一定的屏蔽系统调用能力（跨平台）</li>
+<li>一些 go 的关键字其实是 Runtime 下的函数<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>go</td>
+<td>newproc</td>
+</tr>
+<tr>
+<td>new</td>
+<td>newobject</td>
+</tr>
+<tr>
+<td>make</td>
+<td>makeslice, makechain, makemap …</td>
+</tr>
+<tr>
+<td>&lt;-</td>
+<td>chansend1, chanrecv1</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p><strong>Go 程序是如何编译的？</strong></p>
+<ul>
+<li><code>go build -n</code> 查看编译过程信息</li>
+<li>词法分析 → 句法分析 → 语义分析 → 中间码生成（平台无关的） → 代码优化 → 机器码生成→ 链接 → 可执行文件</li>
+<li>查看生成的中间码 SSA（平台无关）<ul>
+<li>GO SSA FUNC</li>
+<li><code>$env:GOSSAFUNC=&quot;main&quot;</code> 或 <code>export GOSSAFUNC=main</code></li>
+<li><code>go build</code></li>
+</ul>
+</li>
+<li>查看生成的 Plan9 汇编代码（平台相关）<ul>
+<li><code>go build -gcflags -S main.go</code></li>
+</ul>
+</li>
+<li>链接：将各个包（<code>.a</code> 文件）进行链接，包括 runtime，生成可执行文件</li>
+</ul>
+</li>
+<li><p><strong>Go 程序是如何运行的？</strong></p>
+<ul>
+<li>Go 程序的入口不是 main 方法，是 <code>runtime/rt0_xxx_xxx.s</code> 汇编文件中的方法</li>
+<li><ol>
+<li>读取命令行参数</li>
+<li>初始化 <strong>g0</strong> 执行栈</li>
+<li>运行时检测</li>
+<li>参数初始化 runtime.args</li>
+<li>调度器初始化 runtime.schedinit</li>
+<li>创建主协程</li>
+<li>主协程执行主函数 <strong>runtime.main</strong></li>
+</ol>
+</li>
+<li>Go 启动时经历了检查、各种初始化、初始化协程调度的过程</li>
+<li><strong>main.main()</strong> 也是在协程中运行</li>
+<li>Go 程序的启动过程像不像一个虚拟机，或者框架 ?</li>
+</ul>
+</li>
+<li><p><strong>Go 是面向对象语言吗？Yes and No</strong></p>
+<ul>
+<li>Go 允许 OO 的编程风格</li>
+<li>Go 的 struct 可以看作其他语言的 class</li>
+<li>Go 缺乏其他语言的继承结构，所谓“继承”是组合</li>
+<li>组合中的匿名字段，通过语法糖达成了类似继承的效果</li>
+<li>struct 的每个实例并不是“对象”，而是此类型的“值”</li>
+<li>struct 并不显式实现接口，而是隐式实现</li>
+</ul>
+</li>
+<li><p><strong>Go Modules</strong></p>
+<ul>
+<li>本质上，一个 Go 包就是一个项目的源码</li>
+<li>gomod 的作用就是将 Go 包和 Git 项目关联起来</li>
+<li>Go 包的版本就是 git 项目的 Tag</li>
+<li>gomod 就是解决“需要哪个 git 项目的什么版本”</li>
+<li>无法连接远程仓库时，使用重定向或者mod vender方案</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ul>
+<li><p><strong>基本类型的字节数</strong></p>
+<ul>
+<li>int 大小跟随系统字长</li>
+<li>指针的大小也是系统字长</li>
+</ul>
+</li>
+<li><p><strong>空结构体</strong></p>
+<ul>
+<li>空结构体的地址均相同（不被包含在其他结构体中时）</li>
+<li>空结构体主要是为了节约内存<ul>
+<li>map 不要值的时候，实现 hashset</li>
+<li>ChanneI 不需要携带信息的时候，纯信号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>字符串</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/runtime/string.go</span></span><br><span class="line"><span class="keyword">type</span> stringStruct <span class="keyword">struct</span> &#123;</span><br><span class="line">	str unsafe.Pointer</span><br><span class="line">	<span class="built_in">len</span> <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// src/reflect/value.go</span></span><br><span class="line"><span class="keyword">type</span> StringHeader <span class="keyword">struct</span> &#123;</span><br><span class="line">	Data <span class="type">uintptr</span></span><br><span class="line">	Len  <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>字符串本质是个结构体 </p>
+</li>
+<li><p>Data 指针指向底层 Byte 数组</p>
+</li>
+<li><p>Len 表示 Byte 数组的长度而不是字符个数（Unicode 编码</p>
+</li>
+<li><p>Unicode</p>
+<ul>
+<li>是一种统一的字符集</li>
+<li>囊括了159种文字的144679个字符</li>
+<li>14万个字符至少需要3个字节表示</li>
+<li>英文字母均排在前128个</li>
+</ul>
+</li>
+<li><p>UTF-8</p>
+<ul>
+<li>Unicode 的一种变长格式</li>
+<li>128个 US-ASCII 字符只需一个字节编码</li>
+<li>西方常用字符需要两个字节</li>
+<li>其他字符需要3个字节，极少需要4个字节</li>
+</ul>
+</li>
+<li><p>字符串的访问</p>
+<ul>
+<li>对字符串使用 len 方法得到的是字节数不是字符数</li>
+<li>对字符串直接使用下标访问，得到的是字节</li>
+<li>字符串被 range 遍历时，被解码成 rune 类型的字符</li>
+<li>UTF-8 编码解码算法位于 runtime&#x2F;utf8.go</li>
+</ul>
+</li>
+<li><p>字符串的切分</p>
+<ul>
+<li><ol>
+<li>转为rune数组</li>
+<li>切片</li>
+<li>转为 string</li>
+</ol>
+</li>
+<li><code>s = string([]rune(s)[:3])</code></li>
+</ul>
+</li>
+<li><p>字符串与切片都是对底层数组的引用</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><ul>
+<li><p><strong>切片</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtime/slice.go</span></span><br><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;</span><br><span class="line">	array unsafe.Pointer</span><br><span class="line">	<span class="built_in">len</span>   <span class="type">int</span></span><br><span class="line">	<span class="built_in">cap</span>   <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>切片是对数组的引用</p>
+</li>
+<li><p>切片的创建</p>
+<ul>
+<li>根据数组创建：arr[0:3] or slice[0:3]</li>
+<li>字面量，<strong>编译时</strong>插入创建数组的代码：slice :&#x3D; []int{1, 2, 3}</li>
+<li>make，<strong>运行时</strong>创建数组：slice :&#x3D; make([]int, 10)</li>
+</ul>
+</li>
+<li><p>切片的访问</p>
+<ul>
+<li>下标直接访问元素</li>
+<li>range 遍历元素</li>
+<li>len(slice) 查看切片长度</li>
+</ul>
+</li>
+<li><p>切片的追加</p>
+<ul>
+<li>不扩容时，只调整 len（编译器负责）</li>
+<li>扩容时，编译时转为调用 runtime.growslice() （开一个新数组）</li>
+<li>如果期望容量大于当前容量的两倍就会使用期望容量</li>
+<li>如果当前切片的长度小于 1024，将容量翻倍</li>
+<li>如果当前切片的长度大于1024，每次增加 25%</li>
+<li><strong>切片扩容时，并发不安全</strong>，注意切片并发要加锁</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>总结</strong></p>
+<ul>
+<li>字符串与切片都是对底层数组的引用</li>
+<li>字符串有 UTF-8 变长编码的特点</li>
+<li>切片的容量和长度不同</li>
+<li>切片追加时可能需要重建底层数组</li>
+</ul>
+</li>
+</ul>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><ul>
+<li><p><strong>HashMap 的基本方案</strong></p>
+<ul>
+<li>开放寻址法（碰撞横向移动）</li>
+<li>拉链法（碰撞纵向移动）</li>
+</ul>
+</li>
+<li><p><strong>Go 的 map</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// runtime/map.go</span></span><br><span class="line"><span class="comment">// A header for a Go map.</span></span><br><span class="line"><span class="keyword">type</span> hmap <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="comment">// Note: the format of the hmap is also encoded in cmd/compile/internal/reflectdata/reflect.go.</span></span><br><span class="line">	<span class="comment">// Make sure this stays in sync with the compiler&#x27;s definition.</span></span><br><span class="line">	count     <span class="type">int</span> <span class="comment">// # live cells == size of map.  Must be first (used by len() builtin)</span></span><br><span class="line">	flags     <span class="type">uint8</span></span><br><span class="line">	B         <span class="type">uint8</span>  <span class="comment">// log_2 of # of buckets (can hold up to loadFactor * 2^B items)</span></span><br><span class="line">	noverflow <span class="type">uint16</span> <span class="comment">// approximate number of overflow buckets; see incrnoverflow for details</span></span><br><span class="line">	hash0     <span class="type">uint32</span> <span class="comment">// hash seed</span></span><br><span class="line"></span><br><span class="line">	buckets    unsafe.Pointer <span class="comment">// array of 2^B Buckets. may be nil if count==0.</span></span><br><span class="line">	oldbuckets unsafe.Pointer <span class="comment">// previous bucket array of half the size, non-nil only when growing</span></span><br><span class="line">	nevacuate  <span class="type">uintptr</span>        <span class="comment">// progress counter for evacuation (buckets less than this have been evacuated)</span></span><br><span class="line"></span><br><span class="line">	extra *mapextra <span class="comment">// optional fields</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>map 的初始化</p>
+<ul>
+<li>m :&#x3D; make(map[string]int, 10)</li>
+<li>字面量方式，实际是先 make 再赋值</li>
+</ul>
+</li>
+<li><p>Go 语言使用拉链实现了 hashmap</p>
+</li>
+<li><p>每一个桶中存储键哈希的前8位</p>
+</li>
+<li><p>桶超出8个数据，就会存储到溢出桶中</p>
+</li>
+</ul>
+</li>
+<li><p><strong>map 为什么需要扩容？</strong></p>
+<ul>
+<li><p>哈希碰撞，溢出桶太多时会导致严重的性能下降</p>
+</li>
+<li><p>runtime.mapassign() 可能会触发扩容的情况：</p>
+<ul>
+<li>装载因子超过6.5（平均每个槽6.5个key）</li>
+<li>使用了太多溢出桶（溢出桶超过了普通桶）</li>
+</ul>
+</li>
+<li><p>mao 扩容的类型</p>
+<ul>
+<li>等量扩容：数据不多但是溢出桶太多了（就是整理）</li>
+<li>翻倍扩容：数据太多了</li>
+</ul>
+</li>
+<li><p>map 扩容</p>
+</li>
+<li><p>步骤 Ⅰ</p>
+<ul>
+<li><ol>
+<li>创建一组新桶</li>
+<li>oldbuckets 指向原有的桶数组</li>
+<li>buckets 指向新的桶数组</li>
+<li>map标记为扩容状态</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>步骤 Ⅱ</p>
+<ul>
+<li><ol>
+<li>将所有的数据从旧桶驱逐到新桶</li>
+<li>采用<strong>渐进式驱逐</strong></li>
+<li>每次操作一个旧桶时，将旧桶数据驱逐到新桶</li>
+<li>读取时不进行驱逐，只判断读取新桶还是旧桶</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>步骤 Ⅲ</p>
+<ul>
+<li>所有的旧桶驱逐完成后，oldbuckets 回收</li>
+</ul>
+</li>
+<li><p>总结</p>
+<ul>
+<li>装载系数或者溢出桶的增加，会触发 map 扩容</li>
+<li>“扩容”可能并不是增加桶数，而是整理</li>
+<li>map 扩容采用渐进式，桶被操作时才会重新分配</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>怎么解决 map 的并发问题？</strong></p>
+<ul>
+<li>map 的并发问题<ul>
+<li>map的读写有并发问题</li>
+<li>A 协程在桶中读数据时，B 协程驱逐了这个桶</li>
+<li>A 协程会读到错误的数据或者找不到数据</li>
+</ul>
+</li>
+<li>map 并发问题解决方案<ul>
+<li>给 map 加锁（mutex）</li>
+<li><strong>使用 sync.Map</strong><ul>
+<li>“读写” 与 “追加” 分离，避免<strong>扩容</strong>时候的并发问题</li>
+<li>sync.Map 使用了两个map，分离了扩容问题</li>
+<li>不加锁：不会引发扩容的操作（查、改）使用 read map</li>
+<li>加锁：可能引发扩容的操作（新增）使用 dirty map</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>接口：隐式更好还是显式更好？</strong></p>
+<ul>
+<li>Go 隐式接口特点<ul>
+<li>只要实现了接口的全部方法，就是自动实现接口</li>
+<li>可以在不修改代码的情况下抽象出新的接口</li>
+</ul>
+</li>
+<li>接口值的底层表示<ul>
+<li>接口数据使用 runtime.iface 结构体表示</li>
+<li>iface 记录了数据的地址</li>
+<li>iface 也记录了接口类型信息和实现的方法</li>
+</ul>
+</li>
+<li>类型断言（类型转换）<ul>
+<li>类型断言是一个使用在<strong>接口值</strong>上的操作</li>
+<li>可以将接口值转换为其他类型值 （实现或者兼容接口）</li>
+<li>可以配合 switch 进行类型判断</li>
+</ul>
+</li>
+<li>结构体和指针实现接口<ul>
+<li><strong>结构体</strong>实现接口 —— 结构体初始化变量&#x2F;结构体指针初始化变量</li>
+<li><strong>结构体指针</strong>实现接口 —— 只能结构体指针初始化变量</li>
+</ul>
+</li>
+<li>空接口值<ul>
+<li>空接口底层不是普通接口，是 runtime.eface 结构体</li>
+<li>空接口值可以承载任何数据</li>
+</ul>
+</li>
+<li>空接口的用途<ul>
+<li>空接口的最大用途是作为任意类型的函数入参 </li>
+<li>函数调用时，会新生成一个空接口，再传参</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>nil，空接口，空结构体有什么区别？</strong></p>
+<ul>
+<li>nil<ul>
+<li>nil 是空，并不一定是“空指针”</li>
+<li>builtin&#x2F;builtin.go</li>
+<li><em>Type</em> <em>must be a pointer, channel, func, interface, map, or slice type</em></li>
+<li>nil 是6种类型的“零值”</li>
+<li>每种类型的 nil 是不同的，无法比较</li>
+</ul>
+</li>
+<li>空结构体<ul>
+<li>空结构体是 Go 中非常特殊的类型</li>
+<li>空结构体的值不是 nil</li>
+<li>空结构体的指针也不是 nil，但是都相同（zerobase）</li>
+</ul>
+</li>
+<li>空接口<ul>
+<li>它是 runtime.eface 结构体</li>
+<li>空接口不一定是 nil 接口</li>
+<li>两个属性都 nil 才是 nil 接口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>内存对齐</strong></p>
+<ul>
+<li><p>非内存对齐：内存的原子性与效率受到影响</p>
+</li>
+<li><p>内存对齐：提高内存操作效率，有利于内存原子性</p>
+</li>
+<li><p>对齐系数</p>
+<ul>
+<li>unsafet.Alignof()</li>
+<li>对产系数的含义是：变量的<strong>内存地址</strong>必须被对齐系数整除</li>
+<li>如果对齐系数为4，表示变量内存地址必须是4的倍数</li>
+</ul>
+</li>
+<li><p>结构体对齐</p>
+<ul>
+<li><p>结构体对齐分为<strong>内部对齐</strong>和<strong>外部填充对齐</strong>（结构体长度填充）</p>
+</li>
+<li><p>内部对齐</p>
+<ul>
+<li>指的是结构体内部成员的相对位置（偏移量）</li>
+<li>每个成员的<strong>偏移量</strong>是自身大小与其对齐系数较小值的倍数</li>
+<li>结构体的内存地址顺序是严格按照内部成员的定义顺序</li>
+</ul>
+</li>
+<li><p>结构体长度填充</p>
+<ul>
+<li>指的是结构体通过增加长度，对齐系统字长</li>
+<li>结构体长度是最大成员长度与系统字长较小的整数倍</li>
+</ul>
+</li>
+<li><p>可以尝试通过调整成员顺序，节约空间</p>
+</li>
+<li><p>结构体对齐系数</p>
+<ul>
+<li>为什么string的大小是16，对齐系数是8？</li>
+<li>string 底层是一个结构体，包含两个成员（指针的长度是8，int的长度在64位机器也是8，那么其长度就是16）</li>
+<li>结构体的对齐系数是其成员的最大对齐系数</li>
+</ul>
+</li>
+<li><p>空结构体的对齐</p>
+<ul>
+<li>空结构体单独出现时，地址为 zerobase</li>
+<li>空结构体出现在结构体中时，地址跟随前一个变量</li>
+<li>空结构体出现在结构体末尾时，需要补齐字长</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Goroutine-协程"><a href="#Goroutine-协程" class="headerlink" title="Goroutine 协程"></a>Goroutine 协程</h2><ul>
+<li><p><strong>为什么要有协程，线程不好用吗？</strong></p>
+<ul>
+<li>进程<ul>
+<li>进程用来占用内存空间</li>
+<li>进程相当于厂房，占用工厂空间</li>
+</ul>
+</li>
+<li>线程<ul>
+<li>每个进程可以有多个线程</li>
+<li>线程使用系统分配给进程的内存，线程之间共享内存</li>
+<li>线程用来占用CPU时间</li>
+<li>线程的调度需要由系统进行</li>
+<li>线程相当于厂房中的生产线，占用工人的工时</li>
+<li>线程本身占用资源大，线程的操作开销大，切换开销大（CPU）</li>
+</ul>
+</li>
+<li>协程<ul>
+<li>协程就是将一段程序的运行状态打包，可以在线程之间调度</li>
+<li>将生产流程打包，使得流程不固定在生产线上</li>
+<li>协程并不取代线程，协程也要在线程上运行</li>
+<li>协程使用线程的资源，精细利用线程</li>
+<li>资源利用，快速调度，超高并发</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>协程的本质是什么？</strong></p>
+<ul>
+<li>runtime 中，协程的本质是一个 <strong>g</strong> 结构体<ul>
+<li>stack：堆栈地址</li>
+<li>gobuf：目前程序运行现场</li>
+<li>atomicstatus：协程状态</li>
+</ul>
+</li>
+<li>runtime 中将操作系统线程抽象为 <strong>m</strong> 结构体<ul>
+<li>g0：g0 协程，操作调度器</li>
+<li>curg：current g，目前线程运行的 g </li>
+<li>mOS：操作系统线程信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>协程如何在线程上运行</strong></p>
+<ul>
+<li>单线程循环（Go 0.x）</li>
+<li>多线程循环（Go 1.0） </li>
+<li>schedule() → execute() 从 runable queue 中取协程 → gogo() → 业务方法 → goexit() → schedule()</li>
+<li>操作系统并不知道 Goroutine 的存在</li>
+<li>操作系统线程执行一个调度循环，顺序执行</li>
+<li>Goroutine调度循环非常像线程池</li>
+<li><strong>问题一：</strong>协程顺序执行，无法并发</li>
+<li><strong>问题二：</strong>多线程并发时，会抢夺协程队列的<strong>全局锁</strong></li>
+</ul>
+</li>
+<li><p><strong>G-M-P 调度模型</strong></p>
+<ul>
+<li><p>协程 g 结构体，线程 m 结构体，“送料器”（M 与 G 的中介） p 结构体</p>
+</li>
+<li><p>P 持有一些 G（本地队列），使得每次获取 G 的时候不用从全局找</p>
+</li>
+<li><p>大大减少了并发冲突的情况（<strong>解决问题二</strong>）</p>
+</li>
+<li><p>窃取式工作分配机制</p>
+<ul>
+<li>如果在本地或者全局队列中都找不到 G </li>
+<li>去别的 P 中“偷”</li>
+<li>增强了线程的用率</li>
+</ul>
+</li>
+<li><p>新建协程 <code>func newproc()</code></p>
+<ul>
+<li>随机寻找一个 P </li>
+<li>将新协程放入 P 的 runnext（插队）</li>
+<li>若 P 本地队列满，放入全局队列</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>解决<strong>协程饥饿问题（问题一）</strong></p>
+<ul>
+<li><p>如果协程顺序执行，会有饥饿问题</p>
+</li>
+<li><p><strong>基于系统调用和主动挂起</strong></p>
+<ul>
+<li>协程执行中间，将协程挂起，执行其他协程</li>
+<li>切换时机<ul>
+<li>主动挂起（runtime.gopark）</li>
+<li>系统调用完成时</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>防止全局队列饥饿，本地队列随机抽取全局队列</p>
+</li>
+<li><p>如果永远都不主动挂起，永远都不系统调用怎么办？</p>
+<ul>
+<li><p><strong>基于协作的抢占式调度</strong>（需要协程有方法调用）</p>
+<ul>
+<li><p>业务主动调用 runtime.morestack()</p>
+<ul>
+<li>morestack 的本意是检查协程栈是否有足够空间</li>
+<li>调用方法时，会被编译器插入morestack()</li>
+</ul>
+</li>
+<li><p>标记抢占</p>
+<ul>
+<li>统监控到 Goroutine 运行超过 10ms </li>
+<li>将 g.stackguard0 置为 0xfffffade</li>
+</ul>
+</li>
+<li><p>抢占</p>
+<ul>
+<li>执行 morestack() 时判断是否被抢占</li>
+<li>如果被抢占，回到 schedule()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>基于信号的抢占式调度</strong></p>
+<ul>
+<li><p>线程信号</p>
+<ul>
+<li>操作系统中，有很多基于信号的底层通信方式</li>
+<li>比如 SIGPIPE&#x2F;SIGURG&#x2F;SIGHUP</li>
+<li>线程可以注册对应信号的处理函数</li>
+</ul>
+</li>
+<li><p>注册 SIGURG 信号的处理函数</p>
+</li>
+<li><p>强制线程调用 doSigPreempt()</p>
+</li>
+<li><p>GC 工作时，向目标线程发送信号</p>
+</li>
+<li><p>线程收到信号，触发调度</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>协程太多会出现什么问题？</strong></p>
+<ul>
+<li><p>资源限制</p>
+<ul>
+<li><p>文件打开数限制</p>
+</li>
+<li><p>内存限制</p>
+</li>
+<li><p>调度开销过大</p>
+</li>
+</ul>
+</li>
+<li><p>处理协程太多的方案</p>
+<ul>
+<li><p>优化业务逻辑</p>
+</li>
+<li><p>利用 ChanneI 的缓存区</p>
+<ul>
+<li>利用 ChanneI 的缓存机制</li>
+<li>启动协程前，向 ChanneI 送入一个空结构体</li>
+<li>协程结束，取出一个空结构体</li>
+</ul>
+</li>
+<li><p>协程池（tunny）</p>
+<ul>
+<li>预创建一定数量的协程</li>
+<li>将任务送入协程池队列</li>
+<li>协程池不断取出可用协程，执行任务</li>
+<li>慎用协程池<ul>
+<li>Go 语言的线程，已经相当于池化了</li>
+<li>二级池化会增加系统复杂度</li>
+<li>Go语言的初衷是希望协程即用即毁，不要池化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>调整系统资源</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="锁-🔒"><a href="#锁-🔒" class="headerlink" title="锁 🔒"></a>锁 🔒</h2><ul>
+<li><p><strong>atomic 操作（sync&#x2F;atomic）</strong></p>
+<ul>
+<li>原子操作是一种硬件层面加锁的机制</li>
+<li>保证操作一个变量的时候，其他协程&#x2F;线程无法访问</li>
+<li>只能用于简单变量的简单操作</li>
+</ul>
+</li>
+<li><p><strong>sema 锁（不对用户开放使用）</strong></p>
+<ul>
+<li><p>也叫信号量锁&#x2F;信号锁（semaphore）</p>
+</li>
+<li><p>核心是一个 uint32 值，含义是同时可并发的数量</p>
+</li>
+<li><p>每一个 sema 锁都对应一个 SemaRoot 结构体</p>
+</li>
+<li><p>SemaRoot 中有一个平衡二叉树用于协程排队</p>
+</li>
+<li><p>sema 操作（uint32 &gt; 0）</p>
+<ul>
+<li>获取锁：uint32 减一，获取成功</li>
+<li>释放锁：uint32 加一，释放成功</li>
+</ul>
+</li>
+<li><p>sema 操作（uint32 &#x3D;&#x3D; 0）</p>
+<ul>
+<li>获取锁：协程休眠，进入堆树等待</li>
+<li>释放锁：从堆树中取出一个协程，唤醒</li>
+<li>sema 锁退化成一个专用休眠队列</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>sync.Mutex 互斥锁</strong> </p>
+<ul>
+<li>Go 的互斥锁</li>
+<li>Go 中用于并发保护最常见方案</li>
+<li>正常模式 加锁<ul>
+<li>尝试 CAS（compare and swap，借用了CPU提供的原子性指令现） 直接加锁</li>
+<li>若无法直接获取，进行多次自旋尝试</li>
+<li>多次尝试失败，进入 sema 队列休眠</li>
+</ul>
+</li>
+<li>正常模式 解锁<ul>
+<li>尝试 CAS 直接解锁</li>
+<li>若发现有协程在 sema 中休眠，唤醒一个协程</li>
+</ul>
+</li>
+<li>mutex 正常模式下，可能有<strong>锁饥饿问题</strong>（某个协程长时间获取不到锁，无法执行其业务）</li>
+<li>Mutex 饥饿模式<ul>
+<li>当前协程等待锁的时间超过了 10ms，切换到饥饿模式</li>
+<li>饥饿模式中，不自旋，新来的协程直接 sema 休眠</li>
+<li>饥饿模式中，被唤醒的协程直获取锁（不需要和别的协程竞争）</li>
+<li>没有协程在队列中继续等待时，回到正常模式</li>
+</ul>
+</li>
+<li>互斥锁使用经验<ul>
+<li>减少锁的使用时间</li>
+<li>善用 defer 确保锁的释放</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>多个协程同时只读</strong></p>
+</li>
+<li><p>只读时，让其他人不能修改即可</p>
+</li>
+<li><p>只读时，多协程可以共享读</p>
+</li>
+<li><p>只读时，不需要互斥锁</p>
+</li>
+<li><p>读写锁需求（读锁是共享的，写锁是独占的）</p>
+<ul>
+<li>每个锁分为读锁和写锁，写锁互斥</li>
+<li>没有加写锁时，多个协程都可以加读锁</li>
+<li>加了写锁时，无法加读锁，读协程排队等待</li>
+<li>加了读锁，写锁排队等待</li>
+</ul>
+</li>
+<li><p><strong>sync.RWMutex 读写锁</strong></p>
+<ul>
+<li><p>w：互斥锁作为获取加写锁的资格 </p>
+</li>
+<li><p>writerSem：作为写协程队列</p>
+</li>
+<li><p>readerSem：作为读协程队列</p>
+</li>
+<li><p>readerCount：正值表示正在读或想读的协程数（读锁），负值表示加了写锁</p>
+</li>
+<li><p>readerWait：写锁应该等待读协程的个数</p>
+</li>
+<li><p>加写锁</p>
+<ul>
+<li>先加 mutex 锁，若已经被加写锁会阻塞等待</li>
+<li>将 readerCount 变为负值，阻塞读锁的获取</li>
+<li>计算需要等待多少个读协程释放</li>
+<li>如果需要等待读协程释放，陷入 writerSem</li>
+</ul>
+</li>
+<li><p>解写锁</p>
+<ul>
+<li>将readerCount变为正值，允许读锁的获取</li>
+<li>释放在 readerSem 中等待的读协程</li>
+<li>解锁 mutex</li>
+</ul>
+</li>
+<li><p>加读锁</p>
+<ul>
+<li>readerCount + 1</li>
+<li>若 readerCount &gt; 0 加锁成功</li>
+<li>若 readerCount &lt; 0 说明被加了写锁，陷入 readerSem</li>
+</ul>
+</li>
+<li><p>解读锁 </p>
+<ul>
+<li>readerCount - 1</li>
+<li>若 readerCount &gt; 0 解锁成功</li>
+<li>若 readerCount &lt; 0 ，有写锁在排队，如果自己是 readerwait 的最后一个，唤醒写协程</li>
+</ul>
+</li>
+<li><p>使用经验</p>
+<ul>
+<li>RW 锁适合<strong>读多写少</strong>的场景，减少锁冲突</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>如何通过 WaitGroup 互相等待？</strong></p>
+<ul>
+<li><p>实际业务中，一个（组）协程需要等待另一组协程完成</p>
+</li>
+<li><p>Wait()</p>
+<ul>
+<li>如果被等待的协程没了，直接返回</li>
+<li>否则，waiter 加一，陷入 sema</li>
+</ul>
+</li>
+<li><p>Done()</p>
+<ul>
+<li>被等待协程做完，给 counter 减一</li>
+<li>通过 Add(-1) 实现</li>
+<li>Add()<ul>
+<li>被等待协程没做完，或者没人在等待，返回</li>
+<li>被等待协程都做完，且有人在等待，唤醒所有 sema 中的协程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>WaitGroup 实现了一组协程等待另一组协程</p>
+</li>
+<li><p>等待的协程陷入 sema 并记录个数</p>
+</li>
+<li><p>被等待的协程计数归零时，唤醒所有 sema 中的协程</p>
+</li>
+</ul>
+</li>
+<li><p><strong>一段代码只能执行一次，怎么实现？</strong></p>
+<ul>
+<li><p>思路1：Atomic</p>
+<ul>
+<li>做法：CAS改值，成功就做</li>
+<li>优点：算法非常简单</li>
+<li>问题：多个协程竞争 CAS 改值会造成性能问题</li>
+</ul>
+</li>
+<li><p>思路2：Mutex</p>
+<ul>
+<li>争抢一个 mutex，抢不到的陷入 sema 休眠</li>
+<li>抢到的执行代码，改值，释放锁</li>
+<li>其他协程唤醒后判断值已经修改，直接返回</li>
+</ul>
+</li>
+<li><p>sync.Once（采用思路2）</p>
+<ul>
+<li>先判断是否已经改值</li>
+<li>没改，尝试获取锁</li>
+<li>获取到锁的协程执行业务，改值，解锁</li>
+<li>冲突协程唤醒后直接返回</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>如何排查锁异常问题</strong></p>
+<ul>
+<li><p>锁拷贝问题</p>
+<ul>
+<li>锁拷贝可能导致锁的死锁问题</li>
+<li>使用 vet 工具可以检测锁拷贝问题</li>
+<li>vet 还能检测可能的 bug 或者可疑的构造</li>
+<li><code>go vet main.go</code></li>
+</ul>
+</li>
+<li><p>RACE 竞争检测</p>
+<ul>
+<li>多个协程同时对一个变量进行修改，可能会导致修改操作的丢失</li>
+<li>发现隐含的数据竞争问题</li>
+<li>可能是加锁的建议</li>
+<li>可能是 bug 的提醒</li>
+<li><code>go build -race main.go</code></li>
+<li><code>./main</code></li>
+</ul>
+</li>
+<li><p>go-deadlock 检测</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/sasha-s/go-deadlock">go-deadlock</a> 第三方包</li>
+<li>检测可能的死锁</li>
+<li>实际是检测获取锁的等待时间</li>
+<li>用来排查 bug 和性能问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="ChanneI-管道"><a href="#ChanneI-管道" class="headerlink" title="ChanneI 管道"></a>ChanneI 管道</h2><ul>
+<li><p><strong>ChanneI 声明方法</strong></p>
+<ul>
+<li><code>make(chan int)</code> &#x2F;&#x2F;无缓冲</li>
+<li><code>make(chan bool, 0)</code> &#x2F;&#x2F;无缓冲</li>
+<li><code>make(chan string, 2)</code> &#x2F;&#x2F;有缓冲</li>
+</ul>
+</li>
+<li><p><strong>ChanneI 基本用法</strong></p>
+<ul>
+<li><code>ch &lt;- ×</code> &#x2F;&#x2F;发送数据</li>
+<li><code>× = &lt;- ch</code> &#x2F;&#x2F;接收数据，赋给 ×</li>
+<li><code>&lt;- ch</code> &#x2F;&#x2F;接收数据，并丢弃</li>
+</ul>
+</li>
+<li><p><strong>内存与通信</strong></p>
+<ul>
+<li>“不要通过共享内存的方式进行通信，而是应该通过通信的方式共享内存”</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过共享内存的方式进行通信</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">watch</span><span class="params">(i *<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> <span class="literal">true</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> *i == <span class="number">1</span> &#123;</span><br><span class="line">			fmt.Printf(<span class="string">&quot;bye&quot;</span>)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	i := <span class="number">0</span></span><br><span class="line">	<span class="keyword">go</span> watch(&amp;i)</span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">	i = <span class="number">1</span></span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过通信的方式共享内存</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">watch</span><span class="params">(c <span class="keyword">chan</span> <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> &lt;-c == <span class="number">1</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;bye&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">	<span class="keyword">go</span> watch(c)</span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">	c &lt;- <span class="number">1</span></span><br><span class="line">	time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为什么使用通信来共享内存<ul>
+<li>避免协程竞争和数据冲突的问题</li>
+<li>更高级的抽象，降低开发难度，增加程序可读性</li>
+<li>模块之间更容易解耦，增强扩展性和可维护性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>ChanneI 的设计</strong></p>
+<ul>
+<li><p><strong>环形缓存区</strong>可以大幅降低 GC 的开销</p>
+</li>
+<li><p><strong>发送&#x2F;接收队列</strong></p>
+</li>
+<li><p><strong>互斥锁</strong></p>
+<ul>
+<li>互斥锁并不是排队发送&#x2F;接收数据</li>
+<li>互斥锁保护 hchan 结构体（runtime&#x2F;chan.go）本身</li>
+<li>ChanneI 并不是无锁的</li>
+</ul>
+</li>
+<li><p><strong>状态值</strong></p>
+</li>
+<li><p>ChanneI 是 go 的一等公民</p>
+</li>
+</ul>
+</li>
+<li><p><strong>运用 ChanneI 是如何发送数据的</strong></p>
+<ul>
+<li><p><code>c &lt;-</code> 关键字是一个语法糖</p>
+</li>
+<li><p>编译阶段，会把 <code>c &lt;-</code> 转化为 <code>runtime.chansend1()</code></p>
+</li>
+<li><p>chansend1() 会调用 chansend() 方法</p>
+</li>
+<li><p>ChanneI 发送的情形</p>
+<ul>
+<li><p>直接发送</p>
+<ul>
+<li>发送数据前，已经有协程 G 在休眠等待接收</li>
+<li>此时缓存肯定是空的，不用考虑缓存</li>
+<li>将数据直接拷贝给等待接收的 G，唤醒 G</li>
+</ul>
+</li>
+<li><p>放入缓存</p>
+<ul>
+<li>没有 G 在休眠等待，但是有缓存空间</li>
+<li>将数据放入缓存（获取可存入的缓存地址，存入数据，维护索引）</li>
+</ul>
+</li>
+<li><p>休眠等待</p>
+<ul>
+<li>没有 G 在休眠等待，而且没有缓存或满了</li>
+<li>自己进入发送队列，休眠等待</li>
+<li>把自己包装成 sudog, sudog 放入 sendq 队列</li>
+<li>休眠并解锁</li>
+<li>被唤醒后，数据已经被取走，维护其他数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>运用 ChanneI 是如何接收数据的</strong></p>
+<ul>
+<li><code>&lt;- c</code> 关键字也是一个语法糖</li>
+<li>编译阶段，<code> i &lt;- c</code>转化为 <code>runtime.chanrecv1()</code></li>
+<li>编译阶段，<code>i, ok &lt;- c</code> 转化为 <code>runtime.chanrecv2()</code></li>
+<li>最后会调用 <code>chanrecv()</code> 方法</li>
+<li>ChanneI 接收的情形<ul>
+<li><p>有等待的 G，从 G 接收</p>
+<ul>
+<li>接收数据前，已经有 G 在休眠等待发送</li>
+<li>而且这个 ChanneI 没有缓存</li>
+<li>将数据直接从 G 拷贝过来，唤醒 G</li>
+</ul>
+</li>
+<li><p>有等待的 G，从缓存接收</p>
+<ul>
+<li>接收数据前，已经有 G 在休眠等待发送</li>
+<li>而且这个 ChanneI 有缓存</li>
+<li>从缓存取走一个数据将休眠G的数据放进缓存，唤醒 G</li>
+<li>将休眠 G 的数据放进缓存，唤醒 G</li>
+</ul>
+</li>
+<li><p>接收缓存</p>
+<ul>
+<li>没有 G 在休眠等待发送，但是缓存有内容</li>
+<li>直接从缓存取走数据</li>
+</ul>
+</li>
+<li><p>阻塞接收</p>
+<ul>
+<li>没有 G 在休眠等待，而且没有缓存或缓存空</li>
+<li>自己进入接收队列，休眠等待</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>非阻塞的 Channel 怎么做？</strong></p>
+<ul>
+<li><p>select</p>
+</li>
+<li><p>select 原理</p>
+<ul>
+<li>同时存在接收、发送、默认路径</li>
+<li>首先查看是否有可以即时执行的 case</li>
+<li>没有的话，有 default，走 default </li>
+<li>没有default，把自己注册在所有的 channel 中，休眠等待</li>
+</ul>
+</li>
+<li><p>timer (time.NewTimer)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="TCP-网络编程"><a href="#TCP-网络编程" class="headerlink" title="TCP 网络编程"></a>TCP 网络编程</h2><ul>
+<li><strong>Socket</strong><ul>
+<li>系统提供了 Socket 作为 TCP 网络连接的抽象</li>
+<li>如：Linux -&gt; lnternet domain socket -&gt; SOCK STREAM</li>
+<li>Linux 中 Socket 以“文件描述符” FD 作为标识</li>
+</ul>
+</li>
+<li><strong>IO 模型</strong><ul>
+<li>IO 模型指的是同时操作 Socket 的方案</li>
+<li>阻塞 IO（一个连接对应一个线程）<ul>
+<li>同步读写 Socket 时，线程陷入内核态</li>
+<li>当读写成功后，切换回用户态，继续执行</li>
+<li>优点：开发难度小，代码简单</li>
+<li>缺点：内核态切换开销大，性能差</li>
+</ul>
+</li>
+<li>非阻塞 IO（一个线程轮询）<ul>
+<li>如果暂时无法收发数据，会返回错误</li>
+<li>应用会不断轮询，直到 Socket 可以读写</li>
+<li>优点：不会陷入内核态，自由度高</li>
+<li>缺点：需要自旋轮询</li>
+</ul>
+</li>
+<li>多路复用（事件池）<ul>
+<li>注册多个 Socket 事件</li>
+<li>调用 epoll，当有事件发生，返回</li>
+<li>优点：提供了事件列表，不需要查询各个 Scoket，性能好</li>
+<li>缺点：开发难度大，逻辑复杂</li>
+<li>Linux: epoll，Mac: kqueue，Windows: IOCP</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Go 是如何抽象 Epoll 的？</strong><ul>
+<li>在底层使用操作系统的多路复用 IO</li>
+<li>在协程层次使用阻塞模型，阻塞协程时，休眠协程</li>
+<li>多路复用抽象层<ul>
+<li>为了统一各个操作系统对多路复用器的实现</li>
+<li>Linux: epoll，Mac: kqueue，Windows: IOCP</li>
+<li>多路复用器<ul>
+<li>新建多路复用器 epoll_create()</li>
+<li>往多路复用器里插入需要监听的事件 epoll_ctl()</li>
+<li>查询发生了什么事件 epoll_wait()</li>
+</ul>
+</li>
+<li>netpoll.go netpoll_epoll.go netpoll_kqueue.go netpoll_windows.go …</li>
+<li><strong>Go Network PoIIer 是对不同操作系统多路复用器的抽象</strong><ul>
+<li>将 epoll_create() 抽象为 netpollinit()</li>
+<li>将 epoll_ctl() 抽象为 netpollopen()</li>
+<li>将 epoll_wait() 抽象为 netpoll()<ul>
+<li>返回的不是事件，而是返回等待事件的协程列表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Go Network PoIIer  是如何工作的？</strong><ul>
+<li>NetworkPoIIer 初始化<ul>
+<li>poll_runtime_pollServerlnit()</li>
+<li>使用原子操作保证只初始化一次</li>
+<li>调用 netpollinit()</li>
+</ul>
+</li>
+<li>pollcache 与 pollDesc<ul>
+<li>pollcache：一个带锁的链表头</li>
+<li>pollDesc：链表的成员</li>
+<li>poIlDesc 是 runtime 包对 Socket 的详细描述</li>
+<li>其中的 rg，wg：1，或 2，或等待的协程 G 地址</li>
+</ul>
+</li>
+<li>Network PoIIer 新增监听 Socket<ul>
+<li>poll_runtime_pollOpen()</li>
+<li>在 pollcache 链表中分配一个 pollDesc</li>
+<li>初始化 pollDesc（rg wg为0）</li>
+<li>调用 netpollopen()（屏蔽了不同 OS 的底层调用）</li>
+</ul>
+</li>
+<li>NetworkPoIIer 收发数据<ul>
+<li>收发数据分为两个场景<ul>
+<li>协程需要收发数据时，Socket 已经可读写<ul>
+<li>runtime 循环调用 netpoll() 方法（g0协程）</li>
+<li>发现 Socket 可读写时，给对应的 rg 或者 wg 置为 pdReady(1）</li>
+<li>协程调用 poll_runtimepollWait()</li>
+<li>判断 rg 或者 wg 已经置为 pdReady(1)，返回 0</li>
+</ul>
+</li>
+<li>协程需要收发数据时，Socket 暂时无法读写<ul>
+<li>runtime 循环调用 netpoll() 方法（g0协程）</li>
+<li>协程调用 poll_runtimepollWait()</li>
+<li>发现对应的 rg 或者 wg 为 0</li>
+<li>给对应的 rg 或者 wg 置为协程地址</li>
+<li>休眠等待</li>
+<li>runtime 循环调用 netpoll() 方法（g0协程）</li>
+<li>发现 Socket 可读写时，查看对应的 rg 或者 wg </li>
+<li>若为协程地址，返回协程地址</li>
+<li>调度器开始调度对应协程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NetworkPoIIer 是 Runtime 的强大工具</li>
+<li>抽象了多路复用器的操作  </li>
+<li>NetworkPoller 可以自动监测多个 Socket 状态</li>
+<li>在 Socket 状态可用时，快速返回成功</li>
+<li>在 Socket 状态不可用时，休眠等待</li>
+</ul>
+</li>
+<li><strong>Go是如何抽象Socket的？</strong><ul>
+<li><p>net 包</p>
+<ul>
+<li>net 包是 go 原生的网络包</li>
+<li>net 包实现了 TCP、UDP、HTTP 等网络操作</li>
+</ul>
+</li>
+<li><p>net.Listen()</p>
+<ul>
+<li>新建 Socket 并执行 bind 操作</li>
+<li>新建一个 FD（net包对Socket的详情描述）</li>
+<li>返回一个 TCPListener 对象</li>
+<li>将 TCPListener 的 FD 信息加入监听</li>
+<li>TCPListener 对象本质上是一个 LISTEN 状态的 Socket</li>
+</ul>
+</li>
+<li><p>TCPListener.Accept()</p>
+<ul>
+<li>直接调用 Socket 的 accept() </li>
+<li>如果失败，休眠等待新的连接</li>
+<li>将新的 Socket 包装为 TCPConn 变量返回</li>
+<li>将 TCPConn 的 FD 信息加入监听</li>
+<li>TCPConn 本质上是一个 ESTABLISHED 状态的 Socket</li>
+</ul>
+</li>
+<li><p>TCPConn.Read() &#x2F; Write()</p>
+<ul>
+<li>直接调用 Socket 原生读写方法</li>
+<li>如果失败，休眠等待可读&#x2F;可写</li>
+<li>被唤醒后调用系统 Socket</li>
+</ul>
+</li>
+<li><p>net 包抽象了 TCP 网络操作</p>
+</li>
+<li><p>使用 net.Listen() 得到 TCPListener（LISTEN状态的Socket）</p>
+</li>
+<li><p>使用 TCPListener.Accept() 得到TCPConn（ESTABLISHED）</p>
+</li>
+<li><p>TCPConn.Read() &#x2F; Write() 进行读写 Socket 的操作</p>
+</li>
+<li><p>NetworkPoller 作为上述功能的底层支撑</p>
+</li>
+</ul>
+</li>
+<li><strong>goroutine-per-connection 编程风格</strong><ul>
+<li>用主协程监听 Listener</li>
+<li>每个 Conn 使用一个新协程处理</li>
+<li><strong>结合了多路复用的性能和阻塞模型的简洁</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="内存模型与-GC"><a href="#内存模型与-GC" class="headerlink" title="内存模型与 GC"></a>内存模型与 GC</h2><ul>
+<li><strong>Go 协程栈的作用</strong><ul>
+<li>记录协程的执行路径</li>
+<li>记录局部变量</li>
+<li>记录函数传参<ul>
+<li>Go 使用参数拷贝传递（值传递）</li>
+<li>传递结构体时会拷贝结构体中的全部内容</li>
+<li>传递结构体指针时会拷贝结构体指针</li>
+</ul>
+</li>
+<li>记录函数返回值</li>
+</ul>
+</li>
+<li><strong>Go 协程栈的位置</strong><ul>
+<li>Go 协程栈位于 Go 堆内存上（从堆上申请的）</li>
+<li>Go 堆内存位于操作系统虚拟内存上</li>
+</ul>
+</li>
+<li><strong>逃逸分析</strong>（从栈跑到堆）<ul>
+<li>不是所有的变量都能放在协程栈上，如：<ul>
+<li>栈帧回收后，需要继续使用的变量</li>
+<li>太大的变量</li>
+</ul>
+</li>
+<li>触发情形<ul>
+<li>指针逃逸（函数返回了对象的指针）</li>
+<li>空接口逃逸<ul>
+<li>如果函数参数为 interface{}</li>
+<li>函数的实参很可能会逃逸</li>
+<li>因为 interface{} 类型的函数往往会使用反射（需要对象在栈上）</li>
+</ul>
+</li>
+<li>大变量逃逸<ul>
+<li>过大的变量会导致栈空间不足</li>
+<li>64位机器中，一般超过 64KB 的变量会逃逸</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>栈扩容</strong>（汇编实现的）— 解决栈帧过多的问题<ul>
+<li>Go 栈的初始空间为 2KB</li>
+<li>在函数调用前判断栈空间是否足够（morestack）</li>
+<li>必要时对栈进行扩容<ul>
+<li>早期使用分段栈<ul>
+<li>1.13 之前使用</li>
+<li>优点：没有空间浪费</li>
+<li>缺点：栈指针会在不连续的空间跳转</li>
+</ul>
+</li>
+<li>后期使用连续栈<ul>
+<li>优点：同一个协程的栈空间一直连续</li>
+<li>缺点：伸缩时的开销大</li>
+<li>当空间不足时扩容，变为原来的 2 倍</li>
+<li>当空间使用率不足 1&#x2F;4 时缩容，变为原来的 1&#x2F;2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Go 的堆内存结构</strong><ul>
+<li>操作系统虚拟内存<ul>
+<li>指的是操作系统给应用提供的虚拟内存空间</li>
+<li>背后是物理内存，也有可能有磁盘</li>
+<li>Linux 获取虚拟内存：mmap、madvice 系统调用</li>
+</ul>
+</li>
+<li>内存单元 heapArena<ul>
+<li>Go 每次申请的虚拟内存单元 heapArena 为 64MB</li>
+<li>最多有 4,194,304 个虚拟内存单元（$2^{20}$，256 TB）</li>
+<li>所有的 heapArena 组成了 mheap（Go 堆内存）</li>
+</ul>
+</li>
+<li>heapArena 使用方案<ul>
+<li>线性分配或者链表分配容易出现空间碎片</li>
+<li><strong>分级分配</strong><ul>
+<li>内存管理单元 mspan</li>
+<li>runtime&#x2F;sizeclasses.go, mheap.go</li>
+<li>根据隔离适应策略，使用内存时的最小单位为 mspan</li>
+<li>每个 mspan 为 N 个相同大小的 “格子”</li>
+<li>Go 中一共有 67 种 mspan</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>中心索引 mcentral</strong><ul>
+<li><p>runtime&#x2F;mcentral.go</p>
+</li>
+<li><p>136 个 mcentral 结构体</p>
+</li>
+<li><p>其中 68 个组需要 GC 扫描的 mspan</p>
+</li>
+<li><p>68 个组不需要 GC 扫描的 mspan</p>
+</li>
+</ul>
+</li>
+<li>mcentral 的性能问题<ul>
+<li>mcentral 实际是中心索引，使用互斥锁保护</li>
+<li>在高并发场景下，锁冲突问题严重</li>
+<li>参考协程 GMP 模型，增加线程本地缓存</li>
+<li>线程缓存 mcache（大大减少了 mcentral 高并发加锁的情况）<ul>
+<li>每个 P 有一个mcache</li>
+<li>一个mcache，拥有136个mspan，其中</li>
+<li>68 个需要 GC 扫描的 mspan</li>
+<li>68 个不需要 GC 扫描的 mspan</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Go 分配堆内存方案</strong><ul>
+<li><p>对象分级</p>
+<ul>
+<li>Tiny 微对象 (0，16B) 无指针</li>
+<li>SmalI 小对象 [16B, 32KB]</li>
+<li>Large 大对象 (32KB, +∞)</li>
+</ul>
+</li>
+<li><p>微对象分配</p>
+<ul>
+<li>从 mcache 拿到 2 级 mspan</li>
+<li>将多个微对象合并成一个 16Byte 存入</li>
+</ul>
+</li>
+<li><p>mcache 的替换</p>
+<ul>
+<li>mcache 中，每个级别的 mspan 只有一个</li>
+<li>当 mpan 满了之后，会从 mcentral 中换一个新的</li>
+</ul>
+</li>
+<li><p>mcentral 的扩容</p>
+<ul>
+<li>mcentral 中，只有有限数量的 mspan</li>
+<li>当 mspan 缺少时，会从 heapArena 开辟新的 mspan</li>
+</ul>
+</li>
+<li><p>大对象分配</p>
+<ul>
+<li>直接从 heapArena 开辟 0 级的 mspan</li>
+<li>0 级的 mspan 为大对象定制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>垃圾回收（Garbage CoIIecting）</strong><ul>
+<li>思路<ul>
+<li>”标记 — 清除“ ，会有碎片</li>
+<li>“标记 — 整理” ，整理开销大</li>
+<li>“标记 — 复制” ，空间消耗大</li>
+</ul>
+</li>
+<li>Go 因为堆内存结构的独特优势，选择最简单的 “标记 — 清除”</li>
+<li>GC 的起点 GCRoot<ul>
+<li>被栈上的指针引用</li>
+<li>被全局变量指针引用</li>
+<li>被寄存器中的指针引用</li>
+<li>上述变量被称为 RootSet</li>
+</ul>
+</li>
+<li>Root 节点进行广度优先搜索 BFS，可达性分析标记法</li>
+<li>找到有引用的对象，剩下的就是没有引用的，标记有用的</li>
+<li>串行 GC 步骤（Go 老版本）<ul>
+<li><em>Stop The WorId</em>，暂停所有其他协程</li>
+<li>通过可达性分析，找到无用的堆内存</li>
+<li>释放堆内存，恢复所有其他协程</li>
+<li>STW 对性能影响很大</li>
+</ul>
+</li>
+<li><strong>并发垃圾回收</strong><ul>
+<li><p>三色标记法 BFS</p>
+<ul>
+<li>黑色：有用，已经分析扫描</li>
+<li>灰色：有用，还未分析扫描</li>
+<li>白色：不可达，暂时无用（需要清除的对象）</li>
+</ul>
+</li>
+<li><p>并发标记问题（删除）</p>
+<ul>
+<li>Yuasa <strong>删除屏障</strong><ul>
+<li>并发标记时，<strong>对指针释放的白色对象置灰</strong></li>
+<li>删除屏障可以杜绝在 GC 标记中被释放的指针，被清理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>并发标记问题（插入）</p>
+<ul>
+<li>Dijkstra <strong>插入屏障</strong><ul>
+<li>并发标记时，<strong>对插入的白色对象置灰</strong></li>
+<li>插入屏障可以杜绝在 GC 标记中被插入的指针，被清理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>混合屏障 （Go 的 GC）</p>
+<ul>
+<li>被删除的堆对象标记为灰色</li>
+<li>被添加的堆对象标记为灰色</li>
+<li>并发垃圾回收的关键在于标记安全</li>
+<li><strong>混合屏障机制兼顾了安全与效率</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>GC 触发的时机<ul>
+<li><p>系统定时触发</p>
+<ul>
+<li>sysmon 定时检查</li>
+<li>如果 2 分钟内没有过 GC，触发</li>
+<li>谨慎调整</li>
+</ul>
+</li>
+<li><p>用户显式触发</p>
+<ul>
+<li>用户调用 runtime.GC 方法</li>
+<li>并不推荐调用</li>
+</ul>
+</li>
+<li><p>申请内存时触发</p>
+<ul>
+<li>给对象申请堆空间时，可能导致 GC</li>
+</ul>
+</li>
+<li><p><strong>GC 优化原则 — 尽量少在堆上产生垃圾</strong></p>
+<ul>
+<li>内存池化<ul>
+<li>缓存性质的对象</li>
+<li>频繁创建和删除</li>
+<li>使用内存池，不 GC</li>
+</ul>
+</li>
+<li>减少逃逸<ul>
+<li>逃逸会使原本在栈上的对象进入堆中</li>
+<li>fmt 包慎用，多用 log 的组件</li>
+<li>方法返回了指针而不是拷贝，可能会发生逃逸</li>
+</ul>
+</li>
+<li>使用空结构体<ul>
+<li>空结构体指向一个固定地址</li>
+<li>不占用堆空间</li>
+<li>比如 channel 传递空结构体</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>GC 分析工具<ul>
+<li><code>go tool pprof</code></li>
+<li><code>go tool trace</code></li>
+<li><code>go build -gcflags=&quot;-m&quot;</code></li>
+<li>设置环境变量 <code>GODEBUG = &quot;gctrace = 1&quot;</code> ，<code>go run main.go</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="其他高级特性"><a href="#其他高级特性" class="headerlink" title="其他高级特性"></a>其他高级特性</h2><ul>
+<li><p><strong>如何实现 Go 调用 C 代码？</strong></p>
+<ul>
+<li><code>import &quot;C&quot;</code></li>
+<li><code>go tool cgo main.go</code> 查看调用流程</li>
+<li>原理<ul>
+<li>在内存中开辟一个结构体</li>
+<li>结构体中含有参数和返回值</li>
+<li>结构体地址传入 C 方法</li>
+<li>C 方法将结果写入返回值的位置</li>
+</ul>
+</li>
+<li>调度器的配合<ul>
+<li>协程需要抢占式调度</li>
+<li>进入 C 程序之后，调度器无法抢占协程</li>
+<li>调度器停止对此协程的调度</li>
+</ul>
+</li>
+<li>协程栈的切换<ul>
+<li>C 的栈不受 Runtime 管理</li>
+<li>进入 C 时，需要将当前栈切换到线程的系统栈上</li>
+</ul>
+</li>
+<li>cgo 的优缺点<ul>
+<li>cgo 可以让 go 调用现成的 C 实现</li>
+<li>cgo 限制了 go 语言的跨平台特性</li>
+<li>cgo 并不能提高 Go 语言的性能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>defer 的底层原理是怎样的？</strong></p>
+<ul>
+<li><code>go build -gcflags -S main.go</code> 通过其汇编来查看</li>
+<li>思路1：协程记录 defer 信息，函数退出时调用<ul>
+<li>实现1：堆上分配<ul>
+<li>1.12 之前使用</li>
+<li>在堆上开辟一个 sched.deferpool</li>
+<li>遇到 defer 语句，将信息放入 deferpool</li>
+<li>函数返回时，从 deferpool 取出执行</li>
+</ul>
+</li>
+<li>实现2：栈上分配<ul>
+<li>1.13 之后出现</li>
+<li>遇到 defer 语句，将信息放入栈上</li>
+<li>函数返回时，从栈中取出执行</li>
+<li>只能保存一个 defer 信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>思路2：将 defer 代码直接编译进函数尾<ul>
+<li>实现3：开放编码（性能最高，但是不好触发）<ul>
+<li>1.14之后出现</li>
+<li>如果 defer 语句在编译时就可以固定</li>
+<li>直接改写用户代码，defer 语句放入函数末尾</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>recover 如何在 panic 中拯救程序？</strong></p>
+<ul>
+<li>panic<ul>
+<li>panic 会抛出错误</li>
+<li>终止协程运行</li>
+<li>带崩整个 Go 程序</li>
+</ul>
+</li>
+<li>panic + defer<ul>
+<li>panic 在退出协程之前会执行所有已注册的 defer</li>
+<li><strong>不会执行其他协程的 defer</strong></li>
+</ul>
+</li>
+<li>panic + defer + recover<ul>
+<li>在 defer 中执行 recover，可以拯救 panic 的协程</li>
+<li>如果涉及 recover，defer 会使用堆上分配（deferpool）</li>
+<li>遇到 panic，panic 会从 deferpool 取出的 defer 语句，执行</li>
+<li>defer 中调用 recover，可以终止 panic 的过程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Go 是怎么实现反射的？</strong></p>
+<ul>
+<li>需求<ul>
+<li>获取对象的类型</li>
+<li>对任意类型变量赋值</li>
+<li>调用任意方法</li>
+</ul>
+</li>
+<li>元数据<ul>
+<li>元数据就是“数据的数据”（数据的属性）</li>
+<li>把对象的类型表示成一个数据类型</li>
+<li>把对象的值表示成一个数据类型</li>
+</ul>
+</li>
+<li>对象的类型<ul>
+<li>接口 refIect.Type</li>
+<li>把对象的类型表示成一个接口</li>
+<li>就能对类型做各种操作</li>
+</ul>
+</li>
+<li>对象的值<ul>
+<li>结构体 reflect.Value</li>
+<li>把对象的值表示成一个结构体</li>
+<li>就能对值做各种操作</li>
+</ul>
+</li>
+<li>runtime.eface 是运行时对空接口的表示</li>
+<li>reflect.emptylnterface 是 reflect 包对空接口表示</li>
+<li>对象到反射对象时，编译器会将入参提前转为 eface</li>
+<li>反射对象到对象时，根据类型和地址还原数据</li>
+</ul>
+</li>
+<li><p><strong>使用反射调用不同方法</strong></p>
+<ul>
+<li>通过反射调用方法，可以将框架和用户方法解耦</li>
+<li>往往需要用户注册方法，框架调用</li>
+<li>很多框架的 HTTP 调用处理使用此思路</li>
+</ul>
+</li>
+</ul>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/11/24/wsl/">Windows Subsystem for Linux (WSL) 🪟</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/11/18/readme/">《程序员的 README》</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>《程序员的底层思维》 - H-sediment</title>
+
+  
+    <meta name="description" content="作者：张建飞，出版时间：2022-02">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《程序员的底层思维》">
+<meta property="og:url" content="http://example.com/2023/08/28/mindset/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="作者：张建飞，出版时间：2022-02">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/111.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20230829094412.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/42977_100_1.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/42977_102_1.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/42977_189_1.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/42977_321_1.jpg">
+<meta property="article:published_time" content="2023-08-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-03T14:12:33.919Z">
+<meta property="article:author" content="hcjjj">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/111.png">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">《程序员的底层思维》</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%80%9D%E7%BB%B4%E8%83%BD%E5%8A%9B"><span class="toc-number">1.</span> <span class="toc-text">基础思维能力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E6%80%9D%E7%BB%B4"><span class="toc-number">1.1.</span> <span class="toc-text">抽象思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4"><span class="toc-number">1.2.</span> <span class="toc-text">逻辑思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E6%80%9D%E7%BB%B4"><span class="toc-number">1.3.</span> <span class="toc-text">结构化思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%B9%E5%88%A4%E6%80%A7%E6%80%9D%E7%BB%B4"><span class="toc-number">1.4.</span> <span class="toc-text">批判性思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%B4%E5%BA%A6%E6%80%9D%E7%BB%B4"><span class="toc-number">1.5.</span> <span class="toc-text">维度思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB%E6%80%9D%E7%BB%B4"><span class="toc-number">1.6.</span> <span class="toc-text">分类思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%B2%BB%E6%80%9D%E7%BB%B4"><span class="toc-number">1.7.</span> <span class="toc-text">分治思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%80%9D%E7%BB%B4"><span class="toc-number">1.8.</span> <span class="toc-text">简单思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E9%95%BF%E5%9E%8B%E6%80%9D%E7%BB%B4"><span class="toc-number">1.9.</span> <span class="toc-text">成长型思维</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%93%E4%B8%9A%E6%80%9D%E7%BB%B4%E8%83%BD%E5%8A%9B"><span class="toc-number">2.</span> <span class="toc-text">专业思维能力</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E8%80%A6%E6%80%9D%E7%BB%B4"><span class="toc-number">2.1.</span> <span class="toc-text">解耦思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%91%E7%BA%A6%E6%80%9D%E7%BB%B4"><span class="toc-number">2.2.</span> <span class="toc-text">契约思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%80%9D%E7%BB%B4"><span class="toc-number">2.3.</span> <span class="toc-text">模型思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E5%8C%96%E6%80%9D%E7%BB%B4"><span class="toc-number">2.4.</span> <span class="toc-text">工具化思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8F%E5%8C%96%E6%80%9D%E7%BB%B4"><span class="toc-number">2.5.</span> <span class="toc-text">量化思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%80%9D%E7%BB%B4"><span class="toc-number">2.6.</span> <span class="toc-text">数据思维</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A7%E5%93%81%E6%80%9D%E7%BB%B4"><span class="toc-number">2.7.</span> <span class="toc-text">产品思维</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E8%83%BD%E5%8A%9B%E7%9A%84%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">思维能力的综合应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E5%95%86%E5%93%81%E5%9B%A2%E9%98%9F%E4%B9%8B%E6%97%85"><span class="toc-number">3.1.</span> <span class="toc-text">我的商品团队之旅</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#COLA%E7%9A%84%E6%BC%94%E8%BF%9B%E8%BF%87%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">COLA的演进过程</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Reading/">Reading</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-08-27T16:00:00.000Z">2023-08-28</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>《程序员的底层思维》</span></h1>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/111.png" style="zoom:50%;" />
+
+<blockquote>
+<p>作者：张建飞，出版时间：2022-02</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="基础思维能力"><a href="#基础思维能力" class="headerlink" title="基础思维能力"></a>基础思维能力</h2><h3 id="抽象思维"><a href="#抽象思维" class="headerlink" title="抽象思维"></a>抽象思维</h3><blockquote>
+<p>若想捉大鱼，就得潜入深渊。深渊里的鱼更有力，也更纯净。硕大而抽象，且非常美丽。 ——大卫·林奇</p>
+</blockquote>
+<ul>
+<li>抽象思维是程序员最重要的思维能力之一，抽象的过程就是通过归纳概括、分析综合来寻找共性、提炼相关概念的过程。</li>
+<li>语言和抽象是一体的，抽象的概念只有通过语言才能表达出来，因此命名至关重要。</li>
+<li>过多地使用基础类型可能意味着抽象的缺失，需要对这些业务概念进行封装和抽象。</li>
+<li>重复代码通常意味着抽象缺失，提取重复代码只是完成了重构的第一步，关键是后续的命名。</li>
+<li>抽象具有层次性，抽象层次越高，内涵越小，外延越大，扩展性越好；反之，抽象层次越低，内涵越大，外延越小，扩展性越差，但语义表达能力越强。</li>
+<li>对抽象层次的拿捏体现了我们的设计功力，抽象层次要视具体情况而定，既不能太高，也不能太低。</li>
+<li>强制类型转换意味着抽象层次有问题，可以通过提升抽象层次来解决。</li>
+<li>抽象层次要保持一致性，即要遵循LSP，一致性可以减少混乱和降低理解成本。<ul>
+<li>Liskov Substitution Principle（里氏替换原则）：子类应该可以替换任何父类会出现的地方，并且经过替换以后，代码还能正常工作。</li>
+</ul>
+</li>
+<li>我们可以通过刻意练习来提升抽象能力，这些练习包括阅读、总结、命名训练、建模训练等。</li>
+</ul>
+<h3 id="逻辑思维"><a href="#逻辑思维" class="headerlink" title="逻辑思维"></a>逻辑思维</h3><blockquote>
+<p>不合乎逻辑的观点只需一根绳索就可将它绞死。 ——比勒尔</p>
+</blockquote>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20230829094412.png" style="zoom: 67%;" />
+
+<ul>
+<li>逻辑思维是最底层的思维能力，其本质是判断关系是否合理。</li>
+<li>逻辑的三要素是概念、判断和推理，只有概念清晰、判断无误、推理符合形式逻辑要求，才算逻辑正确。</li>
+<li>软件设计从理解问题域开始，而理解问题域的核心是要深入理解领域的核心概念。</li>
+<li>判断分为肯定判断和否定判断，判断要么真、要么假，不能非真非假。</li>
+<li>逻辑推理可以分为演绎推理、归纳推理和溯因推理。<ul>
+<li>演绎推理：因为，因为，所以</li>
+<li>归纳推理：从特殊到一般</li>
+<li>溯因推理：大胆假设，小心求证</li>
+</ul>
+</li>
+<li>思考的深度取决于逻辑链的深度，5Why和5So思考法是非常有用的深度思考工具。但是推导要注意逻辑的严密性，否则逻辑链很容易形成滑坡谬误。</li>
+<li>形式逻辑虽然强大但不实用，掌握常见的逻辑谬误能帮助我们更快地辨别真伪。</li>
+<li>逻辑需要理性，但感性同样重要，不要“得理不饶人”，把自己变成了“杠精”。</li>
+</ul>
+<h3 id="结构化思维"><a href="#结构化思维" class="headerlink" title="结构化思维"></a>结构化思维</h3><blockquote>
+<p>金字塔原理是思考、表达和解决问题的逻辑。 ——芭芭拉·明托</p>
+</blockquote>
+<ul>
+<li>结构是万物之本，小到分子，大到宇宙，只有了解其结构才能真正认识它。</li>
+<li>结构性问题是本质问题，不改变结构，再多的努力也白费。</li>
+<li>人脑记忆的特点是概念不能多，要有逻辑，金字塔结构能满足这样的特征。</li>
+<li>在金字塔结构里，纵向逻辑关系有演绎和归纳两种；横向逻辑关系有时间顺序、空间顺序和程度顺序三种。</li>
+<li>构建结构可以采用自上而下和自下而上两种方法，凡事没有绝对，更多的时候需要上下结合。</li>
+<li>针对不同的问题域，有很多现成的解决问题的框架，熟悉这些“套路”可以帮助我们快速搭建结构和解决问题。<ul>
+<li>制定市场营销策略的“4P”模型</li>
+<li>组织战略的“7S”模型</li>
+<li>分析竞争力的SWOT模型</li>
+<li>制定目标的SMART模型</li>
+</ul>
+</li>
+</ul>
+<h3 id="批判性思维"><a href="#批判性思维" class="headerlink" title="批判性思维"></a>批判性思维</h3><blockquote>
+<p>未经审视的人生不值得过。 ——苏格拉底</p>
+</blockquote>
+<ul>
+<li>批判要基于理性的逻辑思维，而不是耍嘴皮子。</li>
+<li>在当今信息爆炸的社会，我们需要批判精神来看待事情。</li>
+<li>业务多样性、多变性的特性决定了业务中台很难成功。</li>
+<li>代码复制也是一种复用，而且是耦合性最低的复用。</li>
+<li>架构是一种能力，而不仅仅是职位。</li>
+<li><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/42977_100_1.jpg" style="zoom: 50%;" /></li>
+<li>技术管理者不能仅仅是一个管理者(Manager)，也要是一个领导者(Leader)。</li>
+<li><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/42977_102_1.jpg" style="zoom: 50%;" /></li>
+<li>坚持自我批判，才能持续成长。</li>
+<li>在软件领域，很多问题都要批判、辩证地来看。比如，敏捷开发就一定比瀑布式好吗？微服务就一定比单体好吗？<blockquote>
+<p><strong>“不要把自信建立在贬低他人的基础上，什么时候你能发自内心地欣赏你不喜欢的人，你就成长了。”</strong><br>寸有所长，尺有所短，要看得见别人的优（不妒忌，学会欣赏别人），用得上别人的劣（从他人错误中学习）。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="维度思维"><a href="#维度思维" class="headerlink" title="维度思维"></a>维度思维</h3><blockquote>
+<p>这个世界不是只有是非黑白，还有很多灰色地带。 ——白岩松</p>
+</blockquote>
+<ul>
+<li>维度思维的关键是理解维度，维度是问题域独立参数或变量的数量。</li>
+<li>不借助工具，大脑很难处理多维问题，矩阵分析是解决多维问题的利器。</li>
+<li>矩阵分析首先要找到影响问题域的核心要素，也可以叫变量、维度，然后显性化地构建矩阵，当维度和维度属性值比较少的时候，可以用四象限、九宫格或立方体进行视觉上的呈现。</li>
+<li>业务代码的复杂度主要取决于业务场景和业务流程的复杂度。再复杂的业务，其业务场景都是可以枚举的，关键是找到构成业务场景的核心要素。例如，商品业务的场景主要由商品类型、商品售卖方式、商品仓储方式3个要素组成。</li>
+<li>多维度思考是思考的高级形式，矩阵分析在其中是无处不在的。从商业分析的波士顿矩阵、RFM模型到逻辑推理，都能看到矩阵分析的身影。</li>
+</ul>
+<h3 id="分类思维"><a href="#分类思维" class="headerlink" title="分类思维"></a>分类思维</h3><blockquote>
+<p>设计就是分类。 ——“微信之父”张小龙</p>
+</blockquote>
+<ul>
+<li>分类就是设计，分类对设计至关重要。</li>
+<li>人类有分类的本能，这和我们认识世界的方式有关。</li>
+<li>分类的本质是寻找共性，这些共性既可以是物理属性，也可以是概念属性。</li>
+<li>没有完美的分类，任何分类都与进行分类的观察者的视角和目的有关。</li>
+<li>分类是软件设计的基础，主要体现为对象分类、构建分类和领域分类。</li>
+<li>不同维度的分类选择造就了不同的组织，既可以按照业务划分，也可以按照职能划分。</li>
+<li>按照<strong>供给和履约的不同</strong>对互联网进行分类，可以更好地看清互联网。</li>
+</ul>
+<h3 id="分治思维"><a href="#分治思维" class="headerlink" title="分治思维"></a>分治思维</h3><blockquote>
+<p>要把大象装进冰箱，拢共分几步？ ——小品《钟点工》</p>
+</blockquote>
+<ul>
+<li>解决复杂问题要分治，计算机涉及的问题都比较复杂，需要分而治之来解决。</li>
+<li>软件中存在大量的分治思想，比如管道模式、分层架构、分布式架构等，无不体现了分治的强大。</li>
+<li>“分治并”是分治的进阶，有些问题除了分治，还需要整合、合并。</li>
+<li>“分治并”本质上对应的是定义问题、分析问题、解决问题的通用步骤。</li>
+<li>很多问题在解决过程中都显性或隐性地使用到了“分治并”，比如分治算法、流式计算、分布式数据库系统。</li>
+</ul>
+<h3 id="简单思维"><a href="#简单思维" class="headerlink" title="简单思维"></a>简单思维</h3><blockquote>
+<p>一旦做到了简洁，你将无所不能。 ——乔布斯</p>
+</blockquote>
+<ul>
+<li>简单不是一个简单的目标，而是一个非常高的目标。所有的UNIX哲学浓缩为一条铁律就是KISS原则。</li>
+<li>简单不是简陋。简单是一种洞察问题本质、化繁为简的能力，简陋是对问题不加思考地简单处理，二者有本质区别。</li>
+<li>简单需要我们付出很多的精力，对问题深入思考，进行熵减逆向做功。往往需要经历简单—复杂—简单的演化过程。</li>
+<li>我们可以利用隐藏、减少选择及奥卡姆剃刀来实现简化的目的。</li>
+<li>E &#x3D; mc² （E能量 m质量 c光速）和 F &#x3D; ma（F外力 m质量 a加速度） 证明，上帝似乎不是一个喜欢复杂的人。</li>
+<li>不管是弃用流程引擎、重新设计状态机引擎，还是COLA的迭代、产品的博弈，我总是能从化繁为简中受益。</li>
+</ul>
+<h3 id="成长型思维"><a href="#成长型思维" class="headerlink" title="成长型思维"></a>成长型思维</h3><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/42977_189_1.jpg" style="zoom: 50%;" />
+
+<ul>
+<li>决定你成长的第一步不是你是否努力，而是你是否相信努力。</li>
+<li>固定型思维让信心和成功都充满脆弱性。因为相信能力是固定的，所以你需要不断证明自己的能力与价值。</li>
+<li>成长型思维认为成功是学习的结果，努力是通往成功的关键。成功个体的标志在于他们热爱学习、喜欢挑战、重视努力，并在面对苦难时坚韧不拔。</li>
+<li>研究表明，我们的大脑具有可塑性，这是成长型思维的生理基础。</li>
+<li>培养成长型思维，需要我们有一个好的心态，相信努力的意义，改变错误的归因习惯，摆脱精神内耗，相信水滴石穿，持续精进。</li>
+<li>培养成长型思维，最好从小开始，父母要更多地鼓励小孩的努力、过程、选择、策略……而不是天赋。不要做养成固定型思维的助推器。</li>
+<li>成功人士或多或少具备成长型思维，因为唯有如此，他们才能战胜磨难和逆境，没有人能随随便便成功。</li>
+</ul>
+<h2 id="专业思维能力"><a href="#专业思维能力" class="headerlink" title="专业思维能力"></a>专业思维能力</h2><h3 id="解耦思维"><a href="#解耦思维" class="headerlink" title="解耦思维"></a>解耦思维</h3><blockquote>
+<p>人生最难熬的痛苦，就是你跟本该远离的东西纠缠在了一起。</p>
+</blockquote>
+<ul>
+<li>“高内聚、低耦合”是软件设计追求的重要目标之一，组件、模块、层次设计都应该遵循“高内聚、低耦合”的设计原则。</li>
+<li>正交的关键在于如何识别耦合性，我们可以通过识别系统需要扩展的地方来识别耦合性。比如，关于配置系统的设计不应该耦合于某一种特定的实现方式，而是应该更灵活一些。</li>
+<li>解耦主要有依赖倒置和中间层映射两种方式。</li>
+<li>我们要尽可能多地依赖抽象而不是具体，这能使系统更灵活，这种编程方式也叫作面向接口编程。</li>
+<li>“计算机中的任何问题，都可以通过加一层来解决”，中间层的价值也在于解耦。</li>
+</ul>
+<h3 id="契约思维"><a href="#契约思维" class="headerlink" title="契约思维"></a>契约思维</h3><blockquote>
+<p>人是生而自由的，但却无往不在枷锁之中。 ——卢梭</p>
+</blockquote>
+<ul>
+<li>“写代码是自由的，但无往不在规则之下”。</li>
+<li>社会大规模分工协作离不开契约思维，编程在很大程度上是一种“制定契约”。</li>
+<li>在软件领域，契约思维主要有软件规范和软件标准两方面的重要价值。</li>
+<li>一致性可以降低复杂度，我们可以在命名、异常处理、应用架构等方面在团队内制定规范。</li>
+<li>不管是前端标准化，还是JCP(Java Community Process)，都体现了规范和标准在软件中的重要作用。</li>
+<li>“一流的企业定标准，二流的企业做品牌，三流的企业卖产品”，谁掌握了标准制定权，谁就掌握了主动权。从这个意义上来说，提供SPI(Service Provider Interface)要比调用他人的API更主动。</li>
+</ul>
+<h3 id="模型思维"><a href="#模型思维" class="headerlink" title="模型思维"></a>模型思维</h3><blockquote>
+<p>建模的艺术就是去除实在中与问题无关的部分。 ——菲利普·安德森（1977年诺贝尔物理学奖得主）</p>
+</blockquote>
+<ul>
+<li>模型是对现实世界的抽象和映射。没有完美的模型，甚至连正确的模型都没有，就像类比永远不能代替问题本身一样。</li>
+<li>我们可以将模型分成物理模型、数学模型、概念模型、思维模型等。</li>
+<li>UML是在软件工程中具有广泛共识的建模方法、语言和表示法，其类图也常被用来做领域建模。</li>
+<li>领域建模和技术实现无关，是问题域分析、明晰概念、获得关键实体对象的重要过程。领域模型反映了关键的业务概念，刻画了关键领域实体，以及实体之间关系。</li>
+<li>语言是有边界的，同样，模型也有其作用的上下文。我们可以通过共享内核、防腐层等技术实现模型在不同上下文中的映射和协作。</li>
+<li><strong>领域模型</strong>和<strong>数据模型</strong>有明显区别，领域模型关心的是业务概念，其要义是显性化地表达业务语义；数据模型关心的是数据存储，其核心是数据访问的性能、数据的扩展性等非功能属性。</li>
+</ul>
+<h3 id="工具化思维"><a href="#工具化思维" class="headerlink" title="工具化思维"></a>工具化思维</h3><blockquote>
+<p>懒人的逻辑中也有其合理的一面，勤劳奋斗的逻辑中也必定有其荒唐的一面。 ——张方宇</p>
+</blockquote>
+<ul>
+<li>工具化是一种“偷懒”的智慧，工作中要有阶段性地停下来思考，不要用战术上的勤奋掩盖战略上的懒惰。</li>
+<li>工具化的步骤：首先，发现问题，找到重复3次以上的手工劳动；其次，明确问题，找到现状和期望之间的差距；最后，制造工具，解决问题。</li>
+<li>创新不一定都是从无到有的，对现有工具的组合和整合也是一种创新和工具化。</li>
+<li>要不遗余力地提升研发效率，比如TestsContainer和通用的MyBatis Mapper。</li>
+<li>要善于利用工具，白板和便签贴是讨论问题时非常有用的工具。有价值的不是工具本身，而是如何利用它。</li>
+</ul>
+<h3 id="量化思维"><a href="#量化思维" class="headerlink" title="量化思维"></a>量化思维</h3><blockquote>
+<p>No measurement，no improvement.（没有量化，就无法优化。） ——“科学管理之父”温斯洛·泰勒</p>
+</blockquote>
+<ul>
+<li>No measurement，no improvement.（没有量化，就无法优化。）</li>
+<li>量化的一般步骤包括定义指标、数字化和优化指标。</li>
+<li>对于研发效能来说，目前还没有特别有效的度量手段，所以指标的设定非常关键。错误的度量不仅不会带来效率提升，反而会带来伤害。</li>
+<li>团队管理的首要任务是目标管理，我们可以采用OKR进行目标管理，在设定OKR时要遵循SMART原则。指标只是管理手段，不可完全迷信指标。</li>
+<li>量化工作本身是一件非常困难和极具挑战的事情，但量化思维要求我们不要轻易放弃关于量化的思考和尝试。没有量化的目标，就像是断了线的风筝，没有方向，缺少指引，飞到哪里是哪里，而量化后的目标可以为我们清楚地指引方向。</li>
+</ul>
+<h3 id="数据思维"><a href="#数据思维" class="headerlink" title="数据思维"></a>数据思维</h3><blockquote>
+<p>一切业务数据化，一切数据业务化。 ——阿里巴巴</p>
+</blockquote>
+<ul>
+<li>一切业务数据化，一切数据业务化。数据是公司的重要资产，工程师必须了解公司的数据体系。</li>
+<li>整个大数据体系很庞大，对于应用开发者来说，不一定要面面俱到，非常精通，但至少要做到能理解、会使用。</li>
+<li>典型的企业的大数据解决方案包括数据仓库、ETL、元数据、分布式数据存储、流式计算等。</li>
+<li>数据库关注的是OLTP，数据仓库关注的是OLAP，数据仓库中对数据的操作通常包括切片切块、上卷下钻等。</li>
+<li>数仓建模通常采用Ralph Kimball提出的维度模型，其中针对维度表和事实表，为了提升查询性能和响应速度，通常采用大宽表代替雪花模型，用空间换时间的方式。</li>
+<li>阿里巴巴的生意参谋是数据业务化的典型代表和成功案例，通过大数据赋能商家，既让商家更好地在平台做生意，同时平台也实现了数据变现，可谓双赢。</li>
+</ul>
+<h3 id="产品思维"><a href="#产品思维" class="headerlink" title="产品思维"></a>产品思维</h3><blockquote>
+<p>产品就是用来解决某个问题的东西。 ——苏杰《人人都是产品经理》</p>
+</blockquote>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/42977_321_1.jpg" style="zoom:50%;" />
+
+<ul>
+<li>产品就是用来解决某个问题的东西。产品无处不在，每个人都需要具备一些产品思维，人人都是产品经理。</li>
+<li>产品对上支撑业务价值，对下要求业务功能和质量属性的实现。产品的核心要素包括用户、需求和场景。</li>
+<li>产品有多种视角的分类，按照用户需求可以分为工具型产品、社交型产品、交易型产品、平台型产品；按照用户类型可以分为2C、2B和2G产品等。</li>
+<li>产品架构主要分为用户感知层、功能模块层和数据层3个层次。</li>
+<li>产品化是把一种技术、一种服务通过标准化、规范化的流程形成一种可大规模复制生产和发布的能力。</li>
+<li>平台也是一种产品形态，在不同的语境下，平台的含义不一样。在技术的上下文中，平台是指可复用的硬件或软件的操作环境，其目的是节约成本、提升软件研发效率。</li>
+<li>用产品思维去建设平台，我们可以从价值的角度出发，更多地关注用户体验，从而有机会做出不错的平台型产品。</li>
+</ul>
+<h2 id="思维能力的综合应用"><a href="#思维能力的综合应用" class="headerlink" title="思维能力的综合应用"></a>思维能力的综合应用</h2><h3 id="我的商品团队之旅"><a href="#我的商品团队之旅" class="headerlink" title="我的商品团队之旅"></a>我的商品团队之旅</h3><blockquote>
+<p>人是能够习惯于任何环境的生物，之前你认为自己难以克服的困难，慢慢都会适应了。 ——维克多·弗兰克《活出生命的意义》</p>
+</blockquote>
+<ul>
+<li>看起来很困难的事，刻意练习多了，也就不困难了。我从一开始进入新团队的不知所措，到后来的从容谈定，就经历了刻意练习的过程。</li>
+<li>落地新团队，要抓住企业的核心要素——人、业务、技术和文化，可以做到事半功倍。</li>
+<li>再复杂的业务也可以进行结构化分解，一旦把业务的结构梳理清楚，工作就完成一半了。实现方式最好采用简洁朴素的CMP或管道模式，复杂的流程引擎通常不仅帮不上忙，还会增加额外的复杂度。</li>
+<li>复杂业务的应对之道是结合自上而下的结构化分解+自下而上的抽象建模，同时要在过程中随时调整、重构结构和模型，将可复用的能力下沉，从而提升系统的可维护性。</li>
+</ul>
+<h3 id="COLA的演进过程"><a href="#COLA的演进过程" class="headerlink" title="COLA的演进过程"></a>COLA的演进过程</h3><blockquote>
+<p>Software’s primary technical imperative：managing complexity.（软件的首要技术使命：管理复杂度。） ——Steve McConnell</p>
+</blockquote>
+<ul>
+<li>架构的要义在于约束。</li>
+<li>“在一个架构良好的系统中，评估代码改动点不应该是线性地按图索骥，而是应该像散列查找一样，直接定位到需要改动的地方，它们之间是O(n)和O(1)的差别。”</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/COLA">🥤 COLA: Clean Object-oriented &amp; Layered Architecture</a></p>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/08/30/Petri/">广义随机 Petri 网 (GSPN)</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/08/03/linux2/">简明 Linux 系统编程 🐧</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>IEEE S&P 2024 - 对车载攻击面的重新审视 - H-sediment</title>
+
+  
+    <meta name="description" content="论文阅读：**《Revisiting Automotive Attack Surfaces: a Practitioners’ Perspective》**">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IEEE S&amp;P 2024 - 对车载攻击面的重新审视">
+<meta property="og:url" content="http://example.com/2023/12/05/CarVal/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="论文阅读：**《Revisiting Automotive Attack Surfaces: a Practitioners’ Perspective》**">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204111739.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204155410.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240307112819.png">
+<meta property="article:published_time" content="2023-12-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-21T11:25:21.941Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Automotive">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204111739.png">
+  
+  
+  
+  <meta name="keywords" content="Automotive">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">IEEE S&P 2024 - 对车载攻击面的重新审视</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">论文阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">运行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">代码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84%E6%8E%A8%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">攻击路径推理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0"><span class="toc-number">3.2.</span> <span class="toc-text">风险评估</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TARA-1-0"><span class="toc-number">4.</span> <span class="toc-text">TARA 1.0</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Research/">Research</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-12-04T16:00:00.000Z">2023-12-05</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>IEEE S&P 2024 - 对车载攻击面的重新审视</span></h1>
+<p>论文阅读：**<a target="_blank" rel="noopener" href="https://www.computer.org/csdl/proceedings-article/sp/2024/313000a080/1RjEaOV6EQE">《Revisiting Automotive Attack Surfaces: a Practitioners’ Perspective》</a>**</p>
+<span id="more"></span>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204111739.png" fancybox="true"/></div></div>
+
+<h2 id="论文阅读"><a href="#论文阅读" class="headerlink" title="论文阅读"></a>论文阅读</h2><ul>
+<li><strong>背景介绍</strong><ul>
+<li>TARA、网络安全法规</li>
+</ul>
+</li>
+<li><strong>访谈方法</strong><ul>
+<li>访谈设置、访谈程序与数据处理、访谈结构</li>
+</ul>
+</li>
+<li><strong>访谈结果</strong><ul>
+<li>评估TARA<ul>
+<li>资产识别困难</li>
+<li>缺乏客观的定义和标准</li>
+<li>自动化程度低，效率低</li>
+</ul>
+</li>
+<li>评估威胁数据库<ul>
+<li>需要更多常见的汽车专用威胁，而不是照搬其他领域的现有威胁</li>
+<li>从业人员对现有法规列出的具体威胁评价较低</li>
+</ul>
+</li>
+<li>现有法规的限制和建议<ul>
+<li>更详细的信息肯定会对安全小组有所帮助</li>
+<li>传统 IT 威胁与汽车威胁之间存在差距</li>
+</ul>
+</li>
+<li>访谈研究摘要<ul>
+<li><strong>缺乏高质量的针对汽车的威胁数据库</strong></li>
+<li><strong>缺乏有效的 TARA 工具</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>改进威胁数据库</strong><ul>
+<li>使用<strong>分层框架</strong>来呈现汽车特有的威胁  <ul>
+<li>威胁描述（TD）， 一组描述特定威胁细节的自然语言句子  <ul>
+<li><strong>攻击描述 (AD)</strong>  </li>
+<li><strong>威胁的根源 (RC)</strong>  </li>
+<li><strong>识别威胁的安全测试方法 (STA)</strong>  </li>
+<li><strong>预防威胁的措施 (MG)</strong></li>
+</ul>
+</li>
+<li>威胁代码（TC），某一特定类别下的一组威胁描述</li>
+<li>威胁主题（TT），一组遵循特定高级分类逻辑的威胁代码</li>
+<li>威胁知识图谱（TKG），利用知识图谱来进一步表示威胁代码之间的关系<ul>
+<li>知识图谱可以用一组三元组来表示：头部实体、关系、尾部实体</li>
+<li>实体是威胁代码，三元组表示两个代码之间的逻辑关系</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>威胁数据库的分类及其详细内容<ul>
+<li>T1：通用威胁代码（分类），各种 ECU 可共享一套适用于各种实施方案的通用模式<ul>
+<li>C1.Hardware, C2.Software, C3.RTOS, C4.Complex OS, C5.Data</li>
+</ul>
+</li>
+<li>T2：车内组件，描述了对车内特定组件的威胁<ul>
+<li>C6.IVI, C7.Telematics, C8.Sensor, C9.Gateway and Zone Controller, C10.ADAS, C11.IVN, C12.BMS, C13.Other ECUs</li>
+</ul>
+</li>
+<li>T3：车外组件，描述了车外特定组件面临的威胁<ul>
+<li>C14.Mobile APP, C15.Backend Server, C16.Charging Pile</li>
+</ul>
+</li>
+<li>T4：通信协议，描述了通信协议所面临的威胁<ul>
+<li>C17.UWB, NFC and BLE, C18.V2X, C19.CAN, C20.Ethernet</li>
+</ul>
+</li>
+<li>T5：通信通道&#x2F;接口，描述了对车辆通信通道和接口的威<ul>
+<li>C21.Wi-Fi, Bluetooth and Cellular, C22.Charging Port, C23.USB and SD card, C24.OBD</li>
+</ul>
+</li>
+<li>T6：车辆功能&#x2F;服务，描述了对车辆功能和服务的威胁<ul>
+<li>C25.OTA, C26.Diagnostic, C27.Remote monitor and control</li>
+</ul>
+</li>
+<li>T7：其他，包括不属于其他主题的其他威胁（如内部攻击）<ul>
+<li>C28.Others</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>为了更好地说明威胁代码（分类）之间的关系，将28个代码分为两类：<ul>
+<li>实体代码 Entity code（T2车内组件、T3车外组件）</li>
+<li>属性代码 Property code（T1、T4、T5、T6、T7）<ul>
+<li>一个属性代码代表一个实体代码中的一个特定安全属性</li>
+<li>构建知识图谱的三元组进一步表述为（<em>实体代码、易受威胁处、属性代码</em>）</li>
+<li>在11个实体代码和17个属性代码之间构建了109个三元组</li>
+</ul>
+</li>
+<li>威胁代码之间的这些联系使用户能够了解汽车威胁之间的相互依赖关系，帮助他们构建特定于汽车模型的 CarVal Datalog 规则。</li>
+<li>此外，用户可以灵活地根据不同的汽车实现修改和创建自己的关系。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>CarVal — 自动化路径推理和风险评估</strong><ul>
+<li>挑战<ul>
+<li>传统的攻击路径推理引擎依赖于 IT 网络中人工制作的推理规则，目前还没有可用于推理 IVN 攻击路径的规则</li>
+<li>IVN 是由具有各种硬件和软件设置的 ECU 组成，以前的方法没有考虑到这些新特征，无法表示最新的 IVN 模型</li>
+<li>以往的工作只讨论了如何计算攻击路径中特定攻击的<strong>可行性</strong>（即可能性），没有考虑 ISO21434 TARA 所指出的<strong>攻击影响</strong>，这导致在特定汽车系统中的输出不完整</li>
+</ul>
+</li>
+<li>解决方案<ul>
+<li>根据访谈，<strong>构建推理规则集并定义网络攻击</strong></li>
+<li>引入一个<strong>混合模型</strong>，将代表车载总线（如 CAN 总线）广播性质的<em>总线模型</em>与代表最<br>新网关设计的<em>星形模型</em>相结合</li>
+<li>除了攻击可行性，通过计算路径上每个节点的攻击影响来增强推理引擎</li>
+</ul>
+</li>
+<li>工作流程<ul>
+<li>输入<ul>
+<li>攻击目标，指定作为数据模型推理目标的特定攻击</li>
+<li>攻击入口，描述攻击者如何访问汽车系统，攻击路径的起点</li>
+<li>漏洞集，由可能导致特定攻击的潜在漏洞组成</li>
+<li>车辆配置，如 IVN 拓扑结构、IVN 中电子控制单元 (ECU) 和总线的属性</li>
+</ul>
+</li>
+<li><strong>攻击路径推理</strong>，在接收到上述输入后启动数据逻辑推理 <ul>
+<li>确定攻击者如何从<strong>攻击入口</strong>实现<strong>攻击目标</strong></li>
+<li>推理过程的有效性取决于精心设计的推理规则</li>
+<li>攻击路径节点类型<ul>
+<li>攻击节点（AN）—— 攻击目标</li>
+<li>入口节点（ EN）  —— 攻击入口</li>
+<li>漏洞节点（VN）—— 漏洞集</li>
+<li>事实节点（FN）—— 车辆配置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>风险评估</strong>，在考虑 <em>feasibility</em> 和 <em>impact</em> 的基础上对生成的攻击路径进行评估风险值<ul>
+<li>计算攻击路径上所有 AN（代表特定威胁）的攻击可行性和攻击影响</li>
+<li>相关定义<ul>
+<li>EN、VN、AN 的可行性（概率）</li>
+<li>AN 的累积可行性、影响和风险值</li>
+<li>VN、AN 的影响</li>
+</ul>
+</li>
+<li>攻击可行性计算<ul>
+<li>攻击节点的累积路径攻击可行性是由其所有前提节点的可行性值相乘计算得出的</li>
+<li>由于所有可行性值都在 (0,1) 范围内，随着攻击路径变深，累积攻击可行性会降低</li>
+</ul>
+</li>
+<li>攻击影响传播<ul>
+<li>一个 AN 的累积路径上攻击影响是其所有前提节点影响值的乘积</li>
+<li>由于所有影响值都大于 1，因此累积攻击影响会随着攻击路径的深入而增加</li>
+</ul>
+</li>
+<li>风险值计算<ul>
+<li>汽车系统中与特定威胁相关的风险值的确定基于两个因素，即可行性和影响</li>
+<li>可行性和影响越大，风险值也就越大</li>
+<li>节点的最终风险值是可行性和影响相乘后加上基线值</li>
+</ul>
+</li>
+<li>每个推导出的攻击节点都会被赋予特定攻击路径上的累计<strong>攻击可行性</strong>、<strong>影响</strong>和<strong>风险值</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>演示示例<ul>
+<li>CarVal 的输出是 Attributed Attack Path (AAP)<ul>
+<li>既提供如何在 IVN 中实施攻击的<strong>逻辑流程</strong></li>
+<li>也提供了与路径上每个攻击节点相关的<strong>定量指标</strong>（feasibility, impact, and risk value）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>具体实施<ul>
+<li>攻击路径推理（<strong>MulVAL</strong> reasoning framework + <strong>XSB</strong> database system）</li>
+<li>风险评估（<strong>Python</strong> + treelib library）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>实车实验</strong></li>
+<li><strong>Sup_Materials</strong><ul>
+<li>Codebook.pdf（用于访谈研究数据分析的最终代码手册）</li>
+<li>Insights_and_Database.pdf（从访谈中得出的更多见解，以及包含119个威胁的数据库）</li>
+<li>Interview_protocol.pdf（用于访谈过程中的访谈方案）</li>
+<li>Security_Report.pdf（对应于论文中安全分析的安全报告）</li>
+</ul>
+</li>
+</ul>
+<h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><p>开源代码：<a target="_blank" rel="noopener" href="https://github.com/VehicleCyberSec/CarVal">CarVal: Automated Attack Path Reasoning in IVN.</a></p>
+<p><strong>CarVal_Code：</strong></p>
+<ul>
+<li><em>carval_infer.sh</em>（启动推断攻击路径的脚本）</li>
+<li><em>input_IVN.P</em>（CarVal的输入，包括 IVN 和待推断的攻击目标）</li>
+<li><em>interaction_rules.P</em>（CarVal 推理的所有交互规则）</li>
+<li><em>risk_assessment.py</em>（此代码将对由 <em>carval_infer.sh</em> 生成的 <em>AttackGraph.dot</em> 执行风险评估）</li>
+</ul>
+<p><strong>配置运行环境：</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://xsb.sourceforge.net/">XSB</a> （用于Unix和Windows的逻辑编程和推理数据库系统）</li>
+<li><a target="_blank" rel="noopener" href="https://www.graphviz.org/">Graphviz</a> （一款开源图形可视化软件）</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/risksense/mulval">MulVAL</a> （基于逻辑的企业网络安全分析器）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="comment"># 安装 Graphviz</span></span><br><span class="line"><span class="built_in">sudo</span> apt install graphviz graphviz-doc</span><br><span class="line"><span class="comment"># 安装 epstopdf</span></span><br><span class="line"><span class="built_in">sudo</span> apt install texlive-font-utils</span><br><span class="line"><span class="comment"># 安装 jdk</span></span><br><span class="line"><span class="built_in">sudo</span> apt install default-jdk </span><br><span class="line"><span class="comment"># 安装 XSB</span></span><br><span class="line">tar -zxf XSB-5.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> XSB/build</span><br><span class="line">./configure</span><br><span class="line">./makexsb</span><br><span class="line"><span class="comment"># 添加环境变量</span></span><br><span class="line"><span class="built_in">sudo</span> vim /etc/profile</span><br><span class="line"><span class="comment"># sudo vim ~/.zshrc</span></span><br><span class="line"><span class="comment"># 加入 export PATH=/home/hcjjj/Desktop/CarVal/XSB/bin:$PATH</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"><span class="comment"># source ~/.zshrc</span></span><br></pre></td></tr></table></figure>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204155410.png" fancybox="true"/></div></div>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 MulVAL</span></span><br><span class="line"><span class="comment"># 依赖</span></span><br><span class="line"><span class="built_in">sudo</span> apt install flex bison</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/risksense/mulval.git</span><br><span class="line"><span class="built_in">cd</span> mulval</span><br><span class="line"><span class="comment"># 创建文件夹，不然：cp: target &#x27;../../bin/adapter&#x27; is not a directory</span></span><br><span class="line"><span class="built_in">mkdir</span> bin bin/adapter bin/metrics</span><br><span class="line"><span class="comment"># mv -&gt; cp，不然 fatal error: graphit.tab.h: No such file or directory</span></span><br><span class="line">vim src/attack_graph/Makefile</span><br><span class="line"><span class="comment"># 环境变量</span></span><br><span class="line"><span class="built_in">sudo</span> vim /etc/profile</span><br><span class="line"><span class="comment"># export MULVALROOT=/home/hcjjj/Desktop/CarVal/mulval</span></span><br><span class="line"><span class="comment"># export PATH=$MULVALROOT/bin:$MULVALROOT/utils:$PATH</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"><span class="comment"># 编译 注意 gcc 的版本，太高会编译报错</span></span><br><span class="line"><span class="built_in">sudo</span> apt purge --autoremove -y gcc-11 g++-11</span><br><span class="line"><span class="built_in">sudo</span> vim /etc/apt/sources.list</span><br><span class="line"><span class="comment"># deb [arch=amd64] http://archive.ubuntu.com/ubuntu focal main universe</span></span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install gcc-7 g++-7</span><br><span class="line"><span class="built_in">cd</span> /usr/bin/</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mv</span> gcc-7 gcc</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mv</span> g++-7 g++</span><br><span class="line"><span class="comment"># 回到 mulval 目录</span></span><br><span class="line"><span class="built_in">cd</span> -</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行 testcases 代码：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> mulval/testcases/3host</span><br><span class="line"><span class="comment"># 生成攻击图</span></span><br><span class="line"><span class="built_in">chmod</span> u+x graph_gen.sh</span><br><span class="line">graph_gen.sh input.P -v -p</span><br><span class="line"><span class="comment"># 运行 CVSS 度量程序</span></span><br><span class="line">probAssess.sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行 CarVal 代码：</strong></p>
+<p>Copy the CarVal code into the MulVal directory, including:</p>
+<ul>
+<li>Replace <code>mulval/kb/interaction_rules.P</code> with <code>CarVal_Code/interaction_rules.P</code></li>
+<li>Copy all other codes under <em>CarVal_Code</em> (<code>carval_infer.sh</code>, <code>input_IVN.P</code>, <code>risk_assessment.py</code>) into <code>mulval/utils/</code>.</li>
+<li>Now CarVal is ready to run. Execute the following code under the <code>mulval/utils</code>:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加可执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> u+x carval_infer.sh ./render.sh</span><br><span class="line"><span class="comment"># carval_infer.sh 用到 render.sh 和 interaction_rules.P</span></span><br><span class="line"><span class="comment"># 这边要改一下 ./carval_infer.sh 里面 xsb 的路径</span></span><br><span class="line">./carval_infer.sh -v ./input_IVN.P</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Then the output attack path will be generated as <code>AttackGraph.dot</code> in the same directory. Then execute the python script to further calculate the risk values along the attack path.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install python3 pip</span><br><span class="line">pip install pydot networkx matplotlib</span><br><span class="line">python3 risk_assessment.py</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><h3 id="攻击路径推理"><a href="#攻击路径推理" class="headerlink" title="攻击路径推理"></a>攻击路径推理</h3><ul>
+<li><em>carval_infer.sh</em>（启动推断攻击路径的脚本）</li>
+<li><em>input_IVN.P</em>（CarVal 的输入，包括 IVN 和待推断的攻击目标）</li>
+<li><em>interaction_rules.P</em>（CarVal 推理的所有交互规则）</li>
+</ul>
+<h3 id="风险评估"><a href="#风险评估" class="headerlink" title="风险评估"></a>风险评估</h3><ul>
+<li><em>risk_assessment.py</em>（此代码将对由 <em>carval_infer.sh</em> 生成的 <em>AttackGraph.dot</em> 执行风险评估）</li>
+</ul>
+<h2 id="TARA-1-0"><a href="#TARA-1-0" class="headerlink" title="TARA 1.0"></a>TARA 1.0</h2><p>参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/70918.html">ISO&#x2F;SAE 21434:2021 - Road vehicles Cybersecurity engineering</a></li>
+<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/fullHtml/10.1145/3600160.3605084">A Systematic Review of Threat Analysis and Risk Assessment Methodologies for Connected and Automated Vehicles</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.aqniu.com/vendor/91951.html">七大执行步骤详解如何进行 TARA 分析</a></li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240307112819.png" fancybox="true"/></div></div>
+
+<ul>
+<li><strong>资产识别（定义）</strong></li>
+<li><strong>威胁场景识别</strong><ul>
+<li><p>威胁情景识别的方法可以使用<strong>小组讨论</strong>和&#x2F;或<strong>系统方法</strong>，例如：</p>
+<ul>
+<li><p>诱发因合理的可预见的误用或滥用而产生的恶意用例</p>
+</li>
+<li><p>基于 EVITA、TVRA、PASTA、STRIDE 等框架的威胁建模方法</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>影响等级评估</strong><ul>
+<li>应根据安全、财务、操作和隐私（S、F、O、P）等影响类别分别对道路使用者的潜在不利后果进行评估损害情景</li>
+<li>损害情景的影响等级应按每个影响类别确定为以下之一：severe、major、moderate、negligible（严重、主要的、中等、可忽略不计）</li>
+</ul>
+</li>
+<li><strong>攻击路径分析</strong><ul>
+<li>应分析威胁情景，以确定攻击路径<ul>
+<li>一个攻击路径分析可以基于<ul>
+<li>自上而下的方法，通过分析威胁情景的不同方式来推断攻击路径。 可以实现，例如攻击树、<strong>攻击图</strong></li>
+<li>自下而上的方法，从确定的网络安全漏洞中建立攻击路径</li>
+</ul>
+</li>
+<li>如果部分攻击路径没有导致威胁情景的实现，可以停止对该部分攻击路径的分析</li>
+</ul>
+</li>
+<li>一个攻击路径应与该攻击路径可实现的威胁情景相关<ul>
+<li>在产品开发的早期阶段，攻击路径往往是不完整或不精确的，因为具体的实施细节还不知道，无法识别具体的漏洞</li>
+<li>在产品开发过程中，随着更多信息的出现，例如在漏洞分析之后，攻击路径可以被更新</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>攻击可行性评估</strong><ul>
+<li><p>攻击可行性评级方法应根据以下情况之一来定义办法</p>
+<ul>
+<li>基于攻击潜力的方法</li>
+<li>基于CVSS的方法</li>
+<li>基于攻击向量的方法</li>
+<li>选择方法可以取决于生命周期中的阶段和可用的信息</li>
+</ul>
+</li>
+<li><p>如果使用基于攻击潜力的方法，应根据核心因素确定攻击可行性等级，包括：</p>
+<ul>
+<li>经过的时间</li>
+<li>专家的专业知识</li>
+<li>对该项目或组件的了解</li>
+<li>机会之窗</li>
+<li>设备</li>
+</ul>
+</li>
+<li><p>如果使用基于 CVSS 的方法，则应根据以下情况确定攻击可行性等级在基本度量组的可利用度量上，包括：</p>
+<ul>
+<li>攻击矢量</li>
+<li>攻击的复杂性</li>
+<li>需要的特权</li>
+<li>用户互动</li>
+</ul>
+</li>
+<li><p>如果使用基于攻击矢量的方法，应根据评估攻击路径的主要攻击矢量（参见CVSS 2.1.1 ）来确定攻击可行性等级</p>
+</li>
+</ul>
+</li>
+<li><strong>风险值的确定</strong><ul>
+<li>对于每个威胁情景，应根据相关损害情景的影响和相关攻击路径的攻击可行性来确定风险值<ul>
+<li>如果一个威胁情景对应一个以上的损害情景或一个相关的损害情景在一个以上的影响类别中具有影响， 可以为每个影响等级单独确定一个风险值</li>
+<li>如果威胁情景与一个以上的攻击路径相对应，相关的攻击可行性评级可以适当地汇总，例如，威胁情景被赋予相应攻击路径的攻击可行性评级中的最大值。</li>
+</ul>
+</li>
+<li>威胁情景的风险值应在1和5之间（包括1和5），其中1的值代表最小风险</li>
+<li>风险值确定的方法：<ul>
+<li>风险矩阵</li>
+<li>风险公式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>风险处理决策</strong><ul>
+<li>对于每种威胁情况，考虑到其风险值，应确定以下一种或多种风险处理方案：<ul>
+<li>避开风险，如通过消除风险源来避免风险，决定不开始或继续进行引起风险的活动</li>
+<li>减少风险</li>
+<li>分担风险，如通过合同分担风险或通过购买保险转移风险</li>
+<li>保留风险</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/12/12/go3/">使用 Golang 实现的简易 Redis 🔨</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/11/24/wsl/">Windows Subsystem for Linux (WSL) 🪟</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Vim/Neovim 的使用和配置 - H-sediment</title>
+
+  
+    <meta name="description" content="Vi → Vim → Neovim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim&#x2F;Neovim 的使用和配置">
+<meta property="og:url" content="http://example.com/2020/01/10/vim/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="Vi → Vim → Neovim">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180955207.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180955560.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181002722.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180956087.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180957821.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181005285.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/15/ncKGY6.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181000452.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/14/n6Vc8J.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180959426.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181004842.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180958185.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181004193.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181003207.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181006830.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181003073.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/ia_100000000506.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180957590.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/14/n6wXyn.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181000677.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181001737.gif">
+<meta property="article:published_time" content="2020-01-10T13:10:55.000Z">
+<meta property="article:modified_time" content="2024-10-06T07:12:05.151Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Neovim">
+<meta property="article:tag" content="Vim">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180955207.png">
+  
+  
+  
+  <meta name="keywords" content="Linux,Neovim,Vim">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Vim/Neovim 的使用和配置</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">初次使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">指令详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%8C%89%E9%94%AE"><span class="toc-number">3.</span> <span class="toc-text">修改按键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%AE%BE%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">修改设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Linux/">Linux</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-01-10T13:10:55.000Z">2020-01-10</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Vim/Neovim 的使用和配置</span></h1>
+<p>Vi → Vim → Neovim</p>
+<span id="more"></span>
+
+<p><a target="_blank" rel="noopener" href="https://www.vim.org/">Vim</a> 是文本&#x2F;代码编辑器之中最为优秀经典的上古神器之一，也是早年 Vi 编辑器的加强版，强大、高效、免费开源且跨平台。  </p>
+<p><a target="_blank" rel="noopener" href="https://neovim.io/">Neovim</a> 可以说是 Vim 的改进版，而且与 Vim 的编辑模型和 Vimscript 语言完全兼容。</p>
+<h1 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h1><p>Vim 在终端中启动命令为 <code>vim</code>，Neovim 为 <code>nvim</code>， 共分为三种模式：</p>
+<ul>
+<li>命令模式（Command mode）</li>
+<li>写入模式（Insert mode）</li>
+<li>底线命令模式（Last line mode）</li>
+</ul>
+<h2 id="初次使用"><a href="#初次使用" class="headerlink" title="初次使用"></a>初次使用</h2><p>进入 vim 后初始为命令模式，<code>k</code> <code> j</code> <code> h</code> <code>l</code> 为上下左右移动光标</p>
+<ul>
+<li>按 <code>i</code> 进入 <strong>写入模式</strong>，<code>ESC</code> 回到 <strong>命令模式</strong></li>
+<li>在命令模式下，按 <code>:</code> 进入 <strong>底线命令模式</strong></li>
+<li>底线命令模式下输入 <code>:w</code> 后回车为写入文件；<code>:q</code> 为退出 nvim；<code>:wq</code> 为保存文件并退出</li>
+</ul>
+<blockquote>
+<p>ctrl+[ 或 ctrl+c 为 ESC 默认快捷键，可自己设置为更方便的映射</p>
+</blockquote>
+<h2 id="指令详解"><a href="#指令详解" class="headerlink" title="指令详解"></a>指令详解</h2><p>主要是掌握 <strong>操作逻辑</strong> , 都是以 <strong>先指令后动作</strong> 这个模式</p>
+<p><strong>移动</strong></p>
+<ul>
+<li><p><code>w</code>：跳到下一个单词的开头</p>
+</li>
+<li><p><code>e</code>：跳到下一个单词的结尾</p>
+</li>
+<li><p><code>b</code>：跳到上一个单词的开头，由 blank 字符分隔的单词，使用 <code>W</code> 和 <code>E</code></p>
+</li>
+<li><p><code>%</code>：匹配括号移动（需要把光标先移到括号上）</p>
+</li>
+<li><p><code>*</code>：匹配光标当前所在的单词（下一个）</p>
+</li>
+<li><p><code>#</code>：匹配光标当前所在的单词（上一个）</p>
+</li>
+</ul>
+<p><strong>插入</strong></p>
+<ul>
+<li><code>i</code>：insert 在光标前插入</li>
+<li><code>I</code>：在行最前面插入，快捷键为 &#96;Shift+i&#96;&#96;</li>
+<li><code>a</code>：append 在光标后开始编辑</li>
+<li><code>A</code>：在行最后面开始编辑</li>
+<li><code>o</code>：在当前行下一行开始编辑</li>
+<li><code>O</code>：在当前行上一行开始编辑</li>
+</ul>
+<p><strong>删除</strong></p>
+<ul>
+<li><p><code>s</code>：删除当前字符并进入插入模式</p>
+</li>
+<li><p><code>u</code>：撤回上一步操作</p>
+</li>
+<li><p><code>Ctrl + R</code> ：重做</p>
+</li>
+<li><p><code>U</code>： 撤销对整行的操作</p>
+</li>
+<li><p><code>x</code>：删除光标下的字符</p>
+</li>
+<li><p><code>dl</code>：删除光标右边的字符 ( 同 <code>x</code> )</p>
+</li>
+<li><p><code>dh</code>：删除光标左边的字符</p>
+</li>
+<li><p><code>d3l</code> ：删除光标右边的三个字符</p>
+</li>
+<li><p><code>dd</code>：删除该行(等于剪贴，<code>p</code> 粘贴）</p>
+</li>
+<li><p><code>dj</code>：删除该行和下一行</p>
+</li>
+<li><p><code>dG</code> ： 删除当前行至文档尾部</p>
+</li>
+<li><p><code>dt&quot;</code> ：删除 “ 前的所有内容</p>
+</li>
+<li><p><code>cc</code> ：与 <code>d</code> 操作同理，删除并进入写入模式</p>
+</li>
+</ul>
+<p><strong>复制</strong></p>
+<ul>
+<li><code>y、d、x</code> 都会把文本复制到剪切板（默认不与系统剪切板共享）</li>
+<li><code>&quot;+y</code> 复制文本共享至系统剪切板</li>
+<li><code>y</code>：与 <code>d</code> 操作同理</li>
+</ul>
+<p><strong>更改</strong></p>
+<ul>
+<li><code>r </code>：替换光标所在位置的字符</li>
+<li><code>R</code>：连续替换字符</li>
+<li><code>c3l</code>：替换右边三个字符</li>
+<li><code>cw</code>：更改下一个词</li>
+<li><code>cb</code>：更改上一个词</li>
+<li><code>cc</code>：替换整行</li>
+<li><code>ci&quot;</code>：修改双引号内的字符</li>
+</ul>
+<blockquote>
+<p>change in “</p>
+</blockquote>
+<ul>
+<li><code>f&quot;</code> ：光标跳到当前行下一个 “ </li>
+<li><code>3fa</code>：光标跳到当前行第三个出现的 a</li>
+<li><code>F</code> ：反向查找</li>
+<li><code>t&quot;</code>：光标跳到当前行下一个 “ 的前一个字符</li>
+<li><code>T</code>：反向</li>
+<li><code>cfx</code>：修改 x 字符前的内容(包括 x)</li>
+</ul>
+<p><strong>搜索</strong></p>
+<ul>
+<li><code>/</code>：输入后回车</li>
+<li><code>n</code>：下一条搜索结果</li>
+<li><code>N</code>：上一条搜索结果</li>
+<li><code>zz</code>：跳到光标位置</li>
+</ul>
+<p><strong>分屏</strong></p>
+<ul>
+<li><code>:split</code> 上下分屏</li>
+<li><code>:vsplit </code>  左右分屏</li>
+<li><code>:set vsplitright</code> 光标右边</li>
+<li><code>:e [文件路径]</code> 打开新文件</li>
+<li><code>Ctrl+w 后按 hjkl</code> 光标在分屏中移动</li>
+</ul>
+<p><strong>跳转</strong></p>
+<ul>
+<li><code>gg</code>：跳到首行</li>
+<li><code>G</code>：跳到尾行</li>
+<li>N <code>G</code> ：到第 N 行</li>
+</ul>
+<blockquote>
+<p>8G 跳到第 8 行</p>
+</blockquote>
+<p><strong>选中</strong></p>
+<ul>
+<li><code>v</code> ：字符选中</li>
+<li><code>V</code> ：行选中</li>
+<li><code>Ctrl+v</code> ：块选中</li>
+<li><code>vi&quot;</code>：选中 “ 中的字符</li>
+</ul>
+<p><strong>替换</strong></p>
+<ul>
+<li><code>:s/from/to/</code> 将当前行中的第一个 from 替换成 to</li>
+<li><code>:s/from/to/g </code> 将当前行中的所有 from 都替换成 to</li>
+<li><code>:%s/from/to/g</code> 对所有行的内容进行替换</li>
+</ul>
+<p><strong>配色</strong></p>
+<p><code>:color </code> (color 后一个空格 按 Tab 选择, 通过插件安装更好看的配色)</p>
+<hr>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180955207.png" fancybox="true"/></div></div>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180955560.png" fancybox="true"/></div></div>
+
+<hr>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>通过修改 vim 的配置文件和安装插件，能让它更加强大高效</p>
+<ul>
+<li>vim 的配置文件目录在：<code>~/.vimrc</code></li>
+<li>neovim 的配置文件目录在：<code>~/.config/nvim/init.vim</code></li>
+</ul>
+<p>没有的话需自己创建，</p>
+<ul>
+<li><code>nvim ~/.config/nvim/init.vim</code></li>
+</ul>
+<p>创建软链接，方便修改</p>
+<ul>
+<li><code> ln -s ~/.config/nvim/init.vim .nvim</code></li>
+</ul>
+<blockquote>
+<p>在配置文件中  <code>&quot;</code> 为注释  </p>
+</blockquote>
+<p>::: collapse 把 macOS 终端默认的文本编辑器由 vim 替换为 neovim</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">❯ <span class="built_in">where</span> vim</span><br><span class="line">/usr/bin/vim</span><br><span class="line">❯ <span class="built_in">where</span> nvim</span><br><span class="line">/usr/local/bin/nvim</span><br><span class="line">❯ <span class="built_in">sudo</span> <span class="built_in">mv</span> /usr/bin/vim /usr/bin/vim-original</span><br><span class="line">❯ <span class="built_in">sudo</span> <span class="built_in">ln</span> /usr/local/bin/nvim /usr/bin/vim</span><br></pre></td></tr></table></figure>
+
+<p>:::  </p>
+<h2 id="修改按键"><a href="#修改按键" class="headerlink" title="修改按键"></a>修改按键</h2><p>在命令模式下起作用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"> _   ___     _____ __  __</span><br><span class="line">| \ | \ \   / /_ _|  \/  |</span><br><span class="line">|  \| |\ \ / / | || |\/| |</span><br><span class="line">| |\  | \ V /  | || |  | |</span><br><span class="line">|_| \_|  \_/  |___|_|  |_|</span><br><span class="line">--------------------------</span><br><span class="line">imap &lt;Up&gt; &lt;Nop&gt;</span><br><span class="line">nmap &lt;Up&gt; &lt;Nop&gt;</span><br><span class="line">imap &lt;Down&gt; &lt;Nop&gt;</span><br><span class="line">nmap &lt;Down&gt; &lt;Nop&gt;</span><br><span class="line">imap &lt;Left&gt; &lt;Nop&gt;</span><br><span class="line">nmap &lt;Left&gt; &lt;Nop&gt;</span><br><span class="line">imap &lt;Right&gt; &lt;Nop&gt;</span><br><span class="line">nmap &lt;Right&gt; &lt;Nop&gt;</span><br><span class="line">&quot; 让方向键失效</span><br><span class="line">imap kj &lt;esc&gt;</span><br><span class="line">&quot; 按 kj 等同于按 Esc</span><br><span class="line">noremap a b </span><br><span class="line">&quot; 在普通模式下，让按a键等于按b键盘，仅为示例</span><br><span class="line">noremap K 5k</span><br><span class="line">noremap J 5j</span><br><span class="line">&quot; 实现快速换行</span><br><span class="line">map S :w&lt;CR&gt;</span><br><span class="line">&quot; 让按 S 等同于执行 :w 即保存</span><br><span class="line">map ? :nohlsearch&lt;CR&gt;</span><br><span class="line">&quot; 按 ? 取消高亮搜索结果</span><br><span class="line">map s &lt;nop&gt; </span><br><span class="line">&quot; 让按 s 无效果</span><br><span class="line">map Q :q&lt;CR&gt; </span><br><span class="line">&quot; 按 Q 退出nvim</span><br><span class="line">nmap &lt;CR&gt; o&lt;Esc&gt;</span><br><span class="line">&quot; 按回车等于换行</span><br><span class="line">vnoremap Y &quot;+y</span><br><span class="line">&quot; 可视模式下按Y等于&quot;+y，复制到系统剪切板</span><br><span class="line">map sl :set splitright&lt;CR&gt;:vsplit&lt;CR&gt;</span><br><span class="line">&quot; 按 sl 向右分屏，后面同理</span><br><span class="line">map sh :set nosplitright&lt;CR&gt;:vsplit&lt;CR&gt;    </span><br><span class="line">map sk :set nosplitbelow&lt;CR&gt;:split&lt;CR&gt; </span><br><span class="line">map sj :set splitbelow&lt;CR&gt;:split&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">let mapleader=&quot; &quot;</span><br><span class="line">map &lt;LEADER&gt;l &lt;C-w&gt;l</span><br><span class="line">map &lt;LEADER&gt;k &lt;C-w&gt;k</span><br><span class="line">map &lt;LEADER&gt;h &lt;C-w&gt;h</span><br><span class="line">map &lt;LEADER&gt;j &lt;C-w&gt;j</span><br><span class="line">&quot; 修改 空格+hjkl 为光标在分屏中移动</span><br><span class="line">map &lt;up&gt; :res +5&lt;CR&gt;</span><br><span class="line">map &lt;down&gt; :res -5&lt;CR&gt;</span><br><span class="line">map &lt;left&gt; :vertical resize-5&lt;CR&gt;</span><br><span class="line">map &lt;right&gt; :vertical resize+5&lt;CR&gt;</span><br><span class="line">&quot; 通过上下左右箭头修改分屏大小</span><br><span class="line">map sv &lt;C-w&gt;t&lt;C-w&gt;H</span><br><span class="line">map sh &lt;C-w&gt;t&lt;C-w&gt;K</span><br><span class="line">&quot; sv 改为左右分屏</span><br><span class="line">map &lt;LEADER&gt;tt :tabe&lt;CR&gt;</span><br><span class="line">map &lt;LEADER&gt;th :-tabnext&lt;CR&gt;</span><br><span class="line">map &lt;LEADER&gt;tl :+tabnext&lt;CR&gt;</span><br><span class="line">&quot; tt 新建标签页 th移动在左边的标签页 tl右</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改设置"><a href="#修改设置" class="headerlink" title="修改设置"></a>修改设置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">set clipboard+=unnamedplus</span><br><span class="line">&quot; 让vim与系统共享同一个剪切板</span><br><span class="line">set number</span><br><span class="line">&quot; 显示行号</span><br><span class="line">set wildmenu</span><br><span class="line">&quot; 底线命令模式下，按Tab显示补全</span><br><span class="line">set relativenumber</span><br><span class="line">&quot; 显示相对行号</span><br><span class="line">set norelativenumber</span><br><span class="line">&quot; 取消显示相对行号</span><br><span class="line">set cursorline</span><br><span class="line">&quot; 突显当前行</span><br><span class="line">set scrolloff=5</span><br><span class="line">&quot; 光标与窗口的距离为5行</span><br><span class="line">set wrap</span><br><span class="line">&quot; 设置字符不超出窗口</span><br><span class="line">set ignorecase</span><br><span class="line">&quot; 搜索忽略大小写</span><br><span class="line">set smartcase</span><br><span class="line">&quot; 智能搜索匹配</span><br><span class="line">set tabstop=4</span><br><span class="line">set shiftwidth=4</span><br><span class="line">&quot; 调整Tab和每一级缩进的长度</span><br><span class="line">let &amp;t_SI = &quot;\&lt;Esc&gt;]50;CursorShape=1\x7&quot;</span><br><span class="line">let &amp;t_EI = &quot;\&lt;Esc&gt;]50;CursorShape=0\x7&quot;</span><br><span class="line">&quot; 插入状态的光标改为竖线,nvim默认开启</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p><strong>vim-plug</strong></p>
+<p>Vim 的一款插件管理器  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/junegunn/vim-plug">https://github.com/junegunn/vim-plug</a>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181002722.gif" fancybox="true"/></div></div>
+
+<p><strong>安装</strong></p>
+<p>Vim</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fLo ~/.vim/autoload/plug.vim --create-dirs \</span><br><span class="line">    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span><br></pre></td></tr></table></figure>
+
+<p>Neovim</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \</span><br><span class="line">    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用</strong></p>
+<p>以下命令均在命令模式下使用</p>
+<ul>
+<li>安装插件 <code>:PlugInstall</code></li>
+<li>更新插件 <code>:PlugUpdate</code></li>
+<li>删除插件 PlugClean(先在 <code>init.vim</code> 中，注释掉该插件，然后打开 Nvim 使用 <code>:PlugClean</code> 命令清除该插件)</li>
+<li>查看插件状态：<code>:PlugStatus</code></li>
+<li>升级 vim-plug：<code>:PlugUpgrade</code></li>
+</ul>
+<p>如果想暂时禁用某个插件，但不删除它：</p>
+<p>在 inti.vim 中注释掉该插件 或者 <code>Plug &#39;插件名&#39;, &#123; &#39;on&#39;: [] &#125;</code></p>
+<hr>
+<p><strong>vim-airline</strong></p>
+<p>状态栏插件</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vim-airline/vim-airline">https://github.com/vim-airline/vim-airline</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vim-airline/vim-airline-themes">https://github.com/vim-airline/vim-airline-themes</a>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180956087.gif" fancybox="true"/></div></div>
+
+<p>在配置文件中添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line">Plug &#x27;vim-airline/vim-airline&#x27; </span><br><span class="line">Plug &#x27;vim-airline/vim-airline/vim-airline-themes&#x27;</span><br><span class="line">call plug#end()</span><br></pre></td></tr></table></figure>
+
+<p>保存后输入命令 <code>PlugInstall</code>（按 Tab 键可以补全），显示 <strong>Finishing … Done!</strong>  就安装好了   </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180957821.jpg" fancybox="true"/></div></div>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181005285.jpg" fancybox="true"/></div></div>
+
+<p><strong>vim-snazzy</strong></p>
+<p>配色主题</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/connorholyday/vim-snazzy">https://github.com/connorholyday/vim-snazzy</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/w0ng/vim-hybrid">https://github.com/w0ng/vim-hybrid</a>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.ax1x.com/2019/09/15/ncKGY6.png" fancybox="true"/></div></div>
+
+<p><strong>vim-devicons</strong></p>
+<p>显示图标</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ryanoasis/vim-devicons">https://github.com/ryanoasis/vim-devicons</a>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181000452.jpg" fancybox="true"/></div></div>
+
+<p><strong>nerdtree</strong></p>
+<p>文件树  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/scrooloose/nerdtree">https://github.com/scrooloose/nerdtree</a></p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.ax1x.com/2019/09/14/n6Vc8J.png" fancybox="true"/></div></div>  
+
+<p><strong>vim-nerdtree-syntax-highlight</strong>  </p>
+<p>nerdtree 文件名高亮</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tiagofumo/vim-nerdtree-syntax-highlight">https://github.com/tiagofumo/vim-nerdtree-syntax-highlight</a>  </p>
+<p><strong>vim-floaterm</strong></p>
+<p>悬浮窗口使用终端</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/voldikss/vim-floaterm">https://github.com/voldikss/vim-floaterm</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/107749687">https://zhuanlan.zhihu.com/p/107749687</a> <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180959426.gif" fancybox="true"/></div></div></p>
+<p><strong>coc.nvim</strong>  </p>
+<p>一款针对 neovim 所开发的代码补全插件</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/neoclide/coc.nvim">https://github.com/neoclide/coc.nvim</a>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181004842.gif" fancybox="true"/></div></div>
+
+<p>::: collapse 示例安装 java 代码补全</p>
+<p>安装插件：<code>Plug &#39;neoclide/coc.nvim&#39;, &#123;&#39;branch&#39;: &#39;release&#39;&#125;</code><br>执行：<code>CocInstall coc-java</code>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180958185.jpg" fancybox="true"/></div></div>
+
+<p>安装成功：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181004193.jpg" fancybox="true"/></div></div>
+
+<p>打开 java 文件会自动下载 jdt.ls：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181003207.jpg" fancybox="true"/></div></div>
+
+<p>默认下载地址是 eclipse.org ：</p>
+ <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181006830.jpg" fancybox="true"/></div></div>
+
+<p>下载太慢的话可以从 <a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/eclipse/jdtls/snapshots/">中科大镜像站</a> 下载，解压文件至 <code>~/.config/coc/extensions/coc-java-data/server</code></p>
+<p>:::  </p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/39302327">Coc.nvim 系列（一）： 为了更好的补全体验</a></p>
+<p><strong>tagbar</strong></p>
+<p>生成标签</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/majutsushi/tagbar">https://github.com/majutsushi/tagbar</a>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181003073.jpg" fancybox="true"/></div></div>
+
+<p>如果在加载该插件时，报错: Tagbar: Exuberant ctags not found!</p>
+<p>安装 ctags 即可解决问题 </p>
+<p>Manjaro Linux：<code>sudo pacman -S ctags</code></p>
+<p>macOS：<code>brew install ctags</code></p>
+<p><strong>Markdown Preview for Neovim</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/iamcco/markdown-preview.nvim">https://github.com/iamcco/markdown-preview.nvim</a>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/ia_100000000506.gif" fancybox="true"/></div></div>
+
+<p><strong>goyo</strong></p>
+<p>优雅的文本编辑体验</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/junegunn/goyo.vim">https://github.com/junegunn/goyo.vim</a>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304180957590.jpg" fancybox="true"/></div></div>
+
+<p><strong>vim-startify</strong></p>
+<p>快捷启动页  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mhinz/vim-startify">https://github.com/mhinz/vim-startify</a></p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.ax1x.com/2019/09/14/n6wXyn.png" fancybox="true"/></div></div>
+
+<p><strong>indentLine</strong></p>
+<p>缩进 “刻度尺”  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Yggdroot/indentLine">https://github.com/Yggdroot/indentLine</a></p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181000677.jpg" fancybox="true"/></div></div>
+
+<p><strong>nerdcommenter</strong></p>
+<p>代码注释</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/scrooloose/nerdcommenter">https://github.com/scrooloose/nerdcommenter</a>  </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/202304181001737.gif" fancybox="true"/></div></div>
+
+<p><strong>undotree</strong></p>
+<p>编辑历史记录</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mbbill/undotree">https://github.com/mbbill/undotree</a>  </p>
+<p><strong>auto-pairs</strong></p>
+<p>自动补全一对括号</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jiangmiao/auto-pairs">https://github.com/jiangmiao/auto-pairs</a>  </p>
+<p><strong>YouCompleteMe</strong></p>
+<p>强大的代码补全</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ycm-core/YouCompleteMe">https://github.com/ycm-core/YouCompleteMe</a>  </p>
+<p>安装：</p>
+<p><code>cd ~/.vim/plugged/YouCompleteMe</code></p>
+<p><code>sudo python3 install.py</code> </p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av55498503">https://www.bilibili.com/video/av55498503</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.imooc.com/learn/1129">https://www.imooc.com/learn/1129</a></li>
+</ul>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/03/07/homebrew/">Mac OS 手动安装 Homebrew</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/01/04/hexo2/">部署 Hexo 博客到云服务器</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

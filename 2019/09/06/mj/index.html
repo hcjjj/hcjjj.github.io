@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Manjaro Linux 使用记录 - H-sediment</title>
+
+  
+    <meta name="description" content="Manjaro 是一个基于 Arch Linux 专业制作的桌面操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Manjaro Linux 使用记录">
+<meta property="og:url" content="http://example.com/2019/09/06/mj/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="Manjaro 是一个基于 Arch Linux 专业制作的桌面操作系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-06T12:49:55.000Z">
+<meta property="article:modified_time" content="2024-10-04T04:45:40.697Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Manjaro">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="Linux,Manjaro">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Manjaro Linux 使用记录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%8C%89%E9%94%AE"><span class="toc-number">1.</span> <span class="toc-text">修改按键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E7%9B%AE%E5%BD%95%E4%B8%BA%E8%8B%B1%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">修改主目录为英文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">安装中文输入法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">安装常用软件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF"><span class="toc-number">5.</span> <span class="toc-text">配置终端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pacman"><span class="toc-number">6.</span> <span class="toc-text">Pacman</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-number">6.1.</span> <span class="toc-text">配置国内镜像源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">6.2.</span> <span class="toc-text">常用命令</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Linux/">Linux</a></div><div id="post-meta">发布于&nbsp;<time datetime="2019-09-06T12:49:55.000Z">2019-09-06</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Manjaro Linux 使用记录</span></h1>
+<p><a target="_blank" rel="noopener" href="https://manjaro.org/">Manjaro</a> 是一个基于 Arch Linux 专业制作的桌面操作系统  </p>
+<span id="more"></span>
+
+<h2 id="修改按键"><a href="#修改按键" class="headerlink" title="修改按键"></a>修改按键</h2><p><strong>交换 Esc 和 Caps Lock 的按键位置</strong></p>
+<p>方法一:</p>
+<ol>
+<li><p><code>sudo pacman -S xorg</code></p>
+</li>
+<li><p>在 ~&#x2F; 下 创建 <code>.xmodmaprc</code> 文件,加入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">remove Lock = Caps_Lock</span><br><span class="line">add Lock = Escape</span><br><span class="line">keysym Caps_Lock = Escape</span><br><span class="line">keysym Escape = Caps_Lock</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行 <code>xmodmap .xmodmaprc</code> 即生效  (重启后失效)</p>
+</li>
+</ol>
+<p>方法二:</p>
+<ol>
+<li><p>编辑 <code>/etc/X11/xorg.conf.d/00-keyboard.conf</code></p>
+</li>
+<li><p>增加 <code>Option &quot;XkbOptions&quot; &quot;caps:swapescape&quot;</code> :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Read and parsed by systemd-localed. It&#x27;s probably wise not to edit this file</span><br><span class="line"># manually too freely.</span><br><span class="line">Section &quot;InputClass&quot;</span><br><span class="line">        Identifier &quot;system-keyboard&quot;</span><br><span class="line">        MatchIsKeyboard &quot;on&quot;</span><br><span class="line">    Option &quot;XkbOptions&quot; &quot;caps:swapescape&quot;</span><br><span class="line">        Option &quot;XkbLayout&quot; &quot;cn&quot;</span><br><span class="line">        Option &quot;XkbModel&quot; &quot;pc105&quot;</span><br><span class="line">EndSection</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/lepeCoder/p/swap_ESC_and_Caps.html">https://www.cnblogs.com/lepeCoder/p/swap_ESC_and_Caps.html</a></p>
+</blockquote>
+<h2 id="修改主目录为英文"><a href="#修改主目录为英文" class="headerlink" title="修改主目录为英文"></a>修改主目录为英文</h2><p>选择中文语言后，家目录下的文件夹名是中文，不方便终端下的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S xdg-user-dirs-gtk</span><br><span class="line">export LANG=en_US</span><br><span class="line">xdg-user-dirs-gtk-update</span><br><span class="line"># 会弹出窗口提示语言更改，更新名称即可</span><br><span class="line">export LANG=zh_CN.UTF-8</span><br><span class="line"># 以显示中文</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h2><p>安装输入法工具</p>
+<p><code>sudo pacman -S fcitx fcitx-im fcitx-configtool</code></p>
+<blockquote>
+<p>如果安装后一直提示输入法异常则选择 <code>sudo pacman -S fcitx-qt4 fcitx-configtool</code></p>
+</blockquote>
+<p>安装搜狗输入法</p>
+<p><code>sudo pacman -S fcitx-sogoupinyin</code></p>
+<p>皮肤下载：<a target="_blank" rel="noopener" href="https://pinyin.sogou.com/skins/">https://pinyin.sogou.com/skins/</a></p>
+<p>修改全局变量</p>
+<p><code>sudo vi ~/.xprofile</code></p>
+<p>输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export GTK_IM_MODULE=fcitx</span><br><span class="line">export QT_IM_MODUE=fcitx</span><br><span class="line">erport XMODIFERS=”@im=fcitx</span><br></pre></td></tr></table></figure>
+<p>重启后即可使用中文输入法</p>
+<h2 id="安装常用软件"><a href="#安装常用软件" class="headerlink" title="安装常用软件"></a>安装常用软件</h2><p>dock栏</p>
+<p><code>sudo pacman -S latte-dock</code></p>
+<p>安装配置后设置开机自启</p>
+<p>TIM</p>
+<p><code>sudo pacman -S deepin.com.qq.office</code></p>
+<p><strong>安装后如果打不开：</strong></p>
+<ol>
+<li>安装gnome-settings-daemon</li>
+</ol>
+<p>  <code>sudo pacman -S gnome-settings-daemon</code></p>
+<ol start="2">
+<li>设置开启自启动</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">系统设置-&gt;开机或关机-&gt;自动启动-&gt;添加脚本-&gt;输入/usr/lib/gsd-xsettings，重启后即可打开</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>WPS<br><code>sudo pacman -S wps-office </code></p>
+<p>安装wps必要字体</p>
+<p><code>sudo pacman -S ttf-wps-fonts</code></p>
+<p><strong>安装windows字体：</strong></p>
+<p>由于版权问题，linux版WPS 没有自带字体，而许多字体是平时要使用的</p>
+<ol>
+<li><p>到windows字体目录(双系统)下，复制字体文件到wps-fonts</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp *.ttf /usr/share/fonts/wps-fonts/</span><br><span class="line">sudo cp *.TTF /usr/share/fonts/wps-fonts/</span><br><span class="line">sudo cp simsun.ttc /usr/share/fonts/wps-fonts/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加可执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/fonts/</span><br><span class="line">sudo chmod 755 wps-fonts/</span><br><span class="line">cd /usr/share/fonts/wps-fonts/</span><br><span class="line">sudo chmod 644 *</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成字体缓存</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfontscale</span><br><span class="line">sudo mkfontdir</span><br><span class="line">fc-cache </span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这下wps里就有了平时那些常用的字体</p>
+<hr>
+<p>网易云音乐</p>
+<p><code>sudo pacman -S netease-cloud-music</code></p>
+<p>搜索栏无法输入中文解决办法：</p>
+<ol>
+<li><p><code>yay -S qcef</code></p>
+</li>
+<li><p><code>sudo vim /opt/netease/netease-cloud-music/netease-cloud-music.bash</code> 修改为：</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">HERE=&quot;$(dirname &quot;$(readlink -f &quot;$&#123;0&#125;&quot;)&quot;)&quot;</span><br><span class="line">#export LD_LIBRARY_PATH=&quot;$&#123;HERE&#125;&quot;/libs</span><br><span class="line">#export QT_PLUGIN_PATH=&quot;$&#123;HERE&#125;&quot;/plugins </span><br><span class="line">#export QT_QPA_PLATFORM_PLUGIN_PATH=&quot;$&#123;HERE&#125;&quot;/plugins/platforms</span><br><span class="line">export XDG_CURRENT_DESKTOP=DDE </span><br><span class="line">exec &quot;$&#123;HERE&#125;&quot;/netease-cloud-music $@</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>VirtualBox 虚拟机</p>
+<ol>
+<li><code>sudo uname -r</code> 查看内核版本</li>
+<li><code>sudo pacman -S virtualbox</code> 安装对应内核的版本</li>
+<li><code>sudo pacman -Ss virtualbox-ext-oracle</code> 安装扩展包</li>
+</ol>
+<hr>
+<p>谷歌浏览器</p>
+<p><code>sudo pacman -S google-chrome</code></p>
+<p>Vim</p>
+<p><code>sudo pacman -S vim</code></p>
+<p>Neovim</p>
+<p><code>sudo pacman -S neovim</code></p>
+<p>Ranger</p>
+<p><code>sudo pacman -S ranger</code></p>
+<p>微信</p>
+<p><code>sudo pacman -S electronic-wechat</code></p>
+<p>Markdown编辑器</p>
+<p><code>sudo pacman -S typora</code></p>
+<p>VS Code</p>
+<p><code>sudo pacman -S code </code></p>
+<p>百度网盘</p>
+<p><code>sudo pacman -S baidunetdisk-bin</code></p>
+<p>截图工具</p>
+<p><code>sudo pacman -S deepin-screenshot</code></p>
+<p><code>sudo pacman -S flameshot</code></p>
+<p>yay</p>
+<p>pacman不直接支持AUR，yay是一个AUR助手</p>
+<p><code>sudo pacman -S yay</code></p>
+<h2 id="配置终端"><a href="#配置终端" class="headerlink" title="配置终端"></a>配置终端</h2><p>安装Monaco字体 </p>
+<p><code>curl -kL https://raw.github.com/cstrap/monaco-font/master/install-font-archlinux.sh | bash</code></p>
+<p>fish</p>
+<p><code>sudo pacman -S fish</code></p>
+<p>安装oh-my-fish</p>
+<p><code>curl -L https://get.oh-my.fish | fish</code></p>
+<p>更换shell为fish</p>
+<p><code>chsh -s /usr/bin/fish</code></p>
+<p>更改配色样式</p>
+<p><code>fish_config</code></p>
+<h2 id="Pacman"><a href="#Pacman" class="headerlink" title="Pacman"></a>Pacman</h2><p>Pacman是Manjaro系统中的软件包管理器，Manjaro也提供了可视化操作的 pacman-manager</p>
+<h3 id="配置国内镜像源"><a href="#配置国内镜像源" class="headerlink" title="配置国内镜像源"></a>配置国内镜像源</h3><p>Manjaro本身包含了很多国内的源，测试并自动选择国内源<br><code>sudo pacman-mirrors -c China</code></p>
+<p><strong>添加archlinuxcn源：</strong></p>
+<p><code>sudo vi /etc/pacman.d/archlinuxcn</code><br>在archlinuxcn中写入国内的镜像源地址：</p>
+<pre><code>Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+</code></pre>
+<p><code>sudo vi /etc/pacman.conf</code><br>在末尾添加：</p>
+<pre><code>[archlinuxcn]
+SigLevel = Never
+Include = /etc/pacman.d/archlinuxcn
+</code></pre>
+<p>保存后更新软件源</p>
+<p><code>sudo pacman -Syy</code></p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><ul>
+<li><p><strong>更新</strong></p>
+<ul>
+<li><p><code>sudo pacman -Sy</code> 更新软件库，获取最新软件情报，如果刚刚更新过就不再更新</p>
+</li>
+<li><p><code>sudo pacman -Syy</code> 强制更新软件库，无论刚刚是否更新过</p>
+</li>
+<li><p><code>sudo pacman -Su</code> 更新软件包</p>
+</li>
+<li><p><code>sudo pacman -Syyu</code> 更新软件库并更新软件包</p>
+</li>
+</ul>
+</li>
+<li><p><strong>安装</strong></p>
+<ul>
+<li><code>sudo pacman -S [软件包名]</code> 安装软件包</li>
+</ul>
+</li>
+<li><p><strong>查询</strong></p>
+<ul>
+<li><p><code>sudo pacman -Ss [要查询的软件包名]</code> 查询软件仓库中的软件</p>
+</li>
+<li><p><code>sudo pacman -Q</code> 查询本地所有已安装的软件包</p>
+</li>
+<li><p><code>sudo pacman -Q | wc -l</code> 查看本地已安装的软件包数量</p>
+</li>
+<li><p><code>sudo pacman -Qe | wc -l</code> 查看本地自己安装的软件包数量（不包括系统自带的软件包）</p>
+</li>
+<li><p><code>sudo pacman -Qqe</code> 查询本地自己安装的软件包（不显示版本号）</p>
+</li>
+<li><p><code>sudo pacman -Qs [要查询的软件包名]</code> 查询本地软件包</p>
+</li>
+<li><p><code>sudo pacman -Qdt</code> 查询系统中不再被需要的依赖</p>
+</li>
+<li><p><code>sudo pacman -Qdtq</code> 查询系统中不再被需要的依赖（不显示版本号）</p>
+</li>
+</ul>
+</li>
+<li><p><strong>删除</strong></p>
+<ul>
+<li><p><code>sudo pacman -Sc</code> 删除本地安装的软件包缓存</p>
+</li>
+<li><p><code>sudo pacman -R [要删除的软件包名]</code> 删除软件包</p>
+</li>
+<li><p><code>sudo pacman -Rs [要删除的软件包名]</code> 删除软件包及其依赖</p>
+</li>
+<li><p><code>sudo pacman -Rn [要删除的软件包名]</code> 删除软件包及其配置文件</p>
+</li>
+<li><p><code>sudo pacman -Ru [要删除的软件包名]</code> 删除软件包与不再被需要的依赖</p>
+</li>
+<li><p><code>sudo pacman -R (sudo pacman -Qdtq)</code> 删除系统中不再被需要的依赖</p>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2019/11/01/ssh/">SSH 连接云服务器</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2019/07/28/markdown/">Markdown 常用语法整理</a></div></section></div>
+
+
+
+
+
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
