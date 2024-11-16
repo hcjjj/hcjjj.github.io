@@ -23,18 +23,18 @@
   <title>IEEE S&P 2024 - 对车载攻击面的重新审视 - H-sediment</title>
 
   
-    <meta name="description" content="论文阅读：**《Revisiting Automotive Attack Surfaces: a Practitioners’ Perspective》**">
+    <meta name="description" content="论文阅读：《Revisiting Automotive Attack Surfaces: a Practitioners’ Perspective》">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IEEE S&amp;P 2024 - 对车载攻击面的重新审视">
 <meta property="og:url" content="http://example.com/2023/12/05/CarVal/index.html">
 <meta property="og:site_name" content="H-sediment">
-<meta property="og:description" content="论文阅读：**《Revisiting Automotive Attack Surfaces: a Practitioners’ Perspective》**">
+<meta property="og:description" content="论文阅读：《Revisiting Automotive Attack Surfaces: a Practitioners’ Perspective》">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204111739.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204155410.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240307112819.png">
 <meta property="article:published_time" content="2023-12-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-06-21T11:25:21.941Z">
+<meta property="article:modified_time" content="2024-11-16T13:08:35.673Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Automotive">
 <meta name="twitter:card" content="summary">
@@ -91,7 +91,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">IEEE S&P 2024 - 对车载攻击面的重新审视</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">论文阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">运行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">代码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84%E6%8E%A8%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">攻击路径推理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0"><span class="toc-number">3.2.</span> <span class="toc-text">风险评估</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TARA-1-0"><span class="toc-number">4.</span> <span class="toc-text">TARA 1.0</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">IEEE S&P 2024 - 对车载攻击面的重新审视</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">论文阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">运行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TARA-1-0"><span class="toc-number">4.</span> <span class="toc-text">TARA 1.0</span></a></li></ol></div></div></widget>
 
 
 
@@ -111,7 +111,7 @@
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>IEEE S&P 2024 - 对车载攻击面的重新审视</span></h1>
-<p>论文阅读：**<a target="_blank" rel="noopener" href="https://www.computer.org/csdl/proceedings-article/sp/2024/313000a080/1RjEaOV6EQE">《Revisiting Automotive Attack Surfaces: a Practitioners’ Perspective》</a>**</p>
+<p>论文阅读：<a target="_blank" rel="noopener" href="https://www.computer.org/csdl/proceedings-article/sp/2024/313000a080/1RjEaOV6EQE">《Revisiting Automotive Attack Surfaces: a Practitioners’ Perspective》</a></p>
 <span id="more"></span>
 
 <div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204111739.png" fancybox="true"/></div></div>
@@ -334,12 +334,14 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install python3 pip</span><br><span class="line">pip install pydot networkx matplotlib</span><br><span class="line">python3 risk_assessment.py</span><br></pre></td></tr></table></figure>
 
-<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><h3 id="攻击路径推理"><a href="#攻击路径推理" class="headerlink" title="攻击路径推理"></a>攻击路径推理</h3><ul>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p><strong>攻击路径推理</strong></p>
+<ul>
 <li><em>carval_infer.sh</em>（启动推断攻击路径的脚本）</li>
 <li><em>input_IVN.P</em>（CarVal 的输入，包括 IVN 和待推断的攻击目标）</li>
 <li><em>interaction_rules.P</em>（CarVal 推理的所有交互规则）</li>
 </ul>
-<h3 id="风险评估"><a href="#风险评估" class="headerlink" title="风险评估"></a>风险评估</h3><ul>
+<p><strong>风险评估</strong></p>
+<ul>
 <li><em>risk_assessment.py</em>（此代码将对由 <em>carval_infer.sh</em> 生成的 <em>AttackGraph.dot</em> 执行风险评估）</li>
 </ul>
 <h2 id="TARA-1-0"><a href="#TARA-1-0" class="headerlink" title="TARA 1.0"></a>TARA 1.0</h2><p>参考资料：</p>
