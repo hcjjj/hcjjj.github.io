@@ -32,9 +32,8 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204111739.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20231204155410.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240307112819.png">
 <meta property="article:published_time" content="2023-12-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-16T13:08:35.673Z">
+<meta property="article:modified_time" content="2024-11-16T14:06:00.322Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Automotive">
 <meta name="twitter:card" content="summary">
@@ -91,7 +90,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">IEEE S&P 2024 - 对车载攻击面的重新审视</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">论文阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">运行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">代码分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TARA-1-0"><span class="toc-number">4.</span> <span class="toc-text">TARA 1.0</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">IEEE S&P 2024 - 对车载攻击面的重新审视</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB"><span class="toc-number">1.</span> <span class="toc-text">论文阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">运行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">代码分析</span></a></li></ol></div></div></widget>
 
 
 
@@ -343,104 +342,6 @@
 <p><strong>风险评估</strong></p>
 <ul>
 <li><em>risk_assessment.py</em>（此代码将对由 <em>carval_infer.sh</em> 生成的 <em>AttackGraph.dot</em> 执行风险评估）</li>
-</ul>
-<h2 id="TARA-1-0"><a href="#TARA-1-0" class="headerlink" title="TARA 1.0"></a>TARA 1.0</h2><p>参考资料：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.iso.org/standard/70918.html">ISO&#x2F;SAE 21434:2021 - Road vehicles Cybersecurity engineering</a></li>
-<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/fullHtml/10.1145/3600160.3605084">A Systematic Review of Threat Analysis and Risk Assessment Methodologies for Connected and Automated Vehicles</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.aqniu.com/vendor/91951.html">七大执行步骤详解如何进行 TARA 分析</a></li>
-</ul>
-<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20240307112819.png" fancybox="true"/></div></div>
-
-<ul>
-<li><strong>资产识别（定义）</strong></li>
-<li><strong>威胁场景识别</strong><ul>
-<li><p>威胁情景识别的方法可以使用<strong>小组讨论</strong>和&#x2F;或<strong>系统方法</strong>，例如：</p>
-<ul>
-<li><p>诱发因合理的可预见的误用或滥用而产生的恶意用例</p>
-</li>
-<li><p>基于 EVITA、TVRA、PASTA、STRIDE 等框架的威胁建模方法</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>影响等级评估</strong><ul>
-<li>应根据安全、财务、操作和隐私（S、F、O、P）等影响类别分别对道路使用者的潜在不利后果进行评估损害情景</li>
-<li>损害情景的影响等级应按每个影响类别确定为以下之一：severe、major、moderate、negligible（严重、主要的、中等、可忽略不计）</li>
-</ul>
-</li>
-<li><strong>攻击路径分析</strong><ul>
-<li>应分析威胁情景，以确定攻击路径<ul>
-<li>一个攻击路径分析可以基于<ul>
-<li>自上而下的方法，通过分析威胁情景的不同方式来推断攻击路径。 可以实现，例如攻击树、<strong>攻击图</strong></li>
-<li>自下而上的方法，从确定的网络安全漏洞中建立攻击路径</li>
-</ul>
-</li>
-<li>如果部分攻击路径没有导致威胁情景的实现，可以停止对该部分攻击路径的分析</li>
-</ul>
-</li>
-<li>一个攻击路径应与该攻击路径可实现的威胁情景相关<ul>
-<li>在产品开发的早期阶段，攻击路径往往是不完整或不精确的，因为具体的实施细节还不知道，无法识别具体的漏洞</li>
-<li>在产品开发过程中，随着更多信息的出现，例如在漏洞分析之后，攻击路径可以被更新</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>攻击可行性评估</strong><ul>
-<li><p>攻击可行性评级方法应根据以下情况之一来定义办法</p>
-<ul>
-<li>基于攻击潜力的方法</li>
-<li>基于CVSS的方法</li>
-<li>基于攻击向量的方法</li>
-<li>选择方法可以取决于生命周期中的阶段和可用的信息</li>
-</ul>
-</li>
-<li><p>如果使用基于攻击潜力的方法，应根据核心因素确定攻击可行性等级，包括：</p>
-<ul>
-<li>经过的时间</li>
-<li>专家的专业知识</li>
-<li>对该项目或组件的了解</li>
-<li>机会之窗</li>
-<li>设备</li>
-</ul>
-</li>
-<li><p>如果使用基于 CVSS 的方法，则应根据以下情况确定攻击可行性等级在基本度量组的可利用度量上，包括：</p>
-<ul>
-<li>攻击矢量</li>
-<li>攻击的复杂性</li>
-<li>需要的特权</li>
-<li>用户互动</li>
-</ul>
-</li>
-<li><p>如果使用基于攻击矢量的方法，应根据评估攻击路径的主要攻击矢量（参见CVSS 2.1.1 ）来确定攻击可行性等级</p>
-</li>
-</ul>
-</li>
-<li><strong>风险值的确定</strong><ul>
-<li>对于每个威胁情景，应根据相关损害情景的影响和相关攻击路径的攻击可行性来确定风险值<ul>
-<li>如果一个威胁情景对应一个以上的损害情景或一个相关的损害情景在一个以上的影响类别中具有影响， 可以为每个影响等级单独确定一个风险值</li>
-<li>如果威胁情景与一个以上的攻击路径相对应，相关的攻击可行性评级可以适当地汇总，例如，威胁情景被赋予相应攻击路径的攻击可行性评级中的最大值。</li>
-</ul>
-</li>
-<li>威胁情景的风险值应在1和5之间（包括1和5），其中1的值代表最小风险</li>
-<li>风险值确定的方法：<ul>
-<li>风险矩阵</li>
-<li>风险公式</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>风险处理决策</strong><ul>
-<li>对于每种威胁情况，考虑到其风险值，应确定以下一种或多种风险处理方案：<ul>
-<li>避开风险，如通过消除风险源来避免风险，决定不开始或继续进行引起风险的活动</li>
-<li>减少风险</li>
-<li>分担风险，如通过合同分担风险或通过购买保险转移风险</li>
-<li>保留风险</li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 
 
