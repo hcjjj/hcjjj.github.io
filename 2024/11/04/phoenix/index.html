@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/20241103221022.png">
 <meta property="article:published_time" content="2024-11-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-08T08:39:48.683Z">
+<meta property="article:modified_time" content="2024-11-19T06:24:41.935Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="architecture">
 <meta property="article:tag" content="distributed">
@@ -90,7 +90,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">《凤凰架构：构建可靠的大型分布式系统》🪽</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%94%E8%BF%9B%E4%B8%AD%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">演进中的架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%B6%E4%BB%A3"><span class="toc-number">1.1.</span> <span class="toc-text">原始分布式时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%BD%93%E7%B3%BB%E7%BB%9F%E6%97%B6%E4%BB%A3"><span class="toc-number">1.2.</span> <span class="toc-text">单体系统时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SOA-%E6%97%B6%E4%BB%A3"><span class="toc-number">1.3.</span> <span class="toc-text">SOA 时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%97%B6%E4%BB%A3"><span class="toc-number">1.4.</span> <span class="toc-text">微服务时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%97%B6%E4%BB%A3"><span class="toc-number">1.5.</span> <span class="toc-text">后微服务时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%9C%8D%E5%8A%A1%E6%97%B6%E4%BB%A3"><span class="toc-number">1.6.</span> <span class="toc-text">无服务时代</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E5%B8%88%E7%9A%84%E8%A7%86%E8%A7%92"><span class="toc-number">2.</span> <span class="toc-text">架构师的视角</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">访问远程调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">事务处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E5%A4%9A%E7%BA%A7%E5%88%86%E6%B5%81%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.3.</span> <span class="toc-text">透明多级分流系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">架构安全性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E5%9F%BA%E7%9F%B3"><span class="toc-number">3.</span> <span class="toc-text">分布式的基石</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD"><span class="toc-number">4.</span> <span class="toc-text">不可变基础设施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%96%B9%E6%B3%95%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">技术方法论</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">《凤凰架构：构建可靠的大型分布式系统》🪽</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%94%E8%BF%9B%E4%B8%AD%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">演进中的架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%B6%E4%BB%A3"><span class="toc-number">1.1.</span> <span class="toc-text">原始分布式时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%BD%93%E7%B3%BB%E7%BB%9F%E6%97%B6%E4%BB%A3"><span class="toc-number">1.2.</span> <span class="toc-text">单体系统时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SOA-%E6%97%B6%E4%BB%A3"><span class="toc-number">1.3.</span> <span class="toc-text">SOA 时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%97%B6%E4%BB%A3"><span class="toc-number">1.4.</span> <span class="toc-text">微服务时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%97%B6%E4%BB%A3"><span class="toc-number">1.5.</span> <span class="toc-text">后微服务时代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%9C%8D%E5%8A%A1%E6%97%B6%E4%BB%A3"><span class="toc-number">1.6.</span> <span class="toc-text">无服务时代</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E5%B8%88%E7%9A%84%E8%A7%86%E8%A7%92"><span class="toc-number">2.</span> <span class="toc-text">架构师的视角</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.1.</span> <span class="toc-text">访问远程服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">远程服务调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#REST-%E8%AE%BE%E8%AE%A1%E9%A3%8E%E6%A0%BC"><span class="toc-number">2.1.2.</span> <span class="toc-text">REST 设计风格</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">事务处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.2.1.</span> <span class="toc-text">本地事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.2.2.</span> <span class="toc-text">全局事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.2.3.</span> <span class="toc-text">共享事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.2.4.</span> <span class="toc-text">分布式事务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E5%A4%9A%E7%BA%A7%E5%88%86%E6%B5%81%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.3.</span> <span class="toc-text">透明多级分流系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">架构安全性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E5%9F%BA%E7%9F%B3"><span class="toc-number">3.</span> <span class="toc-text">分布式的基石</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD"><span class="toc-number">4.</span> <span class="toc-text">不可变基础设施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%96%B9%E6%B3%95%E8%AE%BA"><span class="toc-number">5.</span> <span class="toc-text">技术方法论</span></a></li></ol></div></div></widget>
 
 
 
@@ -367,13 +367,16 @@
 <p>如果说微服务架构是分布式系统这条路当前所能做到的极致，那无服务架构，也许就是“不分布式”的云端系统这条路的起点。</p>
 <p>将无服务作为技术层面的架构，将微服务视为应用层面的架构，把它们组合起来使用是完全合理可行的。以后，无论是物理机、虚拟机、容器，抑或是无服务云函数，都会是微服务实现方案的候选项之一。 <strong>（微服务与无服务并存）</strong></p>
 </blockquote>
-<h2 id="架构师的视角"><a href="#架构师的视角" class="headerlink" title="架构师的视角"></a>架构师的视角</h2><h3 id="访问远程调用"><a href="#访问远程调用" class="headerlink" title="访问远程调用"></a>访问远程调用</h3><blockquote>
+<h2 id="架构师的视角"><a href="#架构师的视角" class="headerlink" title="架构师的视角"></a>架构师的视角</h2><h3 id="访问远程服务"><a href="#访问远程服务" class="headerlink" title="访问远程服务"></a>访问远程服务</h3><h4 id="远程服务调用"><a href="#远程服务调用" class="headerlink" title="远程服务调用"></a>远程服务调用</h4><blockquote>
 <p>远程服务调用（Remote Procedure Call，RPC）在计算机科学中已经存在超过四十年时间</p>
+<p>最初计算机科学家们的想法，就是将 RPC 作为 IPC 的一种特例来看待，这个观点在今天，仅从分类上说也仍然合理，只是到具体操作手段上就不合适了</p>
 </blockquote>
+<p><strong>进程间通信</strong></p>
 <ul>
-<li>进程间通信<ul>
-<li>一个进程内的函数调用依赖<strong>栈内存</strong></li>
-<li>不同进程之间交换数据的问题被称为“进程间通信”（Inter-Process Communication，IPC）<ul>
+<li><p>一个进程内的函数调用依赖 <strong>栈内存</strong></p>
+</li>
+<li><p>不同进程之间交换数据的问题被称为“进程间通信”（Inter-Process Communication，IPC）</p>
+<ul>
 <li><strong>管道</strong>（Pipe）&#x2F; <strong>具名管道</strong>（Named Pipe）<ul>
 <li>普通管道只用于有亲缘关系的进程（由一个进程启动的另外一个进程）间的通信</li>
 <li>具名管道允许无亲缘关系的进程间的通信，管道典型的应用就是命令行中的“<code>|</code>”操作符</li>
@@ -391,20 +394,136 @@
 </li>
 <li><strong>共享内存</strong>（Shared Memory）允许多个进程访问共同一块公共内存空间，这是效率最高的进程间通信形式</li>
 <li><strong>本地套接字接口</strong>（UNIX&#x2F;IPC Socket），套接字接口则是更普适的进程间通信机制，可用于不同机器之间的进程通信<ul>
-<li>当 <strong>仅限于本机进程间通信时</strong>，套接字接口被优化，不会经过网络协议栈，不需要打包拆包、计算校验和、维护序号和应答等操作</li>
+<li>当 <strong>仅限于本机进程间通信时</strong>，套接字接口被优化，<strong>不会经过网络协议栈</strong>，不需要打包拆包、计算校验和、维护序号和应答等操作</li>
 <li>将应用层数据从一个进程复制到另一个进程，这种进程间通信方式即本地套接字接口（UNIX Domain Socket &#x2F; IPC Socket）</li>
+<li>由于 Socket 是网络栈的统一接口，它也能支持基于网络的跨机进程间通信</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</li>
-<li>通信的成本<ul>
-<li></li>
+<p><strong>通信的成本</strong></p>
+<p>由于 Socket 是各个操作系统都提供的标准接口，完全有可能把远程方法调用的通信细节隐藏在操作系统底层，从应用层面上来看可以做到远程调用与本地的进程间通信在编码上完全一致，在原始分布式时代的早期确实是奔着这个目标去做的</p>
+<p>1987 年，在“透明的 RPC 调用”一度成为主流范式的时候，Andrew Tanenbaum 教授曾发表论文“A Critique of The Remote Procedure Call Paradigm”，对这种透明的 RPC 范式提出一系列质问：把本地调用与远程调用当作同样的调用来处理，这是犯了方向性的错误，把系统间的调用透明化，反而会增加程序员工作的复杂度</p>
+<p>到 1994 年至 1997 年间，由 ACM 和 Sun 院士 Peter Deutsch、套接字接口发明者 Bill Joy、Java 之父 James Gosling 等一众在 Sun 公司工作的专家们共同总结了通过网络进行分布式运算的八宗罪（8 Fallacies of Distributed Computing）</p>
+<ul>
+<li>The network is reliable —— 网络是可靠的</li>
+<li>Latency is zero—— 延迟是不存在的</li>
+<li>Bandwidth is infinite —— 带宽是无限的</li>
+<li>The network is secure —— 网络是安全的</li>
+<li>Topology doesn’t change —— 拓扑结构是一成不变的</li>
+<li>There is one administrator —— 总会有一个管理员</li>
+<li>Transport cost is zero —— 不必考虑传输成本</li>
+<li>The network is homogeneous —— 网络都是同质化的</li>
+</ul>
+<p>以上这八条反话被认为是程序员在网络编程中经常忽略的八大问题，潜台词就是如果远程服务调用要透明化，就必须为这些罪过买单，这算是给 RPC 能否等同于 IPC 来 <strong>暂时</strong> 定下了一个具有公信力的结论</p>
+<p>至此，RPC 应该是一种高层次的或者说语言层次的特征，而不是像 IPC 那样，是低层次的或者说系统层次的特征”的观点成为工业界、学术界的主流观点</p>
+<blockquote>
+<p>远程服务调用是指位于互不重合的内存地址空间中的两个程序，在语言层面上，以同步的方式使用带宽有限的信道来传输程序控制信息。——Bruce Jay Nelson，Remote Procedure Call，Xerox PARC，1981</p>
+</blockquote>
+<p><strong>三个基本问题</strong></p>
+<p>这几十年所有流行过的 RPC 协议，都不外乎变着花样使用各种手段来解决以下三个基本问题：</p>
+<ul>
+<li><p><strong>如何表示数据</strong>，数据包括传递给方法的参数以及方法执行后的返回</p>
+<ul>
+<li>对于进程内的方法调用，使用程序语言预置和程序员自定义的数据类型，就很容易解决数据表示问题</li>
+<li>对于远程方法调用，则完全可能面临交互双方各自使用不同程序语言的情况</li>
+<li>即使只支持一种程序语言的 RPC 协议，在不同硬件指令集&#x2F;操作系统下，同样的数据类型也可能有不一样的表现细节</li>
+<li>有效的做法是将交互双方所涉及的数据转换为某种事先约定好的中立数据流格式来进行传输，将数据流转换回不同语言中对应的数据类型来使用 —— 就是序列化与反序列化，例如：<ul>
+<li>ONC RPC 的外部数据表示（External Data Representation，XDR）</li>
+<li>CORBA 的通用数据表示（Common Data Representation，CDR）</li>
+<li>Java RMI 的 Java 对象序列化流协议（Java Object Serialization Stream Protocol）</li>
+<li>gRPC 的 Protocol Buffers</li>
+<li>Web Service 的 XML 序列化</li>
+<li>众多轻量级 RPC 支持的 JSON 序列化</li>
 </ul>
 </li>
 </ul>
-<h3 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h3><h3 id="透明多级分流系统"><a href="#透明多级分流系统" class="headerlink" title="透明多级分流系统"></a>透明多级分流系统</h3><h3 id="架构安全性"><a href="#架构安全性" class="headerlink" title="架构安全性"></a>架构安全性</h3><h2 id="分布式的基石"><a href="#分布式的基石" class="headerlink" title="分布式的基石"></a>分布式的基石</h2><h2 id="不可变基础设施"><a href="#不可变基础设施" class="headerlink" title="不可变基础设施"></a>不可变基础设施</h2><h2 id="技术方法论"><a href="#技术方法论" class="headerlink" title="技术方法论"></a>技术方法论</h2>
+</li>
+<li><p><strong>如何传递数据</strong>，如何通过网络，在两个服务的 Endpoint 之间相互操作、交换数据（通常指的是应用层协议数据）</p>
+<ul>
+<li>两个服务交互不是只扔个序列化数据流来表示参数和结果就行</li>
+<li>许多在此之外的信息，譬如异常、超时、安全、认证、授权、事务等，都可能产生双方需要交换信息的需求</li>
+<li>在计算机科学中，专门有一个名词“Wire Protocol”来表示这种两个 Endpoint 之间交换这类数据的行为，常见的如下：<ul>
+<li>Java RMI 的 Java 远程消息交换协议（Java Remote Message Protocol，JRMP，也支持 RMI-IIOP）</li>
+<li>CORBA 的互联网 ORB 间协议（Internet Inter ORB Protocol，IIOP，是 GIOP 协议在 IP 协议上的实现版本）</li>
+<li>DDS 的实时发布订阅协议（Real Time Publish Subscribe Protocol，RTPS）</li>
+<li>Web Service 的简单对象访问协议（Simple Object Access Protocol，SOAP）</li>
+<li>如果要求足够简单，双方都是 HTTP Endpoint，直接使用 HTTP 协议也是可以的（如 JSON-RPC）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>如何表示方法</strong>，一套与语言无关的接口描述语言(Interface Description Language，IDL)</p>
+<ul>
+<li>在本地方法调用中，编译器或者解释器会根据语言规范，将调用的方法签名转换为进程空间中子过程入口位置的指针</li>
+<li>不过一旦要考虑不同语言，“如何表示同一个方法”“如何找到对应的方法”需要一个统一的跨语言的标准，用于表示方法的协议有：<ul>
+<li>Android 的 Android 接口定义语言（Android Interface Definition Language，AIDL）</li>
+<li>CORBA 的 OMG 接口定义语言（OMG Interface Definition Language，OMG IDL）</li>
+<li>Web Service 的 Web 服务描述语言（Web Service Description Language，WSDL）</li>
+<li>JSON-RPC 的 JSON Web 服务协议（JSON Web Service Protocol，JSON-WSP）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>以上 RPC 中的三个基本问题，全部都可以在本地方法调用过程中找到对应的解决方案</p>
+<p><strong>统一的 RPC</strong></p>
+<ul>
+<li>1998 年，XML 1.0 发布，并成为万维网联盟（World Wide Web Consortium，W3C）的推荐标准</li>
+<li>1999 年末，SOAP 1.0（Simple Object Access Protocol）规范的发布，标志着一种被称为“Web Service”的全新的 RPC 协议的诞生</li>
+<li>Web Service 采用 XML 作为远程过程调用的序列化、接口描述、服务发现等所有编码的载体<ul>
+<li>Web Service 采用 XML 每一次数据交互都包含大量的冗余信息，性能奇差</li>
+<li>Web Service 希望在一套协议上一揽子解决分布式计算中可能遇到的所有问题，让开发者学习负担沉重</li>
+</ul>
+</li>
+<li>总结<ul>
+<li>那些面向透明的、简单的 RPC 协议，如 DCE&#x2F;RPC、DCOM、Java RMI，要么依赖于操作系统，要么依赖于特定语言（<strong>约束</strong>）</li>
+<li>那些面向通用的、普适的 RPC 协议，如 CORBA，无法逃过使用 <strong>复杂性</strong> 的困扰（CORBA 烦琐的 OMG IDL、ORB ）</li>
+<li>那些意图通过技术手段来屏蔽复杂性的 RPC 协议，如 Web Service，又不免受到 <strong>性能</strong> 问题的束缚</li>
+</ul>
+</li>
+</ul>
+<p><strong>简单、普适、高性能</strong> 这三点，似乎真的很难同时满足</p>
+<p><strong>分裂的 RPC</strong></p>
+<p>由于一直没有一个同时满足以上三点的“完美 RPC 协议”出现，所以远程服务器调用这个小小的领域，逐渐进入群雄混战、百家争鸣的战国时代，距离“统一”越来越远，并一直延续至今</p>
+<p>现在，已经相继出现过许多难以穷举的协议和框架：</p>
+<ul>
+<li>RMI（sun&#x2F;Oracle）</li>
+<li>Thrift（Facebook&#x2F;Apache）</li>
+<li>Dubbo（阿里巴巴&#x2F;Apache）</li>
+<li>gRPC（Google）</li>
+<li>Motan1&#x2F;2（新浪）</li>
+<li>Finagle（Twitter）</li>
+<li>brpc（百度&#x2F;Apache）</li>
+<li>.NET Remoting（微软）</li>
+<li>Arvo（Hadoop）</li>
+<li>JSON-RPC 2.0（公开规范，JSON-RPC 工作组）</li>
+</ul>
+<p>这些 RPC 功能、特点不尽相同，有的是某种语言私有，有的支持跨越多种语言，有的运行在应用层 HTTP 协议之上，有的直接运行于传输层 TCP&#x2F;UDP 协议之上，但并不存在哪一款是“最完美的 RPC”，任何一款具有生命力的 RPC 框架，都不再去追求大而全的“完美”，而是以某个具有针对性的特点作为主要的发展方向：</p>
+<ul>
+<li><p>朝着性能发展，代表为 gRPC 和 Thrift，决定 RPC 性能的主要因素有序列化效率和信息密度</p>
+<ul>
+<li>序列化输出结果的容量越小，速度越快，效率自然越高</li>
+<li>信息密度则取决于协议中有效负载（Payload）所占总传输数据的比例大小，使用传输协议的层次越高，信息密度就越低</li>
+<li>gRPC 和 Thrift 都有自己优秀的专有序列化器</li>
+<li>gRPC 是基于 HTTP&#x2F;2 的，支持多路复用和 Header 压缩</li>
+<li>Thrift 则直接基于传输层的 TCP 协议来实现，省去了应用层协议的额外开销</li>
+</ul>
+</li>
+<li><p>朝着简化发展，代表为 JSON-RPC</p>
+<ul>
+<li>牺牲了功能和效率，换来的是协议的简单轻便，接口与格式都更为通用</li>
+<li>尤其适合用于 Web 浏览器这类一般不会有额外协议支持、额外客户端支持的应用场合</li>
+</ul>
+</li>
+</ul>
+<p>到了最近几年，RPC 框架有明显向 <strong>更高层次</strong>（不仅仅负责调用远程服务，还管理远程服务）与 <strong>插件化</strong> 方向发展的趋势</p>
+<ul>
+<li>不再追求独立地解决 RPC 的全部三个问题（表示数据、传递数据、表示方法），而是将一部分功能设计成扩展点</li>
+<li>框架聚焦于提供核心的、更高层次的能力，譬如提供负载均衡、服务注册、可观察性等方面的支持</li>
+</ul>
+<h4 id="REST-设计风格"><a href="#REST-设计风格" class="headerlink" title="REST 设计风格"></a>REST 设计风格</h4><h3 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h3><h4 id="本地事务"><a href="#本地事务" class="headerlink" title="本地事务"></a>本地事务</h4><h4 id="全局事务"><a href="#全局事务" class="headerlink" title="全局事务"></a>全局事务</h4><h4 id="共享事务"><a href="#共享事务" class="headerlink" title="共享事务"></a>共享事务</h4><h4 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h4><h3 id="透明多级分流系统"><a href="#透明多级分流系统" class="headerlink" title="透明多级分流系统"></a>透明多级分流系统</h3><h3 id="架构安全性"><a href="#架构安全性" class="headerlink" title="架构安全性"></a>架构安全性</h3><h2 id="分布式的基石"><a href="#分布式的基石" class="headerlink" title="分布式的基石"></a>分布式的基石</h2><h2 id="不可变基础设施"><a href="#不可变基础设施" class="headerlink" title="不可变基础设施"></a>不可变基础设施</h2><h2 id="技术方法论"><a href="#技术方法论" class="headerlink" title="技术方法论"></a>技术方法论</h2>
 
 <!-- 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
