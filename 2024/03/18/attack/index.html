@@ -20,21 +20,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>攻击图技术总结 😈⃤ - H-sediment</title>
+  <title>攻击树/图技术总结 😈⃤ - H-sediment</title>
 
   
-    <meta name="description" content="攻击图是用于表达网络或信息系统中脆弱点，及其之间关联关系的有效模型">
+    <meta name="description" content="感知和理解网络攻击是一项困难的任务，需要借助有效的技术手段来加以辅助">
 <meta property="og:type" content="article">
-<meta property="og:title" content="攻击图技术总结 😈⃤">
+<meta property="og:title" content="攻击树&#x2F;图技术总结 😈⃤">
 <meta property="og:url" content="http://example.com/2024/03/18/attack/index.html">
 <meta property="og:site_name" content="H-sediment">
-<meta property="og:description" content="攻击图是用于表达网络或信息系统中脆弱点，及其之间关联关系的有效模型">
+<meta property="og:description" content="感知和理解网络攻击是一项困难的任务，需要借助有效的技术手段来加以辅助">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%873.png">
 <meta property="article:published_time" content="2024-03-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-17T12:34:51.867Z">
+<meta property="article:modified_time" content="2024-11-23T15:04:53.275Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Attack graph">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%872.png">
   
   
   
@@ -87,7 +90,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">攻击图技术总结 😈⃤</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">攻击图技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">1.2.</span> <span class="toc-text">逻辑攻击图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">1.3.</span> <span class="toc-text">属性攻击图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">1.4.</span> <span class="toc-text">贝叶斯攻击图</span></a></li></ol></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">攻击树/图技术总结 😈⃤</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">攻击建模技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB"><span class="toc-number">2.</span> <span class="toc-text">网络攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%BB%E8%BE%91"><span class="toc-number">2.1.</span> <span class="toc-text">条件逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB-1"><span class="toc-number">2.3.</span> <span class="toc-text">网络攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84"><span class="toc-number">2.4.</span> <span class="toc-text">攻击路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE%E5%BA%94%E7%94%A8"><span class="toc-number">2.5.</span> <span class="toc-text">攻击图应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A0%91-%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">攻击树&#x2F;图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E8%A7%89%E8%AF%AD%E6%B3%95%E7%90%86%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text">视觉语法理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">可视化语法分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">6.</span> <span class="toc-text">逻辑攻击图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">7.</span> <span class="toc-text">属性攻击图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">8.</span> <span class="toc-text">贝叶斯攻击图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">9.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div></widget>
 
 
 
@@ -137,39 +140,292 @@
 <div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Research/">Research</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-03-17T16:00:00.000Z">2024-03-18</time></div></div>
 
 <article class='md-text content post'>
-<h1 class="article-title"><span>攻击图技术总结 😈⃤</span></h1>
-<p>攻击图是用于表达网络或信息系统中脆弱点，及其之间关联关系的有效模型</p>
+<h1 class="article-title"><span>攻击树/图技术总结 😈⃤</span></h1>
+<p>感知和理解网络攻击是一项困难的任务，需要借助有效的技术手段来加以辅助</p>
 <span id="more"></span>
 
-<h2 id="攻击图技术"><a href="#攻击图技术" class="headerlink" title="攻击图技术"></a>攻击图技术</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>攻击图是一种风险评估方法，用于枚举攻击者为破坏网络组织而可能采取的 <strong>攻击路径</strong>，表示潜在的攻击者可以通过利用网络上的一系列漏洞并在每个步骤获得某些特权来入侵目标网络的可能方式，可向用户 <strong>展示网络漏洞分析过程</strong>，用于网络安全风险分析。</p>
-<p>在理论上攻击图可以构建完整的网络安全模型，反映网络中各个节点的脆弱性并刻画出攻击者攻陷重要节点的所有途径，弥补了以往技术只能根据漏洞数量和威胁等级评估节点和全网的安全性，而不能根据节点在网络中的位置和功能进行评估的缺陷。</p>
+<h2 id="攻击建模技术"><a href="#攻击建模技术" class="headerlink" title="攻击建模技术"></a>攻击建模技术</h2><p>攻击建模技术（AMT）用于建模和可视化一系列事件和&#x2F;或事件组合，这些事件使得对计算机或网络的网络攻击能够成功实施。</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%872.png" style="zoom:40%;" />
+
+<p>AMT 大致可以分为三类：</p>
 <ul>
-<li>参考资料<ul>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Issac_Liew_X/article/details/107234000">攻击图技术</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/KoiC/p/17216322.html">攻击图技术总结</a></p>
-</li>
+<li>基于用例框架的方法</li>
+<li>基于时间维度呈现的方法</li>
+<li>基于图形的建模方法</li>
+</ul>
+<p>AMT 不仅能够帮助观察者分析网络攻击场景，还减轻了安全专家在评估攻击和制定缓解措施时的认知负担。通过简化复杂信息的表达，它使决策者更快掌握安全问题，更好地感知风险，并直观理解复杂概念。AMT 提供了高效的工具和工作空间，促进了更清晰的讨论和辩论，同时在较少依赖逻辑模型的情况下支持对网络攻击的感知和理解。</p>
+<p><strong>攻击建模中的术语分类</strong></p>
+<ul>
+<li>前提条件（Precondition）用于描述网络攻击成功所需的先决条件<ul>
+<li>相关术语包括：Exploit、Prerequisite、Precondition、Predicate、Requires 等</li>
 </ul>
 </li>
-<li>攻击图定义<ul>
-<li>攻击图是一种有向图，展示攻击者可能发动的攻击顺序和攻击效果，由 <strong>顶点</strong> 和 <strong>有向边</strong> 两部分构成</li>
-<li><strong>顶点</strong> 可以表示：主机、服务、 漏洞、权限等网络安全相关要素，也可以表示账户被攻击者破解、权限被攻击者获取等网络安全状态</li>
-<li><strong>有向边</strong> 用于表示攻击者攻击行为的先后顺序</li>
-<li><strong>规则</strong> 和 <strong>推导</strong> 是攻击图理论的核心<ul>
-<li>攻击图的规则系统由许许多多的规则组成，而攻击图的推导引擎依据规则系统自动完成攻击路径的推导</li>
-<li>攻击路径就是从“初始条件”到“要证目标”的推导过程，将这个推导过程可视化便成了攻击树</li>
-<li>由于推导过程可能有多种可能，就有多条攻击树，形成了攻击图</li>
+<li>后置条件（Postcondition）描述网络攻击完成后产生的后果或效果<ul>
+<li>相关术语包括：Postcondition、Effect、Provides、Consequence、Impact 等</li>
 </ul>
 </li>
-<li>攻击图规则系统决定了该攻击图工具能适用于哪种网络<ul>
-<li>如使用 <strong>企业网络</strong> 的规则系统，则可以适用于企业网络</li>
-<li>若使用 <strong>车联网</strong> 的规则系统，则可适用于车联网</li>
+<li>实施者（Perpetrator）表示进行网络攻击的主体<ul>
+<li>相关术语包括：Perpetrator、Attacker、Adversary、Hacker、Misuser、Bad guy 等</li>
 </ul>
 </li>
 </ul>
+<p><strong>攻击模型的可视化</strong></p>
+<p>攻击模型通常通过组合二维形状（如正方形、矩形和椭圆）、一维形状（如线条）以及文本语法来构建，用以表示网络攻击的结构。这种表达方式被称为视觉语法、视觉修辞或视觉符号体系。</p>
+<p>故障树和 Petri 网等建模系统的视觉语法已经实现标准化，它们在模拟网络攻击时能够形成一致的理解框架。然而，<strong>攻击图和攻击树在视觉语法上缺乏标准化、规范化方法以及通用的建模框架</strong>。许多研究者使用自创且未经验证的视觉语法来模拟攻击，这种方法被亚历山大称为“无意识设计方法”。</p>
+<p>目前，有超过 75 种攻击图可视化语法配置和超过 20 种攻击树配置，这些配置涵盖了 180 多种不同的可视化语法。这些可视化语法在用于表示网络攻击中关键构造（如先决条件和漏洞）的形状和形式上存在显著差异。如此多的相互冲突的提案不仅容易让研究人员和从业者在选择时感到困惑，也反映出该领域的“不成熟”，并导致研究工作的“分散化”。</p>
+<h2 id="网络攻击"><a href="#网络攻击" class="headerlink" title="网络攻击"></a>网络攻击</h2><p><strong>网络攻击相关术语</strong></p>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>漏洞 (Vulnerability)</td>
+<td>一种可被利用的、意外存在的系统弱点，由一个或多个前提条件的存在而导致</td>
+</tr>
+<tr>
+<td>前提条件 (Precondition)</td>
+<td>系统中为了成功利用漏洞而必须满足的状态</td>
+</tr>
+<tr>
+<td>初始前提条件 (Initial precondition)</td>
+<td>网络攻击中需要满足的第一个前提条件</td>
+</tr>
+<tr>
+<td>攻击者能力 (Perpetrator capability)</td>
+<td>攻击者运行漏洞利用所需的工具、知识和&#x2F;或访问权限级别</td>
+</tr>
+<tr>
+<td>后置条件 (Postcondition)</td>
+<td>成功利用漏洞后产生的条件或状态</td>
+</tr>
+<tr>
+<td>目标 (Goal)</td>
+<td>网络攻击的最终目标</td>
+</tr>
+<tr>
+<td>利用 (Exploit)</td>
+<td>一系列步骤 —— 包括执行代码或手动操作，利用目标系统中的一个或多个漏洞，并为攻击者提供特定的能力</td>
+</tr>
+<tr>
+<td>非侵入性事件 (Non-intrusive event)</td>
+<td>支持和辅助网络攻击的事件，但不会改变目标系统的状态</td>
+</tr>
+</tbody></table>
+<p><strong>脆弱性、前提条件和后置条件</strong></p>
+<ul>
+<li><strong>脆弱性</strong><ul>
+<li>脆弱性是指系统设计、实施或管理中存在的可被利用的弱点</li>
+<li>脆弱性通常由多个系统状态的组合构成，这些状态被称为前提条件</li>
+</ul>
+</li>
+<li><strong>前提条件</strong><ul>
+<li>前提条件是指一组系统属性，漏洞的利用必须具备这些属性才能成功执行</li>
+<li>初始前提条件是系统固有的属性，并非由于漏洞利用而产生</li>
+<li>通过解决这些前提条件，可能会使攻击中的所有后续步骤失效，至少有 <strong>三种类型的前提条件</strong>：<ul>
+<li>状态&#x2F;服务：目标系统持有或宣称特定版本的操作系统、系统软件&#x2F;应用程序、服务，或处于特定的硬件&#x2F;软件状态</li>
+<li>可达性：目标是可访问的</li>
+<li>攻击者能力：攻击者具备某些特定能力，例如能够在目标系统上运行进程、使用工具、拥有特权级别，或具备攻击工具和必要的技能</li>
+</ul>
+</li>
+<li>在上述前提条件类型中，<strong>状态&#x2F;服务</strong> 通常在 AMTs 中表示，如攻击图和攻击树，可达性和攻击者能力的表示则较为少见</li>
+<li>实施者能力是攻击分析中的关键因素之一，对于 <strong>安全分析师</strong> 而言，了解哪些漏洞需要较高的实施者能力，哪些漏洞对实施者的能力要求较低，至关重要。例如，在 <strong>RPC（远程过程调用）</strong> 漏洞中，实施者能力的要求如下：<ul>
+<li>rcp 服务必须对攻击者可用</li>
+<li>目标主机必须信任源主机</li>
+<li>攻击者必须具备本地 shell 访问权限</li>
+</ul>
 </li>
 </ul>
-<h3 id="逻辑攻击图"><a href="#逻辑攻击图" class="headerlink" title="逻辑攻击图"></a>逻辑攻击图</h3><h3 id="属性攻击图"><a href="#属性攻击图" class="headerlink" title="属性攻击图"></a>属性攻击图</h3><h3 id="贝叶斯攻击图"><a href="#贝叶斯攻击图" class="headerlink" title="贝叶斯攻击图"></a>贝叶斯攻击图</h3>
+</li>
+<li><strong>后置条件</strong><ul>
+<li>成功的漏洞利用会导致一个或多个后置条件，虽然漏洞利用的结果通常被称为后置条件，但这些后置条件有时也可以成为进一步漏洞利用的前提条件</li>
+<li>因此，大多数研究人员将后置条件视为前提条件的延伸，并且 <strong>使用“目标”一词来指代最终的后置条件</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="条件逻辑"><a href="#条件逻辑" class="headerlink" title="条件逻辑"></a>条件逻辑</h3><p>要成功利用漏洞，必须满足一个或多个前提条件，这些前提条件的组合可以通过前提条件逻辑来表示。例如，</p>
+<ul>
+<li>给定两个前提条件：pr1 和 pr2</li>
+<li>如果需要同时满足这两个条件，则可以用如下形式的 <strong>合取表示</strong>：pr1 ∧ pr2</li>
+<li>如果只需满足其中任意一个条件，则可以用如下形式的 <strong>析取表示</strong>：pr1 ∨ pr2</li>
+</ul>
+<p>尽管前提条件逻辑的表示对于识别网络攻击的防御和应对措施至关重要，但许多攻击图很少涉及前提条件逻辑的具体表示。</p>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>漏洞利用是一组通过代码或手动步骤执行的操作，旨在利用目标系统中的一个或多个漏洞，为攻击者提供特定功能。</p>
+<p>漏洞利用可以被定义为以下形式的表达式： **利用（漏洞，后置条件，来源，目标）&#x2F; <code>exploit(vulnerability, postcondition, source, target)</code>**，其中：</p>
+<ul>
+<li><strong>漏洞</strong>：被利用的脆弱性，漏洞可以分解为多个前提条件，所有这些前提条件或它们的组合必须存在，漏洞才能被利用</li>
+<li><strong>后置条件</strong>：漏洞利用产生的结果</li>
+<li><strong>来源（source）</strong>：源主机，即发起漏洞利用的主机</li>
+<li><strong>目标（target）</strong>：漏洞利用的目标主机</li>
+</ul>
+<p>以下是漏洞形式表达的一些示例：</p>
+<ul>
+<li>**ftp_rhosts(ftp, trusthost, i, j)**：表示主机 i 利用主机 j 的 FTP 漏洞，并将受信任主机列表上传到主机 j</li>
+<li>**sshd_bof(sshd, root, i, j)**：表示主机 i 利用主机 j 的 SSH（安全 Shell）服务中的缓冲区溢出漏洞，从而获得对主机 j 的 root 访问权限</li>
+<li>**local_bof(bofv, root, i, j)**：表示主机 i 利用主机 j 中的本地缓冲区溢出漏洞（bofv），从而获得对主机 j 的 root 访问权限</li>
+</ul>
+<blockquote>
+<p>目前文献中并没有关于漏洞利用和漏洞形式化表达的统一标准或协议</p>
+</blockquote>
+<p><strong>非侵入事件</strong></p>
+<p>非侵入事件，也称为二次漏洞利用或可疑事件，<strong>是攻击者用于发现目标系统属性和漏洞的系统探测操作</strong>。与漏洞利用不同，非侵入事件不会改变系统属性，除非目标系统对这些事件作出程序化或手动的反应，例如阻塞端口或创建新的入侵检测系统规则。</p>
+<p>非侵入事件的示例包括 <code>rpcinfo</code>，该工具能够显示目标机器上的端口和服务数据，以及各种探测和扫描工具，如 nmap、netcat、amap、XProbe、P0f 和 X-Scan。这些工具会返回系统的响应信息，但不会改变系统的状态。</p>
+<p>入侵检测系统（IDS）能够检测并警告侵入事件（漏洞利用）和非侵入事件。</p>
+<table>
+<thead>
+<tr>
+<th><strong>签名（漏洞利用）</strong></th>
+<th><strong>前提条件</strong></th>
+<th><strong>后置条件</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RPC sadmind UDP PING</td>
+<td>主机数据的泄露</td>
+<td>运行服务的泄露；系统访问（非侵入）</td>
+</tr>
+<tr>
+<td>RPC portmap sadmind request UDP</td>
+<td>主机数据的泄露</td>
+<td>端口号的泄露；运行服务的泄露；系统访问；远程访问（非侵入）</td>
+</tr>
+<tr>
+<td>RPC sadmind UDP NET-MGT_PROC_SERVICE CLIENT_DOMAIN overflow attempt</td>
+<td>主机数据的泄露；端口号的泄露；运行服务的泄露</td>
+<td>系统访问；远程访问；管理员访问（侵入）</td>
+</tr>
+<tr>
+<td>RPC sadmind query with root credentials attempt UDP</td>
+<td>主机数据的泄露；端口号的泄露；运行服务的泄露；系统访问；远程访问</td>
+<td>远程访问；管理员访问（侵入）</td>
+</tr>
+</tbody></table>
+<p>如表所示，一些事件（如 RPC sadmind UDP PING 和 RPC portmap sadmind request UDP）既可以是侵入事件，也可以是非侵入事件。RPC sadmind UDP PING 会泄露主机的一些信息——这是非侵入事件，而 RPC portmap sadmind request UDP 则会提供对主机的系统访问权限——这是侵入事件，侵入事件和非侵入事件可以统称为 <strong>漏洞利用</strong>。</p>
+<h3 id="网络攻击-1"><a href="#网络攻击-1" class="headerlink" title="网络攻击"></a>网络攻击</h3><p>网络攻击是一组包含一个或多个漏洞利用的操作，这些操作以顺序或并行的方式应用于目标系统，以暴露目标系统的漏洞并改变其状态。</p>
+<p>一旦漏洞被利用，就会产生多个后置条件，这些后置条件中的每一个都可能成为进一步利用的前提条件。攻击的最终目标在攻击树和攻击图中被称为“目标”，而在故障树中则被称为“不良条件”。</p>
+<p>值得注意的是，不同的观察者对网络攻击的视角可能有所不同。Moody 将这种视角差异称为“认知契合原则”。分析师通常对网络攻击的 <strong>低层次技术视角</strong> 感兴趣，特别是攻击所需的前提条件和具体的漏洞。他们有时需要向非技术领域的人员解释网络攻击。而非专家，如利益相关者、高管和决策者，更倾向于从 <strong>高层次的视角</strong> 看待网络攻击，这种视角通常 <strong>隐藏了技术细节</strong>。然而，在某些情况下，从分析师的技术视角来看待网络攻击也可能对他们有所帮助。</p>
+<h3 id="攻击路径"><a href="#攻击路径" class="headerlink" title="攻击路径"></a>攻击路径</h3><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%873.png" style="zoom:60%;" />
+
+<p>通常情况下，存在多种替代的攻击序列，每一种序列都可能导致攻击成功，这些被称为 <strong>攻击路径</strong>，并且在所有攻击模型（AMT）中都有表示。上图示例，其中包含两条攻击路径，可以描述为：</p>
+<ol>
+<li>路径 1：<code>sshd(3,1) ∧ user(3) → sshd_bof(3,1); user(1) ∧ sshd(1,2) → sshd_bof(1,2) → user(2)</code></li>
+<li>路径 2：<code>user(3) ∧ sshd(3,2) → sshd_bof(3,2) → user(2)</code></li>
+</ol>
+<p><strong>攻击路径分析</strong> 等技术通过概述已知和预测的攻击事件序列，有助于调查攻击图中的漏洞路径。这种分析能够帮助识别攻击路径中可能受影响的资源，以及路径上的具体漏洞。</p>
+<p>上图展示了攻击图和攻击树在视觉表示上的另一个显著差异 —— 事件流方向。图中事件流采用 <strong>自上而下</strong> 的方式呈现，即观察者从顶部开始阅读，然后按事件顺序向下推进，在调查的 118 个攻击图配置中，有 102 个（86.4%）以自上而下的方式呈现事件；而在调查的 61 个攻击树中，有 59 个（96.7%）采用了自下而上的事件流表示。</p>
+<p>上图还说明了攻击图和攻击树在可视化表示方面的另一关键区别，尽管该攻击图仅表示单个攻击目标（user 2），并展示了两条通向该目标的路径，但攻击图经常被用来表示具有多条路径和多个目标的复杂攻击，<strong>Aguessy 指出，攻击树的局限性在于它们仅能表示单一攻击，而攻击图则可以表示多个攻击。</strong></p>
+<blockquote>
+<p>结合攻击路径分析和加权边辅助攻击预测的一个示例是 Frigault 和 Wang 提出的 <strong>基于贝叶斯的攻击图</strong>，在这一示例中，攻击图使分析人员能够计算 <strong>成功攻击路径的概率</strong>。图中的每个节点代表一个潜在漏洞，以及与该漏洞相关的前提条件和后置条件，每个节点都被分配一个概率，用以表示 <strong>该漏洞被利用的可能</strong> 性。</p>
+<p>Aguessy 提到的攻击图分为 <strong>完整攻击图</strong> 和 <strong>部分攻击图</strong>。完整攻击图概述了给定网络中所有潜在漏洞和可能的攻击路径。部分攻击图（也称为 <strong>最小攻击图</strong>）则概述了给定攻击中节点之间的交互模式。在 Stuxnet 和 Jeep Cherokee 攻击场景，以及分析复杂网络问题时，完整攻击图的表示能力尤为重要。</p>
+<p>总体而言，攻击树通常仅表示单一攻击，而 <strong>攻击森林</strong>（攻击树的集合）是为解决这一局限性而提出的扩展方法。</p>
+</blockquote>
+<h3 id="攻击图应用"><a href="#攻击图应用" class="headerlink" title="攻击图应用"></a>攻击图应用</h3><p><strong>攻击图在系统强化中的应用</strong></p>
+<table>
+<thead>
+<tr>
+<th>预测策略</th>
+<th></th>
+<th>方法与内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>事件预测</td>
+<td>度量事件的可能性</td>
+<td>使用马尔可夫决策过程计算攻击成功的概率；超警报相关图和攻击策略图；受损置信指数；邻接矩阵聚类；警报相关矩阵；关联规则挖掘；未来场景排序；基于概率的攻击预测；吸收马尔可夫链用于漏洞分析和辅助评估妥协可能性的马尔可夫奖励模型；预测攻击图；pwnPr3d；</td>
+</tr>
+<tr>
+<td></td>
+<td>分析多步攻击</td>
+<td>警报聚类、警报合并与意图识别；警报关联框架；因果关联；聚类邻接矩阵；分而治之框架；分层聚类算法；漏洞依赖图；</td>
+</tr>
+<tr>
+<td></td>
+<td>攻击路径分析</td>
+<td>攻击链分析；计算实施攻击的难度；关联规则挖掘；</td>
+</tr>
+<tr>
+<td>多样的</td>
+<td>加强安全弱点</td>
+<td>使用利用图；拓扑漏洞分析；</td>
+</tr>
+<tr>
+<td></td>
+<td>优先移除漏洞</td>
+<td>技能水平分析；最小关键攻击集（MCSA）；预测图；网络强化图；基于博弈论的方法；</td>
+</tr>
+<tr>
+<td></td>
+<td>IDS 警报相关性分析</td>
+<td>超警报相关图；ADEPTS；关联规则挖掘算法；拓扑漏洞分析（TVA）；</td>
+</tr>
+<tr>
+<td>确定最佳设备配置</td>
+<td>识别关键设备</td>
+<td>AssetRank 算法；</td>
+</tr>
+<tr>
+<td></td>
+<td>确定最佳设备部署位置</td>
+<td>拓扑漏洞分析；成功测量模型；</td>
+</tr>
+<tr>
+<td></td>
+<td>最佳设备配置</td>
+<td>基于图的网络漏洞分析；聚类邻接矩阵；使用 PageRank 排名的攻击图；依赖攻击图；最佳 IDS 部署；NetSPA；攻击响应图；</td>
+</tr>
+<tr>
+<td></td>
+<td>预测配置设置的影响</td>
+<td>反向图遍历识别关键前提条件和漏洞；排序攻击图；邻接矩阵聚类方法和可达性分析；预测图；分层聚类算法；</td>
+</tr>
+</tbody></table>
+<h2 id="攻击树-图"><a href="#攻击树-图" class="headerlink" title="攻击树&#x2F;图"></a>攻击树&#x2F;图</h2><table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>攻击树</strong></th>
+<th><strong>攻击图</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>结构</strong></td>
+<td>树状结构，简单直观，逻辑清晰</td>
+<td>图状结构，能表示更复杂的关系和路径</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>单一目标、静态分析、小规模系统</td>
+<td>多目标、动态分析、复杂系统</td>
+</tr>
+<tr>
+<td><strong>逻辑复杂度</strong></td>
+<td>支持简单的逻辑（AND&#x2F;OR 节点）</td>
+<td>支持多路径分析和循环关系，表达更灵活</td>
+</tr>
+<tr>
+<td><strong>分析能力</strong></td>
+<td>聚焦于一个目标的分解，适合单一攻击目标</td>
+<td>全面分析所有可能路径，适合多阶段攻击（如 APT）的建模</td>
+</tr>
+<tr>
+<td><strong>易用性</strong></td>
+<td>易于构建和理解</td>
+<td>结构复杂，可能需要算法支持</td>
+</tr>
+<tr>
+<td><strong>动态性</strong></td>
+<td>通常为静态分析工具</td>
+<td>可支持动态分析，结合实时监控数据更新状态</td>
+</tr>
+</tbody></table>
+<h2 id="视觉语法理论"><a href="#视觉语法理论" class="headerlink" title="视觉语法理论"></a>视觉语法理论</h2><h2 id="可视化语法分析"><a href="#可视化语法分析" class="headerlink" title="可视化语法分析"></a>可视化语法分析</h2><h2 id="逻辑攻击图"><a href="#逻辑攻击图" class="headerlink" title="逻辑攻击图"></a>逻辑攻击图</h2><h2 id="属性攻击图"><a href="#属性攻击图" class="headerlink" title="属性攻击图"></a>属性攻击图</h2><h2 id="贝叶斯攻击图"><a href="#贝叶斯攻击图" class="headerlink" title="贝叶斯攻击图"></a>贝叶斯攻击图</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li>Lallie H S, Debattista K, Bal J. A review of attack graph and attack tree visual syntax in cyber security [J]. Computer Science Review, 2020, 35: 100219.</li>
+<li>Frigault M, Wang L. Measuring network security using bayesian network-based attack graphs [C]&#x2F;&#x2F;2008 32nd Annual IEEE International Computer Software and Applications Conference. IEEE, 2008: 698-703.</li>
+<li>Wang L, Islam T, Long T, et al. An attack graph-based probabilistic security metric [C]&#x2F;&#x2F;Data and Applications Security XXII: 22nd Annual IFIP WG 11.3 Working Conference on Data and Applications Security London, UK, July 13-16, 2008 Proceedings 22. Springer Berlin Heidelberg, 2008: 283-296.</li>
+</ul>
+
 
 <!-- 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>

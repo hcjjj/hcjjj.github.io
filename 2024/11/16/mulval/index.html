@@ -31,7 +31,7 @@
 <meta property="og:description" content="MulVAL：基于逻辑推理的攻击图生成及风险评估工具">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-17T12:39:16.425Z">
+<meta property="article:modified_time" content="2024-11-22T08:44:08.608Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Automotive">
 <meta name="twitter:card" content="summary">
@@ -188,6 +188,51 @@
 <p>HARA 的主要目标是在概念阶段识别潜在的危害，评估其风险，并为后续的功能安全开发制定适当的安全目标和安全要求</p>
 <p>虽然 HARA 主要在概念阶段进行，但其结果会贯穿整个开发生命周，安全目标和要求会传递到系统、硬件、软件开发阶段，确保整个系统的功能安全设计</p>
 </blockquote>
+<p><strong>HARA vs TARA 的比较</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>HARA</strong></th>
+<th><strong>TARA</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>关注点</strong></td>
+<td>系统功能性故障及其导致的危害</td>
+<td>外部威胁或攻击行为及其对安全性的影响</td>
+</tr>
+<tr>
+<td><strong>应用领域</strong></td>
+<td>功能安全（如汽车、航空）</td>
+<td>网络安全（如物联网、汽车通信）</td>
+</tr>
+<tr>
+<td><strong>风险来源</strong></td>
+<td>内部（如设备故障、人为失误）</td>
+<td>外部（如恶意攻击、网络威胁）</td>
+</tr>
+<tr>
+<td><strong>标准支持</strong></td>
+<td>ISO 26262、IEC 61508</td>
+<td>ISO&#x2F;SAE 21434、NIST Cybersecurity Framework</td>
+</tr>
+<tr>
+<td><strong>常用指标</strong></td>
+<td>严重性、概率、可检测性</td>
+<td>可能性、影响</td>
+</tr>
+<tr>
+<td><strong>分析工具</strong></td>
+<td>故障模式与影响分析（FMEA）、故障树分析（FTA）</td>
+<td>攻击图（Attack Graph）、威胁情报分析</td>
+</tr>
+<tr>
+<td><strong>结果用途</strong></td>
+<td>安全功能设计、故障管理</td>
+<td>安全控制设计、防御策略优化</td>
+</tr>
+</tbody></table>
 <hr>
 <ul>
 <li>漏洞分析工具有效的前提<ul>
