@@ -31,7 +31,7 @@
 <meta property="og:description" content="MulVAL：基于逻辑推理的攻击图生成及风险评估工具">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-22T08:44:08.608Z">
+<meta property="article:modified_time" content="2024-11-28T11:24:09.934Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Automotive">
 <meta name="twitter:card" content="summary">
@@ -87,7 +87,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">A Logic based Network Security Analyzer</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MulVAL"><span class="toc-number">1.</span> <span class="toc-text">MulVAL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.</span> <span class="toc-text">形式化表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%A7%84%E8%8C%83"><span class="toc-number">1.3.</span> <span class="toc-text">漏洞规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.</span> <span class="toc-text">推理系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E8%A7%84%E5%88%99"><span class="toc-number">1.4.1.</span> <span class="toc-text">推理规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%88%97%E8%A1%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">主机访问控制列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E8%A7%84%E8%8C%83"><span class="toc-number">1.4.3.</span> <span class="toc-text">策略规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E4%BF%A1%E6%81%AF"><span class="toc-number">1.4.4.</span> <span class="toc-text">绑定信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.5.</span> <span class="toc-text">分析算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E7%AD%96%E7%95%A5"><span class="toc-number">1.4.6.</span> <span class="toc-text">更复杂的策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-number">1.5.</span> <span class="toc-text">Example</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E5%9E%8B%E7%9C%9F%E5%AE%9E%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.5.1.</span> <span class="toc-text">小型真实示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%94%BB%E5%87%BB%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.5.2.</span> <span class="toc-text">多阶段攻击示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">1.6.</span> <span class="toc-text">假设性分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%92%8C%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">1.7.</span> <span class="toc-text">性能和可扩展性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.8.</span> <span class="toc-text">相关工作与总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">核心文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="toc-number">2.3.</span> <span class="toc-text">技术细节</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#README"><span class="toc-number">3.</span> <span class="toc-text">README</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E6%A6%82%E8%BF%B0"><span class="toc-number">3.1.</span> <span class="toc-text">工具概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">3.2.</span> <span class="toc-text">安装与配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.3.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">3.4.</span> <span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7"><span class="toc-number">3.5.</span> <span class="toc-text">辅助工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">3.6.</span> <span class="toc-text">高级用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">3.7.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">A Logic based Network Security Analyzer</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MulVAL"><span class="toc-number">1.</span> <span class="toc-text">MulVAL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.</span> <span class="toc-text">形式化表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%A7%84%E8%8C%83"><span class="toc-number">1.3.</span> <span class="toc-text">漏洞规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.</span> <span class="toc-text">推理系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E8%A7%84%E5%88%99"><span class="toc-number">1.4.1.</span> <span class="toc-text">推理规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%88%97%E8%A1%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">主机访问控制列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E8%A7%84%E8%8C%83"><span class="toc-number">1.4.3.</span> <span class="toc-text">策略规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E4%BF%A1%E6%81%AF"><span class="toc-number">1.4.4.</span> <span class="toc-text">绑定信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.5.</span> <span class="toc-text">分析算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E7%AD%96%E7%95%A5"><span class="toc-number">1.4.6.</span> <span class="toc-text">更复杂的策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-number">1.5.</span> <span class="toc-text">Example</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E5%9E%8B%E7%9C%9F%E5%AE%9E%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.5.1.</span> <span class="toc-text">小型真实示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%94%BB%E5%87%BB%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.5.2.</span> <span class="toc-text">多阶段攻击示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">1.6.</span> <span class="toc-text">假设性分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%92%8C%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">1.7.</span> <span class="toc-text">性能和可扩展性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.8.</span> <span class="toc-text">相关工作与总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">核心文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="toc-number">2.3.</span> <span class="toc-text">技术细节</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#README"><span class="toc-number">3.</span> <span class="toc-text">README</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BC%96%E8%AF%91"><span class="toc-number">3.1.</span> <span class="toc-text">配置编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">3.3.</span> <span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">3.4.</span> <span class="toc-text">适配器使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">3.5.</span> <span class="toc-text">高级用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">3.6.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol></div></div></widget>
 
 
 
@@ -143,7 +143,7 @@
 
 <p><strong><a target="_blank" rel="noopener" href="https://www.arguslab.org/software/mulval.html">官网</a> <a target="_blank" rel="noopener" href="https://www.usenix.org/legacy/event/sec05/tech/full_papers/ou/ou.pdf">论文</a> <a target="_blank" rel="noopener" href="https://github.com/risksense/mulval">仓库</a></strong></p>
 <h2 id="MulVAL"><a href="#MulVAL" class="headerlink" title="MulVAL"></a>MulVAL</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
-<li>背景和需求：如何帮助<strong>系统管理员</strong>自动化漏洞评估和安全措施的选择 <strong>（主要是运维阶段+策略验证）</strong><ul>
+<li>背景和需求：如何帮助 <strong>系统管理员</strong> 自动化漏洞评估和安全措施的选择 <strong>（主要是运维阶段+策略验证）</strong><ul>
 <li>漏洞数量增长：由于每年不断发现新的安全漏洞，系统管理员很难在所有网络机器上确保软件完全没有漏洞</li>
 <li>日常任务：系统管理员需要从不同的来源（如 CERT、BugTraq 等）阅读漏洞报告，并判断哪些漏洞是网络中实际存在的安全问题</li>
 <li>漏洞评估：对于新发现的漏洞，管理员需要评估这些漏洞对网络的安全影响，从而决定采取哪些应对措施（例如打补丁、重启、重新配置防火墙等）</li>
@@ -422,65 +422,77 @@
 <h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><blockquote>
 <p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Dalongggggg/article/details/134149701?spm=1001.2014.3001.5502">MulVAL: 基于逻辑推理的攻击图生成及风险评估工具</a></p>
 </blockquote>
-<h2 id="README"><a href="#README" class="headerlink" title="README"></a>README</h2><h3 id="工具概述"><a href="#工具概述" class="headerlink" title="工具概述"></a>工具概述</h3><p>Multi host, multi stage Vulnerability Analysis tool</p>
-<h3 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h3><ol>
+<h2 id="README"><a href="#README" class="headerlink" title="README"></a>README</h2><p>Multi host, multi stage Vulnerability Analysis tool - 多主机、多阶段漏洞分析工具</p>
+<h3 id="配置编译"><a href="#配置编译" class="headerlink" title="配置编译"></a>配置编译</h3><ol>
 <li>安装 <a target="_blank" rel="noopener" href="http://xsb.sourceforge.net/">XSB 逻辑引擎</a></li>
 <li>安装 <a target="_blank" rel="noopener" href="http://www.graphviz.org/">GraphViz</a></li>
 <li>确保都在 PATH 路径</li>
 </ol>
-<p>设置环境变量 MULVALROOT 应指向此软件包的根文件夹。在 PATH 中包含 <code>$MULVALROOT$/bin</code> 和 <code>$MULVALROOT/utils</code>。键入 <code>make</code> 来编译所有内容。可以直接运行 MulVAL 攻击图生成器，如果您已经有了一个输入文件；或者您可以运行相应的适配器来创建输入文件，然后运行攻击图生成器。</p>
-<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p><code>graph_gen.sh INPUT_FILE [OPTIONS]</code><br>在 testcases&#x2F;3host 文件夹中有一个简单的输入文件 <code>input.P</code>。这个输入文件用于 MulVAL 文献中的 3 主机示例 [1,2]。您可以运行它来检查攻击图生成器是否正常工作。<br><code>graph_gen.sh input.P -v -p</code><br>这将生成一个与论文中描述相符的攻击图。请注意，对于生产环境，不应调用 <code>-p</code> 选项，因为它会指数级减慢攻击图生成过程，而且它只是使攻击图在视觉上更美观（尝试使用上面的命令但不带 <code>-p</code> 选项）。<br>默认情况下，MulVAL 以文本格式（AttackGraph.txt）和 XML 格式（AttackGraph.xml）输出攻击图。这些格式的含义是不言自明的。当调用 <code>-v</code> 选项时，攻击图的可视化表示将通过 GraphViz 生成在 <code>AttackGraph.pdf</code> 中。如果设置了环境变量 <code>PDF_READER</code>，程序将自动使用该程序打开 pdf 文件。<br>当指定适当的选项时（请参阅下文），MulVAL 还会以 CSV 格式输出攻击图信息：<code>VERTICES.CSV</code> 和 <code>ARCS.CSV</code>。CSV 文件可供渲染程序稍后生成攻击图的各种视图（请参阅下文）。<br>MulVAL 还将在运行程序的文件夹中输出一些其他临时文件。因此，最好在单独的文件夹中运行它以避免杂乱。</p>
+<p>设置环境变量 MULVALROOT 应指向此软件包的根文件夹。在 PATH 中包含 <code>$MULVALROOT$/bin</code> 和 <code>$MULVALROOT/utils</code>。键入 <code>make</code> 来编译所有内容。可以直接运行 MulVAL 攻击图生成器，如果已经有了一个输入文件；或者您可以运行相应的适配器来创建输入文件，然后运行攻击图生成器。</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">graph_gen.sh INPUT_FILE [OPTIONS]</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>testcases/3host</code> 文件夹中有一个简单的输入文件 <code>input.P</code>, 这个输入文件用于 MulVAL 文献中的 3 主机示例 [1,2]，可以运行它来检查攻击图生成器是否正常工作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">graph_gen.sh input.P -v -p</span><br></pre></td></tr></table></figure>
+
+<p>这将生成与论文中描述的攻击图匹配的图。请注意，<code>-p</code> 选项 <strong>不应</strong> 在生产环境中使用，因为它会指数级地减慢攻击图生成过程，而且它的唯一作用是使攻击图在视觉上更加可读（不加 <code>-p</code> 选项尝试上面的命令）</p>
+<p>默认情况下，MulVAL 会输出文本格式的攻击图（<code>AttackGraph.txt</code>）和 XML 格式的攻击图（<code>AttackGraph.xml</code>），这些格式的意义是显而易见的。当使用 <code>-v</code> 选项时，MulVAL 会通过 GraphViz 生成攻击图的可视化版本，并输出到 <code>AttackGraph.pdf</code>，如果已设置了 <code>PDF_READER</code> 环境变量，则程序会自动打开该 PDF 文件。</p>
+<p>当指定适当的选项时（见下文），MulVAL 还会将攻击图信息输出为 CSV 格式：<code>VERTICES.CSV</code> 和 <code>ARCS.CSV</code>。这些 CSV 文件可以由渲染程序用于后续生成攻击图的各种视图。</p>
+<p>MulVAL 还会在程序运行的文件夹中输出一些其他临时文件，因此最好在单独的文件夹中运行，以避免混乱。</p>
 <h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
-<li><p>图形生成选项：</p>
+<li><p>图生成选项：</p>
 <ul>
-<li><p><code>-l</code>：以 .CSV 格式输出攻击图</p>
+<li><p><code>-l</code>：以 CSV 格式输出攻击图</p>
 </li>
-<li><p><code>-v</code>：以 .CSV 和 .PDF 格式输出攻击图</p>
+<li><p><code>-v</code>：以 CSV 和 PDF 格式输出攻击图</p>
 </li>
-<li><p><code>-p</code>：对攻击图进行深度修剪以改善可视化效果（在生产环境中不要调用）</p>
+<li><p><code>-p</code>：对攻击图执行深度修剪以改善可视化效果（<strong>不要在生产环境中使用</strong>）</p>
 </li>
 </ul>
 </li>
-<li><p>推理选项： </p>
+<li><p>推理选项：</p>
 <ul>
-<li><p><code>-r | --rulefile RULE_FILE</code>：将 RULE_FILE 用作交互规则集</p>
+<li><p><code>-r | --rulefile RULE_FILE</code>：使用 <code>RULE_FILE</code> 作为交互规则集</p>
 </li>
-<li><p><code>-a | --additional ADDITIONAL_RULE_FILE</code>：除了指定的交互规则集外，还使用 ADDITIONAL_RULE_FILE</p>
+<li><p><code>-a | --additional ADDITIONAL_RULE_FILE</code>：在指定的交互规则集之外，还使用 <code>ADDITIONAL_RULE_FILE</code></p>
 </li>
-<li><p><code>-g | --goal ATTACK_GOAL</code>：指定单个攻击目标</p>
+<li><p><code>-g | --goal ATTACK_GOAL</code>：指定一个单一的攻击目标</p>
 </li>
 <li><p><code>--cvss</code>：使用输入文件中包含的 CVSS 信息</p>
 </li>
-<li><p><code>-ma</code>：使用输入文件中包含的 CVSS 信息，并对输入文件进行分组。使用此选项时，输入文件必须包含分组信息（见下文第 II 节）</p>
+<li><p><code>-ma</code>：使用输入文件中包含的 CVSS 信息，并对输入文件进行分组，使用此选项时，输入文件必须包含分组信息（参见下文）</p>
 </li>
 </ul>
 </li>
-<li><p>渲染选项： </p>
+<li><p>渲染选项：</p>
 <ul>
-<li><p><code>--arclabel</code>：输出弧的标签</p>
+<li><p><code>--arclabel</code>：为攻击图的弧输出标签</p>
 </li>
-<li><p><code>--reverse</code>：以相反的顺序输出弧</p>
+<li><p><code>--reverse</code>：反向输出弧的顺序</p>
 </li>
 <li><p><code>--nometric</code>：不显示度量信息</p>
 </li>
-<li><p><code>--simple</code>：不显示顶点事实标签。当攻击图变得过大无法可视化时使用此选项。</p>
+<li><p><code>--simple</code>：不显示顶点事实标签，当攻击图过大时使用此选项</p>
 </li>
-<li><p><code>--nopdf</code>：不生成 PDF。当您需要 DOT 文件但不需要 PDF 文件时使用此选项。</p>
-</li>
-</ul>
+<li><p><code>--nopdf</code>：不生成 PDF。当你只需要 DOT 文件而不需要 PDF 时使用此选项</p>
 </li>
 </ul>
-<p>在运行 <code>graph_gen.sh</code> 脚本之后，您还可以调用 <code>render.sh</code> 使用不同的渲染选项。只需在相同目录中发出 <code>render.sh [RENDERING OPTIONS]</code>。</p>
-<h3 id="辅助工具"><a href="#辅助工具" class="headerlink" title="辅助工具"></a>辅助工具</h3><p>该软件包包含了一些适配器程序，可帮助从企业网络中创建 MulVAL 输入文件。需要按照以下步骤进行操作。</p>
-<p>…</p>
-<h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><p><strong>Creating customized rule set</strong></p>
-<p>要开发自己的交互规则，您可以创建新的规则文件，例如 “my_interaction_rules.P”，并使用 <code>-r</code> 或 <code>-a</code> 选项来加载您的规则文件。默认的规则文件可以在该软件包的 kb&#x2F; 文件夹中找到。</p>
-<p>在规则文件的开头，您必须声明原始和派生谓词，并将所有派生谓词进行表格化。具有原始谓词的事实来自输入，具有派生谓词的事实由交互规则定义。每个交互规则使用的谓词必须具有 “primitive” 或 “derived” 的声明，否则在评估过程中可能会收到 “undefined predicate” 的错误消息，并且攻击图生成可能会因缺少谓词声明而失败，并显示一条警告消息，告诉您缺少哪个谓词的声明。通过表格化，可以防止 XSB 推理引擎陷入无限循环，并通过对中间结果进行记忆化来提高推理的效率。</p>
-<p>每个交互规则由 “interaction_rule(Rule, Label)” 引入，其中 Rule 是一个 Datalog 规则，Label 是一些说明其含义的纯文本。标签将成为攻击图中的注释。一旦开发了自己的规则集，您可以使用 <code>-r RULEFILE</code> 选项来测试它，该选项将让 <code>graph_gen.sh</code> 加载 RULEFILE 而不是使用默认规则集。如果您希望您的规则文件添加到默认规则集中，您可以使用 <code>-a RULEFILE</code> 选项。</p>
-<p><strong>Calculating risk metrics based on CVSS and MulVAL attack graph</strong></p>
-<p>我们已经包含了一个基于 Wang 等人的定量风险评估算法 [4]。它结合了 CVSS 指标和攻击图，为企业网络计算概率风险指标。要运行度量程序，请在攻击图输出所在的位置输入以下命令：<code>probAssess.sh</code></p>
-<p>还有一个脚本集成了多个步骤：创建 MulVAL 攻击图、运行风险度量算法并显示带有度量的攻击图：<code>riskAssess.sh INPUT [OPTIONS]</code></p>
-<p>它将在输入文件上运行 MulVAL。此脚本将始终使用 <code>-ma</code>（模型化工件）选项来生成攻击图。请使用 summ_oval.P（由 oval_translate.sh 生成）或 summ_nessus.P（由 nessus_translate.sh 生成）作为输入。使用 OPTIONS 将任何其他选项传递给 MulVAL 攻击图生成器（graph_gen.sh）。</p>
+</li>
+</ul>
+<p>在运行 <code>graph_gen.sh</code> 脚本后，你还可以调用 <code>render.sh</code> 来使用不同的渲染选项。只需在相同的目录中执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render.sh [RENDERING OPTIONS]</span><br></pre></td></tr></table></figure>
+
+<h3 id="适配器使用"><a href="#适配器使用" class="headerlink" title="适配器使用"></a>适配器使用</h3><p>这部分内容的目标是通过自动化工具采集网络中的漏洞信息，转换为 MulVAL 所需要的 Datalog 格式，然后生成用于安全分析的攻击图。转换过程包括从 NVD、OVAL 和 Nessus 扫描报告中获取漏洞数据，并将其存入数据库，最终为 MulVAL 提供攻击图所需的输入。</p>
+<h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3><p><strong>创建自定义规则集</strong></p>
+<p>开发自己的交互规则，可以创建新的规则文件，如 <code>my_interaction_rules.P</code>，并使用 <code>-r</code> 或 <code>-a</code> 选项加载你的规则文件，默认规则文件可以在包中的 <code>kb/</code> 文件夹中找到。</p>
+<p>规则文件的开始部分，必须声明原始和派生谓词，并对所有派生谓词进行表格化。与交互规则相关的每个谓词都必须声明为“原始”或“派生”，否则在评估时会出现“未定义谓词”的错误，生成攻击图时可能会失败，并给出警告信息，提示缺少的谓词声明。</p>
+<p><strong>基于 CVSS 和 MulVAL 攻击图计算风险度量</strong></p>
+<p>提供了一个基于 Wang 等人 [4] 提出的定量风险评估算法。它结合了 CVSS 度量和攻击图来计算企业网络的 <strong>概率风险度量</strong>，要运行度量程序，输入以下命令，其中攻击图的输出位置如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">probAssess.sh</span><br></pre></td></tr></table></figure>
+
+<p>此外，还有一个脚本将多个步骤集成在一起，创建 MulVAL 攻击图、运行风险度量算法并显示带有度量的攻击图：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">riskAssess.sh INPUT [OPTIONS]</span><br></pre></td></tr></table></figure>
+
+<p>这个脚本将始终使用 <code>-ma</code> 选项来生成攻击图，请使用 <code>summ_oval.P</code>（由 <code>oval_translate.sh</code> 生成）或 <code>summ_nessus.P</code>（由 <code>nessus_translate.sh</code> 生成）作为输入</p>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
 <li>Xinming Ou, Wayne F. Boyer, and Miles A.McQueen. <strong>A scalable approach to attack graph generation</strong>. In 13th ACM Conference on Computer and Communications Security (CCS), 2006.</li>
 <li>Xinming Ou, Sudhakar Govindavajhala, and Andrew W. Appel. <strong>MulVAL: A logic-based network security analyzer</strong>. In 14th USENIX Security Symposium, 2005.</li>

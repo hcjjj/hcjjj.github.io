@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%872.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%873.png">
 <meta property="article:published_time" content="2024-03-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T10:53:09.276Z">
+<meta property="article:modified_time" content="2024-11-28T12:53:15.051Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Attack graph">
 <meta name="twitter:card" content="summary">
@@ -91,7 +91,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">攻击树/图技术总结 😈⃤</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">攻击建模技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB"><span class="toc-number">2.</span> <span class="toc-text">网络攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%BB%E8%BE%91"><span class="toc-number">2.1.</span> <span class="toc-text">条件逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB-1"><span class="toc-number">2.3.</span> <span class="toc-text">网络攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84"><span class="toc-number">2.4.</span> <span class="toc-text">攻击路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE%E5%BA%94%E7%94%A8"><span class="toc-number">2.5.</span> <span class="toc-text">攻击图应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A0%91-%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">攻击树&#x2F;图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">图的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A0%91"><span class="toc-number">3.2.</span> <span class="toc-text">攻击树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text">攻击图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E8%A7%89%E8%AF%AD%E6%B3%95%E7%90%86%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text">视觉语法理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">可视化语法分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">6.</span> <span class="toc-text">逻辑攻击图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">7.</span> <span class="toc-text">属性攻击图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">8.</span> <span class="toc-text">贝叶斯攻击图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">9.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">攻击树/图技术总结 😈⃤</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">攻击建模技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB"><span class="toc-number">2.</span> <span class="toc-text">网络攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%BB%E8%BE%91"><span class="toc-number">2.1.</span> <span class="toc-text">条件逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB-1"><span class="toc-number">2.3.</span> <span class="toc-text">网络攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84"><span class="toc-number">2.4.</span> <span class="toc-text">攻击路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE%E5%BA%94%E7%94%A8"><span class="toc-number">2.5.</span> <span class="toc-text">攻击图应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A0%91-%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">攻击树&#x2F;图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">图形的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A0%91"><span class="toc-number">3.2.</span> <span class="toc-text">攻击树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text">攻击图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">攻击图总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">4.1.</span> <span class="toc-text">逻辑攻击图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">4.2.</span> <span class="toc-text">属性攻击图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">4.3.</span> <span class="toc-text">贝叶斯攻击图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">5.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div></widget>
 
 
 
@@ -418,20 +418,149 @@
 <td>可支持动态分析，结合实时监控数据更新状态</td>
 </tr>
 </tbody></table>
-<p>攻击图和攻击树都是基于图形的网络攻击表示，重要的是区分基于图论的图形和树的表示。在图论中，树是一种无环图，其中任意两个顶点之间都有一条路径相连，而图则是一个可能包含环的图。通常决策树、事件树、攻击树、故障树以及 Petri 网的可视化表示符合树的定义，因为它们在可视化时呈现为无环图。</p>
-<h3 id="图的定义"><a href="#图的定义" class="headerlink" title="图的定义"></a>图的定义</h3><p>基于图形的网络攻击表示可以用以下形式表示：G(V; E)，其中包含顶点 v ∈ V 和边 e ∈ E，边表示节点之间的关系。整体图形结构可以表示为一个元组，形式为 G &#x3D; (S, τ, S0, Ss, L, EX)，其中：</p>
+<p>攻击图和攻击树都是基于图形的网络攻击表示，重要的是区分基于图论的图形和树的表示。在图论中，<strong>树是一种无环图</strong>，其中任意两个顶点之间都有一条路径相连，而图则是一个可能包含环的图。通常决策树、事件树、攻击树、故障树以及 Petri 网的可视化表示符合树的定义，因为它们在可视化时呈现为无环图。</p>
+<h3 id="图形的定义"><a href="#图形的定义" class="headerlink" title="图形的定义"></a>图形的定义</h3><p>基于图形的网络攻击表示可以用以下形式表示：$G(V; E)$，其中包含 <strong>顶点</strong> $v \in V$ 和 <strong>边</strong> $e \in E$，边表示节点之间的关系，整体图形结构可以表示为一个元组，形式为 $G &#x3D; (S, \tau, S_0, S_s, L, EX)$，其中：</p>
 <ul>
-<li>S 是一个有限的状态集，</li>
-<li>τ ⊆ S × S 是一个转换关系，</li>
-<li>S0 ⊆ S 是初始状态集，</li>
-<li>Ss ⊆ S 是成功状态集 —— 例如，获得某一主机的 root 权限或用户权限，</li>
-<li>L : S → 2AP 是状态的标签，标记一组原子命题 (AP)，</li>
-<li>EX 是一个有限的漏洞集合，表示两个状态之间的转换。</li>
+<li>$S$ 是一个有限的状态集</li>
+<li>$\tau \subseteq S \times S$ 是一个转换关系</li>
+<li>$S_0 \subseteq S$ 是初始状态集</li>
+<li>$S_s \subseteq S$ 是成功状态集 —— 例如，获得某一主机的 root 权限或用户权限</li>
+<li>$L : S \to 2^{AP}$ 是状态的标签，标记一组原子命题 (AP)</li>
+<li>$EX$ 是一个有限的漏洞集合，表示两个状态之间的转换</li>
 </ul>
-<h3 id="攻击树"><a href="#攻击树" class="headerlink" title="攻击树"></a>攻击树</h3><h3 id="攻击图"><a href="#攻击图" class="headerlink" title="攻击图"></a>攻击图</h3><h2 id="视觉语法理论"><a href="#视觉语法理论" class="headerlink" title="视觉语法理论"></a>视觉语法理论</h2><h2 id="可视化语法分析"><a href="#可视化语法分析" class="headerlink" title="可视化语法分析"></a>可视化语法分析</h2><h2 id="逻辑攻击图"><a href="#逻辑攻击图" class="headerlink" title="逻辑攻击图"></a>逻辑攻击图</h2><h2 id="属性攻击图"><a href="#属性攻击图" class="headerlink" title="属性攻击图"></a>属性攻击图</h2><h2 id="贝叶斯攻击图"><a href="#贝叶斯攻击图" class="headerlink" title="贝叶斯攻击图"></a>贝叶斯攻击图</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<p><strong>顶点 ($V$)</strong> 也称为节点，可以表示：</p>
+<ul>
+<li>已应用或可能应用于给定节点的漏洞</li>
+<li>一个前置条件或后置条件</li>
+<li>前置条件和后置条件的组合</li>
+</ul>
+<p><strong>边 ($E$)</strong> </p>
+<ul>
+<li>可以是有向的 —— 表示特定的转换</li>
+<li>也可以是无向的 —— 表示两个节点之间的通用连接，指示漏洞的执行</li>
+</ul>
+<p>通常，攻击树使用顶点表示漏洞，而不表示前置条件，前置条件在从一个漏洞到下一个漏洞的转换中被假定已经满足；攻击图则同时表示前置条件和漏洞。在调查的 118 种 <strong>攻击图</strong> 配置中，有 98 种（83%）明确表示了 <strong>前置条件作为一个节点</strong>。然而，在 61 种 <strong>攻击树</strong> 中，只有 4 种（6.5%）<strong>使用不同的形状表示前置条件和漏洞</strong></p>
+<p><strong>加权边</strong>，可以为边或顶点分配权重，以表示成本、概率、风险或其他度量，这些度量表示：</p>
+<ul>
+<li>执行某种类型攻击的难度，或者某种攻击成功的概率&#x2F;可能性</li>
+<li>成本可以以连续值表示，也可以以布尔值表示<ul>
+<li>布尔值，如：容易和不容易、昂贵和不昂贵、具有侵入性和不具有侵入性等</li>
+<li>连续值，如：防御&#x2F;攻击的货币成本、达到&#x2F;反击的时间、攻击&#x2F;防御的资源成本等</li>
+</ul>
+</li>
+<li><strong>攻击预测</strong> 算法通常基于贝叶斯网络或马尔可夫决策过程，这些算法依赖于加权边提供的度量，例如：<ul>
+<li>基于行为的攻击图衡量关键资源被攻破的风险</li>
+<li>概率攻击图计算网络的年化损失期望值，以帮助优先修补漏洞</li>
+<li>以及通过三个概率度量（漏洞成功概率、成功发生概率和条件获得概率）来分别衡量成功攻击的可能性、攻击已被应用的可能性和攻击者将达到给定条件的可能性</li>
+</ul>
+</li>
+</ul>
+<h3 id="攻击树"><a href="#攻击树" class="headerlink" title="攻击树"></a>攻击树</h3><p>Weiss 于 1991 年引入了 <strong>威胁逻辑树</strong>，并提供了一个包含风险测量和前提条件逻辑的示例。普遍认为，<strong>攻击树</strong> 的开创者是 Schneier，其于 1999 年发表的论文被广泛认定为攻击树的奠基之作。攻击树自下而上展示网络攻击，它使用矩形、椭圆等形状，或不使用形状的纯文本来表示前提条件或漏洞。</p>
+<p><strong>事件树</strong> 和 <strong>决策树</strong> 的视觉结构与攻击树相似，事件树侧重于系统中的成功与失败，而决策树则侧重于系统故障。尽管事件树和决策树在计算机&#x2F;网络安全领域中已有应用，但这两种方法尚未得到广泛普及。</p>
+<p>故障树与攻击树具有相同的树形结构。故障树的符号表示法最早由美国核管理委员会提出，之后，IEC 于 1990 年、欧洲空间标准化合作组织和英国标准协会对其进行了标准化。故障树被广泛应用于多个行业，如航空航天、放射性废物处理、汽车工业以及计算机系统故障分析。尽管故障树标准是一个通用标准（并非专门针对网络安全领域），但近年来它已成为表示网络攻击的一种流行手段。</p>
+<p>故障树是最具视觉表现力的 AMT 之一，因为它们采用了多种标准符号来表达攻击元素，符号集包括多数表决门、优先与（PAND）门、禁止门、非门和顺序门等符号</p>
+<h3 id="攻击图"><a href="#攻击图" class="headerlink" title="攻击图"></a>攻击图</h3><p>攻击图起源于 Dacier 的博士论文和两篇早期论文。这些贡献强调了权限图的概念，该图捕获了权限的继承性，在此图中，节点表示用户或一组用户拥有的一组权限，边表示漏洞，状态转换中假定了先决条件。</p>
+<p>其他攻击图示的表现形式：</p>
+<ul>
+<li>漏洞表示为矩形，将先决条件表示为椭圆，先决条件逻辑由圆弧的存在（AND）或不存在（OR）表示</li>
+<li>漏洞表示为椭圆，先决条件表示为纯文本，未表示出先决条件逻辑</li>
+</ul>
+<p><strong>攻击图的类型</strong></p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>参考文献</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>“通用”攻击图</strong></td>
+<td>通用攻击图相关文献</td>
+</tr>
+<tr>
+<td><strong>警报关联图</strong></td>
+<td>警报关联图；超警报关联图；警报依赖图；入侵图 (i-graph)</td>
+</tr>
+<tr>
+<td><strong>漏洞图</strong></td>
+<td>利用图；面向利用的图；状态枚举攻击图；依赖攻击图；协调攻击图</td>
+</tr>
+<tr>
+<td><strong>杂项攻击图</strong></td>
+<td>个性化攻击图；主机访问图；混合攻击图；知识图；任务依赖图；贝叶斯攻击图；多先决条件攻击图；证据图；逻辑攻击图；主机受损攻击图；预测攻击图；攻击策略图；特权图</td>
+</tr>
+<tr>
+<td><strong>依赖关系图</strong></td>
+<td>利用依赖图；混合依赖图；一般依赖图；基于行为的攻击图；概率攻击图；攻击场景图；漏洞原因图；面向利用的图</td>
+</tr>
+</tbody></table>
+<h2 id="攻击图总结"><a href="#攻击图总结" class="headerlink" title="攻击图总结"></a>攻击图总结</h2><h3 id="逻辑攻击图"><a href="#逻辑攻击图" class="headerlink" title="逻辑攻击图"></a>逻辑攻击图</h3><p>逻辑攻击图主要基于 <strong>逻辑推理</strong> 来建模漏洞和攻击路径的关系，通常采用 <strong>图论</strong> 和 <strong>逻辑推理引擎</strong> 来构建和分析。它的重点是描述漏洞之间的因果关系，帮助分析攻击者可能的行为路径。</p>
+<p><strong>主要特征：</strong></p>
+<ul>
+<li><strong>结构</strong>：逻辑攻击图的节点表示网络中的漏洞或攻击目标，边表示从一个漏洞到另一个漏洞的攻击路径。图中的路径表示漏洞被攻击者利用的可能步骤。</li>
+<li><strong>推理引擎</strong>：通常，逻辑攻击图结合了推理技术（如 <strong>Datalog</strong>、<strong>规则引擎</strong>）来推导可能的攻击路径。例如，攻击图中的边表示某一漏洞的攻击者可能通过特定漏洞进入系统，或者通过其他漏洞进一步扩展攻击。</li>
+<li><strong>重点</strong>：逻辑攻击图注重通过漏洞和攻击路径的逻辑关系分析攻击者的行动路线。它关注的是如何从一个漏洞逐步到达攻击目标，强调 <strong>攻击路径的可行性</strong>。</li>
+</ul>
+<p><strong>举例：</strong> 在一个逻辑攻击图中，某个漏洞（如 SQL 注入）可能是攻击路径的一个节点，而攻击者可能通过这个漏洞进一步攻击数据库系统，从而利用另一个漏洞（如操作系统漏洞）来提升权限。</p>
+<h3 id="属性攻击图"><a href="#属性攻击图" class="headerlink" title="属性攻击图"></a>属性攻击图</h3><p>属性攻击图是对逻辑攻击图的扩展，它不仅关注 <strong>漏洞之间的因果关系</strong>，还引入了 <strong>漏洞的属性信息</strong>。这些属性可以包括漏洞的 <strong>严重性</strong>、<strong>攻击成功的概率</strong>、<strong>攻击者的可达性</strong> 等，这些信息帮助量化网络系统的安全性和风险。</p>
+<p><strong>主要特征：</strong></p>
+<ul>
+<li>属性攻击图的核心特点是每个节点或边都附加了不同的 <strong>属性信息</strong>，这些属性可能包括：<ul>
+<li><strong>漏洞的 CVSS（通用漏洞评分系统）评分</strong>：漏洞的严重性。</li>
+<li><strong>攻击成功概率</strong>：攻击者成功利用漏洞的概率。</li>
+<li><strong>攻击者技能需求</strong>：攻击者需要具备的技能水平。</li>
+<li><strong>修复状态</strong>：漏洞是否已修复或是否已知。</li>
+</ul>
+</li>
+<li><strong>计算风险</strong>：属性攻击图的目的是在已有攻击路径的基础上，量化每条路径的风险。例如，某条攻击路径可能具有较低的成功概率，但如果路径的漏洞属性严重，仍然可能构成较大的安全威胁。</li>
+<li><strong>重点</strong>：属性攻击图的重点在于 <strong>风险量化</strong> 和 <strong>综合分析</strong>。通过引入各种属性信息，攻击图不仅仅显示漏洞间的关系，还提供了关于每条攻击路径的更多细节信息，从而帮助网络安全人员做出更加精准的决策。</li>
+</ul>
+<p><strong>举例：</strong> 在属性攻击图中，某个漏洞的节点可能会有以下属性：漏洞的 CVSS 分数是 8.5（高风险），并且攻击成功的概率是 70%。另外，这个漏洞的攻击路径可能依赖于其他系统组件的安全性，因此，路径的风险可以通过综合考虑这些属性来评估。</p>
+<h3 id="贝叶斯攻击图"><a href="#贝叶斯攻击图" class="headerlink" title="贝叶斯攻击图"></a>贝叶斯攻击图</h3><p><strong>贝叶斯攻击图</strong>（<strong>Bayesian Attack Graph</strong>）是一种基于贝叶斯网络（Bayesian Network）理论的攻击图，结合了攻击图和概率推理的方法，旨在通过建模漏洞和攻击路径之间的概率关系来量化网络安全风险。这种方法不仅关注攻击路径的因果关系，还考虑了 <strong>不确定性</strong> 和 <strong>攻击成功的概率</strong>，提供了比传统攻击图 <strong>更为细致和概率化</strong> 的安全评估工具。</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th><strong>逻辑攻击图</strong></th>
+<th><strong>属性攻击图</strong></th>
+<th><strong>贝叶斯攻击图</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>建模方式</strong></td>
+<td>逻辑推理，关注漏洞之间的因果关系</td>
+<td>逻辑推理 + 漏洞属性（如 CVSS、成功概率等）</td>
+<td>贝叶斯网络，关注条件依赖和概率推理</td>
+</tr>
+<tr>
+<td><strong>处理不确定性</strong></td>
+<td>无法处理不确定性</td>
+<td>通过属性信息引入不确定性，支持概率评估</td>
+<td>强调不确定性的量化，通过概率推理处理不确定性</td>
+</tr>
+<tr>
+<td><strong>风险评估</strong></td>
+<td>无法量化风险，仅展示攻击路径的可行性</td>
+<td>能够量化风险，结合漏洞的属性信息评估路径风险</td>
+<td>通过概率推理全面评估风险，量化各攻击路径的成功概率</td>
+</tr>
+<tr>
+<td><strong>计算复杂度</strong></td>
+<td>低，适合快速分析和发现攻击路径</td>
+<td>中等，需考虑属性信息和路径的复杂性</td>
+<td>高，需要大量的概率计算和推理，适用于复杂网络</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>网络漏洞扫描、路径分析</td>
+<td>风险量化、漏洞管理、防御策略优化</td>
+<td>多步骤攻击分析、动态风险评估、大规模复杂网络安全分析</td>
+</tr>
+</tbody></table>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
 <li>Lallie H S, Debattista K, Bal J. A review of attack graph and attack tree visual syntax in cyber security [J]. Computer Science Review, 2020, 35: 100219.</li>
-<li><strong>Frigault M, Wang L. Measuring network security using bayesian network-based attack graphs [C]&#x2F;&#x2F;2008 32nd Annual IEEE International Computer Software and Applications Conference. IEEE, 2008: 698-703.</strong> - 最新的怎么做</li>
 <li>Wang L, Islam T, Long T, et al. An attack graph-based probabilistic security metric [C]&#x2F;&#x2F;Data and Applications Security XXII: 22nd Annual IFIP WG 11.3 Working Conference on Data and Applications Security London, UK, July 13-16, 2008 Proceedings 22. Springer Berlin Heidelberg, 2008: 283-296.</li>
+<li>Frigault M, Wang L. Measuring network security using bayesian network-based attack graphs [C]&#x2F;&#x2F;2008 32nd Annual IEEE International Computer Software and Applications Conference. IEEE, 2008: 698-703.</li>
 </ul>
 
 
