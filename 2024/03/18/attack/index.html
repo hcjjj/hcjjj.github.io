@@ -33,8 +33,10 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%875.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%872.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/%E5%9B%BE%E7%89%873.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241130211026.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241130213622.png">
 <meta property="article:published_time" content="2024-03-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-28T12:53:15.051Z">
+<meta property="article:modified_time" content="2024-11-30T13:38:09.999Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Attack graph">
 <meta name="twitter:card" content="summary">
@@ -91,7 +93,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">攻击树/图技术总结 😈⃤</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">攻击建模技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB"><span class="toc-number">2.</span> <span class="toc-text">网络攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%BB%E8%BE%91"><span class="toc-number">2.1.</span> <span class="toc-text">条件逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB-1"><span class="toc-number">2.3.</span> <span class="toc-text">网络攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84"><span class="toc-number">2.4.</span> <span class="toc-text">攻击路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE%E5%BA%94%E7%94%A8"><span class="toc-number">2.5.</span> <span class="toc-text">攻击图应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A0%91-%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">攻击树&#x2F;图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">图形的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A0%91"><span class="toc-number">3.2.</span> <span class="toc-text">攻击树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text">攻击图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">攻击图总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">4.1.</span> <span class="toc-text">逻辑攻击图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">4.2.</span> <span class="toc-text">属性攻击图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">4.3.</span> <span class="toc-text">贝叶斯攻击图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">5.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">攻击树/图技术总结 😈⃤</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%BB%BA%E6%A8%A1%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">攻击建模技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB"><span class="toc-number">2.</span> <span class="toc-text">网络攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%BB%E8%BE%91"><span class="toc-number">2.1.</span> <span class="toc-text">条件逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">漏洞利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB-1"><span class="toc-number">2.3.</span> <span class="toc-text">网络攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84"><span class="toc-number">2.4.</span> <span class="toc-text">攻击路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE%E5%BA%94%E7%94%A8"><span class="toc-number">2.5.</span> <span class="toc-text">攻击图应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A0%91-%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">攻击树&#x2F;图</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.1.</span> <span class="toc-text">图形的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%A0%91"><span class="toc-number">3.2.</span> <span class="toc-text">攻击树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text">攻击图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%9B%BE%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">攻击图总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">4.1.</span> <span class="toc-text">逻辑攻击图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">4.2.</span> <span class="toc-text">属性攻击图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C"><span class="toc-number">4.3.</span> <span class="toc-text">贝叶斯网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%94%BB%E5%87%BB%E5%9B%BE"><span class="toc-number">4.4.</span> <span class="toc-text">贝叶斯攻击图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">5.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div></widget>
 
 
 
@@ -134,6 +136,40 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@v10/dist/mermaid.min.js"></script>
+
+  <script>
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    if (window.mermaid) {
+      mermaid.initialize(mermaid_config);
+    }
+  </script>
 
 
 
@@ -516,47 +552,131 @@
 <li><strong>重点</strong>：属性攻击图的重点在于 <strong>风险量化</strong> 和 <strong>综合分析</strong>。通过引入各种属性信息，攻击图不仅仅显示漏洞间的关系，还提供了关于每条攻击路径的更多细节信息，从而帮助网络安全人员做出更加精准的决策。</li>
 </ul>
 <p><strong>举例：</strong> 在属性攻击图中，某个漏洞的节点可能会有以下属性：漏洞的 CVSS 分数是 8.5（高风险），并且攻击成功的概率是 70%。另外，这个漏洞的攻击路径可能依赖于其他系统组件的安全性，因此，路径的风险可以通过综合考虑这些属性来评估。</p>
+<h3 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h3><p> <strong>贝叶斯理论（Bayesian Theory）</strong></p>
+<p>贝叶斯理论是一种基于概率论的统计方法，用于处理不确定性。它的核心思想是：通过利用先验知识和新的观察数据，更新对一个事件发生概率的认知。贝叶斯理论基于贝叶斯定理（Bayes’ Theorem），该定理描述了如何根据现有的证据更新事件的概率。贝叶斯定理的数学公式如下：</p>
+<p>$P(A | B) &#x3D; \frac{P(B | A) P(A)}{P(B)}$</p>
+<p>其中：</p>
+<ul>
+<li>$P(A∣B)$ 是在给定 $B$ 发生的情况下，事件 $A$ 发生的 <strong>后验概率</strong>（Posterior Probability）</li>
+<li>$P(B∣A)$ 是在给定 $A$ 发生的情况下，事件 BBB 发生的 <strong>似然性</strong>（Likelihood）</li>
+<li>$P(A)$ 是事件 $A$ 发生的 <strong>先验概率</strong>（Prior Probability）</li>
+<li>$P(B)$ 是事件 $B$ 发生的 <strong>边际概率</strong>（Marginal Probability）</li>
+</ul>
+<p>贝叶斯定理的主要作用是根据新的观测数据（$B$）来更新我们对某个事件（$A$）的信念（后验概率），它是 <strong>贝叶斯推理</strong> 的基础，广泛应用于统计推断、机器学习、决策理论等领域。</p>
+<p><strong>贝叶斯网络（Bayesian Network）</strong></p>
+<p>贝叶斯网络（BN） 是一种图形模型，它利用贝叶斯理论来建模变量之间的依赖关系，并进行推理。贝叶斯网络使用有向无环图（DAG）来表示系统中的变量及其相互关系：</p>
+<ul>
+<li><strong>节点（Node）</strong> 表示一个变量（可以是任何类型的数据，比如天气、疾病、设备故障等）</li>
+<li><strong>边（Edge）</strong> 表示变量之间的依赖关系，也就是一个变量如何影响另一个变量</li>
+</ul>
+<p>贝叶斯网络结合了贝叶斯理论和图形模型的优势，能够处理多变量之间复杂的条件依赖关系，并且支持对未知变量的推断。</p>
+<p><strong>条件概率表（CPT）</strong></p>
+<p>条件概率表（CPT） 是贝叶斯网络中 <strong>每个节点</strong> 的概率分布，用来表示在给定父节点（即有箭头指向它的节点）的情况下，这个节点的值的概率。换句话说，CPT 给出的是：在已知一些其他变量的值时，某个变量取特定值的概率。</p>
+<p>贝叶斯网络的核心思想是通过已知的条件概率来推理未知的信息：</p>
+<ul>
+<li><strong>推断</strong>：给定一些已知的变量，推测其他变量的概率</li>
+<li><strong>更新</strong>：随着新信息的获取，可以动态地更新网络中的概率分布</li>
+</ul>
+<p>贝叶斯理论为贝叶斯网络提供了推理和更新概率的数学基础，贝叶斯网络中的每个节点都依赖于贝叶斯定理来表示条件概率，节点之间的依赖关系通过贝叶斯定理来建立。</p>
 <h3 id="贝叶斯攻击图"><a href="#贝叶斯攻击图" class="headerlink" title="贝叶斯攻击图"></a>贝叶斯攻击图</h3><p><strong>贝叶斯攻击图</strong>（<strong>Bayesian Attack Graph</strong>）是一种基于贝叶斯网络（Bayesian Network）理论的攻击图，结合了攻击图和概率推理的方法，旨在通过建模漏洞和攻击路径之间的概率关系来量化网络安全风险。这种方法不仅关注攻击路径的因果关系，还考虑了 <strong>不确定性</strong> 和 <strong>攻击成功的概率</strong>，提供了比传统攻击图 <strong>更为细致和概率化</strong> 的安全评估工具。</p>
 <table>
 <thead>
 <tr>
-<th>特征</th>
-<th><strong>逻辑攻击图</strong></th>
-<th><strong>属性攻击图</strong></th>
-<th><strong>贝叶斯攻击图</strong></th>
+<th align="left">特征</th>
+<th align="left"><strong>逻辑攻击图</strong></th>
+<th align="left"><strong>属性攻击图</strong></th>
+<th align="left"><strong>贝叶斯攻击图</strong></th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>建模方式</strong></td>
-<td>逻辑推理，关注漏洞之间的因果关系</td>
-<td>逻辑推理 + 漏洞属性（如 CVSS、成功概率等）</td>
-<td>贝叶斯网络，关注条件依赖和概率推理</td>
+<td align="left"><strong>建模方式</strong></td>
+<td align="left">逻辑推理，关注漏洞之间的因果关系</td>
+<td align="left">逻辑推理 + 漏洞属性（如 CVSS、成功概率等）</td>
+<td align="left">贝叶斯网络，关注条件依赖和概率推理</td>
 </tr>
 <tr>
-<td><strong>处理不确定性</strong></td>
-<td>无法处理不确定性</td>
-<td>通过属性信息引入不确定性，支持概率评估</td>
-<td>强调不确定性的量化，通过概率推理处理不确定性</td>
+<td align="left"><strong>处理不确定性</strong></td>
+<td align="left">无法处理不确定性</td>
+<td align="left">通过属性信息引入不确定性，支持概率评估</td>
+<td align="left">强调不确定性的量化，通过概率推理处理不确定性</td>
 </tr>
 <tr>
-<td><strong>风险评估</strong></td>
-<td>无法量化风险，仅展示攻击路径的可行性</td>
-<td>能够量化风险，结合漏洞的属性信息评估路径风险</td>
-<td>通过概率推理全面评估风险，量化各攻击路径的成功概率</td>
+<td align="left"><strong>风险评估</strong></td>
+<td align="left">无法量化风险，仅展示攻击路径的可行性</td>
+<td align="left">能够量化风险，结合漏洞的属性信息评估路径风险</td>
+<td align="left">通过概率推理全面评估风险，量化各攻击路径的成功概率</td>
 </tr>
 <tr>
-<td><strong>计算复杂度</strong></td>
-<td>低，适合快速分析和发现攻击路径</td>
-<td>中等，需考虑属性信息和路径的复杂性</td>
-<td>高，需要大量的概率计算和推理，适用于复杂网络</td>
+<td align="left"><strong>计算复杂度</strong></td>
+<td align="left">低，适合快速分析和发现攻击路径</td>
+<td align="left">中等，需考虑属性信息和路径的复杂性</td>
+<td align="left">高，需要大量的概率计算和推理，适用于复杂网络</td>
 </tr>
 <tr>
-<td><strong>适用场景</strong></td>
-<td>网络漏洞扫描、路径分析</td>
-<td>风险量化、漏洞管理、防御策略优化</td>
-<td>多步骤攻击分析、动态风险评估、大规模复杂网络安全分析</td>
+<td align="left"><strong>适用场景</strong></td>
+<td align="left">网络漏洞扫描、路径分析</td>
+<td align="left">风险量化、漏洞管理、防御策略优化</td>
+<td align="left">多步骤攻击分析、动态风险评估、大规模复杂网络安全分析</td>
 </tr>
 </tbody></table>
+<p><strong>Attack Graph Model</strong></p>
+<ul>
+<li>漏洞的利用被表示为椭圆形的谓词</li>
+<li>条件则用矩形表示</li>
+<li>括号中的两个数字分别表示源主机和目标主机</li>
+<li>攻击者的初始能力通过一个三角形表示</li>
+<li>目标条件则用一个八边形表示</li>
+</ul>
+<p><strong>Bayesian Networks</strong></p>
+<p>系统 $X$ 的贝叶斯网络可以形式化地描述为一个对 $B&#x3D;(G,Q)$，其中 $G$ 是一个有向无环图（DAG），图中的 <strong>节点</strong> 表示系统的 <strong>变量</strong>，<strong>边</strong> 表示变量之间的 <strong>条件关系</strong>。$Q$ 是一组参数，用于量化网络，如每个变量（节点）的条件分布值。贝叶斯网络的联合概率分布表示为：</p>
+<p>$P(X) &#x3D; \prod_{i&#x3D;1}^{n} P(X_i | \text{parents}(X_i))$</p>
+<p>贝叶斯网络提供了一种紧凑的方式来编码被建模系统中所有的条件关系。</p>
+<p>为攻击图（AG）中的每个节点分配一个概率值，表示一个攻击者或攻击者的百分比将利用该漏洞的可能性（为每个节点标注个体概率），然后为攻击图中的每个节点开发条件概率表（CPT），攻击图最终可以表示为一个有向无环图（DAG），并与 CPT 结合，编码所有节点的条件独立性，这将构成一个贝叶斯网络。</p>
+<blockquote>
+<p><strong>将概率分配给节点</strong> 比 <strong>将概率分配给边</strong> 的方法实用，因为节点的概率可以从标准度量中轻松获得，如常见漏洞评分系统（CVSS）</p>
+<p>建议使用 CVSS 机制来填充攻击图，这是一种确保使用一致数据的方式（对研究社区对模型产生的结果有信心）</p>
+</blockquote>
+<p><strong>案例 1：要达到目标状态，漏洞 A 和 B 都必须被利用</strong></p>
+<pre class="mermaid">graph TD;
+    A((A 0.3)) --> B((B 0.4));
+    B -->Goal[Goal State];</pre>
+
+<p>在这个攻击图（AG）中，每个节点都已注释上一个概率得分，正如之前提到的，模型建议使用 CVSS 提供的评分机制来推导这些概率得分。接下来，为每个节点生成条件概率表（CPT），这些表格编码了每个节点的概率值及其条件依赖关系。在这个模型中，节点被分配了离散值 “T”，表示攻击者成功利用了漏洞，或 “F”，表示攻击者未成功利用漏洞。</p>
+<p>条件概率表将帮助计算给定网络的联合概率函数，如前所述，我们的目标是确定达到目标状态的概率，在本案例中，就是计算 $P(B &#x3D; T)$（即漏洞 B 被成功利用的概率），这个计算可以按以下方式进行：</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241130211026.png" style="zoom: 50%;" />
+
+<p><strong>案例 2：要达到目标状态，必须首先利用漏洞 A 或漏洞 B 中的一个，然后再利用漏洞 C</strong></p>
+<pre class="mermaid">graph TD;
+    A((A 0.3)) --> C((C 0.4))
+    B((B 0.3)) --> C
+    C --> Goal[Goal State]</pre>
+
+
+
+<p>案例 2 的概率得分大于案例 1 的得分。这符合直观的性质，即安全度量应该满足这样的概念：当通向目标状态的路径增多时，网络的安全性会降低。因此，这个简单的例子验证了这一概念，并证明了将概率得分作为安全度量的有效性。</p>
+<p><strong>案例 3：要达到目标状态，必须首先同时利用漏洞 A 和漏洞 B，然后再利用漏洞 C</strong></p>
+<pre class="mermaid">graph TD;
+    subgraph AB ["A and B"]
+        A((A 0.3))
+        B((B 0.3))
+    end
+    A -->C((C 0.4))
+    B -->C((C 0.4))
+    C --> Goal[Goal State]</pre>
+
+<p>达到目标状态的概率显著低于案例 1 和案例 2，这在直观上是合理的，因为这个图限制了能够实现利用 C 所需前置条件的潜在攻击者数量。在案例 2 中，能够实现前置条件的攻击者数量是 A“或”B，而在案例 3 中，能够实现前置条件的攻击者数量是 A“和”B。</p>
+<p>接下来，将基于案例 2 考虑一个特定情况。在案例 2 中，漏洞 A 和 B 的利用是互相独立的，而在案例 4 中，我们展示了当漏洞 B 的利用概率依赖于漏洞 A 的利用时的影响。这可能是攻击者在成功利用漏洞 A 后，获得的知识使得他更容易利用漏洞 B 的情况。</p>
+<p><strong>案例 4：成功利用漏洞 A 增加了利用漏洞 B 的可能性（析取关系）</strong></p>
+<p>在案例 4 中，成功利用漏洞 B 的概率，如果没有先利用漏洞 A，评估为 0.3（与案例 2 相同）。然而，假设在成功利用漏洞 A 之后，攻击者获得了知识和技能，增加了利用漏洞 B 的概率至 0.5。</p>
+<p>达到目标状态的概率与案例 2 相同。对这一结果的解释是：为了利用 C，我们必须成功利用 A 或 B 中的任意一个。如果 A 被成功利用，那么利用 B 的可能性会增加。然而，攻击者也可以直接攻击 C，而不必尝试利用 B（在这种情况下，调整后的得分没有变化），这与案例 2 相同。如果只有 B 被成功利用，那么 A 不会被利用。这将导致攻击者能够继续攻击 C，且漏洞 B 的得分保持不变。这个情况与案例 2 相同。</p>
+<p><strong>案例 5：成功利用漏洞 A 增加了利用漏洞 B 的可能性（合取关系）</strong></p>
+<p>这个案例与案例 3 相似，唯一的区别是漏洞 A 和漏洞 B 是相互依赖的，即漏洞 A 的成功利用会增加利用漏洞 B 的可能性。</p>
+<p>需要注意的是，结果将始终是漏洞 A 的可能性与调整后的漏洞 B 的可能性得分的合取。这是因为必须先利用漏洞 A，而这意味着，如果漏洞 C 被利用，那么漏洞 B 的可能性将始终等于调整后的值。</p>
+<p><strong>案例 6：</strong></p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241130213622.png" style="zoom:50%;" />
+
+<p>在左侧的图中，攻击者必须：利用漏洞 A 或 B，以及漏洞 C 和 D，才能达到目标状态。右侧的图略有不同。为了达到目标状态，攻击者必须执行与左侧相同的步骤。然而，如果攻击者利用了漏洞 A，他将获得一些知识，这些知识使得利用漏洞 D 变得更容易且更可能。这个关系用可能性得分来表示：当漏洞 A 没有被利用时，漏洞 D 的可能性得分为 0.4；而当漏洞 A 被利用时，漏洞 D 的可能性得分为 0.8。这个关系由下面的条件概率表（CPT）建模。通过贝叶斯网络推理（BN inference），可以计算出达到目标状态的概率得分。这个概率得分表示了所分析网络的整体安全度量。请注意，在右侧图的 CPT 中，利用漏洞 A 意味着利用漏洞 D 的可能性会增加，但漏洞 C 仍然需要被利用。</p>
+<p>每个图中达到目标状态的概率得分分别为：左侧为 0.0816，右侧为 0.1296。这个安全度量得分表明，右侧图中达到目标状态的可能性大于左侧图。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
 <li>Lallie H S, Debattista K, Bal J. A review of attack graph and attack tree visual syntax in cyber security [J]. Computer Science Review, 2020, 35: 100219.</li>
 <li>Wang L, Islam T, Long T, et al. An attack graph-based probabilistic security metric [C]&#x2F;&#x2F;Data and Applications Security XXII: 22nd Annual IFIP WG 11.3 Working Conference on Data and Applications Security London, UK, July 13-16, 2008 Proceedings 22. Springer Berlin Heidelberg, 2008: 283-296.</li>
