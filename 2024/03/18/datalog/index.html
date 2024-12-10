@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Datalog - declarative logic programming language - H-sediment</title>
+
+  
+    <meta name="description" content="翻译自 Introduction to Datalog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Datalog - declarative logic programming language">
+<meta property="og:url" content="http://example.com/2024/03/18/datalog/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="翻译自 Introduction to Datalog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241210164940.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241210164606.png">
+<meta property="article:published_time" content="2024-03-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-10T09:24:49.730Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Datalog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241210164940.png">
+  
+  
+  
+  <meta name="keywords" content="Datalog">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Datalog - declarative logic programming language</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logic-programming"><span class="toc-number">1.</span> <span class="toc-text">Logic programming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-new-way-of-thinking"><span class="toc-number">1.1.</span> <span class="toc-text">A new way of thinking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Facts-and-rules"><span class="toc-number">1.2.</span> <span class="toc-text">Facts and rules</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Datalog-Syntax"><span class="toc-number">2.</span> <span class="toc-text">Datalog Syntax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Groundness-and-Safety"><span class="toc-number">2.1.</span> <span class="toc-text">Groundness and Safety</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Databases"><span class="toc-number">2.2.</span> <span class="toc-text">Databases</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Datalog-Semantics"><span class="toc-number">3.</span> <span class="toc-text">Datalog Semantics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Model-theoretic-semantics"><span class="toc-number">3.1.</span> <span class="toc-text">Model-theoretic semantics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fixed-point-semantics"><span class="toc-number">3.2.</span> <span class="toc-text">Fixed-point semantics</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Proof-theoretic-semantics"><span class="toc-number">3.3.</span> <span class="toc-text">Proof-theoretic semantics</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Datalog-with-Negation"><span class="toc-number">4.</span> <span class="toc-text">Datalog with Negation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Problems-with-negation"><span class="toc-number">4.1.</span> <span class="toc-text">Problems with negation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stratified-negation"><span class="toc-number">4.2.</span> <span class="toc-text">Stratified negation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Precedence-graphs"><span class="toc-number">4.3.</span> <span class="toc-text">Precedence graphs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Prolog"><span class="toc-number">5.</span> <span class="toc-text">Prolog</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+      </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@v10/dist/mermaid.min.js"></script>
+
+  <script>
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    if (window.mermaid) {
+      mermaid.initialize(mermaid_config);
+    }
+  </script>
+
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Research/">Research</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-03-17T16:00:00.000Z">2024-03-18</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Datalog - declarative logic programming language</span></h1>
+<p>翻译自 <a target="_blank" rel="noopener" href="https://x775.net/2019/03/18/Introduction-to-Datalog.html"><strong>Introduction to Datalog</strong></a></p>
+<span id="more"></span>
+
+<h1 id="Introduction-to-Datalog"><a href="#Introduction-to-Datalog" class="headerlink" title="Introduction to Datalog"></a>Introduction to Datalog</h1><h2 id="Logic-programming"><a href="#Logic-programming" class="headerlink" title="Logic programming"></a>Logic programming</h2><p>与命令式编程范式不同，<strong>声明式编程</strong> 表达了计算的逻辑，而不显式指定其控制流。也就是说，声明式编程关注的是“做什么”（what），而不是“如何做”（how）。如果你以前曾研究过声明式编程，你可能已经读到过类似的描述。如果这是你第一次接触声明式编程的相关内容，那么在开发一个应用时不专注于如何实现，可能会让你感觉非常陌生——对于我来说，最初也是如此！</p>
+<p>然而，很可能你已经在不知不觉中使用过声明式编程！实际上，像 HTML、CSS 和 SQL 这样的广泛使用的领域特定语言都属于 <strong>声明式编程范式</strong>。例如，HTML 只是描述了网页上应该出现什么，而不关心各种元素应该按什么顺序由浏览器渲染。同样，SQL 查询只是描述了要返回什么，而不关心如何计算返回值。从本质上来说，这就是人们所说的声明式编程关注“做什么”的含义。</p>
+<p>值得强调的是，声明式编程实际上是一个广义的术语，除了上面提到的领域特定语言外，它还包含了子范式——<strong>逻辑编程</strong>。正是这一子范式将在本教程中占据我们的关注重点。</p>
+<p>逻辑编程是基于形式逻辑的。这意味着，任何用逻辑编程语言编写的程序（例如 Datalog 或 Prolog）不过是以逻辑形式表达的一组句子，描述了关于某个特定领域的事实和规则。这使得逻辑编程拥有一些其他范式所没有的优点，具体包括：</p>
+<ul>
+<li>没有副作用</li>
+<li>没有显式的控制流</li>
+<li>强有力的终止性保证</li>
+</ul>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241210164940.png" style="zoom:50%;" />
+
+<p>然而，逻辑编程依赖于逻辑形式的句子，这也影响了它的表达能力——即，哪些算法可以通过哪些逻辑编程语言来表达。表达能力的范围是逐层递增的：</p>
+<ul>
+<li>关系代数 (Relational Algebra)<ul>
+<li>最小的表达能力范围，仅限于基本的数据库查询操作（如选择、投影、连接等）。这是关系数据库的理论基础</li>
+<li>示例：SQL 中的基本查询功能</li>
+</ul>
+</li>
+<li>Datalog<ul>
+<li>在关系代数的基础上增加了递归的能力，使得可以表达更复杂的查询和规则</li>
+<li>示例：用规则定义家谱关系（如“祖父”的定义依赖于“父亲”的关系递归）</li>
+</ul>
+</li>
+<li>Datalog + Negation<ul>
+<li>在 Datalog 的基础上进一步扩展，加入了对否定（negation）的支持，使得可以处理带有“不存在”或“不是”的逻辑表达</li>
+<li>示例：查询所有不是学生的人</li>
+</ul>
+</li>
+<li>Prolog<ul>
+<li>表达能力最强，支持完全的一阶逻辑。相比 Datalog，Prolog 可以使用函数、动态规则，以及更复杂的推理模式</li>
+<li>示例：通过规则和事实模拟复杂的人工智能推理任务</li>
+</ul>
+</li>
+</ul>
+<p>最内层的圆圈包含了关系代数（Relational Algebra），如果你有 SQL 的使用经验，那么对其可能会感到熟悉。<strong>Datalog 被展示为对关系代数的直接扩展</strong>。我们之所以称 Datalog 是关系代数的直接扩展，是因为 Datalog 支持递归（这是关系代数所不具备的能力），但除此之外功能并不多。如果你对关系代数不熟悉，也无需担心；本教程不会涉及关系代数的实际编写。这里主要关注的是表达能力，以及如何将这些概念置于一个更广泛的视角中。</p>
+<p>下一个圆圈 <strong>将 Datalog 扩展到了支持否定（negation）的层次</strong>。这一扩展允许我们使用所谓的分层 Datalog（Stratified Datalog）来实现任何多项式时间复杂度的算法。值得注意的是，缺乏否定功能的 Datalog（和关系代数类似）在实际应用中几乎毫无用处。因此，除非特别说明，本教程提到的 Datalog 都默认指支持否定的版本。实际上，如果在扩展 Datalog 的同时对否定运算采取一些适当的预防措施，我们仍然能够保持对终止性（termination）的强有力保证。</p>
+<p>然而，如果我们希望表达那些超出多项式时间复杂度的算法，就必须进一步扩展 Datalog。这时，我们进入了最外层的圆圈，从而有效地 <strong>将 Datalog 转变为 Prolog</strong>。Prolog 是一种图灵完备（Turing-complete）的逻辑编程语言，使我们能够表达任何想要的算法。然而，这种新增的表达能力也带来了直接后果——我们失去了对终止性的严格保证。在本教程的最后，我会简要回到 Prolog 相关的内容。</p>
+<h3 id="A-new-way-of-thinking"><a href="#A-new-way-of-thinking" class="headerlink" title="A new way of thinking"></a>A new way of thinking</h3><p>通过前面的讨论，我们可以理解，<strong>Datalog</strong> 本质上是一种非常简单的语言。这也许不足为奇。学习 Datalog 的挑战并不在于掌握复杂的语法、与编译器“斗智斗勇”，或者处理各种繁琐的库。真正的挑战在于，像学习任何一种新的编程范式一样，你需要重新调整自己的思维方式去理解它的概念。这是一种全新的思维方式！</p>
+<p>我们已经知道，使用逻辑编程语言（如 Datalog）编写的任何程序，其实是一个 <strong>逻辑约束的集合</strong>——即以逻辑形式表达的句子。<strong>编译器会使用这些约束集合来计算解决方案</strong>。请仔细回想一下这一点。是的，确实如此！实际上，当需要求解时，编译器可以自由选择实现解决方案所需的算法和数据结构。我们无法保证编译器总是采用相同的方法，它甚至可能决定并行执行任务！然而，给定相同的输入，编译器总会生成相同的输出。</p>
+<p>幸运的是，由于编译器会在幕后处理所有这些“<strong>如何做</strong>”的问题（how），我们只需要关注写出正确的约束（<strong>做什么</strong>，what）。这种特性不仅减少了程序员的工作量，还让我们专注于程序逻辑本身，而不是实现的细节。</p>
+<h3 id="Facts-and-rules"><a href="#Facts-and-rules" class="headerlink" title="Facts and rules"></a>Facts and rules</h3><p>所有逻辑程序（也就是逻辑约束的集合）都由有限组的事实和规则组成，Datalog 程序也不例外。这两个概念可以粗略地类比为其他编程语言中的类和函数。简而言之：</p>
+<ul>
+<li>事实：对我们所操作的世界的断言</li>
+<li>规则：允许从已有事实推导新事实的句子</li>
+</ul>
+<p>现在我们了解了事实和规则的基础，那么如何实际编写一个 Datalog 程序呢？很简单！我们从定义一些 <strong>事实</strong> 开始。比如，假设我们想要用 Datalog 来表示一个按照主要类型分类的电影收藏架，可以这样写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Movie(&quot;Pulp Fiction&quot;, &quot;Crime&quot;).</span><br><span class="line">Movie(&quot;The Hateful Eight&quot;, &quot;Crime&quot;). </span><br><span class="line">Movie(&quot;Reservoir Dogs&quot;, &quot;Thriller&quot;).</span><br></pre></td></tr></table></figure>
+
+<p>以上代码表示了三个事实，每个事实包含两个值（用逗号分隔），并以 <code>.</code>（句号）结束。在这个例子中，第一个值是电影标题，第二个值是电影类型。每个事实的谓词名称为 <code>Movie</code>。</p>
+<p>如果我们想要进一步扩展我们的“世界”，比如添加每部电影的演员，可以这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StarringIn(&quot;Pulp Fiction&quot;, &quot;Tim Roth&quot;).</span><br><span class="line">StarringIn(&quot;The Hateful Eight&quot;, &quot;Tim Roth&quot;).</span><br><span class="line">StarringIn(&quot;Reservoir Dogs&quot;, &quot;Harvey Keitel&quot;).</span><br></pre></td></tr></table></figure>
+
+<p>同样的逻辑可以应用于电影的导演：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DirectedBy(&quot;Pulp Fiction&quot;, &quot;Quentin Tarantino&quot;).</span><br><span class="line">DirectedBy(&quot;The Hateful Eight&quot;, &quot;Quentin Tarantino&quot;).</span><br><span class="line">DirectedBy(&quot;Reservoir Dogs&quot;, &quot;Quentin Tarantino&quot;).</span><br></pre></td></tr></table></figure>
+
+<p>通常，将所有事实写在程序的开头是一个好习惯，以便程序结构更清晰。如果你更喜欢按照字母顺序组织，Datalog 也支持这种灵活性。在定义事实时，参数的顺序并不重要，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DirectedBy(&quot;Reservoir Dogs&quot;, &quot;Quentin Tarantino&quot;).</span><br><span class="line">DirectedBy(&quot;Quentin Tarantino&quot;, &quot;Reservoir Dogs&quot;).</span><br></pre></td></tr></table></figure>
+
+<p>两者都是有效的。但是，写规则时必须遵守你选择的顺序（稍后会详细解释）。</p>
+<p>现在，我们已经使用事实建模了我们的电影收藏。假设有一位朋友特别喜欢犯罪类型的电影，并且尤其偏爱由 Quentin Tarantino 执导且由 Tim Roth 主演的电影。如何根据这些偏好挑选出合适的电影？</p>
+<p>显然，可以通过手动阅读上述事实找到答案。但如果我们的电影集合包含数以万计的标题（比如 Netflix 的规模），这种手动方法将变得不可行。这时候，规则就派上用场了！</p>
+<p>我们可以定义一条规则来解决这个问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ExtraAwesomeMovie(title) :-</span><br><span class="line">    Movie(title, &quot;Crime&quot;),</span><br><span class="line">    StarringIn(title, &quot;Tim Roth&quot;),</span><br><span class="line">    DirectedBy(title, &quot;Quentin Tarantino&quot;).</span><br></pre></td></tr></table></figure>
+
+<p>这条规则的含义是：</p>
+<ul>
+<li>如果有一部电影 <code>title</code> 的类型是 “Crime”（犯罪类型）</li>
+<li>且这部电影由 Tim Roth 主演</li>
+<li>并且由 Quentin Tarantino 执导</li>
+<li>那么我们可以推导出这部电影是 <code>ExtraAwesomeMovie</code></li>
+</ul>
+<p>规则中的 <code>:-</code> 读作“如果”（if），表示 <strong>物质条件</strong>，左侧是 <strong>结果</strong>，右侧是 <strong>条件</strong>。当 Datalog 程序运行时，规则会匹配程序中所有可用的事实，仅返回满足该规则的事实。在这个例子中，只有符合规则条件的电影会被推导为 <code>ExtraAwesomeMovie</code>。</p>
+<p><strong>匹配规则时的注意事项</strong></p>
+<ul>
+<li><p>额外的事实不会干扰规则匹配</p>
+<ul>
+<li>比如，如果程序中有额外的事实：<code>FirstName(&quot;Jennifer&quot;).</code></li>
+<li>虽然这个事实会被规则扫描，但它不会满足 <code>Movie</code> 的谓词，也不会干扰规则的正常运行。</li>
+</ul>
+</li>
+<li><p>事实中参数顺序的重要性</p>
+<ul>
+<li><p>在事实定义中，参数顺序无关紧要，但在规则中必须遵守定义的顺序。</p>
+</li>
+<li><p>例如：<code>Movie(title, &quot;Crime&quot;)</code> 和 <code>Movie(&quot;Crime&quot;, title)</code> 是不同的，第一种匹配犯罪类型的电影并返回标题，第二种只匹配标题为 “Crime” 的电影并返回类型。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>根据 <code>ExtraAwesomeMovie</code> 规则，从我们的事实集合中推导的结果是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ExtraAwesomeMovie(&quot;Pulp Fiction&quot;).</span><br><span class="line">ExtraAwesomeMovie(&quot;The Hateful Eight&quot;).</span><br></pre></td></tr></table></figure>
+
+<p>这表明，这两部电影都满足朋友的偏好，可以被归类为 <code>ExtraAwesomeMovie</code>。我们可以基于这些推导出的结果放心推荐给朋友。</p>
+<h2 id="Datalog-Syntax"><a href="#Datalog-Syntax" class="headerlink" title="Datalog Syntax"></a>Datalog Syntax</h2><p>在 <strong>Datalog</strong> 中，事实和规则都用 <strong>Horn 子句（Horn Clauses）</strong> 来表示。虽然本篇文章不会深入介绍 Horn 子句的具体细节，但如果你感兴趣，可以查阅相关的进一步资料。这里我们只需要了解以下几点：</p>
+<ul>
+<li>Horn 子句是一种逻辑子句，它最多包含一个正文字面量（positive literal）</li>
+<li>根据 Horn 子句的用途，可以将其分为三种类型：<ol>
+<li>事实（Facts 或 Unit Clauses）：用于表达无条件的知识</li>
+<li>规则（Rules）：用于表达有条件的知识</li>
+<li>目标子句（Goal Clauses）：用于表示目标（后续将详细介绍）</li>
+</ol>
+</li>
+</ul>
+<p>我们已经介绍了前两种类型（事实和规则），稍后会回到第三种类型（目标子句）。Datalog 的完整语法如下：</p>
+<p>$$<br>P∈Program &#x3D; c_1,…, c_n\<br>c∈Constraint &#x3D; a_0⇐a_1,…, a_n\<br>a∈Atom &#x3D; p(t_1,…, t_n)\<br>t∈Term &#x3D; k ∣ x\<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>$p$：有限集合的 <strong>谓词符号</strong></li>
+<li>$k$：有限集合的 <strong>变量符号</strong></li>
+<li>$x$：有限集合的 <strong>常量</strong></li>
+</ul>
+<p>换句话说，一个 Datalog 程序 $P$ 由一系列约束 $c_1,…,c_n$ 组成。这种设计意味着最短的 Datalog 程序是一个空的约束序列。约束 $c$ 是一个 Horn 子句，由一个头部原子 $a_0$ 和一个可选的主体原子序列 $a_1,…,a_n$ 组成。如果主体为空，则这是一个事实；否则，这是一个规则。原子 $a$ 由一个谓词符号（即一个名称）和一系列项 $t_1,…,t_n$ 组成。项 $t$ 可以是一个常量（例如字符串 <code>&quot;Crime&quot;</code> 或整数 <code>31</code>），或者一个变量（例如 <code>title</code>）。以下是可视化的描述：</p>
+<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241210164606.png" style="zoom: 33%;" />
+
+<p>此外，如前所述，行末的 <code>.</code>（句号） 用于结束某个具体的事实或规则。然而，如果我们编写的规则包含多行，那么需要用 <code>,</code>（逗号） 分隔每一行，最后一行除外，正如上面示例中所示。</p>
+<blockquote>
+<p>不同来源可能使用不同的术语。例如约束（即事实或规则）有时也被称为子句（clause）或简单地称为规则（rule），原子（atom） 有时也被称为文字（literal）。某些论文会明确说明它们采用的术语，如果语境不够清楚的话。</p>
+</blockquote>
+<p>以上内容就是 Datalog 的全部语法。</p>
+<h3 id="Groundness-and-Safety"><a href="#Groundness-and-Safety" class="headerlink" title="Groundness and Safety"></a>Groundness and Safety</h3><p>在 Datalog 中，当一个原子的所有项都是 <strong>常量</strong> 时，这个原子被称为 <strong>grounded</strong>。如果包含变量，它就不是 grounded。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NonGroundedFact(&quot;Walter White&quot;, actor). </span><br><span class="line">GroundedFact(&quot;Walter White&quot;, &quot;Bryan Cranston&quot;).</span><br></pre></td></tr></table></figure>
+
+<p>由于 <code>actor</code> 是变量，所以这个事实不是 grounded；因为两项 <code>&quot;Walter White&quot;</code> 和 <code>&quot;Bryan Cranston&quot;</code> 都是常量，所以它是 grounded。</p>
+<p>类似地，规则的范围性可以这样理解：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NonGroundedRule(&quot;Walter White&quot;, actor) :-</span><br><span class="line">    MainCharacter(&quot;Walter White&quot;, &quot;Breaking Bad&quot;),</span><br><span class="line">    StarringIn(&quot;Breaking Bad&quot;, actor).</span><br><span class="line">    </span><br><span class="line">GroundedRule(&quot;Walter White&quot;, &quot;Bryan Cranston&quot;) :-</span><br><span class="line">    MainCharacter(&quot;Walter White&quot;, &quot;Breaking Bad&quot;),</span><br><span class="line">    StarringIn(&quot;Breaking Bad&quot;, &quot;Bryan Cranston&quot;).</span><br></pre></td></tr></table></figure>
+
+<p>由于规则中的 <code>actor</code> 变量出现在头部和规则体中，所以这个规则不是 grounded；所有项均为常量，因此它是 grounded。</p>
+<p>为了确保我们能够产生有意义的结果，我们引入了 <strong>安全性（safety）</strong> 的概念。我们认为一个给定的程序 $P$ 是安全的，当且仅当：</p>
+<ol>
+<li>$P$ 的每个事实都是 <strong>范围化（grounded）</strong> 的</li>
+<li>每个出现在规则头部的变量 $x$ 也必须至少出现在规则体中（例如，上述 <code>NonGroundRule</code> 中的 <code>actor</code> 变量同时出现在头部和规则体中），这被称为 <strong>范围限制属性（range restriction property）</strong></li>
+</ol>
+<blockquote>
+<p>需要特别强调的是，我们的 Datalog 程序不需要规则本身是完全范围化的（grounded）来保证其安全性；我们只需确保规则头部中出现的变量在规则体中 <strong>至少出现过一次</strong> 即可。</p>
+</blockquote>
+<p>这些条件确保了从我们的 Datalog 程序中可以推导出的事实集合是 <strong>有限的</strong>，从而进一步保证了程序的 <strong>终止性</strong>。大多数情况下，这些条件可能并不是我们在编程时需要主动考虑的问题，因为绝大多数 Datalog 实现会直接拒绝不安全的程序。但现在你知道为什么程序可能会被拒绝了！</p>
+<h3 id="Databases"><a href="#Databases" class="headerlink" title="Databases"></a>Databases</h3><p>我们将程序中的事实视为我们的数据库。我们利用这个数据库来回答查询——既可以直接读取数据库中已有的信息，也可以像前面通过 <code>ExtraAwesomeMovie</code> 示例所展示的那样，利用已有知识推导出新的知识。在 Datalog 的语境中，查询实际上就是在询问某个条件是否成立（无论通过哪种方式）。我们稍后会更详细地讨论查询。在 Datalog 中，我们具体操作两种不同类型的数据库：</p>
+<ol>
+<li>外延数据库（Extensional Database, EDB）：指的是 Datalog 程序 PPP 中已经存在的事实集合</li>
+<li>内涵数据库（Intensional Database, IDB）：指的是可以从程序 PPP 推导出的事实集合</li>
+</ol>
+<p>换句话说，我们可以将 EDB 视为 Datalog 程序的 <strong>输入</strong>，而将 IDB 视为 Datalog 程序的 <strong>输出</strong>。</p>
+<p>以下是一个简单的 Datalog 程序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Edge(&quot;a&quot;, &quot;b&quot;).</span><br><span class="line">Edge(&quot;b&quot;, &quot;c&quot;).</span><br><span class="line"></span><br><span class="line">Path(x, y) :-</span><br><span class="line">    Edge(x, y).</span><br><span class="line"></span><br><span class="line">Path(x, z) :-</span><br><span class="line">    Path(x, y),</span><br><span class="line">    Edge(y, z).</span><br></pre></td></tr></table></figure>
+
+<p><code>Path</code> 规则表明如果从 $x→y$ 存在路径，且从 $y→z$ 存在边，那么从 $x→z$ 也存在路径</p>
+<p>在当前程序中，<strong>外延数据库</strong> 包含以下两条事实（直接写入程序的）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Edge(&quot;a&quot;, &quot;b&quot;).     extensional</span><br><span class="line">Edge(&quot;b&quot;, &quot;c&quot;).     extensional</span><br></pre></td></tr></table></figure>
+
+<p>运行该程序后，根据规则可以推导出以下新事实（推导出来的）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Path(&quot;a&quot;, &quot;b&quot;).     intensional</span><br><span class="line">Path(&quot;b&quot;, &quot;c&quot;).     intensional</span><br><span class="line">Path(&quot;a&quot;, &quot;c&quot;).     intensional</span><br></pre></td></tr></table></figure>
+
+<p>此时，<strong>完整的数据库</strong>（即 <strong>EDB + IDB</strong> 的联合）包含：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Edge(&quot;a&quot;, &quot;b&quot;).     extensional</span><br><span class="line">Edge(&quot;b&quot;, &quot;c&quot;).     extensional</span><br><span class="line"></span><br><span class="line">Path(&quot;a&quot;, &quot;b&quot;).     intensional</span><br><span class="line">Path(&quot;b&quot;, &quot;c&quot;).     intensional</span><br><span class="line">Path(&quot;a&quot;, &quot;c&quot;).     intensional</span><br></pre></td></tr></table></figure>
+
+<p>请注意，规则的输出（在此例中为 <code>Path</code>）由新的 <strong>范围化原子（ground atoms）</strong> 组成——这些原子是具体的事实，具有相同的名称（如 <code>Path</code>），但它们的参数满足规则的条件。以上内容也清楚地表明了为什么我们可以将 <strong>EDB</strong> 视为程序的输入，将 <strong>IDB</strong> 视为程序的输出。从语义上讲，Datalog 程序本质上就是 <strong>EDB 和 IDB 的联合</strong>。</p>
+<blockquote>
+<p>我所称的“数据库”（database）有时也被称为“模式”（schema）。一些论文会分别提到“外延模式（extensional schema）”和“内涵模式（intensional schema）”，不过缩写 <strong>EDB</strong> 和 <strong>IDB</strong> 通常保持不变。</p>
+</blockquote>
+<h2 id="Datalog-Semantics"><a href="#Datalog-Semantics" class="headerlink" title="Datalog Semantics"></a>Datalog Semantics</h2><p>在前面的介绍中，我提到了编译器在计算解决方案时发生的“魔法”。事实上，我们对编译器的操作方式并非完全一无所知。实际上，Datalog 有三种不同但等价的语义：</p>
+<ol>
+<li>模型论语义（Model-theoretic semantics）</li>
+<li>固定点语义（Fixed-point semantics）</li>
+<li>证明论语义（Proof-theoretic semantics）</li>
+</ol>
+<p>这三种语义共同构成理解 Datalog 程序的关键。通过研究这三种语义，我们可以获得足够的理解和知识，从而合理地推导 Datalog 程序的解决方案。</p>
+<h3 id="Model-theoretic-semantics"><a href="#Model-theoretic-semantics" class="headerlink" title="Model-theoretic semantics"></a>Model-theoretic semantics</h3><h3 id="Fixed-point-semantics"><a href="#Fixed-point-semantics" class="headerlink" title="Fixed-point semantics"></a>Fixed-point semantics</h3><h3 id="Proof-theoretic-semantics"><a href="#Proof-theoretic-semantics" class="headerlink" title="Proof-theoretic semantics"></a>Proof-theoretic semantics</h3><h2 id="Datalog-with-Negation"><a href="#Datalog-with-Negation" class="headerlink" title="Datalog with Negation"></a>Datalog with Negation</h2><h3 id="Problems-with-negation"><a href="#Problems-with-negation" class="headerlink" title="Problems with negation"></a>Problems with negation</h3><h3 id="Stratified-negation"><a href="#Stratified-negation" class="headerlink" title="Stratified negation"></a>Stratified negation</h3><h3 id="Precedence-graphs"><a href="#Precedence-graphs" class="headerlink" title="Precedence graphs"></a>Precedence graphs</h3><h2 id="Prolog"><a href="#Prolog" class="headerlink" title="Prolog"></a>Prolog</h2>
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/03/18/attack/">攻击树/图技术总结 😈⃤</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/12/12/go3/">使用 Golang 实现的简易 Redis 🔨</a></div></section></div>
+
+
+
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body giscus'>
+      
+
+<svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="giscus" data-repo="hcjjj/blog-comments" data-repo-id="R_kgDOM8H5Mg" data-category="Announcements" data-category-id="DIC_kwDOM8H5Ms4CjGw7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous"></div>
+
+    </section>
+  </div>
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadJS() {
+    const els = document.querySelectorAll("#comments #giscus");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.log(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    loadJS();
+  });
+</script>
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

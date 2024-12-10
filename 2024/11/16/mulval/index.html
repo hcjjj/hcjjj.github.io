@@ -31,7 +31,7 @@
 <meta property="og:description" content="MulVAL：基于逻辑推理的攻击图生成及风险评估工具">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-11-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-28T11:24:09.934Z">
+<meta property="article:modified_time" content="2024-12-09T12:46:57.429Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Automotive">
 <meta name="twitter:card" content="summary">
@@ -87,7 +87,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">A Logic based Network Security Analyzer</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MulVAL"><span class="toc-number">1.</span> <span class="toc-text">MulVAL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.</span> <span class="toc-text">形式化表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%A7%84%E8%8C%83"><span class="toc-number">1.3.</span> <span class="toc-text">漏洞规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.</span> <span class="toc-text">推理系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E8%A7%84%E5%88%99"><span class="toc-number">1.4.1.</span> <span class="toc-text">推理规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%88%97%E8%A1%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">主机访问控制列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E8%A7%84%E8%8C%83"><span class="toc-number">1.4.3.</span> <span class="toc-text">策略规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E4%BF%A1%E6%81%AF"><span class="toc-number">1.4.4.</span> <span class="toc-text">绑定信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.5.</span> <span class="toc-text">分析算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E7%AD%96%E7%95%A5"><span class="toc-number">1.4.6.</span> <span class="toc-text">更复杂的策略</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-number">1.5.</span> <span class="toc-text">Example</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E5%9E%8B%E7%9C%9F%E5%AE%9E%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.5.1.</span> <span class="toc-text">小型真实示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%94%BB%E5%87%BB%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.5.2.</span> <span class="toc-text">多阶段攻击示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">1.6.</span> <span class="toc-text">假设性分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%92%8C%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">1.7.</span> <span class="toc-text">性能和可扩展性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C%E4%B8%8E%E6%80%BB%E7%BB%93"><span class="toc-number">1.8.</span> <span class="toc-text">相关工作与总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">核心文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="toc-number">2.3.</span> <span class="toc-text">技术细节</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#README"><span class="toc-number">3.</span> <span class="toc-text">README</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BC%96%E8%AF%91"><span class="toc-number">3.1.</span> <span class="toc-text">配置编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">3.3.</span> <span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">3.4.</span> <span class="toc-text">适配器使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">3.5.</span> <span class="toc-text">高级用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">3.6.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">A Logic based Network Security Analyzer</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MulVAL"><span class="toc-number">1.</span> <span class="toc-text">MulVAL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.</span> <span class="toc-text">形式化表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%A7%84%E8%8C%83"><span class="toc-number">1.3.</span> <span class="toc-text">漏洞规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.</span> <span class="toc-text">推理系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-number">1.5.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">1.6.</span> <span class="toc-text">假设性分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%92%8C%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">1.7.</span> <span class="toc-text">性能和可扩展性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">核心文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="toc-number">2.3.</span> <span class="toc-text">技术细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-number">2.4.</span> <span class="toc-text">案例分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#README"><span class="toc-number">3.</span> <span class="toc-text">README</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BC%96%E8%AF%91"><span class="toc-number">3.1.</span> <span class="toc-text">配置编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">3.3.</span> <span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">3.4.</span> <span class="toc-text">适配器使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">3.5.</span> <span class="toc-text">高级用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">3.6.</span> <span class="toc-text">参考文献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Datalog"><span class="toc-number">4.</span> <span class="toc-text">Datalog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prolog"><span class="toc-number">4.1.</span> <span class="toc-text">Prolog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSB"><span class="toc-number">4.2.</span> <span class="toc-text">XSB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E8%A7%84%E5%88%99"><span class="toc-number">4.3.</span> <span class="toc-text">推理规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.4.</span> <span class="toc-text">推理示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVSS"><span class="toc-number">5.</span> <span class="toc-text">CVSS</span></a></li></ol></div></div></widget>
 
 
 
@@ -406,22 +406,102 @@
 <h3 id="推理系统"><a href="#推理系统" class="headerlink" title="推理系统"></a>推理系统</h3><p>MulVAL 推理系统的规则被声明为 Datalog 子句，在 Datalog 的形式主义中，一个 <em>literal</em>，$p(t_1,\ldots,t_k)$ 是一个谓词应用于其参数，每个参数要么是一个常量要么是一个变量（在 Datalog 中，变量是一个以大写字母开头的标识符，常量则是以小写字母开头的）</p>
 <p>设 $L_0,\ldots,L_n$ 是 <em>literal</em>，MulVAL 中的一个句子被表示为一个 Horn 子句：$L_0 \coloneqq L_1, \ldots, L_n$</p>
 <p>语义上，这意味着如果 $L_1,\ldots,L_n$ 是真的，那么 $L_0$ 也是真的，左边被称为 <em>head</em>，右边被称为 <em>body</em>，一个空 <em>body</em> 的子句被称为 <strong>事实</strong>，一个非空 <em>body</em> 的子句被称为规则</p>
-<h4 id="推理规则"><a href="#推理规则" class="headerlink" title="推理规则"></a>推理规则</h4><p>MulVAL 推理规则指定了不同类型的漏洞利用、妥协传播和多跳网络访问的语义，其被精心设计以便将关于特定漏洞的信息分解到从 OVAL 和 ICAT 生成的数据中，交互规则描述了一般的攻击方法（例如“特洛伊木马客户端程序”），而不是特定的漏洞，因此，即使新的漏洞频繁报告，规则也不需要经常改变</p>
-<p><strong>漏洞利用规则（Exploit rules）</strong></p>
-<p><strong>入侵传播（Compromise propagation）</strong></p>
-<p><strong>多跳网络访问（Multihop network access）</strong></p>
-<h4 id="主机访问控制列表"><a href="#主机访问控制列表" class="headerlink" title="主机访问控制列表"></a>主机访问控制列表</h4><h4 id="策略规范"><a href="#策略规范" class="headerlink" title="策略规范"></a>策略规范</h4><h4 id="绑定信息"><a href="#绑定信息" class="headerlink" title="绑定信息"></a>绑定信息</h4><h4 id="分析算法"><a href="#分析算法" class="headerlink" title="分析算法"></a>分析算法</h4><h4 id="更复杂的策略"><a href="#更复杂的策略" class="headerlink" title="更复杂的策略"></a>更复杂的策略</h4><h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><blockquote>
+<p><strong>推理规则</strong></p>
+<p>MulVAL 推理规则指定了不同类型的漏洞利用、妥协传播和多跳网络访问的语义，其被精心设计以便将关于特定漏洞的信息分解到从 OVAL 和 ICAT 生成的数据中，交互规则描述了一般的攻击方法（例如“特洛伊木马客户端程序”），而不是特定的漏洞，因此，即使新的漏洞频繁报告，规则也不需要经常改变。</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><blockquote>
 <p>论文使用 <strong>Example（示例）</strong> 还是 <strong>Case Study（案例研究）</strong>，取决于作者希望传达的重点：</p>
 <p>如果论文聚焦于 <strong>方法或理论的描述和初步验证</strong>，更适合用 <strong>example</strong></p>
 <p>如果论文聚焦于 <strong>实践中的实际应用和深度分析</strong>，更适合用 <strong>case study</strong></p>
 <p>两者也可以结合使用，例如先用 example 快速解释理论或方法，再用 case study 深入分析实际应用，增强理论的说服力和实用性</p>
 </blockquote>
-<h4 id="小型真实示例"><a href="#小型真实示例" class="headerlink" title="小型真实示例"></a>小型真实示例</h4><h4 id="多阶段攻击示例"><a href="#多阶段攻击示例" class="headerlink" title="多阶段攻击示例"></a>多阶段攻击示例</h4><h3 id="假设性分析"><a href="#假设性分析" class="headerlink" title="假设性分析"></a>假设性分析</h3><h3 id="性能和可扩展性"><a href="#性能和可扩展性" class="headerlink" title="性能和可扩展性"></a>性能和可扩展性</h3><h3 id="相关工作与总结"><a href="#相关工作与总结" class="headerlink" title="相关工作与总结"></a>相关工作与总结</h3><h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h3><h3 id="核心文件"><a href="#核心文件" class="headerlink" title="核心文件"></a>核心文件</h3><p><strong>MulVAL 目录</strong></p>
+<h3 id="假设性分析"><a href="#假设性分析" class="headerlink" title="假设性分析"></a>假设性分析</h3><h3 id="性能和可扩展性"><a href="#性能和可扩展性" class="headerlink" title="性能和可扩展性"></a>性能和可扩展性</h3><h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h3><h3 id="核心文件"><a href="#核心文件" class="headerlink" title="核心文件"></a>核心文件</h3><p><strong>MulVAL 目录</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">├── bin <span class="comment"># src目录下功能文件编译后存放该目录下</span></span><br><span class="line">│   ├── adapter</span><br><span class="line">│   └── metrics</span><br><span class="line">├── doc <span class="comment"># 说明文档</span></span><br><span class="line">├── docker <span class="comment"># 构建镜像</span></span><br><span class="line">├── kb <span class="comment"># 默认规则目录</span></span><br><span class="line">├── lib <span class="comment"># 库文件</span></span><br><span class="line">├── src <span class="comment"># 功能实现</span></span><br><span class="line">│   ├── adapter</span><br><span class="line">│   ├── analyzer</span><br><span class="line">│   ├── attack_graph</span><br><span class="line">│   └── metrics</span><br><span class="line">├── testcases <span class="comment"># 测试案例</span></span><br><span class="line">│   └── 3host</span><br><span class="line">└── utils <span class="comment"># 部分调用脚本，功能脚本</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><blockquote>
 <p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Dalongggggg/article/details/134149701?spm=1001.2014.3001.5502">MulVAL: 基于逻辑推理的攻击图生成及风险评估工具</a></p>
 </blockquote>
+<h3 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h3><p><strong>基本使用</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">❯ pwd</span><br><span class="line">/root/Desktop/mulval/testcases/3host</span><br><span class="line">❯ graph_gen.sh input.P -v -p</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>graph_gen.sh</code> 用来生成攻击图，指定了 <code>input.P</code> 作为输入文件，并使用了 <code>-v</code> 和 <code>-p</code> 选项</li>
+</ul>
+<ul>
+<li><p><code>-v</code>：表示生成视觉化的攻击图，并输出为 PDF 格式（即 <code>AttackGraph.pdf</code>）</p>
+</li>
+<li><p><code>-p</code>：这个选项通常用于深度修剪攻击图的复杂性，使得生成的攻击图更加简洁（在生产环境中不推荐使用，因为会显著降低生成速度），它仅用于提高图形的可视化效果</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">❯ probAssess.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这个脚本用于执行基于 Wang 等人的算法的风险评估。它将生成攻击图并基于攻击图计算网络中的潜在风险</li>
+<li>在脚本的最后，<code>probAssess.sh</code> 还会生成一个新的 <code>VERTICES.CSV</code> 文件，该文件包含了攻击图中的各个顶点及其度量值</li>
+</ul>
+<p><strong>脚本分析</strong></p>
+<ul>
+<li><p>输入文件 <code>input.P</code></p>
+<ul>
+<li>输入文件 <code>input.P</code> 定义了 <strong>网络拓扑、服务配置、漏洞信息</strong> 等内容，这些信息会作为 MulVAL 分析的基础</li>
+<li>攻击者位置：<code>attackerLocated(internet)</code>，即假设攻击者位于互联网</li>
+<li>攻击目标：<code>attackGoal(execCode(workStation,_))</code>，即目标是执行工作站上的代码</li>
+<li>网络连接规则（hacl）：描述了不同主机之间的访问控制规则，如工作站与其他服务器的连接</li>
+<li>漏洞和服务配置：<ul>
+<li>文件服务器（fileServer）：包括了 <code>mountd</code> 服务的漏洞信息，和与工作站及 Web 服务器的网络服务配置</li>
+<li>Web 服务器（webServer）：有一个 <code>httpd</code> 漏洞（<code>CAN-2002-0392</code>），这是一个远程执行代码的漏洞</li>
+<li>工作站（workStation）：配置了 NFS 挂载信息，允许从文件服务器读取数据</li>
+</ul>
+</li>
+<li>这些信息构成了 MulVAL 用来生成攻击图的基础，根据这些定义，MulVAL 将推理出可能的攻击路径和相应的风险</li>
+</ul>
+</li>
+<li><p><code>graph_gen.sh</code> 脚本</p>
+<ul>
+<li><p>脚本首先会检查所有必要的参数和环境变量（如 <code>MULVALROOT</code> 和 <code>MULVALROOT/bin/attack_graph</code>）</p>
+</li>
+<li><p>然后基于输入文件创建一个 Prolog 脚本 (<code>run.P</code>)，通过 XSB 引擎进行推理计算</p>
+</li>
+<li><p>该脚本的主要作用是生成攻击图并输出相关数据，主要文件有：</p>
+<ul>
+<li><code>AttackGraph.txt</code> 是攻击图的文本表示，列出了可能的攻击路径</li>
+<li><code>AttackGraph.pdf</code> 是攻击图的视觉化表示，通过 GraphViz 生成，帮助可视化攻击路径</li>
+<li><strong><code>VERTICES.CSV</code></strong>  包含 <strong>节点</strong> 的相关信息，文件中的每一行至少包含以下信息：<ul>
+<li>节点 ID：唯一标识节点</li>
+<li>类型：每个节点都有一个类型字段，包括 <code>&quot;LEAF&quot;</code>、<code>&quot;AND&quot;</code>、<code>&quot;OR&quot;</code> 等，这决定了该节点的计算方式</li>
+<li>其他信息：文件可能还包含其他节点的描述信息，比如节点的风险度、权重等</li>
+</ul>
+</li>
+<li><strong><code>ARCS.CSV</code></strong> 描述了节点之间的连接关系，即攻击图中的 <strong>边</strong>，文件的每一行包含以下信息：<ul>
+<li>源节点（Source Node）：边的起点，表示攻击图中某个节点</li>
+<li>目标节点（Target Node）：边的终点，表示另一个节点，攻击从源节点指向目标节点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>通过 <code>Graphviz</code> 进行可视化</p>
+<ul>
+<li>如果启用了可视化选项，<code>graph_gen.sh</code> 脚本会调用 <code>render.sh</code> 来渲染攻击图</li>
+<li><code>render.sh</code> 通过根据不同选项选择适当的模板文件</li>
+<li>使用 <code>sed</code> 命令对 <code>VERTICES.CSV</code> 和 <code>ARCS.CSV</code> 中的节点和边数据进行格式化，将它们转换为 Graphviz 的 Dot 格式</li>
+<li>根据 <code>AttackGraph.dot</code> 文件，通过 Graphviz 工具（<code>dot</code>）生成攻击图的可视化输出</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>probAssess.sh</code> 脚本</p>
+<ul>
+<li>该脚本的目的是通过 MulVAL 生成的攻击图来计算风险度量，并生成包含顶点和度量信息的 CSV 文件</li>
+<li>它依赖于一个名为 <code>independentAlgoSumm</code> 的 Java 类来执行风险评估过程，其输入数据来源：<ul>
+<li><code>VERTICES.CSV</code>：这个文件包含图中所有节点的基本信息，如节点的 ID 和类型</li>
+<li><code>ARCS.CSV</code>：这个文件定义了节点之间的连接关系，即节点的前驱和后继节点</li>
+<li><code>config.txt</code>：该文件包含了数据库连接信息，用于在需要时查询数据库</li>
+<li><code>数据库查询</code>：constructConProb()方法中的查询逻辑通过数据库中的数据计算条件概率</li>
+</ul>
+</li>
+<li>脚本将生成 <code>VERTICES_METRICS.CSV</code> 文件并重命名为 <code>VERTICES.CSV</code>，并调用 <code>render.sh</code> 来生成相应的攻击图</li>
+</ul>
+</li>
+</ul>
 <h2 id="README"><a href="#README" class="headerlink" title="README"></a>README</h2><p>Multi host, multi stage Vulnerability Analysis tool - 多主机、多阶段漏洞分析工具</p>
 <h3 id="配置编译"><a href="#配置编译" class="headerlink" title="配置编译"></a>配置编译</h3><ol>
 <li>安装 <a target="_blank" rel="noopener" href="http://xsb.sourceforge.net/">XSB 逻辑引擎</a></li>
@@ -499,6 +579,108 @@
 <li>Su Zhang, Xinming Ou, and John Homer. <strong>Effective network vulnerability assessment through model abstraction</strong>. In Eighth Conference on Detection of Intrusions and Malware &amp; Vulnerability Assessment (DIMVA), Amsterdam, The Netherlands, 2011.</li>
 <li>Lingyu Wang, Tania Islam, Tao Long, Anoop Singhal, and Sushil Jajodia. <strong>An attack graph-based probabilistic security metric</strong>. In Proceedings of The 22nd Annual IFIP WG 11.3 Working Conference on Data and Applications Security (DBSEC’08), 2008.</li>
 </ol>
+<h2 id="Datalog"><a href="#Datalog" class="headerlink" title="Datalog"></a>Datalog</h2><p>基于 Datalog 的知识推理方法具有多种应用，特别是在知识补全和一致性检查等领域，通过 Datalog，可以从现有的知识库中推理出新的事实，或检查新知识是否与已有的知识冲突。</p>
+<h3 id="Prolog"><a href="#Prolog" class="headerlink" title="Prolog"></a>Prolog</h3><p>Datalog 和 Prolog 都是基于一阶逻辑的编程语言，广泛应用于知识推理和人工智能领域。两者在基本构成上相似，都有 <strong>事实</strong>、<strong>规则</strong> 和 <strong>目标</strong> 的概念，但 Datalog 更专注于数据库查询和知识库推理，且其结构比 Prolog 更为简化。</p>
+<ul>
+<li><p>Prolog 的基本组成</p>
+<ul>
+<li><strong>事实</strong>：表示已知的关系，如 <code>妻子(姚明, 叶莉)</code> 表示姚明的妻子是叶莉</li>
+<li><strong>规则</strong>：表示事实之间的依赖关系，如 <code>bird(x) :- animal(x), has(x, feather)</code>，表示凡是动物且有羽毛，那么它是鸟</li>
+<li><strong>目标</strong>：用于查询的目标，如 <code>?- student(bill)</code> 查询 Bill 是否是学生</li>
+</ul>
+</li>
+<li><p>Datalog 的基本组成</p>
+<ul>
+<li><strong>事实</strong>、<strong>目标</strong></li>
+<li>Datalog 的 <strong>规则</strong> 形式更为简化，且不允许函数作为谓词的自变量，一般由三部分组成：<ul>
+<li><strong>规则头</strong>：关系原子（如 <code>student(x)</code>）</li>
+<li><strong>蕴含符号</strong>：表示逻辑关系的符号 <code>:-</code>，可以读作“如果…则…”</li>
+<li><strong>规则体</strong>：一个或多个子目标（如 <code>P1, P2, ..., Pn</code>），相当于逻辑“与”（AND）连接</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="XSB"><a href="#XSB" class="headerlink" title="XSB"></a>XSB</h3><p>XSB 是实现 Datalog 查询和推理的一个工具平台，它提供了基于 Datalog 的推理引擎，能够高效地处理复杂的推理任务</p>
+<ul>
+<li>XSB 是一个支持 Datalog 的逻辑编程系统，它不仅能够执行基于规则的 Datalog 查询，还对递归查询进行了优化，提供了高效的推理能力</li>
+<li>Datalog 是一种简单的逻辑编程语言，通常用于知识表示、推理、查询等场景</li>
+<li>XSB 是 Datalog 的实现平台之一，它通过扩展和优化提供了一个高效的推理引擎，适合大规模数据的处理和推理任务</li>
+</ul>
+<blockquote>
+<p><strong>XSB 对 Datalog 的关系类似于 GCC 对 C 语言</strong>，这种类比在某些方面是成立的，因为 XSB 和 GCC 都是各自语言的实现工具，提供了执行和优化功能。唯一的区别在于，GCC 是一个 <strong>编译器</strong>，负责将高级程序语言转化为机器语言，而 XSB 是一个 <strong>推理引擎</strong>，负责执行逻辑推理和查询。</p>
+</blockquote>
+<h3 id="推理规则"><a href="#推理规则" class="headerlink" title="推理规则"></a>推理规则</h3><p>Datalog 的推理规则可以描述各种逻辑操作，如交、并、差等。以下是几种常见的 Datalog 规则类型：</p>
+<ul>
+<li><p>交 (Intersection)，交操作表示两个关系的共同部分，通常通过“与”逻辑（AND）来表示。</p>
+<ul>
+<li><p>规则：<code>Q(x1, x2, ..., xn) :- R(x1, x2, ..., xn), S(x1, x2, ..., xn)</code></p>
+</li>
+<li><p>例子：<code>智能手机(x) :- 手机(x), 智能设备(x)</code>，表示某个物品既是手机又是智能设备时，它是智能手机</p>
+</li>
+</ul>
+</li>
+<li><p>并 (Union)，并操作表示两个关系的合并，可以用两个规则表示。</p>
+<ul>
+<li><p>规则：<code>Q(x1, x2, ..., xn) :- R(x1, x2, ..., xn)</code> <code>Q(x1, x2, ..., xn) :- S(x1, x2, ..., xn)</code></p>
+</li>
+<li><p>例子：<code>Q(x) :- R(x), S(x)</code>，表示 Q 可以从 R 和 S 中得到</p>
+</li>
+</ul>
+</li>
+<li><p>差 (Difference)，差操作表示从一个关系中排除另一个关系的部分，通常通过“非”操作来实现。</p>
+<ul>
+<li><p>规则：<code>Q(x1, x2, ..., xn) :- R(x1, x2, ..., xn), NOT S(x1, x2, ..., xn)</code></p>
+</li>
+<li><p>例子：<code>弟弟(X, Y) :- 兄弟(X, Y), NOT 哥哥(X, Y)</code>，表示 X 是 Y 的弟弟，前提是 X 和 Y 是兄弟，但 X 不是 Y 的哥哥</p>
+</li>
+</ul>
+</li>
+<li><p>选择 (Selection)，选择操作表示对满足特定条件的实例进行筛选。</p>
+<ul>
+<li><p>规则：<code>Q(x1, x2, ..., xn) :- R(x1, x2, ..., xn), x &gt; 10</code></p>
+</li>
+<li><p>例子：<code>哥哥(X, Y) :- 弟弟(Y, X), 性别(Y, a), a = &#39;男&#39;</code>，表示 Y 是男弟弟时，X 是其哥哥</p>
+</li>
+</ul>
+</li>
+<li><p>投影 (Projection)，投影操作表示从一个关系中选择特定的列</p>
+<ul>
+<li><p>规则：<code>Q(x1, x2, ..., xn) :- R(x1, x2, ..., xn)</code></p>
+</li>
+<li><p>例子：<code>memberOf(X, Y) :- member(Y, X)</code>，表示如果 Y 是 X 的成员，则 X 是 Y 的成员</p>
+</li>
+</ul>
+</li>
+<li><p>乘积 (Product)，乘积操作表示两个关系的笛卡尔积。</p>
+<ul>
+<li><p>规则：<code>P(a, b, c, x, y, z) :- R(a, b, c), S(x, y, z)</code></p>
+</li>
+<li><p>例子：表示 a, b, c 的关系与 x, y, z 的关系组合</p>
+</li>
+</ul>
+</li>
+<li><p>连接 (Join)，连接操作表示基于共同字段将两个关系连接起来。</p>
+<ul>
+<li><p>规则：<code>P(a, b, c) :- R(a, b), S(b, c)</code></p>
+</li>
+<li><p>例子：<code>岳父(X, Z) :- 妻子(X, Y), 父亲(Y, Z)</code>，表示 X 是 Z 的岳父，前提是 X 的妻子 Y 是 Z 的父亲的女儿</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="推理示例"><a href="#推理示例" class="headerlink" title="推理示例"></a>推理示例</h3><p>通过一个简单的推理示例来展示 Datalog 的推理过程</p>
+<ul>
+<li>规则：<code>岳父(X, Z) :- 妻子(X, Y), 父亲(Y, Z)</code></li>
+<li>事实：<code>妻子(姚明, 叶莉)</code>、<code>父亲(叶莉, 叶大)</code></li>
+<li>推理过程：<ol>
+<li>根据规则 <code>岳父(X, Z) :- 妻子(X, Y), 父亲(Y, Z)</code>，可以推理出 <code>岳父(姚明, Z)</code>，条件是 <code>妻子(姚明, 叶莉)</code> 和 <code>父亲(叶莉, Z)</code> 成立</li>
+<li>将事实 <code>妻子(姚明, 叶莉)</code> 和 <code>父亲(叶莉, 叶大)</code> 代入规则，得到 <code>岳父(姚明, 叶大)</code></li>
+<li>最终推理得出：<code>岳父(姚明, 叶大)</code></li>
+</ol>
+</li>
+</ul>
+<h2 id="CVSS"><a href="#CVSS" class="headerlink" title="CVSS"></a>CVSS</h2><p><strong><a target="_blank" rel="noopener" href="https://www.first.org/cvss/">Common Vulnerability Scoring System</a></strong></p>
 
 
 <!-- 
