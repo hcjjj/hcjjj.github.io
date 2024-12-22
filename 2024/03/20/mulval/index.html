@@ -26,19 +26,20 @@
     <meta name="description" content="MulVAL：基于逻辑推理的攻击图生成及风险评估工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="A Logic based Network Security Analyzer">
-<meta property="og:url" content="http://example.com/2024/11/16/mulval/index.html">
+<meta property="og:url" content="http://example.com/2024/03/20/mulval/index.html">
 <meta property="og:site_name" content="H-sediment">
 <meta property="og:description" content="MulVAL：基于逻辑推理的攻击图生成及风险评估工具">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-11-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-09T12:46:57.429Z">
+<meta property="article:published_time" content="2024-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-22T11:36:39.258Z">
 <meta property="article:author" content="hcjjj">
-<meta property="article:tag" content="Automotive">
+<meta property="article:tag" content="Attack graph">
+<meta property="article:tag" content="MulVal">
 <meta name="twitter:card" content="summary">
   
   
   
-  <meta name="keywords" content="Automotive">
+  <meta name="keywords" content="Attack graph,MulVal">
 
   <!-- feed -->
   
@@ -87,7 +88,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">A Logic based Network Security Analyzer</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MulVAL"><span class="toc-number">1.</span> <span class="toc-text">MulVAL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.</span> <span class="toc-text">形式化表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%A7%84%E8%8C%83"><span class="toc-number">1.3.</span> <span class="toc-text">漏洞规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.</span> <span class="toc-text">推理系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-number">1.5.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">1.6.</span> <span class="toc-text">假设性分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%92%8C%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">1.7.</span> <span class="toc-text">性能和可扩展性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">核心文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="toc-number">2.3.</span> <span class="toc-text">技术细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-number">2.4.</span> <span class="toc-text">案例分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#README"><span class="toc-number">3.</span> <span class="toc-text">README</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BC%96%E8%AF%91"><span class="toc-number">3.1.</span> <span class="toc-text">配置编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">3.3.</span> <span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">3.4.</span> <span class="toc-text">适配器使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">3.5.</span> <span class="toc-text">高级用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">3.6.</span> <span class="toc-text">参考文献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Datalog"><span class="toc-number">4.</span> <span class="toc-text">Datalog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prolog"><span class="toc-number">4.1.</span> <span class="toc-text">Prolog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSB"><span class="toc-number">4.2.</span> <span class="toc-text">XSB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E8%A7%84%E5%88%99"><span class="toc-number">4.3.</span> <span class="toc-text">推理规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.4.</span> <span class="toc-text">推理示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVSS"><span class="toc-number">5.</span> <span class="toc-text">CVSS</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">A Logic based Network Security Analyzer</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MulVAL"><span class="toc-number">1.</span> <span class="toc-text">MulVAL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.2.</span> <span class="toc-text">形式化表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%A7%84%E8%8C%83"><span class="toc-number">1.3.</span> <span class="toc-text">漏洞规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.</span> <span class="toc-text">推理系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-number">1.5.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%87%E8%AE%BE%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">1.6.</span> <span class="toc-text">假设性分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%92%8C%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7"><span class="toc-number">1.7.</span> <span class="toc-text">性能和可扩展性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">核心文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82"><span class="toc-number">2.3.</span> <span class="toc-text">技术细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-number">2.4.</span> <span class="toc-text">案例分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#README"><span class="toc-number">3.</span> <span class="toc-text">README</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BC%96%E8%AF%91"><span class="toc-number">3.1.</span> <span class="toc-text">配置编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">3.3.</span> <span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">3.4.</span> <span class="toc-text">适配器使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">3.5.</span> <span class="toc-text">高级用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">3.6.</span> <span class="toc-text">参考文献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Datalog"><span class="toc-number">4.</span> <span class="toc-text">Datalog</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prolog"><span class="toc-number">4.1.</span> <span class="toc-text">Prolog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSB"><span class="toc-number">4.2.</span> <span class="toc-text">XSB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E8%A7%84%E5%88%99"><span class="toc-number">4.3.</span> <span class="toc-text">推理规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E7%90%86%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.4.</span> <span class="toc-text">推理示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CVSS"><span class="toc-number">5.</span> <span class="toc-text">CVSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#V3-1-%E6%8C%87%E6%A0%87"><span class="toc-number">5.1.</span> <span class="toc-text">V3.1 指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A3%8E%E9%99%A9%E5%80%BC"><span class="toc-number">5.2.</span> <span class="toc-text">风险值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="toc-number">5.3.</span> <span class="toc-text">计算公式</span></a></li></ol></li></ol></div></div></widget>
 
 
 
@@ -134,7 +135,7 @@
 
 
 
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Research/">Research</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-11-15T16:00:00.000Z">2024-11-16</time></div></div>
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Research/">Research</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-03-19T16:00:00.000Z">2024-03-20</time></div></div>
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>A Logic based Network Security Analyzer</span></h1>
@@ -680,8 +681,146 @@
 </ol>
 </li>
 </ul>
-<h2 id="CVSS"><a href="#CVSS" class="headerlink" title="CVSS"></a>CVSS</h2><p><strong><a target="_blank" rel="noopener" href="https://www.first.org/cvss/">Common Vulnerability Scoring System</a></strong></p>
-
+<h2 id="CVSS"><a href="#CVSS" class="headerlink" title="CVSS"></a>CVSS</h2><ul>
+<li><p><strong>CWE (Common Weakness Enumeration)</strong></p>
+<ul>
+<li><strong>定义</strong>：CWE 是一个列出了软件开发过程中可能出现的脆弱点的列表，它侧重于描述潜在的弱点，而不是具体的漏洞，CWE 分类并提供了脆弱点的标准定义，旨在帮助开发人员识别和解决系统中的安全弱点</li>
+<li><strong>作用</strong>：CWE 更多聚焦于软件开发过程中的设计、编码和配置中的潜在问题（例如：缓冲区溢出、SQL 注入等），它为漏洞的根本原因提供了标准化的分类</li>
+</ul>
+</li>
+<li><p><strong>CVE (Common Vulnerabilities and Exposures)</strong></p>
+<ul>
+<li><strong>定义</strong>：CVE 是漏洞的公开标识系统，每个漏洞都有一个唯一的编号和描述，它是一个全球共享的漏洞标识符数据库，帮助不同的安全工具、数据库和服务统一识别漏洞</li>
+<li><strong>作用</strong>：CVE 的目的是为每个已知的安全漏洞提供一个唯一的标识符，方便各种安全产品和服务之间的共享和沟通。例如，CVE-2021-34527 是一个常见的 Windows PrintNightmare 漏洞的唯一标识符</li>
+</ul>
+</li>
+<li><p><strong>CVSS (Common Vulnerability Scoring System)</strong></p>
+<ul>
+<li><strong>定义</strong>：CVSS 是一个用于量化漏洞严重性的评分系统，它通过一套标准化的指标评估漏洞的危害性（例如，攻击的可行性、影响范围等），CVSS 分数帮助用户根据漏洞的严重性来优先修复</li>
+<li><strong>作用</strong>：CVSS 为每个 CVE 分配一个分数（通常在 0 到 10 之间），并提供一个评估方法，使得组织能够量化并优先处理最严重的漏洞。例如，一个高 CVSS 分数（如 9.0 或更高）表示漏洞的危害性较大，需要尽快修复</li>
+</ul>
+</li>
+<li><p>**NVD (National Vulnerability Database)**：</p>
+<ul>
+<li><strong>定义</strong>：NVD 是美国国家安全局（NIST）维护的一个漏洞数据库，它不仅提供 CVE 的信息，还结合了 CVSS 分数和对漏洞的风险分析，NVD 提供了详细的漏洞描述、影响分析和其他相关信息</li>
+<li><strong>作用</strong>：NVD 提供更全面的信息，涵盖漏洞的技术细节、可能的攻击方式、漏洞的解决办法等，它通过与 CVE 标识符相结合，提供了漏洞的深入分析和评分系统，帮助用户更好地理解漏洞的风险并做出决策</li>
+</ul>
+</li>
+<li><p>总结来说，CWE、CVE、CVSS 和 NVD 之间的关系如下：</p>
+<ul>
+<li><strong>CWE</strong> 侧重于描述软件中的潜在弱点</li>
+<li><strong>CVE</strong> 提供具体漏洞的唯一标识符，并进行归档</li>
+<li><strong>CVSS</strong> 用于量化 CVE 漏洞的严重性</li>
+<li><strong>NVD</strong> 是一个综合性的漏洞数据库，整合了 CVE、CVSS 等信息，为漏洞管理提供详细分析</li>
+</ul>
+</li>
+</ul>
+<h3 id="V3-1-指标"><a href="#V3-1-指标" class="headerlink" title="V3.1 指标"></a>V3.1 指标</h3><p><strong>CVSS (Common Vulnerability Scoring System)</strong> 是用于量化漏洞严重性的重要工具，它通过几个关键指标来评估一个漏洞的威胁程度。这些指标分为三类：<strong>基本指标（Base Metrics）</strong>、<strong>时间指标（Temporal Metrics）</strong> 和 <strong>环境指标（Environmental Metrics）</strong>。这些指标的组合形成一个漏洞的最终评分，通常在 0 到 10 之间。</p>
+<ul>
+<li><p><strong>基本指标（Base Metrics）</strong>，基本指标是 CVSS 评分的核心，它描述了漏洞本身的 <strong>严重性</strong>，并且是评分的主要依据</p>
+<ul>
+<li>攻击向量（Attack Vector，AV），这个指标衡量攻击者需要通过什么方式才能成功利用漏洞，攻击向量越复杂，漏洞的严重性越高。取值：<ul>
+<li>网络（Network）：攻击者可以通过网络直接利用漏洞</li>
+<li>邻接网络（Adjacent Network）：攻击者需要在同一物理或逻辑网络中才能利用漏洞</li>
+<li>本地（Local）：攻击者需要访问目标系统的本地环境才能利用漏洞（如物理访问、登录）</li>
+<li>物理（Physical）：攻击者需要直接物理访问设备才能利用漏洞</li>
+</ul>
+</li>
+<li>攻击复杂度（Attack Complexity，AC），衡量利用漏洞的难度，攻击复杂度越高，漏洞的严重性越低，取值：<ul>
+<li>低（Low）：攻击者只需少量的条件或低复杂度的手段。</li>
+<li>高（High）：攻击者需要特定条件或复杂的操作步骤才能成功利用漏洞。</li>
+</ul>
+</li>
+<li>特权要求（Privileges Required，PR），描述攻击者利用漏洞时，所需的权限级别。特权要求越低，漏洞的严重性越高。取值：<ul>
+<li>无（None）：攻击者不需要任何权限即可成功利用漏洞</li>
+<li>低（Low）：攻击者需要低级别权限（如普通用户权限）</li>
+<li>高（High）：攻击者需要管理员或高级权限</li>
+</ul>
+</li>
+<li>用户交互（User Interaction，UI），衡量攻击是否需要用户的交互。没有用户交互的漏洞通常更加严重。取值：<ul>
+<li>无（None）：不需要任何用户交互即可利用漏洞</li>
+<li>必需（Required）：攻击者需要诱使目标用户进行交互（如点击恶意链接）</li>
+</ul>
+</li>
+<li>影响范围（Scope，S），衡量漏洞对系统影响的范围，是描述漏洞对其他系统或组件影响的关键指标。取值：<ul>
+<li>未改变（Unchanged）：漏洞影响的仅限于受影响的组件</li>
+<li>改变（Changed）：漏洞影响整个系统，可能导致系统的全面破坏或控制。</li>
+</ul>
+</li>
+<li>机密性影响（Confidentiality Impact，C），评估漏洞对机密性（数据泄露）的影响程度。取值：<ul>
+<li>无（None）：没有泄露机密信息</li>
+<li>低（Low）：信息被部分泄露（例如泄露一些敏感数据）</li>
+<li>高（High）：信息完全泄露或数据丢失</li>
+</ul>
+</li>
+<li>完整性影响（Integrity Impact，I），评估漏洞对系统数据完整性的影响，表示数据是否能够被篡改。取值：<ul>
+<li>无（None）：数据未被篡改</li>
+<li>低（Low）：数据可能部分被篡改</li>
+<li>高（High）：数据完全可以被篡改，导致完整性损坏</li>
+</ul>
+</li>
+<li>可用性影响（Availability Impact，A），评估漏洞对系统可用性的影响，表示系统的正常运行是否受到破坏。取值：<ul>
+<li>无（None）：系统的可用性没有受到影响</li>
+<li>低（Low）：部分可用性受损，系统或服务可能会变慢或变得不稳定</li>
+<li>高（High）：系统或服务完全不可用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>时间指标（Temporal Metrics）</strong>，时间指标描述漏洞在生命周期中的变化，它基于漏洞的实际情况和时间推移所带来的影响，主要包括以下三个方面：</p>
+<ul>
+<li><p>攻击者可用性（Exploit Code Maturity，E），衡量漏洞是否已经有成熟的攻击代码公开。取值：</p>
+<ul>
+<li>未公布（Not Defined）：未定义</li>
+<li>未利用（Unproven）：没有已知的攻击代码或工具</li>
+<li>可利用（Proof-of-concept）：有已知的攻击代码或概念验证代码</li>
+<li>利用（Functional）：攻击代码是功能完整的，可以被黑客广泛使用</li>
+<li>成熟（High）：攻击代码已被广泛使用并且能够自动化</li>
+</ul>
+</li>
+<li><p>修补状态（Remediation Level，RL），评估漏洞是否已有可用的修补措施。取值：</p>
+<ul>
+<li><p>未定义（Not Defined）：未定义</p>
+</li>
+<li><p>解决方案（Official Fix）：发布了官方修补程序</p>
+</li>
+<li><p>临时解决方案（Temporary Fix）：已发布临时修补程序，但并非永久修复</p>
+</li>
+<li><p>无法修复（Workaround）：提供了可行的规避方案</p>
+</li>
+<li><p>没有解决方案（Unavailable）：没有任何修复或解决方案</p>
+</li>
+</ul>
+</li>
+<li><p>报告可信度（Report Confidence，RC），衡量漏洞报告的可靠性和漏洞的确认情况。取值：</p>
+<ul>
+<li>未定义（Not Defined）：未定义</li>
+<li>低（Unknown）：漏洞报告的可信度不高</li>
+<li>高（Confirmed）：漏洞已被确认，且其描述与实际一致</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>环境指标（Environmental Metrics）</strong>，环境指标根据漏洞对特定环境的影响来进行评分，允许用户根据实际环境对漏洞评分进行调整，考虑了组织的特定风险配置。它主要包括以下指标：</p>
+<ul>
+<li>安全需求（Security Requirements，CR）：<ul>
+<li>根据组织的安全需求评估漏洞对机密性、完整性和可用性的影响。具体评分可能会有所不同，取决于组织的需求。</li>
+<li>取值：低、中、高。</li>
+</ul>
+</li>
+<li>环境影响（Environmental Impact，EI）：<ul>
+<li>衡量漏洞对组织特定环境的潜在影响，可能对评分有所加权。</li>
+<li>取值：低、中、高。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>在 CVSS v3.1 中，<strong>攻击复杂度（AC）</strong> 和 <strong>攻击者可用性（E）</strong> 可以视为某种程度上反映了漏洞被成功利用的 <strong>“可能性”</strong>，虽然它们并不直接用“概率”来描述。它们评估的是利用漏洞所需的条件和难度，因此它们的评分间接反映了漏洞被成功利用的难度和可行性。</p>
+</blockquote>
+<p>通过这些基本指标、时间指标和环境指标，CVSS 可以给出一个针对每个漏洞的评分，帮助企业、开发者和安全人员评估漏洞的风险，并根据其严重性采取相应的修复措施。</p>
+<h3 id="风险值"><a href="#风险值" class="headerlink" title="风险值"></a>风险值</h3><h3 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h3>
 
 <!-- 
 <div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
@@ -689,7 +828,7 @@
 
 </article>
 
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/12/02/go4/">Golang 开发“疑难杂症”解决办法 🤔⁉️</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/11/04/phoenix/">《凤凰架构：构建可靠的大型分布式系统》🪽</a></div></section></div>
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/05/05/gosdk/">Go SDK：context、sync、reflect、errors</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/03/18/attack/">攻击树/图技术总结 😈⃤</a></div></section></div>
 
 
 

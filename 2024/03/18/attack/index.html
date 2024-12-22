@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241130211026.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/hcjjj/blog-img@master/20241130213622.png">
 <meta property="article:published_time" content="2024-03-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-04T07:48:28.709Z">
+<meta property="article:modified_time" content="2024-12-22T11:36:40.579Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Attack graph">
 <meta name="twitter:card" content="summary">
@@ -495,7 +495,9 @@
 <p><strong>事件树</strong> 和 <strong>决策树</strong> 的视觉结构与攻击树相似，事件树侧重于系统中的成功与失败，而决策树则侧重于系统故障。尽管事件树和决策树在计算机&#x2F;网络安全领域中已有应用，但这两种方法尚未得到广泛普及。</p>
 <p>故障树与攻击树具有相同的树形结构。故障树的符号表示法最早由美国核管理委员会提出，之后，IEC 于 1990 年、欧洲空间标准化合作组织和英国标准协会对其进行了标准化。故障树被广泛应用于多个行业，如航空航天、放射性废物处理、汽车工业以及计算机系统故障分析。尽管故障树标准是一个通用标准（并非专门针对网络安全领域），但近年来它已成为表示网络攻击的一种流行手段。</p>
 <p>故障树是最具视觉表现力的 AMT 之一，因为它们采用了多种标准符号来表达攻击元素，符号集包括多数表决门、优先与（PAND）门、禁止门、非门和顺序门等符号</p>
-<h3 id="攻击图"><a href="#攻击图" class="headerlink" title="攻击图"></a>攻击图</h3><p>攻击图起源于 Dacier 的博士论文和两篇早期论文。这些贡献强调了权限图的概念，该图捕获了权限的继承性，在此图中，节点表示用户或一组用户拥有的一组权限，边表示漏洞，状态转换中假定了先决条件。</p>
+<h3 id="攻击图"><a href="#攻击图" class="headerlink" title="攻击图"></a>攻击图</h3><p>攻击图是一种基于模型的网络安全评估技术。它从攻击者的角度出发，在综合分析多种网络配置和脆弱性信息的基础上，找出所有可能的攻击路径，并提供了一种表示攻击过程场景的可视化方法，从而帮助网络安全管理人员直观地理解目标网络内各个脆弱性之间的关系、脆弱性与网络安全配置之间的关系以及由此产生的潜在威胁。基于攻击图模型的网络安全评估技术是在攻击图的基础上进行深入的安全评估建模和分析，给出安全评估的建议。</p>
+<p>攻击图展示了攻击者可能发动的攻击顺序和攻击效果，由顶点和有向边两部分构成。根据攻击图类型的不同，顶点可以表示主机、服务、 漏洞、权限等网络安全相关要素，也可以表示账户被攻击者破解、权限被攻击者获取等网络安全状态，边用于表示攻击者攻击行为的先后顺序。</p>
+<p>攻击图起源于 Dacier 的博士论文和两篇早期论文。这些贡献强调了权限图的概念，该图捕获了权限的继承性，在此图中，节点表示用户或一组用户拥有的一组权限，边表示漏洞，状态转换中假定了先决条件。</p>
 <p>其他攻击图示的表现形式：</p>
 <ul>
 <li>漏洞表示为矩形，将先决条件表示为椭圆，先决条件逻辑由圆弧的存在（AND）或不存在（OR）表示</li>
@@ -530,6 +532,14 @@
 <td>利用依赖图；混合依赖图；一般依赖图；基于行为的攻击图；概率攻击图；攻击场景图；漏洞原因图；面向利用的图</td>
 </tr>
 </tbody></table>
+<p><strong>攻击图的作用</strong></p>
+<p>在攻击者对网络进行渗透的过程中，特定的连续攻击行为可称为一条由攻击者节点到目标节点的 <strong>攻击路径</strong>，而攻击图以图形化的方式展示了网络中所有可被防御方发现的攻击路径，对目标网络构建攻击图：</p>
+<ul>
+<li>一方面可以分析从边界节点到需要进行重点保护节点可能的攻击路径，对路径上的高危节点进行重点防御，达到保护重要节点的目的</li>
+<li>另一方面可以在攻击发生时实时分析攻击者的攻击能力和推断攻击者的后续攻击目标，以便采取应对和反制措施</li>
+</ul>
+<p>在理论上攻击图可以构建完整的网络安全模型，反映网络中各个节点的脆弱性并刻画出攻击者攻陷重要节点的所有途径，弥补了以往技术只能根据漏洞数量和威胁等级评估节点和全网的安全性，而不能根据节点在网络中的位置和功能进行评估的缺陷，因此，攻击图技术很快得到了专家学者的广泛认可，攻击图的代表性科研成果有 TVA ，NetSPA v2，MulVAL 等原型系统</p>
+<p><strong>攻击图的核心</strong></p>
 <h2 id="攻击图总结"><a href="#攻击图总结" class="headerlink" title="攻击图总结"></a>攻击图总结</h2><h3 id="逻辑攻击图"><a href="#逻辑攻击图" class="headerlink" title="逻辑攻击图"></a>逻辑攻击图</h3><p>逻辑攻击图主要基于 <strong>逻辑推理</strong> 来建模漏洞和攻击路径的关系，通常采用 <strong>图论</strong> 和 <strong>逻辑推理引擎</strong> 来构建和分析。它的重点是描述漏洞之间的因果关系，帮助分析攻击者可能的行为路径。</p>
 <p><strong>主要特征：</strong></p>
 <ul>
@@ -690,7 +700,7 @@
 
 </article>
 
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/05/05/gosdk/">Go SDK：context、sync、reflect、errors</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/03/18/datalog/">Datalog - declarative logic programming language</a></div></section></div>
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/03/20/mulval/">A Logic based Network Security Analyzer</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/03/18/datalog/">Datalog - declarative logic programming language</a></div></section></div>
 
 
 

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>基于 Redis 的通用接口排队服务 🪜 - H-sediment</title>
+
+  
+    <meta name="description" content="对于计算密集型的业务接口，使用排队机制可以有效地管理请求并避免系统过载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 Redis 的通用接口排队服务 🪜">
+<meta property="og:url" content="http://example.com/2024/11/22/redis-queue/index.html">
+<meta property="og:site_name" content="H-sediment">
+<meta property="og:description" content="对于计算密集型的业务接口，使用排队机制可以有效地管理请求并避免系统过载">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-22T11:54:23.760Z">
+<meta property="article:author" content="hcjjj">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="queue">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="Redis,queue">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/icon.png">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://cdn.jsdelivr.net/gh/hcjjj/blog-img/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">H-sediment</div><div class="sub cap">dust in the wind</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/about/">About</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">基于 Redis 的通用接口排队服务 🪜</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">核心作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="toc-number">2.</span> <span class="toc-text">时序图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="toc-number">3.</span> <span class="toc-text">技术栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text">详细设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97"><span class="toc-number">4.1.</span> <span class="toc-text">优先级队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81"><span class="toc-number">4.2.</span> <span class="toc-text">任务状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C"><span class="toc-number">4.3.</span> <span class="toc-text">任务执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E9%99%90%E9%80%9F"><span class="toc-number">4.4.</span> <span class="toc-text">接口限速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">4.5.</span> <span class="toc-text">生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E4%BF%A1%E6%81%AF%E9%85%8D%E7%BD%AE"><span class="toc-number">4.6.</span> <span class="toc-text">接口信息配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%A4%96%E6%8E%A5%E5%8F%A3"><span class="toc-number">5.</span> <span class="toc-text">对外接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.1.</span> <span class="toc-text">提交任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.2.</span> <span class="toc-text">查询任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E6%B6%88%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.3.</span> <span class="toc-text">取消任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E8%80%83%E8%99%91"><span class="toc-number">5.4.</span> <span class="toc-text">安全考虑</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/hcjjj" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/></a><a class="social" href="/hcjjj@foxmail.com" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg"/></a><a class="social" href="/H_sediment" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg"/></a><a class="social" href="/" rel="noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/3845874.svg"/></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@v10/dist/mermaid.min.js"></script>
+
+  <script>
+    var mermaid_config = {
+      startOnLoad: true,
+      theme:
+        "auto" == "auto" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "neutral",
+      logLevel: 3,
+      themeVariables: {
+        darkMode: true
+      },
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+        curve: "linear"
+      },
+      gantt: {
+        axisFormat: "%Y/%m/%d"
+      },
+      sequence: {
+        actorMargin: 50
+      }
+    }
+    if (window.mermaid) {
+      mermaid.initialize(mermaid_config);
+    }
+  </script>
+
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Internship/">Internship</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-11-21T16:00:00.000Z">2024-11-22</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>基于 Redis 的通用接口排队服务 🪜</span></h1>
+<p>对于计算密集型的业务接口，使用排队机制可以有效地管理请求并避免系统过载</p>
+<span id="more"></span>
+
+<h2 id="核心作用"><a href="#核心作用" class="headerlink" title="核心作用"></a>核心作用</h2><ol>
+<li><strong>限流限速保护</strong>：排队服务会控制请求进入业务接口的速率，确保不会超过业务接口的 QPS 上限，从而避免业务接口被过多请求压垮</li>
+<li><strong>请求排队</strong>：公平排队，所有请求都会按顺序先入队，之后在允许的范围内逐个进入业务接口，获取响应<strong>（支持在线和离线）</strong></li>
+<li><strong>优先级管理：</strong>如 VIP 用户可以在任务队列中优先执行（即“插队”），可以根据任务的优先级来动态设置，从而控制任务的处理顺序</li>
+<li><strong>超时和失败处理</strong>：对于排队超时的请求，排队服务可以返回超时错误或直接丢弃，避免请求长时间占用系统资源。此外，当业务接口因故障或流量过高无法响应时，排队服务也可以处理失败请求，防止服务完全不可用</li>
+</ol>
+<h2 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h2><pre class="mermaid">sequenceDiagram
+    participant User as 前端
+    participant QueueService as 排队服务
+    participant Redis as Redis 队列
+    participant Business as 业务接口
+
+    User->>QueueService: submitTask（用户提交任务）
+    QueueService->>Redis: 将任务存入队列
+    Note right of Redis: 队列存储任务
+    loop 控制QPS
+        QueueService->>Redis: 从队列取出任务
+        alt 未超出QPS
+            QueueService->>Business: 调用业务接口
+            Business-->>QueueService: 返回处理结果
+            QueueService->>Redis: 更新任务状态和结果数据
+        else 超出QPS
+            QueueService->>Redis: 保持任务在队列中，并退避等待
+        end
+    end
+    User->>QueueService: queryTask (查询任务状态)
+    QueueService->>Redis: 获取任务状态和结果数据
+    Redis-->>QueueService: 返回任务状态和结果数据
+    QueueService-->>User: 返回任务状态和结果</pre>
+
+
+
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><ul>
+<li>Go-zero  + Redis + MySQL</li>
+<li>Redis<ul>
+<li><del><code>List</code>：用于任务队列（公平排队）</del></li>
+<li><code>Sorted Set</code>（ZSet）：用于任务优先级管理</li>
+<li><del><code>Hash</code>：用于存储任务状态和执行结果，不支持为一个元素设置过期时间</del></li>
+<li><code>String</code>：用于存储任务状态和执行结果</li>
+<li><code>TTL</code>：过期时间管理</li>
+<li><code>Sorted Set</code> 或 <code>String</code>：用于全局计数器（限流限速）</li>
+</ul>
+</li>
+</ul>
+<h2 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h2><h3 id="优先级队列"><a href="#优先级队列" class="headerlink" title="优先级队列"></a>优先级队列</h3><ul>
+<li>采用 Redis 的 <code>ZSet</code> 数据结构来实现优先级队列</li>
+<li><code>ZSet</code> 内部维护了元素的 <code>score</code>，并且它是按 <code>score</code> 排序的</li>
+<li>定义优先级<ul>
+<li>优先级与 <code>score</code> 关联：通常，<code>score</code> 值越小，优先级越高</li>
+<li><code>score = -priority * 1e9 + timestamp</code>，其中 priority 根据用户类型进行设置</li>
+<li>timestamp 仍然采用时间戳来确保相同优先级的任务按照提交时间排序（FIFO）</li>
+</ul>
+</li>
+<li><code>ZSet</code> 中只保存任务的 TaskId，任务的详细数据序列化后保存在 <code>String</code> 中</li>
+</ul>
+<h3 id="任务状态"><a href="#任务状态" class="headerlink" title="任务状态"></a>任务状态</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> TaskRequestDetails <span class="keyword">struct</span> &#123;</span><br><span class="line">    TargetURL     <span class="type">string</span>              <span class="string">`json:&quot;target_url&quot;`</span>     <span class="comment">// 业务接口 URL</span></span><br><span class="line">    ExtractedPath <span class="type">string</span>              <span class="string">`json:&quot;extracted_path&quot;`</span> <span class="comment">// 提取的路径</span></span><br><span class="line">    HTTPMethod    <span class="type">string</span>              <span class="string">`json:&quot;http_method&quot;`</span>    <span class="comment">// HTTP 方法</span></span><br><span class="line">    Headers       <span class="keyword">map</span>[<span class="type">string</span>][]<span class="type">string</span> <span class="string">`json:&quot;headers&quot;`</span>        <span class="comment">// 请求头</span></span><br><span class="line">    RequestBody   <span class="type">string</span>              <span class="string">`json:&quot;request_body&quot;`</span>   <span class="comment">// 请求体</span></span><br><span class="line">    QueryParams   url.Values          <span class="string">`json:&quot;query_params&quot;`</span>   <span class="comment">// 路由参数或查询参数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TaskExecutionStatus <span class="keyword">struct</span> &#123;</span><br><span class="line">    Status    <span class="type">string</span>    <span class="string">`json:&quot;status&quot;`</span>     <span class="comment">// 任务的当前状态（如 &quot;pending&quot;, &quot;processing&quot;, &quot;completed&quot;, &quot;failed&quot; 等）</span></span><br><span class="line">    Result    <span class="type">string</span>    <span class="string">`json:&quot;result&quot;`</span>     <span class="comment">// 接口的响应内容，包括成功结果或错误信息，作为 JSON 字符串存储</span></span><br><span class="line">    CreatedAt time.Time <span class="string">`json:&quot;created_at&quot;`</span> <span class="comment">// 任务的创建时间，即任务被添加到队列的时间</span></span><br><span class="line">    StartedAt time.Time <span class="string">`json:&quot;started_at&quot;`</span> <span class="comment">// 任务的开始时间，即任务正式处理的时间</span></span><br><span class="line">    EndedAt   time.Time <span class="string">`json:&quot;ended_at&quot;`</span>   <span class="comment">// 任务的结束时间，任务完成或失败的时间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Task <span class="keyword">struct</span> &#123;</span><br><span class="line">    UserId       <span class="type">int64</span>               <span class="string">`json:&quot;user_id&quot;`</span>        <span class="comment">// 用户 ID</span></span><br><span class="line">    TaskId       <span class="type">string</span>              <span class="string">`json:&quot;taskID&quot;`</span>         <span class="comment">// 任务的唯一标识符</span></span><br><span class="line">    TaskQueueKey <span class="type">string</span>              <span class="string">`json:&quot;task_queue_Key&quot;`</span> <span class="comment">// 任务队列的唯一标识符</span></span><br><span class="line">    Priority     <span class="type">int64</span>               <span class="string">`json:&quot;priority&quot;`</span>       <span class="comment">// 任务的优先级</span></span><br><span class="line">    Type         <span class="type">string</span>              <span class="string">`json:&quot;type&quot;`</span>           <span class="comment">// 任务类型，如果是 offline 类型的任务，需要保存任务请求信息</span></span><br><span class="line">    Request      TaskRequestDetails  <span class="string">`json:&quot;task_request&quot;`</span>   <span class="comment">// 任务请求信息</span></span><br><span class="line">    Execution    TaskExecutionStatus <span class="string">`json:&quot;task_status&quot;`</span>    <span class="comment">// 任务状态信息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>支持在线和离线排队任务，在线类型排队任务只需要 TargetURL 参数用于队列 key 的构建</li>
+<li>因为在线排队是给到一个前端向目标接口发起调用的许可，需要做好防止用户<strong>跳过排队</strong>直接向目标接口发起请求的措施（目前是在网关的鉴权服务做检查，前端需要把 taskId 加入请求头）</li>
+</ul>
+<h3 id="任务执行"><a href="#任务执行" class="headerlink" title="任务执行"></a>任务执行</h3><ul>
+<li><strong>难点分析</strong><ul>
+<li>如何监听多个动态变化的 <code>ZSet</code> 任务队列（一个业务接口对应一个队列）</li>
+</ul>
+</li>
+<li><strong>解决方案</strong><ul>
+<li>使用 sync.Map 来存储当前的队列，并且在队列动态增加时，通过信号或事件通知来更新监听的队列<ul>
+<li>在服务启动时，从 Redis 中加载一次所有的任务队列 Keys，并将它们添加到 sync.Map</li>
+<li>在服务运行时，使用 sync.Map 来维护当前正在监听的任务队列，避免持续的查询</li>
+</ul>
+</li>
+<li>通过 channel 通知协程有新的队列加入或队列删除</li>
+<li>使用 <code>BZPOPMIN</code> 来阻塞并从 <code>ZSet</code> 中取出任务</li>
+</ul>
+</li>
+</ul>
+<h3 id="接口限速"><a href="#接口限速" class="headerlink" title="接口限速"></a>接口限速</h3><ul>
+<li>采用滑动窗口的限流策略（<code>Sorted Set</code> + Lua 脚本）<ul>
+<li>利用 Redis 的有序集合（Sorted Set）数据结构来记录请求的时间戳</li>
+<li>并通过计算当前窗口内的请求数来进行限流</li>
+<li><em>interval</em> 内允许 <em>rate</em> 个请求（如 <em>1s 内允许 300 个请求</em>）</li>
+</ul>
+</li>
+<li>采用计数法的限流策略（<code>String</code>）<ul>
+<li>每个接口使用一个独立的 Redis <code>String</code> 键来计数</li>
+<li>键名格式可以设置为 <code>rate_limit:&lt;endpoint&gt;</code>，例如，<code>rate_limit:/api/generate_image</code> 和 <code>rate_limit:/api/generate_video</code></li>
+<li>通过 Redis 的 <code>INCR</code> 命令对每个键的值进行计数，并设置一个过期时间（TTL），当过期后自动重置计数，实现滑动时间窗口的效果</li>
+</ul>
+</li>
+<li>触发限流后的指数退避方案</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 触发限流</span></span><br><span class="line">    <span class="keyword">if</span> limited &#123;</span><br><span class="line">       <span class="comment">// 任务放回队列</span></span><br><span class="line">       _, err := z.Redis.ZAdd(ctx, task.TaskQueueKey, redis.Z&#123;</span><br><span class="line">          Score:  res.Score,</span><br><span class="line">          Member: res.Member,</span><br><span class="line">       &#125;).Result()</span><br><span class="line">       <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">          logx.Errorf(<span class="string">&quot;触发限流，任务还原失败: %v，被丢弃&quot;</span>, err)</span><br><span class="line">          <span class="comment">// 从任务状态 String 中删除任务状态，防止状态泄露</span></span><br><span class="line">          z.Redis.Del(ctx, taskKey)</span><br><span class="line">          <span class="keyword">continue</span></span><br><span class="line">       &#125;</span><br><span class="line">       retryCount := <span class="number">0</span></span><br><span class="line">       maxRetryCount := <span class="number">5</span> <span class="comment">// 最大重试次数</span></span><br><span class="line">       baseWaitTime := time.Second</span><br><span class="line">       <span class="keyword">for</span> retryCount &lt; maxRetryCount &#123;</span><br><span class="line">          <span class="comment">// 计算指数退避时间，最大为 TaskInterval</span></span><br><span class="line">          backoffTime := time.Duration(<span class="type">float64</span>(baseWaitTime) * math.Pow(<span class="number">2</span>, <span class="type">float64</span>(retryCount)))</span><br><span class="line">          <span class="keyword">if</span> backoffTime &gt; TaskInterval &#123;</span><br><span class="line">             backoffTime = TaskInterval</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// 退避一段时间，等待下一个窗口</span></span><br><span class="line">          logx.Infof(<span class="string">&quot;限流触发，等待 %v 后重试，任务: %s&quot;</span>, backoffTime, taskKey)</span><br><span class="line">          time.Sleep(backoffTime)</span><br><span class="line">          <span class="comment">// 重新检查限流状态</span></span><br><span class="line">          <span class="comment">//limited, err = z.RateLimiter.LimitDefault(ctx, rateLimitedKey)</span></span><br><span class="line">          now := time.Now()</span><br><span class="line">          limited, err = z.RateLimiter.Limit(ctx, rateLimitedKey, interval, rate, now)</span><br><span class="line">          logx.Infof(<span class="string">&quot;重新检查限流状态: %v&quot;</span>, limited)</span><br><span class="line">          <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">             logx.Errorf(<span class="string">&quot;限流判断失败: %v&quot;</span>, err)</span><br><span class="line">             <span class="keyword">break</span></span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// 如果不再限流，退出重试循环</span></span><br><span class="line">          <span class="comment">// 这边要注意，就算不再限流了，外层可能会因此又触发限流</span></span><br><span class="line">          <span class="keyword">if</span> !limited &#123;</span><br><span class="line">             <span class="comment">// 删除内层循环检查限流为 false 情况时产生的元素</span></span><br><span class="line">             z.Redis.ZRem(ctx, rateLimitedKey, now.UnixMilli())</span><br><span class="line">             <span class="keyword">break</span></span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// 增加重试次数，准备下一次退避</span></span><br><span class="line">          retryCount++</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">continue</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(task Task)</span></span> &#123;</span><br><span class="line">       <span class="comment">// 执行对应的任务</span></span><br><span class="line">       err = z.Execute(&amp;task)</span><br><span class="line">       <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">          logx.Errorf(<span class="string">&quot;执行任务失败: %v&quot;</span>, err)</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;(task)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>针对接口的限速策略 - 通过查询接口配置表</li>
+</ul>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><pre class="mermaid">graph TD
+    A[任务提交] -->|写入| B[Redis: pending 状态]
+    B -->|过期时间 3h| E[任务自动过期]
+    B -->|任务执行完成| C[任务结果写入]
+    C -->|写入成功| D[Redis: completed 状态]
+    D -->|过期时间缩短至 1h| F[Redis 自动过期]
+    C -->|写入| G[MySQL: 持久化存储]
+    G -->|保留 3 天| H[MySQL 定期清理]
+    D -->|用户查询结果| I[Redis: 缩短过期时间 10s]
+    I -->|Redis 过期后| J[删除 Redis 数据]
+    I -->|用户查询后立即| K[删除 MySQL 数据]
+    J -->|MySQL 数据保留 3d| H
+    H -->|批量删除| L[清理过期 MySQL 数据]</pre>
+
+<p>Redis 和 MySQL 结合使用，并且通过设置合理的过期时间来控制任务数据的生命周期，在实际应用中，过期时间的管理和删除策略需要特别注意性能和空间管理，以确保系统不会因为过期数据而导致性能下降或资源浪费</p>
+<ul>
+<li>任务提交后<ul>
+<li>Redis String 的过期时间设置为 3h</li>
+</ul>
+</li>
+<li>任务执行后，结果和状态写入 Redis String 和 MySQL 中<ul>
+<li>Redis String 的对应元素过期时间缩短为 1h</li>
+<li>MySQL 只保留任务结果数据 3d</li>
+</ul>
+</li>
+<li>用户查询到任务<ul>
+<li>若任务还未执行完毕，正常返回状态</li>
+<li>若任务已经执行完毕<ul>
+<li>Redis 中存在<ul>
+<li>Redis String 的对应元素的过期时间缩短为 20s（允许短时间内的重试，还有网关的插队检查）</li>
+<li>可立即删除 MySQL 中的任务数据，减少存储压力</li>
+</ul>
+</li>
+<li>Redis 中不存在，查询 MySQL，异步延迟 10s 后删除对应记录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用户如果已离线，不再查询任务结果<ul>
+<li>Redis String 如期自动过期删除</li>
+<li>MySQL 定时检查删除保留超过 3 天的任务数据<ul>
+<li>索引优化，created_at 加索引，避免全表扫描</li>
+<li>批量删除，如果数据量较大，采用批量删除的方式，避免锁表和性能压力</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="接口信息配置"><a href="#接口信息配置" class="headerlink" title="接口信息配置"></a>接口信息配置</h3><p>表格里填写需要排队的接口信息</p>
+<blockquote>
+<p>并发数为 <code>C</code>，表示系统当前可以同时处理的请求数</p>
+<p>执行时间为 <code>T</code>，表示每个请求的平均处理时间（秒）</p>
+<p>QPS为 <code>Q</code>，表示系统每秒钟能够处理的请求数，Q &#x3D; C &#x2F; T</p>
+<p>用户预计排队等待时间 &#x3D; 待处理任务数 &#x2F; QPS × 任务执行时间</p>
+</blockquote>
+<h2 id="对外接口"><a href="#对外接口" class="headerlink" title="对外接口"></a>对外接口</h2><h3 id="提交任务"><a href="#提交任务" class="headerlink" title="提交任务"></a>提交任务</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SubmitReq &#123;</span><br><span class="line">    TargetUrl  <span class="type">string</span> <span class="string">`json:&quot;target_url&quot;`</span> <span class="comment">// 目标接口地址，完整的 url</span></span><br><span class="line">    HttpMethod <span class="type">string</span> <span class="string">`json:&quot;http_method&quot;`</span> <span class="comment">// 请求方法，目前只考虑了 GET POST</span></span><br><span class="line">    Body       <span class="type">string</span> <span class="string">`json:&quot;body&quot;`</span> <span class="comment">// post 请求体 json 字符串，注意是带转义字符的字符串</span></span><br><span class="line">    Priority   <span class="type">int64</span>  <span class="string">`json:&quot;priority&quot;`</span> <span class="comment">// 优先级 ＞ 0，数字越大优先级越高，例如,普通用户 0 VIP 2 SVIP 3</span></span><br><span class="line">    Timestamp  <span class="type">int64</span>  <span class="string">`json:&quot;timestamp&quot;`</span> <span class="comment">// 请求时间戳</span></span><br><span class="line">    TaskType    <span class="type">string</span> <span class="string">`json:&quot;task_type&quot;`</span>  <span class="comment">// &quot;online&quot; 在线排队 &quot;offline&quot; 离线排队</span></span><br><span class="line">&#125;</span><br><span class="line">SubmitResp &#123;</span><br><span class="line">    TaskId     <span class="type">string</span> <span class="string">`json:&quot;task_id&quot;`</span> <span class="comment">// 任务Id</span></span><br><span class="line">    TaskStatus <span class="type">string</span> <span class="string">`json:&quot;task_status&quot;`</span> <span class="comment">// 任务状态</span></span><br><span class="line">    CreatedAt  <span class="type">string</span> <span class="string">`json:&quot;created_at&quot;`</span> <span class="comment">// 任务创建时间</span></span><br><span class="line">    WaitNum    <span class="type">int64</span>  <span class="string">`json:&quot;wait_num&quot;`</span> <span class="comment">// 排队人数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="查询任务"><a href="#查询任务" class="headerlink" title="查询任务"></a>查询任务</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">StatusReq &#123;</span><br><span class="line">    TaskId <span class="type">string</span> <span class="string">`form:&quot;task_id&quot;`</span> <span class="comment">// 任务Id</span></span><br><span class="line">&#125;</span><br><span class="line">StatusResp &#123;</span><br><span class="line">    TaskStatus <span class="type">string</span> <span class="string">`json:&quot;task_status&quot;`</span> <span class="comment">// 任务状态</span></span><br><span class="line">    TaskResult <span class="type">string</span> <span class="string">`json:&quot;task_result&quot;`</span> <span class="comment">// 任务结果，对应接口的响应体 json</span></span><br><span class="line">    WaitNum    <span class="type">int64</span>  <span class="string">`json:&quot;wait_num&quot;`</span> <span class="comment">// 排队人数</span></span><br><span class="line">    WaitTime   <span class="type">int64</span>  <span class="string">`json:&quot;wait_time&quot;`</span> <span class="comment">// 预计等待时间</span></span><br><span class="line">    CreatedAt  <span class="type">string</span> <span class="string">`json:&quot;created_at&quot;`</span> <span class="comment">// 任务创建时间</span></span><br><span class="line">    StartedAt  <span class="type">string</span> <span class="string">`json:&quot;started_at&quot;`</span> <span class="comment">// 任务开始时间</span></span><br><span class="line">    EndedAt    <span class="type">string</span> <span class="string">`json:&quot;ended_at&quot;`</span> <span class="comment">// 任务结束时间</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="取消任务"><a href="#取消任务" class="headerlink" title="取消任务"></a>取消任务</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CancelReq &#123;</span><br><span class="line">    TaskId <span class="type">string</span> <span class="string">`json:&quot;task_id&quot;`</span> <span class="comment">// 任务Id</span></span><br><span class="line">&#125;</span><br><span class="line">CancelResp &#123;</span><br><span class="line">    TaskId     <span class="type">string</span> <span class="string">`json:&quot;task_id&quot;`</span> <span class="comment">// 任务Id</span></span><br><span class="line">    TaskStatus <span class="type">string</span> <span class="string">`json:&quot;task_status&quot;`</span> <span class="comment">// 任务状态</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安全考虑"><a href="#安全考虑" class="headerlink" title="安全考虑"></a>安全考虑</h3><ul>
+<li><code>Priority</code> 可能会被用户篡改：采用前后端请求体对称加密</li>
+<li>跳过排队，直接访问目标接口：请求染色，配合网关服务做鉴权</li>
+</ul>
+
+
+<!-- 
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div> -->
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/12/02/go4/">Golang 开发“疑难杂症”解决办法 🤔⁉️</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/11/04/phoenix/">《凤凰架构：构建可靠的大型分布式系统》🪽</a></div></section></div>
+
+
+
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body giscus'>
+      
+
+<svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="giscus" data-repo="hcjjj/blog-comments" data-repo-id="R_kgDOM8H5Mg" data-category="Announcements" data-category-id="DIC_kwDOM8H5Ms4CjGw7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous"></div>
+
+    </section>
+  </div>
+
+
+
+      <!-- 
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer> -->
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadJS() {
+    const els = document.querySelectorAll("#comments #giscus");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.log(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    loadJS();
+  });
+</script>
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
