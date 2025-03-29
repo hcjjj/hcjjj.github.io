@@ -31,7 +31,7 @@
 <meta property="og:description" content="101 个核心错误案例分析，从语法特性到运行时（内存管理、GC、GMP）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-02T12:28:18.754Z">
+<meta property="article:modified_time" content="2025-02-24T11:06:27.042Z">
 <meta property="article:author" content="hcjjj">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -143,27 +143,6 @@
 <h1 class="article-title"><span>Golang 开发“疑难杂症”解决办法 🤔⁉️</span></h1>
 <p>101 个核心错误案例分析，从语法特性到运行时（内存管理、GC、GMP）</p>
 <span id="more"></span>
-
-<pre class="mermaid">graph TD
-    A[就绪的 goroutine] --产生--> C[Worker 任务]
-    B[新创建或就绪的计时器] --产生--> C
-    M[空闲优先的垃圾回收机制] --产生--> C
-    M -----P((异步代码的 GC 写屏障\n卡表更新错误))
-    C --> D{运行时}
-    D --> E[提交到本地/全局运行队列、计时器堆、标记为待回收状态]
-    E --- N((GC 三色标记错误\nGoroutine 同步竞争))
-    D -->F[检查自旋操作系统线程]
-    F ---O((Goroutine 之间的竞争))</pre>
-<pre class="mermaid">graph TD
-    D{运行时} --> G[StoreLoad 内存屏障]
-    G --> H[使用 storeload 内存屏障]
-    G --> L[将自旋操作系统线程转变成非自旋状态]
-    H --- I((Cache 异常\nBuffer 异常))
-    G --> J[检查所有 P 本地队列和 GC]
-    J --- K((M（GMP模型）在自旋状态))
-    L --- O((Goroutine 之间的竞争))</pre>
-
-<center> <strong> 运行时错误总述（冰山一角）</strong> </center>
 
 <h2 id="工程架构不合理性"><a href="#工程架构不合理性" class="headerlink" title="工程架构不合理性"></a>工程架构不合理性</h2><ul>
 <li>解决混乱的代码作用域导致的<strong>变量隐藏</strong><ul>
